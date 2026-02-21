@@ -1,0 +1,52 @@
+<!--- Shipping Address --->
+<p class="summary-section-label shipping-addr-label multi-shipping ${pdict.order.usingMultiShipping ? '' : 'd-none'}">
+    ${Resource.msg('order.summery.section.text', 'order', null)}
+</p>
+
+<isloop var="shippingModel" items="${pdict.order.shipping}" status="shippingLoop">
+    <isif condition="${shippingLoop.first}">
+        <div class="single-shipping ${pdict.order.usingMultiShipping ? 'd-none' : ''}" data-shipment-summary="${shippingModel.UUID}">
+            <isinclude template="checkout/shipping/shippingTitle"/>
+            <isif condition="${shippingModel.shippingAddress !== null}">
+                <isset name="address" value="${shippingModel.shippingAddress}" scope="page"/>
+            <iselse/>
+                <isset name="address" value="${{}}" scope="page"/>
+            </isif>
+            <div class="summary-details shipping">
+                <isinclude template="checkout/addressSummary" />
+                <div class="shipping-phone">
+                    ${shippingModel.shippingAddress && shippingModel.shippingAddress.phone ? shippingModel.shippingAddress.phone : ''}
+                </div>
+            </div>
+
+            <!--- Shipping information --->
+            <p class="summary-section-label shipping-method-label">${Resource.msg('label.order.shipping.method', 'confirmation', null)}</p>
+            <isif condition="${shippingModel.selectedShippingMethod}">
+                <!--- Shipping Cost --->
+                <isloop items="${pdict.order.shipping}" var="shipments">
+                    <isloop items="${shipments.shippingLineItems}" var="shippingLineItem" status="sloopstatus">
+                        <div class="leading-lines m-0 d-flex justify-content-between shipping-items">
+                            <p class="order-receipt-label"><span>
+                                <isif condition="${sloopstatus.index === 0}">
+                                    <span class="display-name shipping-method-title">${shippingModel.selectedShippingMethod.displayName}</span>
+                                    <isif condition="${shippingModel.selectedShippingMethod.estimatedArrivalTime}">
+                                        <span class="text-muted shipping-method-arrival-time">(${shippingModel.selectedShippingMethod.estimatedArrivalTime})</span>
+                                    </isif>
+                                <iselse/>
+                                    ${shippingLineItem.lineItemText}
+                                </isif>
+                            </span></p>
+                            <isif condition="${sloopstatus.index === 0}">
+                                <span class="shipping-method-price">${shippingLineItem.adjustedPrice.formatted}</span>
+                            <iselse/>
+                                <span class="shipping-lineitem-cost">${shippingLineItem.adjustedPrice.formatted}</span>
+                            </isif>
+                        </div>
+                    </isloop>
+                </isloop>
+            </isif>
+
+            <isinclude template="checkout/shipping/giftMessageSummary" />
+        </div>
+    </isif>
+</isloop>

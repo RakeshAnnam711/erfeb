@@ -1,0 +1,95 @@
+<div id="modals" class="sg__header3">Modals  <a
+    role="button"
+    tabindex="0"
+    class="icon-search tooltip-icon"
+    data-toggle="popover"
+    data-placement="bottom"
+    title="Find it in the Storefront"
+    data-content="
+        <ul>
+            <li>&ldquo;Forgot Password&rdquo; link on Login page <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Login-Show')}' target='_blank' rel='noopener'></a></li>
+            <li>Quickview links on product tiles <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Search-Show', 'cgid', 'mens')}' target='_blank' rel='noopener'></a></li>
+            <li>Edit link on cart page <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Cart-Show')}' target='_blank' rel='noopener'></a></li>
+        </ul>
+    "></a></div>
+<p>A modal can be created by adding modal markup (see below for the markup used in this example) to an .isml template and then triggering it by using data attributes on a button in that same .isml template. See full documentation <a href="https://getbootstrap.com/docs/4.0/components/modal/" target="_blank" rel="noopener">here</a> for more configuration options.</p>
+<div class="row">
+    <div class="col-md-6">
+        <button data-toggle="modal" data-target="#sgExampleModal" type="button" class="btn btn-primary">Click to launch modal</button>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button data-toggle="modal" data-target="#sgExampleModal" type="button" class="btn btn-primary">Click to launch modal</button></script></code></pre>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Modal sizes can be set via helper class or mixin (applied to the <span class="pre">.modal-dialog</span> div). Choose an option below and hit the button above to preview.</p>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="modalOptions" id="modalSizeNormal" checked>
+            <label class="custom-control-label" for="modalSizeNormal">Normal</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="modalOptions" id="modalSizeSmall">
+            <label class="custom-control-label" for="modalSizeSmall">Small <span class="pre">modal-sm</span> / <span class="pre">@include modal-size(sm)</span></label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="modalOptions" id="modalSizeLarge">
+            <label class="custom-control-label" for="modalSizeLarge">Large <span class="pre">modal-lg</span> / <span class="pre">@include modal-size(lg)</span></label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="modalOptions" id="modalSizeExtraLarge"
+                invalid>
+            <label class="custom-control-label" for="modalSizeExtraLarge">Extra Large <span class="pre">modal-xl</span> / <span class="pre">@include modal-size(xl)</span></label>
+        </div>
+        <p class="mt-4">Be default, if there is too much content to fit on the screen, the entire modal will scroll. Adding the helper class below will cause only the modal's body to scroll.</p>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="modalOptions" id="modalScrollbody"
+                invalid>
+            <label class="custom-control-label" for="modalScrollbody">Scroll body only <span class="pre">modal-scrollbody</span></label>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup example-modal-code'><script type="text/plain" class="language-markup"><div id="sgExampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="sgExampleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-toast="success" data-content="Saved!" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>
+
+
+<!-- Example Modal -->
+<div id="sgExampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="sgExampleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-toast="success" data-content="Saved!" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

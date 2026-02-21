@@ -1,0 +1,23 @@
+<iscomment>
+    This template gets overwritten in rvw_integrations_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_integrations_core
+</iscomment>
+<div class="row cart-and-ipay">
+    <div class="col-sm-12">
+        <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}">
+        <button class="add-to-cart-global btn btn-primary ${pdict.extraclass ? pdict.extraclass : ''}"
+                data-pid="${product.id}"
+                ${!product.readyToOrder || !product.available ? "disabled" : ""}
+                cypress-target="addToCartButton">
+            <i class="fa fa-shopping-bag"></i>
+            <isif condition="${product.productType === 'set' || product.productType === 'bundle'}">
+                ${Resource.msg('button.addalltocart', 'common', null)}
+            <iselse>
+                ${Resource.msg('button.addtocart', 'common', null)}
+            </isif>
+        </button>
+    </div>
+</div>

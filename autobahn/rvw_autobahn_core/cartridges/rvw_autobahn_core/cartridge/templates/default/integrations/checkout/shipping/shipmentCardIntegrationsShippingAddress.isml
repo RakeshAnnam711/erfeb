@@ -1,0 +1,27 @@
+<iscomment>
+    This is a blank template that gets overwritten in rvw_integrations_core
+    The overriding template in rvw_integrations_core has integrations specific to this area
+
+    Page Type: Checkout~Shipping
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/shipping/shippingCard.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_integrations_core
+</iscomment>
+<fieldset class="shipment-selector-block ${(pdict.order.usingMultiShipping || shipmentLoopState) || (pdict.customer.addresses && pdict.customer.addresses.length > 0) ? '' : 'd-none'} ">
+    <isinclude template="checkout/shipping/shipmentSelector" />
+</fieldset>
+
+<fieldset class="shipping-address-block">
+    <isinclude template="checkout/shipping/shippingAddress" />
+</fieldset>
+
+<fieldset class="shipping-method-block">
+    <h3>${Resource.msg('heading.shipping.method', 'checkout', null)}</h3>
+
+    <isinclude template="checkout/shipping/shippingMethod" />
+</fieldset>
+
+<fieldset class="gift-message-block">
+    <isinclude template="checkout/shipping/isGift" />
+</fieldset>

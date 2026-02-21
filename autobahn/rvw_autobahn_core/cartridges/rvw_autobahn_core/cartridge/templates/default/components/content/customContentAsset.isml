@@ -1,0 +1,59 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+    var ContentMgr = require('dw/content/ContentMgr');
+    var PageMgr = require('dw/experience/PageMgr');
+
+    // Handle multibrand logic
+    var apiContent = !empty(pdict.aid) ? (ContentMgr.getContent(pdict.aid) || null) : null;
+    var bid = pdict.abConfigs && pdict.abConfigs.brandID ? ('_' + pdict.abConfigs.brandID) : '';
+    var apiPage = null; // must be null to clear out preexisting value
+
+    // Find & Validate publish state
+    [pdict.aid + bid, pdict.aid].filter(pgid => !empty(pgid)).forEach(pageID => {
+        var page = empty(apiPage) && PageMgr.getPage(pageID);
+        // Only update if prev id empty or invisible, otherwise reset
+        apiPage = (page || {}).visible ? page : apiPage;
+    });
+</isscript>
+<isif condition="${pdict.contentIncludeCache == false || (!empty(apiPage) && apiPage.hasVisibilityRules()) || pdict.personalized === 'true' || !empty(pdict.pageid)}">
+    <iscomment>
+        This template includes a content asset as remote include. It is used
+        as module template for 'iscontentasset' to have a more convenient way
+        to include assets into a page and use the asset's parent folder rendering template
+
+        if page is not cached, route content and pd request through cachable page-include
+    </iscomment>
+    <isinclude url="${URLUtils.url('Page-Include', 'cid', pdict.aid, 'bid', bid, 'template', pdict.template, 'pid', (pdict.product ? pdict.product.ID : null), 'personalized', pdict.personalized, 'pageid', pdict.pageid, 'params', pdict.params, 'bodyonly', pdict.bodyonly)}"/>
+<iselse/>
+    <isif condition="${!empty(apiPage)}">
+        <iscomment> This PageDesinger response will be cached based on current page cache </iscomment>
+        <isprint value="${PageMgr.renderPage(apiPage.ID, JSON.stringify(pdict))}" encoding="off"/>
+    <iselseif condition="${!empty(apiContent) && apiContent.isOnline()}">
+        <isscript>
+            var ContentModel = require('*/cartridge/models/content');
+            var RenderTemplateHelper = require('*/cartridge/scripts/renderTemplateHelper');
+
+            // Mimic Page-Include ContentAsset request
+            pdict.params = Object.assign(pdict.params || {},
+                {
+                    cid: apiContent.ID,
+                    content: new ContentModel(apiContent, 'components/content/contentAssetInc'),
+                    product: pdict.product
+                }
+            );
+            // Follow template selection pattern from Page-Include
+            pdict.template = [
+                pdict.params.content.template,
+                pdict.params.content.folderTemplate,
+                !empty(pdict.product && pdict.product.custom) ? pdict.product.custom.template.value : null,
+                [true, 'true'].indexOf(pdict.bodyonly) !== -1 ? 'components/content/contentAssetBodyOnly' : null,
+                pdict.template
+            ].filter(template => !empty(template) && ['null','undefined'].indexOf(template) === -1)
+            .concat(['']) // ensure reduce doesn't thow length error
+            .reduce((a, b) => !empty(b) ? b : a);
+        </isscript>
+        <isprint value="${RenderTemplateHelper.getRenderedHtml(pdict.params, pdict.template || '')}" encoding="off"/>
+    </isif>
+</isif>
+<iscomment>Clear values to prvent persisted values on subsequent template or module includes</iscomment>
+<isscript>['aid','bodyonly','customtitle','template','personalized','pageid','params'].forEach(k => delete pdict[k]);</isscript>

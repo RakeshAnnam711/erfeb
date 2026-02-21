@@ -1,0 +1,40 @@
+<div id="fonts" class="sg__header3">Fonts</div>
+<p>Fonts can be applied using either a helper class (<span class="pre">font--</span> + font name) or using a variable on the <span class="pre">font-family</span> property. The body font is applied to all text and the header font is applied to all headers automatically.</p>
+<p>Font size and line-height can also be set via helper class: <span class="pre">font-size--</span> or <span class="pre">line-height--</span> plus any number between 1 and 60.</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <span class="font--primary"></span>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="font--primary">Primary</span></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {font-family: $primary-font}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <span class="font--secondary"></span>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="font--secondary">Secondary</span></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {font-family: $secondary-font}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <span class="font--tertiary"></span>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="font--tertiary">Tertiary</span></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {font-family: $tertiary-font}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 pt-3">
+        <div class="sg__header3">Font Helper Classes</div>
+        <p class="mb-1">Use helper classes by adding one of the following class names to an element: <span class="pre">font-weight--</span>, <span class="pre">font-size--</span>, or <span class="pre">letter-spacing--</span>.</p>
+        <p class="mb-2"><small>Note: <span class="pre">font-weight--</span> is set from 100-900 using increments of 100. If your loaded font doesn't have a specific weight it will load the next highest value.</small></p>
+        <div class="sg__header3 pt-2 d-flex align-items-center">Example: <h3 class="font-weight--100  font-size--15 letter-spacing--4 m-0 pl-3">Light Weight with lots of kerning</h3></div>
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="font-weight--100  font-size--13 letter-spacing--4">Light Weight with lots of kerning</div></script></code></pre>
+    </div>
+</div>

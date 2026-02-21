@@ -1,0 +1,3 @@
+${Resource.msg('label.item', 'product', null)}
+<iscomment>Please don't remove the product ID as it will break the add-to-cart functionality. Instead hide it via sr-only class</iscomment>
+<span class="product-id">${product.id}</span>

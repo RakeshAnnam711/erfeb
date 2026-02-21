@@ -1,0 +1,26 @@
+<iscomment>
+    This overwrites what is in rvw_autobahn_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isif condition="${pdict.isOrderShipped}">
+    <iscomment>
+    /************
+    * Zenkraft Integration
+    *
+    * Zenkraft Print Label Form
+    *************/
+    no ootb configuration to enable/disable this feature so we rely on pdict for now
+    </iscomment>
+    <form action="${URLUtils.https('Zenkraft-Returns')}" method="post" id="zenkraft-print-label-form">
+        <input type="hidden" id="orderno" name="orderno" value="${pdict.order.orderNumber}"/>
+        <input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+        <iscomment>
+        <input type="hidden" id="shipmentno" name="shipmentno" value="${pdict.order.getDefaultShipment().ID}"/>
+        </iscomment>
+        <button type="submit" class="button-text pull-right" name="zenkraft-printlabel" value="Print Label">${Resource.msg('label.printreturnlabel','order',null)}</button>
+    </form>
+</isif>

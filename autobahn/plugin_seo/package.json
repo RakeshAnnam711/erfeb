@@ -1,0 +1,17 @@
+{
+  "name": "plugin_seo",
+  "version": "ab1.5.0",
+  "description": "AUTOBAHN MOD of plugin_seo enhances the app_storefront_base cartridge from SFRA",
+  "main": "index.js",
+  "scripts": {
+    "lint": "sgmf-scripts --lint js && sgmf-scripts --lint css",
+    "upload": "sgmf-scripts --upload -- ",
+    "uploadCartridge": "sgmf-scripts --uploadCartridge plugin_seo"
+  },
+  "devDependencies": {
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb-base": "^5.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "sgmf-scripts": "^2.0.0"
+  }
+}

@@ -1,0 +1,1 @@
+<isif condition="${('ajax' in pdict) && (pdict.ajax === 'true')}"><iscontent type="text/plain"/><isanalyticsoff/></isif><isinclude sf-toolkit="off" url="${pdict.remoteIncludeUrl}" />

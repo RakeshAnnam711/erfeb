@@ -1,0 +1,153 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+<isset name="isSecondLevelCategory" value="${!empty(secondLevelCategory) && secondLevelCategory.ID === category.id}" scope="page"/>
+<isset name="megamenuNavLayout" value="${dw.system.Site.current.preferences.custom.megamenuNavLayout.value || 'mega-standard'}" scope="page"/>
+<isset name="categoryImageUrl" value="${category.imageUrl}" scope="page"/>
+<isset name="categoryURL" value="${category.url}" scope="page"/>
+<isset name="categoryId" value="${category.id}" scope="page"/>
+<isset name="featureHeading" value="${category.featureHeading}" scope="page"/>
+<isset name="shopNowText" value="${category.shopNowText}" scope="page"/>
+<isset name="placeholder_Thumbnail" value="${URLUtils.staticURL('/images/placeholder_Category_Navigation_banner.png')}" scope="page" />
+
+<isscript>
+    var featuredCategories = [];
+</isscript>
+<iscomment> <ul style="gap: 100px; justify-content: center;" class="dropdown-menu ${megamenuNavLayout} dropdown-menu-spacing" aria-label="${category.id}" categoryurl="${categoryURL}"> </iscomment>
+<ul style="" class="dropdown-menu ${megamenuNavLayout} dropdown-menu-spacing" aria-label="${category.id}" categoryurl="${categoryURL}">
+
+    <isif condition="${!category.contentSubLinksOnly}">
+        <isif condition="${megamenuNavLayout === 'mega-left'}">
+            <li>
+	            <ul class="left-nav d-none d-lg-block">
+	                <isset name="subAssetFirst" value="" scope="page" />
+	                <isloop items="${menuItem.subCategories}" var="category" status="subCatLoopStatus1">
+	                    <li class="dropdown-item col-lg" role="menuitem">
+	                        <isif condition="${subCatLoopStatus1.first}">
+	                            <a href="${category.url}" id="${category.id}" role="menuitem" class="dropdown-link mega-left-menu-link active" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}">${category.name}</a>
+	                        <iselse/>
+	                            <a href="${category.url}" id="${category.id}" role="menuitem" class="dropdown-link mega-left-menu-link" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}">${category.name}</a>
+	                        </isif>
+	                    </li>
+	                    <iscomment>If the first item has a megamenu asset, set a class for hiding the parent asset(s)</iscomment>
+	                    <isset name="secondaryCategory" value="${category}" scope="page" />
+	                    <isif condition="${secondaryCategory && !empty(secondaryCategory.megamenuAsset1) || !empty(secondaryCategory.megamenuAsset2)}">
+	                        <isif condition="${subCatLoopStatus1.first}">
+	                            <isset name="subAssetFirst" value="has-sub-asset" scope="page" />
+	                        </isif>
+	                    </isif>
+	                </isloop>
+	            </ul>
+            </li>
+            <li>
+	            <ul class="menu-subcategories mega-left ${subAssetFirst}" role="menu">
+	                <isloop items="${menuItem.subCategories}" var="category" status="subCatLoopStatus2">
+	                    <isset name="secondaryCategory" value="${category}" scope="page" />
+
+	                    <isif condition="${category.subCategories}">
+	                        <li class="dropdown-item custom-dropdown col-lg ${subCatLoopStatus2.first ? 'active-list' : ''}" role="menuitem">
+	                            <a href="${category.url}" id="${category.id}-right" class="dropdown-link dropdown-toggle nav-link d-lg-none" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}">${category.name}</a>
+	                            <isset name="menuItem" value="${category}" scope="page" />
+	                            <isinclude template="components/header/menuItem" />
+	                        </li>
+	                    <iselse/>
+
+	                        <li class="dropdown-item col-lg ${subCatLoopStatus2.first ? 'active-list' : ''}" role="menuitem">
+	                            <a href="${category.url}" id="${category.id}" role="menuitem" class="dropdown-link" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}">${category.name}</a>
+	                        </li>
+	                    </isif>
+
+	                    <iscomment>If a secondary nav has a megamenu asset, it will show over the top level megamenu asset</iscomment>
+	                    <isif condition="${secondaryCategory && !empty(secondaryCategory.megamenuAsset1) || !empty(secondaryCategory.megamenuAsset2)}">
+	                        <isset name="subAsset1" value="${!empty(secondaryCategory.megamenuAsset1) ? 'sub-asset-1' : ''}" scope="page" />
+	                        <isset name="subAsset2" value="${!empty(secondaryCategory.megamenuAsset2) ? 'sub-asset-2' : ''}" scope="page" />
+
+	                        <li id="${secondaryCategory.id}-asset" class="${subAsset1} ${subAsset2} megamenu-asset-lazy-container" data-asset1="${secondaryCategory.megamenuAsset1 || ''}" data-asset2="${secondaryCategory.megamenuAsset2 || ''}">
+	                            <isif condition="${!empty(secondaryCategory.megamenuAsset1)}">
+	                                <div class="megamenu-asset-lazy" data-content-asset-id="${secondaryCategory.megamenuAsset1}">
+	                                    <iscontentasset aid="${secondaryCategory.megamenuAsset1}" />
+	                                </div>
+	                            </isif><isif condition="${!empty(secondaryCategory.megamenuAsset2)}">
+	                                <div class="megamenu-asset-lazy" data-content-asset-id="${secondaryCategory.megamenuAsset2}">
+	                                    <iscontentasset aid="${secondaryCategory.megamenuAsset2}" />
+	                                </div>
+	                            </isif>
+	                        </li>
+	                    </isif>
+	                </isloop>
+	            </ul>
+	    	</li>
+        <iselse/>
+            <isif condition="${isSecondLevelCategory && !empty(secondLevelCategory.custom.megamenuAsset1)}">
+                <li class="megamenu-asset-1 d-none d-lg-block megamenu-asset-lazy-container" data-content-asset-id="${secondLevelCategory.custom.megamenuAsset1}">
+                    <div class="megamenu-asset-lazy">
+                        <iscontentasset aid="${secondLevelCategory.custom.megamenuAsset1}" />
+                    </div>
+                </li>
+            </isif>
+            <li class="d-flex menu-subcategories-wrapper">
+	            <ul class="menu-subcategories menu-subcategories-grid" role="menu">
+	                <isloop items="${menuItem.subCategories}" var="category" status="subCatLoopStatus3">
+	                    <isif condition="${category.subCategories}">
+	                        <li class="dropdown-item custom-dropdown col-lg dropdown-item-pd" role="menuitem">
+	                            <a href="${category.url}" id="${category.id}" class="dropdown-link dropdown-toggle nav-link dropdown-link-hover" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}">${category.name}</a>
+	                            <isset name="menuItem" value="${category}" scope="page" />
+	                            <isinclude template="components/header/menuItem" />
+	                        </li>
+	                    <iselse/>
+							<isif condition="${!category.isFeatured}">
+								<li class="dropdown-item col-lg dropdown-item-pd" role="menuitem">
+									<a href="${category.url}" id="${category.id}" role="button" class="dropdown-link dropdown-link-hover" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}">${category.name}</a>
+								</li>
+							<iselse/>
+								<isscript>
+									featuredCategories.push(category);
+								</isscript>
+							</isif>
+	                    </isif>
+	                    <iscomment>Add blank item to make even column widths in desktop view</iscomment>
+	                    <isif condition="${subCatLoopStatus3.last && subCatLoopStatus3.odd}">
+	                        <li class="dropdown-item col-lg d-none d-xl-block" role="menuitem"></li>
+	                    </isif>
+	                </isloop>
+	            </ul>
+				<isif condition="${featuredCategories.length > 0}">
+					<ul class="menu-subcategories menu-subcategories-grid menu-subcategories-featured" role="menu">
+						<p class="dropdown-item col-lg dropdown-item-pd" style="text-decoration: underline; text-transform: capitalize;padding: 12px 5px; margin: 0;">${featureHeading}</p>
+						<isloop items="${featuredCategories}" var="category" status="loopstatus">
+							<li class="dropdown-item col-lg dropdown-item-pd" role="menuitem">
+								<a href="${category.url}" id="${category.id}" role="button" class="dropdown-link dropdown-link-hover" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}">${category.name}</a>
+							</li>
+						</isloop>
+					</ul>
+				</isif>
+	   		</li>
+        </isif>
+        <isif condition="${isSecondLevelCategory}">
+            <isif condition="${!empty(secondLevelCategory.custom.megamenuAsset1)}">
+                <li class="megamenu-asset-1 ${megamenuNavLayout === 'mega-standard' ? 'd-lg-none' : ''} megamenu-asset-lazy-container" data-content-asset-id="${secondLevelCategory.custom.megamenuAsset1}">
+                    <div class="megamenu-asset-lazy">
+                        <iscontentasset aid="${secondLevelCategory.custom.megamenuAsset1}" />
+                    </div>
+                </li>
+            </isif>
+            <isif condition="${!empty(secondLevelCategory.custom.megamenuAsset2)}">
+                <li class="megamenu-asset-2 megamenu-asset-lazy-container" data-content-asset-id="${secondLevelCategory.custom.megamenuAsset2}">
+                    <div class="megamenu-asset-lazy">
+                        <iscontentasset aid="${secondLevelCategory.custom.megamenuAsset2}" />
+                    </div>
+                </li>
+            </isif>
+        </isif>
+    <iselse/>
+        <isif condition="${!empty(secondLevelCategory.custom.megamenuAsset1)}">
+            <li class="megamenu-asset-only megamenu-asset-lazy-container" data-content-asset-id="${secondLevelCategory.custom.megamenuAsset1}">
+                <div class="megamenu-asset-lazy">
+                    <iscontentasset aid="${secondLevelCategory.custom.megamenuAsset1}" />
+                </div>
+            </li>
+        </isif>
+    </isif>
+	<div id="category-img" class="category-collection-image">
+		<img data-src="${categoryImageUrl}" src="${categoryImageUrl}" alt="Category Image" itemprop="image" loading="lazy" class="megamenu-image-lazy" onerror="this.onerror=null;this.src='${placeholder_Thumbnail}'">
+		<p>${shopNowText} <a href="${categoryURL}" class="link shop-now-link" aria-label="${categoryId == 'bambuserliveshopping' ? Resource.msg('seemore.link.text', 'menu', null) : Resource.msg('shopnow.link.text', 'menu', null)}">${categoryId == 'bambuserliveshopping' ? Resource.msg('seemore.link.text', 'menu', null) : Resource.msg('shopnow.link.text', 'menu', null)}</a></p>
+	</div>
+</ul>

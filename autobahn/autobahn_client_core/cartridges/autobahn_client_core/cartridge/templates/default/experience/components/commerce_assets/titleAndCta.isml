@@ -1,0 +1,18 @@
+<iscomment>CSS is now loaded via consolidated-components.scss in global.scss</iscomment>
+
+
+<div class="text-configuration ${pdict.textContainerClass}"
+	style = "
+			--title-font-size-mobile: ${pdict.titleFontSizeMobile};
+			--subtitle-font-size-mobile: ${pdict.subTitleFontSizeMobile};
+			--title-container-background-color-mobile: ${pdict.textContainerBackgroundColorMobile};
+		"
+>
+	<div class="title ${pdict.titleClass}" style="color: ${pdict.titleColor}; font-size: ${pdict.titleFontSize}; text-align: ${pdict.titleAlignment}; ">
+		<isprint value="${pdict.title}" encoding="off" />
+	</div>
+	<div class="sub-title ${pdict.subTitleContainerClass}" style="color:${pdict.subTitleColor}; width: ${pdict.subTitleWidth}; font-size: ${pdict.SubTitleFontSize}; text-align: ${pdict.SubTitleAlignment};"><isprint value="${pdict.subTitle}" encoding="off" /></div>
+	<isif condition="${pdict.buttonText != null}">
+		<div class="shop-button" style="display: ${pdict.shopButtonDiv};"><a class="btn ${pdict.buttonStyle} ${pdict.buttonContainerClass}" style="justify-self: ${pdict.buttonAlignment};" href="${pdict.ctaUrl}" aria-label="${pdict.ctaAriaLabel}">${pdict.buttonText}</a></div>
+	</isif>
+</div>

@@ -1,0 +1,35 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+<div class="quantity-form" cypress-target="productQuantityForm">
+    <label class="quantity-label" for="quantity-${lineItem.UUID}">${Resource.msg('field.selectquantity','cart',null)}</label>
+    <select class="form-control quantity custom-select form-control-sm ${lineItem.enableQuantityStepper ? 'd-none' : ''}"
+            data-uuid="${lineItem.UUID}"
+            data-pid="${lineItem.id}"
+            data-action="${pdict.actionUrls.updateQuantityUrl}"
+            data-pre-select-qty="${lineItem.quantity}"
+            id="quantity-${lineItem.UUID}"
+            name="quantity-${lineItem.UUID}"
+            aria-label="quantity: ${StringUtils.formatInteger(lineItem.quantity)}"
+            ${(lineItem.available && lineItem.quantityOptions.minOrderQuantity && lineItem.quantityOptions.maxOrderQuantity) ? "" : "disabled"}
+            cypress-target="productCardQuantitySelect">
+
+        <isloop items="${lineItem.quantityOptions.quantities}" var="quantity">
+             <isif condition="${quantity.selected}">
+                <isset name="currentQuantity" value="${quantity.value}" scope="page"/>
+            </isif>
+            <option value="${quantity.value}" ${quantity.selected ? 'selected' : ''}>
+                ${quantity.value}
+            </option>
+        </isloop>
+    </select>
+
+    <isif condition="${lineItem.enableQuantityStepper}">
+        <isquantitystepper
+            qty="${currentQuantity}"
+            min="${lineItem.quantityOptions.minOrderQuantity.toFixed()}"
+            max="${lineItem.quantityOptions.maxOrderQuantity.toFixed()}"
+            size="small"
+            disabled="${!(lineItem.available && lineItem.quantityOptions.minOrderQuantity && lineItem.quantityOptions.maxOrderQuantity)}"
+            cypresstarget="productCardQuantityStepper"
+        />
+    </isif>
+</div>

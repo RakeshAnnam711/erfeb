@@ -1,0 +1,40 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/checkoutRegistration.js');
+    </isscript>
+
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+
+    <div class="container receipt py-3 ${pdict.order.shipping.length > 1 ? 'multi-ship' : ''} ${pdict.order.hideShipping ? 'hide-shipping' : ''}">
+
+        <iscontentasset aid="orderConfirmationHeader"/>
+
+        <div class="row py-3">
+            <div class="col-12">
+                <iscontentasset aid="orderConfirmationSubheader"/>
+                <isif condition="${pdict.order.orderEmail}">
+                    <p class="order-thank-you-email-msg"><isprint value="${Resource.msgf('info.receive.email.confirmation', 'confirmation', null, pdict.order.orderEmail)}" encoding="htmlcontent" /></p>
+                </isif>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <isinclude template="checkout/confirmation/confirmationDetails" />
+                <div class="row">
+                    <div class="mb-3 col-md-6 col-lg-8">
+                        <a href="${URLUtils.url('Home-Show')}" class="btn btn-primary btn-block order-confirmation-continue-shopping" role="button" aria-pressed="true">
+                            ${Resource.msg('button.continue.shopping','confirmation',null)}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <isinclude template="integrations/checkout/confirmation/bottom"/>
+</isdecorate>

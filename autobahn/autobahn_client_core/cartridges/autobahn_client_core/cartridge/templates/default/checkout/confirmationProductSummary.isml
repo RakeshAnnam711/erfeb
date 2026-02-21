@@ -1,0 +1,56 @@
+<isset name="miniCart" value="${false}" scope="page" />
+<div class="card order-product-summary">
+    <div class="card-header d-none">
+        <div class="row leading-lines">
+            <p class="col-6 start-lines">
+                <span class="order-receipt-label grand-total-label">${pdict.order.items.totalQuantity + pdict.order.giftCertificateLineItems.totalQuantity == 1 ? Resource.msgf('label.number.item.in.cart','cart', null, pdict.order.items.totalQuantity + pdict.order.giftCertificateLineItems.totalQuantity) : Resource.msgf('label.number.items.in.cart','cart', null, pdict.order.items.totalQuantity + pdict.order.giftCertificateLineItems.totalQuantity)}</span>
+            </p>
+            <p class="col-6 end-lines text-right">
+                <span class="grand-total-price">${pdict.order.isFlowOrder ? pdict.order.flowTotals.subTotal : pdict.order.totals.subTotal}</span>
+            </p>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="product-summary-block product-info">
+            <isloop items="${pdict.order.shipping}" var="shippingModel">
+                <isif condition="${pdict.order.shipping.length > 1}">
+                    <div class="shipment-block">
+                </isif>
+
+                <isif condition="${pdict.order.orderNumber}">
+                    <isloop items="${shippingModel.productLineItems.items}" var="lineItem">
+                        <isinclude template="integrations/checkout/orderProductSummary/tracking">
+                        <isbreak>
+                    </isloop>
+                </isif>
+
+                <isloop items="${shippingModel.productLineItems.items}" var="lineItem" status="productLoop">
+                    <isif condition="${lineItem.bonusProductLineItemUUID === 'bonus'}">
+                       <isloop items="${pdict.order.items.items}" var="fullProduct">
+
+                            <isif condition="${fullProduct.bonusProductLineItemUUID === 'bonus'}">
+                                <isif condition="${lineItem.UUID === fullProduct.UUID}">
+                                    <div class="bonus-product-line-item uuid-${lineItem.UUID}">
+                                        <isinclude template="checkout/productCard/bonusProductCard" />
+                                    </div>
+                                </isif>
+                            </isif>
+
+                        </isloop>
+                    <iselse/>
+                        <isinclude template="cart/productCard/confirmationProductCard" />
+                    </isif>
+                </isloop>
+
+                <isloop items="${shippingModel.giftCertificateLineItems.items}" var="lineItem" status="productLoop">
+                    <isinclude template="cart/productCard/confirmationProductCard" />
+                </isloop>
+
+                <isif condition="${pdict.order.shipping.length > 1}">
+                    <isinclude template="checkout/shipping/shippingCard" />
+                    </div>
+                </isif>
+            </isloop>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<a class="size-chart-launcher" href="${URLUtils.url('Product-SizeChart', 'cid', product.sizeChartId)}">${Resource.msg('link.size_chart', 'product', null)}</a>
+
+<div id="sizeChartModal" class="modal fade size-chart-modal" tabindex="-1" role="dialog" data-product="${product.id}" aria-labelledby="sizeChartModal">
+    <div class="modal-dialog modal-lg modal-scrollbody" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">${Resource.msg('link.size_chart', 'product', null)}</h5>
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>

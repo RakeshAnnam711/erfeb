@@ -1,0 +1,432 @@
+/*
+* ICON SETUP INSTRUCTIONS
+* 1) To edit Icomoon fonts, import the /fonts/icomoon/selection.json file 
+*    at this URL: https://icomoon.io/app/#/select
+* 2) After making changes and generating the font, replace everything in /fonts/icomoon
+*    with all the files and folders downloaded from Icomoon
+* 3) Copy the font files from /fonts/icomoon/fonts to /static/fonts/
+* 4) Replace the @font-face rule in this file with the one from fonts/icomoon/style.scss. Or, if
+*    you have customizations, just update the URL hashes to make sure the old files aren't cached
+* 5) Replace the variables in this file with the variables from fonts/icomoon/variables.scss
+* 6) Replace the classes in this file with the classes from fonts/icomoon/style.scss
+* 7) Check the Icons section of the Style Guide to make sure any new/updated icons are
+*    rendering properly. New icons should get added automatically by reading the contents
+*    of /fonts/icomoon/selection.json (see Styleguide-Show)
+*/
+
+// Not copied from any icon set, do not overwrite
+$icon-content-blank: "";
+// Not copied from any icon set, do not overwrite
+
+$icomoon-font-family: "icomoon" !default;
+$icomoon-font-path: "../fonts" !default;
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?d4dkv5');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?d4dkv5#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?d4dkv5') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?d4dkv5') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?d4dkv5##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"]:not(.btn),
+[class*=" icon-"]:not(.btn) {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "#{$icomoon-font-family}" !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+* Copy line 4 down from fonts/icomoon/variables.scss
+*/
+$icon-menu: "\e929";
+$icon-images: "\e905";
+$icon-alert: "\e904";
+$icon-account: "\e900";
+$icon-add-to-cart: "\e901";
+$icon-add-to-cart-path2: "\e902";
+$icon-add-to-cart-path3: "\e903";
+$icon-arrow-down: "\e907";
+$icon-arrow-left-thin: "\e908";
+$icon-arrow-left: "\e909";
+$icon-arrow-right-thin: "\e90a";
+$icon-arrow-right: "\e90b";
+$icon-arrow-top: "\e90c";
+$icon-arrow-up: "\e90d";
+$icon-call: "\e90e";
+$icon-cart: "\e90f";
+$icon-checkmark: "\e910";
+$icon-close-small: "\e911";
+$icon-close: "\e912";
+$icon-collapse: "\e913";
+$icon-edit: "\e914";
+$icon-email: "\e915";
+$icon-expand: "\e916";
+$icon-facebook: "\e917";
+$icon-favorite-selected: "\e918";
+$icon-favorite: "\e919";
+$icon-film: "\e91a";
+$icon-globe: "\e9ca";
+$icon-google: "\e91b";
+$icon-guarantee: "\e91c";
+$icon-image: "\e91d";
+$icon-info: "\e921";
+$icon-instagram: "\e922";
+$icon-link: "\e923";
+$icon-linkedin: "\e924";
+$icon-livechat: "\e925";
+$icon-livechat-path2: "\e926";
+$icon-location: "\e927";
+$icon-lock: "\e928";
+$icon-minus: "\e92c";
+$icon-offsite: "\e92d";
+$icon-pause: "\e92e";
+$icon-pinterest: "\e92f";
+$icon-play-hollow: "\e930";
+$icon-plus: "\e931";
+$icon-print: "\e932";
+$icon-question: "\e933";
+$icon-remove: "\e934";
+$icon-search: "\e935";
+$icon-size: "\e936";
+$icon-star-empty: "\e937";
+$icon-star-half: "\e938";
+$icon-star: "\e939";
+$icon-twitter: "\e93a";
+$icon-youtube: "\e93b";
+$icon-zoom-out: "\e93c";
+$icon-zoom: "\e93d";
+
+
+/*
+* Copy line 30 down from from fonts/icomoon/style.scss
+*/
+.icon-menu {
+  &:before {
+    content: $icon-menu;
+  }
+}
+.icon-images {
+  &:before {
+    content: $icon-images;
+  }
+}
+.icon-alert {
+  &:before {
+    content: $icon-alert;
+  }
+}
+.icon-account {
+  &:before {
+    content: $icon-account;
+  }
+}
+.icon-add-to-cart {
+  &:before {
+    content: $icon-add-to-cart;
+    color: rgb(68, 68, 68);
+  }
+}
+.icon-add-to-cart .path2 {
+  &:before {
+    content: $icon-add-to-cart-path2;
+    margin-left: -1.03125em;
+    color: rgb(192, 192, 192);
+  }
+}
+.icon-add-to-cart .path3 {
+  &:before {
+    content: $icon-add-to-cart-path3;
+    margin-left: -1.03125em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-arrow-down {
+  &:before {
+    content: $icon-arrow-down;
+  }
+}
+.icon-arrow-left-thin {
+  &:before {
+    content: $icon-arrow-left-thin;
+  }
+}
+.icon-arrow-left {
+  &:before {
+    content: $icon-arrow-left;
+  }
+}
+.icon-arrow-right-thin {
+  &:before {
+    content: $icon-arrow-right-thin;
+  }
+}
+.icon-arrow-right {
+  &:before {
+    content: $icon-arrow-right;
+  }
+}
+.icon-arrow-top {
+  &:before {
+    content: $icon-arrow-top;
+  }
+}
+.icon-arrow-up {
+  &:before {
+    content: $icon-arrow-up;
+  }
+}
+.icon-call {
+  &:before {
+    content: $icon-call;
+  }
+}
+.icon-cart {
+  &:before {
+    content: $icon-cart;
+  }
+}
+.icon-checkmark {
+  &:before {
+    content: $icon-checkmark;
+  }
+}
+.icon-close-small {
+  &:before {
+    content: $icon-close-small;
+  }
+}
+.icon-close {
+  &:before {
+    content: $icon-close;
+  }
+}
+.icon-collapse {
+  &:before {
+    content: $icon-collapse;
+  }
+}
+.icon-edit {
+  &:before {
+    content: $icon-edit;
+  }
+}
+.icon-email {
+  &:before {
+    content: $icon-email;
+  }
+}
+.icon-expand {
+  &:before {
+    content: $icon-expand;
+  }
+}
+.icon-facebook {
+  &:before {
+    content: $icon-facebook;
+  }
+}
+.icon-favorite-selected {
+  &:before {
+    content: $icon-favorite-selected;
+  }
+}
+.icon-favorite {
+  &:before {
+    content: $icon-favorite;
+  }
+}
+.icon-film {
+  &:before {
+    content: $icon-film;
+  }
+}
+.icon-globe {
+    &:before {
+      content: $icon-globe;
+    }
+  }
+.icon-google {
+  &:before {
+    content: $icon-google;
+  }
+}
+.icon-guarantee {
+  &:before {
+    content: $icon-guarantee;
+  }
+}
+.icon-image {
+  &:before {
+    content: $icon-image;
+  }
+}
+.icon-info {
+  &:before {
+    content: $icon-info;
+  }
+}
+.icon-instagram {
+  &:before {
+    content: $icon-instagram;
+  }
+}
+.icon-link {
+  &:before {
+    content: $icon-link;
+  }
+}
+.icon-linkedin {
+  &:before {
+    content: $icon-linkedin;
+  }
+}
+.icon-livechat {
+  &:before {
+    content: $icon-livechat;
+    color: rgb(68, 68, 68);
+  }
+}
+.icon-livechat .path2 {
+  &:before {
+    content: $icon-livechat-path2;
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-location {
+  &:before {
+    content: $icon-location;
+  }
+}
+.icon-lock {
+  &:before {
+    content: $icon-lock;
+  }
+}
+.icon-minus {
+  &:before {
+    content: $icon-minus;
+  }
+}
+.icon-offsite {
+  &:before {
+    content: $icon-offsite;
+  }
+}
+.icon-pause {
+  &:before {
+    content: $icon-pause;
+  }
+}
+.icon-pinterest {
+  &:before {
+    content: $icon-pinterest;
+  }
+}
+.icon-play-hollow {
+  &:before {
+    content: $icon-play-hollow;
+  }
+}
+.icon-plus {
+  &:before {
+    content: $icon-plus;
+  }
+}
+.icon-print {
+  &:before {
+    content: $icon-print;
+  }
+}
+.icon-question {
+  &:before {
+    content: $icon-question;
+  }
+}
+.icon-remove {
+  &:before {
+    content: $icon-remove;
+  }
+}
+.icon-search {
+  &:before {
+    content: $icon-search;
+  }
+}
+.icon-size {
+  &:before {
+    content: $icon-size;
+  }
+}
+.icon-star-empty {
+  &:before {
+    content: $icon-star-empty;
+  }
+}
+.icon-star-half {
+  &:before {
+    content: $icon-star-half;
+  }
+}
+.icon-star {
+  &:before {
+    content: $icon-star;
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter;
+  }
+}
+.icon-youtube {
+  &:before {
+    content: $icon-youtube;
+  }
+}
+.icon-zoom-out {
+  &:before {
+    content: $icon-zoom-out;
+  }
+}
+.icon-zoom {
+  &:before {
+    content: $icon-zoom;
+  }
+}
+
+
+// Font Awesome helper class carryover
+.fa {
+    display: inline-block;
+    font-weight: normal;
+    font-style: normal;
+    text-rendering: auto;
+    font-size: inherit;
+}
+.fa-stack {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+.fa-stack-1x,
+.fa-stack-2x {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: inherit;
+}

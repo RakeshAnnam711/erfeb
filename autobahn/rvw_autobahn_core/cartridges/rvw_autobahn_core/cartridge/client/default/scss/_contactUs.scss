@@ -1,0 +1,29 @@
+.contact-us-landing-page {
+    padding-top: $spacer;
+    padding-bottom: $spacer;
+
+    .col-12>.card:only-child {
+        .card-body>form {
+            @include media-breakpoint-up(lg) {
+                width: 750px;
+            }
+        }
+    }
+
+    .card {
+        margin-top: $spacer;
+    }
+
+    .subscribe-contact-us {
+        margin-top: 10px;
+    }
+}
+
+.contact-us-signup-message {
+    @include toast-message();
+}
+
+.contact-us-signup-alert {
+    @include toast-alert();
+    padding: 20px 30px;
+}

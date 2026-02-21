@@ -1,0 +1,336 @@
+{
+    "name": "Hero Banner WGACA",
+    "description": "Main hero banner with optional text, ctas, and layout styles",
+    "group": "wgaca_assets",
+    "attribute_definition_groups": [
+    	{
+	    	"id": "container",
+	      	"attribute_definitions": [
+	     		{
+                    "id": "enableContainer",
+                    "name": "Enable Container",
+                    "description": "Wrap hero banner in container, enabling this will restrict hero banner to max width",
+                    "type": "boolean",
+                    "required": false
+                },
+				{
+					"id": "heroBannerContainerClass",
+					"name": "Hero Banner Container Class",
+					"type": "string",
+					"description": "Add a class to adjust spacing, alignment, or styling of the hero banner container. e.g. 'mb-2'. See the Style Guide for more class options.",
+					"required": false
+				},
+				{
+					"id": "contentClass",
+					"name": "Content Class",
+					"type": "string",
+					"description": "Add a class to adjust spacing, alignment, or styling of the hero content. e.g. 'p-2'. See the Style Guide for more class options.",
+					"required": false
+				}
+	      	]
+	    },
+    	{
+	    	"id": "Image",
+	      	"attribute_definitions": [
+	     		{
+	          		"id": "desktopImage",
+	          		"name": "Desktop Image",
+					"description": "For faster load time, please use images under 500 KB.",
+	          		"type": "image",
+	          		"required": true
+	        	},
+	        	{
+	          		"id": "mobileImage",
+	          		"name": "Mobile Image",
+					"description": "For faster load time, please use images under 500 KB.",
+	          		"type": "image",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "alt",
+	          		"name": "Alt Text",
+	          		"description": "The image alt text shown by the component.",
+	          		"type": "string",
+	          		"required": true
+	        	}
+	      	]
+	    },
+	    {
+	    	"id": "bannerLinkBlock",
+	      	"attribute_definitions": [
+	     		{
+	          		"id": "bannerLink",
+	          		"name": "Banner Link",
+	          		"type": "url",
+	          		"required": false
+	        	}
+	      	]
+	    },
+	    {
+	    	"id": "textAndCtaPlacementBlock",
+	      	"attribute_definitions": [
+	        	{
+	          		"id": "textAndCtaPlacement",
+	          		"name": "Text and CTA Placement",
+	          		"description": "Text and CTA Placement",
+	          		"type": "enum",
+                    "values": [
+                        "Top Left",
+                        "Top Center",
+                        "Top Right",
+                        "Middle Left",
+                        "Middle Center",
+                        "Middle Right",
+                        "Bottom Left",
+                        "Bottom Center",
+                        "Bottom Right"
+                    ],
+                    "default_value": "Middle Center",
+	          		"required": false
+	        	},
+				{
+					"id": "contentStack",
+					"name": "Tablet/Mobile Text Position",
+					"type": "enum",
+					"values": [
+						"Text displayed over image (default)",
+						"Text below image on tablet and smaller",
+						"Text below image on mobile"
+					],
+					"default_value": "Text displayed over image (default)",
+					"description": "Defines how the text should be positioned relative to the image on smaller screens. Defaults to text overlaying the image.",
+					"required": false
+				}
+	      	]
+	    },
+	    {
+	    	"id": "textConfiguration",
+			"name": "Text Configurations",
+			"description": "Configure text styling for title and subtitle elements, including font sizes, colors, alignment, width, and utility classes for layout and spacing on desktop.",
+	      	"attribute_definitions": [
+				{
+					"id": "textWidth",
+					"name": "Text Width",
+					"type": "string",
+					"description": "Set the width of hero content, eg: '25%'",
+					"required": false
+				}, 
+				{
+					"id": "titleClass",
+					"name": "Title Class",
+					"type": "string",
+					"description": "Add a class to adjust the styling, spacing, and alignment of the title. e.g. 'mb-2' See the Style Guide for more class options.",
+					"required": false
+				},
+	     		{
+	          		"id": "title",
+	          		"name": "Title",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "titleColor",
+	          		"name": "Title Color",
+	          		"type": "string",
+	          		"required": false
+	        	},
+				{
+					"id": "titleFontSize",
+					"name": "Title Font Size",
+					"description": "Title font size, default is 32px",
+					"type": "enum",
+				    "values": ["24px", "28px", "32px", "36px", "40px", "44px", "48px"],
+				    "default_value": "32px",
+				    "required": false
+			  	},
+				{
+					"id": "contentAlignment",
+					"name": "Content Alignment",
+					"description": "Sets the horizontal alignment of the content. Defaults to center.",
+					"type": "enum",
+				  	"values": ["left", "center", "right"],
+				  	"default_value": "center",
+					"required": false
+			  	},
+				{
+					"id": "subTitleClass",
+					"name": "Subtitle Class",
+					"type": "string",
+					"description": "Add a class to adjust the styling, spacing, and alignment of the subtitle. e.g. 'mb-2' See the Style Guide for more class options.",
+					"required": false
+				},
+				{
+					"id": "subTitle",
+					"name": "Subtitle",
+					"type": "string",
+					"required": false
+			  	},
+			  	{
+					"id": "subTitleColor",
+					"name": "Subtitle Color",
+					"type": "string",
+					"required": false
+			  	},
+				{
+					"id": "subTitleFontSize",
+					"name": "Subtitle Font Size",
+					"description": "Subtitle font size, default is 18px",
+					"type": "enum",
+				  	"values": ["18px", "24px", "28px", "32px"],
+				  	"default_value": "18px",
+					"required": false
+			  	}
+	      	]
+	    },
+	    {
+	    	"id": "ctaConfiguration",
+	      	"attribute_definitions": [
+				{
+					"id": "buttonClass",
+					"name": "Button Class",
+					"type": "string",
+					"description": "Add a class to adjust the styling, spacing, and alignment of the button. e.g. 'p-0' See the Style Guide for more class options.",
+					"required": false
+				},
+	     		{
+	          		"id": "buttonText",
+	          		"name": "Button Text",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+                    "id": "removeButtonBorder",
+                    "name": "Remove Button Border",
+                    "type": "boolean",
+                    "required": false
+                },
+				{
+					"id": "buttonStyle",
+					"name": "Button Style",
+					"description": "Select button styling, default is btn-primary",
+					"type": "enum",
+				    "values": ["btn-primary", "btn-secondary", "btn-tertiary"],
+				    "default_value": "btn-primary",
+					"required": false
+			  	},
+				{
+					"id": "tertiaryButtonColor",
+					"name": "Tertiary Button Text Color",
+					"description": "Specifies the text color for the tertiary button.",
+					"type": "string",
+					"required": false
+			  	}
+	      	]
+	    },
+		{
+	    	"id": "textConfigurationTablet",
+			"name": "Tablet Configurations",
+			"description": "Configure text styling for title and subtitle elements, including font sizes, colors, alignment, width, and utility classes for layout and spacing on tablet.",
+	      	"attribute_definitions": [
+				{
+					"id": "textWidthTablet",
+					"name": "Text Width",
+					"type": "string",
+					"description": "Set the width of hero content on tablet, eg: '25%'",
+					"required": false
+				}, 
+				{
+                    "id": "contentBackgroundColorTablet",
+                    "name": "Content Background Color",
+                    "description": "Sets a background color for the hero content on tablet. Commonly used when the text is positioned below the image.",
+                    "type": "string",
+                    "required": false
+                },
+				{
+					"id": "titleColorTablet",
+					"name": "Title Color",
+	          		"type": "string",
+	          		"required": false
+				},
+				{
+					"id": "titleFontSizeTablet",
+					"name": "Title Font Size",
+					"description": "Sets title font size for tablets, default is 20px",
+					"type": "enum",
+				    "values": ["16px","18px","20px","24px", "28px"],
+				    "default_value": "20px",
+					"required": false
+			  	},
+				{
+					"id": "subTitleColorTablet",
+					"name": "Subtitle Color",
+					"type": "string",
+					"required": false
+			  	},
+			  	{
+					"id": "subTitleFontSizeTablet",
+					"name": "Subtitle Font Size",
+					"description": "Sets subtitle font size font size for tablets, default is 16px",
+					"type": "enum",
+					"values": ["16px", "18px", "24px"],
+					"default_value": "16px",
+					"required": false
+		  	   	},
+				{
+					"id": "tertiaryButtonColorTablet",
+					"name": "Tertiary Button Text Color",
+					"description": "Specifies the text color for the tertiary button.",
+					"type": "string",
+					"required": false
+				}
+	      	]
+	    },
+		{
+	    	"id": "textConfigurationMobile",
+			"name": "Mobile Configurations",
+			"description": "Configure text styling for title and subtitle elements, including font sizes, colors, alignment, width, and utility classes for layout and spacing on mobile.",
+	      	"attribute_definitions": [
+				{
+                    "id": "contentBackgroundColorMobile",
+                    "name": "Content Background Color",
+                    "description": "Sets a background color for the hero content on mobile. Commonly used when the text is positioned below the image.",
+                    "type": "string",
+                    "required": false
+                },
+				{
+					"id": "titleColorMobile",
+					"name": "Title Color",
+	          		"type": "string",
+	          		"required": false
+				},
+				{
+					"id": "titleFontSizeMobile",
+					"name": "Title Font Size",
+					"description": "Sets title font size for mobile screens, default is 24px",
+					"type": "enum",
+				    "values": ["16px","18px", "24px", "28px"],
+				    "default_value": "24px",
+					"required": false
+			  	},
+				{
+					"id": "subTitleColorMobile",
+					"name": "Subtitle Color",
+					"type": "string",
+					"required": false
+			  	},
+			  	{
+					"id": "subTitleFontSizeMobile",
+					"name": "Subtitle Font Size",
+					"description": "Sets subtitle font size font size for mobile screens, default is 18px",
+					"type": "enum",
+					"values": ["16px", "18px", "24px"],
+					"default_value": "18px",
+					"required": false
+		  	   	},
+				{
+					"id": "tertiaryButtonColorMobile",
+					"name": "Tertiary Button Text Color",
+					"description": "Specifies the text color for the tertiary button.",
+					"type": "string",
+					"required": false
+				}
+	      	]
+	    } 
+    ],
+    "region_definitions": []
+}

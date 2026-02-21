@@ -1,0 +1,20 @@
+<span class="api-${pdict.consentApi} ${pdict.tracking_consent == null ? '' : 'consented' } tracking-consent"
+    data-caOnline="${pdict.caOnline}"
+    data-heading="${Resource.msg('heading.consentTracking.track.consent', 'common', null)}"
+    ></span>
+
+<isif condition="${pdict.abConfigs.enableConsentTracking}">
+    <div class="consent-drawer" id="consent-tracking" role="dialog"  ${pdict.consentApi === true && pdict.tracking_consent === null ? '' : 'hidden'}>
+        <div class="consent-text-wrapper"><isprint value="${pdict.contentHTML}" encoding="off" /></div>
+        <div class="consent-button-wrapper ml-auto">
+            <button class="affirm btn btn-primary" data-url="${URLUtils.url('ConsentTracking-SetConsent', 'consent', 'true', pdict.csrf.tokenName, pdict.csrf.token)}" autofocus>
+            ${Resource.msg('button.consentTracking.yes', 'common', null)}
+            </button>
+        </div>
+        <div class="consent-button-wrapper">
+            <button class="decline btn btn-primary" data-url="${URLUtils.url('ConsentTracking-SetConsent', 'consent', 'false', pdict.csrf.tokenName, pdict.csrf.token)}" >
+            ${Resource.msg('button.consentTracking.no', 'common', null)}
+            </button>
+        </div>
+    </div>
+</isif>

@@ -1,0 +1,35 @@
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+
+<isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+    <isset name="CsSaType" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('CsSAType').value}" scope="page" />
+    <isset name="CsSaUrl" value=false scope="page"/>
+    <isif condition="${CsSaType == 'SA_SILENTPOST'}">
+        <isset name="CsSaUrl" value="${URLUtils.https('CYBSecureAcceptance-GetRequestDataForSilentPost')}" scope="page" />
+    </isif>
+<iselse/>
+    <isset name="CsSaType" value=false scope="page"/>
+    <isset name="CsSaUrl" value=false scope="page"/>
+</isif>
+
+
+<li class="nav-item" data-method-id="${paymentOption.ID}" ${CsSaType ? 'data-sa-type=' + CsSaType : ''} ${CsSaUrl ? 'data-sa-url=' + CsSaUrl : ''}>
+    <a class="nav-link credit-card-tab <isif condition="${pdict.selectedPaymentMethod == 'CREDIT_CARD'}">active</isif>" data-toggle="tab" href="#credit-card-content" role="tab">
+        <!--- Radio button --->
+        <i class="fa fa-check-circle"></i>
+        <i class="fa fa-circle-o"></i>
+
+        <iscomment> <isif condition="${pdict.selectedPaymentMethod == 'CREDIT_CARD'}">
+            <i class="fa fa-check-circle"></i>
+        <iselse>
+            <i class="fa fa-circle-o"></i>
+        </isif> </iscomment>
+        <img class="credit-card-option"
+                src="${URLUtils.staticURL('/images/credit.png')}"
+                height="32"
+                alt="${paymentOption.name}"
+                title="${paymentOption.name}"
+        >
+        <span class="payment-option-title">Debit/Credit Card</span>
+    </a>
+</li>
+

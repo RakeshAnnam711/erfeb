@@ -1,0 +1,24 @@
+{
+    "hooks": [
+        {
+            "name": "app.payment.processor.salesforce_payments",
+            "script": "./cartridge/scripts/hooks/payment/processor/salesforce_payments"
+        },
+        {
+            "name": "app.payment.form.processor.salesforce_payments",
+            "script": "./cartridge/scripts/hooks/payment/processor/salesforce_payments_form_processor"
+        },
+        {
+            "name": "dw.extensions.payments.asyncPaymentSucceeded",
+            "script": "./cartridge/scripts/hooks/dw_extensions_payments"
+        },
+        {
+            "name": "forter.api.request.payment.salesforce_payments",
+            "script": "./cartridge/scripts/hooks/buildForterRequest"
+        },
+        {
+            "name": "signifyd.api.request.payment.salesforce_payments",
+            "script": "./cartridge/scripts/hooks/buildSignifydRequest"
+        }
+    ]
+}

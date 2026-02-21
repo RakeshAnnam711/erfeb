@@ -1,0 +1,10 @@
+<li class="nav-item giftcertificate-tab-wrapper" hidden data-method-id="${paymentOption.ID}">
+    <a class="nav-link giftcertificate-tab <isif condition="${pdict.selectedPaymentMethod === dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE}">active</isif>" data-toggle="tab" href="#giftcertificate-content" role="tab">
+        <img class="giftcertificate-options"
+                src="${URLUtils.staticURL('/images/credit.png')}"
+                height="32"
+                alt="${paymentOption.name}"
+                title="${paymentOption.name}"
+        >
+    </a>
+</li>

@@ -1,0 +1,13 @@
+<div id="smallButtons" class="sg__header3">Small Buttons</div>
+<p>A button can be made smaller by adding either a helper class or a mixin.</p>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-primary btn-sm">Small Button</button>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button class="btn btn-primary btn-sm">Small Button</button></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {
+    @include button(primary, null, null, null, small);
+}</script></code></pre>
+    </div>
+</div>

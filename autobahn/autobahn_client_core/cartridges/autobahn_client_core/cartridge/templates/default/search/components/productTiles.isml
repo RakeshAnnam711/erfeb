@@ -1,0 +1,28 @@
+<isset name="productCountPreset" value="${pdict.productSearch.pageSize * pdict.productSearch.pageNumber}" scope="page" />
+
+<isloop items="${pdict.productSearch.productIds}" var="product" status="productPosition">
+    <div class="plp-product-tile">
+        <isif condition="${product.promoTile}">
+            <isprint value="${product.promoTile}" encoding="off" />
+        <iselse/>
+            <isobject object="${product.productSearchHit}" view="searchhit" >
+                <isset name="tileURL"
+                    value="${URLUtils.url('Tile-Show', 'pid', product.productID, 'swatches', true, 'ratings', true, 'productPosition', (productCountPreset + productPosition.count - 1))}"
+                    scope="page" />
+                <isif condition="${!empty(pdict.refinementValues) && !empty(pdict.refinementValues.key)}">
+                    <isset name="tileURL"
+                        value="${tileURL.append('key', pdict.refinementValues.key).append('values', pdict.refinementValues.values)}"
+                        scope="page" />
+                </isif>
+
+                <isif condition="${!empty(pdict.productSearch.category) && !empty(pdict.productSearch.category.id)}">
+                    <isset name="tileURL" value="${tileURL.append('cgid', pdict.productSearch.category.id)}"
+                        scope="page" />
+                    <isinclude url="${tileURL}" />
+                <iselse/>
+                    <isinclude url="${tileURL}" />
+                </isif>
+            </isobject>
+        </isif>
+    </div>
+</isloop>

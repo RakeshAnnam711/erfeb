@@ -1,0 +1,36 @@
+<isif condition="${customer.authenticated && (pdict.listSelected && pdict.listSelected.listOwner && pdict.listSelected.listOwner === customer.ID)}">
+    <div
+        id="wishlistDetailNotes"
+        class="wishlist-detail-notes container"
+        data-wishlist-id="${pdict.listSelected.ID}"
+        data-url="${pdict.urls.addListNotes}"
+    >
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="wishlist-detail-notes-toggle" data-toggle="collapse" data-target="#wishlistDetailNotesFormGroup" aria-expanded="false" aria-controls="wishlistDetailNotesFormGroup">
+                    <span class="wishlist-detail-notes-text-show">
+                        ${Resource.msg('button.detail.notes.show', 'wishlist', null)}
+                    </span>
+                    <span class="wishlist-detail-notes-text-hide d-none">
+                        ${Resource.msg('button.detail.notes.hide', 'wishlist', null)}
+                    </span>
+                    ${Resource.msg('button.detail.notes', 'wishlist', null)}
+                </button>
+            </div>
+            <div id="wishlistDetailNotesFormGroup" class="wishlist-detail-notes-form-group form-group col-12 collapse">
+                <label for="wishlistDetailNotesText" class="sr-only">
+                    ${Resource.msg('text.detail.noteslabel', 'wishlist', null)}
+                </label>
+                <textarea class="wishlist-detail-notes-text form-control" id="wishlistDetailNotesText" rows="3" maxlength="256">${pdict.listSelected.description ? pdict.listSelected.description : ''}</textarea>
+            </div>
+        </div>
+    </div>
+<iselseif condition="${pdict.listSelected && pdict.listSelected.description}"/>
+    <div class="wishlist-detail-notes container">
+        <div class="row">
+            <div class="wishlist-detail-notes-logged-out col-12">
+                <p>${pdict.listSelected.description}</p>
+            </div>
+        </div>
+    </div>
+</isif>

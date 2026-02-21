@@ -1,0 +1,12 @@
+{
+    "name": "Promo Tile Column Span",
+    "description": "Choose how many columns should the asset in this location span.",
+    "resources": {
+        "scripts": [
+            "/experience/editors/promoTileSpanSelectorScript.js"
+        ],
+        "styles": [
+            "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+        ]
+    }
+}

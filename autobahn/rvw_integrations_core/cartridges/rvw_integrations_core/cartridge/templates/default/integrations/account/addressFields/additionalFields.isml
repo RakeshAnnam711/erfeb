@@ -1,0 +1,20 @@
+<iscomment>
+    This overwrites what is in rvw_autobahn_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('Vertex_isEnabled') && dw.system.Site.current.getCustomPreferenceValue('Vertex_isVATEnabled')}">
+    <!-- Tax registration Number -->
+    <div class="form-group
+        ${pdict.addressForm.taxnumber.mandatory === true ? 'required' : ''}">
+        <label class="form-control-label" for="taxnumber">
+            <isprint value="${pdict.addressForm.taxnumber.label}" encoding="htmlcontent" />
+        </label>
+        <input type="text" class="form-control" id="taxnumber"
+            <isprint value="${pdict.addressForm.taxnumber.attributes}"  encoding="htmlsinglequote" />>
+        <div class="invalid-feedback"></div>
+    </div>
+</isif>

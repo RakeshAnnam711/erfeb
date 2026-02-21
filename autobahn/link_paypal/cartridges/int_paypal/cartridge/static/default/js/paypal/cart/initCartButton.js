@@ -1,0 +1,449 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/cart/initCartButton.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/api.js":
+/*!**************************************************************************************!*\
+  !*** ../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/api.js ***!
+  \**************************************************************************************/
+/*! exports provided: updateOrderData, getPurchaseUnits, getBillingAgreementToken, createBillingAgreementCall, getOrderDetailsCall, returnFromCart, showCartErrorHtml, showCheckoutErrorHtml, finishLpmOrder */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOrderData", function() { return updateOrderData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPurchaseUnits", function() { return getPurchaseUnits; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBillingAgreementToken", function() { return getBillingAgreementToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBillingAgreementCall", function() { return createBillingAgreementCall; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOrderDetailsCall", function() { return getOrderDetailsCall; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "returnFromCart", function() { return returnFromCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCartErrorHtml", function() { return showCartErrorHtml; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCheckoutErrorHtml", function() { return showCheckoutErrorHtml; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "finishLpmOrder", function() { return finishLpmOrder; });
+var loaderInstance = __webpack_require__(/*! ./loader */ "../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/loader.js");
+
+var $loaderContainer = document.querySelector('.paypalLoader');
+var loader = loaderInstance($loaderContainer);
+/**
+ *  Appends error message on cart page
+ *
+ * @param {string} message error message
+ */
+
+function showCartErrorHtml(message) {
+  $('.checkout-btn').addClass('disabled');
+  $('.cart-error').append("<div class=\"alert alert-danger alert-dismissible valid-cart-error fade show cartError\" role=\"alert\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            ".concat(message, "\n        </div>"));
+  window.scrollTo(0, 0);
+}
+/**
+ *  Appends error message on billing checkout page
+ *
+ * @param {string} message error message
+ */
+
+
+function showCheckoutErrorHtml(message) {
+  document.querySelector('.error-message-text').textContent = '';
+  document.querySelector('.error-message').style.display = 'block';
+  document.querySelector('.error-message-text').append(message);
+  window.scrollTo(0, 0);
+}
+/**
+ * Updates information about an order
+ *
+ * @returns {Object} Call handling result
+ */
+
+
+function updateOrderData() {
+  loader.show();
+  return $.ajax({
+    url: window.paypalUrls.updateOrderData,
+    type: 'PATCH',
+    success: function success() {
+      loader.hide();
+      window.location.href = window.paypalUrls.placeOrderStage;
+    },
+    error: function error(err) {
+      loader.hide();
+      var error = JSON.parse(err.responseText);
+      showCartErrorHtml(error.errorMsg);
+
+      if (error.transactionExpired) {
+        location.reload();
+      }
+    }
+  });
+}
+/**
+ * Gets purchase units
+ *
+ * @returns {Object} with purchase units data
+ */
+
+
+function getPurchaseUnits() {
+  return $.get(window.paypalUrls.getPurchaseUnit).then(function (_ref) {
+    var purchase_units = _ref.purchase_units;
+    return purchase_units;
+  });
+}
+/**
+ * Gets Billing Agreement Token
+ *
+ * @param {boolean} isCartFlow - billing agreement flow from cart
+ * @returns {string} billingToken - returns a JSON response that includes token, an approval URL
+ */
+
+
+function getBillingAgreementToken() {
+  var isCartFlow = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  return $.get(window.paypalUrls.createBillingAgreementToken + "?isCartFlow=".concat(isCartFlow)).then(function (data) {
+    return data;
+  });
+}
+/**
+ * Gets Billing Agreement
+ * After buyer approval, you use a billing agreement token to create the agreement.
+ *
+ * @param {string} billingToken - billing agreement token
+ * @param {boolean} isAccountFlow - billing agreement flow from account page
+ * @returns {Object} JSON response body that includes the billing agreement ID,
+ * the state of the agreement, which is ACTIVE, and information about the payer
+ */
+
+
+function createBillingAgreementCall(billingToken) {
+  var isAccountFlow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  return $.ajax({
+    url: window.paypalUrls.createBillingAgreement + "?isAccountFlow=".concat(isAccountFlow),
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      billingToken: billingToken
+    })
+  });
+}
+/**
+ * Gets Order Details
+ *
+ * @param {string} orderId - billing agreement token
+ * @returns {Object} JSON response body that includes payer email
+ */
+
+
+function getOrderDetailsCall(orderId) {
+  return $.get(window.paypalUrls.getOrderDetails + "?orderId=".concat(orderId)).then(function (data) {
+    return data;
+  });
+}
+/**
+ * Calls to returnFromCart endpoint, redirects to place order stage or shows error if it exists
+ *
+ * @returns {Object} Call handling result
+ */
+
+
+function returnFromCart() {
+  loader.show();
+  var payerEmail = document.querySelector('#paypal_image').getAttribute('data-paypal-default-ba-email');
+  return $.ajax({
+    url: window.paypalUrls.returnFromCart,
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      payerEmail: payerEmail
+    }),
+    success: function success() {
+      loader.hide();
+      window.location.href = window.paypalUrls.placeOrderStage;
+    },
+    error: function error(err) {
+      loader.hide();
+      showCartErrorHtml(err.responseText);
+    }
+  });
+}
+/**
+ * Call finishLpmOrder endpoint
+ * @param  {Object} details billing address details
+ * @returns {Promise} ajax call
+ */
+
+
+function finishLpmOrder(details) {
+  var lpmName = document.querySelector('#usedPaymentMethod').value;
+  var paypalMethodId = document.querySelector('#paypalMethodId').value;
+  return $.ajax({
+    url: window.paypalUrls.finishLpmOrder,
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      details: details,
+      lpmName: lpmName,
+      paypalMethodId: paypalMethodId
+    })
+  });
+}
+
+
+
+/***/ }),
+
+/***/ "../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/cart/initCartButton.js":
+/*!******************************************************************************************************!*\
+  !*** ../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/cart/initCartButton.js ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/api.js");
+
+
+var loaderInstance = __webpack_require__(/*! ../loader */ "../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/loader.js");
+
+var $loaderContainer = document.querySelector('.paypalLoader');
+var loader = loaderInstance($loaderContainer);
+var defaultStyle = {
+  color: 'gold',
+  shape: 'rect',
+  layout: 'vertical',
+  label: 'checkout',
+  tagline: false
+};
+/**
+ *  Gets cart button styles
+ *
+ * @returns {Object} with button styles or if error appears with default styles
+ */
+
+function getCartButtonStyle() {
+  var cartButtonConfigs;
+
+  try {
+    if (document.querySelector('.js_paypal_button_on_cart_page').getAttribute('data-paypal-button-config')) {
+      cartButtonConfigs = JSON.parse(document.querySelector('.js_paypal_button_on_cart_page').getAttribute('data-paypal-button-config'));
+      return cartButtonConfigs.style;
+    }
+  } catch (error) {
+    return {
+      style: defaultStyle
+    };
+  }
+}
+/**
+ *  Gets purchase units object, creates order and returns object with data
+ *
+ * @param {Object} _ - arg
+ * @param {Object} actions - paypal actions
+ * @returns {Object} with purchase units data and application context
+ */
+
+
+function createOrder(_, actions) {
+  loader.show();
+  return $.get(window.paypalUrls.getCartPurchaseUnit).then(function (_ref) {
+    var purchase_units = _ref.purchase_units;
+    var parsedPurchaseUnit = JSON.parse(purchase_units[0].amount.value);
+
+    if (parsedPurchaseUnit === 0) {
+      Object(_api__WEBPACK_IMPORTED_MODULE_0__["showCartErrorHtml"])('Order total 0 is not allowed for PayPal');
+    }
+
+    var application_context = {
+      shipping_preference: 'GET_FROM_FILE'
+    };
+    loader.hide();
+    return actions.order.create({
+      purchase_units: purchase_units,
+      application_context: application_context
+    });
+  });
+}
+/**
+ *  Makes post call and transfers order ID to returnFromCart endpoint, goes to checkout place order stage
+ *
+ * @param {Object} orderID - order id
+ */
+
+
+function onApprove(_ref2) {
+  var orderID = _ref2.orderID;
+  $.ajax({
+    type: 'POST',
+    url: window.paypalUrls.returnFromCart,
+    contentType: 'application/json',
+    data: JSON.stringify({
+      paypalOrderID: orderID
+    }),
+    success: function success() {
+      loader.hide();
+      window.location.href = window.paypalUrls.placeOrderStage;
+    },
+    error: function error() {
+      if (!document.querySelector('.cartError')) {
+        Object(_api__WEBPACK_IMPORTED_MODULE_0__["showCartErrorHtml"])('An internal server error has occurred. \r\nRetry the request later.');
+      }
+
+      loader.hide();
+    }
+  });
+}
+/**
+ * Hides loader on paypal widget closing without errors
+ *
+ */
+
+
+function onCancel() {
+  loader.hide();
+}
+/**
+ * Shows errors if paypal widget was closed with errors
+ *
+ */
+
+
+function onError() {
+  loader.hide();
+
+  if (!document.querySelector('.cartError')) {
+    Object(_api__WEBPACK_IMPORTED_MODULE_0__["showCartErrorHtml"])('An internal server error has occurred. \r\nRetry the request later.');
+  }
+}
+/**
+ *Inits paypal button on cart page
+ */
+
+
+function initPaypalButton() {
+  loader.show();
+  window.paypal.Buttons({
+    createOrder: createOrder,
+    onApprove: onApprove,
+    onCancel: onCancel,
+    onError: onError,
+    style: getCartButtonStyle()
+  }).render('.paypal-cart-button').then(function () {
+    loader.hide();
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (initPaypalButton);
+
+/***/ }),
+
+/***/ "../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/loader.js":
+/*!*****************************************************************************************!*\
+  !*** ../link_paypal/cartridges/int_paypal/cartridge/client/default/js/paypal/loader.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* eslint-disable require-jsdoc */
+module.exports = function (containerElement) {
+  function Constructor() {
+    this.containerEl = containerElement;
+  }
+
+  Constructor.prototype.show = function () {
+    this.containerEl.style.display = 'block';
+  };
+
+  Constructor.prototype.hide = function () {
+    this.containerEl.style.display = 'none';
+  };
+
+  return new Constructor();
+};
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=initCartButton.js.map

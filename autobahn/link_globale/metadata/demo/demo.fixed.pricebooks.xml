@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pricebooks xmlns="http://www.demandware.com/xml/impex/pricebook/2006-10-31">
+    <pricebook>
+        <header pricebook-id="AUD-AU-fixed-list-prices">
+            <currency>AUD</currency>
+            <display-name xml:lang="x-default">Australia AUD Fixed List prices</display-name>
+            <description xml:lang="x-default">Australia AUD Fixed List Prices</description>
+            <online-flag>true</online-flag>
+            <custom-attributes>
+                <custom-attribute attribute-id="geApplicableToCountries">
+                    <value>AU</value>
+                </custom-attribute>
+                <custom-attribute attribute-id="geApplicableToCurrencies">
+                    <value>AUD</value>
+                </custom-attribute>
+                <custom-attribute attribute-id="geBasePricebook">false</custom-attribute>
+                <custom-attribute attribute-id="geFixedPricebook">true</custom-attribute>
+                <custom-attribute attribute-id="geNotApplicableForDynamic">false</custom-attribute>
+            </custom-attributes>
+        </header>
+
+        <price-tables>
+            <price-table product-id="701643636310">
+                <amount quantity="1.0">135.50</amount>
+            </price-table>
+
+            <price-table product-id="701643636341">
+                <amount quantity="1.0">135.50</amount>
+            </price-table>
+
+            <price-table product-id="701642984924M">
+                <amount quantity="1.0">135.50</amount>
+            </price-table>
+
+            <price-table product-id="701642984955M">
+                <amount quantity="1.0">135.50</amount>
+            </price-table>
+
+        </price-tables>
+    </pricebook>
+    <pricebook>
+        <header pricebook-id="AUD-AU-fixed-sale-prices">
+            <currency>AUD</currency>
+            <display-name xml:lang="x-default">Australia AUD Fixed Sale prices</display-name>
+            <description xml:lang="x-default">Australia AUD Fixed Sale prices</description>
+            <online-flag>true</online-flag>
+            <parent>AUD-AU-fixed-list-prices</parent>
+            <custom-attributes>
+                <custom-attribute attribute-id="geApplicableToCountries">
+                    <value>AU</value>
+                </custom-attribute>
+                <custom-attribute attribute-id="geApplicableToCurrencies">
+                    <value>AUD</value>
+                </custom-attribute>
+                <custom-attribute attribute-id="geBasePricebook">false</custom-attribute>
+                <custom-attribute attribute-id="geFixedPricebook">true</custom-attribute>
+                <custom-attribute attribute-id="geNotApplicableForDynamic">false</custom-attribute>
+            </custom-attributes>
+        </header>
+
+        <price-tables>
+            <price-table product-id="701643636310">
+                <amount quantity="1.0">87.50</amount>
+            </price-table>
+
+            <price-table product-id="701642984924M">
+                <amount quantity="1.0">87.50</amount>
+            </price-table>
+
+        </price-tables>
+    </pricebook>
+</pricebooks>

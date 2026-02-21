@@ -1,0 +1,472 @@
+@use 'sass:math'; // added to give support for math.div()
+
+// place styleguide css here that should be affected by theme switching
+
+.styleguide {
+    .main {
+        &__section {
+            &>.row {
+                background: $page-background-color;
+                .brand-logo {
+                    height: 50px;
+                    max-width: $header-logo-width;
+                    background-image: $header-logo-image-sm;
+                    @include media-breakpoint-up(md) {
+                        height: 100px;
+                        max-width: $header-logo-width-md;
+                        background-image: $header-logo-image-md;
+                    }
+                    @include media-breakpoint-up(lg) {
+                        max-width: $header-logo-width-lg;
+                        background-image: $header-logo-image-lg;
+                    }
+                }
+                .brand-favicon {
+                    height: 32px;
+                    width: 32px;
+                    background-image: $header-favicon-image;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                .sg {
+                    &__header1,
+                    &__header2,
+                    &__header3,
+                    &__header4 {
+                        color: rgba($base-font-color, 0.75);
+                    }
+                    &__print-icon {
+                        @include icon($icon-print, after);
+                    }
+                    &__gold-star-icon {
+                        @include icon($icon-star, after, 50px, gold);
+                    }
+                    &__custom-button {
+                        @include button(custom, $green, $white, $green);
+                    }
+                }
+                .font {
+                    @each $name, $font in $fonts {
+                        &--#{"" + $name} {
+                            text-transform: capitalize;
+                            &:before {
+                                content: " #{str-replace(str-replace($font, 'var(--#{$name}-font,'),')')}";
+                                position: absolute;
+                                top: 100%;
+                                font-size: 12px;
+                                color: $gray;
+                            }
+                            &:after {
+                                content: " #{$name + ' font'}";
+                            }
+                            &[data-variable] {
+                                &:before {
+                                    content: attr(data-variable);
+                                }
+                            }
+                        }
+                    }
+                }
+                .color-value {
+                    @each $name, $hex in $colors {
+                        &.background--#{"" + $name}::after {
+                            content: "#{$hex}";
+                        }
+                    }
+                    &.background {
+                        &--brand- {
+                            &primary:after { content: " #{str-replace(str-replace($brand-primary, 'var(--brand-primary,'),')')}"; }
+                            &secondary:after { content: " #{str-replace(str-replace($brand-secondary, 'var(--brand-secondary,'),')')}"; }
+                            &tertiary:after { content: " #{str-replace(str-replace($brand-tertiary, 'var(--brand-tertiary,'),')')}"; }
+                        }
+                    }
+                    &[class*="background--brand-"][data-variable]::after {
+                        content: attr(data-variable);
+                    }
+                }
+                .grid-columns {
+                    // dynamically add site-specific breakpoint-data
+                    &__breakpoint-xs::after {
+                        content: "0 - #{map-get($grid-breakpoints, md) - 1}";
+                    }
+                    &__breakpoint-md::after {
+                        content: "#{map-get($grid-breakpoints, md)} - #{map-get($grid-breakpoints, xl) - 1}";
+                    }
+                    &__breakpoint-xl::after {
+                        content: "#{map-get($grid-breakpoints, xl)} +";
+                    }
+                    &__gutter-size-xs::after {
+                        content: "#{map-get($grid-gutter-widths, xs)}";
+                    }
+                    &__gutter-size-md::after {
+                        content: "#{map-get($grid-gutter-widths, md)}";
+                    }
+                    &__gutter-size-xl::after {
+                        content: "#{map-get($grid-gutter-widths, xl)}";
+                    }
+                    &__xs {
+                        padding-right: math.div(map-get($grid-gutter-widths, xs), 2);
+                        padding-left: math.div(map-get($grid-gutter-widths, xs), 2);
+                        .row {
+                            margin-right: -(math.div(map-get($grid-gutter-widths, xs), 2));
+                            margin-left: -(math.div(map-get($grid-gutter-widths, xs), 2));
+                        }
+                        .col {
+                            padding-right: math.div(map-get($grid-gutter-widths, xs), 2);
+                            padding-left: math.div(map-get($grid-gutter-widths, xs), 2);
+                        }
+                    }
+                    &__md {
+                        padding-right: math.div(map-get($grid-gutter-widths, md), 2);
+                        padding-left: math.div(map-get($grid-gutter-widths, md), 2);
+                        .row {
+                            margin-right: -(math.div(map-get($grid-gutter-widths, md), 2));
+                            margin-left: -(math.div(map-get($grid-gutter-widths, md), 2));
+                        }
+                        .col {
+                            padding-right: math.div(map-get($grid-gutter-widths, md), 2);
+                            padding-left: math.div(map-get($grid-gutter-widths, md), 2);
+                        }
+                    }
+                    &__xl {
+                        padding-right: math.div(map-get($grid-gutter-widths, xl), 2);
+                        padding-left: math.div(map-get($grid-gutter-widths, xl), 2);
+                        .row {
+                            margin-right: -(math.div(map-get($grid-gutter-widths, xl), 2));
+                            margin-left: -(math.div(map-get($grid-gutter-widths, xl), 2));
+                        }
+                        .col {
+                            padding-right: math.div(map-get($grid-gutter-widths, xl), 2);
+                            padding-left: math.div(map-get($grid-gutter-widths, xl), 2);
+                        }
+                    }
+                }
+            }
+        }
+
+        .section {
+            &--typography {
+                .bp {
+                    &--mobile::after {
+                        content: "0 - #{map-get($grid-breakpoints, md) - 1}";
+                    }
+                    &--tablet::after {
+                        content: "#{map-get($grid-breakpoints, md)} - #{map-get($grid-breakpoints, lg) - 1}";
+                    }
+                    &--mobile-tablet::after {
+                        content: "0 - #{map-get($grid-breakpoints, lg) - 1}";
+                    }
+                    &--desktop::after {
+                        content: "#{map-get($grid-breakpoints, lg)} +";
+                    }
+                }
+                .h1 {
+                    &--mobile .h1 {
+                        font-size: $h1-font-size;
+                        line-height: $h1-line-height;
+                        font-weight: $h1-font-weight;
+                        letter-spacing: $h1-letter-spacing;
+                        text-transform: $h1-text-transform;
+                        font-style: $h1-font-style;
+                        margin-bottom: $h1-margin-bottom;
+                    }
+                    &--tablet .h1 {
+                        font-size: $h1-md-font-size;
+                        line-height: $h1-md-line-height;
+                        font-weight: $h1-md-font-weight;
+                        letter-spacing: $h1-md-letter-spacing;
+                        text-transform: $h1-md-text-transform;
+                        font-style: $h1-md-font-style;
+                        margin-bottom: $h1-md-margin-bottom;
+                    }
+                    &--desktop .h1 {
+                        font-size: $h1-lg-font-size;
+                        line-height: $h1-lg-line-height;
+                        font-weight: $h1-lg-font-weight;
+                        letter-spacing: $h1-lg-letter-spacing;
+                        text-transform: $h1-lg-text-transform;
+                        font-style: $h1-lg-font-style;
+                        margin-bottom: $h1-lg-margin-bottom;
+                    }
+                }
+                .h2 {
+                    &--mobile .h2 {
+                        font-size: $h2-font-size;
+                        line-height: $h2-line-height;
+                        font-weight: $h2-font-weight;
+                        letter-spacing: $h2-letter-spacing;
+                        text-transform: $h2-text-transform;
+                        font-style: $h2-font-style;
+                        margin-bottom: $h2-margin-bottom;
+                    }
+                    &--tablet .h2 {
+                        font-size: $h2-md-font-size;
+                        line-height: $h2-md-line-height;
+                        font-weight: $h2-md-font-weight;
+                        letter-spacing: $h2-md-letter-spacing;
+                        text-transform: $h2-md-text-transform;
+                        font-style: $h2-md-font-style;
+                        margin-bottom: $h2-md-margin-bottom;
+                    }
+                    &--desktop .h2 {
+                        font-size: $h2-lg-font-size;
+                        line-height: $h2-lg-line-height;
+                        font-weight: $h2-lg-font-weight;
+                        letter-spacing: $h2-lg-letter-spacing;
+                        text-transform: $h2-lg-text-transform;
+                        font-style: $h2-lg-font-style;
+                        margin-bottom: $h2-lg-margin-bottom;
+                    }
+                }
+                .h3 {
+                    &--mobile .h3 {
+                        font-size: $h3-font-size;
+                        line-height: $h3-line-height;
+                        font-weight: $h3-font-weight;
+                        letter-spacing: $h3-letter-spacing;
+                        text-transform: $h3-text-transform;
+                        font-style: $h3-font-style;
+                        margin-bottom: $h3-margin-bottom;
+                    }
+                    &--tablet .h3 {
+                        font-size: $h3-md-font-size;
+                        line-height: $h3-md-line-height;
+                        font-weight: $h3-md-font-weight;
+                        letter-spacing: $h3-md-letter-spacing;
+                        text-transform: $h3-md-text-transform;
+                        font-style: $h3-md-font-style;
+                        margin-bottom: $h3-md-margin-bottom;
+                    }
+                    &--desktop .h3 {
+                        font-size: $h3-lg-font-size;
+                        line-height: $h3-lg-line-height;
+                        font-weight: $h3-lg-font-weight;
+                        letter-spacing: $h3-lg-letter-spacing;
+                        text-transform: $h3-lg-text-transform;
+                        font-style: $h3-lg-font-style;
+                        margin-bottom: $h3-lg-margin-bottom;
+                    }
+                }
+                .h4 {
+                    &--mobile .h4 {
+                        font-size: $h4-font-size;
+                        line-height: $h4-line-height;
+                        font-weight: $h4-font-weight;
+                        letter-spacing: $h4-letter-spacing;
+                        text-transform: $h4-text-transform;
+                        font-style: $h4-font-style;
+                        margin-bottom: $h4-margin-bottom;
+                    }
+                    &--tablet .h4 {
+                        font-size: $h4-md-font-size;
+                        line-height: $h4-md-line-height;
+                        font-weight: $h4-md-font-weight;
+                        letter-spacing: $h4-md-letter-spacing;
+                        text-transform: $h4-md-text-transform;
+                        font-style: $h4-md-font-style;
+                        margin-bottom: $h4-md-margin-bottom;
+                    }
+                    &--desktop .h4 {
+                        font-size: $h4-lg-font-size;
+                        line-height: $h4-lg-line-height;
+                        font-weight: $h4-lg-font-weight;
+                        letter-spacing: $h4-lg-letter-spacing;
+                        text-transform: $h4-lg-text-transform;
+                        font-style: $h4-lg-font-style;
+                        margin-bottom: $h4-lg-margin-bottom;
+                    }
+                }
+                .h5 {
+                    &--mobile .h5 {
+                        font-size: $h5-font-size;
+                        line-height: $h5-line-height;
+                        font-weight: $h5-font-weight;
+                        letter-spacing: $h5-letter-spacing;
+                        text-transform: $h5-text-transform;
+                        font-style: $h5-font-style;
+                        margin-bottom: $h5-margin-bottom;
+                    }
+                    &--tablet .h5 {
+                        font-size: $h5-md-font-size;
+                        line-height: $h5-md-line-height;
+                        font-weight: $h5-md-font-weight;
+                        letter-spacing: $h5-md-letter-spacing;
+                        text-transform: $h5-md-text-transform;
+                        font-style: $h5-md-font-style;
+                        margin-bottom: $h5-md-margin-bottom;
+                    }
+                    &--desktop .h5 {
+                        font-size: $h5-lg-font-size;
+                        line-height: $h5-lg-line-height;
+                        font-weight: $h5-lg-font-weight;
+                        letter-spacing: $h5-lg-letter-spacing;
+                        text-transform: $h5-lg-text-transform;
+                        font-style: $h5-lg-font-style;
+                        margin-bottom: $h5-lg-margin-bottom;
+                    }
+                }
+                .h6 {
+                    &--mobile .h6 {
+                        font-size: $h6-font-size;
+                        line-height: $h6-line-height;
+                        font-weight: $h6-font-weight;
+                        letter-spacing: $h6-letter-spacing;
+                        text-transform: $h6-text-transform;
+                        font-style: $h6-font-style;
+                        margin-bottom: $h6-margin-bottom;
+                    }
+                    &--tablet .h6 {
+                        font-size: $h6-md-font-size;
+                        line-height: $h6-md-line-height;
+                        font-weight: $h6-md-font-weight;
+                        letter-spacing: $h6-md-letter-spacing;
+                        text-transform: $h6-md-text-transform;
+                        font-style: $h6-md-font-style;
+                        margin-bottom: $h6-md-margin-bottom;
+                    }
+                    &--desktop .h6 {
+                        font-size: $h6-lg-font-size;
+                        line-height: $h6-lg-line-height;
+                        font-weight: $h6-lg-font-weight;
+                        letter-spacing: $h6-lg-letter-spacing;
+                        text-transform: $h6-lg-text-transform;
+                        font-style: $h6-lg-font-style;
+                        margin-bottom: $h6-lg-margin-bottom;
+                    }
+                }
+                .b1 {
+                    &--mobile .b1 {
+                        font-size: $b1-font-size;
+                        line-height: $b1-line-height;
+                        font-weight: $b1-font-weight;
+                        letter-spacing: $b1-letter-spacing;
+                        text-transform: $b1-text-transform;
+                        font-style: $b1-font-style;
+                    }
+                    &--tablet .b1 {
+                        font-size: $b1-md-font-size;
+                        line-height: $b1-md-line-height;
+                        font-weight: $b1-md-font-weight;
+                        letter-spacing: $b1-md-letter-spacing;
+                        text-transform: $b1-md-text-transform;
+                        font-style: $b1-md-font-style;
+                    }
+                    &--desktop .b1 {
+                        font-size: $b1-lg-font-size;
+                        line-height: $b1-lg-line-height;
+                        font-weight: $b1-lg-font-weight;
+                        letter-spacing: $b1-lg-letter-spacing;
+                        text-transform: $b1-lg-text-transform;
+                        font-style: $b1-lg-font-style;
+                    }
+                }
+                .b2 {
+                    &--mobile .b2 {
+                        font-size: $b2-font-size;
+                        line-height: $b2-line-height;
+                        font-weight: $b2-font-weight;
+                        letter-spacing: $b2-letter-spacing;
+                        text-transform: $b2-text-transform;
+                        font-style: $b2-font-style;
+                    }
+                    &--tablet .b2 {
+                        font-size: $b2-md-font-size;
+                        line-height: $b2-md-line-height;
+                        font-weight: $b2-md-font-weight;
+                        letter-spacing: $b2-md-letter-spacing;
+                        text-transform: $b2-md-text-transform;
+                        font-style: $b2-md-font-style;
+                    }
+                    &--desktop .b2 {
+                        font-size: $b2-lg-font-size;
+                        line-height: $b2-lg-line-height;
+                        font-weight: $b2-lg-font-weight;
+                        letter-spacing: $b2-lg-letter-spacing;
+                        text-transform: $b2-lg-text-transform;
+                        font-style: $b2-lg-font-style;
+                    }
+                }
+                .b3 {
+                    &--mobile .b3 {
+                        font-size: $b3-font-size;
+                        line-height: $b3-line-height;
+                        font-weight: $b3-font-weight;
+                        letter-spacing: $b3-letter-spacing;
+                        text-transform: $b3-text-transform;
+                        font-style: $b3-font-style;
+                    }
+                    &--tablet .b3 {
+                        font-size: $b3-md-font-size;
+                        line-height: $b3-md-line-height;
+                        font-weight: $b3-md-font-weight;
+                        letter-spacing: $b3-md-letter-spacing;
+                        text-transform: $b3-md-text-transform;
+                        font-style: $b3-md-font-style;
+                    }
+                    &--desktop .b3 {
+                        font-size: $b3-lg-font-size;
+                        line-height: $b3-lg-line-height;
+                        font-weight: $b3-lg-font-weight;
+                        letter-spacing: $b3-lg-letter-spacing;
+                        text-transform: $b3-lg-text-transform;
+                        font-style: $b3-lg-font-style;
+                    }
+                }
+                .b4 {
+                    &--mobile .b4 {
+                        font-size: $b4-font-size;
+                        line-height: $b4-line-height;
+                        font-weight: $b4-font-weight;
+                        letter-spacing: $b4-letter-spacing;
+                        text-transform: $b4-text-transform;
+                        font-style: $b4-font-style;
+                    }
+                    &--tablet .b4 {
+                        font-size: $b4-md-font-size;
+                        line-height: $b4-md-line-height;
+                        font-weight: $b4-md-font-weight;
+                        letter-spacing: $b4-md-letter-spacing;
+                        text-transform: $b4-md-text-transform;
+                        font-style: $b4-md-font-style;
+                    }
+                    &--desktop .b4 {
+                        font-size: $b4-lg-font-size;
+                        line-height: $b4-lg-line-height;
+                        font-weight: $b4-lg-font-weight;
+                        letter-spacing: $b4-lg-letter-spacing;
+                        text-transform: $b4-lg-text-transform;
+                        font-style: $b4-lg-font-style;
+                    }
+                }
+                .p--mobile {
+                    .p--small {
+                        font-size: $paragraph-font-size-small;
+                        line-height: $paragraph-line-height-small;
+                    }
+                    .p {
+                        font-size: $paragraph-font-size;
+                        line-height: $paragraph-line-height;
+                    }
+                    .p--large {
+                        font-size: $paragraph-font-size-large;
+                        line-height: $paragraph-line-height-large;
+                    }
+                }
+                .p--desktop {
+                    .p--small {
+                        font-size: $paragraph-lg-font-size-small;
+                        line-height: $paragraph-lg-line-height-small;
+                    }
+                    .p {
+                        font-size: $paragraph-lg-font-size;
+                        line-height: $paragraph-lg-line-height;
+                    }
+                    .p--large {
+                        font-size: $paragraph-lg-font-size-large;
+                        line-height: $paragraph-lg-line-height-large;
+                    }
+                }
+            }
+        }
+    }
+}

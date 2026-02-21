@@ -1,0 +1,84 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Page
+
+    It gets called by rvw_autobahn_core: templates/default/common/layout/page.isml
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+
+<isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+    <iscomment> Include Device Fingerprint </iscomment>
+    <isinclude url="${URLUtils.url('CYBDeviceFingerprint-GetFingerprint')}" />
+
+    <iscomment>Visa Checkout clickjacking prevention</iscomment>
+    <isinclude template="visacheckout/clickjackingPrevent" />
+
+    <isscript>
+        var CybersourceConstants = require('*/cartridge/scripts/utils/CybersourceConstants');
+     </isscript>
+    <isif condition="${dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.METHOD_PAYPAL) && dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.METHOD_PAYPAL).isActive() &&  dw.system.Site.current.getCustomPreferenceValue('CsEnableExpressPaypal')==true}">
+        <input type="hidden" id="paypal_express" class="paypal_express" value="${URLUtils.url('CYBPaypal-InitiatePaypalExpress').toString()}" />
+        <input type="hidden" id="paypal_callback" class="paypal_callback" value="${URLUtils.https('CYBPaypal-SessionCallback').toString()}" />
+        <input type="hidden" id="paypal_enabled" class="paypal_enabled" value="${'CsEnableExpressPaypal' in dw.system.Site.getCurrent().getPreferences().getCustom()
+            && dw.system.Site.getCurrent().getCustomPreferenceValue('CsEnableExpressPaypal') ? true : false}" />
+        <input type="hidden" id="paypal_endpoint" class="paypal_endpoint" value="${'CsEndpoint' in dw.system.Site.getCurrent().getPreferences().getCustom()
+            && dw.system.Site.getCurrent().getCustomPreferenceValue('CsEndpoint').value == 'Production' ? 'production' : 'sandbox'}" />
+    </isif>
+
+    <isset name="isGooglePayEnabled" value="${currentSite.getCustomPreferenceValue('enableGooglePay')}" scope="page" />
+    <isif condition="${isGooglePayEnabled}">
+        <input type="hidden" name="isGooglePayEnabled" id="isGooglePayEnabled" value="${currentSite.getCustomPreferenceValue('enableGooglePay')}"/>
+    </isif>
+
+    <isif condition="${dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.METHOD_PAYPAL) && dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.METHOD_PAYPAL).isActive() &&  dw.system.Site.current.getCustomPreferenceValue('CsEnableExpressPaypal')==true}">
+        <script defer src="https://www.paypalobjects.com/api/checkout.js"></script>
+    </isif>
+
+    <isif condition="${isGooglePayEnabled}">
+        <input type="hidden" name="googlePayMerchantID" id="googlePayMerchantID"  value="${currentSite.getCustomPreferenceValue('googlePayMerchantID')}"/>
+        <input type="hidden" name="googlePaygatewayMerchantId" id="googlePaygatewayMerchantId" value="${currentSite.getCustomPreferenceValue('CsMerchantId')}" />
+
+        <isif condition="${pdict.currentStage == null}" >
+            <script defer src="https://pay.google.com/gp/p/js/pay.js"></script>
+            <script defer src="${URLUtils.staticURL('/custom/googlepay.js')}"></script>
+
+            <script>
+                var googlepayvariables = {
+                    currencyCode: "${session.getCurrency().getCurrencyCode()}",
+                    totalPriceStatus: 'FINAL',
+                    sessionCallBack : "${dw.web.URLUtils.url('CheckoutServices-GetGooglePayToken')}",
+                    submitURL : "${dw.web.URLUtils.https('Checkout-Begin', 'stage', 'placeOrder')}",
+                    cartURL : "${dw.web.URLUtils.https('Cart-Show')}",
+                    environment: "${dw.system.System.getInstanceType() == dw.system.System.PRODUCTION_SYSTEM ? 'PRODUCTION' : 'TEST'}"
+                }
+                window.googlepayval = googlepayvariables;
+            </script>
+        </isif>
+    </isif>
+
+    <iscomment>Visa Chekout</iscomment>
+    <isif condition="${currentSite.getCustomPreferenceValue('cybVisaButtonOnCart') && dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.METHOD_VISA_CHECKOUT) && dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.METHOD_VISA_CHECKOUT).isActive()}">
+        <isinclude url="${URLUtils.url('CYBVisaCheckout-InitializeVisaToken')}"/>
+    </isif>
+
+    <script defer src="${URLUtils.staticURL('/custom/cybersource-custom.js')}"></script>
+</isif>
+
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('forterEnabled')}">
+    <isinclude template="custom/fortersnippetjs"/>
+</isif>
+
+<iscomment>Logged in Customer tracking for Yotpo Loyalty</iscomment>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('yotpoCartridgeEnabled')}">
+    <isinclude template="loyalty/yotpoFooter"/>
+</isif>
+
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('klaviyo_enabled')}" >
+    <isinclude template="klaviyo/klaviyoFooter" />
+</isif>
+
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('wishlistEnable')}">
+    <isinclude template="wishlist/components/toast" />
+</isif>

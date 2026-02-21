@@ -1,0 +1,11 @@
+<isset name="brandName" value="${!empty(pdict.siteContext.name) ? pdict.siteContext.name : ''}" scope="page" />
+
+<input
+    type="checkbox"
+    class="custom-control-input" id="add-to-email-list"
+    <isprint value="${pdict.profileForm.customer.addtoemaillist.attributes}" encoding="off" />
+>
+
+<label class="custom-control-label" for="add-to-email-list">
+        ${Resource.msgf('form.newsletter.email.optin', 'forms', null, brandName)}
+</label>

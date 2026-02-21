@@ -1,0 +1,32 @@
+<isset name="filterType" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('filterType').value}" scope="page" />
+<iscomment> <isset name="currencySymbol" value="${session.currency.currencyCode}" scope="page" /> </iscomment>
+
+ <isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}"
+                            scope="page" />
+<isset name="currencySymbol" value="${globaleSession.get('geCurrency')}" scope="page" />
+<iscomment> globaleSession.get('geCurrency') </iscomment>
+<!--- Close button --->
+<div class="filter-header">
+    <div class="header-bar d-lg-none clearfix">
+        <div class="pull-left result-count">
+            <isinclude template="search/resultsCount" />
+        </div>
+        <button class="pull-right close" aria-label="close refinemnt menu">
+            <span>${Resource.msg('button.close', 'search', null)}</span>
+            <i class="fa fa-close"></i>
+        </button>
+    </div>
+</div>
+
+<!--- Results count and Reset button --->
+
+
+<div class="d-block d-lg-none mobile-search-refinements">
+    <isinclude template="search/components/mobileSearchRefineBar" />
+</div>
+
+<div class="d-none d-lg-block" id="${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown' ? 'desktop-horizontal-search-refinements' : 'desktop-vertical-search-refinements'}">
+    <div class="desktop-search-refinements">
+        <isinclude template="search/components/desktopSearchRefineBar" />
+    </div>
+</div>

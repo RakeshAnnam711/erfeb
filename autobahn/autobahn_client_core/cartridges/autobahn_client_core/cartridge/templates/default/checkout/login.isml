@@ -1,0 +1,48 @@
+<isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/login.js');
+    </isscript>
+
+<script>
+        if (window.location.search.indexOf('?rurl=1') > -1) {
+            var hrefURL = window.location.href;
+            hrefURL = hrefURL.replace('?rurl=1', '');
+            window.location.href = hrefURL;
+        }
+    </script>
+
+
+
+<div class="checkout-login-form" id="checkout-login-form">
+    <div class="row equal-height">
+        <div class="col-12">
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="login-nav-tabs">
+                        <isinclude template="account/components/navTabs" />
+                    </div>
+                    <div class="login-form-nav">
+                        <div class="tab-content">
+                            <div class="tab-pane ${pdict.navTabValue === 'login' ? 'active' : ''}" id="login"
+                                role="tabpanel" aria-labelledby="login-tab">
+                                <isinclude template="checkout/loginForm" />
+                                <isinclude template="account/password/requestPasswordResetModal" />
+                                <isinclude template="account/components/oauth" />
+                                <div class="guest-btn-wrapper">
+                                    <button class="btn btn-block btn-secondary continue-guest-btn js-cancel-login guest-btn" aria-label="${Resource.msg('button.text.Guest', 'login', null)}">${Resource.msg('button.text.Guest', 'login', null)}</button>
+                                </div>
+                            </div>
+                            <div class="tab-pane ${pdict.navTabValue === " register" ? 'active' : ''}" id="register"
+                                role="tabpanel" aria-labelledby="register-tab">
+                                <isinclude template="checkout/registerForm" />
+                                <div class="guest-btn-wrapper">
+                                    <button class="btn btn-block btn-secondary continue-guest-btn js-cancel-login guest-btn" aria-label="${Resource.msg('button.text.Guest', 'login', null)}">${Resource.msg('button.text.Guest', 'login', null)}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

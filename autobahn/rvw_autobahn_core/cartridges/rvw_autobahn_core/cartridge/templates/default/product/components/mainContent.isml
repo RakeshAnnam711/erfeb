@@ -1,0 +1,17 @@
+<isset name="numberSlides" value="${(product.images['large'].length + ('pdpGalleryAssets' in product ? product.pdpGalleryAssets.length : 0)).toFixed()}" scope="page" />
+<isset name="hasSingleImage" value="${numberSlides > 1 ? false : true}" scope="page"/>
+
+<div class="main-content-group ${hasSingleImage ? '' : 'product-has-thumbnails'}">
+
+    <iscomment>Placeholder For rvw_integrations_core</iscomment>
+    <isinclude template="integrations/product/components/descDetailsIntegrationsBeforeMainAttributes" />
+
+    <isinclude template="product/components/mainAttributes" />
+
+    <isinclude template="product/components/attributes" />
+
+    <isinclude template="product/components/collapsibleContent" />
+
+    <iscomment>Placeholder For rvw_integrations_core</iscomment>
+    <isinclude template="integrations/product/components/descDetailsIntegrationsAfterLongDescription" />
+</div>

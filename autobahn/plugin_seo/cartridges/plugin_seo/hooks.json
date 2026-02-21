@@ -1,0 +1,16 @@
+{
+    "hooks": [
+        {
+            "name": "app.server.registerRoute",
+            "script": "./cartridge/scripts/hooks/route/addCurrentPageMetaData.js"
+        },
+        {
+            "name": "app.template.htmlHead",
+            "script": "./cartridge/scripts/hooks/template/htmlHead-autobahn.js"
+        },
+        {
+            "name": "app.template.htmlHead.seo",
+            "script": "./cartridge/scripts/hooks/template/htmlHead.js"
+        }
+    ]
+}

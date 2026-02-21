@@ -1,0 +1,52 @@
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page" />
+<isset name="finalOrigPrice" value="${price}" scope="page" />
+<isset name="isCouponApplied" value="${!empty(summaryProduct.couponsApplied)}" scope="page" />
+
+<isset name="price" value="${finalOrigPrice.sales}" scope="page" />
+<span class="sales">
+    <isif condition="${isLowPrice == 'range-low'}">
+        <span class="value" content="${price.decimalPrice}">
+    </isif>
+    <isif condition="${isLowPrice == 'range-high'}">
+        <span class="value" content="${price.decimalPrice}">
+    </isif>
+    <isif condition="${isLowPrice == null}">
+        <span class="value" content="${price.decimalPrice}"></span>
+    </isif>
+    <iscomment> <isinclude template="/product/components/pricing/formatted" /> </iscomment>
+    <div data-value="${lineItem.priceTotal.priceValue}" class="pricing line-item-total-price-amount item-total-${lineItem.UUID} <isif condition="${isCouponApplied}">price-discounted"</isif>">${lineItem.priceTotal.price}</div>
+</span>
+
+<iscomment> Show non adjusted price in strikethorugh when coupons are applied to product </iscomment>
+<del>
+    <span class="strike-through coupon-strike-through list ${lineItem.price && lineItem.price.list ? 'strike-through-black' : ''}">
+        <span class="value ${!isCouponApplied && !lineItem.priceTotal.nonAdjustedPrice ? 'd-none' : 'd-flex'}" content="${lineItem.priceTotal.nonAdjustedPrice}">
+                ${lineItem.priceTotal.nonAdjustedPrice}
+        </span>
+    </span>
+</del>
+
+<iscomment> Show already discounted price when coupons are not applied </iscomment>
+<isif condition="${finalOrigPrice.list !== null}">
+    <isset name="price" value="${finalOrigPrice.list}" scope="page" />
+    <del>
+        <span class="strike-through noncoupon-strike-through list">
+            <span class="value d-flex" content="${price.decimalPrice}">
+                <span class="sr-only">
+                    ${Resource.msg('label.price.reduced.from', 'pricing', null)}
+                </span>
+                <isif condition="${lineItem.priceTotal.nonAdjustedPrice != price.formatted}">
+                    <isinclude template="/product/components/pricing/formatted" />
+                </isif>
+                <span class="sr-only">
+                    ${Resource.msg('label.price.to', 'pricing', null)}
+                </span>
+            </span>
+        </span>
+    </del>
+</isif>
+
+<isif condition="${currentSite.getCustomPreferenceValue('zonosHelloEnabled')}">
+    <span class="zonos-conversion-container" style="display: none;">${Resource.msg('label.zonos.price.estimated', 'pricing', null)} <span class="zonos-conversion">${price.decimalPrice}</span>
+    </span>
+</isif>

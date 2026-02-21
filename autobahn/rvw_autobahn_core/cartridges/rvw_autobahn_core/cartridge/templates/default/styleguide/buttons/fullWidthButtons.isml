@@ -1,0 +1,11 @@
+<div id="fullwidthButtons" class="sg__header3">Full-Width Buttons</div>
+<p>Buttons can be made full width by using either a helper class or a mixin.</p>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-primary btn-block">Full-Width Button</button>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button class="btn btn-primary btn-block">Full-Width Button</button></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include full-width}</script></code></pre>
+    </div>
+</div>

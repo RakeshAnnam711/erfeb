@@ -1,0 +1,50 @@
+@import "~core/components/badges";
+
+.badge-product-container {
+    width: 100%;
+
+    // take the badge out of page flow and move to top
+    &.badge-top-left,
+    &.badge-top-centered,
+    &.badge-top-right {
+        position: absolute;
+    }
+
+    // move it up just a tad
+    &.badge-bottom-left,
+    &.badge-bottom-centered,
+    &.badge-bottom-right {
+        top: -5px;
+    }
+
+    // top left badge goes to top left of product tile
+    &.badge-top-left {
+        top: 0;
+    }
+
+    // top center and top right badge needs pushed down a bit to be below wishlist button
+    &.badge-top-centered,
+    &.badge-top-right {
+        transform: translateY(-50%);
+        top: 80px;
+    }
+
+    // push to the left
+    &.badge-top-left > span,
+    &.badge-bottom-left > span {
+        margin-right: auto;
+    }
+
+    // move to center
+    &.badge-top-centered > span,
+    &.badge-bottom-centered > span {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    // move to right
+    &.badge-top-right > span,
+    &.badge-bottom-right > span {
+        margin-left: auto;
+    }
+}

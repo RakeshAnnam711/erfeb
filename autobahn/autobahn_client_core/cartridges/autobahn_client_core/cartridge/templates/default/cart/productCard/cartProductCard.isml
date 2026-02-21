@@ -1,0 +1,77 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="hasEmbeddedBonusProducts" value="${lineItem.bonusProductLineItemUUID === 'bonus'}"  scope="page"/>
+<isset name="bonusproductlineitem" value="${hasEmbeddedBonusProducts ? 'bonus-product-line-item' : ''}" scope="page"/>
+<isset name="bonuslineitemrow" value="${hasEmbeddedBonusProducts ? 'bonus-line-item-row' : ''}" scope="page"/>
+<isset name="placeholderImage" value="${URLUtils.staticURL('/images/placeholder_Thumbnails.png')}" scope="page" />
+<isset name="summaryProduct" value="${null}" scope="page" />
+<isloop items="${pdict.cartSummary.products}" var="sProduct">
+    <isif condition="${sProduct.pid == lineItem.id}">
+        <isset name="summaryProduct" value="${sProduct}" scope="page" />
+        <isbreak/>
+    </isif>
+</isloop>
+
+<div class="card" cypress-target="cartProductCard" data-product-line-item="${lineItem.UUID}" role="row">
+    <div class="card-body product-info ${bonusproductlineitem} uuid-${lineItem.UUID}">
+        <div class="${bonuslineitemrow}">
+            <iscomment> product card section </iscomment>
+            <div class="d-flex flex-row card-inner-body">
+                <iscomment> product image section </iscomment>
+                <a class="item-image" href="${URLUtils.url('Product-Show', 'pid', lineItem.id)}" aria-label="Product Image" role="columnheader">
+                    <img class="product-image" src="${lineItem.images.small[0].url}" alt="${lineItem.images.small[0].alt}" title="${lineItem.images.small[0].title}" onerror="this.onerror=null;this.src='${placeholderImage}'" loading="lazy" width="80" height="120">
+                </a>
+                <iscomment> product details section </iscomment>
+                <div class="item-attributes d-flex flex-column">
+                    <iscomment> brand name, product name, price section </iscomment>
+                    <div class="item-attributes-header">
+                        <isinclude template="cart/productCard/cartProductCardHeader" />
+                    </div>
+                    <iscomment> promotions section </iscomment>
+                    <div class="line-item-promo custom-promo m-0 item-${lineItem.UUID}">
+                        <iscomment> list of applied coupons </iscomment>
+                        <p class="line-item-promo-list ${empty(summaryProduct.couponsApplied) ? 'd-none' : ''}">
+                            <span class="line-item-promo-ids">
+                                <isloop items="${summaryProduct.couponsApplied}" var="coupon" status="couponLoop">
+                                    <isif condition="${coupon.isApplied}">
+                                        ${coupon.couponCode}
+                                        <isif condition="${!couponLoop.last}">, </isif>
+                                    </isif>
+                                </isloop>
+                            </span>
+                            ${Resource.msg('label.promocodeapplied','cart', null)}
+                        </p>
+                        <isset value="${dw.catalog.ProductMgr.getProduct(lineItem.id)}" name="Product" scope="page" />
+                        <isif condition="${Product.custom.final_sale}">
+                            <iscontentasset aid ="finalsalecalloutmsg"/>
+                        </isif>
+                        <isinclude template="checkout/productCard/productCardProductPromotions" />
+                    </div>
+                    <isloop items="${lineItem.variationAttributes}" var="attribute">
+                        <p class="line-item-attributes ${attribute.displayName}-${lineItem.UUID}">${attribute.displayName}: ${attribute.displayValue}</p>
+                    </isloop>
+                    <isloop items="${lineItem.options}" var="option">
+                        <isif condition="${!!option}" />
+                            <div class="lineItem-options-values" data-option-id="${option.optionId}" data-value-id="${option.selectedValueId}">
+                                <p class="line-item-attributes">${option.displayName}</p>
+                            </div>
+                        </isif>
+                    </isloop>
+
+                    <iscomment> wishlist and remove buttons </iscomment>
+                    <isif condition="${!lineItem.isBonusProductLineItem}">
+                        <isinclude template="cart/productCard/cartProductCardEdit" />
+                    </isif>
+                </div>
+            </div>
+            <isinclude template="integrations/cart/productCard/cartProductCard/additionalInfo" />
+
+        </div>
+
+        <isif condition="${lineItem.bonusProductLineItemUUID === 'bonus'}">
+            <isinclude template="cart/productCard/cartEmbeddedBonusProducts" />
+        </isif>
+
+        <isinclude template="integrations/cart/productCard/cartProductCardIntegrationsBottom.isml" />
+    </div>
+</div>

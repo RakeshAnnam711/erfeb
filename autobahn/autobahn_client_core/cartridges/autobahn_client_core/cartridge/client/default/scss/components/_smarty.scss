@@ -1,0 +1,161 @@
+.no-po-box {
+	font-size: 11px;
+    color: $alert-text;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid $grey-border;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 24px;
+    div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: $white;
+        border-bottom: 1px solid $grey-border;
+        &:hover {
+          background-color: $light-grey;
+        }
+        span {
+          padding-right: 5px;
+        }
+      }
+  }
+
+  .autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: $white;
+  }
+
+  .address-form {
+    .autocomplete-items {
+      margin: 0;
+    }
+  }
+
+  .addresscontent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+    }
+    .suggestionAddress, .userenterAddress{
+      .title{
+        font-size: 20px;
+        line-height: 25px;
+        margin-bottom: 1rem;
+      }
+      .addressinfo{
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+      .btn-group {
+      	width: 100%;
+      }
+      button {
+        padding: 10px 10px;
+        margin-bottom: 1rem;
+        width: 100%;
+	    max-width: 260px;
+      }
+      .confirm-address {
+		background: $alert-red;
+		border: none;
+		letter-spacing: 0px;
+	    font-size: 14px;
+	  }
+	  .update-address {
+	  	background: $success-green;
+	  	border: none;
+	  	letter-spacing: 0px;
+	    font-size: 13px;
+	  }
+    }
+    .change-address{
+      display: none;
+      background: $alert-red;
+    }
+    &.notfound {
+      .change-address{
+        display: inline;
+        margin-right: 1rem;
+      }
+      .confirm-address {
+		background: $success-green;
+	  }
+      .userenterAddress {
+      	flex: 0 0 100%;
+      	max-width: 100%;
+      }
+    }
+  }
+  .smartyVerification-modal{
+  	.modal-header {
+  		background-color: $brand-primary;
+  		.modal-title {
+  			font-wieght: bold;
+  		}
+  	}
+  	.subtitle {
+  		display: flex;
+  		font-size: 10px;
+  		margin-bottom: 15px;
+  		font-weight: bold;
+  		border: 1px solid $light-gray;
+  		padding: 10px;
+  		&:before {
+		  	content: "\E921";
+		    font-family: "icomoon";
+		    display: inline-block;
+		    font-size: 16px;
+		    font-weight: normal;
+	   	}
+	   	.subtitle-inner-block {
+	   		padding-left: 10px;
+	   	}
+  		
+  	}
+  	.po-outer-block {
+  		display: flex;
+  		border: 1px solid $light-gray;
+  		padding: 10px;
+  		color: $alert-text;
+  		margin-bottom: 10px;
+  		&:before {
+		  	content: "\E921";
+		    font-family: "icomoon";
+		    display: inline-block;
+		    font-size: 16px;
+		    font-weight: normal;
+	   	}
+	   	.po-inner-block {
+	    	font-size: 12px;
+	    	padding-left: 10px;
+	    }
+  	}
+  	
+    .infomessage{
+      color: $alert-text;
+      text-align: left;
+      margin-bottom: 1rem;
+      border: 1px solid $grey-border2;
+      padding: 5px;
+      .icon-alert{
+        font-size: 15px;
+        position: relative;
+        top: 2px;
+      }
+      .erro-message{
+        font-size: 12px;
+        color: $alert-text;
+      }
+    }
+  }

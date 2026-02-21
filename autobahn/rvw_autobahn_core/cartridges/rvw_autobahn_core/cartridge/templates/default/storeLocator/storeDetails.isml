@@ -1,0 +1,32 @@
+<div class="store-details" data-store-id="${store.ID}">
+    <div class="store-name">
+        <a class="h4" href="${URLUtils.url('Stores-Detail', 'storeID', store.ID)}">${store.name}</a>
+        <isif condition="${store.storeType && store.storeType.displayValue}">
+            <p>${store.storeType.displayValue}</p>
+        </isif>
+    </div>
+
+    <isset name="storeAddress" value="${(store.address1 ? store.address1 : '') + (store.address2 ? store.address2 : '') + (store.city ? ', ' + store.city : '') + (store.stateCode ? ', ' + store.stateCode : '') + (store.postalCode ? ' ' + store.postalCode : '')}" scope="page"/>
+    <address>
+        <a class="store-map" target='_blank' rel='noopener' href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store.name+' '+storeAddress)}">${storeAddress}</a>
+        <div class="store-hours">
+            <isif condition="${store.storeHours}">
+                <isprint value="${store.storeHours}" encoding="off" />
+            </isif>
+        </div>
+        <isif condition="${store.phone}">
+            <a class="storelocator-phone" href="tel:${store.phone}">${store.phone}</a>
+        </isif>
+    </address>
+
+    <isif condition="${pdict.showMap === 'true'}">
+        <div class="mt-2 mr-3 mb-3">
+            <button data-store-name="${store.name}" data-action="${URLUtils.url('Stores-SetPreferredStore', 'preferredStoreID', store.ID)}" class="btn btn-primary btn-block store-select-map">${Resource.msgf('button.storelocator.maps.individual', 'storeLocator', null, store.name)}</button>
+            <div>
+                <p class="text-center store-locator-failed-to-set-preferred alert alert-danger error-message" style="display: none;">
+                    ${Resource.msg('error.storelocator.header.set', 'storeLocator', null)}
+                </p>
+            </div>
+        </div>
+    </isif>
+</div>

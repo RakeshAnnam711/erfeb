@@ -1,0 +1,13 @@
+<header class="page-header search-results-header">
+    <div class="container">
+        <iscomment> <isinclude template="components/breadcrumbs/pageBreadcrumbs"/> </iscomment>
+
+        <div class="page-header-title">
+            <isif condition="${pdict.productSearch.isCategorySearch}">
+                ${pdict.productSearch.category.name}
+            <iselse/>
+                ${Resource.msg('label.header.banner','search',null)}
+            </isif>
+        </div>
+    </div>
+</header>

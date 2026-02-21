@@ -1,0 +1,37 @@
+//List Styles
+
+ul.styled-list,
+ol.styled-list,
+.styled-list ul,
+.styled-list ol {
+    margin-left: 2px;
+    padding-left: $list-padding-left;
+
+    li {
+        margin-bottom: $list-item-bottom-margin;
+        padding-left: 4px;
+
+        &::marker {
+            color: $list-item-marker-color;
+        }
+    }
+}
+
+ol.styled-list,
+.styled-list ol {
+    counter-reset: ol-items;
+
+    li {
+        display: list-item;
+        counter-increment: ol-items;
+
+        &::marker {
+            display: list-item;
+            content: counter(ol-items) " ";
+            font-family: $ordered-list-marker-font;
+            font-size: $ordered-list-marker-font-size;
+            font-style: $ordered-list-marker-font-style;
+            font-weight: $ordered-list-marker-font-weight;
+        }
+    }
+}

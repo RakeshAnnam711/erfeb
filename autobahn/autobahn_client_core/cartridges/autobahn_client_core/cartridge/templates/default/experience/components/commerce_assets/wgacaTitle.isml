@@ -1,0 +1,5 @@
+<iscomment>CSS is now loaded via consolidated-components.scss in global.scss</iscomment>
+
+<div class="title-block" style="text-align: ${pdict.titleAlignment}">
+	<div class="title ${pdict.titleContainerClass}" style="color: ${pdict.titleColor}; font-size: ${pdict.titleFontSize}; letter-spacing: ${pdict.letterSpacing}"><isprint value="${pdict.title}" encoding="off" /></div>
+</div>

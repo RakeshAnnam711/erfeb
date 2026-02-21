@@ -1,0 +1,69 @@
+<div class="mobile-1r-1c ${pdict.customClass} ${pdict.fullBleed ? 'full-bleed' : ''} ${!empty(pdict.backgroundImage) ? 'has-background-image' : ''} ${!empty(pdict.animation) ? 'animation-initial-state' : ''} ${pdict.disableMobileAnimation === true ? 'disable-mobile-animation' : ''}"
+     data-component-id="${pdict.componentID}"
+     data-component-index="${pdict.componentIndex.toString()}"
+     <isif condition="${!empty(pdict.animation)}">
+        data-animation="${pdict.animation}"
+        data-animation-play-once="${pdict.animationPlayOnce}"
+     </isif>
+    <isif condition="${!empty(pdict.marginTop) || !empty(pdict.marginBottom) || !empty(pdict.containerBackgroundColor)}">
+    style="
+        <isif condition="${!empty(pdict.marginTop)}">margin-top: ${pdict.marginTop};</isif>
+        <isif condition="${!empty(pdict.marginBottom)}">margin-bottom: ${pdict.marginBottom};</isif>
+        <isif condition="${!empty(pdict.containerBackgroundColor)}">background-color: ${pdict.containerBackgroundColor}; padding: 32px 0;</isif>
+    "
+    </isif>
+>
+
+    <isif condition="${pdict.fullBleed}">
+        <div class="row" <isif condition="${!empty(pdict.animation)}">style='animation-delay: ${pdict.animationDelay}ms;'</isif>>
+            <isif condition="${!empty(pdict.backgroundImage)}">
+                <div class="column-background column-background-mobile ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImage.alt}"
+                     style="background-image: url('${pdict.backgroundImage.src.mobile}');
+                            background-image: -webkit-image-set(url(${pdict.backgroundImage.src.mobile}) 1x, url(${pdict.backgroundImage.src.mobile2x}) 2x);
+                            background-image: image-set(url(${pdict.backgroundImage.src.mobile}) 1x, url(${pdict.backgroundImage.src.mobile2x}) 2x);
+                            background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+                </div>
+                <div class="column-background column-background-tablet ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImage.alt}"
+                     style="background-image: url('${pdict.backgroundImage.src.tablet}');
+                            background-image: -webkit-image-set(url(${pdict.backgroundImage.src.tablet}) 1x, url(${pdict.backgroundImage.src.tablet2x}) 2x);
+                            background-image: image-set(url(${pdict.backgroundImage.src.tablet}) 1x, url(${pdict.backgroundImage.src.tablet2x}) 2x);
+                            background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+                </div>
+                <div class="column-background column-background-desktop ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImage.alt}"
+                     style="background-image: url('${pdict.backgroundImage.src.desktop}');
+                            background-image: -webkit-image-set(url(${pdict.backgroundImage.src.desktop}) 1x, url(${pdict.backgroundImage.src.desktop2x}) 2x);
+                            background-image: image-set(url(${pdict.backgroundImage.src.desktop}) 1x, url(${pdict.backgroundImage.src.desktop2x}) 2x);
+                            background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+                </div>
+            </isif>
+            <isprint value="${pdict.regions.column1.setClassName("region col-12 px-0").render()}" encoding="off"/>
+        </div>
+    <iselse/>
+        <div class="container" <isif condition="${!empty(pdict.animation)}">style='animation-delay: ${pdict.animationDelay}ms;'</isif>>
+            <div class="row">
+                <isif condition="${!empty(pdict.backgroundImage)}">
+                    <div class="column-background column-background-mobile ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImage.alt}"
+                         style="background-image: url('${pdict.backgroundImage.src.mobile}');
+                                background-image: -webkit-image-set(url(${pdict.backgroundImage.src.mobile}) 1x, url(${pdict.backgroundImage.src.mobile2x}) 2x);
+                                background-image: image-set(url(${pdict.backgroundImage.src.mobile}) 1x, url(${pdict.backgroundImage.src.mobile2x}) 2x);
+                                background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+                    </div>
+                    <div class="column-background column-background-tablet ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImage.alt}"
+                         style="background-image: url('${pdict.backgroundImage.src.tablet}');
+                                background-image: -webkit-image-set(url(${pdict.backgroundImage.src.tablet}) 1x, url(${pdict.backgroundImage.src.tablet2x}) 2x);
+                                background-image: image-set(url(${pdict.backgroundImage.src.tablet}) 1x, url(${pdict.backgroundImage.src.tablet2x}) 2x);
+                                background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+                    </div>
+                    <div class="column-background column-background-desktop ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImage.alt}"
+                         style="background-image: url('${pdict.backgroundImage.src.desktop}');
+                                background-image: -webkit-image-set(url(${pdict.backgroundImage.src.desktop}) 1x, url(${pdict.backgroundImage.src.desktop2x}) 2x);
+                                background-image: image-set(url(${pdict.backgroundImage.src.desktop}) 1x, url(${pdict.backgroundImage.src.desktop2x}) 2x);
+                                background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+                    </div>
+                </isif>
+                <isprint value="${pdict.regions.column1.setClassName("region col-12").render()}" encoding="off"/>
+            </div>
+        </div>
+    </isif>
+
+</div>

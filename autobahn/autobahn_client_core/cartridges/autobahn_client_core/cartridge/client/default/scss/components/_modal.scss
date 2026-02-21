@@ -1,0 +1,39 @@
+@import "~core/components/modal";
+
+.modal {
+    .modal-header {
+        position: relative;
+        justify-content: center;
+    }
+
+    .close {
+        position: absolute;
+        right: 20px;
+    }
+}
+
+#wishlistModalShowLists.wishlist-modal-show-lists {
+    .wishlist-all-lists {
+        .wishlist-favorite-product-btn.selected {
+            &::before {
+                color: #ba4257;
+            }
+        }
+    }
+}
+
+#wishlistModalDeleteProducts{
+    .modal-content{
+        .close{
+            right: 10px;
+        }
+    }
+}
+
+#wishlistModalDeleteProduct{
+    @include media-breakpoint-up(md){
+        .close{
+            right: 11px;
+        }
+    }
+}

@@ -1,0 +1,280 @@
+{
+    "name": "4 Column",
+    "description": "This is a layout component of variable columns for mobile and 1 row by 4 columns for desktop/tablet.",
+    "group": "autobahn_layouts",
+    "attribute_definition_groups": [
+        {
+            "id": "4columnAttributes",
+            "name": "Variable number of columns on mobile / 1 row, 4 columns on desktop.",
+            "attribute_definitions": [
+                {
+                    "id": "containerBackgroundColor",
+                    "name": "Container Background Color",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "customClass",
+                    "name": "Custom Class",
+                    "description": "Add a custom class to be applied to this layout container. For example, use Bootstrap classes for spacing, or set a background color by using classes found in the Style Guide.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "marginTop",
+                    "name": "Top Margin",
+                    "description": "Override the default top spacing by entering a pixel amount here, e.g. '100'.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "marginBottom",
+                    "name": "Bottom Margin",
+                    "description": "Override the default bottom spacing by entering a pixel amount here, e.g. '100'.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "mobileColumns",
+                    "name": "Mobile Columns",
+                    "description": "Choose the number of columns to be displayed on mobile devices. Default is '2 rows, 2 columns'.",
+                    "type": "enum",
+                    "values": ["2 rows, 2 columns", "4 rows, 1 column", "1 row, 4 columns"],
+                    "default_value": "2 rows, 2 columns",
+                    "required": false
+                },
+                {
+                    "id": "fullBleed",
+                    "name": "Full Bleed",
+                    "description": "If enabled, this container will be allowed to span the entire width of the viewport.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "noPaddingCol",
+                    "name": "No Column Padding",
+                    "description": "If enabled, these columns will have no padding between each other.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "alignCols",
+                    "name": "Column Content Alignment",
+                    "type": "enum",
+                    "values": [
+                        "Stretch",
+                        "Top",
+                        "Center",
+                        "Bottom"
+                    ],
+                    "default_value": "Center",
+                    "description": "Default: Center; Choose how smaller columns should align vertically with the larger ones.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "animationOptions",
+            "name": "Animation Options",
+            "attribute_definitions": [
+                {
+                    "id": "animation",
+                    "name": "Animation",
+                    "type": "enum",
+                    "values": [
+                        "None",
+                        "Fade in",
+                        "Zoom in",
+                        "Hinge drop",
+                        "Flip in top",
+                        "Flip in bottom",
+                        "Slide in from top",
+                        "Slide in from left",
+                        "Slide in from right",
+                        "Slide in from bottom"
+                    ],
+                    "default_value": "None",
+                    "description": "Select an option below to animate this layout when it's scrolled to on the page.",
+                    "required": false
+                },
+                {
+                    "id": "animationDistance",
+                    "name": "Animation Duration",
+                    "description": "Choose a duration for the animation to travel. Default is Medium. Short will make the animation more subtle and Long will make it more extreme.",
+                    "type": "enum",
+                    "values": [
+                        "Short",
+                        "Medium",
+                        "Long"
+                    ],
+                    "default_value": "Medium",
+                    "required": false
+                },
+                {
+                    "id": "col1AnimationDelay",
+                    "name": "Column 1 Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "col2AnimationDelay",
+                    "name": "Column 2 Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "col3AnimationDelay",
+                    "name": "Column 3 Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "col4AnimationDelay",
+                    "name": "Column 4 Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "animationPlayOnce",
+                    "name": "Play Animation Once Only",
+                    "description": "If selected, the animation will not reset when the user scrolls back to the top of the page.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "disableMobileAnimation",
+                    "name": "Disable Mobile Animation",
+                    "description": "If selected, animation will only occur on desktop (lg breakpoint and up).",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id":"column1",
+            "name":"Column 1",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"column2",
+            "name":"Column 2",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"column3",
+            "name":"Column 3",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"column4",
+            "name":"Column 4",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        }
+    ]
+}

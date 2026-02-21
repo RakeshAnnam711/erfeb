@@ -1,0 +1,140 @@
+{
+    "name": "Flexible Grid Item",
+    "group": "autobahn_layouts_flexgrid",
+    "attribute_definition_groups": [
+        {
+            "id": "gridItemOptions",
+            "name": "Grid Item Options",
+            "description": "Options to customize beyond default Flexible Grid settings",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container Class",
+                    "type": "string",
+                    "description": "Add a class to the container of this grid item. Useful for overriding padding or setting a background color, e.g. 'p-0 background--black' See the Style Guide for more class options.",
+                    "required": false
+                },
+                {
+                    "id": "smWidth",
+                    "name": "Mobile Width in Columns",
+                    "type": "enum",
+                    "description": "The number of columns out of 12 this item should span. For example, in a 2 column grid, you could choose 12/12 to make this item span both columns.",
+                    "values": [
+                        "Default",
+                        "1/12",
+                        "2/12",
+                        "3/12",
+                        "4/12",
+                        "5/12",
+                        "6/12",
+                        "7/12",
+                        "8/12",
+                        "9/12",
+                        "10/12",
+                        "11/12",
+                        "12/12"
+                    ],
+                    "default_value": "Default",
+                    "required": false
+                },
+                {
+                    "id": "mdWidth",
+                    "name": "Tablet Width in Columns",
+                    "type": "enum",
+                    "description": "The number of columns out of 12 this item should span. For example, in a 3 column grid, you could choose 8/12 to make this item span 2 columns.",
+                    "values": [
+                        "Default",
+                        "1/12",
+                        "2/12",
+                        "3/12",
+                        "4/12",
+                        "5/12",
+                        "6/12",
+                        "7/12",
+                        "8/12",
+                        "9/12",
+                        "10/12",
+                        "11/12",
+                        "12/12"
+                    ],
+                    "default_value": "Default",
+                    "required": false
+                },
+                {
+                    "id": "lgWidth",
+                    "name": "Desktop Width in Columns",
+                    "type": "enum",
+                    "description": "The number of columns out of 12 this item should span. For example, in a 4 column grid, you could choose 6/12 to make this item span 2 columns.",
+                    "values": [
+                        "Default",
+                        "1/12",
+                        "2/12",
+                        "3/12",
+                        "4/12",
+                        "5/12",
+                        "6/12",
+                        "7/12",
+                        "8/12",
+                        "9/12",
+                        "10/12",
+                        "11/12",
+                        "12/12"
+                    ],
+                    "default_value": "Default",
+                    "required": false
+                },
+                {
+                    "id": "verticalPosition",
+                    "name": "Vertical Position",
+                    "description": "Setting for how this component should sit in it's container vertically",
+                    "type": "enum",
+                    "values": [
+                        "Top",
+                        "Middle",
+                        "Bottom",
+                        "Fill Height"
+                    ],
+                    "required": false
+                },
+                {
+                    "id": "itemPadding",
+                    "name": "Padding for the item container",
+                    "description": "Padding for the item. Any valid CSS padding value may be used (20px 1% 15vh 5vw). This value is added to an inline style tag on the container for the embedded component.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id":"embeddedComponent",
+            "name":"Embedded Component",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,157 @@
+<isset name="filterType" value="${pdict.abConfigs.filterType}" scope="page" />
+<isset name="collapseRefinementsDesktop" value="${pdict.abConfigs.plpCollapseRefinementsDesktop == true ? true : false}" scope="page"/>
+<isset name="stickyRefinementBar" value="${pdict.abConfigs.enablePLPStickyRefinementBar == true ? true : false}" scope="page"/>
+<isset name="headerType" value="${pdict.abConfigs.headerFixed == 'enhanced' ? 'enhanced-header-enabled' : ''}" scope="page" />
+
+<!-- Desktop Vertical Layout -->
+<isif condition="${filterType == 'vertical'}">
+    <div class="refinements" data-collapse-desktop="${collapseRefinementsDesktop}" data-refinement-style-desktop="vertical" data-sticky-refinement-bar="false" cypress-target="desktopVerticalSearchRefinements">
+        <isloop items="${pdict.productSearch.refinements}" var="refinement">
+            <div class="card aside d-lg-flex collapsible-xl refinement refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                <div class="card-header col-sm-12" id="refinement-title-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                    <button type="button" class="card-title title btn text-left btn-block"
+                        aria-controls="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}"
+                        aria-expanded="false"
+                    >
+                        <span>${refinement.displayName}</span>
+                    </button>
+                </div>
+
+                <div class="card-body content value" id="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}" aria-labelledby="refinement-title-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                    <!--- CATEGORY REFINEMENTS --->
+                    <isif condition="${refinement.isCategoryRefinement}">
+                        <isset name="categories" value="${refinement.values}" scope="page" />
+                        <isinclude template="search/refinements/categories" />
+                    </isif>
+
+                    <!--- ATTRIBUTE/PROMOTION REFINEMENTS --->
+                    <isif condition="${refinement.isAttributeRefinement || refinement.isPromotionRefinement}">
+                        <isinclude template="search/refinements/attributes" />
+                    </isif>
+
+                    <!--- PRICE REFINEMENTS --->
+                    <isif condition="${refinement.isPriceRefinement}">
+                        <isinclude template="search/refinements/prices" />
+                    </isif>
+                </div>
+            </div>
+        </isloop>
+    </div>
+</isif>
+
+<!-- Horizontal layout with multiple dropdowns, one for each filter -->
+<isif condition="${filterType == 'horizontal-multiple-dropdowns'}">
+    <div class="refinements horizontal-multipledropdowns-filter horizontal-filter-refinements-bar" data-refinement-style-desktop="horizontal-multiple-dropdowns" data-sticky-refinement-bar="${stickyRefinementBar}"  id="horizontal-filter" cypress-target="desktopHorizontalSearchRefinementsMulti">
+        <div class="container refinements-container">
+             <div class="refinements-outer-grid">
+                <div class="refinements-inner-grid">
+                    <isloop items="${pdict.productSearch.refinements}" var="refinement">
+                        <div class="dropdown horizontal-multipledropdowns-filter-refinement horizontal-filter-refinement card aside refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')} refinement">
+                            <button class="d-none d-lg-block dropdown-toggle col-sm-12 title btn text-left btn-block horizontal-multipledropdowns-filter-btn"
+                                id="refinement-${refinement.isAttributeRefinement ? refinement.attributeID.toLowerCase().replace(/ /g, '-') : refinement.displayName.toLowerCase().replace(/ /g, '-')}"
+                                aria-controls="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                                data-toggle="dropdown"
+                            >
+                                <span>${refinement.displayName}</span>
+                            </button>
+
+                            <div class="horizontal-multipledropdowns-filter-dropdown-menu dropdown-menu" aria-labelledby="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                                <iscomment>
+                                    WGACA MODIFICATION modified id (ADA Unique)
+                                    <div class="card card-body content value" id="${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                                </iscomment>
+                                <div class="card card-body content value" id="bb-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                                    <isif condition="${refinement.isCategoryRefinement}">
+                                        <div class="refinement-category" aria-labelledby="refinement-${refinement.displayName.toLowerCase().replace(/ /g, '-')}">
+                                            <isset name="categories" value="${refinement.values}" scope="page" />
+                                            <isinclude template="search/refinements/categories" />
+                                        </div>
+                                    </isif>
+
+                                    <isif condition="${refinement.isAttributeRefinement || refinement.isPromotionRefinement}">
+                                        <div aria-labelledby="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                                            <isinclude template="search/refinements/attributes" />
+                                        </div>
+                                    </isif>
+
+                                    <isif condition="${refinement.isPriceRefinement}">
+                                        <div aria-labelledby="refinement-${refinement.displayName.toLowerCase().replace(/ /g, '-')}" aria-hidden="true">
+                                            <isinclude template="search/refinements/prices" />
+                                        </div>
+                                    </isif>
+                                </div>
+                            </div>
+                        </div>
+                    </isloop>
+                </div>
+                <div class="d-none d-lg-block product-sort">
+                    <isinclude template="search/sortOrderMenu" />
+                </div>
+            </div>
+        </div>
+    </div>
+</isif>
+
+<!-- Horizontal layout with one filter by dropdown, each filter showing open in that -->
+<isif condition="${filterType == 'horizontal-one-dropdown'}">
+    <div class="refinements horizontal-onedropdown-filter horizontal-filter-refinements-bar" data-refinement-style-desktop="horizontal-one-dropdown" data-sticky-refinement-bar="${stickyRefinementBar}" id="horizontal-filter" cypress-target="desktopHorizontalSearchRefinementsDrawer">
+        <div class="container refinements-container">
+            <div class="d-lg-flex justify-content-lg-between">
+                <div class="horizontal-onedropdown-filter-group">
+                    <button
+                        class="horizontal-filter-btn horizontal-onedropdown-filter-btn custom-select card-header card-title title btn-sm"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="collapseFilters"
+                        >
+                        <span>${Resource.msg('horizontal.button.filter', 'search', null)}</span>
+                        <span class="horizontal-onedropdown-filter-btn-arrow"></span>
+                    </button>
+                    <div class="collapse-filters-wrapper ${headerType}">
+                        <div class="collapse-one-dropdown-filter collapse-filters card-body" id="collapseFilters">
+                            <isloop items="${pdict.productSearch.refinements}" var="refinement">
+                                <div class="horizontal-onedropdown-filter-refinement horizontal-filter-refinement card aside refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')} refinement">
+                                    <h4 class="d-none d-lg-block" id="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">${refinement.displayName}</h4>
+                                    <div class="d-block d-lg-none card-header col-sm-12">
+                                        <button class="card-title title btn text-left btn-block"
+                                            aria-controls="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}"
+                                            aria-expanded="false"
+                                        >
+                                            <span>${refinement.displayName}</span>
+                                        </button>
+                                    </div>
+                                    <div class="card card-body content value" >
+                                        <isif condition="${refinement.isCategoryRefinement}">
+                                            <div class="refinement-category"  aria-labelledby="refinement-${refinement.displayName.toLowerCase().replace(/ /g, '-')}">
+                                                <isset name="categories" value="${refinement.values}" scope="page" />
+                                                <isinclude template="search/refinements/categories" />
+                                            </div>
+                                        </isif>
+
+                                        <isif condition="${refinement.isAttributeRefinement || refinement.isPromotionRefinement}">
+                                            <div  aria-labelledby="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                                                <isinclude template="search/refinements/attributes" />
+                                            </div>
+                                        </isif>
+
+                                        <isif condition="${refinement.isPriceRefinement}">
+                                            <div  aria-labelledby="refinement-${refinement.displayName.toLowerCase().replace(/ /g, '-')}" aria-hidden="true">
+                                                <isinclude template="search/refinements/prices" />
+                                            </div>
+                                        </isif>
+                                    </div>
+                                </div>
+                            </isloop>
+                            <button class="close-one-refinements-dropdown"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-lg-block horizontal-onedropdown-sortBy">
+                        <isinclude template="search/sortOrderMenu" />
+                </div>
+            </div>
+        </div>
+    </div>
+</isif>

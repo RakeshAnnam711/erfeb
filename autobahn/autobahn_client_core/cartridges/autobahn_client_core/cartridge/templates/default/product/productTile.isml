@@ -1,0 +1,46 @@
+<isif condition="${pdict.display.recommendation}"><isobject object="${product.apiProduct}" view="recommendation"></isobject></isif>
+<div class="product-tile ${!empty(pdict.swatchMethod) ? pdict.swatchMethod : ''}" data-pid="${product.id}" data-gtm-data="${pdict.gtmProductData}">
+
+    <!-- dwMarker="product" dwContentID="${product.uuid}" -->
+	<a href="${pdict.urls.product}" aria-label="${product.brand}: ${product.productName}">
+		<isif condition="${pdict.display.isSliderProduct == true}">
+			<isinclude template="product/components/sliderProductTileImage" />
+		<iselse>
+			<isinclude template="product/components/productTileImage" />
+			<div class="tile-body">
+				<isinclude template="product/components/productTileName" />
+
+				<isset name="price" value="${product.price}" scope="page" />
+				<isif condition="${product.productType === 'set'}">
+					<isinclude template="product/components/pricing/setPrice" />
+				<iselse>
+					<isinclude template="product/components/pricing/main" />
+				</isif>
+				<isinclude template="util/affirmModule"/>
+				<isaffirmpromo context="plp" fpname="${require('*/cartridge/scripts/utils/affirmUtils').getFPNameForPLP(false, product)}" price="${price}"/>
+
+					<isinclude template="integrations/product/productTileIntegrationsPostPrice"/>
+
+				<iscomment> to hide promotional code text in PLP </iscomment>
+				<iscomment> <isif condition="${dw.system.Site.current.preferences.custom.plpPromotionShow === true}">
+					<isinclude template="product/components/promotions" />
+				</isif> </iscomment>
+
+				<iscomment>
+					<isif condition="${pdict.display.ratings !== false}">
+						<isinclude template="product/components/ratings" />
+					</isif>
+				</iscomment>
+
+				<isif condition="${pdict.display.swatches !== false}">
+					<isinclude template="product/components/productTileSwatch" />
+				</isif>
+			</div>
+			<!-- Add To Cart -->
+			<div class="add-to-cart-btn-area">
+				<isinclude template="product/components/addToCartProduct" />
+			</div>
+		</isif>
+	</a>
+    <!-- END_dwmarker -->
+</div>

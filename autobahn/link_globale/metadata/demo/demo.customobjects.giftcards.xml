@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="DEMO_GLOBALE_GIFT_CARDS" object-id="1625743016759">
+        <object-attribute attribute-id="currentBalance">1000.0</object-attribute>
+        <object-attribute attribute-id="initialBalance">1000.0</object-attribute>
+        <object-attribute attribute-id="originalCurrencyCode">GBP</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="DEMO_GLOBALE_GIFT_CARDS" object-id="1625743016786">
+        <object-attribute attribute-id="currentBalance">100.0</object-attribute>
+        <object-attribute attribute-id="initialBalance">100.0</object-attribute>
+        <object-attribute attribute-id="originalCurrencyCode">GBP</object-attribute>
+    </custom-object>
+
+</custom-objects>

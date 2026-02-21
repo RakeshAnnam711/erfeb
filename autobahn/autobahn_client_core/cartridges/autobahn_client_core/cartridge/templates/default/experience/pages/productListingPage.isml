@@ -1,0 +1,48 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<isdecorate template="/common/layout/page">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+        assets.addJs('/js/search.js', null, 'defer');
+        assets.addCss('/css/search.css');
+    </isscript>
+    <iscomment>Performance: Defer URL cleanup script to avoid blocking render</iscomment>
+    <script>
+        (function() {
+            // Defer URL cleanup to avoid blocking initial render
+            function checkUrl() {
+                if (window.location.search.indexOf('&lang=en_US') > -1) {
+                    window.location.href = window.location.href.replace('&lang=en_US', '');
+                } else if (window.location.search.indexOf('?lang=en_US&') > -1) {
+                    window.location.href = window.location.href.replace('lang=en_US&', '');
+                } else if (window.location.search.indexOf('?lang=en_US') > -1) {
+                    window.location.href = window.location.href.replace('?lang=en_US', '');
+                }
+            }
+            
+            // Use requestIdleCallback for non-critical URL cleanup
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(checkUrl, { timeout: 1000 });
+            } else {
+                // Fallback: run after DOM is ready
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', checkUrl);
+                } else {
+                    setTimeout(checkUrl, 0);
+                }
+            }
+        })();
+    </script>
+
+    <div class="plp page-designer ${pdict.customClass}" id="pd-${pdict.page.ID}">
+
+        <isprint value="${pdict.regions.top.render()}" encoding="off"/>
+
+        <header class="container page-header search-results-header">
+            <isprint value="${pdict.regions.pageheader.render()}" encoding="off"/>
+        </header>
+
+        <isprint value="${pdict.regions.main.render()}" encoding="off"/>
+
+    </div>
+</isdecorate>
