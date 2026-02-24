@@ -47,8 +47,10 @@ server.append('Refinebar', cache.applyPromotionSensitiveCache, function (req, re
     viewData.productSearch.filterCount = selectedFilters.length.toString();
 
     if (viewData.productSearch) {
-        var categoryID = viewData.productSearch.category.id;
-        var resetLink = URLUtils.url('Search-Show', searchHelper.cgidKey, categoryID);
+        var categoryID = viewData.productSearch.category && viewData.productSearch.category.id;
+        var resetLink = categoryID
+            ? URLUtils.url('Search-Show', searchHelper.cgidKey, categoryID)
+            : URLUtils.url('Search-Show', 'q', req.querystring.q || '');
         viewData.productSearch.resetLink = resetLink;
     }
 

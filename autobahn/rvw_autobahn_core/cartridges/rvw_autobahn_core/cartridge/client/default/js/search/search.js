@@ -20,7 +20,7 @@ baseSearch.methods.setRefinementCollapseStates = status => {
     if (status === 'open') {
         $('.refinement').addClass('active');
     }
-    else if (status === 'closed') {
+    else if (status === 'closed' || status === 'close') {
         $('.refinement').removeClass('active');
         $('.refinement').find('button.title').attr('aria-expanded','false');
     }
@@ -157,6 +157,8 @@ baseSearch.methods.handleRefinements = ($results, selector) => {
 baseSearch.methods.parseResults = (response, jqXHR) => {
     var $results = $(response);
     var isMobile = window.isMobile();
+    var $searchResults = $('.search-results');
+    var $incomingSearchResults = $results.find('.search-results').first();
 
     if (isMobile) {
         var $refinements = $results.find('.refinements[data-refinement-style-mobile]');
@@ -210,18 +212,27 @@ baseSearch.methods.parseResults = (response, jqXHR) => {
         var refinements = '.mobile-search-refinements';
     };
 
-    // Update DOM elements that do not require special handling
+    // Update DOM elements only inside search-results container
+    var updateDomInSearch = function (selector) {
+        if (!$searchResults.length || !$incomingSearchResults.length) {
+            return;
+        }
+        var $updates = $incomingSearchResults.find(selector);
+        var $targets = $searchResults.find(selector);
+        if ($updates.length && $targets.length) {
+            $targets.empty().html($updates.html());
+        }
+    };
+
     [
         '.grid-header',
-        '.header-bar',
-        '.header.page-title',
         '.product-grid',
         "#noresultfound",
         '.show-more',
         refinements,
         filterBar
     ].forEach((selector) => {
-        module.exports.methods.updateDom($results, selector);
+        updateDomInSearch(selector);
     });
 
     if (horizontalOneDropdownDesktopOpen === true) {
@@ -313,10 +324,9 @@ baseSearch.initialize = () => $(document).ready(function () {
         module.exports.methods.getContent($('.content-search'), $('#content-search-results'));
     }
 
-    var refinementCategoryOpen = localStorage.getItem('refinement-category');
-    if (refinementCategoryOpen) {
-        $('.refinement-category').addClass('active');
-    }
+    localStorage.removeItem('refinement-category');
+    $('.refinement-category').removeClass('active');
+    $('.refinement-category').find('button.title').attr('aria-expanded', 'false');
 });
 
 baseSearch.closeRefinements = function () {
@@ -582,8 +592,7 @@ baseSearch.applyFilter = function () {
                 var category = $(event.currentTarget).closest('.refinement');
 
                 if (category && category.hasClass('refinement-category')) {
-                    localStorage.setItem('refinement-category', true);
-                    return;
+                    localStorage.removeItem('refinement-category');
                 }
             }
             //find new attr on Sort if selected, if not use the default
@@ -639,11 +648,15 @@ baseSearch.applyFilter = function () {
                 $('.helpButton')?.addClass('d-none');    // handling the visibility of overlapping .helpButton
                 let attrId = $(this).closest('.card-body').attr('id');
                 attrId = attrId.split('-').slice(2).join('-') // Get Selected attribute of filter
+                if (attrId === 'category' || attrId === 'plp_category_refinement') {
+                    $('.refinement-bar .filter-apply-btn:visible').first().attr('data-href', refinementUrl);
+                    return;
+                }
                 const selectedLabelFilter =
-                attrId == 'category' ? $(this).data('href') :
+                attrId == 'category' ? ($(this).attr('data-href') || $(this).data('href')) :
                 $(this).find('.swatch-color-text').text()?.trim() || $(this).find('span').first().text()?.trim(); // Get Selected filter label
                 const newFilterUrl = module.exports.methods.createSelectedFiltersUrl(refinementUrl, attrId, selectedLabelFilter);
-                $('.filter-apply-btn').attr('data-href', newFilterUrl || refinementUrl);
+                $('.refinement-bar .filter-apply-btn:visible').first().attr('data-href', newFilterUrl || refinementUrl);
                 return;
             }
 

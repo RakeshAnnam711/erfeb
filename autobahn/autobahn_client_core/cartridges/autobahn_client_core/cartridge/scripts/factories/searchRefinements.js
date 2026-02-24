@@ -117,9 +117,13 @@ function createProductSearchRefinement(productSearch,
     var mappedList = {};
     collections.forEach(refinementValues, function (value) {
         var category = catalogMgr.getCategory(value.value);
+        if (!category || !category.parent) {
+            return;
+        }
         mappedList[value.value] = new Model(
             productSearch,
             refinementDefinition,
+            value,
             category,
             productSearch.categoryID === value.value);
         mappedList[value.value].parent = category.parent.ID;

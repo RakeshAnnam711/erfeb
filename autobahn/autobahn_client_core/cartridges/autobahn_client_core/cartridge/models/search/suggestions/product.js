@@ -69,7 +69,18 @@ function getProducts(suggestedProducts, maxItems, rawQuery, stripeMidValue) {
         }
     } else {
         // Log error details if API call fails
-        dw.system.Logger.error("Failed to fetch products: " + (result ? result.error : "Unknown error"));
+        // dw.system.Logger.error("Failed to fetch products: " + (result ? result.error : "Unknown error"));
+            var product = null;
+            for (var i = 0; i < maxItems; i++) {
+                if (suggestedProducts.hasNext()) {
+                    product = suggestedProducts.next().productSearchHit.product;
+                    products.push({
+                        name: product.name,
+                        imageUrl: getImageUrl(product),
+                        url: URLUtils.url(ACTION_ENDPOINT, 'pid', product.ID)
+                    });
+                }
+            }
     }
 
     return products;

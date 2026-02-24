@@ -21,7 +21,8 @@
     <isset name="contentActive" value="active" scope="page" />
 </isif>
 <isset name="placeholder_PLPBanner" value="${URLUtils.staticURL('/images/placeholder_Category_Navigation_banner.png')}" scope="page" />
-
+<isset name="displaySearchQuery" value="${pdict.noResultsQuery || pdict.productSearch.originalSearchQuery || pdict.productSearch.searchKeywords || ''}" scope="page" />
+<isset name="isNoResultsFallback" value="${pdict.noResultsFallback || pdict.productSearch.noResultsFallback}" scope="page" />
 <div class="plp_wrapper">
     <iscomment> PLP Hero Banner </iscomment>
     <div class="container page-header search-results-header plp-hero-banner">
@@ -112,11 +113,12 @@
                                 </div>
                                 <div class="col-12 col-lg-4 result-count filter-count order-lg-1" aria-live="polite">
                                     <h2 class="sr-only">Results found</h2>
-                                    <span aria-hidden="true">Results found:</span>
-                                    <isif condition="${pdict.productSearch.isCategorySearch}">
-                                        <span>
-                                            ${Resource.msgf('label.results', 'search', null, pdict.productSearch.count)}
-                                        </span>
+                                    <isif condition="${isNoResultsFallback && !empty(displaySearchQuery)}">
+                                        <div aria-hidden="true">No search results found:</div>
+                                        <div>Try Filters:</div>
+                                    <iselse/>
+                                        <span aria-hidden="true">Results found:</span>
+                                        <span>${pdict.productSearch.count}</span>
                                     </isif>
                                     <iscomment> <isinclude template="search/resultsCount" /> </iscomment>
                                 </div>
@@ -145,7 +147,7 @@
                                 <iscomment> <isinclude template="search/resultsCount" /> </iscomment>
                                 <div class="content">
                                     <div>
-                                        No results found.
+                                        No search results found for "${displaySearchQuery}".
                                     </div>
                                         <div>
                                         Reset filters and try again.

@@ -5,7 +5,7 @@
         <isif condition="${product.promoTile}">
             <isprint value="${product.promoTile}" encoding="off" />
         <iselse/>
-            <isobject object="${product.productSearchHit}" view="searchhit" >
+            <isobject object="${product}" view="searchhit" >
                 <isset name="tileURL"
                     value="${URLUtils.url('Tile-Show', 'pid', product.productID, 'swatches', true, 'ratings', true, 'productPosition', (productCountPreset + productPosition.count - 1))}"
                     scope="page" />
