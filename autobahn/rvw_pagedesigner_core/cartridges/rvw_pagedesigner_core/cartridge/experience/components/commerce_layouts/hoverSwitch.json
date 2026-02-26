@@ -1,0 +1,83 @@
+{
+    "name": "Hover Switch",
+    "description": "Use this layout to show one component on page load, and replace it with another component on hover.",
+    "group": "autobahn_layouts",
+    "attribute_definition_groups": [
+        {
+            "id": "hoverSwitchAttributes",
+            "name": "Hover Switch",
+            "description": "Place a component in the 'On Load' region to show it initially. Place another component in the 'On Hover' region to switch to it when the user hovers over the first component.",
+            "attribute_definitions": [
+                {
+                    "id": "customClass",
+                    "name": "Custom Class",
+                    "description": "Add a custom class to be applied to this layout container. For example, use Bootstrap classes for spacing, or set a background color by using classes found in the Style Guide.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id":"onLoad",
+            "name":"On Load",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"onHover",
+            "name":"On Hover",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        }
+    ]
+}

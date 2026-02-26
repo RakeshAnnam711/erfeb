@@ -1,0 +1,35 @@
+<iscomment>Set hover image to second image of "card" type</iscomment>
+<isif condition="${!empty(product.images.card) && product.images.card.length > 1 && product.images.card[1] && product.images.card[1].url}">
+    <isset name="altImageUrl" value="${product.images.card[1].url}" scope="page"/>
+    <isset name="altImageText" value="${product.images.card[1].alt}" scope="page"/>
+<iselse/>
+    <isset name="altImageUrl" value="" scope="page"/>
+</isif>
+
+<isset name="imageUrl" value="${product.images.card[0].url}" scope="page"/>
+<isset name="imageTitle" value="${product.images.card[0].title}" scope="page"/>
+
+<div class="product-tile-image-container image-container${pdict.display.tileBackground != 'undefined' ? ' enable-tile-background' : ''}" data-tile-background="${pdict.display.tileBackground != 'undefined' ? pdict.display.tileBackground : ''}">
+    <a href="${pdict.urls.product}" class=" product-click-track" data-gtm-data="${pdict.gtmProductData}" aria-label="${pdict.section}:${product.productName}"  data-page-type="Homepage-${pdict.section}">
+        <div class="tile-img-wrapper">
+            <img class="product-tile-image tile-image lazyload"
+                src="${URLUtils.staticURL('/images/noimage-card.png')}"
+                data-src="${imageUrl}"
+                alt="${product.productName}"
+                title="${imageTitle}"
+            />
+        </div>
+
+        <isif condition="${!pdict.display.hideWishlist}">
+            <iswishlisticon
+                wishlistpid="${product.wishlistpid}"
+                productname="${product.productName}"
+                addmessage="${'wishlist.addto.wishlist.icon'}"
+                removemessage="${'wishlist.removefrom.wishlist.icon'}"
+                includeicon="true"
+            />
+        </isif>
+        <isinclude template="product/components/productTileName" />
+    </a>
+</div>
+<isinclude template="/product/components/badges" />

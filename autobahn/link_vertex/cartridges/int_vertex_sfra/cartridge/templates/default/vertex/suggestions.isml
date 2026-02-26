@@ -1,0 +1,29 @@
+<!--- TEMPLATENAME: suggestions.isml --->
+
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<link rel="stylesheet" type="text/css" href="${URLUtils.staticURL('/css/vertex.css')}" />
+
+<isset name="VertexAddressSuggestions" value="${JSON.parse(session.privacy.VertexAddressSuggestions)}" scope="page" />
+<isset name="VertexAddressSuggestionsError" value="${session.privacy.VertexAddressSuggestionsError}" scope="page" />
+                    
+<iscomment>VertexInc Address Cleansing select field</iscomment>
+
+<div class="vertexSuggestions d-none">
+    <div class="select-address form-row">
+        <label for="VertexAddressSuggestions">
+            ${Resource.msg('form.suggestionselect','vertex',null)}
+        </label>
+        <div class="field-wrapper" id="vertex-suggestions" data-suggest="${URLUtils.https('VertexEndpoint-SelectVertexAddress')}">
+            <select id="vertex-suggestion" name="vertex-suggestion" class="input-select">
+            </select>
+        </div>
+    </div>
+    <div class="vertexHint">
+        ${Resource.msg('form.suggestionhint','vertex',null)}
+    </div>
+</div>
+<div class="vertexError d-none">
+    <div class="vertexHint">
+        ${Resource.msg('form.taxlookuperror','vertex',null)}
+    </div>
+</div>

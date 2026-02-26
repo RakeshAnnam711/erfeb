@@ -1,0 +1,25 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Account
+
+    It gets called by rvw_autobahn_core:templates/default/account/payment/addPayment
+</iscomment>
+
+<isif condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('sfcommercepaymentsCartridgeEnabled')}">
+    <div class="card">
+        <div class="card-header">
+            <isif condition="${pdict.UUID}">
+                <h2>${Resource.msg('label.payment.editpayment','payment',null)}</h2>
+            <iselse/>
+                <h2>${Resource.msg('label.payment.addnewpayment','payment',null)}</h2>
+            </isif>
+        </div>
+        <div class="card-body">
+            <isinclude template="account/payment/paymentForm"/>
+        </div>
+    </div>
+<iselse/>
+    <h2 class="text-center pt-3">${Resource.msg('unavailable.message','account',null)}</h2>
+</isif>

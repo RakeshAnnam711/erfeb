@@ -1,0 +1,475 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets');
+</isscript>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let isMobile = ($(window).width() < 769) ? true : false;
+        let scale = isMobile ? 1 : 0.3;
+        let vScale = 1;
+        const scaleFactor = 0.1;
+        $("#zoomOut").prop("disabled", true);
+
+        // Check Window width on resize
+        window.addEventListener('resize', function(event) {
+            isMobile = ($(window).width() < 769) ? true : false;
+            scale = isMobile ? 1 : 0.3
+        })
+
+        // Function to update the zoom percentage
+        function updateZoomPercentage(vScale) {
+            const percentage = Math.round(vScale * 100);
+            $("#zoomPercentage").text(percentage + "%");
+        }
+
+        // Function to reset Zoom to default
+        function resetDefaultZoom() {
+            scale = isMobile ? 1 : 0.3
+            vScale = 1;
+            const newWidth = (100 * scale);
+            const percentage = Math.round(vScale * 100);
+            $("#zoomOut").prop("disabled", true);
+            $("#zoomIn").prop("disabled", false);
+            $("#zoomPercentage").text(percentage + "%");
+            $(".zoomable-content .tns-slide-active img").css({
+                width: newWidth + '%',
+                height: isMobile ? '60vh' : '100%',
+                top: '0',
+                left: '0'
+            });
+            checkDraggable();
+        }
+
+        function attachDraggableToActiveImg() {
+            $(".zoomable-content .tns-slide-active img").draggable({
+                scroll: false,
+                cursor: "move",
+                drag: function (event, ui) {
+                    let $parent = $(this).parent(); // Get the parent container
+
+                    let parentWidth = $parent.width(); // Parent container width
+                    let parentHeight = $parent.height(); // Parent container height
+                    let elementWidth = $(this).width(); // Image width after zoom
+                    let elementHeight = $(this).height(); // Image height after zoom
+
+                    // Restrict dragging within the bounds
+                    ui.position.left = Math.min(0, Math.max(ui.position.left, parentWidth - elementWidth));
+                    ui.position.top = Math.min(ui.position.top, Math.max(ui.position.top, parentHeight - elementHeight));
+
+
+                },
+            });
+        }
+
+        function checkDraggable() {
+            const img = $('.zoomable-content .tns-slide-active img');
+            let $parent = img.parent();
+
+            let parentWidth = $parent.width(); // Parent container width
+            let parentHeight = $parent.height(); // Parent container height
+            let elementWidth = img.width(); // Image width after zoom
+            let elementHeight = img.height();
+
+            // Enable dragging only if the image overflows
+            if ((elementWidth > parentWidth) || (elementHeight > parentHeight)) {
+                img.draggable({ disabled: false });
+            } else {
+                img.draggable({ disabled: true });
+                img.css({ top: 0, left: 0 }); // Reset position when not draggable
+            }
+        }
+
+
+        // Make the image inside the container draggable
+         $(document).ready(function () {
+            // Initial check for draggable state
+            attachDraggableToActiveImg();
+        });
+
+        // handle click
+        $(document).ready(function () {
+            $(".slider-thumbnails .tns-item").on("click", function () {
+                resetDefaultZoom();
+            });
+        });
+
+        // Zoom In
+        $("#zoomIn").on("click", function () {
+            scale += scaleFactor;
+            vScale += scaleFactor;
+            if(Math.round(vScale * 100) >= 200){
+                $("#zoomIn").prop("disabled", true);
+            }
+            else{
+                $("#zoomOut").prop("disabled", false);
+            }
+            $(".zoomable-content .tns-slide-active img").css({
+                width: (100 * scale) + "%",
+                height: "auto",
+            });
+            updateZoomPercentage(vScale);
+            checkDraggable();
+        });
+
+        // Zoom Out
+        $("#zoomOut").on("click", function () {
+            if (scale > scaleFactor) {
+                scale -= scaleFactor;
+                vScale -= scaleFactor;
+                if(Math.round(vScale * 100) <= 100){
+                    $("#zoomOut").prop("disabled", true);
+                }
+                else{
+                    $("#zoomIn").prop("disabled", false);
+                }
+
+                $(".zoomable-content .tns-slide-active img").css({
+                    width: (100 * scale) + "%",
+                    height: "auto",
+                    left: 0,
+                    top: 0,
+                });
+                updateZoomPercentage(vScale);
+                checkDraggable();
+            }
+            // Reset to Default Zoom
+            if(vScale === 1) {
+                resetDefaultZoom();
+            }
+        });
+
+        $(".close").on("click", function () {
+            resetDefaultZoom();
+        })
+
+        // Initialize zoom percentage display
+        updateZoomPercentage(vScale);
+
+        // Initialize funcation when model is visiable
+        $('#pdpImagesModal').on('shown.bs.modal', function () {
+            checkDraggable();
+        });
+
+
+        // Logic to change position of "Try Me On" button
+        function populateTangibleeCta(node) {
+            try {
+                if (node.getAttribute("aria-label") == "tangiblee cta") {
+                    node.innerHTML = 'SEE PRODUCT SIZE';
+                    node.classList.add('tangiblee-cta');
+                    const tangibleeCta = document.querySelector('.tangiblee-cta-main');
+                    tangibleeCta.appendChild(node);
+                    return true;
+                }
+            } catch (err) {
+                return false;
+            }
+            return false;
+        }
+
+        const mainDiv = document.getElementById("tangiblee-cta-main-div");
+        const config = { childList: true };
+
+        const callback = (mutationList, observer) => {
+            for (const mutation of mutationList) {
+                for (const node of mutation.addedNodes) {
+                    if (populateTangibleeCta(node)) {
+                        observer.disconnect();
+                    }
+                }
+            }
+        };
+
+        const childNodes = Array.from(mainDiv.childNodes);
+        var alreadyLoaded = false;
+
+        for(const node of childNodes) {
+            if (populateTangibleeCta(node)) {
+                alreadyLoaded = true;
+                break;
+            }
+        }
+        if (!alreadyLoaded) {
+            const tangibleeObserver = new MutationObserver(callback);
+            tangibleeObserver.observe(mainDiv, config);
+        }
+    });
+
+</script>
+<iscomment>
+    <p>${pdict.product.images['large'][1].url}</p>
+</iscomment>
+<iscomment> [PipelineDictionary id=69587859] </iscomment>
+<iscomment>
+    <p>${product.pdpImageColumnWidth}</p>
+</iscomment>
+
+<iscomment> variables </iscomment>
+<isset name="imageArrLength" value="${product.images['large'].length}" scope="page" />
+<isset name="hasSingleImage" value="${imageArrLength > 1 ? false : true}" scope="page" />
+<isset name="imageColumnCount" value="${parseInt(product.pdpImageColumnWidth.split('/')[0])}" scope="page" />
+<isset name="imageColumnXLCount" value="${imageColumnCount + (imageColumnCount < 5 ? 1 : 0)}" scope="page" />
+<isset name="imageColumnClass" value="${'col-12 col-md-' + imageColumnCount + ' col-xl-' + imageColumnXLCount}"
+    scope="page" />
+
+<iscomment>Override column settings for Page Designer component if applicable</iscomment>
+<isif condition="${'pdpImageColumnWidth' in pdict}">
+    <isset name="imageColumnCount" value="${parseInt(product.pdpImageColumnWidth.split('/')[0])}" scope="page" />
+    <isset name="imageColumnXLCount" value="${imageColumnCount + (imageColumnCount < 5 ? 1 : 0)}" scope="page" />
+    <isset name="imageColumnClass" value="${'col-12 col-md-' + imageColumnCount + ' col-xl-' + imageColumnXLCount}"
+        scope="page" />
+</isif>
+
+
+<isset name="placeholder_PDP" value="${URLUtils.staticURL('/images/placeholder_PDP.png')}" scope="page" />
+<isset name="placeholder_Thumbnails" value="${URLUtils.staticURL('/images/placeholder_Thumbnails.png')}" scope="page" />
+<div class="col-12 col-md-7 pdp-grid-view">
+    <div class="primary-images">
+        <iscomment>Adding productDataColumnClass so it overrides classes in quickview</iscomment>
+        <div class="row">
+            <div id="tangiblee-cta-main-div" class='primary-images-main col-12 d-none d-sm-block'>
+                <button aria-label="PDP Image" type="button" class="open-pdp-images-modal" data-toggle="modal"
+                    data-target="#pdpImagesModal">
+                    <div class="slider" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: auto;">
+                        <isloop items="${product.images['large']}" var="image" status="loopStatus">
+                            <div class="slide" role="group"
+                                data-zoom-image="${product.images['hi-res'][loopStatus.index].url}"
+                                style="background: #fff; height: 444px; width: auto; display: flex; justify-content: center; ${loopStatus.index == 0 || (loopStatus.index == imageArrLength - 1 && imageArrLength % 2 == 0) ? 'grid-column: span 2;' :
+                                                                                                                            'grid-column: span 1;'}">
+                                <img src="${image.url}" class="d-block img-fluid" style="object-fit: contain;"
+                                    alt="${image.alt} image number ${(parseInt(image.index)).toFixed(0)}"
+                                    itemprop="image" fetchpriority="${loopStatus.index == 0 ? 'high' : loopStatus.index < 3 ? 'auto' : 'low'}"
+                                    loading="${loopStatus.index < 3 ? 'eager' : 'lazy'}" onerror="this.onerror=null;this.src='${placeholder_PDP}'"/>
+                                <iscomment>
+                                    <isif condition="${pdict.isWishlistModal !== true}">
+                                        <iswishlisticon wishlistpid="${product.wishlistpid}"
+                                            productname="${product.productName}"
+                                            addmessage="${'wishlist.addto.wishlist.icon'}"
+                                            removemessage="${'wishlist.removefrom.wishlist.icon'}" includeicon="true" />
+                                    </isif>
+                                </iscomment>
+                            </div>
+                            <iscomment> <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableTangiblee')}">
+                                <isif condition="${pdict.tangibleeResponse}">
+                                    <isif
+                                        condition="${loopStatus.count == 1 && pdict.tangibleeResponse.ThumbInfos[0] != null}">
+                                        <div class="slide" data-zoom-image="${pdict.tangibleeResponse.ThumbInfos[0].Full}">
+                                            <img width="600" height="800"
+                                                src="${pdict.tangibleeResponse.ThumbInfos[0].Main}"
+                                                class="d-block img-fluid"
+                                                alt="${image.alt} image number ${(parseInt(image.index)).toFixed(0)}"
+                                                itemprop="image" />
+                                            <isif condition="${pdict.isWishlistModal !== true}">
+                                                <iswishlisticon wishlistpid="${product.wishlistpid}"
+                                                    productname="${product.productName}"
+                                                    addmessage="${'wishlist.addto.wishlist.icon'}"
+                                                    removemessage="${'wishlist.removefrom.wishlist.icon'}"
+                                                    includeicon="true" />
+                                            </isif>
+                                        </div>
+                                    </isif>
+                                </isif>
+                            </isif> </iscomment>
+                        </isloop>
+
+                        <iscomment>Add any assets found in pdpGalleryAssets</iscomment>
+                        <isif condition="${!empty(product.pdpGalleryAssets)}">
+                            <isloop items="${product.pdpGalleryAssets}" var="asset">
+                                <div class="slide no-zoom">
+                                    <iscontentasset aid="${asset.id}" />
+                                </div>
+                            </isloop>
+                        </isif>
+                    </div>
+                </button>
+                <isinclude template="/product/components/badges" />
+            </div>
+
+            <iscomment> -------------------- PDP images modal START -------------------- </iscomment>
+            <div class="modal fade" id="pdpImagesModal" tabindex="-1" role="dialog" aria-labelledby="pdpImagesModal">
+                <div class="modal-dialog modal-dialog-centered pdp-images-modal modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true" style="color: black;">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="primary-images col-12">
+                                <iscomment>Adding productDataColumnClass so it overrides classes in quickview</iscomment>
+
+                                <div class='primary-images-main'>
+                                    <div class="slider-container zoom-container slider-buttons-hidden slider-buttons-hidden-md slider-buttons-hidden-lg slider-bullets-hidden-md slider-bullets-hidden-lg"
+                                        data-slider-thumbnail-container="${'#'}slider-pdp-${product.id}"
+                                        data-slider-loop="false" data-slider-gutter="1" data-slider-gutter-md="1"
+                                         data-slider-gutter-lg="1" data-slider-touch="false">
+                                        <div class="slider zoomable-content">
+                                            <isloop items="${product.images['large']}" var="image" status="loopStatus">
+                                                <div role="group" tabindex="0"
+                                                    data-zoom-image="${product.images['hi-res'][loopStatus.index].url}">
+                                                    <img id="imageToZoom" src="${image.url}" class="d-block img-fluid"
+                                                        alt="${image.alt} image number ${(parseInt(image.index)).toFixed(0)}"
+                                                        fetchpriority="${loopStatus.index == 0 ? 'high' : loopStatus.index < 3 ? 'auto' : 'low'}"
+                                                        loading="${loopStatus.index < 3 ? 'eager' : 'lazy'}"
+                                                        itemprop="image" onerror="this.onerror=null;this.src='${placeholder_PDP}'"/>
+                                                </div>
+                                            </isloop>
+
+                                            <iscomment>Add any assets found in pdpGalleryAssets</iscomment>
+                                            <isif condition="${!empty(product.pdpGalleryAssets)}">
+                                                <isloop items="${product.pdpGalleryAssets}" var="asset">
+                                                    <div class="slide no-zoom">
+                                                        <iscontentasset aid="${asset.id}" />
+                                                    </div>
+                                                </isloop>
+                                            </isif>
+                                        </div>
+                                    </div>
+
+                                    <isinclude template="/product/components/badges" />
+                                </div>
+
+                                <isif condition="${!hasSingleImage}">
+                                    <isset name="numberSlides"
+                                        value="${(product.images['large'].length + ('pdpGalleryAssets' in product ? product.pdpGalleryAssets.length : 0)).toFixed()}"
+                                        scope="page" />
+                                    <isset name="thumbnailCount" value="${0}" scope="page" />
+
+                                    <div class="primary-images-thumbnails">
+                                        <div class="zoom-controls">
+                                            <button id="zoomOut" aria-label="Zoom Out">-</button>
+                                            <span id="zoomPercentage">100%</span>
+                                            <button id="zoomIn" aria-label="Zoom In">+</button>
+                                        </div>
+                                        <div id="slider-pdp-${product.id}"
+                                            class="slider-container slider-thumbnails slider-buttons-inside slider-buttons-inside-md slider-buttons-inside-lg"
+                                            <isif
+                                            condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableTangiblee')}">
+                                            data-slider-items="${numberSlides + 1}"
+                                            data-slider-items-md="${numberSlides + 1}"
+                                            data-slider-items-lg="${numberSlides + 1}"
+                                            <iselse>
+                                                data-slider-items="${numberSlides}"
+                                                data-slider-items-md="${numberSlides}"
+                                                data-slider-items-lg="${numberSlides}"
+                                </isif>
+                                data-slider-gutter="1"
+                                data-slider-gutter-md="1"
+                                data-slider-gutter-lg="1"
+                                data-slider-loop="false"
+                                >
+                                <div class="slider">
+                                    <isloop items="${product.images['large']}" var="image" status="loopState">
+                                        <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                                        <div class="slide" role="group">
+                                            <img src="${image.url}" tabindex="0" class="d-block img-fluid"
+                                                alt="${image.alt} image number ${thumbnailCount.toFixed()}"
+                                                fetchpriority="${loopState.index == 0 ? 'high' : loopState.index < 3 ? 'auto' : 'low'}"
+                                                loading="${loopState.index < 3 ? 'eager' : 'lazy'}"
+                                                itemprop="image" onerror="this.onerror=null;this.src='${placeholder_Thumbnails}'"/>
+                                        </div>
+
+                                        <isif
+                                            condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableTangiblee')}">
+                                            <isif condition="${pdict.tangibleeResponse}">
+                                                <isif
+                                                    condition="${loopState.count == 1 && pdict.tangibleeResponse.ThumbInfos[0] != null}">
+                                                    <isset name="thumbnailCount" value="${thumbnailCount + 1}"
+                                                        scope="page" />
+                                                    <div class="slide" role="group">
+                                                        <img src="${pdict.tangibleeResponse.ThumbInfos[0].Thumb}"
+                                                            class="d-block img-fluid"
+                                                            fetchpriority="low"
+                                                            loading="lazy"
+                                                            alt="${image.alt} image number ${thumbnailCount.toFixed()}"
+                                                            itemprop="image" onerror="this.onerror=null;this.src='${placeholder_PDP}'"/>
+                                                    </div>
+                                                </isif>
+                                            </isif>
+                                        </isif>
+                                    </isloop>
+
+                                    <iscomment>Add thumbnail images found in pdpGalleryAssets</iscomment>
+                                    <isif condition="${!empty(product.pdpGalleryAssets)}">
+                                        <isloop items="${product.pdpGalleryAssets}" var="asset" status="loopStatus">
+                                            <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                                            <div class="slide video-container" role="group">
+                                                <img src="${asset.thumbnail}" class="d-block img-fluid"
+                                                    fetchpriority="${loopStatus.index == 0 ? 'high' : loopStatus.index < 3 ? 'auto' : 'low'}"
+                                                    loading="${loopStatus.index < 3 ? 'eager' : 'lazy'}"
+                                                    alt="image number ${thumbnailCount.toFixed()}" itemprop="image" onerror="this.onerror=null;this.src='${placeholder_PDP}'"/>
+                                                <span class="video-thumbnail-button"></span>
+                                            </div>
+                                        </isloop>
+                                    </isif>
+                                </div>
+                                <div class="slider-thumbnail-controls d-none">
+                                    <button class='prev icon-arrow-left-thin' aria-label='Previous product image'></button>
+                                    <button class='next icon-arrow-right-thin' aria-label='Next product image'></button>
+                                </div>
+
+                            </div>
+                            </isif>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <iscomment> -------------------- PDP images modal END -------------------- </iscomment>
+
+        </div>
+    </div>
+</div>
+<div class="primary-images d-block d-sm-none">
+    <div class='primary-images-main'>
+            <div class="slider-container mobile-slider" data-slider-thumbnail-container="${'#'}slider-pdp-${product.id}"
+                data-slider-loop="false" data-slider-gutter="1" data-slider-gutter-md="1" data-slider-gutter-lg="1">
+                <div class="slider">
+                    <isloop items="${product.images['large']}" var="image" status="loopStatus">
+                        <button aria-label="PDP Image" type="button" class="open-pdp-images-modal" data-toggle="modal" data-target="#pdpImagesModal">
+                            <div role="group" tabindex="0" data-zoom-image="${product.images['hi-res'][loopStatus.index].url}">
+                                <img src="${image.url}" class="d-block img-fluid"
+                                    fetchpriority="${loopStatus.index == 0 ? 'high' : loopStatus.index < 3 ? 'auto' : 'low'}"
+                                    loading="${loopStatus.index < 3 ? 'eager' : 'lazy'}"
+                                    alt="${image.alt} image number ${(parseInt(image.index)).toFixed(0)}" itemprop="image" onerror="this.onerror=null;this.src='${placeholder_PDP}'"/>
+                            </div>
+                        </button>
+                    </isloop>
+
+                    <iscomment>Add any assets found in pdpGalleryAssets</iscomment>
+                    <isif condition="${!empty(product.pdpGalleryAssets)}">
+                        <isloop items="${product.pdpGalleryAssets}" var="asset">
+                            <div class="slide no-zoom">
+                                <iscontentasset aid="${asset.id}" />
+                            </div>
+                        </isloop>
+                    </isif>
+                </div>
+
+                <isloop items="${product.images['large']}" var="image" status="loopStatus">
+
+                    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableTangiblee')}">
+                        <isif condition="${pdict.tangibleeResponse}">
+                            <isif condition="${loopStatus.count == 1 && pdict.tangibleeResponse.ThumbInfos[0] != null}">
+                                <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                                <div class="slide" role="group">
+                                    <button type="button" data-nav="${image.index}" aria-controls="tns2"
+                                        aria-label="${image.alt}" class="tns-nav-active slide-button-image"></button>
+
+                                    <iscomment> <img src="${pdict.tangibleeResponse.ThumbInfos[0].Thumb}"
+                                            class="d-block img-fluid"
+                                            alt="${image.alt} image number ${thumbnailCount.toFixed()}" itemprop="image" />
+                                    </iscomment>
+                                </div>
+                            </isif>
+                        </isif>
+                    </isif>
+
+                </isloop>
+
+            </div>
+
+        <isinclude template="/product/components/badges" />
+    </div>
+</div>
+</div>
+</div>

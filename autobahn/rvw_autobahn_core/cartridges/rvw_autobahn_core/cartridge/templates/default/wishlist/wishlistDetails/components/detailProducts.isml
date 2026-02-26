@@ -1,0 +1,53 @@
+<div class="wishlist-details-products container">
+    <isif condition="${pdict.listSelected && pdict.listSelected.products && pdict.listSelected.products.length > 0}">
+
+        <div class="wishlist-details-products-row row">
+            <isloop items="${pdict.listSelected.products}" end="${pdict.detailPageSize - 1}" var="product" status="loopState">
+                <div class="wishlist-details-products-column col-sm-6 col-md-4 col-lg-3">
+                    <isinclude template="wishlist/cardProduct"/>
+                </div>
+            </isloop>
+        </div>
+
+        <iscomment> More button </iscomment>
+        <isif condition="${pdict.listSelected.products.length > pdict.detailPageSize}">
+            <div class="show-more-wishlist-products">
+                <div class="text-center">
+                    <button class="btn btn-secondary col-12 col-sm-4 more"
+                            data-url="${pdict.urls.showMoreDetail}"
+                    >
+                        ${Resource.msg('button.more', 'search', null)}
+                    </button>
+                </div>
+            </div>
+        </isif>
+
+    <iselse/>
+        <div class="wishlist-message-empty row">
+            <div class="col-12">
+                <isif condition="${!pdict.listSelected}">
+                    <p>
+                        ${Resource.msg('text.search.wishlist.not.viewable', 'wishlist', null)}
+                    </p>
+                <iselse/>
+                    <p>
+                        ${Resource.msg('text.detail.noitems', 'wishlist', null)}
+                    </p>
+                </isif>
+            </div>
+        </div>
+    </isif>
+     <div id="wishlistEmptyMessage" class="wishlist-message-empty row d-none">
+            <div class="col-12">
+                <isif condition="${!pdict.listSelected}">
+                    <p>
+                        ${Resource.msg('text.search.wishlist.not.viewable', 'wishlist', null)}
+                    </p>
+                <iselse/>
+                    <p>
+                        ${Resource.msg('text.detail.noitems', 'wishlist', null)}
+                    </p>
+                </isif>
+            </div>
+    </div>
+</div>

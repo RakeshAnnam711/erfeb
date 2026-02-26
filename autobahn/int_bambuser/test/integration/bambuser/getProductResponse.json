@@ -1,0 +1,616 @@
+[{
+
+		"bambuserPID": "tpl:4b2cd27433bebe821f14b4489e98bc635fc83da8",
+		"id": "701643421084M",
+		"brand": null,
+		"name": "3/4 Sleeve V-Neck Top",
+		"description": "Wear this v-neck top alone, or pair it with a jacket for a classic look!",
+		"variations": [{
+				"sku": "701643421084M_JJ169XX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "Black",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923404M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421053M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923411M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923428M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923435M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			},
+			{
+				"sku": "701643421084M_JJ370XX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "Butter",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923442M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923466M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421060M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923473M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923459M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			},
+			{
+				"sku": "701643421084M_JJ8UTXX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "Icy Mint",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923480M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923497M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923510M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923503M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421084M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			},
+			{
+				"sku": "701643421084M_JJ908XX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "Grey Heather",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923527M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421077M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923534M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923558M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923541M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			},
+			{
+				"sku": "701643421084M_JJI15XX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "White",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923565M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923596M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923572M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421091M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923589M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			}
+		]
+	},
+	{
+
+		"bambuserPID": "tpl:4b2cd27433bebe821f14b4489e98bc635fc83da9",
+		"id": "701642923459M",
+		"brand": null,
+		"name": "3/4 Sleeve V-Neck Top",
+		"description": "Wear this v-neck top alone, or pair it with a jacket for a classic look!",
+		"variations": [{
+				"sku": "701642923459M_JJ169XX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "Black",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923404M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421053M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923411M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923428M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923435M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			},
+			{
+				"sku": "701642923459M_JJ370XX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "Butter",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923442M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923466M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421060M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923473M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923459M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			},
+			{
+				"sku": "701642923459M_JJ8UTXX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "Icy Mint",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923480M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923497M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923510M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923503M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421084M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			},
+			{
+				"sku": "701642923459M_JJ908XX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "Grey Heather",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923527M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421077M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923534M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923558M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923541M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			},
+			{
+				"sku": "701642923459M_JJI15XX",
+				"name": "3/4 Sleeve V-Neck Top",
+				"colorName": "White",
+				"imageURLs": [],
+				"sizes": [{
+						"name": "L",
+						"sku": "701642923565M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XL",
+						"sku": "701642923596M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "M",
+						"sku": "701642923572M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "XS",
+						"sku": "701643421091M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					},
+					{
+						"name": "S",
+						"sku": "701642923589M",
+						"price": {
+							"currency": "USD",
+							"current": 24
+						},
+						"inStock": true
+					}
+				]
+			}
+		]
+	},
+	{
+
+		"bambuserPID": "tpl:4b2cd27433bebe821f14b4489e98bc635fc83da1",
+		"id": "013742000252M",
+		"brand": null,
+		"name": "Bronze Clip On Button Earring",
+		"description": "This classic styled button earring is the perfect way to add a little color to your wardrobe. Each piece of jewelry will be shipped with a beautiful Commerce Cloud Store velvet gift pouch.",
+		"variations": [{
+			"sku": "013742000252M_JJNY2XX",
+			"name": "Bronze Clip On Button Earring",
+			"colorName": "Silver Ox",
+			"imageURLs": [],
+			"sizes": [{
+				"name": "",
+				"sku": "013742000252M",
+				"price": {
+					"currency": "USD",
+					"current": 20
+				},
+				"inStock": true
+			}]
+		}]
+	},
+	{
+
+		"bambuserPID": "tpl:4b2cd27433bebe821f14b4489e98bc635fc83da2",
+		"id": "029407331258M",
+		"brand": null,
+		"name": "Solid Silk Tie",
+		"description": "This silk tie works well with a Commerce Cloud Store dress shirt and suit. It's perfect for any occasion. ",
+		"variations": [{
+				"sku": "029407331258M_NAVYSI",
+				"name": "Solid Silk Tie",
+				"colorName": "Navy",
+				"imageURLs": [],
+				"sizes": [{
+					"name": "",
+					"sku": "029407331227M",
+					"price": {
+						"currency": "USD",
+						"current": 29.99
+					},
+					"inStock": true
+				}]
+			},
+			{
+				"sku": "029407331258M_REDSI",
+				"name": "Solid Silk Tie",
+				"colorName": "Red",
+				"imageURLs": [],
+				"sizes": [{
+					"name": "",
+					"sku": "029407331258M",
+					"price": {
+						"currency": "USD",
+						"current": 29.99
+					},
+					"inStock": true
+				}]
+			},
+			{
+				"sku": "029407331258M_YELLOSI",
+				"name": "Solid Silk Tie",
+				"colorName": "Yellow",
+				"imageURLs": [],
+				"sizes": [{
+					"name": "",
+					"sku": "029407331289M",
+					"price": {
+						"currency": "USD",
+						"current": 29.99
+					},
+					"inStock": true
+				}]
+			}
+		]
+	}
+]

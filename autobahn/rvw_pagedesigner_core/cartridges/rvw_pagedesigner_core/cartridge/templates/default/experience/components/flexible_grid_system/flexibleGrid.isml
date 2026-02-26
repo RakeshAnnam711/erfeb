@@ -1,0 +1,13 @@
+<div class="flex-grid-wrapper ${pdict.containerClass} container${pdict.fullBleed ? '-fluid full-bleed' : ''}"
+    <isif condition="${!empty(pdict.marginTop) || !empty(pdict.marginBottom)}">
+        style='<isif condition="${!empty(pdict.marginTop)}">margin-top: ${pdict.marginTop};</isif><isif condition="${!empty(pdict.marginBottom)}"> margin-bottom: ${pdict.marginBottom};</isif>'
+    </isif>
+>
+    <isif condition="${pdict.title}">
+        <div class="grid-title py-3 text-${pdict.titleAlign} ${pdict.titleClass}">
+            <isprint value="${pdict.title}" encoding="off" />
+        </div>
+    </isif>
+    <iscomment>Flexible Grid Items</iscomment>
+    <isprint value="${pdict.regions.gridItems.render()}" encoding="off"/>
+</div>

@@ -1,0 +1,29 @@
+<iscomment> <link rel="stylesheet" href="https://use.typekit.net/ujn6twx.css?display=swap" /> </iscomment>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;600&amp;family=Bodoni+Moda:ital@0;1&amp;display=swap" rel="stylesheet">
+
+<iscomment> avoid loading below css files for cart page to reduce unused CSS </iscomment>
+<isif condition="${request.httpPath && request.httpPath.toString().indexOf('Cart-Show') === -1}">
+<link rel="stylesheet" href="https://unpkg.com/tiny-slider@2.9.4/dist/tiny-slider.css" integrity="" />
+<link rel="stylesheet" href="https://unpkg.com/video.js@7.20.3/dist/video-js.min.css" integrity="" />
+<link rel="stylesheet" href="https://unpkg.com/tiny-slider@2.9.4/dist/tiny-slider.css" integrity="" />
+</isif>
+
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('AffirmOnline')}">
+   <script src="${URLUtils.staticURL('/js/vcn.js')}" async></script>
+</isif>
+<isinclude template="affirm/affirmHeaderMF" />
+<iscomment> <isinclude template="klarna/klarnaHeaderMF" /> </iscomment>
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('KlarnaOSMEnable')}">
+    <isinclude template="klarna/klarnaHeaderMF" />
+</isif>
+ <iscomment> <script
+        <isif condition="${isOneTrustEnable}">
+            type='text/plain' class='optanon-category-C0003'
+        </isif>
+    defer>!function(){var b=function(){window.__AudioEyeSiteHash = "${dw.system.Site.getCurrent().getCustomPreferenceValue('AudioEye')}"; var a=document.createElement("script");a.src="https://wsmcdn.audioeye.com/aem.js";a.type="text/javascript";a.setAttribute("async","");document.getElementsByTagName("body")[0].appendChild(a)};"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",b):window.attachEvent&&window.attachEvent("onload",b):b()}();</script> </iscomment>
+${dw.system.HookMgr.callHook('app.template.htmlHead', 'htmlHead', pdict) || ''}
+    <iscomment> <script
+        <isif condition="${isOneTrustEnable}">
+            type='text/plain' class='optanon-category-C0003'
+        </isif>
+    defer>!function(){var b=function(){window.__AudioEyeSiteHash = "${dw.system.Site.getCurrent().getCustomPreferenceValue('AudioEye')}"; var a=document.createElement("script");a.src="https://wsmcdn.audioeye.com/aem.js";a.type="text/javascript";a.setAttribute("async","");document.getElementsByTagName("body")[0].appendChild(a)};"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",b):window.attachEvent&&window.attachEvent("onload",b):b()}();</script> </iscomment>

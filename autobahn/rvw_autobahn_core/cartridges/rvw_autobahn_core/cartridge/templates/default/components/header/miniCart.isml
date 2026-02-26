@@ -1,0 +1,28 @@
+<div class="minicart-total" cypress-target="miniCart">
+    <a class="minicart-link" href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.count.default','common',null)}" aria-label="${Resource.msg('minicart.count.default','common',null)}" aria-haspopup="true" tabindex="0">
+        <i class="minicart-icon fa fa-shopping-bag"></i>
+        <span class="minicart-quantity" cypress-target="minicartQuantity">
+            <iscomment>Update value from browser memory</iscomment>
+            <script>
+                ((c) => document.currentScript.parentNode.textContent = !isNaN(c) ? c : '')(parseInt(sessionStorage?.getItem?.('cartcount'), 10));
+            </script>
+
+            <iscomment>Update value from server response</iscomment>
+            <script defer>
+                (async (el, p) => {
+                    try {
+                        (await window.fetch?.('${URLUtils.url("Cart-MiniCartJSON")}', {priority: p ? 'high' : 'low'}))
+                            .json()
+                            .then(json => sessionStorage?.setItem?.('cartcount', json?.quantityTotal))
+                            .finally(() => el.textContent = parseInt(sessionStorage?.getItem?.('cartcount'), 10) || '0');
+                    } catch (err) {
+                        el.setAttribute('hidden','hidden');
+                        throw err;
+                    }
+                })(document.currentScript.parentNode, isNaN(parseInt(sessionStorage?.getItem?.('cartcount'), 10)))
+            </script>
+        </span>
+    </a>
+</div>
+
+<div class="popover popover-bottom" cypress-target="minicartContainer"></div>

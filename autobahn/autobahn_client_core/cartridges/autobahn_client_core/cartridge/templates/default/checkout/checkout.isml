@@ -1,0 +1,153 @@
+<isdecorate template="common/layout/checkout">
+
+    <iscomment>Load Static Assets</iscomment>
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        //for google address Auto Complete - load async for better performance
+        if (pdict.googleAddressAutocompleteUrl) {
+            assets.addJs(pdict.googleAddressAutocompleteUrl, null, 'async');
+        }
+        assets.addJs('/js/checkout.js');
+        <iscomment>Performance: Load checkout CSS asynchronously (handled in stylesheets.isml)</iscomment>
+        assets.addCss('/css/checkout/checkout.css');
+    </isscript>
+
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+
+    <input type="hidden" name="get-cart-summary-data" value="${URLUtils.url('Cart-GetSummaryData')}" />
+    <input type="hidden" name="get-checkout-order-summary-data" value="${URLUtils.url('Checkout-RefreshOrderSummary')}" />
+    <input type="hidden" name="get-cart-page-link" value="${URLUtils.url('Cart-Show')}" />
+    <isset name="cartSummary" value="${pdict.cartSummary}" scope="page" />
+
+    <div id="checkout-main"
+        class='container data-checkout-stage py-5 <isif condition="${pdict.order.usingMultiShipping && pdict.order.shipping.length > 1}">multi-ship</isif>'
+        data-customer-type="${pdict.customer.registeredUser ? 'registered' : 'guest'}"
+        data-checkout-stage="${pdict.currentStage}" data-checkout-get-url="${URLUtils.https('CheckoutServices-Get')}">
+
+        <iscomment>Help and Phone</iscomment>
+        <iscomment>
+            <div class="row">
+                <div class="col-12 col-md-5 offset-md-7 mb-2">
+                    <div class="text-center">
+                        <span>${Resource.msg('info.need.help', 'cart', null)}</span>
+                        <span><a href="tel:${Resource.msg('info.phone.number', 'common', null)}">${Resource.msg('info.phone.number', 'common', null)}</a></span>
+                    </div>
+                </div>
+            </div>
+        </iscomment>
+
+        <div class="accordion-main-container">
+            <h1 class="page-title">${Resource.msg('title.checkout', 'checkout', null)}</h1>
+            <div class="accordion-wrapper">
+                <div class="accordion" id="customer" role="region" aria-label="Customer Information">
+                    <!-- Step 1: Customer Details -->
+                    <button class="accordion-button customer-details-wrapper-button">CUSTOMER DETAILS</button>
+                    <div class="panel customer-section">
+                        <isinclude template="checkout/customer/customer" />
+                        <div class="card customer-summary">
+                            <iscomment>
+                                <div class="card-header clearfix">
+                                    <h2 class="pull-left card-header-custom">${Resource.msg('heading.checkout.customer', 'checkout', null)}</h2>
+                                    <isif condition="${!pdict.customer.registeredUser}">
+                                        <button class="edit-button pull-right"
+                                            aria-label="${Resource.msg('action.edit.step.msg.customer', 'checkout', null)}">${Resource.msg('action.edit.step', 'checkout', null)}</button>
+                                    </isif>
+                                </div>
+                            </iscomment>
+                            <div class="card-body">
+                                <isinclude template="checkout/customer/customerSummary" />
+                            </div>
+                        </div>
+                    </div>
+                    <span class="steps-label">Step 1/3</span>
+                </div>
+
+                <div class="accordion" id="shipping" role="region" aria-label="Shipping Information" data-lazy-load="true">
+                    <button class="accordion-button">SHIPPING</button>
+                    <div class="panel" data-lazy-content="true">
+
+                        <!-- Step 2: Shipping -->
+                        <isinclude template="checkout/shipping/shipping" />
+                        <div class="card shipping-summary">
+                            <div class="card-header clearfix">
+                                <h2 class="pull-left card-header-custom">${Resource.msg('heading.ship.to.address', 'checkout', null)}</h2>
+                                <button class="edit-button pull-right"
+                                    aria-label="${Resource.msg('action.edit.step.msg.shipping', 'checkout', null)}">${Resource.msg('action.edit.step', 'checkout', null)}</button>
+                            </div>
+                            <div class="card-body">
+                                <isinclude template="checkout/shipping/shippingSummary" />
+                            </div>
+                        </div>
+                        <!-- Continue To Shipping Button -->
+                        <iscomment>Checkout Workflow Buttons</iscomment>
+                        <iscomment> <div class="col-12 next-step-button">
+                            <button class="btn btn-primary btn-block submit-shipping" type="submit" name="submit"
+                                value="submit-shipping" <isif
+                                condition="${pdict.order.usingMultiShipping && !pdict.order.shippable}">disabled</isif>>
+                                ${Resource.msg('button.next.payment', 'checkout', null)}
+                            </button>
+                        </div> </iscomment>
+                    </div>
+                    <span class="steps-label">Step 2/3</span>
+                </div>
+
+                <div class="accordion" id="payment" role="region" aria-label="Payment Information" data-lazy-load="true">
+                    <button class="accordion-button">PAYMENT</button>
+                    <div class="panel" data-lazy-content="true">
+                        <!-- Step 3: Payment and Billing-->
+                        <iscomment> <isinclude template="checkout/billing/paymentOptions" /> </iscomment>
+                        <isinclude template="checkout/billing/billing" />
+                        <isinclude template="integrations/checkout/checkoutIntegrationsBeforePayments" />
+
+                        <div class="card payment-summary">
+                            <div class="card-header clearfix">
+                                <h2 class="pull-left card-header-custom">${Resource.msg('label.order.billing.address', 'confirmation', null)}
+                                </h2>
+                                <button class="edit-button pull-right"
+                                    aria-label="${Resource.msg('action.edit.step.msg.payment', 'checkout', null)}">${Resource.msg('action.edit.step', 'checkout', null)}</button>
+                            </div>
+
+                            <div class="card-body">
+                                <isinclude template="checkout/billing/billingSummary" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <span class="steps-label">Step 3/3</span>
+                </div>
+
+                 <iscomment>Order Totals, Details and Summary - Lazy loaded for performance</iscomment>
+                <div class="checkout-order-summary" data-lazy-load="true">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-header-custom">${Resource.msg('heading.order.summary', 'checkout', null)}</h2>
+                        </div>
+                        <div class="card-body order-total-summary">
+                            <isinclude template="checkout/orderTotalSummary" />
+                        </div>
+                    </div>
+
+                    <isinclude template="checkout/orderProductSummary" />
+
+                    <isinclude template="integrations/checkout/checkoutIntegrationsSummaryButtons" />
+                </div>
+
+                <iscomment>Checkout Workflow Buttons</iscomment>
+
+                    <div class="col-12 next-step-button">
+                    <isinclude template="integrations/checkout/checkoutIntegrationsWorkflowButtons" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <isinclude template="checkout/smartyVerificationModal" />
+    <isinclude template="checkout/shipping/shippingAddressTemplate" />
+    <isinclude template="cart/cartRemoveCouponModal"/>
+
+    <isinclude template="integrations/checkout/checkout/bottom" />
+
+</isdecorate>

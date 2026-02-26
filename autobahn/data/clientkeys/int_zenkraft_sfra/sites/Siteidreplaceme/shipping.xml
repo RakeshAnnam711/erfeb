@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shipping xmlns="http://www.demandware.com/xml/impex/shipping/2007-03-31">
+    <shipping-method method-id="501" default="false">
+        <display-name xml:lang="x-default">UPS - Ground</display-name>
+        <description xml:lang="x-default">UPS - Ground</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <custom-attributes>
+            <!--<custom-attribute attribute-id="zenkraftID">ups_ground</custom-attribute>-->
+            <custom-attribute attribute-id="shippingMethodAccountID">603201235</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="x-default">3-7 Business Days</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="502" default="false">
+        <display-name xml:lang="x-default">UPS - 2nd Day Air</display-name>
+        <description xml:lang="x-default">UPS - 2nd Day Air</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <custom-attributes>
+            <custom-attribute attribute-id="zenkraftID">ups_second_day_air</custom-attribute>
+            <custom-attribute attribute-id="shippingMethodAccountID">603201235</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="503" default="false">
+        <display-name xml:lang="x-default">UPS - Next Day Air</display-name>
+        <description xml:lang="x-default">UPS - Next Day Air</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <custom-attributes>
+            <custom-attribute attribute-id="zenkraftID">ups_next_day_air</custom-attribute>
+            <custom-attribute attribute-id="shippingMethodAccountID">603201235</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="504" default="false">
+        <display-name xml:lang="x-default">BorderFree - Border Free Shipping</display-name>
+        <description xml:lang="x-default">BorderFree - Border Free Shipping</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="505" default="false">
+        <display-name xml:lang="x-default">Standard</display-name>
+        <description xml:lang="x-default">Standard</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="005" default="false">
+        <display-name xml:lang="x-default">Store Pickup</display-name>
+        <description xml:lang="x-default">Store Pickup</description>
+        <online-flag>false</online-flag>
+        <price-table>
+            <amount order-value="0">0</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="storePickupEnabled">true</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="506" default="false">
+        <display-name xml:lang="x-default">FreeEconomy_FreeEconomy</display-name>
+        <description xml:lang="x-default">FreeEconomy_FreeEconomy</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="507" default="false">
+        <display-name xml:lang="x-default">Standard_Standard</display-name>
+        <description xml:lang="x-default">Standard_Standard</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="508" default="false">
+        <display-name xml:lang="x-default">SecondDay_SecondDay</display-name>
+        <description xml:lang="x-default">SecondDay_SecondDay</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="509" default="false">
+        <display-name xml:lang="x-default">UPS Ground - Free</display-name>
+        <description xml:lang="x-default">UPS Ground - Free</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="510" default="true">
+        <display-name xml:lang="x-default">UPS Ground</display-name>
+        <description xml:lang="x-default">UPS Ground</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">10</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="storePickupEnabled">false</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="x-default">3-7 Business Days</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="511" default="false">
+        <display-name xml:lang="x-default">UPS Next Day Air Early A.M.</display-name>
+        <description xml:lang="x-default">UPS Next Day Air Early A.M.</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <custom-attributes>
+            <custom-attribute attribute-id="zenkraftID">ups_next_day_air_early</custom-attribute>
+            <custom-attribute attribute-id="shippingMethodAccountID">603201235</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="512" default="false">
+        <display-name xml:lang="x-default">UPS Three-Day Select</display-name>
+        <description xml:lang="x-default">UPS Three-Day Select</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <custom-attributes>
+            <custom-attribute attribute-id="zenkraftID">ups_three_day_select</custom-attribute>
+            <custom-attribute attribute-id="shippingMethodAccountID">603201235</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="513" default="false">
+        <display-name xml:lang="x-default">UPS Second Day Air</display-name>
+        <description xml:lang="x-default">UPS Second Day Air</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <custom-attributes>
+            <custom-attribute attribute-id="zenkraftID">ups_second_day_air</custom-attribute>
+            <custom-attribute attribute-id="shippingMethodAccountID">603201235</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="514" default="false">
+        <display-name xml:lang="x-default">UPS Next Day Air</display-name>
+        <description xml:lang="x-default">UPS Next Day Air</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <custom-attributes>
+            <custom-attribute attribute-id="zenkraftID">ups_next_day_air</custom-attribute>
+            <custom-attribute attribute-id="shippingMethodAccountID">603201235</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="515" default="false">
+        <display-name xml:lang="x-default">eBay Shipping Method - eBay Shipping Method(Defaul...</display-name>
+        <description xml:lang="x-default">eBay Shipping Method - eBay Shipping Method(Defaul...</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="516" default="false">
+        <display-name xml:lang="x-default">STANDARD (2 - 7 Business days)_STANDARD (2 - 7 Bus...</display-name>
+        <description xml:lang="x-default">STANDARD (2 - 7 Business days)_STANDARD (2 - 7 Bus...</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="517" default="false">
+        <display-name xml:lang="x-default">Flat Rate - UPS Ground</display-name>
+        <description xml:lang="x-default">Flat Rate - UPS Ground</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <currency>USD</currency>
+    </shipping-method>
+
+    <shipping-method method-id="999" default="false">
+        <display-name xml:lang="x-default">Other</display-name>
+        <description xml:lang="x-default">Shipped by unusual or retired method</description>
+        <online-flag>false</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table/>
+        <custom-attributes>
+            <custom-attribute attribute-id="storePickupEnabled">false</custom-attribute>
+        </custom-attributes>
+        <currency>USD</currency>
+    </shipping-method>
+</shipping>

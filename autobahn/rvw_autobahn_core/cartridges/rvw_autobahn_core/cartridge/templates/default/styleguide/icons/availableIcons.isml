@@ -1,0 +1,19 @@
+<p>Icons are managed in <a href="https://icomoon.io/app/${'#'}/select" target="_blank" rel="noopener">Icomoon</a>. Instructions for editing/adding icons can be found in <span class="pre">scss/utilities/_icons.scss</span> in the rvw_autobahn_core cartridge.</p>
+
+<div id="availableIcons" class="sg__header3">Available Icons</div>
+
+<div class="icon-search-field form-group">
+    <input type="text" class="form-control" id="iconFilter" placeholder="Type to search for an icon..."/>
+    <span class="icon-search"></span>
+</div>
+
+<div class="row icon-list">
+    <isloop items="${pdict.icons}" var="icon">
+        <div class="column col-4 col-lg-2">
+            <div class="icon-container">
+                <div class="icon ${icon}"></div>
+                <div class="name">${icon}</div>
+            </div>
+        </div>
+    </isloop>
+</div>

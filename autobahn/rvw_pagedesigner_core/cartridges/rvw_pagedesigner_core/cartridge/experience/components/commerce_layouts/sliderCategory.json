@@ -1,0 +1,453 @@
+{
+    "name": "Category Product Slider/Grid",
+    "group": "dynamic_components",
+    "attribute_definition_groups": [
+        {
+            "id": "heading",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to the container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "textHeadline",
+                    "name": "Title",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "textHeadlineAlignment",
+                    "name": "Title alignment",
+                    "type": "enum",
+                    "values": ["left", "center", "right"],
+                    "default_value": "left",
+                    "required": false
+                },
+                {
+                    "id": "textHeadlineClass",
+                    "name": "Title class",
+                    "description": "Additional class(es) to add to the title for styling purposes, e.g. 'h2 text--black mb-2'.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "categoryOptions",
+            "name": "Category Options",
+            "description": "Options specific to the Category Product Slider/Grid",
+            "attribute_definitions": [
+                {
+                    "id": "category",
+                    "name": "Category",
+                    "type": "category",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "category"
+                    }
+                },
+                {
+                    "id": "count",
+                    "name": "Max limit of results",
+                    "description": "The maximum number of tiles rendered. Limited by category response. Default is 12.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "sort",
+                    "name": "Sorting Rule",
+                    "description": "Choose a sorting rule below to override the default sort order for the selected category.",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "sortOptionsPicker"
+                    }
+                },
+                {
+                    "id": "queryString",
+                    "name": "URL Search Query String",
+                    "type": "string",
+                    "description": "Pass additional params for filtering in JSON format. For example, to filter by the color Pink, use the following: {\"preferences\": {\"refinementColor\": \"Pink\"}}.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "productTileSpec",
+            "name": "Product Tile Options",
+            "description": "Specification of the product to be displayed in the product tile.",
+            "attribute_definitions": [
+                {
+                    "id": "displayRatings",
+                    "name": "Display product ratings",
+                    "description": "Specify whether or not to display ratings in product tile.",
+                    "type": "boolean",
+                    "required": true
+                },
+                {
+                    "id": "displaySwatches",
+                    "name": "Display product swatches",
+                    "description": "Specify whether or not to display swatches in product tile.",
+                    "type": "boolean",
+                    "required": true
+                },
+                {
+                    "id": "displayQuickview",
+                    "name": "Display Quickview link",
+                    "description": "Specify whether or not to display the Quickview link in product tile.",
+                    "type": "boolean",
+                    "required": true
+                },
+                {
+                    "id": "displayQuickAddToCart",
+                    "name": "Display Quick-add-to-cart link",
+                    "description": "Specify whether or not to display the Quick-add-to-cart link in product tile.",
+                    "type": "boolean",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "id": "gridOptions",
+            "name": "Grid Options",
+            "description": "Use this section to display the results as a grid instead of a slider.",
+            "attribute_definitions": [
+                {
+                    "id": "useGrid",
+                    "name": "Display as grid (no slider)",
+                    "description": "Select this to bypass the slider option and display as a grid instead.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "smGridColumns",
+                    "name": "Number of grid columns to display on mobile.",
+                    "description": "Default is 1 column.",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "default_value": 1,
+                    "required": false
+                },
+                {
+                    "id": "mdGridColumns",
+                    "name": "Number of grid columns to display on tablet.",
+                    "description": "Default is 3 columns.",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        6
+                    ],
+                    "default_value": 3,
+                    "required": false
+                },
+                {
+                    "id": "lgGridColumns",
+                    "name": "Number of grid columns to display on desktop.",
+                    "description": "Default is 4 columns.",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        6
+                    ],
+                    "default_value": 4,
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "behavior",
+            "name": "Slider Options",
+            "description": "Only applicable if the Display as grid option above is unchecked.",
+            "attribute_definitions": [
+                {
+                    "id": "autoplay",
+                    "name": "Autoplay",
+                    "description": "To turn autoplay on, choose a time in seconds for the delay between slides. Default state is off.",
+                    "type": "enum",
+                    "values": ["Off", "1 Second", "2 Seconds", "3 Seconds", "4 Seconds", "5 Seconds"],
+                    "default_value": "Off",
+                    "required": false
+                },
+                {
+                    "id": "disableLoop",
+                    "name": "Disable Loop",
+                    "description": "Check this to prevent the slider from looping back to the beginning after the last slide",
+                    "type": "boolean",
+                    "default_value": false,
+                    "required": false
+                },
+                {
+                    "id": "speed",
+                    "name": "Speed",
+                    "description": "Enter the number of milliseconds for slide transitions. Default is 300ms.",
+                    "type": "integer",
+                    "default_value": 300,
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "style",
+            "name": "Slider style",
+            "attribute_definitions": [
+                {
+                    "id": "paginationStyle",
+                    "name": "Pagination Style",
+                    "description": "Slider pagination style. Default is dots.",
+                    "type":"enum",
+                    "values": ["dots","shortLines"],
+                    "default_value": "dots",
+                    "required": false
+                },
+                {
+                    "id": "pauseButtonPlacement",
+                    "name": "Pause Button Placement",
+                    "description": "Determine where pause button will show on slider, select none for it not to show. NOTE: Showing the button improves on ADA compliance. Only works if autoplay is enabled. Default is none.",
+                    "type": "enum",
+                    "values": ["none","top left","top right","bottom left","bottom right","with pagination"],
+                    "default_value": "none",
+                    "required": false
+                },
+                {
+                    "id": "controlsTheme",
+                    "name": "Controls Theme",
+                    "description": "Set the theme to help with visibility of the slider's controls. Default is dark",
+                    "type": "enum",
+                    "values": ["dark", "light"],
+                    "default_value": "dark",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "smallConfiguration",
+            "name": "Phone configurations",
+            "description": "Configuration for how the slider will display on phones.",
+            "attribute_definitions": [
+                {
+                    "id": "smCarouselIndicators",
+                    "name": "Display slider indicators on phones",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "smInsideIndicators",
+                    "name": "Position slider indicators on the inside of the slider on phones",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "smCarouselControls",
+                    "name": "Display slider controls on phones",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "smInsideControls",
+                    "name": "Position slider controls on the inside of the slider on phones",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "smCarouselSlidesToDisplay",
+                    "name": "Number of slides to display on phones",
+                    "description": "Default is 1 slide visible at a time.",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "default_value": 1,
+                    "required": false
+                },
+                {
+                    "id": "smGutter",
+                    "name": "Space between slides",
+                    "description": "Enter a number representing how many pixels there should be between slides. Default is 20.",
+                    "type": "integer",
+                    "default_value": 20,
+                    "required": false
+                },
+                {
+                    "id": "smPercentageOfPrevSlide",
+                    "name": "Show percentage of previous slide",
+                    "description": "Choose a percentage below to show a portion of the previous slide to the left. Default is 0%.",
+                    "type": "enum",
+                    "values": ["0%", "10%", "20%", "30%", "40%"],
+                    "default_value": "0%",
+                    "required": false
+                },
+                {
+                    "id": "smPercentageOfNextSlide",
+                    "name": "Show percentage of next slide",
+                    "description": "Choose a percentage below to show a portion of the next slide to the right. Default is 0%.",
+                    "type": "enum",
+                    "values": ["0%", "10%", "20%", "30%", "40%"],
+                    "default_value": "0%",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "mediumConfiguration",
+            "name": "Tablet configurations",
+            "description": "Configuration for how the slider will display on tablets.",
+            "attribute_definitions": [
+                {
+                    "id": "mdCarouselIndicators",
+                    "name": "Display slider indicators on tablets",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "mdInsideIndicators",
+                    "name": "Position slider indicators on the inside of the slider on tablets",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "mdCarouselControls",
+                    "name": "Display slider controls on tablets",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "mdInsideControls",
+                    "name": "Position slider controls on the inside of the slider on tablets",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "mdCarouselSlidesToDisplay",
+                    "name": "Number of slides to display on tablets",
+                    "description": "Default is 3 slides visible at a time.",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6
+                    ],
+                    "default_value": 3,
+                    "required": false
+                },
+                {
+                    "id": "mdGutter",
+                    "name": "Space between slides",
+                    "description": "Enter a number representing how many pixels there should be between slides. Default is 20.",
+                    "type": "integer",
+                    "default_value": 20,
+                    "required": false
+                },
+                {
+                    "id": "mdPercentageOfPrevSlide",
+                    "name": "Show percentage of previous slide",
+                    "description": "Choose a percentage below to show a portion of the previous slide to the left. Default is 0%.",
+                    "type": "enum",
+                    "values": ["0%", "10%", "20%", "30%", "40%"],
+                    "default_value": "0%",
+                    "required": false
+                },
+                {
+                    "id": "mdPercentageOfNextSlide",
+                    "name": "Show percentage of next slide",
+                    "description": "Choose a percentage below to show a portion of the next slide to the right. Default is 0%.",
+                    "type": "enum",
+                    "values": ["0%", "10%", "20%", "30%", "40%"],
+                    "default_value": "0%",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "largeConfiguration",
+            "name": "Desktop configurations",
+            "description": "Configuration for how the slider will display on desktop.",
+            "attribute_definitions": [
+                {
+                    "id": "lgCarouselIndicators",
+                    "name": "Display slider indicators on desktop",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "lgInsideIndicators",
+                    "name": "Position slider indicators on the inside of the slider on desktop",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "lgCarouselControls",
+                    "name": "Display slider controls on desktop",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "lgInsideControls",
+                    "name": "Position slider controls on the inside of the slider on desktops",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "lgCarouselSlidesToDisplay",
+                    "name": "Number of slides to display on desktop",
+                    "description": "Default is 4 slides visible at a time.",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6
+                    ],
+                    "default_value": 4,
+                    "required": false
+                },
+                {
+                    "id": "lgGutter",
+                    "name": "Space between slides",
+                    "description": "Enter a number representing how many pixels there should be between slides. Default is 20.",
+                    "type": "integer",
+                    "default_value": 20,
+                    "required": false
+                },
+                {
+                    "id": "lgPercentageOfPrevSlide",
+                    "name": "Show percentage of previous slide",
+                    "description": "Choose a percentage below to show a portion of the previous slide to the left. Default is 0%.",
+                    "type": "enum",
+                    "values": ["0%", "10%", "20%", "30%", "40%"],
+                    "default_value": "0%",
+                    "required": false
+                },
+                {
+                    "id": "lgPercentageOfNextSlide",
+                    "name": "Show percentage of next slide",
+                    "description": "Choose a percentage below to show a portion of the next slide to the right. Default is 0%.",
+                    "type": "enum",
+                    "values": ["0%", "10%", "20%", "30%", "40%"],
+                    "default_value": "0%",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

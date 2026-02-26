@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-header clearfix">
+        <h4 class="pull-left">${Resource.msg('form.marketing.unsubscribe.all','forms',null)}</h4>
+    </div>
+
+    <div class="card-body card-info-group">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group mt-0">
+                    <div class="custom-control custom-checkbox">
+                        <input
+                            class="custom-control-input"
+                            type="checkbox"
+                            name="opt_out_all"
+                            id="opt_out_all"
+                        />
+                        <label for="opt_out_all" class="custom-control-label">
+                            ${Resource.msg('form.marketing.unsubscribe.from.all.emails','forms',null)}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

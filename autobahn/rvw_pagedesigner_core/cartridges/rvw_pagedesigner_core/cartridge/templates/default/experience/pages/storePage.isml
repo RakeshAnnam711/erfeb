@@ -1,0 +1,15 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<isdecorate template="/common/layout/page">
+        <isscript>
+            var assets = require('*/cartridge/scripts/assets.js');
+            assets.addCss('/css/consolidated-components.css');
+        </isscript>
+    <div class="storepage page-designer ${pdict.customClass}" id="${pdict.page.ID}">
+        <isprint value="${pdict.regions.main.render()}" encoding="off"/>
+
+        <isif condition="${!pdict.chromeless && pdict.belowFoldPopulated}">
+            <div id="belowFoldRegion" class="pd-async-region" data-url="${URLUtils.url('Page-Show', 'cid', pdict.page.ID, 'ajaxRegion', pdict.regions.belowFold.region.ID)}"></div>
+        </isif>
+    </div>
+</isdecorate>

@@ -1,0 +1,104 @@
+--ContentTypeSwitch
+Content-Type: multipart/related; boundary="related_boundary"
+
+--related_boundary
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<!doctype html>
+<html>
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #E9E9E9;">
+    <center role="article" aria-roledescription="email" lang="en" style="width: 100%; background-color: #E9E9E9;">
+    <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #E9E9E9;">
+    <tr>
+    <td>
+    <![endif]-->
+
+        <style>
+            .brand-primary-text {
+                color: ${pdict.brandPrimary};
+            }
+            .brand-primary-background {
+                background: ${pdict.brandPrimary};
+            }
+            @media screen and (max-width: 600px) {
+                .email-container {
+                    width: 100% !important;
+                    margin: auto !important;
+                }
+
+                .stack-column-center {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    direction: ltr !important;
+                    text-align: center !important;
+                }
+
+                .email-container p {
+                    font-size: 17px !important;
+                }
+            }
+            /***** ios fix *****/
+            .logo:nth-child(1) {
+                display:none !important;
+            }
+            .logo:nth-child(2) {
+                display:block !important;
+                height: auto !important;
+                max-height: none !important;
+            }
+        </style>
+
+        <!-- Email Body : BEGIN -->
+        <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: auto;" class="email-container">
+            <!-- Email Header : BEGIN -->
+            <tr>
+                <td width="100%" style="padding: 20px 0; text-align: center">
+                    <a href="${URLUtils.http('Home-Show')}" title="${Resource.msgf('global.homepage.tooltip', 'common', null, Resource.msg('global.storename', 'common', null), Resource.msg('global.home', 'common', null))}">
+                    <isif condition="${!empty(pdict.styleGuideLogo)}">
+                        <img class='logo' src="logo.png" width="180" height="auto" alt="${Resource.msg('global.storename', 'common', null)}" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;" />
+                        <!-- *HIDDEN* unless on iOS — ios doesn't support attachment references for imgs but does support base64 strings -->
+                        <!--[if !mso]><!-->
+                        <img class='logo ios-logo-only' src="data:image/png;base64,${pdict.styleGuideLogo}" width="180" style="display:none; height: 0; mso-hide: all;max-height:0px;overflow:hidden;text-align: center;margin:0 auto;" />
+                        <!--<![endif]-->
+                    <iselse/>
+                        <img src="${URLUtils.absStatic('/images/logo.png')}" width="180" height="18" alt="${Resource.msg('global.storename', 'common', null)}" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;" />
+                    </isif>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class="brand-primary-background" style="padding: 10px; background-color: ${pdict.brandPrimary};">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <th valign="middle" width="50%" class="stack-column-center">
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                    <tr>
+                                        <td style="padding: 10px; text-align: center">
+                                            <isif condition="${!empty(pdict.emailAssets['emailGlobalHeaderLink1'])}">
+                                                <isprint value="${pdict.emailAssets['emailGlobalHeaderLink1']}" encoding="off" />
+                                            </isif>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </th>
+                            <th valign="middle" width="50%" class="stack-column-center">
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                    <tr>
+                                        <td style="padding: 10px; text-align: center">
+                                            <isif condition="${!empty(pdict.emailAssets['emailGlobalHeaderLink2'])}">
+                                                <isprint value="${pdict.emailAssets['emailGlobalHeaderLink2']}" encoding="off" />
+                                            </isif>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </th>
+                            <!-- Column : END -->
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- Email Header : END -->
+        </table>

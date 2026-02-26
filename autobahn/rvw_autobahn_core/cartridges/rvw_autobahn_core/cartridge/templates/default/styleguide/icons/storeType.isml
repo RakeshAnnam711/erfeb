@@ -1,0 +1,71 @@
+
+
+<isscript>
+    var URLUtils = require('dw/web/URLUtils');
+    var preferenceHelper = require('*/cartridge/scripts/helpers/preferenceHelper');
+    var storeTypePreferences = preferenceHelper.getAttributeValue('storeTypePreferences');
+    try {
+        storeTypePreferencesJSON = JSON.parse(storeTypePreferences);
+    } catch (e) {
+        storeTypePreferencesJSON = [];
+        dw.system.Logger.error('storeTypePreferences custom preference json is invalid: ' + e);
+    }
+
+    var storeTypeArray = [];
+    if (storeTypePreferencesJSON) {
+        for (var i = 0; i < storeTypePreferencesJSON.length; i++) {
+            if (storeTypePreferencesJSON[i]) {
+                if (storeTypePreferencesJSON[i].mapMarker && storeTypePreferencesJSON[i].mapMarker.backgroundImage) {
+                    backgroundImage = storeTypePreferencesJSON[i].mapMarker.backgroundImage;
+                    color = storeTypePreferencesJSON[i].mapMarker.color;
+                    value = storeTypePreferencesJSON[i].value;
+                }
+            }
+            if (backgroundImage) {
+                storeTypeArray.push({
+                    color: color,
+                    backgroundImageURL: backgroundImage,
+                    backgroundImage: URLUtils.staticURL(backgroundImage).toString(),
+                    value: value
+                });
+            }
+        }
+    }
+</isscript>
+<div id="storeTypeIcons" class="sg__header3">Store Type Icons</div>
+<p>Store Type icons are stored  in <span class="pre">\static\default\images\icons</span> and referenced in the <span class="pre">AutoBahn Store Type Preferences</span> Custom Preference.</p>
+<p>If a store type doesn't have an icon defined, it falls back to the <span class="pre">default</span> value in the JSON. If both the store type and the <span class="pre">default</span> value are not defined the <span class="pre">fallback</span> is used.</p>
+<p>The <span class="pre">color</span> value can be either a name or a hex value.</p>
+
+<isif condition="${storeTypeArray != null}">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row icon-list">
+                <div class="column col-2">
+                    <div class="icon-container">
+                        <div class="map-marker">
+                            <img src='${URLUtils.staticURL("/images/icons/map-marker-default.svg").toString()}' alt="File location: \static\default\images\icons\map-marker-default.svg" />
+                            <span style="color:white">1</span>
+                        </div>
+                        <div class="name">fallback</div>
+                    </div>
+                </div>
+                <isloop items="${storeTypeArray}" var="storeType">
+                    <div class="column col-2">
+                        <div class="icon-container">
+                            <div class="map-marker">
+                                <img src="${storeType.backgroundImage}" alt="File location: ${storeType.backgroundImageURL}" />
+                                <span style="color:${storeType.color}">1</span>
+                            </div>
+                            <div class="name">${storeType.value}</div>
+                        </div>
+                    </div>
+                </isloop>
+            </div>
+        </div>
+        <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+            <p>Current custom preference for store type preferences:</p>
+            <pre><code class="language-json">${storeTypePreferences}</code></pre>
+        </div>
+    </div>
+</isif>

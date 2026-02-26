@@ -1,0 +1,13 @@
+<isloop items="${pdict.paymentinstruments}" var="paymentInstrument">
+    <isif condition="${paymentInstrument.paymentMethod === dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE}">
+        <div class="row my-2 no-gutters">
+            <div>
+                <button type="button" class="js-remove-giftcertificate-pi" data-action="${URLUtils.https('GiftCertificate-RemoveGiftCertificatePaymentInstrument')}" data-giftcertificatecode="${paymentInstrument.giftCertificateCode}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="d-inline-flex">${Resource.msg('giftcertificate.purchase.giftcertificate', 'checkout', null) + ": " + paymentInstrument.maskedGiftCertificateCode}</div>
+            </div>
+            <div class="">${Resource.msg('giftcertificate.checkout.balance', 'checkout', null) + ": " + paymentInstrument.formattedRemainingBalance}</div>
+        </div>
+    </isif>
+</isloop>

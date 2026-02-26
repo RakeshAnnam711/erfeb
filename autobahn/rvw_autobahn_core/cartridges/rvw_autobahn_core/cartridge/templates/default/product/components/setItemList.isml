@@ -1,0 +1,97 @@
+<div class="set-items ${hasSingleImage ? "" : "product-has-thumbnails"}">
+    <isloop items="${productCopy.individualProducts}" var="product" status="setProductsStatus">
+
+        <isif condition="${setProductsStatus.first}">
+            <div class="product-set-contains">${Resource.msg('label.set.contains', 'product', null)} ${setItemCount}</div>
+        </isif>
+
+        <div class="row no-gutters align-items-stretch product-detail product-set-item-detail" data-pid="${product.id}" data-swatchable-attributes="${product.attrsToUseForSwatch}">
+            <div class="col-12 col-md-8 pr-md-4 pr-lg-5">
+                <div class="row">
+                    <div class="col-6 ${hasSingleImage ? "" : "product-has-thumbnails"} d-flex justify-content-end align-items-start">
+                        <img src="${product.images['large'][0].url}" class="product-set-item-main-image d-block img-fluid" alt="${product.images['small'][0].alt} image" itemprop="image" />
+                    </div>
+                    <div class="col-6 pl-sm-1">
+                        <div class="row align-items-center mb-1" data-pid="${product.id}">
+                            <div class="col-md-12">
+                                <h3 class="set-item-product-name mb-0">
+                                    <a href="${URLUtils.url('Product-Show', 'pid', product.id)}" target="_blank" rel="noopener">
+                                        ${product.productName}
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <isinclude template="product/components/pidRating" />
+                            </div>
+                        </div>
+                        <div class="set-item-headline-and-description ${isQuickView && product.quickviewShowHeadlineAndDescription == false ? 'd-none' : ''}">
+                            <isif condition="${!empty(product.headline)}">
+                                <div class="row mt-3">
+                                    <div class="col product-headline">
+                                        ${product.headline}
+                                    </div>
+                                </div>
+                            </isif>
+                            <isif condition="${!empty(product.headlineDescription)}">
+                                <div class="row my-3">
+                                    <div class="col product-headlinedescription">
+                                        <isprint value="${product.headlineDescription}" encoding="off" />
+                                    </div>
+                                </div>
+                            </isif>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="prices top-prices clearfix set-item-price">
+                    <isset name="price" value="${product.price}" scope="page" />
+                    <isinclude template="product/components/pricing/main" />
+                </div>
+                <div class="attributes product-detail-attributes mini-attributes">
+                    <isinclude template="product/components/mainAttributes" />
+                    <isset name="loopState" value="${{count: 1}}" scope="page" />
+                    <isset name="sizeChartHasBeenShown" value="${false}" scope="page"/>
+                    <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                        <div class="row" data-attr="${attr.id}">
+                            <div class="col-12">
+                                <iscomment>used for sticky add to cart </iscomment>
+                                <isset name="noSwatchOverride" value="${false}" scope="page" />
+                                <isinclude template="product/components/variationAttribute" />
+                            </div>
+                        </div>
+                    </isloop>
+
+                    <div class="product-options">
+                        <isif condition="${product.options && product.options.length > 0}">
+                            <isinclude template="product/components/options" />
+                        </isif>
+                    </div>
+
+                    <!-- Product Availability -->
+                    <isinclude template="product/components/productAvailability" />
+
+                    <isinclude template="integrations/product/components/beforeAddToCart"/>
+
+                    <!-- Add To Cart and Quantity -->
+                    <div class="row qty-cart-container no-gutters" id="qty-cart-container">
+                        <!-- Quantity Drop Down Menu -->
+                        <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 ${product.hideQty ? 'd-none' : ''}">
+                            <isinclude template="product/components/quantity" />
+                        </div>
+
+                        <div class="prices-add-to-cart-actions col-12 ${product.hideQty ? '' : 'col-sm-6 col-md-7 col-lg-9'}">
+
+                            <!-- Add To Cart -->
+                            <isinclude template="product/components/addToCartSetItem" />
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </isloop>
+</div>

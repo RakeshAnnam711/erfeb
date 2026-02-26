@@ -1,0 +1,7 @@
+<div class="brand">
+    <a class="logo-home d-block"
+        href="${pdict.siteContext && pdict.siteContext.url ? pdict.siteContext.url : URLUtils.home()}"
+        title="${pdict.siteContext && pdict.siteContext.name ? pdict.siteContext.name : Resource.msg('global.home', 'common', null)}"
+        style="${pdict.siteContext && pdict.siteContext.logo ? 'background-image: url(' + pdict.siteContext.logo + ')' : ''}">
+    </a>
+</div>

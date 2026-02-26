@@ -1,0 +1,42 @@
+<div
+    class="wishlist-toast hide"
+    data-default-wishlist-name="${Resource.msg('title.wishlist', 'wishlist', null)}"
+    data-default-manage-label-wishlist="${Resource.msg('link.toast.managewishlist', 'wishlist', null)}"
+    data-product-id
+    data-wishlist-id
+>
+    <div
+        class="alert alert-success alert-dismissible"
+        id="toast-alert-status"
+        role="alert"
+        aria-labelledby="wishlistToastLabel"
+        tabindex="-1"
+    >
+        <div class="wishlist-toast-content">
+            <iscomment> WGACA MODIFICATION - aria-label extension
+            <div id="wishlistToastLabel" class="wishlist-toast-message-wrapper"> </iscomment>
+            <div id="wishlistToastLabel" class="wishlist-toast-message-wrapper" role="region" aria-label="${Resource.msg('title.wishlist','wishlist',null)}">
+                <p class="message add">
+                    ${Resource.msg('text.toast.added', 'wishlist', null)} <span class="wishlist-name"></span>
+                    <a href="#" class="manage" data-wishlist-id>
+                        ${Resource.msg('link.toast.managewishlist', 'wishlist', null)}
+                    </a>
+                </p>
+                <p class="message remove d-none">
+                    ${Resource.msg('text.toast.removed', 'wishlist', null)} <span class="wishlist-name"></span>
+                    <a href="" class="undo" data-url-list="${URLUtils.url('Wishlist-AddProduct')}" data-url-lists="${URLUtils.url('Wishlist-AddProductToLists')}">${Resource.msg('button.toast.undo', 'wishlist', null)}</a>
+                </p>
+                <p class="message both d-none">
+                    <span class="message-text">
+                        ${Resource.msg('text.toast.both', 'wishlist', null)}
+                    </span>
+                    <a href="${URLUtils.url('Wishlist-Show')}" class="manage">
+                        ${Resource.msg('link.toast.managewishlist', 'wishlist', null)}
+                    </a>
+                </p>
+                <p class="message error d-none">${Resource.msg('wishlist.updatewishlist.failure.msg', 'wishlist', null)}</p>
+            </div>
+            <button type="button" class="btn close icon-close" data-dismiss="alert" data-toast-dismiss="wishlist-toast" aria-label="${Resource.msg('button.dismiss', 'wishlist', null)}"></button>
+        </div>
+    </div>
+</div>

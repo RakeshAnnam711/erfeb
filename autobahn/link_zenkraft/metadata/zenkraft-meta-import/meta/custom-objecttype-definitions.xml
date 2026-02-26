@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <custom-type type-id="zenkraftParcel">
+        <display-name xml:lang="x-default">Zenkraft Parcel</display-name>
+        <description xml:lang="x-default">Represent a parcel for zenkraft shipment</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>organization</storage-scope>
+        <key-definition attribute-id="id">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="carrier">
+                <display-name xml:lang="x-default">Carrier</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="checkpoints">
+                <display-name xml:lang="x-default">Checkpoints</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="contents">
+                <display-name xml:lang="x-default">Contents</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="estimatedDate">
+                <display-name xml:lang="x-default">Estimated date</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="lastCarrierUpdate">
+                <display-name xml:lang="x-default">Last carrier update</display-name>
+                <type>datetime</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="lastNotificationSent">
+                <display-name xml:lang="x-default">Last notification sent</display-name>
+                <type>datetime</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="notificationType">
+                <display-name xml:lang="x-default">Notification type</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="orderNo">
+                <display-name xml:lang="x-default">Order number</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="shipmentNo">
+                <display-name xml:lang="x-default">Shipment Number</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="status">
+                <display-name xml:lang="x-default">Status</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="statusDescription">
+                <display-name xml:lang="x-default">Status description</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingNumber">
+                <display-name xml:lang="x-default">Tracking Number</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingStage">
+                <display-name xml:lang="x-default">Tracking Stage</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="zenkraftParcel">
+                <display-name xml:lang="x-default">Zenkraft Parcel</display-name>
+                <attribute attribute-id="carrier"/>
+                <attribute attribute-id="trackingStage"/>
+                <attribute attribute-id="contents"/>
+                <attribute attribute-id="lastCarrierUpdate"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="trackingNumber"/>
+                <attribute attribute-id="notificationType"/>
+                <attribute attribute-id="estimatedDate"/>
+                <attribute attribute-id="checkpoints"/>
+                <attribute attribute-id="id"/>
+                <attribute attribute-id="shipmentNo"/>
+                <attribute attribute-id="lastModified" system="true"/>
+                <attribute attribute-id="statusDescription"/>
+                <attribute attribute-id="lastNotificationSent"/>
+                <attribute attribute-id="orderNo"/>
+                <attribute attribute-id="status"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+     <custom-type type-id="zenkraftReturn">
+        <display-name xml:lang="x-default">Zenkraft Return ID</display-name>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="id">
+            <display-name xml:lang="x-default">Zenkraft Return</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="allLabels">
+                <display-name xml:lang="x-default">All Labels</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="labelType">
+                <display-name xml:lang="x-default">Label Type</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="orderNumber">
+                <display-name xml:lang="x-default">Order Number</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="returnLineItems">
+                <display-name xml:lang="x-default">Return Line Items IDs</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="returnAttributes">
+                <display-name xml:lang="x-default">Return Attributes</display-name>
+                <attribute attribute-id="id"/>
+                <attribute attribute-id="returnLineItems"/>
+                <attribute attribute-id="allLabels"/>
+                <attribute attribute-id="labelType"/>
+                <attribute attribute-id="orderNumber"/>
+                <attribute attribute-id="lastModified" system="true"/>
+                <attribute attribute-id="creationDate" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="zenkraftReturnLineItem">
+        <display-name xml:lang="x-default">Zenkraft Return Line Item ID</display-name>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="id">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="approvedDate">
+                <display-name xml:lang="x-default">Approved Date</display-name>
+                <type>datetime</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="carrier">
+                <display-name xml:lang="x-default">Carrier</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="estimatedDeliveryDate">
+                <display-name xml:lang="x-default">Estimated Delivery Date</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="label">
+                <display-name xml:lang="x-default">Label</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="labelType">
+                <display-name xml:lang="x-default">Label Type</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="productID">
+                <display-name xml:lang="x-default">Product ID</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantity">
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="reasonCode">
+                <display-name xml:lang="x-default">Reason Code</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rejectedDate">
+                <display-name xml:lang="x-default">Rejected Date</display-name>
+                <type>datetime</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="returnID">
+                <display-name xml:lang="x-default">Return ID</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="subReasonCode">
+                <display-name xml:lang="x-default">Sub Reason Code</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingDescription">
+                <display-name xml:lang="x-default">Tracking Description</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingLastModifiedDate">
+                <display-name xml:lang="x-default">Tracking Last Modified Date</display-name>
+                <type>datetime</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingNumber">
+                <display-name xml:lang="x-default">Tracking Number</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingStage">
+                <display-name xml:lang="x-default">Tracking Stage</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="refundDeduction">
+                <display-name xml:lang="x-default">Refund deduction</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingStatus">
+                <display-name xml:lang="x-default">Tracking Status</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="returnLineItem">
+                <display-name xml:lang="x-default">Return Line Item</display-name>
+                <attribute attribute-id="reasonCode"/>
+                <attribute attribute-id="subReasonCode"/>
+                <attribute attribute-id="id"/>
+                <attribute attribute-id="returnID"/>
+                <attribute attribute-id="productID"/>
+                <attribute attribute-id="trackingNumber"/>
+                <attribute attribute-id="approvedDate"/>
+                <attribute attribute-id="carrier"/>
+                <attribute attribute-id="rejectedDate"/>
+                <attribute attribute-id="labelType"/>
+                <attribute attribute-id="quantity"/>
+                <attribute attribute-id="lastModified" system="true"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="trackingStage"/>
+                <attribute attribute-id="trackingDescription"/>
+                <attribute attribute-id="trackingStatus"/>
+                <attribute attribute-id="estimatedDeliveryDate"/>
+                <attribute attribute-id="trackingLastModifiedDate"/>
+                <attribute attribute-id="refundDeduction"/>
+                <attribute attribute-id="label"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+</metadata>

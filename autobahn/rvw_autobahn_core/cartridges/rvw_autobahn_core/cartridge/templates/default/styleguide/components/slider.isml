@@ -1,0 +1,202 @@
+<div id="slider" class="sg__header3">Slider</div>
+<p>Sliders are powered by <a href="https://github.com/ganlanyuan/tiny-slider" target="_blank" rel="noopener">Tiny Slider</a>. They can be customized by adding helper classes and data attributes to the <span class="pre">.slider-container</span> div.</p>
+<div class="row sg__slider sg__slider--1">
+    <div class="col-md-6">
+        <div class="slider-container"
+            data-slider-autoplay="false"
+            data-slider-gutter="0"
+            data-slider-gutter-md="0"
+            data-slider-gutter-lg="0"
+            data-slider-items="1"
+            data-slider-items-md="1"
+            data-slider-items-lg="1"
+            data-slider-loop="true"
+            data-slider-speed="300"
+            data-slide-html='<div class="slider"><div class="slide slide--1"><div class="slide-background"><h4>Slide 1</h4></div></div><div class="slide slide--2"><div class="slide-background"><h4>Slide 2</h4></div></div><div class="slide slide--3"><div class="slide-background"><h4>Slide 3</h4></div></div><div class="slide slide--4"><div class="slide-background"><h4>Slide 4</h4></div></div><div class="slide slide--5"><div class="slide-background"><h4>Slide 5</h4></div></div></div>'
+        >
+            <div class="slider">
+                <div class="slide slide--1"><div class="slide-background"><h4>Slide 1</h4></div></div>
+                <div class="slide slide--2"><div class="slide-background"><h4>Slide 2</h4></div></div>
+                <div class="slide slide--3"><div class="slide-background"><h4>Slide 3</h4></div></div>
+                <div class="slide slide--4"><div class="slide-background"><h4>Slide 4</h4></div></div>
+                <div class="slide slide--5"><div class="slide-background"><h4>Slide 5</h4></div></div>
+            </div>
+        </div>
+
+        <iscomment>Helper Classes</iscomment>
+        <p class="mt-4">Helper Classes:</p>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderButtonsHidden">
+            <label class="custom-control-label" for="sliderButtonsHidden"><span class="pre">slider-buttons-hidden</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderButtonsHiddenMedium">
+            <label class="custom-control-label" for="sliderButtonsHiddenMedium"><span class="pre">slider-buttons-hidden-md</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderButtonsHiddenLarge">
+            <label class="custom-control-label" for="sliderButtonsHiddenLarge"><span class="pre">slider-buttons-hidden-lg</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderButtonsInside">
+            <label class="custom-control-label" for="sliderButtonsInside"><span class="pre">slider-buttons-inside</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderButtonsInsideMedium">
+            <label class="custom-control-label" for="sliderButtonsInsideMedium"><span class="pre">slider-buttons-inside-md</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderButtonsInsideLarge">
+            <label class="custom-control-label" for="sliderButtonsInsideLarge"><span class="pre">slider-buttons-inside-lg</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderBulletsHidden">
+            <label class="custom-control-label" for="sliderBulletsHidden"><span class="pre">slider-bullets-hidden</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderBulletsHiddenMedium">
+            <label class="custom-control-label" for="sliderBulletsHiddenMedium"><span class="pre">slider-bullets-hidden-md</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderBulletsHiddenLarge">
+            <label class="custom-control-label" for="sliderBulletsHiddenLarge"><span class="pre">slider-bullets-hidden-lg</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderBulletsInside">
+            <label class="custom-control-label" for="sliderBulletsInside"><span class="pre">slider-bullets-inside</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderBulletsInsideMedium">
+            <label class="custom-control-label" for="sliderBulletsInsideMedium"><span class="pre">slider-bullets-inside-md</span></label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="sliderClassOptions" id="sliderBulletsInsideLarge">
+            <label class="custom-control-label" for="sliderBulletsInsideLarge"><span class="pre">slider-bullets-inside-lg</span></label>
+        </div>
+        <ul>
+            <li><span class="pre">next-slide-<select name="sliderClassOptions" aria-label="next-slide" id="nextSlide" style="width: 50px"><option>0</option><option>10</option><option>20</option><option>30</option><option>40</option></select></span></li>
+            <li><span class="pre">next-slide-md-<select name="sliderClassOptions" aria-label="next-slide-medium" id="nextSlideMedium" style="width: 50px"><option>0</option><option>10</option><option>20</option><option>30</option><option>40</option></select></span></li>
+            <li><span class="pre">next-slide-lg-<select name="sliderClassOptions" aria-label="next-slide-large" id="nextSlideLarge" style="width: 50px"><option>0</option><option>10</option><option>20</option><option>30</option><option>40</option></select></span></li>
+        </ul>
+
+        <iscomment>Data Attributes</iscomment>
+        <p class="mt-4 mb-0">Data Attributes:</p>
+        <p><small>Default values are below&mdash;change them to see how they affect the slider.</small></p>
+        <ul class="sg__attribute-list">
+            <li><span class="pre">data-slider-autoplay="<input type="number" name="sliderDataAttributes" id="sliderAutoplay" value="" style="width: 70px" placeholder=""/>"</span><button data-toggle="tooltip" aria-label="tooltip" title="To enable, set value of desired autoplay delay in milliseconds (2000 = 2 seconds)" class="tooltip-icon"></button></li>
+            <li><span class="pre">data-slider-gutter="<input type="number" name="sliderDataAttributes" id="sliderGutter" value="0" style="width: 40px"/>"</span><button data-toggle="tooltip" aria-label="tooltip" title="Set value in pixels (20 = 20px)" class="tooltip-icon"></button></li>
+            <li><span class="pre">data-slider-gutter-md="<input type="number" name="sliderDataAttributes" id="sliderGutterMedium" value="0" style="width: 40px"/>"</span><button data-toggle="tooltip" aria-label="tooltip" title="Set value in pixels (20 = 20px)" class="tooltip-icon"></button></li>
+            <li><span class="pre">data-slider-gutter-lg="<input type="number" name="sliderDataAttributes" id="sliderGutterLarge" value="0" style="width: 40px"/>"</span><button data-toggle="tooltip" aria-label="tooltip" title="Set value in pixels (20 = 20px)" class="tooltip-icon"></button></li>
+            <li><span class="pre">data-slider-items="<input type="number" name="sliderDataAttributes" id="sliderItems" value="1" style="width: 40px"/>"</span><button data-toggle="tooltip" aria-label="tooltip" title="The number of items to show at the small breakpoint." class="tooltip-icon"></button></li>
+            <li><span class="pre">data-slider-items-md="<input type="number" name="sliderDataAttributes" id="sliderItemsMedium" value="1" style="width: 40px"/>"</span><button data-toggle="tooltip" aria-label="tooltip" title="The number of items to show at the medium breakpoint." class="tooltip-icon"></button></li>
+            <li><span class="pre">data-slider-items-lg="<input type="number" name="sliderDataAttributes" id="sliderItemsLarge" value="1" style="width: 40px"/>"</span><button data-toggle="tooltip" aria-label="tooltip" title="The number of items to show at the large breakpoint." class="tooltip-icon"></button></li>
+            <li><span class="pre">data-slider-loop="<select name="sliderDataAttributes" id="sliderLoop" style="width: 70px"><option value="true">true</option><option value="false">false</option></select>"</span><button data-toggle="tooltip" aria-label="tooltip" title="Whether the slider should loop back to the beginning or stop at the last slide." class="tooltip-icon"></button></li>
+            <li><span class="pre">data-slider-speed="<input type="number" name="sliderDataAttributes" id="sliderSpeed" value="300" style="width: 50px"/>"</span><button data-toggle="tooltip" aria-label="tooltip" title="Set value in milliseconds (500 = 1/2 second)" class="tooltip-icon"></button></li>
+
+        </ul>
+
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="slider-container"
+    data-slider-autoplay="false"
+    data-slider-gutter="0"
+    data-slider-gutter-md="0"
+    data-slider-gutter-lg="0"
+    data-slider-items="1"
+    data-slider-items-md="1"
+    data-slider-items-lg="1"
+    data-slider-loop="true"
+    data-slider-speed="300"
+
+>
+    <div class="slider">
+        <div class="slide slide--1"><div class="slide-background"><h4>Slide 1</h4></div></div>
+        <div class="slide slide--2"><div class="slide-background"><h4>Slide 2</h4></div></div>
+        <div class="slide slide--3"><div class="slide-background"><h4>Slide 3</h4></div></div>
+        <div class="slide slide--4"><div class="slide-background"><h4>Slide 4</h4></div></div>
+        <div class="slide slide--5"><div class="slide-background"><h4>Slide 5</h4></div></div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>
+
+<p class="mb-2"><strong>Sliders with thumbnails</strong> can be created by using two sliders with settings as follows. A couple requirements to note:</p>
+<ul>
+    <li>The <span class="pre">data-slider-thumbnail-container</span> attribute needs to contain a selector that matches the thumbnail slider it corresponds with. (In this case, it's <span class="pre">.slider-thumbnails</span>.)</li>
+    <li>The <span class="pre">data-slider-items</span> attributes on the thumbnail slider need to be set to the same number of items that are in the main slider (5, in this case).</li>
+</ul>
+<div class="row sg__slider sg__slider--2">
+    <div class="col-md-6">
+        <div class="slider-container slider-buttons-hidden slider-buttons-hidden-md slider-buttons-hidden-lg slider-bullets-hidden slider-bullets-hidden-md slider-bullets-hidden-lg" data-slider-thumbnail-container=".slider-thumbnails">
+            <div class="slider">
+                <div class="slide slide--1"><div class="slide-background"><h4>Slide 1</h4></div></div>
+                <div class="slide slide--2"><div class="slide-background"><h4>Slide 2</h4></div></div>
+                <div class="slide slide--3"><div class="slide-background"><h4>Slide 3</h4></div></div>
+                <div class="slide slide--4"><div class="slide-background"><h4>Slide 4</h4></div></div>
+                <div class="slide slide--5"><div class="slide-background"><h4>Slide 5</h4></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="slider-container slider-buttons-hidden slider-buttons-hidden-md slider-buttons-hidden-lg slider-bullets-hidden slider-bullets-hidden-md slider-bullets-hidden-lg" data-slider-thumbnail-container=".slider-thumbnails">
+    <div class="slider">
+        <div class="slide slide--1"><div class="slide-background"><h4>Slide 1</h4></div></div>
+        <div class="slide slide--2"><div class="slide-background"><h4>Slide 2</h4></div></div>
+        <div class="slide slide--3"><div class="slide-background"><h4>Slide 3</h4></div></div>
+        <div class="slide slide--4"><div class="slide-background"><h4>Slide 4</h4></div></div>
+        <div class="slide slide--5"><div class="slide-background"><h4>Slide 5</h4></div></div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>
+<div class="row sg__slider sg__slider--3">
+    <div class="col-md-6">
+        <div class="slider-container slider-thumbnails"
+            data-slider-items="5"
+            data-slider-items-md="5"
+            data-slider-items-lg="5"
+            data-slider-gutter="0"
+            data-slider-gutter-md="0"
+            data-slider-gutter-lg="0"
+            data-slider-loop="false"
+        >
+            <div class="slider">
+                <div class="slide slide--1"><img class="d-block w-100" src="${URLUtils.staticURL('/images/storelocator.jpg')}"/></div>
+                <div class="slide slide--2"><img class="d-block w-100" src="${URLUtils.staticURL('/images/search.jpg')}"/></div>
+                <div class="slide slide--3"><img class="d-block w-100" src="${URLUtils.staticURL('/images/account.jpg')}"/></div>
+                <div class="slide slide--4"><img class="d-block w-100" src="${URLUtils.staticURL('/images/contact-us.jpg')}"/></div>
+                <div class="slide slide--5"><img class="d-block w-100" src="${URLUtils.staticURL('/images/thankyou.jpg')}"/></div>
+            </div>
+            <div class="slider-thumbnail-controls">
+                <iscomment> WGACA MODIFICIATION - aria-labels </iscomment>
+                <div class='prev icon-arrow-left-thin' aria-label='prev'></div>
+                <div class='next icon-arrow-right-thin' aria-label='next'></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="slider-container slider-thumbnails"
+    data-slider-items="5"
+    data-slider-items-md="5"
+    data-slider-items-lg="5"
+    data-slider-gutter="0"
+    data-slider-gutter-md="0"
+    data-slider-gutter-lg="0"
+    data-slider-loop="false"
+>
+    <div class="slider">
+        <div class="slide slide--1"><img class="d-block w-100" src="${URLUtils.staticURL('/images/storelocator.jpg')}"/></div>
+        <div class="slide slide--2"><img class="d-block w-100" src="${URLUtils.staticURL('/images/search.jpg')}"/></div>
+        <div class="slide slide--3"><img class="d-block w-100" src="${URLUtils.staticURL('/images/account.jpg')}"/></div>
+        <div class="slide slide--4"><img class="d-block w-100" src="${URLUtils.staticURL('/images/contact-us.jpg')}"/></div>
+        <div class="slide slide--5"><img class="d-block w-100" src="${URLUtils.staticURL('/images/thankyou.jpg')}"/></div>
+    </div>
+    <div class="slider-thumbnail-controls">
+        <iscomment> WGACA MODIFICIATION - aria-labels </iscomment>
+        <div class='prev icon-arrow-left-thin' aria-label='prev'></div>
+        <div class='next icon-arrow-right-thin' aria-label='next'></div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>

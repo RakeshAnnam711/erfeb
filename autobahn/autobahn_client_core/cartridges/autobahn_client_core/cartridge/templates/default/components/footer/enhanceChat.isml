@@ -1,0 +1,54 @@
+
+
+<style>
+.embeddedMessagingFrame {
+    bottom: 20px !important;
+    right: 80px !important;
+}
+
+/* Mobile: move chat left so it doesn't overlap reCAPTCHA badge */
+@media (max-width: 768px) {
+
+  /* Shift the minimized launcher button left */
+  embeddedmessaging-minimized-state.notificationArea {
+    right: 100px !important;   /* adjust: 90–140px depending on your captcha badge */
+    left: auto !important;
+    bottom: 140px !important;
+    inset-inline-end: 110px !important;
+    inset-inline-start: auto !important;
+    z-index: 2147483647 !important;
+  }
+
+  /* Also shift any messaging iframe used for the launcher */
+  iframe.embeddedMessagingSiteContextFrame,
+  iframe[class*="embeddedMessaging"],
+  iframe[id*="embeddedMessaging"] {
+    right: 5px !important;
+    left: auto !important;
+    bottom: 120px !important;
+    z-index: 2147483647 !important;
+  }
+}
+</style>
+
+
+<script type='text/javascript'>
+function initEmbeddedMessaging() {
+  try {
+    console.log("Initializing Embedded Messaging eswar ...");
+   embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+   embeddedservice_bootstrap.init(
+    '00DE200000Eun1B',
+    'WGACA_Enhanced_Chat',
+    'https://wgaca--upgrade.sandbox.my.site.com/ESWWGACAEnhancedChat1770843176069',
+    {
+     scrt2URL: 'https://wgaca--upgrade.sandbox.my.salesforce-scrt.com'
+    }
+   );
+  } catch (err) {
+   console.error('Error loading Embedded Messaging: ', err);
+  }
+};
+</script>
+<script type='text/javascript' src='https://wgaca--upgrade.sandbox.my.site.com/ESWWGACAEnhancedChat1770843176069/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>

@@ -1,0 +1,56 @@
+{
+    "clients": [
+        {
+            "client_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "permissions": [
+                {
+                    "path": "/cartridges",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/impex",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/libraries/abe_themes_shared",
+                    "operations": [
+                        "read_write"
+                    ]
+                }
+            ]
+        },
+        {
+            "client_id": "97aeab94-09dd-45bf-aa8e-3f41682b4c77",
+            "permissions": [
+                {
+                    "path": "/cartridges",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/impex",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "operations": [
+                        "read_write"
+                    ],
+                    "path": "/logs/jobs"
+                },
+                {
+                    "path": "/libraries/abe_themes_shared",
+                    "operations": [
+                        "read_write"
+                    ]
+                }
+            ]
+        }
+    ]
+}

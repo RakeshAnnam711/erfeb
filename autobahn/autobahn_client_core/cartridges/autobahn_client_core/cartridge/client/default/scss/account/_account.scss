@@ -1,0 +1,64 @@
+@import "~core/account/account";
+// Login page
+.login-page {
+    // Custom styles for login nav tabs to better match card header styles
+    .login-nav-tabs {
+        .nav-link {
+            &.active {
+                border-color: $black;
+                border-width: 2px;
+            }
+        }
+        .nav-tabs {
+            .nav-item {
+                width: 50%;
+                .nav-link {
+                    @include media-breakpoint-down(md) {
+                        padding: 10px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+    .login-form-nav {
+        .forgot-password {
+            text-transform: capitalize;
+            a {
+                text-decoration: underline;
+            }
+        }
+    }
+    .login-nav-tabs .nav-link {
+        text-transform: uppercase;
+    }
+    .privacy-policy {
+        a {
+            text-decoration: underline;
+        }
+    }
+}
+
+// return table on account > order history page
+#som-orderData.slds-scope {
+    .return-orders .return-table {  
+        tr.body {
+            display: flex;
+            justify-content: center;
+        }
+        tr.header, tr.body {
+            .item {
+                flex: 1;
+                &:nth-child(1){
+                    text-align: left;
+                }
+                &:nth-child(2){
+                    text-align: center;
+                }
+                &:nth-child(3){
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

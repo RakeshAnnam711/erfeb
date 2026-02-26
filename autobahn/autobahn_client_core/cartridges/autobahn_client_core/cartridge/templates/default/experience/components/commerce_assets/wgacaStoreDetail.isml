@@ -1,0 +1,33 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addCss('/css/experience/components/commerce_assets/wgacaStoreDetail.css');
+</isscript>
+
+<div class="container">
+	<div class="store-detail-block">
+		<div class="title" style="color: ${pdict.titleColor}; font-size: ${pdict.titleFontSize}; letter-spacing: ${pdict.letterSpacing}"><isprint value="${pdict.title}" encoding="off" /></div>
+		<div class="title-button-block d-block d-lg-flex align-items-lg-center justify-content-lg-between">
+			<div class="sub-title" style="color: ${pdict.subTitleColor}; font-size: ${pdict.subTitleFontSize}; letter-spacing: ${pdict.subTitleLetterSpacing}"><isprint value="${pdict.subTitle}" encoding="off" /></div>
+			<isif condition="${pdict.buttonText != null}">
+				<div class="shop-button"><a class="btn ${pdict.buttonStyle}" href="${pdict.ctaUrl}"  aria-label="${pdict.buttonText}">${pdict.buttonText}</a></div>
+			</isif>
+		</div>
+		<div class="store-bottom-section d-flex justify-content-between">
+			<isif condition="${pdict.storeTimings != null}">
+				<div class="store-timings">
+					<isprint value="${pdict.storeTimings}" encoding="off" />
+				</div>
+			</isif>
+			<isif condition="${pdict.storeContact != null}">
+				<div class="store-contact">
+					<isprint value="${pdict.storeContact}" encoding="off" />
+				</div>
+			</isif>
+		</div>
+		<isif condition="${pdict.storeDescription != null}">
+			<div class="store-description">
+				<isprint value="${pdict.storeDescription}" encoding="off" />
+			</div>
+		</isif>
+	</div>
+</div>

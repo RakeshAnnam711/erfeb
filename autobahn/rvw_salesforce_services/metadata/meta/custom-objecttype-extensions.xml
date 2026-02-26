@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <custom-type type-id="SalesforceAccessToken">
+        <display-name xml:lang="x-default">Id</display-name>
+        <description xml:lang="x-default">The identifier for an instance of this object should be the name of the cloud; for example, "MarketingCloud" or "ServiceCloud". There should be only one instance of this object per Salesforce cloud that is being accessed.&#13;
+This object may be used in the future to support authentication tokens for additional Salesforce Clouds.</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="Id">
+            <display-name xml:lang="x-default">Id</display-name>
+            <description xml:lang="x-default">The identifier for the object indicates which Salesforce Cloud it is for.</description>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="AccessToken">
+                <display-name xml:lang="x-default">Access Token</display-name>
+                <description xml:lang="x-default">The access (authentication) token returned from Salesforce for a specific cloud.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ExpirationDateTime">
+                <display-name xml:lang="x-default">Expiration</display-name>
+                <description xml:lang="x-default">When this token expires. For Marketing Cloud, the expiration is returned in the token response. For Service Cloud it is not and the session expiration is configurable; it could be 2 hours, 12 hours, 24, etc.</description>
+                <type>datetime</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="InstanceUrl">
+                <display-name xml:lang="x-default">Instance URL</display-name>
+                <description xml:lang="x-default">The URL for accessing the instance of this cloud. This is needed for Service Cloud as the instance URL is different from the initial URL on the service used for authenticating.&#13;
+For Marketing Cloud, the REST API on Connected App and what is returned by the service are always the same.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="TokenInfo">
+                <display-name xml:lang="x-default">TokenInfo</display-name>
+                <attribute attribute-id="Id"/>
+                <attribute attribute-id="AccessToken"/>
+                <attribute attribute-id="ExpirationDateTime"/>
+                <attribute attribute-id="InstanceUrl"/>
+                <attribute attribute-id="lastModified" system="true"/>
+                <attribute attribute-id="creationDate" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+</metadata>

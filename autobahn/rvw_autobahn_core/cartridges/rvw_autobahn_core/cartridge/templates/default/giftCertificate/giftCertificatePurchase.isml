@@ -1,0 +1,71 @@
+<isdecorate template="common/layout/page">
+    <div class="container giftcert-page">
+        <isinclude template="components/modules"/>
+        <h1>${Resource.msg('giftcertificate.purchase.giftcertificates', 'checkout', null)}</h1>
+
+        <!---Breadcrumbs--->
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+
+        <isif condition="${pdict.enabled == true}">
+            <div class="row">
+                <div class="card col-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <iscontentasset aid="gift-details-pd"/>
+                            </div>
+                            <div class="col-lg-6">
+                                <isset name="isEdit" value="" scope="page" />
+                                <isinclude template="giftCertificate/components/giftCertificatePurchaseForm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card col-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <iscontentasset aid="gift-check-balance-pd" />
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                                <form method="post" class="suppress check-balance" action="${URLUtils.url('GiftCertificate-CheckBalance')}">
+                                    <fieldset>
+                                        <div class='form-group required'>
+                                            <label class="form-control-label" for="giftcertificateid">
+                                                <isprint value="${pdict.giftCertificateForm.balance.giftcertificateid.label}" encoding="htmlcontent" />
+                                            </label>
+                                            <input type="string" class="form-control" id="giftcertificateid"
+                                                <isprint value="${pdict.giftCertificateForm.balance.giftcertificateid.attributes}" encoding="off" />>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                        <div class="form-group d-none">
+                                            <label class="form-control-label" for="honeypot">honeypot</label>
+                                            <input type="string" class="form-control" id="honeypot">
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-block btn-secondary js-checkbalancebutton" value="${Resource.msg('global.checkbalance', 'locale', null)}">
+                                                ${Resource.msg('global.checkbalance', 'checkout', null)}
+                                            </button>
+                                        </div>
+                                        <p class="form-row mt-3 balancemsg" aria-live="polite"></p>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="col mt-4">
+                                <iscontentasset aid="gift-additional-details-pd" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <iselse>
+            <h3>
+                ${Resource.msg('giftcertificate.disabled', 'checkout', null)}
+            </h3>
+        </isif>
+    </div>
+</isdecorate>

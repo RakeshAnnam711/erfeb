@@ -1,0 +1,47 @@
+.product-detail,
+.quick-view-dialog {
+    .price {
+        color: $pdp-price-color;
+        .strike-through {
+            text-decoration: line-through;
+            color: $product-strike-through-price-color;
+        }
+        del ~ .sales {
+            float: left;
+            margin-right: $spacer;
+        }
+        .tiered {
+            color: $pdp-price-color;
+            table {
+                .table-header {
+                    display: none;
+                }
+            }
+            td,
+            span.price {
+                font-size: paragraph-font-size(small);
+                font-weight: bold;
+            }
+            td {
+                padding: calc(#{$spacer} / 2);
+                &.quantity {
+                    font-weight: normal;
+                    text-align: right;
+                }
+                &.value {
+                    text-align: left;
+                }
+            }
+            .table-header {
+                padding: calc(#{$spacer} / 2);
+            }
+            .column-header {
+                padding: calc(#{$spacer} / 2);
+                font-weight: normal;
+            }
+            .column-header.quantity {
+                text-align: right;
+            }
+        }
+    }
+}

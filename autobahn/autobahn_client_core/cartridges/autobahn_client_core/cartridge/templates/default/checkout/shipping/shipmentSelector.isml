@@ -1,0 +1,20 @@
+<div class="form-group">
+    <label class="form-control-label hidden-shipping-label" for="shipmentSelector-${lineItem ? lineItem.UUID : 'default'}">
+        ${Resource.msg('heading.ship.to.address', 'checkout', null)}
+    </label> 
+
+    <select id="shipmentSelector-${lineItem ? lineItem.UUID : 'default'}"
+            name="shipmentSelector"
+            class="addressSelector form-control custom-select"
+            aria-label="${Resource.msg('heading.ship.to.address', 'checkout', null)}"
+            data-create-shipment-url="${URLUtils.https('CheckoutAddressServices-CreateNewAddress')}"
+    >
+        <isinclude template="checkout/shipping/shipmentSelectorOptions" />
+    </select>
+
+    <div class="invalid-feedback"></div>
+    <div class="row btn-wrapper">
+        <button class="col-6 text-left btn-show-details btn" aria-label="${Resource.msg('action.update.address', 'checkout', null)}" type="button">${Resource.msg('action.update.address', 'checkout', null)}</button>
+        <button class="col-6 text-right btn-add-new btn" aria-label="${Resource.msg('action.add.new', 'checkout', null)}" type="button">${Resource.msg('action.add.new', 'checkout', null)}</button>
+    </div>
+</div>

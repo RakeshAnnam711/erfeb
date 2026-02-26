@@ -1,0 +1,16 @@
+{
+  "name": "com.salesforce.cc-cs.job-components",
+  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SalesforceCommerceCloud/job-components.git"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "~4.18.2",
+    "eslint-config-commercecloud": "git@github.com:SalesforceCommerceCloud/styleguide.git"
+  }
+}

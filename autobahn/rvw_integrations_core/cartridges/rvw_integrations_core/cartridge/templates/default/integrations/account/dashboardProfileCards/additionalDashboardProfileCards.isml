@@ -1,0 +1,25 @@
+<iscomment>
+    This overwrites what is in rvw_autobahn_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<!---Paypal payment block--->
+<isif condition="${pdict.paypal && (!empty(pdict.paypal.savedBA) || pdict.paypal.billingAgreementEnabled)}">
+    <isinclude template="account/paypal/paymentPaypal" />
+</isif>
+<isif condition="${pdict.account.returns}">
+    <!---Zenkraft Return History, driven by pdict, no ootb preference to turn off--->
+    <isset name="returns" value="${pdict.account.returns}" scope="page"/>
+    <isinclude template="account/return/returnHistoryCards"/>
+</isif>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('klaviyo_enabled')}">
+    <!--Email Subscriptions-->
+    <isinclude template="klaviyo/mySubscription"/>
+</isif>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('MarketingCloudForNewsletterEnabled')}">
+    <!--Email Subscriptions-->
+    <isinclude template="account/components/emailPreferenceLists"/>
+</isif>

@@ -1,0 +1,9 @@
+<div class="${pdict.containerClass}">
+    <isif condition="${pdict.product.productType === 'set'}">
+        <isinclude template="product/components/setDetailsContent" />
+    <iselseif condition="${pdict.product.productType === 'bundle'}" />
+        <isinclude template="product/components/bundleDetailsContent" />
+    <iselse/>
+        <isinclude template="product/components/productDetailsContent" />
+    </isif>
+</div>

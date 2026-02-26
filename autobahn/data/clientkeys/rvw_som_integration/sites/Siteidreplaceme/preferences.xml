@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <development>
+            <preference preference-id="StorefrontOrderAccess">allow_list</preference>
+            <preference preference-id="StorefrontOrderAccessAllowList">SOMUpdate-Submit,Order-Track</preference>
+            <preference preference-id="SOM_Order_History_Enabled">true</preference>
+            <preference preference-id="SOM_OrderHistory_Endpoint">//wgaca--dev.sandbox.my.site.com/selfService</preference>
+            <preference preference-id="SOM_OrderHistory_LightningOut_URL">//wgaca--dev.sandbox.my.site.com/selfService/lightning/lightning.out.js</preference>
+            <preference preference-id="SOM_OrderHistory_Namespace">c</preference>
+            <preference preference-id="SOM_OrderHistory_DetailURL">/on/demandware.store/Sites-WGACA-Site/en_US/Order-Details?orderID=</preference>
+        </development>
+        <staging>
+            <preference preference-id="StorefrontOrderAccess">allow_list</preference>
+            <preference preference-id="StorefrontOrderAccessAllowList">SOMUpdate-Submit,Order-Track</preference>
+            <preference preference-id="SOM_Order_History_Enabled">true</preference>
+            <preference preference-id="SOM_OrderHistory_Endpoint">//wgaca--upgrade.sandbox.my.site.com/selfService</preference>
+            <preference preference-id="SOM_OrderHistory_LightningOut_URL">//wgaca--upgrade.sandbox.my.site.com/selfService/lightning/lightning.out.js</preference>
+            <preference preference-id="SOM_OrderHistory_Namespace">c</preference>
+            <preference preference-id="SOM_OrderHistory_DetailURL">/on/demandware.store/Sites-WGACA-Site/en_US/Order-Details?orderID=</preference>
+        </staging>
+        <production/>
+    </custom-preferences>
+
+</preferences>

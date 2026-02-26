@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="Vertex Health Test" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="Vertex Health Test (Tax Area)" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">bm_vertex/cartridge/controllers/VertexInc.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">HealthCheckTaxArea</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">true</parameter>
+                </parameters>
+            </step>
+            <step step-id="Vertex Health Test (Tax Calculation)" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">bm_vertex/cartridge/controllers/VertexInc.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">HealthCheckTaxCalculation</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">true</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules>
+            <on-exit status="ERROR" enabled="true">
+                <send-mail>
+                    <from></from>
+                    <to></to>
+                </send-mail>
+            </on-exit>
+        </rules>
+        <triggers>
+            <run-once enabled="false">
+                <date>2017-04-28Z</date>
+                <time>09:38:59.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+</jobs>

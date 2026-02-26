@@ -1,0 +1,61 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<script type='text/javascript' src='${pdict.ServiceJSURL}' ></script>
+<script type='text/javascript'>
+    var initESW = function(gslbBaseURL) {
+        console.log('Initializing Embedded Service Widget...'); 
+        embedded_svc.settings.displayHelpButton = true;
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
+
+        embedded_svc.init(
+            '${pdict.ChatBaseUrl}',
+            '${pdict.ServerInstanceUrl}',
+            gslbBaseURL,
+            '${pdict.ChatOrganizationId}',
+            '${pdict.LiveAgentName}',
+            {
+                baseLiveAgentContentURL: '${pdict.AgentContentUrl}',
+                deploymentId: '${pdict.DeploymentId}',
+                buttonId: '${pdict.ButtonId}',
+                baseLiveAgentURL: '${pdict.BaseLiveAgentUrl}',
+                eswLiveAgentDevName: '${pdict.ESWLiveAgentDevName}',
+                isOfflineSupportEnabled: ${pdict.OfflineSupportEnabled}
+            }
+        );
+    };
+
+    if (!window.embedded_svc) {
+        console.log('Embedded Service Widget not found, loading script...'); 
+        var s = document.createElement('script');
+        s.setAttribute('src', '${pdict.ButtonSourceAttribute}');
+        s.onload = function() {
+            console.log('Script loaded successfully, initializing...'); 
+            initESW(null);
+        };
+        s.onerror = function() {
+            console.error('Failed to load the Embedded Service Widget script.'); 
+        };
+        document.body.appendChild(s);
+    } else {
+        console.log('Embedded Service Widget already loaded, initializing...'); 
+        initESW('${pdict.InitEswUrl}');
+    }
+
+    // Accessibility Fix - Text not included in an ARIA landmark -
+    // Ensured that the text <span> is included within a valid ARIA landmark
+    window.addEventListener('DOMContentLoaded', function () {
+        var checkButtonInterval = setInterval(function () {
+            var helpButton = document.querySelector(".embeddedServiceHelpButton");
+            if (helpButton) {
+                console.log('Help button found, applying accessibility fixes...'); 
+                helpButton.setAttribute('role', 'complementary');
+                var message = helpButton.querySelector(".message");
+                if (message) {
+                    message.setAttribute('id', 'chatExpert');
+                    helpButton.setAttribute('aria-labelledby', 'chatExpert');
+                }
+                clearInterval(checkButtonInterval); // Stop checking once found
+            }
+        }, 100); // Check every 100ms (adjust if needed)
+    });
+</script>

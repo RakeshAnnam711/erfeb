@@ -1,0 +1,17 @@
+{
+    "configurations": [
+    
+        {
+            "type": "chrome",
+            "name": "http://202.83.31.241",
+            "request": "launch",
+            "url": "http://202.83.31.241"
+        },
+
+        {
+            "type": "prophet",
+            "request": "launch",
+            "name": "bgnd-010.dx.commercecloud.salesforce.com"
+        },
+    ]
+}

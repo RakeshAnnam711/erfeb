@@ -1,0 +1,564 @@
+{
+    "name": "Tabs/Accordion",
+    "description": "Add up to 10 tabs with corresponding content.",
+    "group": "autobahn_layouts",
+    "attribute_definition_groups": [{
+            "id": "tabSettings",
+            "name": "Component Settings",
+            "attribute_definitions": [
+                {
+                    "id": "tabHeaderStyle",
+                    "name": "Component Style",
+                    "type": "enum",
+                    "values": [
+                        "Links",
+                        "Tabs",
+                        "Pills",
+                        "Accordion"
+                    ],
+                    "default_value": "Links",
+                    "description": "Set the style of the tab headers. Default is Links.",
+                    "required": false
+                },
+                {
+                    "id": "containerCustomClass",
+                    "name": "Component Container Custom Class",
+                    "type": "string",
+                    "description": "Custom class(es) that will be added to the outer container of this component. For example, create a new helper class to add custom styles.",
+                    "required": false
+                },
+                {
+                    "id": "tabHeaderCustomClass",
+                    "name": "Headers Custom Class",
+                    "type": "string",
+                    "description": "Custom class(es) that will be added to the link-header containers. For example, 'nav-fill', 'justify-content-center', etc. See the Bootstrap docs for more class options: https://getbootstrap.com/docs/4.0/components/navs/",
+                    "required": false
+                },
+                {
+                    "id": "tabContentCustomClass",
+                    "name": "Content Custom Class",
+                    "type": "string",
+                    "description": "Custom class(es) that will be added to the content container for each tab/drawer's contents. Useful for spacing or background color classes.",
+                    "required": false
+                },
+                {
+                    "id": "activeTab",
+                    "name": "Active Tab/Drawer",
+                    "type": "enum",
+                    "description": "Set which item to be active on page load. Default is 1 for tab, none for accordion",
+                    "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    "required": false
+                },
+                {
+                    "id": "hideScrollbar",
+                    "name": "Hide Scrollbar",
+                    "type": "boolean",
+                    "description": "If there are too many tabs to fit on one line, the tab row becomes scrollable with a custom scrollbar beneath. Check this option to hide the scrollbar altogether (not recommended if this could become scrollable on desktop). This setting is not applicable to Accordion Component Style.",
+                    "required": false
+                },
+                {
+                    "id": "preventAutoClose",
+                    "name": "Prevent auto-closing of Accordion drawers",
+                    "type": "boolean",
+                    "description": "Enable this option to allow multiple Accordion drawers to be open, vs. the default behavior that auto-closes other drawers when one is opened. Applicable to the Accordion Component Style only.",
+                    "required": false
+                },
+                {
+                    "id": "expandDrawers",
+                    "name": "Expand all Accordion drawers",
+                    "type": "boolean",
+                    "description": "Enable this option to show all Accordion drawers in the open state initially.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "tab1",
+            "name": "Tab/Drawer 1",
+            "attribute_definitions": [{
+                    "id": "tabDisplay1",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass1",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "tab2",
+            "name": "Tab/Drawer 2",
+            "attribute_definitions": [{
+                    "id": "tabDisplay2",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass2",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "tab3",
+            "name": "Tab/Drawer 3",
+            "attribute_definitions": [{
+                    "id": "tabDisplay3",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass3",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "tab4",
+            "name": "Tab/Drawer 4",
+            "attribute_definitions": [{
+                    "id": "tabDisplay4",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass4",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "tab5",
+            "name": "Tab/Drawer 5",
+            "attribute_definitions": [{
+                    "id": "tabDisplay5",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass5",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "tab6",
+            "name": "Tab/Drawer 6",
+            "attribute_definitions": [{
+                    "id": "tabDisplay6",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass6",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        }, {
+            "id": "tab7",
+            "name": "Tab/Drawer 7",
+            "attribute_definitions": [{
+                    "id": "tabDisplay7",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass7",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        }, {
+            "id": "tab8",
+            "name": "Tab/Drawer 8",
+            "attribute_definitions": [{
+                    "id": "tabDisplay8",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass8",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        }, {
+            "id": "tab9",
+            "name": "Tab/Drawer 9",
+            "attribute_definitions": [{
+                    "id": "tabDisplay9",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass9",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        }, {
+            "id": "tab10",
+            "name": "Tab/Drawer 10",
+            "attribute_definitions": [{
+                    "id": "tabDisplay10",
+                    "name": "Link Header",
+                    "type": "string",
+                    "description": "The name to be shown for this item. This field must be populated for its corresponding content to display.",
+                    "required": false
+                },
+                {
+                    "id": "tabCustomClass10",
+                    "name": "Link Header Custom Class",
+                    "type": "string",
+                    "description": "A custom class that will be applied to only this item link, e.g. 'disabled'. Note: Many classes will not work here, as tabs already have custom styles applied that will override them. A preferred method is to use a custom helper class along with custom CSS.",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id":"tabContent1",
+            "name":"Tab/Drawer 1 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent2",
+            "name":"Tab/Drawer 2 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent3",
+            "name":"Tab/Drawer 3 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent4",
+            "name":"Tab/Drawer 4 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent5",
+            "name":"Tab/Drawer 5 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent6",
+            "name":"Tab/Drawer 6 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent7",
+            "name":"Tab/Drawer 7 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent8",
+            "name":"Tab/Drawer 8 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent9",
+            "name":"Tab/Drawer 9 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"tabContent10",
+            "name":"Tab/Drawer 10 Content",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        }
+    ]
+}

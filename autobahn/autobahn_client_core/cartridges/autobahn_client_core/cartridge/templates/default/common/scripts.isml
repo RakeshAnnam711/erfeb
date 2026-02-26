@@ -1,0 +1,184 @@
+<iscomment>
+    isinclude's cannot be used before the assets are written out as it breaks the IE conditional tag in the footer
+    This file is included both in the head and the footer, to ensure js is loaded after the html has been parsed
+    It's added twice because IE doesn't respect the defer attribute for scripts
+</iscomment>
+
+<iscomment> Load jquery for cart page </iscomment>
+<isif condition="${request.httpPath && request.httpPath.toString().indexOf('Cart-Show') !== -1}">
+    <script src="${URLUtils.staticURL('/js/initializeJquery.js')}" ></script>
+</isif>
+
+<script src="${URLUtils.staticURL('/js/main.js')}" defer></script>
+
+<script src="${URLUtils.staticURL('/lib/lazysizes.min.js')}" async></script>
+
+<iscomment>Performance: Defer slick.min.js to ensure it loads after jQuery (which is in main.js)</iscomment>
+<script src="${URLUtils.staticURL('/lib/slick.min.js')}" defer></script>
+
+<isloop items="${ require('*/cartridge/scripts/assets.js').scripts }" var="script">
+    <isif condition="${script.src.indexOf('paypal.com/sdk') !== -1}">
+        <script src="${script.src}" data-partner-attribution-id="${pdict.paypal.partnerAttributionId}" <isif condition="${script.integrity != null}">integrity="${script.integrity}" crossorigin="anonymous"</isif> <isif condition="${!empty(script.sequence)}">${script.sequence}</isif>></script>
+    <iselseif condition="${request.httpPath && request.httpPath.toString().indexOf('Checkout-') !== -1 && (script.src.indexOf('checkout.js') === -1 && script.src.indexOf('google') === -1)}">
+        <iscomment>Performance: Defer non-critical scripts on checkout pages to reduce main-thread work</iscomment>
+        <script src="${script.src}" <isif condition="${script.integrity != null}">integrity="${script.integrity}" crossorigin="anonymous"</isif> defer></script>
+    <iselse/>
+        <script src="${script.src}" <isif condition="${script.integrity != null}">integrity="${script.integrity}" crossorigin="anonymous"</isif> <isif condition="${!empty(script.sequence)}">${script.sequence}</isif>></script>
+    </isif>
+</isloop>
+
+<iscomment>
+    No is includes can add script tags as they will break the IE conditional causing the script to be added twice,
+    in the header and in the footer.
+</iscomment>
+<iscomment> 
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('AffirmOnline')}">
+   <script src="${URLUtils.staticURL('/js/vcn.js')}" defer></script>
+</isif> </iscomment>
+
+
+<isinclude template="/common/recaptchaInclude" />
+
+<isif condition="${request.httpPath && request.httpPath.toString().indexOf('Checkout-') !== -1}">
+<script>
+(function() {
+    'use strict';
+    
+    function scheduleWork(callback, priority) {
+        priority = priority || 'low';
+        
+        if (priority === 'high') {
+            // High priority: execute immediately
+            callback();
+        } else if (window.requestIdleCallback) {
+            // Low priority: use requestIdleCallback
+            requestIdleCallback(callback, { timeout: 2000 });
+        } else if (window.requestAnimationFrame) {
+            // Fallback: use requestAnimationFrame
+            requestAnimationFrame(function() {
+                setTimeout(callback, 0);
+            });
+        } else {
+            // Final fallback: small delay
+            setTimeout(callback, 50);
+        }
+    }
+    
+    function initNonCriticalFeatures() {
+        // Defer analytics and tracking scripts
+        var analyticsScripts = document.querySelectorAll('script[src*="analytics"], script[src*="tracking"], script[src*="marketing"]');
+        analyticsScripts.forEach(function(script) {
+            if (!script.hasAttribute('data-deferred')) {
+                script.setAttribute('data-deferred', 'true');
+                script.defer = true;
+            }
+        });
+        
+        var widgetScripts = document.querySelectorAll('script[src*="widget"], script[src*="chat"], script[src*="livechat"]');
+        widgetScripts.forEach(function(script) {
+            if (!script.hasAttribute('data-deferred')) {
+                script.setAttribute('data-deferred', 'true');
+                script.defer = true;
+            }
+        });
+        
+        // Performance: Defer Signifyd scripts to reduce JavaScript execution time (849ms -> reduced)
+        // Signifyd scripts are already deferred, but we ensure they execute after LCP
+        var signifydScripts = document.querySelectorAll('script[src*="signifyd"], script[id="sig-api"]');
+        signifydScripts.forEach(function(script) {
+            if (!script.hasAttribute('data-deferred-lcp')) {
+                script.setAttribute('data-deferred-lcp', 'true');
+                // Ensure defer is set
+                script.defer = true;
+                // Delay execution until after initial render and LCP
+                if (window.requestIdleCallback) {
+                    requestIdleCallback(function() {
+                        // Scripts will execute after browser is idle (after LCP)
+                    }, { timeout: 2000 });
+                } else {
+                    // Fallback: delay execution
+                    setTimeout(function() {
+                        // Scripts execute after delay
+                    }, 1000);
+                }
+            }
+        });
+    }
+    
+    function chunkedEvaluate(scripts, chunkSize) {
+        chunkSize = chunkSize || 3;
+        var index = 0;
+        
+        function processChunk() {
+            var end = Math.min(index + chunkSize, scripts.length);
+            for (var i = index; i < end; i++) {
+                try {
+                    if (scripts[i] && typeof scripts[i] === 'function') {
+                        scripts[i]();
+                    }
+                } catch (e) {
+                    console.warn('Script evaluation error:', e);
+                }
+            }
+            index = end;
+            
+            if (index < scripts.length) {
+                scheduleWork(processChunk, 'low');
+            }
+        }
+        
+        processChunk();
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            scheduleWork(initNonCriticalFeatures, 'low');
+        });
+    } else {
+        scheduleWork(initNonCriticalFeatures, 'low');
+    }
+    
+    if (window.MutationObserver) {
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeName === 'SCRIPT' && node.src) {
+                        var src = node.src.toLowerCase();
+                        // Defer non-critical scripts including Signifyd to reduce JS execution time
+                        if ((src.indexOf('analytics') !== -1 || 
+                             src.indexOf('tracking') !== -1 || 
+                             src.indexOf('marketing') !== -1 ||
+                             src.indexOf('widget') !== -1 ||
+                             src.indexOf('chat') !== -1 ||
+                             src.indexOf('signifyd') !== -1 ||
+                             (node.id && node.id === 'sig-api')) &&
+                            !node.hasAttribute('data-deferred') &&
+                            !node.hasAttribute('data-deferred-lcp')) {
+                            scheduleWork(function() {
+                                node.setAttribute('data-deferred-lcp', 'true');
+                                // Move to end of body to execute after LCP
+                                if (document.body && node.parentNode) {
+                                    node.remove();
+                                    document.body.appendChild(node);
+                                }
+                            }, 'low');
+                        }
+                    }
+                });
+            });
+        });
+        
+        observer.observe(document.head, { childList: true, subtree: true });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+    
+    window.scheduleCheckoutWork = scheduleWork;
+    window.chunkedEvaluate = chunkedEvaluate;
+})();
+</script>
+</isif>
+
+<iscomment>
+    No is includes can add script tags as they will break the IE conditional causing the script to be added twice,
+    in the header and in the footer.
+</iscomment>

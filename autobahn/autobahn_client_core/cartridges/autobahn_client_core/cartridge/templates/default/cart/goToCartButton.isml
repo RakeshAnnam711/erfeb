@@ -1,0 +1,8 @@
+<div class="mb-sm-3">
+    <a href="${URLUtils.https('Cart-Show')}"
+        title="Go To Cart"
+        class="btn btn-secondary btn-block minicart-footer-cta" role="button"
+        aria-label="${Resource.msg('button.gotocart', 'cart', null)}">
+        ${Resource.msg('button.gotocart', 'cart', null)}
+    </a>
+</div>

@@ -1,0 +1,79 @@
+<div class="row brand-colors">
+    <div class="col-12">
+        <div class="row sg__header4">Brand</div>
+        <div class="row color-blocks">
+            <div class="color-block">
+                <div class="color-value background--brand-primary text--white"></div>
+                <div class="color-name">brand-primary</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--brand-secondary text--white"></div>
+                <div class="color-name">brand-secondary</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--brand-tertiary text--white"></div>
+                <div class="color-name">brand-tertiary</div>
+            </div>
+        </div>
+        <div class="row sg__header4">Grayscale</div>
+        <div class="row color-blocks">
+            <div class="color-block">
+                <div class="color-value background--white text--black"></div>
+                <div class="color-name">white</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--off-white text--black"></div>
+                <div class="color-name">off-white</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--light-gray text--black"></div>
+                <div class="color-name">light-gray</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--gray text--black"></div>
+                <div class="color-name">gray</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--dark-gray text--white"></div>
+                <div class="color-name">dark-gray</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--black text--white"></div>
+                <div class="color-name">black</div>
+            </div>
+        </div>
+        <div class="row sg__header4">Notification / Sale / Promo</div>
+        <div class="row color-blocks">
+            <div class="color-block">
+                <div class="color-value background--success text--white"></div>
+                <div class="color-name">green / success</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--warning text--black"></div>
+                <div class="color-name">yellow / warning</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--danger text--white"></div>
+                <div class="color-name">red / danger</div>
+            </div>
+            <div class="color-block">
+                <div class="color-value background--info text--white"></div>
+                <div class="color-name">blue / info</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 pt-3">
+        <div class="row brand-colors__helpers">
+            <div class="sg__header3">Color Helper Classes</div>
+            <p class="mb-2">Colors can be applied with helper classes by adding one of the following prefixes before the color name: <span class="pre">text--</span>, <span class="pre">background--</span>, or <span class="pre">border--</span>. You can also specify color changes at breakpoints by using the Bootstrap breakpoint names, e.g. <span class="pre">text--md--</span>, <span class="pre">text--lg--</span>.</p>
+            <p class="mb-3"><small>Note: <span class="pre">border--</span> only adds the border-color. You'll still need to add the border-style and width separately.</small></p>
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="text--white text--md--black background--dark-gray background--lg--light-gray border--brand-secondary">Helper Class Usage</div></script></code></pre>
+            <p class="mb-2 mt-4">Sass variables can also be used to apply colors directly to any property.</p>
+            <pre><code class='language-css'><script type="text/plain" class="language-scss">.element {
+    color: $white;
+    background: $dark-gray;
+    border: 2px solid $black;
+}</script></code></pre>
+    </div>
+    </div>
+</div>

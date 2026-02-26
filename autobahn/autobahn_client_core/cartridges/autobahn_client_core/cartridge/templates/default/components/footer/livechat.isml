@@ -1,0 +1,142 @@
+<style type='text/css'>
+        .embeddedServiceHelpButton .helpButton .uiButton {
+            background-color: #000;
+            font-family: "BrandonGrotesque", sans-serif;
+            min-width: fit-content;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .embeddedServiceHelpButton .helpButton .uiButton:focus {
+            outline: 1px solid #000;
+        }
+        .embeddedServiceHelpButton .helpButton .uiButton .embeddedServiceIcon {
+            margin: 0;
+        }
+
+        /* Don't show the help button label */
+        .embeddedServiceHelpButton .helpButton .uiButton .helpButtonLabel {
+            display: none;
+        }
+        .embeddedServiceSidebarForm .embeddedServiceSidebarButton .bBody,
+        .embeddedServiceSidebarFeature .embeddedServiceSidebarButton .bBody
+        {
+            font-size: 14px;
+        }
+        embeddedservice-chat-header .sidebarHeader h2{
+            color: #FFF;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        embeddedservice-chat-header .sidebarHeader .minimizeButton .slds-icon{
+            position: relative;
+            bottom: 5px;
+        }
+        embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container lightning-primitive-icon{
+        visibility:hidden;
+        }
+        embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::before,
+        embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::after
+        {
+            position: absolute;
+            left: 289px;
+            bottom: 18px;
+            content: ' ';
+            height: 16px;
+            width: 2px;
+            background-color: #fff;
+        }
+        embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::before{
+            transform: rotate(45deg);
+        }
+        embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::after{
+            transform: rotate(-45deg);
+        }
+        @media screen and (max-width:360px){
+            embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::before,
+            embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::after{
+            left: 90%;
+            }
+        }
+        .embeddedServiceSidebar.layout-docked.sidebarMinimized .dockableContainer {
+            left: 20px !important;
+        }
+        .embeddedServiceSidebar.layout-docked.sidebarMaximized .dockableContainer {
+            left: 0px !important;
+        }
+        .embeddedServiceHelpButton .helpButton{
+            left: 12px !important;
+        }
+        .embeddedServiceSidebarMinimizedDefaultUI.helpButton{
+            left: 12px !important;
+        }
+
+    .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #000;
+    }
+
+    .embeddedServiceSidebarForm .embeddedServiceSidebarButton .bBody,
+    .embeddedServiceSidebarFeature .embeddedServiceSidebarButton .bBody {
+        font-size: 14px;
+    }
+
+    embeddedservice-chat-header .sidebarHeader h2 {
+        color: #FFF;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    embeddedservice-chat-header .sidebarHeader .minimizeButton .slds-icon {
+        position: relative;
+        bottom: 5px;
+    }
+
+    embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container lightning-primitive-icon {
+        visibility: hidden;
+    }
+
+    embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::before,
+    embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::after {
+        position: absolute;
+        left: 289px;
+        bottom: 18px;
+        content: ' ';
+        height: 16px;
+        width: 2px;
+        background-color: #fff;
+    }
+
+    embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::before {
+        transform: rotate(45deg);
+    }
+
+    embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::after {
+        transform: rotate(-45deg);
+    }
+
+    @media screen and (max-width:360px) {
+
+        embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::before,
+        embeddedservice-chat-header .sidebarHeader .closeButton .slds-icon_container::after {
+            left: 90%;
+        }
+    }
+
+    .embeddedServiceSidebar.layout-docked.sidebarMinimized .dockableContainer {
+        left: 20px !important;
+    }
+
+    .embeddedServiceSidebar.layout-docked.sidebarMaximized .dockableContainer {
+        left: 0px !important;
+    }
+
+    .embeddedServiceHelpButton .helpButton {
+        left: 12px !important;
+    }
+
+    .embeddedServiceSidebarMinimizedDefaultUI.helpButton {
+        left: 12px !important;
+    }
+</style>

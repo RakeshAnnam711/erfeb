@@ -1,0 +1,58 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/checkout.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_integrations_core
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<iscomment>These are the buttons that are referenced in app_storefront_base and are defined here incase there is no credit card integration</iscomment>
+<button class="btn btn-primary btn-block submit-shipping ${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled') && pdict.order.hideShipping ? 'moveToPayment' : ''}" type="submit" name="submit" value="submit-shipping"
+    ${pdict.order.usingMultiShipping && !pdict.order.shippable ? 'disabled' : ''}
+    <isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+        data-dav='${dw.system.Site.current.preferences.custom.CsDavEnable.value}'
+        data-url="${URLUtils.url('CYBAddressVerification-VerifyAddress')}"
+    </isif>
+    cypress-target="checkoutSubmitShipping"
+    >
+    ${Resource.msg('button.next.payment', 'checkout', null)}
+</button>
+
+<button class="btn btn-primary btn-block submit-payment ${dw.system.Site.current.getCustomPreferenceValue('sfcommercepaymentsCartridgeEnabled') || dw.system.Site.current.getCustomPreferenceValue('skipReviewStepInCheckout') ? 'place-order' : ''}"
+        data-action="${URLUtils.url('CheckoutServices-PlaceOrder')}"
+        data-paypal-approved-url="${URLUtils.url('CommercePaymentsCheckoutServices-PayPalOrderApproved')}"
+        data-fail-order-url = "${URLUtils.url('CommercePaymentsCheckoutServices-FailOrder', dw.web.CSRFProtection.getTokenName(), dw.web.CSRFProtection.generateToken())}"
+        type="submit"
+        name="submit"
+        value="submit-payment"
+         cypress-target="checkoutPlaceOrder">
+    <isif condition="${dw.system.Site.current.getCustomPreferenceValue('sfcommercepaymentsCartridgeEnabled') || dw.system.Site.current.getCustomPreferenceValue('skipReviewStepInCheckout')}">
+        ${Resource.msg('button.place.order', 'checkout', null)}
+    <iselse/>
+        ${Resource.msg('button.next.place.order', 'checkout', null)}
+    </isif>
+</button>
+
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+    <!-- secure acceptance silent post response -->
+    <div id="secureAcceptancePost">
+    </div>
+    <!-- secure acceptance iframe response -->
+    <div class="card secure-acceptance-iframe">
+        <div id="secureAcceptanceIframe">
+        </div>
+    </div>
+    <input type="hidden" id="is_Cartridge_Enabled" value="true">
+    <button id="submit-order" class="btn btn-primary btn-block ${pdict.paymentClass}" data-action="${URLUtils.url('CheckoutServices-PlaceOrder')}"
+        data-payerauth="${URLUtils.url('CheckoutServices-InitPayerAuth')}" type="submit" name="submit" value="place-order">${Resource.msg('button.place.order', 'checkout', null)}
+    </button>
+<iselse/>
+    <iscomment>blame paypal for inline style used in billingHelper.showContinueButton()</iscomment>
+    <button id="submit-order" class="btn btn-primary btn-block place-order" data-action="${URLUtils.url('CheckoutServices-PlaceOrder')}"
+        type="submit" name="submit" value="place-order">
+        ${Resource.msg('button.place.order', 'checkout', null)}
+    </button>
+</isif>

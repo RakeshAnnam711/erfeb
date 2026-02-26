@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="RefArchSharedLibrary">
+
+    <content content-id="home-main-bambuser">
+        <display-name xml:lang="x-default">Home Banner with Bambuser link.</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>true</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;style&gt;&#13;
+@media (max-width: 543px) {&#13;
+    .main-callout {&#13;
+        background-image: url(images/homepage/homepage-4/small.jpg?$staticlink$);&#13;
+    }&#13;
+}&#13;
+@media (max-width: 768px) and (min-width: 544px) {&#13;
+    .main-callout {&#13;
+        background-image: url(images/homepage/homepage-4/medium.jpg?$staticlink$);&#13;
+    }&#13;
+}&#13;
+@media (min-width: 992px) {&#13;
+    .main-callout {&#13;
+        background-image: url(images/homepage/homepage-4/large.jpg?$staticlink$);&#13;
+    }&#13;
+}&#13;
+&#13;
+.bambuser-hero-trigger {&#13;
+	position: relative;&#13;
+	color: #fff;&#13;
+	padding: .3125em .625em .3125em 15px;&#13;
+	background-color: #84BD00;&#13;
+	display: inline-block;&#13;
+        cursor: pointer;&#13;
+}&#13;
+@media (min-width: 769px) {&#13;
+	.bambuser-hero-trigger {&#13;
+		font-size: 3rem;&#13;
+	}&#13;
+}&#13;
+@media (min-width: 544px) {&#13;
+	.bambuser-hero-trigger {&#13;
+		font-size: 2rem;&#13;
+	}&#13;
+}&#13;
+&lt;/style&gt;&#13;
+&lt;div class="hero main-callout"&gt;&#13;
+&lt;div style="height: 100%; display: flex; justify-content: space-between; align-items: center;"&gt;&#13;
+&lt;h1 class="page-title" style="top: 0; margin: 0;"&gt;&#13;
+Summer Style &#13;
+&lt;/h1&gt;&#13;
+&lt;div"&gt;&#13;
+$include('Page-Include', 'cid', 'home-main-bambuser-trigger')$&#13;
+&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+        </custom-attributes>
+    </content>
+
+    <content content-id="home-main-bambuser-trigger">
+        <display-name xml:lang="x-default">Home Banner Bambuser trigger.</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>true</searchable-flag>
+        <template>content/bambuserTrigger</template>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="bambuserStreamId">[your stream ID here]</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">LiveShopping</custom-attribute>
+        </custom-attributes>
+    </content>
+
+
+</library>

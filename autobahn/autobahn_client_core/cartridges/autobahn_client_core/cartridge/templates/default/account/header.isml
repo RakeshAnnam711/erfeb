@@ -1,0 +1,42 @@
+<div class="user custom-dropdown dropdown" cypress-target="accountDropdown">
+    <a href="${URLUtils.https('Login-Show')}" class="dropdown-toggle header-link nav-link" id="dropdownAccountSelector" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" aria-label="${Resource.msg('link.header.login', 'account', null)}">
+        ${Resource.msg('link.header.login', 'account', null)}
+        <script>
+            ((c, p, a) => {
+                if (c.isAuthenticated) {
+                    p.classList.add('user-authenticated');
+                    if (c.initial) p.setAttribute('data-account-icon-letter', c.initial);
+                    if (!!c.name) a.innerHTML = c.name;
+                }
+            })(window.UncachedData?.customer, document.currentScript.parentNode, document.currentScript.previousSibling)
+        </script>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAccountSelector">
+        <ul class="nav" aria-label="${Resource.msg('label.profile.myaccountlink', 'account', null)}">
+            <iscomment> child elements swapped after dom load </iscomment>
+            <li class="dropdown-item">
+                <a class="dropdown-link header-link" href="${URLUtils.https('Login-Show')}" role="button"
+                    aria-label="${Resource.msg('link.header.login', 'account', null)}" cypress-target="accountDropdownLogin">
+                    <span class="user-message header-link">${Resource.msg('link.header.login', 'account', null)}</span>
+                </a>
+            </li>
+            <li class="dropdown-item">
+                <a class="dropdown-link header-link" href="${URLUtils.https('Login-Show', 'action', 'register')}" role="button"
+                    aria-label="${Resource.msg('link.header.create', 'account', null)}" cypress-target="accountDropdownCreate">
+                    <span class="user-message header-link">${Resource.msg('link.header.create', 'account', null)}</span>
+                </a>
+            </li>
+            <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('wishlistEnable')}">
+                <li class="dropdown-item">
+                    <a class="dropdown-link header-link" href="${URLUtils.https('Wishlist-Show')}" role="button"
+                        aria-label="${Resource.msg('link.wishlist.login', 'account', null)}">
+                        <span class="user-message header-link">${Resource.msg('link.wishlist.login', 'account', null)}</span>
+                    </a>
+                </li>
+            </isif>
+        </ul>
+        <script> ((auth, menu, el) => { if (auth && menu) el.querySelector('.nav').innerHTML = menu })(!!window.UncachedData?.customer?.isAuthenticated, CachedData.template.authAccountHeader, document.currentScript.parentNode) </script>
+    </div>
+</div>

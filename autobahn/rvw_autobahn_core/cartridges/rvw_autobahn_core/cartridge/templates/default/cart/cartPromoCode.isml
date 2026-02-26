@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-12">
+        <form action="${pdict.actionUrls.submitCouponCodeUrl}" class="promo-code-form" method="GET" name="promo-code-form">
+            <div class="form-group">
+                <label for="couponCode">${Resource.msg('label.promo.code','cart',null)}</label>
+                <div class="row">
+                    <div class="col-7 col-md-12 pr-0 pr-md-3">
+                        <input type="text" class="form-control coupon-code-field" id="couponCode" name="couponCode" placeholder="${Resource.msg('placholder.text.promo.code.input','cart',null)}">
+                        <div class="form-text coupon-missing-error invalid-feedback" id="missingCouponCode" role="alert">${Resource.msg('error.missing.coupon.code', 'cart', null)}</div>
+                        <div class="form-text coupon-error-message invalid-feedback" id="invalidCouponCode" role="alert"></div>
+                    </div>
+
+                    <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+
+                    <div class="col-5 mt-md-3 promo-code-submit">
+                        <button type="submit" class="btn btn-primary btn-block promo-code-btn px-0">
+                            ${Resource.msg('button.submit.promo.code','cart',null)}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

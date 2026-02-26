@@ -1,0 +1,411 @@
+{
+    "name": "Hero Banner",
+    "description": "Main hero banner with optional text, ctas, and layout styles",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "bannerOptions",
+            "name": "Banner Options",
+            "description": "The layout options that the banner should use.",
+            "attribute_definitions": [
+                {
+                    "id": "bannerType",
+                    "name": "Banner Type",
+                    "type": "enum",
+                    "values": [
+                        "Text over Image or Solid Background",
+                        "Text in Card",
+                        "Half and Half"
+                    ],
+                    "default_value": "Text over Image or Solid Background",
+                    "description": "Defaults to 'Text over Image or Solid Background', see documentation for examples of all options.",
+                    "required": false
+                },
+                {
+                    "id": "bannerHeight",
+                    "name": "Banner Height",
+                    "type": "enum",
+                    "values": [
+                        "Short",
+                        "Medium",
+                        "Tall",
+                        "Screen Height"
+                    ],
+                    "default_value": "Medium",
+                    "description": "Controls the height of the banner. Defaults to Medium.",
+                    "required": false
+                },
+                {
+                    "id": "textPlacement",
+                    "name": "Text Placement",
+                    "type": "enum",
+                    "values": [
+                        "Top Left",
+                        "Top Center",
+                        "Top Right",
+                        "Middle Left",
+                        "Middle Center",
+                        "Middle Right",
+                        "Bottom Left",
+                        "Bottom Center",
+                        "Bottom Right",
+                        "Below Left",
+                        "Below Center",
+                        "Below Right"
+                    ],
+                    "default_value": "Middle Center",
+                    "description": "Controls the placement of the text over the component. Defaults to Middle Center. For the 'Half and Half' layout, use any left or right placement.",
+                    "required": false
+                },
+                {
+                    "id": "textWidth",
+                    "name": "Text Width",
+                    "type": "enum",
+                    "values": [
+                        "1/4",
+                        "1/3",
+                        "1/2",
+                        "2/3",
+                        "3/4",
+                        "100%"
+                    ],
+                    "default_value": "1/2",
+                    "description": "How wide the text container should be (tablet and desktop only). Default is 1/2 of the component width.",
+                    "required": false
+                },
+                {
+                    "id": "contentStack",
+                    "name": "Mobile Text Position",
+                    "type": "enum",
+                    "values": [
+                        "Text in front of image (default)",
+                        "Text below image on tablet and smaller",
+                        "Text below image on mobile"
+                    ],
+                    "default_value": "Text in front of image (default)",
+                    "description": "How should this content stack on smaller viewports. Defaults to Text in front of image.",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "background",
+            "name": "Background, Color, and Text Options",
+            "description": "Background, Color, and Text Options",
+            "attribute_definitions": [
+                {
+                    "id": "backgroundImage",
+                    "name": "Background Image",
+                    "type": "image",
+                    "description": "For faster load time, please use images under 500 KB.",
+                    "required": false
+                },
+                {
+                    "id": "backgroundImageAlt",
+                    "name": "Background Image Alt Text",
+                    "type": "string",
+                    "description": "Add alternative text for image, default is an empty string. See following to better understand what to write: https://html.spec.whatwg.org/multipage/images.html#alt",
+                    "required": false
+                },
+                {
+                    "id": "backgroundClass",
+                    "name": "Background Class",
+                    "type": "string",
+                    "description": "Adds a class to the outermost container of the hero. Use this to set a background color if there is no image selected, it's using Half & Half layout, or if it stacks vertically on mobile. e.g. 'background--brand-secondary' See the Style Guide for more color options.",
+                    "required": false
+                },
+                {
+                    "id": "backgroundLink",
+                    "name": "Background Link",
+                    "description": "Set this to make the entire hero a link. To use this to launch a video in a modal, enter the video's URL as an 'External' link type. YouTube, Vimeo and self-hosted MP4s are supported.",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "containerClass",
+                    "name": "Container Class",
+                    "type": "string",
+                    "description": "Add a class to the inner container of the component. Useful for overriding padding. e.g. 'p-0' See the Style Guide for more class options.",
+                    "required": false
+                },
+                {
+                    "id": "colorTheme",
+                    "name": "Color Theme",
+                    "type": "enum",
+                    "values": [
+                        "Light theme with black text",
+                        "Dark theme with white text"
+                    ],
+                    "default_value": "Light theme with black text",
+                    "description": "Controls the colors of the component. This will only add a background to the text block if the Text in Card layout is used. See documentation for examples. Defaults to Light theme with black text.",
+                    "required": false
+                },
+                {
+                    "id": "textblockBackground",
+                    "name": "Textblock Background",
+                    "type": "enum",
+                    "values": [
+                        "None",
+                        "Semitransparent",
+                        "Opaque"
+                    ],
+                    "default_value": "Semitransparent",
+                    "description": "Only applicable for Text in Card layout. Choose a background style for the textblock. Defaults to Semitransparent.",
+                    "required": false
+                },
+                {
+                    "id": "textblockClass",
+                    "name": "Textblock Class",
+                    "type": "string",
+                    "description": "Add a class to override the default theme colors, e.g. 'background--light-gray'. See the Style Guide for color options. Note: This does not support semitransparent backgrounds.",
+                    "required": false
+                },
+                {
+                    "id": "textAlignment",
+                    "name": "Text alignment",
+                    "description": "Defaults to center text alignment. Controls alignment of the text within the text area on the banner.",
+                    "type": "enum",
+                    "values": [
+                        "Left",
+                        "Center",
+                        "Right"
+                    ],
+                    "default_value": "Center",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "textContent",
+            "name": "Text Content",
+            "attribute_definitions": [
+                {
+                    "id": "title",
+                    "name": "Title",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "titleClass",
+                    "name": "Title Class",
+                    "type": "string",
+                    "description": "Add a class to override the default title styles, e.g. 'h4'. See the Style Guide for class options.",
+                    "required": false
+                },
+                {
+                    "id": "titleColor",
+                    "name": "Title Color",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "titleBackgroundColor",
+                    "name": "Title Background Color",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "subtitle",
+                    "name": "Subtitle",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "subtitleClass",
+                    "name": "Subtitle Class",
+                    "type": "string",
+                    "description": "Add a class to override the default subtitle styles, e.g. 'text--yellow'. See the Style Guide for class options.",
+                    "required": false
+                },
+                {
+                    "id": "subtitleColor",
+                    "name": "Subtitle Color",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "subtitleBackgroundColor",
+                    "name": "Subtitle Background Color",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "ctaButtons",
+            "name": "CTA Buttons",
+            "attribute_definitions": [
+                {
+                    "id": "buttonsClass",
+                    "name": "Buttons Class",
+                    "type": "string",
+                    "description": "Add a class to the buttons container, e.g. 'mt-4'. See the Style Guide for class options.",
+                    "required": false
+                },
+                {
+                    "id": "button1Text",
+                    "name": "Button 1 Text",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "button1Color",
+                    "name": "Button 1 Text Color",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "button1BackgroundColor",
+                    "name": "Button 1 Background Color",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "button1Action",
+                    "name": "Button 1 Action",
+                    "description": "To use this button to launch a video in a modal, enter the video's URL as an 'External' link type. YouTube, Vimeo and self-hosted MP4s are supported.",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "button1Style",
+                    "name": "Button 1 Style",
+                    "description": "Defaults to Primary button style",
+                    "type": "enum",
+                    "values": [
+                        "Primary",
+                        "Secondary",
+                        "Tertiary",
+                        "Primary Disabled"
+                    ],
+                    "default_value": "Primary",
+                    "required": false
+                },
+                {
+                    "id": "button1Class",
+                    "name": "Button 1 Custom Class",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "animationOptions",
+            "name": "Animation Options",
+            "description": "Animations are applied to each text and embedded element.",
+            "attribute_definitions": [
+                {
+                    "id": "textAnimation",
+                    "name": "Text Animation",
+                    "type": "enum",
+                    "values": [
+                        "None",
+                        "Fade in",
+                        "Zoom in",
+                        "Hinge drop",
+                        "Flip in top",
+                        "Flip in bottom",
+                        "Slide in from top",
+                        "Slide in from left",
+                        "Slide in from right",
+                        "Slide in from bottom"
+                    ],
+                    "default_value": "None",
+                    "description": "Select an option below to animate in the text elements when this Hero Banner is scrolled to on the page.",
+                    "required": false
+                },
+                {
+                    "id": "textAnimationDistance",
+                    "name": "Text Animation Duration",
+                    "description": "Choose a duration for the animation to travel. Default is Medium. Short will make the animation more subtle and Long will make it more extreme.",
+                    "type": "enum",
+                    "values": [
+                        "Short",
+                        "Medium",
+                        "Long"
+                    ],
+                    "default_value": "Medium",
+                    "required": false
+                },
+                {
+                    "id": "subtitleAnimationDelay",
+                    "name": "Subtitle Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "titleAnimationDelay",
+                    "name": "Title Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "embeddedAnimationDelay",
+                    "name": "Embedded Asset Animation Delay",
+                    "description": "This will only apply if an embedded asset is used. Enter a number (in milliseconds) for the animation delay. Default is 0.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "bodyAnimationDelay",
+                    "name": "Body Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "buttonsAnimationDelay",
+                    "name": "Buttons Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "textAnimationPlayOnce",
+                    "name": "Play Text Animation Once Only",
+                    "description": "If selected, the animation will not reset when the user scrolls back to the top of the page.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "disableMobileAnimation",
+                    "name": "Disable Mobile Animation",
+                    "description": "If selected, animation will only occur on desktop (lg breakpoint and up).",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id":"embeddedComponent",
+            "name":"Embedded Component",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" }
+            ]
+        }
+    ]
+}

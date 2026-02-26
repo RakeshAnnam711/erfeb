@@ -1,0 +1,99 @@
+.modal {
+    z-index: $z-index-modal;
+    .modal-content {
+        background-color: $modal-background-color;
+        border: $modal-border;
+        border-radius: $modal-border-radius;
+        box-shadow: $modal-box-shadow;
+    }
+    .modal-header {
+        padding: $modal-header-padding;
+        background-color: $modal-header-background-color;
+        color: $modal-header-text-color;
+        border-bottom-color: $modal-header-border-color;
+        border-top-left-radius: calc(#{$modal-border-radius} - 1px);
+        border-top-right-radius: calc(#{$modal-border-radius} - 1px);
+        .modal-title {
+            @include header($modal-header-title-size);
+        }
+        .close {
+            @include icon($icon-close, before, $modal-header-close-icon-size, $modal-header-text-color);
+            line-height: 75%;
+            margin: 0;
+            padding: 0;
+            text-shadow: none;
+            opacity: 1;
+            [aria-hidden=true] {
+                display: none;
+            }
+        }
+        a {
+            color: $modal-header-text-color;
+        }
+    }
+    .modal-body {
+        flex: 0 0 auto;
+        padding: $modal-body-padding;
+        color: $modal-body-text-color;
+        background-color: $modal-body-background-color;
+    }
+    .modal-footer {
+        padding: $modal-footer-padding;
+        color: $modal-footer-text-color;
+        background-color: $modal-footer-background-color;
+        border-top-color: $modal-footer-border-color;
+        border-bottom-left-radius: calc(#{$modal-border-radius} - 1px);
+        border-bottom-right-radius: calc(#{$modal-border-radius} - 1px);
+        .button-wrapper {
+            .btn + .btn {
+                margin-left: $spacer;
+            }
+        }
+        &>.btn + .btn {
+            margin-left: $spacer;
+        }
+    }
+    &.show {
+        &~.modal.show {
+            z-index: $z-index-modal + 2;
+        }
+    }
+}
+
+.modal-backdrop {
+    background-color: $modal-backdrop-background-color;
+    &.show {
+        opacity: 1;
+        z-index: $z-index-modal-backdrop;
+        &~.modal-backdrop.show {
+            z-index: $z-index-modal + 1;
+        }
+        &+ .modal.show {
+            z-index: $z-index-modal + 2;
+        }
+    }
+}
+
+// Modal sizes
+.modal {
+    &-dialog {
+        @include modal-size;
+    }
+    &-sm {
+        @include modal-size(sm);
+    }
+    &-lg {
+        @include modal-size(lg);
+    }
+    &-xl {
+        @include modal-size(xl);
+    }
+}
+
+.modal-scrollbody {
+    overflow: hidden;
+    .modal-body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

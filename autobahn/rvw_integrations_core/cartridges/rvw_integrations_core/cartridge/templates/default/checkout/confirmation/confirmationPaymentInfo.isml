@@ -1,0 +1,52 @@
+<isloop items="${pdict.order.billing.payment.selectedPaymentInstruments}" var="payment">
+    <isif condition="${payment.paymentMethod === 'CREDIT_CARD'}">
+        <div>
+            <span>${Resource.msg('msg.payment.type.credit', 'confirmation', null)} ${payment.type}</span>
+        </div>
+        <div>
+            ${payment.maskedCreditCardNumber}
+        </div>
+        <div>
+            <span>${Resource.msg('msg.card.type.ending', 'confirmation', null)} ${payment.expirationMonth}/${payment.expirationYear}</span>
+        </div>
+    </isif>
+    <isif condition="${payment.paymentMethod === 'AdyenComponent'}">
+        <isinclude template="checkout/confirmation/adyenConfirmationDetails"/>
+    </isif>
+    <isif condition="${payment.paymentMethod === 'PayPal'}">
+        <div>
+            ${payment.paymentMethod}
+        </div>
+        <div>
+            ${payment.formattedAmount}
+        </div>
+    </isif>
+    <isif condition="${payment.paymentMethod === dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE}">
+        <div>
+            <span>${Resource.msg('giftcertificate.purchase.giftcertificate', 'checkout', null)}</span>
+        </div>
+        <div>
+            ${payment.maskedGiftCertificateCode}
+        </div>
+        <div>
+            <span>${Resource.msg('giftcertificate.purchase.amount', 'checkout', null)} ${payment.formattedAmount}</span>
+        </div>
+        <div>
+            <span>${Resource.msg('giftcertificate.checkout.remainingbalance', 'checkout', null) + ' ' + payment.formattedRemainingBalance}</span>
+        </div>
+    </isif>
+    <isif condition="${payment.paymentMethod === 'DW_APPLE_PAY'}">
+        <div>
+            <span>${Resource.msg('msg.paid.using.apple.pay', 'checkout', null)}</span>
+        </div>
+        <div>
+            <span>${payment.formattedAmount}</span>
+        </div>
+    </isif>
+    <isif condition="${payment.paymentMethod === 'Salesforce Payments'}">
+        <div>
+            ${payment.formattedAmount}
+        </div>
+    </isif>
+    <br />
+</isloop>

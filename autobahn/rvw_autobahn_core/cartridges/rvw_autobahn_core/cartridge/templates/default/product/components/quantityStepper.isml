@@ -1,0 +1,10 @@
+<div
+    class="quantity-stepper form-control ${pdict.size === 'small' ? 'form-control-sm' : ''}"
+    data-min="${pdict.min}"
+    data-max="${pdict.max}"
+    cypress-target="${pdict.cypresstarget}"
+>
+    <button class="icon-minus" data-action="decrease" aria-label="${Resource.msg('label.increase.quantity', 'common', null)}"></button>
+    <input name="qty-stepper" type="text" value="${pdict.qty}" data-qty="${pdict.qty}" ${pdict.disabled ? "disabled" : ""} aria-label="${Resource.msg('label.quantity', 'common', null)}"/>
+    <button class="icon-plus" data-action="increase" aria-label="${Resource.msg('label.decrease.quantity', 'common', null)}"></button>
+</div>

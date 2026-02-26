@@ -1,0 +1,42 @@
+<isloop items="${pdict.categories}" var="category">
+    <iscomment>only render out secondary menu if a cat has a secondary nav and its currently active</iscomment>
+    <isif condition="${category.secondaryNav && (category.active || category.parentOfActive)}">
+        <isif condition="${category.subCategories || category.contentSubLinksOnly}">
+            <div class="menu-group" role="navigation">
+                <ul class="nav navbar-nav secondary-navbar menu-level-${menuLevel.toFixed()}" role="menu">
+                    <isloop items="${category.subCategories}" var="category" status="secondNavCatLoopStatus">
+                        <isscript>
+                            var menuHighlightClass = category.highlight ? 'highlight' : '';
+                            var menuParentClass = category.parentOfActive ? 'contains-inview' : '';
+                            var menuActiveClass = category.active ? 'is-inview' : '';
+                            var secondaryNavDropdownClass = category.secondaryNav ? 'has-secondary-nav' : '';
+                        </isscript>
+                        <isif condition="${category.subCategories || category.contentSubLinksOnly}">
+                            <isscript>
+                                var megamenuClass = category.megamenu ? 'megamenu' : '';
+                                var secondLevelCategory = !empty(category.fullCategory) ? category.fullCategory : null; // Referenced in megamenu.isml
+                            </isscript>
+                            <li class="nav-item custom-dropdown ${megamenuClass} ${menuHighlightClass} ${menuParentClass} ${menuActiveClass}" role="menuitem">
+                                <a href="<isprint value="${category.url}" encoding="htmldoublequote"/>" id="${category.id}" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">${category.name}</a>
+                                <isset name="menuItem" value="${category}" scope="page" />
+                                <iscomment> menuLevel is incremented up as we include another level of navigation</iscomment>
+                                <isset name="menuLevel" value="${menuLevel + 1}" scope="page" />
+                                <isif condition="${category.megamenu}">
+                                    <isinclude template="components/header/megamenu" />
+                                <iselse/>
+                                    <isinclude template="components/header/menuItem" />
+                                </isif>
+                                <iscomment> menuLevel is incremented down to maintain a proper value for the next instance of the isloop </iscomment>
+                                <isset name="menuLevel" value="${menuLevel - 1}" scope="page" />
+                            </li>
+                        <iselse/>
+                            <li class="nav-item ${menuHighlightClass} ${menuParentClass} ${menuActiveClass}" role="menuitem">
+                                <a href="<isprint value="${category.url}" encoding="htmldoublequote"/>" id="${category.id}" class="nav-link" role="link" tabindex="0">${category.name}</a>
+                            </li>
+                        </isif>
+                    </isloop>
+                </ul>
+            </div>
+        </isif>
+    </isif>
+</isloop>

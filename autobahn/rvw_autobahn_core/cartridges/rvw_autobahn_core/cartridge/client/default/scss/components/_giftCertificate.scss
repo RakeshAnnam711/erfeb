@@ -1,0 +1,13 @@
+.check-balance .balancemsg {
+    font-weight: $giftcertificate-balancemsg-font-weight;
+    font-size: $giftcertificate-balancemsg-font-size;
+    margin-top: $spacer;
+    justify-content: $tooltip-text-align
+}
+.remove-giftcertificate-pi {
+    @include delete-card-button(false);
+    padding: 0px 5px;
+}
+.max-quantity-msg {
+    padding: 16px 0px;
+}

@@ -1,0 +1,105 @@
+// wishlist landing page
+.wishlist-landing {
+    .wishlist-header {
+        + .list-container {
+             margin-top: calc(#{$spacer} * 2); // extra space needed when notes are not present
+        }
+    }
+    .wishlist-landing-header-container {
+        @include media-breakpoint-up(md) {
+            display: flex;
+            align-items: center;
+        }
+        .wishlist-landing-header-title {
+            margin: 0;
+            padding-bottom: calc($spacer / 2);
+            text-align: center;
+            @include header($wishlist-landing-title-header);
+            @include media-breakpoint-up(md) {
+                padding-right: calc($spacer / 2);
+                padding-bottom: 0;
+                text-align: left;
+                flex-shrink: 0;
+            }
+        }
+        .wishlist-landing-header-row {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: center;
+            width: 100%;
+            margin-top: $spacer-sm;
+            @include media-breakpoint-up(sm) {
+                flex-direction: row;
+            }
+            @include media-breakpoint-up(md) {
+                margin-top: 0;
+                justify-content: flex-end;
+            }
+        }
+        .wishlist-landing-create-list-btn {
+            @include button($wishlist-landing-create-list-button, null, null, null, $wishlist-landing-create-list-button-size);
+        }
+        .wishlist-search-area {
+            margin-top: $spacer-sm;
+            @include media-breakpoint-up(sm) {
+                margin-top: 0;
+                margin-left: $wishlist-landing-header-button-spacing;
+            }
+            .wishlist-search-list-btn {
+                @include button($wishlist-landing-search-list-button, null, null, null, $wishlist-landing-search-list-button-size);
+                width: 100%;
+            }
+        }
+    }
+    .wishlist-landing-notes {
+        padding-top: $wishlist-landing-notes-padding;
+        padding-bottom: $wishlist-landing-notes-padding;
+        text-align: $wishlist-landing-notes-toggle-button-align;
+        .wishlist-landing-notes-toggle {
+            @include button($wishlist-landing-notes-toggle-button);
+        }
+    }
+    .lists {
+        .wishlist-grid-item {
+            align-self: stretch;
+            margin-bottom: calc(#{$spacer} * 2);
+            .wishlist-card-list {
+                height: 100%;
+                margin-bottom: 0;
+            }
+        }
+    }
+    .wishlist-landing-message {
+        margin: $wishlist-landing-message-margin;
+        justify-content: center;
+        p {
+            margin-bottom: 0;
+        }
+    }
+    .wishlist-card-list {
+        .notes {
+            transition: padding $transition-speed ease-out;
+            &:not(.show) {
+                @include visually-hidden;
+            }
+            &.show {
+                padding-bottom: $card-body-padding-bottom;
+            }
+            .wishlist-card-notes {
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+.wishlist-search-popover {
+    &.card {
+        border: none;
+        margin: -$popover-body-padding;
+    }
+    .wishlist-search-btn {
+        @include button($wishlist-search-results-button);
+        width: 100%;
+    }
+}

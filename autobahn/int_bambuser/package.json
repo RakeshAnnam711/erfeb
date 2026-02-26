@@ -1,0 +1,57 @@
+{
+  "name": "sfra_bambuser",
+  "version": "24.1.0",
+  "author": "Bambuser <https://bambuser.com/contact>",
+  "description": "int_bambuser cartridge",
+  "contributors": [
+    {
+      "name": "Bambuser",
+      "email": "support@bambuser.com"
+    },
+    {
+      "name": "OSF Digital",
+      "email": "osfproducts.support@osf.digital"
+    }
+  ],
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "npm run lint && npm run compile:scss && npm run compile:js",
+    "build:dev": "npm run lint && npm run compile:scss && npm run compile:js:dev",
+    "compile:js": "webpack",
+    "compile:js:dev": "webpack --mode=\"development\"",
+    "compile:scss": "sass cartridges/int_bambuser/cartridge/client/default/scss/bambuser/overview.scss cartridges/int_bambuser/cartridge/static/default/css/bambuser/overview.css",
+    "lint": "eslint './cartridges/int_bambuser/**/*.js' && eslint './test/**/*.js'",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:integration": "mocha 'test/integration/**/*.js'",
+    "test:unit": "mocha 'test/unit/**/*.js'"
+  },
+  "devDependencies": {
+    "@tridnguyen/config": "^2.3.1",
+    "axios": "^1.6.5",
+    "axios-cookiejar-support": "^4.0.7",
+    "chai": "^4.4.0",
+    "chai-subset": "^1.6.0",
+    "chalk": "^4.1.2",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-only-var": "^0.1.2",
+    "mocha": "^10.2.0",
+    "sass": "^1.69.7",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "packageName": "int_bambuser",
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "mocha": {
+    "recursive": true,
+    "spec": "./test/unit"
+  }
+}

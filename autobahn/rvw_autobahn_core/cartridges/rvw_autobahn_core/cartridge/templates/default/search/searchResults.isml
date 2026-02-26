@@ -1,0 +1,15 @@
+<isdecorate template="common/layout/page">
+    <isinclude template="search/components/tilefocus" />
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+        assets.addJs('/js/search.js');
+    </isscript>
+    <isinclude template="integrations/search/searchResultsIntegrationsAssetIncludes"/>
+
+    <isif condition=${false}>
+        <isslot id="category-search-banner" context="category" description="Banner for category search PLP" context-object="${pdict.fullCategory}" />
+    </isif>
+
+    <isinclude template="search/searchResultsNoDecorator" />
+</isdecorate>

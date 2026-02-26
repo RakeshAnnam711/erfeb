@@ -1,0 +1,156 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets');
+    assets.addJs('/js/productDetail.js');
+    assets.addCss('/css/product/detail.css');
+</isscript>
+
+<iscomment>
+    It is necessary to set both "product" and "productCopy" to pdict.product here as it changes per product downstream.
+</iscomment>
+
+<isset name="product" value="${pdict.product}" scope="page" />
+<isset name="productCopy" value="${pdict.product}" scope="page" />
+<isset name="isBundle" value="${false}" scope="page" />
+<isset name="isProductSet" value="${true}" scope="page" />
+<isset name="setItemCount" value="${product.numberOfProductsInSet + ' ' + Resource.msg('label.set.item', 'product', null) + (product.individualProducts.length > 1 ? Resource.msg('label.pluralize', 'product', null) : '') + ':'}" scope="page" />
+<isset name="isQuickView" value="${false}" scope="page" />
+<isset name="pdpImageColumnWidth" value="${product.pdpImageColumnWidth ? product.pdpImageColumnWidth.split('/')[0] : pdict.abConfigs.pdpImageColumnWidth.split('/')[0]}" scope="page"/>
+<isset name="setImageColumnClass" value="${'col-12 col-md-' + pdpImageColumnWidth}" scope="page" />
+<isset name="productDataColumnClass" value="${'col-12 col-md-' + (12 - pdpImageColumnWidth)}" scope="page"/>
+<iscomment>Override column settings for Page Designer component if applicable</iscomment>
+<isif condition="${'pdpImageColumnWidth' in pdict}">
+    <isset name="imageColumnClass" value="${'col-12 col-md-' + parseInt(pdict.pdpImageColumnWidth.split('/')[0])}" scope="page"/>
+    <isset name="productDataColumnClass" value="${'col-12 col-md-' + (12 - parseInt(pdict.pdpImageColumnWidth.split('/')[0]))}" scope="page"/>
+</isif>
+
+<isobject object="${product.raw}" view="detail" />
+
+    <header class="container page-header">
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+    </header>
+
+    <div class="container product-detail product-set-detail" data-pid="${product.id}">
+        <div class="row">
+            <div class="col-12 d-md-none">
+                <h1 class="product-name">${product.productName}</h1>
+            </div>
+             <!-- Product Images Carousel -->
+            <isset name="hasImages" value="${product.images['large'].length > 0 && !product.images['large'][0].url.includes('noimage') ? true : false}" scope="page"/>
+            <isif condition="${hasImages}">
+                <isinclude template="product/components/imageCarousel" />
+            <iselse/>
+                <isinclude template="product/components/imageCarouselSetGenerate" />
+            </isif>
+
+            <isset name="product" value="${productCopy}" scope="page" />
+
+            <div class="product-data ${productDataColumnClass}">
+
+                <div class="product-set-title">
+                    <!-- Product Name -->
+                    <div class="row">
+                        <div class="col-sm-12 hidden-sm-down">
+                            <h1 class="product-name">${product.productName}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prices -->
+                <div class="mt-2 mt-md-1">
+                    <isinclude template="product/components/pricing/setPrice" />
+                </div>
+
+                <iscomment>Sticky Add to Cart</iscomment>
+                <isif condition="${product.enableStickyAddToCart}">
+                    <isinclude template="product/components/addToCartStickyBar" />
+                </isif>
+
+                <div class="row">
+                    <div class="col">
+                        <isinclude template="product/components/pidRating" />
+                    </div>
+                </div>
+
+                <isif condition="${!empty(product.headline)}">
+                    <div class="row mt-3">
+                        <div class="col product-headline">
+                            ${product.headline}
+                        </div>
+                    </div>
+                </isif>
+                <hr/>
+
+                <isif condition="${!empty(product.headlineDescription)}">
+                    <div class="row my-3">
+                        <div class="col product-headlinedescription">
+                            <isprint value="${product.headlineDescription}" encoding="off" />
+                        </div>
+                    </div>
+                </isif>
+
+                <!-- Applicable Promotions -->
+                <div class="promotions">
+                    <isinclude template="product/components/promotions" />
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Set Item List -->
+        <isinclude template="product/components/setItemList" />
+        <isset name="product" value="${productCopy}" scope="page" />
+
+        <hr/>
+
+        <div class="row mb-4">
+            <div class="${setImageColumnClass ? setImageColumnClass : imageColumnClass}"></div>
+            <div class="product-data ${productDataColumnClass}">
+
+                <!-- Add To Cart and Quantity -->
+                <div class="row qty-cart-container no-gutters" id="qty-cart-container">
+                    <!-- Quantity Drop Down Menu -->
+                    <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 align-items-start ${product.hideQty ? 'd-none' : ''}">
+                        <isinclude template="product/components/quantity" />
+                    </div>
+
+                    <div class="prices-add-to-cart-actions col-12 ${product.hideQty ? 'col-md-12' : 'col-sm-6 col-md-7 col-lg-9'}">
+                        <!-- Add To Cart -->
+                        <isinclude template="product/components/addToCartGlobal" />
+                    </div>
+                </div>
+
+                <!-- Social Sharing Icons -->
+                <div class="row">
+                    <isinclude template="product/components/socialIcons" />
+                </div>
+
+                <isinclude template="integrations/product/setDetailsIntegrationsDetailEnd"/>
+
+            </div>
+        </div>
+
+        <!-- Collapsible Content -->
+        <div class="col-12">
+            <isinclude template="product/components/collapsibleContent" />
+        </div>
+
+        <!-- Tabs -->
+        <div class="col-12">
+            <isinclude template="product/components/tabs" />
+        </div>
+
+    </div>
+
+    <isif condition="${!empty(product.pdpAssetIds)}">
+        <div class="pdp-assets container">
+            <isloop items="${product.pdpAssetIds}" var="assetId">
+                <div class="pdp-asset">
+                    <iscontentasset aid="${assetId}" personalized="true" />
+                </div>
+            </isloop>
+        </div>
+    </isif>
+
+</isobject>
