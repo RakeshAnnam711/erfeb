@@ -1,0 +1,33 @@
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable') && pdict.action === 'Search-UpdateGrid'}">
+    <isscript>
+        // Filter out promo tiles before sending GTM data to dataLayer
+        function removePromoTiles(items) {
+            let promoTileIndexes = [];
+            // get index for each promo tile in the impression data
+            items.forEach(function(item, index) {
+                var isEmpty = Object.keys(item).length === 0;
+                if (isEmpty) {
+                    promoTileIndexes.push(index);
+                }
+            });
+            // remove promo tiles from impression data
+            promoTileIndexes.reverse().forEach(function(promoTileIndex, index) {
+                items.splice(promoTileIndex, 1);
+            });
+        }
+
+        var gtmHelpers = require('*/cartridge/scripts/gtm/gtmHelpers');
+        var searchImpressionData = gtmHelpers.getSearchImpressionData(pdict); // formatted as getGA4SearchImpressionData
+
+        if (searchImpressionData && searchImpressionData.ecommerce && searchImpressionData.ecommerce.items) {
+            removePromoTiles(searchImpressionData.ecommerce.items);
+        }
+    </isscript>
+    <script>console.log(<isprint value="${JSON.stringify(searchImpressionData)}" encoding="off"/>)</script>
+    <isif condition="${!empty(searchImpressionData)}">
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            dataLayer.push(<isprint value="${JSON.stringify(searchImpressionData)}" encoding="off"/>);
+        </script>
+    </isif>
+</isif>

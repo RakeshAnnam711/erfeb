@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances/>
+        <development>
+            <preference preference-id="TaxJarEnable">true</preference>
+            <preference preference-id="TaxJarAPIToken">38655d21ad0f29c5ba1f63774da85645</preference>
+            <preference preference-id="TaxJarShipFromCountryCode">US</preference>
+            <preference preference-id="TaxJarShipFromState">NJ</preference>
+            <preference preference-id="TaxJarShipFromZip">07310</preference>
+            <preference preference-id="TaxJarShipFromCity">Jersey City</preference>
+            <preference preference-id="TaxJarShipFromAddress">812 Jersey Ave, 8th Floor, Jersey City, NJ 07310</preference>
+        </development>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+

@@ -1,0 +1,11 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<div class="${pdict.containerClass}">
+    <isif condition="${!empty(pdict.html)}">
+        <isprint value="${pdict.html}" encoding="off" />
+    </isif>
+
+    <isif condition="${!empty(pdict.assetId)}">
+        <iscontentasset aid="${pdict.assetId}"/>
+    </isif>
+</div>

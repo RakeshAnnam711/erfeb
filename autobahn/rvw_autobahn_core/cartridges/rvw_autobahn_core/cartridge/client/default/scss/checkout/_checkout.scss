@@ -1,0 +1,570 @@
+
+.customer-information-block {
+    .btn-link {
+        @include text-link;
+        padding: 0;
+        vertical-align: baseline;
+        margin-top: 10px;
+        border: none;
+    }
+    .submit-customer {
+        margin-top: 10px;
+    }
+    .btn-block+.btn-block {
+        margin-top: 10px;
+    }
+    .password-form {
+        margin-bottom: 20px;
+    }
+}
+
+.data-checkout-stage {
+    .row > .col-12 .text-center {
+        margin-bottom: 10px;
+    }
+    .row [class*='col-'] .card {
+        margin-bottom: 0;
+        &~.card {
+            .card-header {
+                border-top: 0;
+            }
+            &.customer-section,
+            &.customer-summary {
+                border-top: 1px solid $card-header-border-color;
+            }
+            &.ghost.payment {
+                border: solid $card-header-border-color;
+                border-width: 0 0 1px 0;
+            }
+        }
+
+    }
+    .card-header {
+        .edit-button {
+            @include text-link;
+            color: $card-header-color;
+            &:hover {
+                color: $card-header-color;
+            }
+        }
+    }
+    .shipping-summary,
+    .payment-summary {
+        .leading-lines {
+            margin-bottom: 0;
+        }
+        .summary-details {
+            padding-bottom: $checkout-spacer;
+            .address-summary,
+            .shipping-phone,
+            .shipping-method,
+            .gift-message-summary,
+            .order-summary-email,
+            .order-summary-phone,
+            .payment-details {
+                color: $card-form-value-color;
+                margin-bottom: 1px;
+            }
+        }
+    }
+    .payment-summary {
+        .addressInformation.hideAddressInformationForPayment {
+            display: none;
+        }
+    }
+    .view-address-block,
+    .shipment-block,
+    .product-summary-block {
+        h3:not(:first-child),
+        .multi-shipping {
+            margin-top: $spacer;
+        }
+        address,
+        .store-details,
+        .shipping-header-text + p {
+            margin-left: $spacer;
+            address {
+                margin-left: 0;
+            }
+        }
+    }
+    .shipping-method-block {
+        h3 {
+            margin-bottom: $spacer;
+        }
+        .shipping-method-list {
+            .start-lines {
+                margin-bottom: 12px;
+                &:before {
+                    left: $spacer-xl+$radiocheck-button-size+$radiocheck-button-margin;
+                }
+            }
+            .end-lines {
+                margin-bottom: 12px;
+            }
+        }
+        span.display-name {
+            padding-right: 0;
+        }
+        .text-muted.arrival-time {
+            padding-top: 3px;
+            margin-top: -3px;
+            top: -1px;
+            padding-left: 3px;
+            left: -3px;
+            padding-right: 0;
+        }
+        .shipping-cost {
+            float: right;
+        }
+    }
+    .gift-message-block {
+        margin-bottom: $spacer;
+        .gift-message {
+            margin-top: $spacer;
+        }
+    }
+    .gift-message-summary {
+        margin-bottom: $spacer;
+    }
+    .shipment-selector-block,
+    .address-selector-block {
+        .btn-show-details,
+        .btn-add-new {
+            @include text-link;
+            margin-top: $spacer-xl;
+            padding: 0;
+            border: none;
+        }
+    }
+    .contact-info-block {
+        .info-icon {
+            font-size: $form-label-font-size;
+        }
+    }
+    .giftcertificate-information {
+        margin-top: $spacer;
+        .applybalancebutton {
+            margin-top: auto;
+            margin-bottom: $form-help-text-margin-top;
+        }
+    }
+    .payment-information {
+        .payment-options {
+            .nav-item {
+                display: flex;
+                &:only-child {
+                    display: none;
+                }
+                &:not(:only-child) {
+                    margin-top: calc(#{$form-group-margin-top} - #{$form-help-text-margin-top});
+                }
+                > .nav-link {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .form-control.shippingZipCode~span,
+    .form-control.shippingPhoneNumber~span,
+    .form-control.billingZipCode~span {
+        font-size: $form-help-text-font-size;
+        line-height: $form-help-text-line-height;
+        letter-spacing: $form-help-text-letter-spacing;
+        margin-top: 4px;
+        display: block;
+        &:not(.invalid-feedback) {
+            color: $form-help-text-color;
+        }
+    }
+    .credit-card-selection-new {
+        .info-icon {
+            font-size: $form-label-font-size;
+        }
+        .paypal-content {
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .saved-payment-information {
+            margin-top: calc(#{$spacer-xl} / 2);
+            @include media-breakpoint-up(sm) {
+                margin-top: 0;
+            }
+        }
+        .card-image {
+            max-width: 100%;
+        }
+        .saved-payment-instrument {
+            padding-top: calc(#{$spacer-xl} / 2);
+            padding-bottom: calc(#{$spacer-xl} / 2);
+            align-items: center;
+        }
+        .add-payment {
+            margin-top: calc(#{$spacer-xl} / 2);
+        }
+        .cancel-new-payment {
+            margin-top: $spacer-xl;
+        }
+        .selected-payment {
+            background-color: $checkout-selected-payment-background;
+            border: $checkout-selected-payment-border;
+            color: $checkout-selected-payment-color;
+        }
+        .save-credit-card {
+            margin-top: 5px;
+        }
+    }
+    .credit-card-form {
+        select:invalid {
+            color: $input-placeholder-color;
+        }
+    }
+
+    // mobile footer
+    .next-step-button {
+        margin-top: $spacer-xl;
+        @include media-breakpoint-down(sm) {
+            position: fixed;
+            bottom: 0;
+            padding-right: 0;
+            padding-left: 0;
+            background-color: $checkout-mobile-footer-background;
+            box-shadow: $checkout-mobile-footer-box-shadow;
+            z-index: $z-index-sticky-footer;
+            .btn {
+                margin-top: $spacer-xl;
+                margin-bottom: $spacer-xl;
+            }
+        }
+        .card {
+            border: 0;
+        }
+    }
+
+    /*
+    * Show/Hide behavior for various checkout states
+    */
+    // Initial states ------------------------
+    [data-customer-type=guest] .single-shipping .shipment-selector-block,
+    option[value=new],
+    .single-shipping .shipping-form:not(.in-store-pickup) .multi-ship-action-buttons,
+    .single-shipping .view-address-block,
+    .multi-ship .single-shipping .shipping-content,
+    .multi-ship .shipping-summary .single-shipping,
+    .multi-ship .confirm-details .single-shipping,
+    .multi-shipping,
+    .error-message,
+    .checkout-hidden {
+        display: none;
+    }
+    &.multi-ship .multi-shipping,
+    span.ship-to-name,
+    span.ship-to-address1,
+    span.ship-to-address2,
+    span.ship-to-phone,
+    span.ship-to-city-st-zip {
+        display: block;
+    }
+    &[data-checkout-stage] {
+        .card.payment-summary,
+        .shipping-summary,
+        button.place-order,
+        button.submit-payment,
+        button.submit-shipping {
+            display: none;
+        }
+        // Cybersource customizations
+        .card.secure-acceptance-iframe,
+        button.sa_redirect,
+        button.alipay, button.sof, button.eps, button.idl, button.gpy, button.mch, button.klarna, button.credit_card, button.dw_google_pay,
+        button.sa_iframe,
+        button.sa_silentpost,
+        button.sa_flex {
+            display: none;
+        }
+
+        //Skip Shipping
+        &.hide-shipping {
+            .shipping-summary,
+            .shipping-line-items,
+            .shipping-card-title,
+            .shipping-items,
+            .shipping-section {
+                display: none;
+            }
+        }
+    }
+
+    // Customer ------------------------------
+    &[data-checkout-stage=customer] {
+        .shipping-address-block {
+            > .row .form-group {
+                margin-top: calc(#{$form-group-margin-top} - #{$form-help-text-margin-top});
+            }
+            &:not(.d-none) + .shipping-method-block {
+                margin-top: $checkout-spacer;
+            }
+        }
+        .card.ghost.customer,
+        .card.customer-summary,
+        .card.payment-form,
+        .card.ghost.shipping {
+            display: none;
+        }
+        button.submit-customer,
+        button.submit-shipping {
+            display: block;
+        }
+    }
+
+    // Shipping ------------------------------
+    &[data-checkout-stage=shipping] {
+        .card.customer-section,
+        button.submit-customer,
+        .card.ghost.customer,
+        .card.payment-form,
+        .card.ghost,
+        [data-address-mode=customer] .shipping-address-block,
+        [data-address-mode=shipment] .shipping-address-form,
+        [data-address-mode=edit] .shipping-address-block,
+        [data-address-mode=new] .btn-show-details,
+        [data-address-mode=new] .btn-add-new {
+            display: none;
+        }
+        button.submit-shipping {
+            display: block;
+        }
+        .shipping-address-block {
+            > .row .form-group {
+                margin-top: calc(#{$form-group-margin-top} - #{$form-help-text-margin-top});
+            }
+            &:not(.d-none) + .shipping-method-block {
+                margin-top: $checkout-spacer;
+            }
+        }
+        .multi-shipping .card {
+            .card-header {
+                border-top: 0;
+            }
+            .card-title {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    // Payment -------------------------------
+    &[data-checkout-stage=payment] {
+        button.submit-customer,
+        .customer-section,
+        .shipping-section,
+        .card.ghost,
+        [data-address-mode=customer] .billing-address,
+        [data-address-mode=shipment] .billing-address,
+        [data-address-mode=edit] .billing-address,
+        [data-address-mode=new] .btn-show-details,
+        [data-address-mode=new] .btn-add-new,
+        [data-address-mode=details] .btn-show-details,
+        [data-address-mode=details] .btn-add-new,
+        button#hideSubmitPayment,
+        .card.secure-acceptance-iframe,
+        button.sa_redirect,
+        button.sa_iframe,
+        button.alipay, button.sof, button.eps, button.idl, button.gpy, button.mch, button.klarna, button.credit_card, button.dw_google_pay,
+        button.sa_silentpost,
+        button.sa_flex {
+            display: none;
+        }
+        .card.payment-form,
+        .shipping-summary,
+        button.submit-payment,
+        button#showSubmitPayment {
+            display: block;
+        }
+        .contact-info-block,
+        .billing-address,
+        .billingAddressFields,
+        .credit-card-form {
+            > .row .form-group {
+                margin-top: calc(#{$form-group-margin-top} - #{$form-help-text-margin-top});
+            }
+        }
+    }
+
+    // Place Order -----------------------------
+    &[data-checkout-stage=placeOrder] {
+        button.submit-customer,
+        .customer-section,
+        .shipping-section,
+        .card.payment-form,
+        .card.ghost,
+        button.sasilentpost,
+        .card.secure-acceptance-iframe,
+        &.hide-shipping .shipping-summary {
+            display: none;
+        }
+        .card.payment-summary,
+        .shipping-summary,
+        button.place-order,
+        .card.secure-acceptance-iframe,
+        button.sa_redirect,
+        button.sa_iframe,
+        button.sa_silentpost,
+        button.alipay, button.sof, button.eps, button.idl, button.gpy, button.mch, button.klarna, button.credit_card, button.dw_google_pay,
+        button.sa_flex {
+            display: block;
+        }
+    }
+
+    // Submitted -----------------------------
+    &[data-checkout-stage=submitted] {
+        .shipping-form,
+        .card.payment-form,
+        button.submit-customer,
+        .card.ghost,
+        .summary-section-label.shipping-addr-label,
+        button.place-order {
+            display: none;
+        }
+        .card.payment-summary,
+        .shipping-summary {
+            display: block;
+        }
+    }
+}
+
+/*
+* Shared styles for account order detail and checkout confirmation pages
+*/
+.data-checkout-stage,
+.receipt,
+.account-page {
+
+    // totals
+    .order-total-summary,
+    .order-product-summary {
+        .grand-total,
+        .grand-total .order-receipt-label,
+        .grand-total-sum {
+            font-family: $checkout-totals-font-family;
+            font-size: $checkout-totals-font-size !important;
+            font-weight: $checkout-totals-font-weight;
+            text-transform: $checkout-totals-text-transform;
+        }
+    }
+    .summary-section-label,
+    .shipping-section h3,
+    .product-summary-block .shipment-block h3,
+    .product-summary-block .multi-shipping h3 {
+        @include label-styles;
+        display: block;
+        color: $card-header-color;
+    }
+    .order-total-summary {
+        .grand-total {
+            margin-bottom: $spacer-sm;
+        }
+    }
+    // Cart Items
+    .order-product-summary {
+        .product-summary-block {
+            padding-top: $card-no-header-body-padding-top;
+        }
+        .card-header {
+            border-bottom: 1px solid $card-header-border-color;
+            padding: $spacer-xl $card-header-padding-right $spacer-xl $card-header-padding-left;
+        }
+        .leading-lines {
+            margin-bottom: 0;
+        }
+        .product-line-item {
+            .line-item-name,
+            .line-item-pricing-info {
+                text-decoration: none;
+            }
+            .item-attributes {
+                padding: 0;
+                & .line-item-attributes,
+                & .item-options {
+                    color: $card-form-value-color;
+                    margin-top: 1px;
+                    text-overflow: $cart-product-name-text-overflow;
+                    white-space: $cart-product-name-white-space;
+                    overflow: hidden;
+                    width: 100%;
+                }
+            }
+            .item-price-qty {
+                border-top: none;
+                padding-top: $spacer-xl;
+                > .col {
+                    padding: 0;
+                }
+            }
+            .line-item-total-text {
+                color: $card-form-value-color;
+            }
+            .line-item-total-price-amount {
+                color: $black;
+            }
+            &~.store-details {
+                margin-left: $spacer;
+                margin-bottom: $spacer;
+            }
+            &~address {
+                margin-left: $spacer;
+                span {
+                    display: block;
+                }
+            }
+        }
+        .gift-summary {
+            margin-top: $spacer;
+        }
+    }
+
+    // confirmation page
+    .confirm-details {
+        .summary-section-label {
+            @include label-styles;
+            display: block;
+            color: $card-header-color;
+            &:not(.order-number-label) {
+                margin-top: $spacer-xl;
+            }
+        }
+        .shipping-method-arrival-time {
+            @include paragraph-font-size(small);
+            padding-top: 3px;
+            margin-top: -3px;
+            top: -1px;
+            padding-left: 3px;
+            left: -3px;
+        }
+        .summary-details,
+        .shipping-method,
+        .pricing {
+            color: $card-form-value-color;
+        }
+        .card-body > .summary-details:last-child {
+            padding-bottom: $checkout-spacer;
+        }
+    }
+}
+.receipt,
+.account-page {
+    .confirm-details {
+        margin-bottom: 0;
+    }
+}
+.receipt {
+    .checkout-order-total-summary .order-total-summary {
+        border-top: none;
+    }
+}
+
+// hides google places form dropdown styles that stick around
+.pac-container:empty {
+    box-shadow: none;
+    border-top: 0;
+}

@@ -1,0 +1,13 @@
+<iscomment>
+    This is a template that gets overwritten in rvw_integrations_core
+    The overriding template in rvw_integrations_core has integrations specific to this area
+
+    It gets called by rvw_autobahn_core:templates/default/product/components/rating.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_integrations_core
+</iscomment>
+<isif condition="${pdict.display && pdict.display.ratings}">
+    <div class="ratings">
+        <isinclude template="product/components/productRating" />
+    </div>
+</isif>

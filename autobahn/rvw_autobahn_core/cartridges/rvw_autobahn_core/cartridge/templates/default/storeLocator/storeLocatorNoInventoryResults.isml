@@ -1,0 +1,18 @@
+<isif condition="${pdict.stores.noInventoryStores.length > 0}">
+    <h5> Local ${pdict.stores.noInventoryStores.length == 1 ? 'store' : 'stores'} without inventory:</h5>
+    <isloop items="${pdict.stores.noInventoryStores}" var="store" status="loopState">
+        <isif condition="${pdict.showMap === 'true'}">
+            <div class="store-result" id="${store.ID}" data-store-type="${store.storeType.value}">
+                <div class='map-marker'>
+                    <img src="${store.storeType.mapMarker.backgroundImage}" alt="${store.storeType.displayValue}">
+                    <span <isif condition="${store.storeType.mapMarker.color}">style="color:${store.storeType.mapMarker.color}</isif>">${loopState.count}</span>
+                </div>
+                <isinclude template="storeLocator/storeDetails" />
+            </div>
+        <iselse>
+            <div class="store-result custom-control custom-radio">
+                <isinclude template="storeLocator/storeDetails" />
+            </div>
+        </isif>
+    </isloop>
+</isif>

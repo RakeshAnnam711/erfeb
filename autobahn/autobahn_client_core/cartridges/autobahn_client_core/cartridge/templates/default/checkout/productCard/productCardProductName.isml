@@ -1,0 +1,1 @@
+<a class="line-item-name" title="${lineItem.productName}" href="${lineItem.productType === 'giftCertificate' ? URLUtils.url('GiftCertificate-Purchase') : URLUtils.url('Product-Show', 'pid', lineItem.id)}" aria-label="${lineItem.productName}">${lineItem.productName}</a>

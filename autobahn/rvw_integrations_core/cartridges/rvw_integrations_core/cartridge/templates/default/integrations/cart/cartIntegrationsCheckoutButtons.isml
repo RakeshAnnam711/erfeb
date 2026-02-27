@@ -1,0 +1,113 @@
+<iscomment>
+  This is the overriding template for integration specific code, please ensure where appropriate to check
+  the global toggle for the integration you are adding to this page to ensure that only the active integrations get
+  included and executed
+
+  Page Type: Cart
+
+  It gets called by rvw_autobahn_core:templates/default/cart/cart.isml
+
+</iscomment>
+<div class="cartAdditionalPaymentButtons <isif condition="${!pdict.totals.grandTotalLessGiftCertificatePaymentInstrumentsValue}">d-none</isif>">
+    <isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page" />
+    <div class="js-paymentmethod-mutationobserver">
+        <div class="paymentmethodwarning js-paymentmethodwarning-msgcontainer d-none mb-3"
+            data-iframepresent="false"
+            <isif condition="${currentSite.getCustomPreferenceValue('bopisCartridgeEnabled')}">
+                data-bopis_msg="${dw.web.Resource.msg('bopis.buynow.compat.warn.override', 'instorePickup', dw.web.Resource.msg('bopis.buynow.compat.warn', 'instorePickup', null))}"
+                data-bopis_show="${pdict.hasPickupInstoreItem ? true : false}"
+                data-bopis_disable="true"
+            </isif>
+            <isif condition="${currentSite.getCustomPreferenceValue('giftCertificateEnabled')}">
+                <isif condition="${currentSite.getCustomPreferenceValue('adyenCartridgeEnabled')}">
+                    data-giftcertificate_msg="${dw.util.StringUtils.format(dw.web.Resource.msg('giftcertificatepaymentinstrument.buynow.compat.warn', 'checkout', null), pdict.totals ? pdict.totals.grandTotal : pdict.order.totals.grandTotal)}"
+                    data-giftcertificate_show="${((pdict.totals && !pdict.totals.giftCertificatePaymentInstrumentsTotalValue) || (pdict.order && pdict.order.totals && !pdict.order.totals.giftCertificatePaymentInstrumentsTotalValue)) ? 'false' : 'true'}"
+                    data-giftcertificate_disable="false"
+                </isif>
+            </isif>
+            <isif condition="${currentSite.getCustomPreferenceValue('multishippingWithoutBopisEnabled')}">
+                data-multiship_msg="${dw.web.Resource.msg('multiship.buynow.compat.warn', 'checkout', null)}"
+                data-multiship_show="${pdict.usingMultiShipping && !pdict.hasPickupInstoreItem}"
+                data-multiship_disable="true"
+            </isif>
+        ></div>
+
+        <div class="js-paymentmethodwarning-affectedcontainer"
+            <isif condition="${pdict.hasPickupInstoreItem}">disabled</isif>>
+            <iscomment>
+              If apply pay is configured (through Cybersource, Adyen, etc.) this tag will be used by the Apply Pay client
+              side script to add UI components. If not configured the tag will simply sit in the DOM unused.
+            </iscomment>
+            <isapplepay class="dw-apple-pay-logo-black applePaySpecificityOverride"></isapplepay>
+
+            <isif condition="${currentSite.getCustomPreferenceValue('sfcommercepaymentsCartridgeEnabled')}">
+                <isif condition="${pdict.showPaymentMessages}">
+                    <isset name="paymentmessagesclass" value="${pdict.paymentRequestData.messagesElementClass}" scope="page">
+                    <isset name="paymentmessagesrequest" value="${pdict.paymentRequestData.messagesPaymentRequest}" scope="page">
+                    <isinclude template="_commercepayments/components/paymentMessages" sf-toolkit="off"/>
+                </isif>
+                <div class="mb-1 mb-sm-3 checkout-buttons">
+                    <isinclude template="_commercepayments/components/product/paymentRequestButtons"/>
+                </div>
+            </isif>
+        </div>
+    </div>
+
+    <isif condition="${currentSite.getCustomPreferenceValue('paypalCartridgeEnabled')}">
+        <div class="js-paymentmethod-mutationobserver">
+            <div class="paymentmethodwarning js-paymentmethodwarning-msgcontainer d-none mb-3 js-paypal-checkout"
+                data-iframepresent="false"
+            ></div>
+
+            <div class="js-paymentmethodwarning-affectedcontainer">
+                <isif condition="${pdict.paypal && pdict.paypal.cartButtonEnabled}">
+                    <isinclude template="paypal/cart/paypalCartContent" />
+                </isif>
+            </div>
+        </div>
+    </isif>
+
+    <isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+        <div class="js-paymentmethod-mutationobserver">
+            <div class="paymentmethodwarning js-paymentmethodwarning-msgcontainer d-none mb-3 js-cybergoogle-checkout"
+                data-iframepresent="false"
+            ></div>
+
+            <div class="js-paymentmethodwarning-affectedcontainer">
+
+                <isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+                    <isinclude template="cart/checkoutOptions"/>
+                    <isinclude template="cart/checkoutOptionVisa"/>
+                    <isinclude template="cart/checkoutOptionGoogle"/>
+                </isif>
+            </div>
+        </div>
+
+        <div class="js-paymentmethod-mutationobserver">
+            <div class="paymentmethodwarning js-paymentmethodwarning-msgcontainer d-none mb-3 js-cyberpaypal-checkout"
+                data-iframepresent="true"
+                <isif condition="${currentSite.getCustomPreferenceValue('giftCertificateEnabled')}">
+                    data-giftcertificate_msg="${dw.util.StringUtils.format(dw.web.Resource.msg('giftcertificatepaymentinstrument.cyberpaypal.compat.warn', 'checkout', null), pdict.totals ? pdict.totals.grandTotal : pdict.order.totals.grandTotal)}"
+                    data-giftcertificate_show="${((pdict.totals && !pdict.totals.giftCertificatePaymentInstrumentsTotalValue) || (pdict.order && pdict.order.totals && !pdict.order.totals.giftCertificatePaymentInstrumentsTotalValue)) ? 'false' : 'true'}"
+                    data-giftcertificate_disable="false"
+                    data-giftcertificateincart_msg="${dw.web.Resource.msg('giftcertificateincart.cyberpaypal.compat.warn', 'checkout', null)}"
+                    data-giftcertificateincart_show="${(pdict.giftCertificateLineItems && pdict.giftCertificateLineItems.items && pdict.giftCertificateLineItems.items.length > 0) || (pdict.order && pdict.order.giftCertificateLineItems && pdict.order.giftCertificateLineItems.items && pdict.order.giftCertificateLineItems.items.length > 0)}"
+                    data-giftcertificateincart_disable="true"
+                </isif>
+            ></div>
+
+             <isscript>
+                var CybersourceConstants = require('*/cartridge/scripts/utils/CybersourceConstants');
+             </isscript>
+             <isif condition="${dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.METHOD_PAYPAL) &&
+                         dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.METHOD_PAYPAL).isActive() &&
+                        dw.system.Site.current.getCustomPreferenceValue('CsEnableExpressPaypal')}">
+                <div class="js-paymentmethodwarning-affectedcontainer"
+                    <isif condition="${(currentSite.getCustomPreferenceValue('giftCertificateEnabled') && ((pdict.giftCertificateLineItems && pdict.giftCertificateLineItems.items && pdict.giftCertificateLineItems.items.length > 0) || (pdict.order && pdict.order.giftCertificateLineItems && pdict.order.giftCertificateLineItems.items && pdict.order.giftCertificateLineItems.items.length > 0)))}">disabled</isif>>
+
+                        <isinclude template="cart/checkoutOptionPaypal"/>
+                </div>
+            </isif>
+        </div>
+    </isif>
+</div>

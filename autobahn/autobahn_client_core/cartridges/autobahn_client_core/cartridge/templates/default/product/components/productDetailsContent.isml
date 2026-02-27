@@ -1,0 +1,1342 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets');
+    assets.addJs('/js/productDetail.js');
+</isscript>
+
+<isset name="product" value="${pdict.product}" scope="page" />
+<isset name="csrf" value="${pdict.csrf}" scope="page" />
+<isset value="${dw.catalog.ProductMgr.getProduct(product.id)}" name="Product" scope="page" />
+<isset name="customerNo" value="${pdict.currentCustomer.profile.customerNo}" scope="page" />
+
+<isset name="isIdIncluded" value="" scope="page" />
+<input type="hidden" name="add-to-cart-url" value="${URLUtils.url('Cart-AddProduct')}"/>
+<input type="hidden" name="get-cart-url" value="${URLUtils.url('Cart-Get')}"/>
+<input type="hidden" name="product-details-json" value="${JSON.stringify(product)}"/>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const mainDiv = document.querySelector(".frenzy_recommendation_section");
+
+        const config = { childList: true };
+
+        const callback = (mutationList, observer) => {
+            for (const mutation of mutationList) {
+                for (const node of mutation.addedNodes) {
+                    if (node != null) {
+                        const wishlistIcons = Array.from(document.getElementsByClassName('wishlist-icon-div'));
+                        const wishlistPIDs = window.UncachedData?.wishlistPIDs || [];
+
+                        for (let i=0;i<wishlistIcons.length;i++){
+                            if (wishlistPIDs.includes(wishlistIcons[i].getAttribute('data-id'))){
+                                wishlistIcons[i].classList.add('selected');
+                            }
+                        }
+                        observer.disconnect();
+                    }
+                }
+            }
+        };
+
+        const frenzyRecommadtionObserver = new MutationObserver(callback);
+        frenzyRecommadtionObserver.observe(mainDiv, config);
+
+        const stickyBarElementBtn = document.querySelector('#addtocart-sticky-bar-isml button');
+        if(!stickyBarElementBtn.disabled){
+            // showAddToCartStatus();
+        }
+    });
+
+	function dataLayerPushAddtoCart() {
+        window.dataLayer = window.dataLayer || [];
+        var data = {
+            'user_id': '${session.custom.currentCustomer || (pdict.currentCustomer ? pdict.currentCustomer.raw.ID : '')}',
+            'sku': '${product.id}'
+        };
+        var obj = {
+            'event': 'productaddtocartClick',
+            'ecommerce': {
+				'click': {
+					'products': data
+				}
+			}
+        };
+	    dataLayer.push(obj);
+    }
+
+    (async () => {
+            var data_json = JSON.stringify({
+                    pid: '${product.id}'
+                });
+                const response = await fetch("${URLUtils.abs('RecentlyViewed-AddProduct')}", {
+                method: 'POST',
+                body: data_json,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                });
+                const data = await response.json(); //fetching resonse data
+            })();
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        //Add event listener to the image to copy URL when clicked
+        document.getElementById('copyIcon').addEventListener('click', function() {
+            navigator.clipboard.writeText(currentPageUrl).then(function() {
+                console.log("Link Copied - " + currentPageUrl);
+            })
+        });
+
+        // Capture current page URL and assign it to the input field
+        var currentPageUrl = window.location.href;
+        var pageUrlInput = document.getElementById('pageUrlInput');
+        pageUrlInput.value = currentPageUrl;
+
+        var desc = $("#product-card-details").find('#ACC-item')
+            .clone()
+            .children('.product-attributes')
+            .remove()
+            .end()
+            .html();
+
+        $('#description .card-body').html(desc);
+
+        var measurement = $("#product-card-details").find('#ACC-item .details-container').html();
+        $('#measurement .card-body').html(measurement);
+
+        //Moving made in and year to details setion
+        var items = $('#measurement .card-body ul.ACC-det2 li');
+        var madeInLi = null;
+        var yearLi = null;
+        items.each(function( index ) {
+            // Find out made in li element
+            if($(this).text().toLowerCase().search('made in') != -1){
+                madeInLi = $(this).clone();
+                $(this).addClass('d-none');
+            }
+            // Find out year li element
+            var regex = /\b(19|20)\d{2}(-\d{4})?\b/g;
+            if(regex.test($(this).text())){
+                yearLi = $(this).clone();
+                $(this).addClass('d-none');
+            }
+        });
+        $('#measurement .card-body .detail-title').addClass('d-none');
+
+        var details = $("#product-card-details").find('#ACC-item .features-container').html();
+        $('#details .card-body').html(details);
+
+        //If made in li element found, change text and move into details section
+        if(madeInLi != null){
+            $('#measurement .card-body ul.ACC-det2 li.d-none').remove();
+            var madeInText = madeInLi.text().toLowerCase().replace('made in', 'made in:');
+            madeInLi.text(madeInText);
+            madeInLi.addClass('text-capitalize');
+            $('#details .card-body ul.ACC-det').append(madeInLi[0].outerHTML);
+        }
+
+        //If year li element found, move into details section
+        if(yearLi != null){
+            $('#measurement .card-body ul.ACC-det2 li.d-none').remove();
+            $('#details .card-body ul.ACC-det').append(yearLi[0].outerHTML);
+        }
+
+        // Shows Additional bullet points for Non Authorized Brands under Details Accordion
+        var brand = $(".product-brand").text().trim() || $(".product-brand-link").text().trim();
+        var nonAuthBrands = $('#nonAuthBrands').val();
+
+        if(nonAuthBrands.length > 0){
+            var unauthorizedBrands = nonAuthBrands.toLowerCase().split(',').map(function (b) {
+                return b.trim();
+            });
+            if (unauthorizedBrands.includes(brand.toLowerCase())) {
+                if($("#prodSerial").val().toLowerCase() != 'null' && $("#prodSerial").val().toLowerCase() != 'none' ){
+                    $('#details .card-body ul.ACC-det').append('<li>Serial Number: <span class="no-underline">'+ $("#prodSerial").val() +'</span></li>');
+                }
+                // $('#details .card-body ul.ACC-det').append('<li> What Goes Around Comes Around is not affiliated with ' + brand + ' and has not been authorized by ' + brand + ' to sell this item. </li>');
+                $('#legalDisclaimer').append('<span> What Goes Around Comes Around is not affiliated with ' + brand + ' and has not been authorized by ' + brand + ' to sell this item. </span>');
+            }
+        }
+
+        const locationValue = document.getElementById('store-location-value').innerHTML;
+            const storeDetailsNameHTML = `<div class='store-location'><span class='lbl'>${Resource.msg('pdp.storeavailable.text', 'pdpcontent', null)}</span> <span id="store-name"></span>`;
+            const storeDetailsButtonHTML = `
+                <button
+                        aria-label="Store Location Modal"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#storeLocationModal">
+                        <i class="info-icon"></i>
+                </button></div>`;
+
+            const storeDetailsHTML = `<li>`+storeDetailsNameHTML+storeDetailsButtonHTML+`</li>`;
+
+        // Handling different store location conditions
+        if (locationValue === "Online Only") {
+            $('#details .card-body ul').append(`<li>`+storeDetailsNameHTML+`</li>`);
+        }else if(locationValue === "Beverly Hills" || locationValue === "Soho" || locationValue === "Wooster"){
+            $('#details .card-body ul').append(storeDetailsHTML);
+        }
+        $('#details .card-body ul #store-name').append(locationValue);
+        $('#details .card-body .detail-title').addClass('d-none');
+        $('#shipping .card-body .detail-title').addClass('d-none');
+
+
+    });
+</script>
+
+
+<iscomment> function to generate array of recently viewed product details </iscomment>
+<script>
+        async function getProductDetailsArray() {
+        try {
+            //Fetching recently viewed product objecs from GetAllProducts API
+            const data_json = JSON.stringify({
+                user_id: '${session.custom.currentCustomer || pdict.currentCustomer.raw.ID}'
+            });
+            const response1 = await fetch("${URLUtils.abs('RecentlyViewed-GetAllProducts')}", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-frenzy-authorization': 'b423c0ba-a5f5-4c32-b369-ad7bdc94a1b5'
+                }
+            });
+            const RVProductsData = await response1.json();
+            const RVProducts = RVProductsData.products;
+
+            //removing current PDP product from recently viewed array if exists
+            const productDetailsArray = RVProducts.filter(RVproduct => RVproduct.id !== `${product.id}`);
+            return productDetailsArray;
+        } catch (error) {
+            console.error("Error fetching product details: ", error);
+        }
+    }
+</script>
+
+<isset name="isQuickView" value="${false}" scope="page" />
+<isset name="isProductSet" value="${pdict.product.productType === 'set'}" scope="page" />
+<isset name="productDataColumnClass" value="col-12 col-md-5 offset-xl-0" scope="page" />
+<iscomment>Override column settings for Page Designer component if applicable</iscomment>
+<isif condition="${'pdpImageColumnWidth' in pdict}">
+    <isset name="productDataColumnClass" value="col-12 col-md-5 offset-xl-0" scope="page" />
+</isif>
+
+<input id="pdpLogInUrl" type="hidden" value="${URLUtils.url("Login-Show")}" />
+<input id="pdpCurrencySymbol" type="hidden" value="${pdict.currencySymbol}" />
+<input id="pdpSubmitCustomerOffer" type="hidden" value="${URLUtils.url("Product-SubmitCustomerOffer")}" />
+<input id="pdpUpdateUserFromMakeAnOffer" type="hidden" value="${URLUtils.url("Account-UpdateUserFromMakeAnOffer")}" />
+<input id="pdpGetUserForProductOffer" type="hidden" value="${URLUtils.url("Account-GetUserForProductOffer")}" />
+<input id="pdpProductUSDPrice" type="hidden" value="${pdict.productUSDPrice}" />
+<input id="pdpCurrencyRate" type="hidden" value="${pdict.currencyRate}" />
+
+<isobject object="${product.raw}" view="detail" />
+
+<div class="container product-detail product-wrapper pdp"
+    data-swatchable-attributes="${pdict.product.attrsToUseForSwatch}" data-pid="${product.id}">
+    <isif condition="${!pdict.breadcrumbs.isEmpty()}">
+        <header class="container page-header">
+            <isinclude template="components/breadcrumbs/pageBreadcrumbs" />
+        </header>
+    </isif>
+    <iscomment>
+        <div class="row d-md-none">
+            <div class="col-12">
+                <isif condition="${!empty(product.brand) && product.brandLink}">
+                    <a class="product-brand-link" href="${product.brandLink}">${product.brand}</a>
+                <iselseif condition="${!empty(product.brand)}" />
+                    <div class="mb-2 product-brand text-uppercase">${product.brand}</div>
+                </isif>
+                <h2 class="product-name">${product.productName}</h2>
+            </div>
+        </div>
+    </iscomment>
+
+    <div class="row mt-3 mb-5">
+        <!-- Product Images Carousel -->
+        <isinclude template="product/components/imagePDPCarousel" />
+
+        <div class="product-data product-details ${productDataColumnClass}">
+            <!-- Product Name -->
+            <div class="row">
+                <div class="col">
+                    <isif condition="${!empty(product.brand) && product.brandLink}">
+                        <a class="product-brand-link" href="${product.brandLink}"
+                            aria-label="${product.brand}">${product.brand}</a>
+                    <iselseif condition="${!empty(product.brand)}" />
+                        <div class="mb-2 product-brand text-uppercase">${product.brand}</div>
+                    </isif>
+                    <h1 class="product-name prod-name">
+                        ${product.productName}
+                        <!-- Social Sharing Dropdown -->
+                        <div class="share-options">
+                            <button class="nav-link dropdown-toggle" id="socialSharingDropdown" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" aria-label="Social Share Dropdown">
+                                <i class="icon-share_button"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-country-selector" role="menu"
+                                aria-labelledby="socialSharingDropdown">
+                                <!-- Social Sharing Icons -->
+                                <div class="row ">
+                                    <iscontentasset aid="shareThis" />
+                                </div>
+                                <div class="copy-page-link">
+                                    <div class="lbl"> ${Resource.msg('pdp.copylink.text', 'pdpcontent', null)} </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="pageUrlInput" name="pageUrl"
+                                            aria-label="Read-only page URL" readonly />
+                                        <button id="copyIcon" type="button" class="icon-content_copy"
+                                            data-toast="success" data-content="Link Copied!" data-dismiss="modal"
+                                            aria-label="Copy link">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h1>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="prices top-prices clearfix">
+                        <isset name="price" value="${product.price}" scope="page" />
+                        <isinclude template="product/components/pricing/main" />
+                        <iscomment>
+                            <isinclude url="${URLUtils.url('Flow-GetDeliveryWindow')}" />
+                        </iscomment>
+
+                        <isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}"
+                            scope="page" />
+                        <isif condition="${globaleSession.get('geOperatedCountry')}">
+                            <iscomment> ${lineItem.priceTotal.price} </iscomment>
+                        <iselse/>
+                                <!-- Applicable Promotions -->
+                                <div class="promotions">
+                                    <isinclude template="product/components/promotions" />
+                                </div>
+                        </isif>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Condition Modal -->
+            <div class="modal fade" id="conditionScaleModal" tabindex="-1" role="dialog"
+                aria-labelledby="conditionScaleModal">
+                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title"> ${Resource.msg('pdp.conditionscale.text', 'pdpcontent', null)}
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">${Resource.msg('pdp.conditionscale.exit', 'pdpcontent', null)}</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="product-condition-details">
+                                <div class="details">
+                                    ${Resource.msg('pdp.condition.pristine.details', 'pdpcontent', null)}
+                                </div>
+                                <div class="desc">
+                                    ${Resource.msg('pdp.condition.pristine.desc', 'pdpcontent', null)}
+                                </div>
+                            </div>
+                            <div class="product-condition-details">
+                                <div class="details">
+                                    ${Resource.msg('pdp.condition.excellent.details', 'pdpcontent', null)}
+                                </div>
+                                <div class="desc">
+                                    ${Resource.msg('pdp.condition.excellent.desc', 'pdpcontent', null)}
+                                </div>
+                            </div>
+                            <div class="product-condition-details">
+                                <div class="details">
+                                    ${Resource.msg('pdp.condition.verygood.details', 'pdpcontent', null)}
+                                </div>
+                                <div class="desc">
+                                    ${Resource.msg('pdp.condition.verygood.desc', 'pdpcontent', null)}
+                                </div>
+                            </div>
+                            <div class="product-condition-details">
+                                <div class="details">
+                                    ${Resource.msg('pdp.condition.good.details', 'pdpcontent', null)}
+                                </div>
+                                <div class="desc">
+                                    ${Resource.msg('pdp.condition.good.desc', 'pdpcontent', null)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Condition Modal Ends-->
+
+            <!-- Store Location Modal -->
+            <iscomment> this is just to fetch the location value inside script tag, hence display none </iscomment>
+            <p id="store-location-value" class="pdp-store-location-value">${Product.custom.location[0]}</p>
+            <isif condition="${Product.custom.location[0] != "Online Only"}">
+                <div class="modal fade" id="storeLocationModal" tabindex="-1" role="dialog"
+                    aria-labelledby="storeLocationModal">
+                    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                        <div class="modal-content store-modal-font">
+                            <div class="modal-header">
+                                <div class="modal-title"> ${Resource.msg('pdp.store.modal.title', 'pdpcontent', null)}
+                                </div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">${Resource.msg('pdp.store.modal.exit', 'pdpcontent', null)}</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="store-location-details">
+                                    <div class="store-location-details-head">
+                                        <i class="icon-address"></i>
+                                        <p>${Resource.msg('pdp.store.modal.address.text', 'pdpcontent', null)}</p>
+                                    </div>
+                                    <div class="store-location-details-body">
+                                        <isif condition="${Product.custom.location[0] == "Wooster"}">
+                                            <p>${Resource.msg('pdp.store.address.wooster.address1', 'pdpcontent', null)}
+                                                <br> ${Resource.msg('pdp.store.address.wooster.address2', 'pdpcontent', null)}</p>
+                                            <a class="link" aria-label="Wooster"
+                                                href="${Resource.msg('pdp.store.address.wooster.gmap', 'pdpcontent', null)}"
+                                                target="_blank" rel="noopener">${Resource.msg('pdp.store.address.direction.text', 'pdpcontent', null)}</a>
+                                        <iselseif condition="${Product.custom.location[0] == "Beverly Hills"}">
+                                                <p>${Resource.msg('pdp.store.address.beverly.address1', 'pdpcontent', null)} <br> ${Resource.msg('pdp.store.address.beverly.address2', 'pdpcontent', null)}</p>
+                                                <a class="link" aria-label="Beverly Hills"
+                                                    href="${Resource.msg('pdp.store.address.beverly.gmap', 'pdpcontent', null)}"
+                                                    target="_blank" rel="noopener">${Resource.msg('pdp.store.address.direction.text', 'pdpcontent', null)}</a>
+                                            <iselseif condition="${Product.custom.location[0] == "Soho"}">
+                                                    <p>${Resource.msg('pdp.store.address.soho.address1', 'pdpcontent', null)} <br> ${Resource.msg('pdp.store.address.soho.address2', 'pdpcontent', null)}</p>
+                                                    <a class="link" aria-label="Soho"
+                                                        href="${Resource.msg('pdp.store.address.soho.gmap', 'pdpcontent', null)}"
+                                                        target="_blank" rel="noopener">${Resource.msg('pdp.store.address.direction.text', 'pdpcontent', null)}</a>
+                                                <iselse/>
+                                                    <a class="link" aria-label="Soho"
+                                                        href="${Resource.msg('pdp.store.address.soho.gmap', 'pdpcontent', null)}"
+                                                        target="_blank" rel="noopener">${Resource.msg('pdp.store.address.direction.text', 'pdpcontent', null)}</a>
+                                                    <p>${Resource.msg('pdp.store.address.exception', 'pdpcontent', null)}</p>
+                                        </isif>
+                                    </div>
+                                </div>
+                                <div class="store-location-details">
+                                    <div class="store-location-details-head">
+                                        <i class="icon-call"></i>
+                                        <p>${Resource.msg('pdp.store.modal.phone.text', 'pdpcontent', null)}</p>
+                                    </div>
+                                    <div class="store-location-details-body">
+                                        <isif condition="${Product.custom.location[0] == "Wooster"}">
+                                            <a class="ph-no" aria-label="Phone Number"
+                                                href="tel:${Resource.msg('pdp.store.address.wooster.phone', 'pdpcontent', null)}">${Resource.msg('pdp.store.address.wooster.phone', 'pdpcontent', null)}</a>
+                                        <iselseif condition="${Product.custom.location[0] == "Beverly Hills"}">
+                                                <a class="ph-no" aria-label="Phone Number"
+                                                    href="tel:${Resource.msg('pdp.store.address.beverly.phone', 'pdpcontent', null)}">${Resource.msg('pdp.store.address.beverly.phone', 'pdpcontent', null)}</a>
+                                            <iselseif condition="${Product.custom.location[0] == "Soho"}">
+                                                    <a class="ph-no" aria-label="Phone Number"
+                                                        href="tel:${Resource.msg('pdp.store.address.soho.phone', 'pdpcontent', null)}">${Resource.msg('pdp.store.address.soho.phone', 'pdpcontent', null)}</a>
+                                                <iselse/>
+                                                    <p>${Resource.msg('pdp.store.phone.exception', 'pdpcontent', null)}
+                                                    </p>
+                                        </isif>
+                                    </div>
+                                </div>
+                                <div class="store-location-details store-hours">
+                                    <div class="store-location-details-head">
+                                        <i class="icon-clock"></i>
+                                        <p>${Resource.msg('pdp.store.modal.hours.text', 'pdpcontent', null)}</p>
+                                    </div>
+                                    <div class="store-location-details-body">
+                                        <ul>
+                                            <isif condition="${Product.custom.location[0] == "Wooster"}">
+                                                <li><span>Monday</span> <span>11am - 7pm</span></li>
+                                                <li><span>Tuesday</span> <span>11am - 7pm</span></li>
+                                                <li><span>Wednesday</span> <span>11am - 7pm</span></li>
+                                                <li><span>Thursday</span> <span>11am - 7pm</span></li>
+                                                <li><span>Friday</span> <span>11am - 7pm</span></li>
+                                                <li><span>Saturday</span> <span>11am - 7pm</span></li>
+                                                <li><span>Sunday</span> <span>12pm - 6pm</span></li>
+                                            <iselseif condition="${Product.custom.location[0] == "Beverly Hills"}">
+                                                    <li><span>Monday</span> <span>10am - 6pm</span></li>
+                                                    <li><span>Tuesday</span> <span>10am - 6pm</span></li>
+                                                    <li><span>Wednesday</span> <span>10am - 6pm</span></li>
+                                                    <li><span>Thursday</span> <span>10am - 6pm</span></li>
+                                                    <li><span>Friday</span> <span>10am - 6pm</span></li>
+                                                    <li><span>Saturday</span> <span>10am - 6pm</span></li>
+                                                    <li><span>Sunday</span> <span>12pm - 6pm</span></li>
+                                                <iselseif condition="${Product.custom.location[0] == "Soho"}">
+                                                        <li><span>Monday</span> <span>11am - 7pm</span></li>
+                                                        <li><span>Tuesday</span> <span>11am - 7pm</span></li>
+                                                        <li><span>Wednesday</span> <span>11am - 7pm</span></li>
+                                                        <li><span>Thursday</span> <span>11am - 7pm</span></li>
+                                                        <li><span>Friday</span> <span>11am - 7pm</span></li>
+                                                        <li><span>Saturday</span> <span>11am - 7pm</span></li>
+                                                        <li><span>Sunday</span> <span>12pm - 6pm</span></li>
+                                                    <iselse/>
+                                                        <p>Null</p>
+                                            </isif>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </isif>
+            <!-- Store Location Modal Ends-->
+
+            <!-- Sign in/Register Modal -->
+            <div class="modal fade" id="signInRegisterModal" tabindex="-1" role="dialog"
+                aria-labelledby="signInRegisterModal">
+                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title"> ${Resource.msg('pdp.myaccount.text', 'pdpcontent', null)}
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">${Resource.msg('pdp.conditionscale.exit', 'pdpcontent', null)}</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="details">
+                                <div id="loginContent">
+                                    <iframe id="loginIframe" width="100%" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sign in/Register Modal Ends-->
+
+            <isif condition="${!empty(product.headline)}">
+                <div class="row mt-3">
+                    <div class="col">
+                        ${product.headline}
+                    </div>
+                </div>
+                <hr>
+            </isif>
+
+            <div class="attributes product-detail-attributes">
+                <isset name="isBundle" value="${false}" scope="page" />
+                <isset name="loopState" value="{count: 1}" scope="page" />
+                <isset name="sizeChartHasBeenShown" value="${false}" scope="page" />
+                <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                    <div class="row" data-attr="${attr.id}">
+                        <div class="col-12">
+                            <iscomment>used for sticky add to cart </iscomment>
+                            <isset name="noSwatchOverride" value="${false}" scope="page" />
+                            <isinclude template="product/components/variationAttribute" />
+                        </div>
+                    </div>
+                </isloop>
+
+                <div class="product-options">
+                    <isif condition="${product.options && product.options.length > 0}">
+                        <isinclude template="product/components/options" />
+                    </isif>
+                </div>
+
+                <iscomment>Sticky Add to Cart</iscomment>
+                <div id="addtocart-sticky-bar-isml">
+                    <isif condition="${product.enableStickyAddToCart}">
+                        <isinclude template="product/components/addToCartStickyBar" />
+                    </isif>
+                </div>
+
+                <div class="customPDPmessage">
+                    <isslot id="pdpoffermessage" description="Products offer message placement" context="global" />
+                </div>
+                <!-- Product Availability -->
+                <iscomment>
+                    <isinclude template="product/components/productAvailability" />
+                </iscomment>
+
+
+
+                <isinclude template="integrations/product/components/beforeAddToCart" />
+
+                <!-- Add To Cart and Quantity -->
+                <div class="row qty-cart-container no-gutters" id="qty-cart-container">
+                    <isif condition="${(!isBundle && product.options.length === 0) || !product.variationAttributes}">
+                        <!-- Quantity Drop Down Menu -->
+                        <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 <isif condition=" ${product.hideQty}">
+                            d-none
+                    </isif>">
+                    <isinclude template="product/components/quantity" />
+                </div>
+                </isif>
+
+                <div class="prices-add-to-cart-actions col-12 col-sm-6 col-md-12">
+                    <!-- Add To Cart -->
+                    <div id="add-to-cart-template">
+                        <isinclude template="product/components/addToCartProduct" />
+                    </div>
+                    <div class="wishlist-icon-area">
+                        <isif condition="${pdict.isWishlistModal !== true}">
+                            <iswishlisticon wishlistpid="${product.wishlistpid}" productname="${product.productName}"
+                                gtmdata="${JSON.stringify(product.gtmData)}"
+                                addmessage="${'wishlist.addto.wishlist.icon'}"
+                                removemessage="${'wishlist.removefrom.wishlist.icon'}" includeicon="true" />
+                        </isif>
+                    </div>
+                    <isif
+                        condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('disableMakeAnOfferDisplay') && !!product.makeAnOfferEnabled}">
+                        <!-- Submit an offer modal -->
+                        <div class="submit-offer">
+                            <div class="">
+                                 <button id="btnMakeOffer" class="btn-submit-offer btn btn-secondary" data-toggle="modal"
+                                    <isif
+                                    condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
+                                    data-gtmdata="${JSON.stringify(product.gtmData)}"
+                                    </isif>
+                                    data-pid="${product.id}">
+                                    ${Resource.msg('submit.offer.button', 'product', null)}
+                                </button>
+
+                        <iscomment> <button class="btn-submit-offer btn btn-secondary" data-toggle="modal"
+                            data-target="#submitOfferModal"
+                            aria-label="${Resource.msg('submit.offer.button', 'product', null)}" <isif
+                            condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
+                            data-gtmdata="${JSON.stringify(product.gtmData)}"
+                            </isif>
+                            data-pid="${product.id}">
+                            ${Resource.msg('submit.offer.button', 'product', null)}
+                        </button> </iscomment>
+                </div>
+            </div>
+            <div id="submitOfferModal" class="modal fade" tabindex="-1" role="dialog"
+                aria-labelledby="submitOfferModal">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">${Resource.msg('submit.offer.modal.title', 'product', null)}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">${Resource.msg('submit.offer.modal.exit', 'product', null)}</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <iscontentasset aid="pdpMakeAnOffer" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">${Resource.msg('label.modal.close', 'common', null)}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </isif>
+
+            <isset name="price" value="${product.price}" scope="page" />
+            <isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}"
+                scope="page" />
+            <isif condition="${globaleSession.get('geOperatedCountry')}">
+                <iscomment> ${lineItem.priceTotal.price} </iscomment>
+            <iselse/>
+
+                <!-- Affirm OSM -->
+                <isinclude template="util/affirmModule" />
+                <div class="affirm-pdp-price">
+                    <isaffirmpromo context="pdp"
+                        fpname="${require('*/cartridge/scripts/utils/affirmUtils').getFPNameForPDP(product)}" />
+                </div>
+
+                <!-- Klarna OSM -->
+                <isset name="KlarnaOSMEnable" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('KlarnaOSMEnable')}" scope="page" />
+                <isif condition="${KlarnaOSMEnable}">
+                    <isset name="KlarnaOSMType" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('KlarnaOSMType')}" scope="page" />
+
+                    <klarna-placement
+                        data-key="${KlarnaOSMType}"
+                        data-locale="en-US"
+                        data-purchase-amount="${(product.price.sales.value * 100).toFixed()}"
+                    ></klarna-placement>
+                </isif>
+            </isif>
+        </div>
+    </div>
+
+
+
+    <isif condition="${Product.custom.final_sale}">
+        <iscontentasset aid="finalsalecalloutmsg" />
+    </isif>
+
+
+
+
+    <!-- tangiblee-cta -->
+    <div id="tangiblee-cta-main" class="tangiblee-cta-main">
+
+    </div>
+
+    <!-- Product Condition -->
+    <div id='prod-condition'>
+
+    </div>
+    <!-- Collabsable -->
+    <div class="row accordion-container">
+        <div class="col">
+            <div id="product-card-details" class="prod-card-body d-none">
+                <isprint value="${product.headlineDescription}" encoding="off" />
+            </div>
+            <!-- Description Section -->
+            <div id="description" class="details card aside collapsible-xl" data-expand="true">
+                <div class="card-header">
+                    <button class="card-title title" aria-expanded="false" aria-controls="collapsible-details-1"
+                        aria-label="${Resource.msg('pdp.accordion.description.head', 'pdpcontent', null)}">
+                        <iscomment> ${product.collapsibleTitleTwo} </iscomment>
+                        ${Resource.msg('pdp.accordion.description.head', 'pdpcontent', null)}
+                    </button>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+            <!-- Measurement Section -->
+            <div id="measurement" class="details card aside collapsible-xl" data-expand="true">
+                <div class="card-header">
+                    <button class="card-title title" aria-expanded="false" aria-controls="collapsible-details-1"
+                        aria-label=" ${Resource.msg('pdp.accordion.measurement.head', 'pdpcontent', null)}">
+                        <iscomment> ${product.collapsibleTitleTwo} </iscomment>
+                        ${Resource.msg('pdp.accordion.measurement.head', 'pdpcontent', null)}
+                    </button>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+            <!-- Details Section -->
+            <div id="details" class="details card aside collapsible-xl" data-expand="true">
+                <input id="nonAuthBrands" type="hidden"
+                    value="${dw.system.Site.getCurrent().getCustomPreferenceValue('NonAuthorizedBrands')}" />
+                <input id="prodSerial" type="hidden" value="${product.serial}" />
+                <div class="card-header">
+                    <button class="card-title title" aria-expanded="false" aria-controls="collapsible-details-1"
+                        aria-label=" ${Resource.msg('pdp.accordion.details.head', 'pdpcontent', null)}">
+                        <iscomment> ${product.collapsibleTitleTwo} </iscomment>
+                        ${Resource.msg('pdp.accordion.details.head', 'pdpcontent', null)}
+                    </button>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+            <!-- Shipping Section -->
+            <div id="shipping" class="details card aside collapsible-xl" data-expand="true">
+                <div class="card-header">
+                    <button class="card-title title" aria-expanded="false" aria-controls="collapsible-details-1"
+                        aria-label="${Resource.msg('pdp.accordion.shipping.head', 'pdpcontent', null)}">
+                        <iscomment> ${product.collapsibleTitleTwo} </iscomment>
+                        ${Resource.msg('pdp.accordion.shipping.head', 'pdpcontent', null)}
+                    </button>
+                </div>
+                <div class="card-body">
+
+                    <isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}"
+                        scope="page" />
+                    <isif condition="${globaleSession.get('geOperatedCountry')}">
+                        <isslot id="product-shipping-info-geCustomer"
+                            description="Products shipping information on PDP page" context="global" />
+                    <iselse/>
+
+                        <isslot id="product-shipping-info" description="Products shipping information on PDP page"
+                            context="global" />
+                    </isif>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Collabsable Section Ends -->
+
+    <!-- Product SKU -->
+    <div class="product-sku-number">
+        <span class="lbl"> Product SKU: </span>
+        <isinclude template="product/components/pidRating" />
+    </div>
+
+    <div id="legalDisclaimer">
+
+    </div>
+
+    </div>
+</div>
+
+
+
+    <div>
+        <iscontentasset aid="complete-the-set-recommendations" />
+    </div>
+    <isset name="placeholder_ProductTile" value="${URLUtils.staticURL('/images/placeholder_ProductTile.png')}"
+        scope="page" />
+
+    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableFrenzyRecommendationOnPDP')}">
+        <div id="frenzy_recommendation_section_main" class="frenzy_recommendation_section" data-currency="$ {{amount}}">
+        </div>
+    <div class="recently_viewed_section" data-currency="$ {{amount}}"></div>
+        <script>
+				let authUrl_Frenzy = "https://wgaca.search.frenzy.ai/recommendation"; //API endpoint to fetch product recommendations
+				let eventsUrl_Frenzy = "https://wgaca.search.frenzy.ai/events";  //API for tracking user events
+				let sku = "${product.id}";
+				let number_days_ago = 3
+				let num_matching = 15;
+				let currency_symbol_Frenzy = '';
+				let filter_order_Frenzy = [];
+
+                //custom function to format monetary values based on different formats (e.g., with commas, periods, no decimals)
+				let money_format_Frenzy = function (t, r) {
+				function e(t, r) {
+				return void 0 === t ? r : t
+				}
+				function a(t, r, a, o) {
+					if (r = e(r, 2), a = e(a, ","), o = e(o, "."), isNaN(t) || null == t) return 0;
+					t = (t / 100).toFixed(r);
+					var n = t.split(".");
+					return n[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + a) + (n[1] ? o + n[1] : "")
+				}
+				"string" == typeof t && (t = t.replace(".", ""));
+				var o = "",
+					n = /\{\{\s*(\w+)\s*\}\}/,
+					i = r || this.money_format;
+				switch (i.match(n)[1]) {
+				case "amount":
+					o = a(t, 2);
+				break;
+				case "amount_no_decimals":
+					o = a(t, 0);
+				break;
+				case "amount_with_comma_separator":
+					o = a(t, 2, ".", ",");
+				break;
+				case "amount_with_space_separator":
+					o = a(t, 2, " ", ",");
+				break;
+				case "amount_with_period_and_space_separator":
+					o = a(t, 2, " ", ".");
+				break;
+				case "amount_no_decimals_with_comma_separator":
+					o = a(t, 0, ".", ",");
+				break;
+				case "amount_no_decimals_with_space_separator":
+					o = a(t, 0, ".", "");
+				break;
+				case "amount_with_space_separator":
+					o = a(t, 2, ",", "");
+				break;
+				case "amount_with_apostrophe_separator":
+					o = a(t, 2, "'", ".")
+				}
+					return i.replace(n, o)
+				};
+
+                //layout and appearance of the recommendation products
+				let frenzy_setting_recomm_data = {
+                    "layout_type": "2",
+					"grid_items_per_row": "5",
+					"total_items": "10",
+					"grid_show_secondary_image": "1",
+					"recommendation_title": "YOU MAY ALSO LIKE",
+					"recently_viewed_title": "RECENTLY VIEWED",
+					"grid_align_text": "3",
+					"title_align": "3"  //1:left, 2:right, others:center
+				};
+
+                //custom styling for the recommendation products
+				let frenzy_setting_recomm_css = {
+					"card_border_color": "ffffff",
+					"arrow_color": "#000000",
+					"text_color": "#000000",
+					"price_color": "#999999",
+					"compare_price_color": "#000000"
+				};
+
+
+                function getCookieValue(name) {
+					let cookieName = name + "=";
+					let decodedCookie = decodeURIComponent(document.cookie);
+					let cookieArray = decodedCookie.split(';');
+					for(let i = 0; i < cookieArray.length; i++) {
+						let cookie = cookieArray[i];
+						while (cookie.charAt(0) == ' ') {
+							cookie = cookie.substring(1);
+						}
+						if (cookie.indexOf(cookieName) == 0) {
+							return cookie.substring(cookieName.length, cookie.length);
+						}
+					}
+					return "";
+				}
+                //function to send event data to Frenzy API
+				async function send_events(product_id, query_id){
+                    let frenzyUserID = ${customerNo} ? '${customerNo}' : getCookieValue('__frenzy_user_id');
+					var data_json = JSON.stringify([{
+					sku: product_id,
+					event_name: "similar_product_carousel_product_click",
+					query_id: query_id,
+					user_id: frenzyUserID
+					}]);
+
+                    //sending user data as response to Frenzy event API
+					const response = await fetch(eventsUrl_Frenzy, {
+					method: 'POST',
+					body: data_json,
+					headers: {
+						'Content-Type': 'application/json',
+						'x-frenzy-authorization': 'b423c0ba-a5f5-4c32-b369-ad7bdc94a1b5'
+					}
+					});
+					const data = await response.json();
+				}
+
+                let addToCartUrl = document.querySelector('input[name="add-to-cart-url"]').value;
+                let getCartUrl = document.querySelector('input[name="get-cart-url"]').value;
+
+                let addToCartButtonHTML = `
+                    <input type="hidden" class="add-to-cart-url" value="`+addToCartUrl+`"/>
+                    <input type="hidden" class="get-cart-url" value="`+getCartUrl+`"/>
+                    <button
+                        onclick="dataLayerPushAddtoCart()"
+                        class="add-to-cart btn btn-primary"
+                        data-toggle="modal"
+                        aria-label="Add [[product_title]] to Cart"
+                        data-target="#chooseBonusProductModal"
+                        data-gtmdata="[[gtmdata]]"
+                        data-pid="[[product_id]]" [[product_stock_status]] cypress-target="addToCartButton">
+                        Add To Cart
+                    </button>
+                `;
+
+                //HTML structure of individual recommended product card (includes product image, brand, title, and price)
+				let frenzy_setting_recomm_html = `
+                    <div class='frenzy_product_item' data-id='[[product_id]]' data-query-id='[[query_id]]' onclick='send_events("[[product_id]]", "[[query_id]]")'>
+
+                        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('wishlistEnable')}">
+                            <button data-href="${URLUtils.url('Wishlist-ToggleProduct')}"
+                            class="wishlist-toggle-product"
+                            aria-label="Wishlist"
+                            data-wishlistpid="[[product_id]]"
+                            data-wishlistquantity="1"
+                            data-url="${URLUtils.url('Wishlist-ToggleProduct')}"
+                            data-productname="[[product_title]]"
+                            data-isinwishlist="${isinwishlist}"
+                            data-gtmdata="[[gtmdata]]">
+                                <div class="wishlist-icon wishlist-icon-div ${isinwishlist ? 'selected' : ''}" data-id='[[product_id]]'></div>
+                            </button>
+                        </isif>
+
+                        <figure>
+                        <a href='[[product_url]]' aria-label='[[product_title]]'>
+                            <img class='frenzy_img frenzy_img_first lazyload' data-src='[[product_featured_image]]' alt='[[product_title]]' onerror="this.onerror=null;this.src='${placeholder_ProductTile}'">
+                        </a>
+                        </figure>
+                        <div class='frenzy_product_desc'>
+                        <div class='frenzy_product_brand'>
+                            [[product_brand]]
+                        </div>
+                        <h3 class='frenzy_product_title'>
+                            <a href='[[product_url]]' alt='[[product_title]]'>[[product_title]]</a>
+                        </h3>
+                        <div class='frenzy_product_price_meta'>
+                            <span class='frenzy_product_price_sale'>
+                            [[product_sale_price]]
+                            </span>
+                            <div class="add_to_cart_btn_area">
+                                `+ addToCartButtonHTML +`
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    `;
+				/*
+				* Append stylesheet
+				*/
+
+                //adding stylesheets(stylesheets fetching from Frenzy services using below links) into head of the page
+				let head_Frenzy = document.getElementsByTagName('HEAD')[0];
+				let search_link_Frenzy = document.createElement('link');
+				search_link_Frenzy.rel = 'stylesheet';
+				search_link_Frenzy.type = 'text/css';
+				search_link_Frenzy.href = 'https://shopify.plugin.frenzy.ai/api/public/assets/css/frenzy-search.css';
+				//stylesheet for swiper
+                let swiper_link_Frenzy = document.createElement('link');
+				swiper_link_Frenzy.rel = 'stylesheet';
+				swiper_link_Frenzy.type = 'text/css';
+				swiper_link_Frenzy.href = 'https://shopify.plugin.frenzy.ai/api/public/assets/css/swiper.min.css';
+				head_Frenzy.appendChild(search_link_Frenzy);
+				head_Frenzy.appendChild(swiper_link_Frenzy);
+
+                //adding swiper functionality using script
+                const script_Frenzy = document.createElement('script');
+				script_Frenzy.src = 'https://shopify.plugin.frenzy.ai/api/public/assets/js/swiper.min.js';
+				document.body.appendChild(script_Frenzy);
+
+                //fetching the recommedation section element into a variable
+                let get_frenzy_recommendation_section = document.querySelector('.frenzy_recommendation_section');
+                let get_recently_viewed_section = document.querySelector('.recently_viewed_section');
+
+                //API to get recommended products
+                const getHomepageProductsApi = async () => {
+				//history
+                var present_date = new Date();
+				var past_date = new Date(present_date);
+				past_date.setDate(past_date.getDate() - number_days_ago);
+				present_date = present_date.toISOString().split('T')[0]
+				past_date = past_date.toISOString().split('T')[0]
+				function getCookieValue(name) {
+					let cookieName = name + "=";
+					let decodedCookie = decodeURIComponent(document.cookie);
+					let cookieArray = decodedCookie.split(';');
+					for(let i = 0; i < cookieArray.length; i++) {
+						let cookie = cookieArray[i];
+						while (cookie.charAt(0) == ' ') {
+							cookie = cookie.substring(1);
+						}
+						if (cookie.indexOf(cookieName) == 0) {
+							return cookie.substring(cookieName.length, cookie.length);
+						}
+					}
+					return "";
+				}
+                let frenzyUserID = ${customerNo} ? '${customerNo}' : getCookieValue('__frenzy_user_id');
+
+				var data_json = JSON.stringify({
+				sku: sku,
+				num_matching: num_matching,
+				full_description: true,
+				user_id: frenzyUserID
+				});
+				const response = await fetch(authUrl_Frenzy, {
+				method: 'POST',
+				body: data_json,
+				headers: {
+					'Content-Type': 'application/json',
+					'x-frenzy-authorization': 'b423c0ba-a5f5-4c32-b369-ad7bdc94a1b5'
+				}
+				});
+				const data = await response.json(); //fetching resonse data
+
+                //rendering recommended products by passing relevant arguments
+                getHomepageProducts(data.matching_products, frenzy_setting_recomm_data, frenzy_setting_recomm_html, data.request_id);
+
+
+                const recommendationCss = frenzy_setting_recomm_css;
+				const cssdata = '.frenzy_recommendation_section .frenzy_product_item figure{border-color: #ffffff;} ' + '.frenzy_recommendation_section .frenzy_product_item_detail, .frenzy_recommendation_section .frenzy_product_item_detail h3 a{color:#000} ' + '.frenzy_recommendation_section .frenzy_product_price_sale{color:#000000} ' + '.frenzy_recommendation_section .frenzy_product_price_compare{color:#999999} ' + '.frenzy_recommendation_section .swiper-button-next:after, .frenzy_recommendation_section .swiper-button-prev:after{color:#00}';
+
+
+                let head_Frenzy = document.head || document.getElementsByTagName('head')[0],
+				style_Frenzy = document.createElement('style');
+				head_Frenzy.appendChild(style_Frenzy);
+				style_Frenzy.type = 'text/css';
+				if (style_Frenzy.styleSheet) {
+				style_Frenzy.styleSheet.cssText = cssdata;
+				} else {
+				style_Frenzy.appendChild(document.createTextNode(cssdata));
+				}
+				}
+
+                //function definition for Rendering Recommendations
+                //productDataz: array of recommended products fetched in getHomepageProductsApi
+                //settingData: grid layout (frenzy_setting_recomm_data)
+                //gridHtml: product card HTML (frenzy_setting_recomm_html)
+                //query_id: request_id
+				function getHomepageProducts(productData, settingData, gridHtml, query_id) {
+				let product_grid_html = gridHtml;
+				let recommendation_layout_mode = settingData.layout_type;
+
+                //if there are no recommended products, then don't show the section
+                if (productData.length === 0) {
+				get_frenzy_recommendation_section.style.display = "none"
+				// get_recently_viewed_section.style.display = "none"
+				} else {
+				get_frenzy_recommendation_section.style.display = "block"
+				// get_recently_viewed_section.style.display = "block"
+				}
+
+				const title_align = settingData.title_align === '1' ? 'text_align-left' : settingData.title_align === '2' ? 'text_align-right' : 'text_align-center'; {
+
+                const shop_currency = get_frenzy_recommendation_section.getAttribute('data-currency');
+				let recommendationProductHTML = '';
+				let gtmDatalist = [];
+
+                //looping into the products array
+                //x: index, i: product data
+				(productData || []).map((x, i) => {
+				    recommendationProductHTML += getProductGridItem(product_grid_html, x, settingData, shop_currency, query_id, i, gtmDatalist);
+				})
+
+
+				$('body').trigger('frenzyRecommadtion:productitem',JSON.stringify(gtmDatalist));
+				let recommendation_html = '<div class="frenzy_container">';
+                recommendation_html += '<h2 class="frenzy_recommendation_title ' + title_align + '">' + settingData.recommendation_title + '</h2>';
+				recommendation_html += '<div class="frenzy_recommendation_wraper"><div class="frenzy_recommendation_contain">';
+				recommendation_html += '<div class="recommendation_product_items frenzy_product_row">' +   recommendationProductHTML + '</div>';
+				recommendation_html += '</div></div>';
+				recommendation_html += '</div>';
+				get_frenzy_recommendation_section.innerHTML = recommendation_html;
+                $('body').trigger('frenzy:dataLoadComplete');
+
+				if(recommendation_layout_mode === '2'){
+					document.querySelector('.frenzy_recommendation_section .frenzy_recommendation_wraper').classList.add('frenzy_slider');
+
+					document.querySelector('.frenzy_recommendation_section .recommendation_product_items').classList.add('swiper-wrapper','ltg_'+settingData.grid_items_per_row+'');
+
+					// document.querySelectorAll('.frenzy_recommendation_section .frenzy_recommendation_wraper')[0].insertAdjacentHTML('beforeend', '<span id="recommendation_prev" class="swiper-button-prev"></span><span id="recommendation_next" class="swiper-button-next"></span>');
+
+					setTimeout(function() {
+					var swiper = new Swiper(".frenzy_recommendation_section .frenzy_recommendation_contain", {
+					slidesPerView: 'auto',
+					spaceBetween: 0,
+						navigation: {
+						nextEl: "#recommendation_next",
+						prevEl: "#recommendation_prev"
+						},
+						freeMode: true,
+						pagination: {
+						el: ".swiper-pagination",
+						clickable: true,
+						}
+						});
+                    }, 100);
+
+				} else {
+				document.querySelector('.frenzy_recommendation_section .recommendation_product_items').classList.add('layout_type_grid', 'ltg_' + settingData.grid_items_per_row + '');
+				}
+				}
+				}
+
+                function getRVProductsSection(productData, settingData, gridHtml, query_id) {
+                    let product_grid_html = gridHtml;
+                    let recommendation_layout_mode = "2";
+
+                    //if there are no recommended products, then don't show the section
+                    if (productData.length === 0) {
+                        get_recently_viewed_section.style.display = "none"
+                    } else {
+                        get_recently_viewed_section.style.display = "block"
+                    }
+
+                    const title_align = settingData.title_align === '1' ? 'text_align-left' : settingData.title_align === '2' ? 'text_align-right' : 'text_align-center'; {
+
+                    const shop_currency = get_frenzy_recommendation_section.getAttribute('data-currency');
+                    let recentlyViewedProductHTML = '';
+                    let gtmDatalist = [];
+
+                    //looping into the products array
+                    //x: product data, i: index
+                    (productData || []).reverse().map((x, i) => {
+                        recentlyViewedProductHTML += getRVProductGridItem(product_grid_html, x, settingData, shop_currency, query_id, i, gtmDatalist);
+                    })
+
+                    // $('body').trigger('frenzyRecommadtion:productitem',JSON.stringify(gtmDatalist));
+                    let recently_view_html = '<div class="frenzy_container">';
+                    recently_view_html += '<h2 class="frenzy_recommendation_title ' + title_align + '">' + settingData.recently_viewed_title + '</h2>';
+                    recently_view_html += '<div class="frenzy_recommendation_wraper"><div class="frenzy_recommendation_contain">';
+                    recently_view_html += '<div class="recommendation_product_items frenzy_product_row">' +   recentlyViewedProductHTML + '</div>';
+                    recently_view_html += '</div></div>';
+                    recently_view_html += '</div>';
+
+                    get_recently_viewed_section.innerHTML = recently_view_html;
+                    $('body').trigger('frenzy:dataLoadComplete');
+
+                    if(recommendation_layout_mode === '2'){
+                        document.querySelector('.recently_viewed_section .frenzy_recommendation_wraper').classList.add('frenzy_slider');
+
+                        document.querySelector('.recently_viewed_section .recommendation_product_items').classList.add('swiper-wrapper','ltg_'+settingData.grid_items_per_row+'');
+
+                        // document.querySelectorAll('.recently_viewed_section .frenzy_recommendation_wraper')[0].insertAdjacentHTML('beforeend', '<span id="recently_prev" class="swiper-button-prev"></span><span id="recently_next" class="swiper-button-next"></span>');
+
+                        setTimeout(function() {
+                            var swiper2 = new Swiper(".recently_viewed_section .frenzy_recommendation_contain", {
+                            slidesPerView: 'auto',
+                            spaceBetween: 0,
+                                navigation: {
+                                nextEl: "#recently_next",
+                                prevEl: "#recently_prev"
+                                },
+                                freeMode: true,
+                                pagination: {
+                                el: ".swiper-pagination",
+                                clickable: true,
+                                }
+                            });
+                        }, 100);
+
+                    } else {
+                        document.querySelector('.recently_viewed_section .recommendation_product_items').classList.add('layout_type_grid', 'ltg_' + settingData.grid_items_per_row + '');
+                    }
+                    }
+				}
+
+                //function to construct the HTML for each individual recommended product
+				function getProductGridItem(html, x, settingData, shop_currency, query_id, index, gtmDatalist) {
+				let product_grid_html = html;
+				let main_grid_image = 'https://shopify.plugin.frenzy.ai/api/public/assets/images/placeholder_img.jpg';
+				if (x.org_image_url) {
+				if (x.org_image_url.includes(' ')) {
+				let pro_image = (x.org_image_url).split(/(?=https?:\/\/)/);
+				main_grid_image = pro_image[0].trim();
+				} else {
+				main_grid_image = x.org_image_url;
+				}
+				let imagspilt = main_grid_image.split('/on/');
+				main_grid_image = 'https://www.whatgoesaroundnyc.com/dw/image/v2/BGND_PRD/on/'+ imagspilt[1] + '?sw=200&sh=300';
+
+				}
+				// Domain and Locale modifications
+				let prod_url = window?.CachedData?.isProduction === false ? x.org_prod_url.replace(/.*\/\/.*\.com\//gi,'/') : x.org_prod_url;
+				if ([undefined, null, 'en-us'].indexOf(window.CachedData?.seoLocale) === -1) prod_url = prod_url.replace('en-us', window.CachedData?.seoLocale);
+				let stock_available = x.org_stock_available === 'True' ? 'false' : 'true';
+				let grid_class_name = settingData.layout_type === '1' ? 'frenzy_grid' : 'frenzy_grid swiper-slide';
+				let grid_text_align = settingData.grid_align_text === '1' ? 'text_align_left' : settingData.grid_align_text === '2' ? 'text_align_right' : 'text_align_center';
+				let gtmdata = {};
+				let pName = x.org_product;
+				let pBrand = x.org_brand;
+				let position = index + 1;
+				let discount_percent = 0;
+				let discount_price = 0;
+
+				let comparePrice = (x && x.org_msrp_price && x.org_msrp_price > x.org_price) ? money_format_Frenzy((x.org_msrp_price * 100),shop_currency) : '' ;
+				if(comparePrice != '') {
+					discount_price = x.org_msrp_price - x.org_price;
+					discount_percent = ((discount_price / x.org_price) * 100).toFixed(2);
+				}
+                gtmdata.item_id = x.sku;
+                gtmdata.price = x.org_price;
+                gtmdata.item_brand = pBrand.replaceAll(/["]/g, '');
+                gtmdata.item_name = pName.replaceAll(/["]/g, '');
+				gtmdata.stock_status = (x.org_stock_available == 'True') ? 'In Stock' : 'Out of Stock';
+				gtmdata.product_gender  = (x.org_gender) ? x.org_gender : 'Women';
+				gtmdata.sale_status = (comparePrice == '') ? 'No Offer':'On Offer';
+                gtmdata.discount = discount_price;
+                gtmdata.item_category = '';
+                gtmdata.item_category2 = '';
+                gtmdata.item_variant='';
+                gtmdata.item_condition='';
+                gtmdata.item_list_id = 'you_may_also_like';
+                gtmdata.item_list_name = 'You may also like';
+                var gggData = JSON.stringify(gtmdata).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+                gtmDatalist.push(gtmdata);
+				product_grid_html = '<div class="' + grid_class_name + ' out_of_stock_' + stock_available + ' ' +  grid_text_align + ' ' + '">' + product_grid_html;
+			    product_grid_html = product_grid_html.replaceAll('[[query_id]]', query_id);
+				product_grid_html = product_grid_html.replaceAll('[[product_featured_image]]', main_grid_image);
+				product_grid_html = product_grid_html.replaceAll('[[product_id]]', x.sku);
+				product_grid_html = product_grid_html.replaceAll('[[product_title]]', x.org_product);
+				product_grid_html = product_grid_html.replaceAll('[[product_brand]]', x.org_brand);
+                product_grid_html = product_grid_html.replaceAll('[[gtmdata]]', gggData);
+				product_grid_html = product_grid_html.replaceAll('[[product_url]]', prod_url);
+				product_grid_html = product_grid_html.replaceAll('[[product_sale_price]]', money_format_Frenzy((x.org_price * 100), shop_currency));
+                if (x.org_stock_available == 'True') {
+                    product_grid_html = product_grid_html.replaceAll('[[product_stock_status]]', '');
+                }else{
+                    product_grid_html = product_grid_html.replaceAll('[[product_stock_status]]', 'disabled');
+                }
+				product_grid_html = product_grid_html + '</div>';
+				return product_grid_html;
+				}
+
+                function getRVProductGridItem(html, x, settingData, shop_currency, query_id, index, gtmDatalist) {
+                    let product_grid_html = html;
+                    let main_grid_image = 'https://shopify.plugin.frenzy.ai/api/public/assets/images/placeholder_img.jpg';
+                    if (x.images.large[0].url) {
+                        if (x.images.large[0].url.includes(' ')) {
+                            let pro_image = (x.images.large[0].url).split(" ");
+                            main_grid_image = pro_image[0];
+                            } else {
+                            main_grid_image = x.images.large[0].url;
+                        }
+                        let imagspilt = main_grid_image.split('/on/');
+                        main_grid_image = 'https://www.whatgoesaroundnyc.com/dw/image/v2/BGND_PRD/on/'+ imagspilt[1];
+                    }
+                    let prod_url = x.selectedProductUrl.split('?')[0]; // to default query string in url
+                    let stock_available = x.available;
+                    let grid_class_name = settingData.layout_type === '1' ? 'frenzy_grid' : 'frenzy_grid swiper-slide';
+                    let grid_text_align = settingData.grid_align_text === '1' ? 'text_align_left' : settingData.grid_align_text === '2' ? 'text_align_right' : 'text_align_center';
+                    let gtmdata = { ...x.gtmData };
+                    gtmdata.item_brand = gtmdata.brand || '';
+                    gtmdata.discount = Number(gtmdata.discount_price || 0);
+                    gtmdata.item_list_id = 'recently_viewed';
+                    gtmdata.item_list_name = 'Recently Viewed';
+                    gtmdata.price = Number(gtmdata.price) || 0;
+                    gtmdata.quantity = 1;
+                    gtmdata.item_category = '';
+                    gtmdata.item_category2 = '';
+                    delete gtmdata.brand;
+                    delete gtmdata.discount_price;
+                    delete gtmdata.discount_percent;
+                    delete gtmdata.category;
+                    let pName = x.productName;
+                    let pBrand = x.brand;
+                    let position = index + 1;
+                    let discount_percent = 0;
+                    let discount_price = 0;
+
+                    product_grid_html = '<div class="' + grid_class_name + ' out_of_stock_' + stock_available + ' ' +  grid_text_align + ' ' + '">' + product_grid_html;
+                    product_grid_html = product_grid_html.replaceAll('[[query_id]]', query_id);
+                    product_grid_html = product_grid_html.replaceAll('[[product_featured_image]]', main_grid_image);
+                    product_grid_html = product_grid_html.replaceAll('[[product_id]]', x.id);
+                    product_grid_html = product_grid_html.replaceAll('[[product_title]]', x.productName);
+                    product_grid_html = product_grid_html.replaceAll('[[product_brand]]', x.brand);
+                    product_grid_html = product_grid_html.replaceAll('[[product_url]]', prod_url);
+                    let gggData = JSON.stringify(gtmdata).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+                    product_grid_html = product_grid_html.replaceAll('[[gtmdata]]', gggData);
+                    product_grid_html = product_grid_html.replaceAll('[[product_sale_price]]', x.price.sales.formatted);
+                    // if (x.available) {
+                    //     product_grid_html = product_grid_html.replaceAll('[[product_stock_status]]', '');
+                    // }else{
+                    //     product_grid_html = product_grid_html.replaceAll('[[product_stock_status]]', 'disabled');
+                    // }
+                    product_grid_html = product_grid_html + '</div>';
+                    return product_grid_html;
+				}
+
+                document.addEventListener('DOMContentLoaded', function(){
+                    // Load Recommendation Section
+                    if (get_frenzy_recommendation_section) {
+                        getHomepageProductsApi();
+                    }
+                });
+                // Load Recently Viewed Section
+                getProductDetailsArray().then((array) => {
+                    if(array.length){
+                        get_recently_viewed_section.style.display = "block";
+                        getRVProductsSection(array, frenzy_setting_recomm_data, frenzy_setting_recomm_html, 'xyz');
+                    }else{
+                        get_recently_viewed_section.style.display = "none";
+                    }
+                });
+			</script>
+    </isif>
+
+    <iscomment> einsten recomenedations pdp start </iscomment>
+    <div class="einstein_section overflow-hidden px-5 w-100">
+        <div class="einstein-scroll">
+            <isslot id="einstein-pdp-recommendations" description="Einstein PDP Recommendations" context="global" />
+        </div>
+    </div>
+    <iscomment> einsten recomenedations pdp end </iscomment>
+
+
+    <!-- Main Content Including Attributes and Collapsible Content -->
+    <isset name="loopState" value="{count: 1}" scope="page" />
+    <isinclude template="product/components/mainContent" />
+
+    <!-- Tabs -->
+    <isinclude template="product/components/tabs" />
+
+</div>
+
+<isif condition="${!empty(product.pdpAssetIds)}">
+    <div class="pdp-assets container">
+        <div class="row justify-content-center">
+            <isloop items="${product.pdpAssetIds}" var="assetId">
+                <div class="col-12 col-md pdp-asset">
+                    <iscontentasset aid="${assetId}" personalized="true" />
+                </div>
+            </isloop>
+        </div>
+    </div>
+</isif>
+
+</isobject>

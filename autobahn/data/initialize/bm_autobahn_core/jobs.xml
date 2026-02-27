@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+
+    <job job-id="GoogleMerchantProductExport" priority="0">
+        <description/>
+        <parameters/>
+        <split sequential="true">
+            <contexts template-ref="template_26">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_26">
+                <step step-id="custom.GoogleMerchant.ProductExport" type="custom.GoogleMerchant.ProductExport" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="CurrencyCode">USD</parameter>
+                        <parameter name="UnitsInInches">true</parameter>
+                        <parameter name="SkipMaster">true</parameter>
+                        <parameter name="AvailableOnly">true</parameter>
+                        <parameter name="OnlineOnly">true</parameter>
+                    </parameters>
+                    <rules>
+                        <on-exit status="ERROR">
+                            <continue/>
+                        </on-exit>
+                    </rules>
+                </step>
+            </flow-template>
+        </split>
+        <split sequential="false">
+            <contexts template-ref="template_237">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_237">
+                <step step-id="custom.CSComponents.FtpUpload" type="custom.CSComponents.FtpUpload" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="ServiceID">google.merchant.feed</parameter>
+                        <parameter name="FilePattern">GMerchantFeed\.csv</parameter>
+                        <parameter name="SourceFolder">src/googlemerchant/catalog</parameter>
+                        <parameter name="TargetFolder">_root_</parameter>
+                        <parameter name="Recursive">false</parameter>
+                        <parameter name="NoFileFoundStatus">ERROR</parameter>
+                    </parameters>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="false">
+                <recurrence>
+                    <date-from>2019-06-12Z</date-from>
+                    <start-time>18:33:00.000Z</start-time>
+                    <interval>24h</interval>
+                    <day-of-week/>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+</jobs>

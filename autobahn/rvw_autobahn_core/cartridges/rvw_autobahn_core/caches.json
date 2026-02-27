@@ -1,0 +1,8 @@
+{
+  "caches": [
+    {
+      "id": "customPromoCache",
+      "expireAfterSeconds": 86400
+    }
+  ]
+}

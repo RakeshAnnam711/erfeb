@@ -1,0 +1,66 @@
+/* Parent prevents page overflow */
+.reco-scroll-wrapper {
+    width: 100%;
+    overflow: hidden;   /* critical */
+    position: relative;
+}
+
+/* Horizontal scroller */
+.product-grid-new {
+    display: flex;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 24px;
+    scroll-behavior: smooth;
+
+    /* Prevent page width expansion */
+    max-width: 100%;
+}
+
+/* Remove Bootstrap row margins */
+.product-grid-new.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Lock card width */
+.product-grid-new> [class*="col-"] {
+    flex: 0 0 auto;
+    width: 280px;
+    max-width: 280px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Optional scrollbar */
+.product-grid-new::-webkit-scrollbar {
+    height: 4px;
+}
+
+.product-grid-new::-webkit-scrollbar-thumb {
+    background: #000;
+}
+.product-grid-new .tile-image,
+.product-grid-new .product-tile-image-secondary {
+    min-height: 175px !important;
+    max-height: 175px !important;
+}
+.product-grid-new .product-tile .product-tile-image-link {
+    min-height: 200px !important;
+    max-height: 200px !important;
+}
+.product-grid-new .product-tile {
+    margin-bottom :0;
+}
+.product-grid-new .product-tile .tile-body .price  {
+    height :20px;
+}
+.product-grid-new .recommendation-card {
+    width: 220px;
+    max-width: 220px;
+}
+
+.product-grid-new .recommendation-card .product-tile a:hover {
+    text-decoration: none;
+}

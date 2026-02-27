@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="GlobaleSettings" priority="0">
+        <description>Loads the Global-e Settings in respective SFCC Custom Objects</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArchGlobal"/>
+            <step step-id="AppSettings" type="custom.GlobaleAppSettings" enforce-restart="false">
+                <description>Loads Global-e AppSettings</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="Countries" type="custom.GlobaleCountries" enforce-restart="false">
+                <description>Loads Global-e Countries</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="CountryCoefficients" type="custom.GlobaleCountryCoefficients" enforce-restart="false">
+                <description>Loads Global-e Country Coefficients</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="Cultures" type="custom.GlobaleCultures" enforce-restart="false">
+                <description>Loads Global-e Cultures</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="Currencies" type="custom.GlobaleCurrencies" enforce-restart="false">
+                <description>Loads Global-e Currencies</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="CurrencyRates" type="custom.GlobaleCurrencyRates" enforce-restart="false">
+                <description>Loads Global-e Currency Rates</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="RoundingRules" type="custom.GlobaleRoundingRules" enforce-restart="false">
+                <description>Loads Global-e Rounding Rules</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="ActiveHubDetails" type="custom.GlobaleActiveHubDetails" enforce-restart="false">
+                <description>Loads Global-e Active Hub Details</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="RefArchGlobal"/>
+            <step step-id="GlobaleGenerateCachePriceBooksXML" type="custom.GlobaleGenerateCachePriceBooksXML" enforce-restart="false">
+                <description>Generates Global-e cache price books XML</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="Sites"/>
+            <step step-id="GlobaleImportPriceBook" type="ImportPriceBook" enforce-restart="false">
+                <description>Imports Global-e cache price books</description>
+                <parameters>
+                    <parameter name="WorkingFolder">globale/pricebooks</parameter>
+                    <parameter name="FileNamePattern">globale_pricebooks_.*\.xml</parameter>
+                    <parameter name="NoFilesFoundHandling">OK</parameter>
+                    <parameter name="ImportMode">Merge</parameter>
+                    <parameter name="ImportFailedHandling">ERROR</parameter>
+                    <parameter name="AfterImportFileHandling">Delete</parameter>
+                    <parameter name="ArchiveFolder">src/globale/pricebooks/archive</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="RefArchGlobal"/>
+            <step step-id="InvalidatePageCache" type="InvalidateCache" enforce-restart="false">
+                <description>Invalidates Cache</description>
+                <parameters>
+                    <parameter name="InvalidatePageCache">true</parameter>
+                    <parameter name="InvalidateStaticCache">false</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2018-01-01Z</date-from>
+                    <start-time>02:00:00.000Z</start-time>
+                    <interval>1d</interval>
+                    <day-of-week>
+                        <weekday>Thursday</weekday>
+                        <weekday>Saturday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Sunday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Wednesday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="GlobaleProducts" priority="0">
+        <description>Loads products resrictions and destination VAT rates for different countries.</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArchGlobal"/>
+            <step step-id="LoadRecentProductCountryData" type="custom.GlobaleLoadRecentProductCountryS" enforce-restart="false">
+                <description>Loads Recent ProductCountry Data (delta)</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="ImportRecentProductCountryData" type="custom.GlobaleImportRecentProductCountryS" enforce-restart="false">
+                <description>Import Recent ProductCountry Data</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="RefArchGlobal"/>
+            <step step-id="ArchiveRecentProductCountryData" type="custom.GlobaleArchiveRecentProductCountryS" enforce-restart="false">
+                <description>Archive Recent ProductCountry Data</description>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <rules>
+            <on-running runtime-threshold="60m" enabled="false">
+                <mark-job-as-hanging/>
+            </on-running>
+        </rules>
+        <triggers>
+            <run-recurring enabled="false">
+                <recurrence>
+                    <date-from>2018-01-01Z</date-from>
+                    <start-time>05:00:00.000Z</start-time>
+                    <interval>15m</interval>
+                    <day-of-week>
+                        <weekday>Friday</weekday>
+                        <weekday>Thursday</weekday>
+                        <weekday>Sunday</weekday>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Saturday</weekday>
+                        <weekday>Tuesday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="GlobaleOrderNotifications" priority="0">
+        <description>This job sends the Order status update, the UpdateOrderDispatchV2 request, the CreateOrderRefund request to Global-e</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArchGlobal"/>
+            <step step-id="UpdateOrderStatus" type="custom.GlobaleUpdateOrderStatus" enforce-restart="false">
+                <description>Sends the Order status update to Global-e</description>
+                <parameters>
+                    <parameter name="geDisableJobStep">false</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <continue/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="UpdateOrderDispatch" type="custom.GlobaleUpdateOrderDispatch" enforce-restart="false">
+                <description>Sends the UpdateOrderDispatchV2 request to Global-e</description>
+                <parameters>
+                    <parameter name="geDisableJobStep">false</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <continue/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="CreateOrderRefund" type="custom.GlobaleCreateOrderRefund" enforce-restart="false">
+                <description>Sends the CreateOrderRefund request to Global-e</description>
+                <parameters>
+                    <parameter name="geDisableJobStep">false</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <continue/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="UpdateRMA" type="custom.GlobaleUpdateRMA" enforce-restart="false">
+                <description>Sends the UpdateRMA request to Global-e</description>
+                <parameters>
+                    <parameter name="geDisableJobStep">true</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <continue/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <rules>
+            <on-running runtime-threshold="60m" enabled="false">
+                <mark-job-as-hanging/>
+            </on-running>
+        </rules>
+        <triggers>
+            <run-recurring enabled="false">
+                <recurrence>
+                    <date-from>2018-01-01Z</date-from>
+                    <start-time>05:00:00.000Z</start-time>
+                    <interval>15m</interval>
+                    <day-of-week>
+                        <weekday>Thursday</weekday>
+                        <weekday>Saturday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Sunday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Wednesday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="GlobaleCatalogFeed" priority="0">
+        <description>Generates Catalog Feed and sends it to Global-e SFTP folder</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArchGlobal"/>
+            <step step-id="GenerateCatalogFeed" type="custom.GlobaleGenerateCatalogFeed" enforce-restart="false">
+                <description>Generates Catalog file and stores it in IMPEX/* folder</description>
+                <parameters>
+                    <parameter name="geDisableJobStep">false</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+            <step step-id="UploadCatalogFeed" type="custom.GlobaleUploadCatalogFeed" enforce-restart="false">
+                <description>Uploads generated Catalog file from IMPEX/* to Global-e SFTP folder</description>
+                <parameters>
+                    <parameter name="geDisableJobStep">false</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <rules>
+            <on-running runtime-threshold="60m" enabled="false">
+                <mark-job-as-hanging/>
+            </on-running>
+        </rules>
+        <triggers>
+            <run-recurring enabled="false">
+                <recurrence>
+                    <date-from>2018-01-01Z</date-from>
+                    <start-time>05:00:00.000Z</start-time>
+                    <interval>1d</interval>
+                    <day-of-week>
+                        <weekday>Thursday</weekday>
+                        <weekday>Saturday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Sunday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Wednesday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+</jobs>

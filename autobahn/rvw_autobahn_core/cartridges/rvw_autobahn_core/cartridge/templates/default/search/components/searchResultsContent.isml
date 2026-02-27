@@ -1,0 +1,121 @@
+<isset name="filterType" value="${pdict.abConfigs.filterType}" scope="page"/>
+<isset name="filterBarGrid" value="col-lg-3" scope="page"/>
+<isset name="productGrid" value="col-lg-9" scope="page"/>
+<isset name="refinmentBarHorizontalClass" value="" scope="page"/>
+
+<isif condition="${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown'}">
+    <isset name="filterBarGrid" value="col-sm-12" scope="page"/>
+    <isset name="productGrid" value="" scope="page"/>
+    <isset name="refinmentBarHorizontalClass" value="refinement-bar-horizontal" scope="page"/>
+    <isif condition="${filterType == 'horizontal-one-dropdown'}">
+        <isset name="refinmentBarHorizontalClass" value="refinement-bar-horizontal-one-dropdown" scope="page"/>
+    </isif>
+</isif>
+<isset name="hideSearchTabsClass" value="hide-search-tabs" scope="page"/>
+<isset name="productActive" value="active" scope="page"/>
+<isset name="contentActive" value="" scope="page"/>
+<isif condition="${!pdict.productSearch.isCategorySearch && pdict.contentCount > 0}">
+    <isset name="hideSearchTabsClass" value="" scope="page"/>
+</isif>
+<isif condition="${pdict.productSearch.productIds.length === 0 && pdict.contentCount > 0}">
+    <isset name="productActive" value="" scope="page"/>
+    <isset name="contentActive" value="active" scope="page"/>
+</isif>
+<isif condition="${pdict.apiProductSearch && pdict.apiProductSearch.categorySearch}">
+    <isactivedatacontext category="${pdict.apiProductSearch.category}"/>
+</isif>
+<div class="search-results">
+    <!--- Browser History Url parsed by search.js --->
+    <div class="history-data">
+        <div class="history-url" data-history-url="${pdict.historyUrl || pdict.productSearch.permalink}"></div>
+    </div>
+    <div class="container">
+        <div class="row search-nav ${hideSearchTabsClass}">
+            <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item" role="tab">
+                        <a class="nav-link ${productActive} product-search" href="#product-search-results" aria-controls="product-search-results" data-toggle="tab" role="tab" aria-selected="true" id="product-tab">
+                            ${Resource.msgf('tab.nav.search.productsresults', 'search', null, '(' +pdict.productSearch.count+ ')')}
+                        </a>
+                    </li>
+                    <isif condition="${!pdict.productSearch.isCategorySearch && pdict.contentCount > 0}">
+                        <li class="nav-item" role="tab">
+                            <a class="nav-link ${contentActive} content-search" href="#content-search-results-pane" aria-controls="content-search-results-pane" data-toggle="tab" role="tab" aria-selected="false" id="articles-tab"
+                                data-url="${URLUtils.url('Search-Content', 'q', pdict.productSearch.searchKeywords, 'startingPage', 0)}">
+                                ${Resource.msgf('tab.nav.search.artclesresults', 'search', null, '(' +pdict.contentCount+ ')')}
+                            </a>
+                        </li>
+                    </isif>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="tab-content col-12">
+                <div class="tab-pane ${productActive}" id="product-search-results" role="tabpanel" tabindex="0" aria-labelledby="product-tab">
+                        <isif condition="${pdict.productSearch.productIds.length > 0}">
+                            <div class="row grid-header">
+                                <div class="result-count text-center align-self-center col-12 col-sm-4 order-sm-2 d-lg-none pb-3">
+                                    <isinclude template="search/resultsCount" />
+                                </div>
+                            </div>
+                        <iselse/>
+                            <div class="row grid-header justify-content-center">
+                                <div class="result-count col">
+                                    <isif condition="${pdict.productSearch.productSearch.refinedSearch}">
+                                        <a class="text-link reset pr-2" href="${pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)} ${Resource.msg('button.filter', 'search', null)}</a>
+                                    </isif>
+                                    <isinclude template="search/resultsCount" />
+                                </div>
+                            </div>
+                        </isif>
+
+                        <isif condition="${pdict.productSearch.productIds.length > 0}">
+                            <div class="col-6 col-sm-4 col-lg-3 order-3 order-lg-1 ${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown' ? 'd-block d-lg-none' : ''}">
+                                <isinclude template="search/sortOrderMenu" />
+                            </div>
+
+                            <div class="col-6 col-sm-4 text-right d-lg-none order-1">
+                                <button type="button" class="btn btn-primary filter-results col-12" cypress-target="mobileRefinementsToggle">
+                                    ${Resource.msg('button.filter', 'search', null)}
+                                </button>
+                            </div>
+                        </isif>
+
+                    <isif condition="${pdict.productSearch.productIds.length > 0}">
+                        <!--- Refinement bar --->
+                        <div class="row">
+                            <div class="refinement-bar ${filterBarGrid} ${refinmentBarHorizontalClass}" cypress-target="plpRefinementBar">
+                                <isinclude template="search/searchRefineBar" />
+                            </div>
+
+                            <div class="col-sm-12 ${productGrid}">
+                                <!--- Selected filters bar --->
+                                <div class="row filter-bar" data-filter-bar-style-mobile="vertical" data-filter-bar-style-desktop="${filterType}">
+                                    <isif condition="${!empty(pdict.productSearch.selectedFilters)}">
+                                        <isinclude template="search/filterBar" />
+                                    </isif>
+
+                                    <div class="result-count d-none d-lg-block">
+                                        <isinclude template="search/resultsCount" />
+                                    </div>
+                                </div>
+
+                                <!--- Product Grid --->
+                                <div class="row product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product" cypress-target="productGrid">
+                                    <isinclude template="search/productGrid" />
+
+                                    ${dw.system.HookMgr.callHook('app.template.domInject', 'afterPLPGrid', pdict) || ''}
+                                </div>
+                            </div>
+                        </div>
+                    </isif>
+                </div>
+                <!--- Content Grid --->
+                <div class="tab-pane ${contentActive} container" id="content-search-results-pane" role="tabpanel" aria-labelledby="articles-tab">
+                    <div id="content-search-results" class="content-grid-header"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

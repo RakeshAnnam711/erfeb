@@ -1,0 +1,25 @@
+<isdecorate template="common/layout/page">
+<div class="order-unauthorized d-flex flex-column justify-content-center align-items-center text-center">
+    <div class="row w-100">
+        <div class="col-12">
+            <p class="order-unauthorized-text m-0 mb-4 font-weight-bold">
+                ${Resource.msg('info.order.unauthorized.msg', 'order', null)}
+            </p>
+        </div>
+        <div class="col-4 order-unauthorized-ctas d-flex flex-column gap-3 mx-auto">
+            <a href="${URLUtils.https('Login-Show')}"
+                class="btn btn-primary mb-2"
+                aria-label="${Resource.msg('link.login','order',null)}"
+                role="button">
+                ${Resource.msg('link.login','order',null)}
+            </a>
+            <a href="${URLUtils.https('TrackOrder-Show')}"
+                class="btn btn-secondary"
+                aria-label="${Resource.msg('link.check.order.status','order',null)}"
+                role="button">
+                ${Resource.msg('link.check.order.status','order',null)}
+            </a>
+        </div>
+    </div>
+</div>
+</isdecorate>

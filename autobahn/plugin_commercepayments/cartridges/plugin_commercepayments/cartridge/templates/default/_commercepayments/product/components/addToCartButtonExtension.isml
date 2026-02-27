@@ -1,0 +1,4 @@
+<isset name="buynowproduct" value="${product}" scope="page">
+<isset name="buynowprice" value="${price}" scope="page">
+
+<isinclude template="_commercepayments/components/product/buyNowButtons" sf-toolkit="off"/>

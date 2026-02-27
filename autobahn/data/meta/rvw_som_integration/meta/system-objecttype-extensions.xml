@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="ProductLineItem">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_brandId">
+                <display-name xml:lang="x-default">RVW AB SOM BrandId</display-name>
+                <description xml:lang="x-default">Indicates the primary brand this product would fall under.&#13;
+This custom attribute has been added to the ProductLineItem so that it will be available to SOM after the order is exported so that it might be used for reporting purposes (if needed).</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_brandId">
+                <display-name xml:lang="x-default">SOM BrandId</display-name>
+                <description xml:lang="x-default">Indicates the primary brand this product would fall under.&#13;
+This custom attribute has been added to the ProductLineItem so that it will be available to SOM after the order is exported so that it might be used for reporting purposes (if needed).</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="lastUpdateDate">
+                <display-name xml:lang="x-default">Last SOM Update</display-name>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityCanceled">
+                <display-name xml:lang="x-default">Quantity Canceled</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityReturned">
+                <display-name xml:lang="x-default">Quantity Returned</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityFulfilled">
+                <display-name xml:lang="x-default">Quantity Fulfilled</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityOrdered">
+                <display-name xml:lang="x-default">Quantity Ordered</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_UUID">
+                <display-name xml:lang="x-default">SOM UUID Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_UUID">
+                <display-name xml:lang="x-default">RVW AB SOM UUID Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="status">
+                <display-name xml:lang="x-default">Status</display-name>
+                <description xml:lang="x-default">Line Item Status</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingNumbersList">
+                <display-name xml:lang="x-default">TrackingNumbers</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Narvar_LOM__image_url">
+                <display-name xml:lang="x-default">Narvar LOM Image URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_classificationCategory">
+                <display-name xml:lang="x-default">SOM Classification Category</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_classificationCategory">
+                <display-name xml:lang="x-default">RVW AB SOM Classification Category</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_primaryCategory">
+                <display-name xml:lang="x-default">SOM Primary Category</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_primaryCategory">
+                <display-name xml:lang="x-default">RVW AB SOM Primary Category</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_PDP_URL">
+                <display-name xml:lang="x-default">RVW AB SOM Generic PDP Url</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_PDP_URL">
+                <display-name xml:lang="x-default">SOM Generic PDP Url</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_Image_URL">
+                <display-name xml:lang="x-default">RVW AB SOM Generic Image Url</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_Image_URL">
+                <display-name xml:lang="x-default">SOM Generic Image Url</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <!-- WGACA MODIFICATION extension for custom return integration -->
+            <attribute-definition attribute-id="somCC_returnable">
+                <display-name xml:lang="x-default">SOM Returnable</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <!-- END MODIFICATION -->
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="SOMUpdates">
+                <display-name xml:lang="x-default">SOM Updates</display-name>
+                <attribute attribute-id="trackingNumbersList"/>
+                <attribute attribute-id="lastUpdateDate"/>
+                <attribute attribute-id="rvw_autobahn__somCC_UUID"/>
+                <attribute attribute-id="rvw_autobahn__somCC_classificationCategory"/>
+                <attribute attribute-id="rvw_autobahn__somCC_primaryCategory"/>
+                <attribute attribute-id="rvw_autobahn__somCC_PDP_URL"/>
+                <attribute attribute-id="rvw_autobahn__somCC_Image_URL"/>
+                <attribute attribute-id="rvw_autobahn__somCC_brandId"/>
+                <attribute attribute-id="somCC_UUID"/>
+                <attribute attribute-id="somCC_classificationCategory"/>
+                <attribute attribute-id="somCC_primaryCategory"/>
+                <attribute attribute-id="somCC_PDP_URL"/>
+                <attribute attribute-id="somCC_Image_URL"/>
+                <attribute attribute-id="somCC_brandId"/>
+                <attribute attribute-id="status"/>
+                <attribute attribute-id="quantityCanceled"/>
+                <attribute attribute-id="quantityReturned"/>
+                <attribute attribute-id="quantityFulfilled"/>
+                <attribute attribute-id="quantityOrdered"/>
+                <attribute attribute-id="Narvar_LOM__image_url"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ShippingLineItem">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="externalLineItemStatus">
+                <display-name xml:lang="x-default">External LineItem Status</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="lastUpdateDate">
+                <display-name xml:lang="x-default">Last SOM Update</display-name>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_UUID">
+                <display-name xml:lang="x-default">SOM UUID Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_UUID">
+                <display-name xml:lang="x-default">RVW AB SOM UUID Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="status">
+                <display-name xml:lang="x-default">Status</display-name>
+                <description xml:lang="x-default">Line Item Status</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="SOMUpdates">
+                <display-name xml:lang="x-default">SOM Updates</display-name>
+                <attribute attribute-id="rvw_autobahn__somCC_UUID"/>
+                <attribute attribute-id="somCC_UUID"/>
+                <attribute attribute-id="externalLineItemStatus"/>
+                <attribute attribute-id="lastUpdateDate"/>
+                <attribute attribute-id="status"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="GiftCertificateLineItem">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="externalLineItemStatus">
+                <display-name xml:lang="x-default">External LineItem Status</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="lastUpdateDate">
+                <display-name xml:lang="x-default">Last SOM Update</display-name>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityValue">
+                <display-name xml:lang="x-default">Quantity Value</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityCanceled">
+                <display-name xml:lang="x-default">Quantity Canceled</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityReturned">
+                <display-name xml:lang="x-default">Quantity Returned</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityFulfilled">
+                <display-name xml:lang="x-default">Quantity Fulfilled</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityOrdered">
+                <display-name xml:lang="x-default">Quantity Ordered</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_UUID">
+                <display-name xml:lang="x-default">SOM UUID Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_UUID">
+                <display-name xml:lang="x-default">RVW AB SOM UUID Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="status">
+                <display-name xml:lang="x-default">Status</display-name>
+                <description xml:lang="x-default">Line Item Status</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="SOMUpdates">
+                <display-name xml:lang="x-default">SOM Updates</display-name>
+                <attribute attribute-id="rvw_autobahn__somCC_UUID"/>
+                <attribute attribute-id="somCC_UUID"/>
+                <attribute attribute-id="externalLineItemStatus"/>
+                <attribute attribute-id="lastUpdateDate"/>
+                <attribute attribute-id="status"/>
+                <attribute attribute-id="quantityValue"/>
+                <attribute attribute-id="quantityCanceled"/>
+                <attribute attribute-id="quantityReturned"/>
+                <attribute attribute-id="quantityFulfilled"/>
+                <attribute attribute-id="quantityOrdered"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="SOM_Auth_Salt">
+                <display-name xml:lang="x-default">SOM Authorization Salt</display-name>
+                <description xml:lang="x-default">Salt value to be appended to Secret &amp; Hashed to compare to SOM Request Header</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>1</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Auth_Secret">
+                <display-name xml:lang="x-default">SOM Authorization Secret</display-name>
+                <description xml:lang="x-default">Secret value to be Salted &amp; Hashed and compared to SOM Request Header</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>1</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_ALLOCATED">
+                <display-name xml:lang="x-default">ITEM_STATUS_ALLOCATED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_ALLOCATED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_CANCELED">
+                <display-name xml:lang="x-default">ITEM_STATUS_CANCELED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_CANCELED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_FULFILLED">
+                <display-name xml:lang="x-default">ITEM_STATUS_FULFILLED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_FULFILLED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_ORDERED">
+                <display-name xml:lang="x-default">ITEM_STATUS_ORDERED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_ORDERED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_PAID">
+                <display-name xml:lang="x-default">ITEM_STATUS_PAID Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_PAID if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_PARTIALLYALLOCATED">
+                <display-name xml:lang="x-default">ITEM_STATUS_PARTIALLYALLOCATED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_PARTIALLYALLOCATED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_PARTIALLYFULFILLED">
+                <display-name xml:lang="x-default">ITEM_STATUS_PARTIALLYFULFILLED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_PARTIALLYFULFILLED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_RESHIPPED">
+                <display-name xml:lang="x-default">ITEM_STATUS_RESHIPPED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_RESHIPPED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ITEM_STATUS_RETURNED">
+                <display-name xml:lang="x-default">ITEM_STATUS_RETURNED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ITEM_STATUS_RETURNED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ORDER_STATUS_CANCELLED">
+                <display-name xml:lang="x-default">ORDER_STATUS_CANCELLED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ORDER_STATUS_CANCELLED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ORDER_STATUS_COMPLETED">
+                <display-name xml:lang="x-default">ORDER_STATUS_COMPLETED Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ORDER_STATUS_COMPLETED if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Email_ORDER_STATUS_OPEN">
+                <display-name xml:lang="x-default">ORDER_STATUS_OPEN Email</display-name>
+                <description xml:lang="x-default">Send SOM_Email_ORDER_STATUS_OPEN if found.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_ALLOCATED">
+                <display-name xml:lang="x-default">ITEM_STATUS_ALLOCATED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_CANCELED">
+                <display-name xml:lang="x-default">ITEM_STATUS_CANCELED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_FULFILLED">
+                <display-name xml:lang="x-default">ITEM_STATUS_FULFILLED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_ORDERED">
+                <display-name xml:lang="x-default">ITEM_STATUS_ORDERED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_PAID">
+                <display-name xml:lang="x-default">ITEM_STATUS_PAID Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_PARTIALLYALLOCATED">
+                <display-name xml:lang="x-default">ITEM_STATUS_PARTIALLYALLOCATED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_PARTIALLYFULFILLED">
+                <display-name xml:lang="x-default">ITEM_STATUS_PARTIALLYFULFILLED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_RESHIPPED">
+                <display-name xml:lang="x-default">ITEM_STATUS_RESHIPPED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ITEM_STATUS_RETURNED">
+                <display-name xml:lang="x-default">ITEM_STATUS_RETURNED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ORDER_STATUS_CANCELLED">
+                <display-name xml:lang="x-default">ORDER_STATUS_CANCELLED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ORDER_STATUS_COMPLETED">
+                <display-name xml:lang="x-default">ORDER_STATUS_COMPLETED Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_StatusBucket_ORDER_STATUS_OPEN">
+                <display-name xml:lang="x-default">ORDER_STATUS_OPEN Bucket</display-name>
+                <description xml:lang="x-default">Comma separated list of status codes (no spaces) sent from SOM to SFCC.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>3</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_OrderHistory_DetailURL">
+                <display-name xml:lang="x-default">Order History Detail URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_OrderHistory_Endpoint">
+                <display-name xml:lang="x-default">SOM OrderHistory Endpoint</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_OrderHistory_LightningOut_URL">
+                <display-name xml:lang="x-default">URL for SOM lightning.out.js</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_OrderHistory_Namespace">
+                <display-name xml:lang="x-default">SOM Order History Namespace</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="SOM_Order_History_Enabled">
+                <display-name xml:lang="x-default">Use SOM Order History?</display-name>
+                <description xml:lang="x-default">Check this preference to use Order History directly from SOM instead of Commerce Cloud</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="SOMOptions">
+                <display-name xml:lang="x-default">SOM Configurations</display-name>
+                <attribute attribute-id="SOM_Auth_Secret"/>
+                <attribute attribute-id="SOM_Auth_Salt"/>
+                <attribute attribute-id="SOM_StatusBucket_ORDER_STATUS_OPEN"/>
+                <attribute attribute-id="SOM_Email_ORDER_STATUS_OPEN"/>
+                <attribute attribute-id="SOM_StatusBucket_ORDER_STATUS_COMPLETED"/>
+                <attribute attribute-id="SOM_Email_ORDER_STATUS_COMPLETED"/>
+                <attribute attribute-id="SOM_StatusBucket_ORDER_STATUS_CANCELLED"/>
+                <attribute attribute-id="SOM_Email_ORDER_STATUS_CANCELLED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_ORDERED"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_ORDERED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_CANCELED"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_CANCELED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_PARTIALLYALLOCATED"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_PARTIALLYALLOCATED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_ALLOCATED"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_ALLOCATED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_PARTIALLYFULFILLED"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_PARTIALLYFULFILLED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_FULFILLED"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_FULFILLED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_RETURNED"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_RETURNED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_RESHIPPED"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_RESHIPPED"/>
+                <attribute attribute-id="SOM_StatusBucket_ITEM_STATUS_PAID"/>
+                <attribute attribute-id="SOM_Email_ITEM_STATUS_PAID"/>
+            </attribute-group>
+            <attribute-group group-id="SOMOrderHistory">
+                <display-name xml:lang="x-default">SOM Order History</display-name>
+                <attribute attribute-id="SOM_Order_History_Enabled"/>
+                <attribute attribute-id="SOM_OrderHistory_Endpoint"/>
+                <attribute attribute-id="SOM_OrderHistory_LightningOut_URL"/>
+                <attribute attribute-id="SOM_OrderHistory_Namespace"/>
+                <attribute attribute-id="SOM_OrderHistory_DetailURL"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="somCC_checkoutStorefront">
+                <display-name xml:lang="x-default">SOM Checkout Storefront</display-name>
+                <description xml:lang="x-default">This custom attribute was added so that it can be available for SOM.&#13;
+The source code that is already on the order and will have the same value is, unfortunately, not available to SOM when the order is exported.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_checkoutStorefront">
+                <display-name xml:lang="x-default">RVW AB SOM Checkout Storefront</display-name>
+                <description xml:lang="x-default">This custom attribute was added so that it can be available for SOM.&#13;
+The source code that is already on the order and will have the same value is, unfortunately, not available to SOM when the order is exported.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="paymentStatus">
+                <display-name xml:lang="x-default">SOM Payment Status</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_customerID">
+                <display-name xml:lang="x-default">SOM CustomerID Duplicate</display-name>
+                <description xml:lang="x-default">System generated ID of the customer, also generated for guest checkout</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_customerNo">
+                <display-name xml:lang="x-default">SOM CustomerNo Duplicate</display-name>
+                <description xml:lang="x-default">Unique identifier for customer profile, also generated for guest checkout</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_billingFirstName">
+                <display-name xml:lang="x-default">SOM Billing First Name Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_billingFirstName">
+                <display-name xml:lang="x-default">RVW AB SOM Billing First Name Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_billingLastName">
+                <display-name xml:lang="x-default">SOM Billing Last Name Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_billingLastName">
+                <display-name xml:lang="x-default">RVW AB SOM Billing Last Name Duplicate</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_paymentInstrumentCreditCardType">
+                <display-name xml:lang="x-default">SOM Billing Payment Instrument Type</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rvw_autobahn__somCC_paymentInstrumentCreditCardType">
+                <display-name xml:lang="x-default">RVW AB SOM Billing Payment Instrument Type</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="somCC_orderSyncResolution">
+                <display-name xml:lang="x-default">SOM Order Sync Resolution</display-name>
+                <description xml:lang="x-default">Order Sync value is set post order export to SOM. Via OCAPI PATCH Request or Manual Intervention</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">matched</display>
+                        <value>matched</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">unmatched</display>
+                        <value>unmatched</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">ignore</display>
+                        <value>ignore</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="SOMUpdates">
+                <display-name xml:lang="x-default">SOM Updates</display-name>
+                <attribute attribute-id="paymentStatus"/>
+                <attribute attribute-id="rvw_autobahn__somCC_billingFirstName"/>
+                <attribute attribute-id="rvw_autobahn__somCC_billingLastName"/>
+                <attribute attribute-id="rvw_autobahn__somCC_paymentInstrumentCreditCardType"/>
+                <attribute attribute-id="rvw_autobahn__somCC_checkoutStorefront"/>
+                <attribute attribute-id="somCC_customerID"/>
+                <attribute attribute-id="somCC_customerNo"/>
+                <attribute attribute-id="somCC_billingFirstName"/>
+                <attribute attribute-id="somCC_billingLastName"/>
+                <attribute attribute-id="somCC_paymentInstrumentCreditCardType"/>
+                <attribute attribute-id="somCC_checkoutStorefront"/>
+                <attribute attribute-id="somCC_orderSyncResolution"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

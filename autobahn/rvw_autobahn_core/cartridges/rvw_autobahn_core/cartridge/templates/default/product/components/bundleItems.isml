@@ -1,0 +1,17 @@
+<div class="row pt-5">
+    <div class="col-12">
+        <h3 class="bundle-items-label">${Resource.msg('label.bundle.contains', 'product', null)}</h3>
+    </div>
+</div>
+
+<div class="bundle-items">
+    <isloop items="${product.bundledProducts}" var="productItem" status="loopState">
+        <isset name="product" value="${productItem}" scope="page" />
+        <isset name="isBundle" value="${true}" scope="page" />
+        <isset name="isBundleMainProduct" value="${false}" scope="page" />
+        <isset name="bundleProductDataWidth" value="${'col-12 col-md-' + (12 - parseInt(product.pdpImageColumnWidth.split('/')[0]))}" scope="page"/>
+
+        <isinclude template="product/components/bundleItem" />
+    </isloop>
+</div>
+

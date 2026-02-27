@@ -1,0 +1,25 @@
+<isset name="megamenuNavLayout" value="${pdict.abConfigs.megamenuNavLayout || 'mega-standard'}" scope="page"/>
+<ul class="dropdown-menu menu-level-${menuLevel.toFixed()} ${secondaryNavDropdownClass}" role="menu" aria-label="${category.id}">
+    <isif condition="${menuItem.showViewAllLink}">
+        <li class="dropdown-item view-all-link d-none d-lg-block" role="menuitem">
+            <a href="${menuItem.url}" id="view-all-${menuItem.id}" role="button" class="dropdown-link" tabindex="0">${Resource.msg('link.viewall', 'account', null)} ${menuItem.name}</a>
+        </li>
+    </isif>
+    <isloop items="${menuItem.subCategories}" var="category" status="subCatLoopStatus">
+        <isif condition="${category.subCategories}">
+            <li class="dropdown-item custom-dropdown ${category.parentOfActive ? 'contains-inview' : ''} ${category.active ? 'is-inview' : ''}" role="menuitem">
+                <a href="${category.url}" id="${category.id}" class="dropdown-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">${category.name}</a>
+                <isset name="menuItem" value="${category}" scope="page" />
+                <iscomment> menuLevel is incremented up as we include another level of navigation</iscomment>
+                <isset name="menuLevel" value="${menuLevel + 1}" scope="page" />
+                <isinclude template="components/header/menuItem" />
+                <iscomment> menuLevel is incremented down to maintain a proper value for the next instance of the isloop </iscomment>
+                <isset name="menuLevel" value="${menuLevel - 1}" scope="page" />
+            </li>
+        <iselse/>
+            <li class="dropdown-item ${category.parentOfActive ? 'contains-inview' : ''} ${category.active ? 'is-inview' : ''}" role="menuitem">
+                <a href="${category.url}" id="${category.id}" role="button" class="dropdown-link" tabindex="0">${category.name}</a>
+            </li>
+        </isif>
+    </isloop>
+</ul>

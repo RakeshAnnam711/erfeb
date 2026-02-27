@@ -1,0 +1,46 @@
+// custom toast messages for adding/removing in wishlists
+.wishlist-toast {
+    // these needed to be added as mixins vs. classes to avoid disrupting behavior of normal toast messages
+    @include toast-message;
+    .alert {
+        @include toast-alert;
+    }
+    // provide more space on small screens to avoid wrapping
+    @include media-breakpoint-down(sm){
+        width: calc(100vw - #{$spacer});
+    }
+    &.hide {
+        z-index: -1;
+        opacity: 0;
+        display: none;
+    }
+    &.show {
+        z-index: $z-index-toast;
+        opacity: 1;
+        display: block;
+    }
+    .wishlist-name {
+        font-weight: bold;
+    }
+}
+
+.wishlist-toast-message-wrapper {
+    .message {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 0; // overwrite margin-bottom applied by p tags
+        &:not(.error){
+            @include icon($icon-checkmark);
+        }
+        .manage,
+        .undo {
+            &:before {
+                content: "|";
+                padding-right: calc(#{$spacer} / 2);
+                text-decoration: none;
+                display: inline-block;
+            }
+        }
+    }
+}

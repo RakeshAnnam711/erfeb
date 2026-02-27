@@ -1,0 +1,6 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscomment>Performance: Load global.css asynchronously to prevent render blocking - uses preload pattern compatible with existing async CSS loader</iscomment>
+<isset name="globalCssUrl" value="${URLUtils.staticURL(pdict.theme.exists ? pdict.theme.src : '/css/global.css')}" scope="page" />
+<link rel="preload" href="${globalCssUrl}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link id="globalStyles" rel="stylesheet" href="${globalCssUrl}" /></noscript>
+

@@ -1,0 +1,5 @@
+dw.json
+.vscode
+.history
+
+!/**/static/**

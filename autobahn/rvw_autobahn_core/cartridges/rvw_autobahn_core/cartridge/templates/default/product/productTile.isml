@@ -1,0 +1,43 @@
+<div class="product-tile  ${!empty(pdict.swatchMethod) ? pdict.swatchMethod : ''} ${!empty(pdict.plpHoverEffects) ? pdict.plpHoverEffects : ''}" data-pid="${product.id}" cypress-target="productTile">
+    <!-- dwMarker="product" dwContentID="${product.uuid}" -->
+    <isinclude template="product/components/productTileImage" />
+    <div class="tile-body ${pdict.plpContentAlignment === 'left' ? 'align-items-start'
+                            : (pdict.plpContentAlignment === 'center' ? 'align-items-center'
+                            : 'align-items-end')}"
+    >
+        <isinclude template="product/components/productTileName" />
+
+        <isset name="price" value="${product.price}" scope="page" />
+        <isif condition="${product.productType === 'set'}">
+            <isinclude template="product/components/pricing/setPrice" />
+        <iselse/>
+            <isinclude template="product/components/pricing/main" />
+        </isif>
+
+        <isinclude template="integrations/product/productTileIntegrationsPostPrice"/>
+
+        <isif condition="${pdict.abConfigs.plpPromotionShow === true}">
+            <isinclude template="product/components/promotions" />
+        </isif>
+
+        <isif condition="${pdict.display.ratings !== false}">
+            <isinclude template="product/components/ratings" />
+        </isif>
+
+        <!-- Options (Included but hidden for quick add to cart, default options selected) -->
+        <div class="product-options d-none">
+            <isif condition="${product.options && product.options.length > 0}">
+                    <isinclude template="product/components/options" />
+            </isif>
+        </div>
+
+        <isif condition="${pdict.display.swatches !== false}">
+            <isinclude template="product/components/productTileSwatch" />
+        </isif>
+    </div>
+    <!-- END_dwmarker -->
+</div>
+<iscomment> pdict.plpHoverEffects
+${pdict.plpContentAlignment === 'left' ? 'justify-content-start'
+    : (pdict.plpContentAlignment === 'center' ? 'justify-content-center'
+    : 'justify-content-end')} </iscomment>

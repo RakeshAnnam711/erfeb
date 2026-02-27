@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-profile service-profile-id="Flow.prof">
+        <timeout-millis>5000</timeout-millis>
+        <rate-limit-enabled>true</rate-limit-enabled>
+        <rate-limit-calls>200</rate-limit-calls>
+        <rate-limit-millis>1000</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>10</cb-calls>
+        <cb-millis>5000</cb-millis>
+    </service-profile>
+
+    <service service-id="FlowAPI">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>Flow</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Flow.prof</profile-id>
+        <credential-id>FlowAPI.cred</credential-id>
+    </service>
+
+    <service service-id="FlowSFTP">
+        <service-type>SFTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Flow.prof</profile-id>
+        <credential-id/>
+    </service>
+</services>

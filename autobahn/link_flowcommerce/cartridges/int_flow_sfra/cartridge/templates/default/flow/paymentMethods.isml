@@ -1,0 +1,7 @@
+<isif condition="${ !empty(pdict.paymentMethods) }">
+    <div class='row justify-content-center flow-payment-methods'>
+        <isloop items="${pdict.paymentMethods}" var="pm">
+            <img class='px-1' alt='${ pm.payment_method.name }' src='${ pm.payment_method.images.medium.url }' height='30' />
+        </isloop>
+    </div>
+</isif>

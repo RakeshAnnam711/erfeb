@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coupons xmlns="http://www.demandware.com/xml/impex/coupon/2008-06-17">
+    <coupon coupon-id="DEMO-10OFF-PRODUCT">
+        <enabled-flag>true</enabled-flag>
+        <case-insensitive>true</case-insensitive>
+        <redemption-limits>
+            <allow-multiple-codes-per-order>false</allow-multiple-codes-per-order>
+        </redemption-limits>
+        <single-code>DEMO-10OFF-PRODUCT</single-code>
+    </coupon>
+
+    <coupon coupon-id="DEMO-10%-PRODUCT">
+        <enabled-flag>true</enabled-flag>
+        <case-insensitive>true</case-insensitive>
+        <redemption-limits>
+            <allow-multiple-codes-per-order>false</allow-multiple-codes-per-order>
+        </redemption-limits>
+        <single-code>DEMO-10%-PRODUCT</single-code>
+    </coupon>
+
+    <coupon coupon-id="DEMO-FREE-SHIPPING">
+        <enabled-flag>true</enabled-flag>
+        <case-insensitive>true</case-insensitive>
+        <redemption-limits>
+            <allow-multiple-codes-per-order>false</allow-multiple-codes-per-order>
+        </redemption-limits>
+        <single-code>DEMO-FREE-SHIPPING</single-code>
+    </coupon>
+
+    <coupon coupon-id="DEMO-10OFF-ORDER">
+        <enabled-flag>true</enabled-flag>
+        <case-insensitive>true</case-insensitive>
+        <redemption-limits>
+            <allow-multiple-codes-per-order>false</allow-multiple-codes-per-order>
+        </redemption-limits>
+        <single-code>DEMO-10OFF-ORDER</single-code>
+    </coupon>
+
+    <coupon coupon-id="DEMO-10%-ORDER">
+        <enabled-flag>true</enabled-flag>
+        <case-insensitive>true</case-insensitive>
+        <redemption-limits>
+            <allow-multiple-codes-per-order>false</allow-multiple-codes-per-order>
+        </redemption-limits>
+        <single-code>DEMO-10%-ORDER</single-code>
+    </coupon>
+
+    <coupon coupon-id="DEMO-BONUS">
+        <enabled-flag>true</enabled-flag>
+        <case-insensitive>true</case-insensitive>
+        <redemption-limits>
+            <allow-multiple-codes-per-order>false</allow-multiple-codes-per-order>
+        </redemption-limits>
+        <single-code>DEMO-BONUS</single-code>
+    </coupon>
+
+</coupons>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inventory xmlns="http://www.demandware.com/xml/impex/inventory/2007-05-31">
+    <inventory-list>
+        <header list-id="inventory_m_store_store1">
+            <default-instock>false</default-instock>
+            <description>Inventory list for store: Store1</description>
+            <use-bundle-inventory-only>false</use-bundle-inventory-only>
+            <on-order>false</on-order>
+        </header>
+
+        <records>
+
+            <record product-id="hydra-38-backpack-blue-L">
+                <allocation>100</allocation>
+                <allocation-timestamp>2021-10-15T19:39:00.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>100</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpack-blue-S">
+                <allocation>100</allocation>
+                <allocation-timestamp>2021-10-15T19:38:59.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>100</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpack-orange-L">
+                <allocation>100</allocation>
+                <allocation-timestamp>2021-10-15T19:39:00.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>100</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpack-orange-S">
+                <allocation>100</allocation>
+                <allocation-timestamp>2021-10-15T19:39:00.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>100</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpack-white-L">
+                <allocation>100</allocation>
+                <allocation-timestamp>2021-10-15T19:39:00.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>100</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpack-white-S">
+                <allocation>100</allocation>
+                <allocation-timestamp>2021-10-15T19:39:00.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>100</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpacks-blue-L">
+                <allocation>1</allocation>
+                <allocation-timestamp>2021-10-12T18:22:42.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>1</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpacks-blue-S">
+                <allocation>1</allocation>
+                <allocation-timestamp>2021-10-12T18:22:42.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>1</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpacks-orange-L">
+                <allocation>1</allocation>
+                <allocation-timestamp>2021-10-12T18:22:42.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>1</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpacks-orange-S">
+                <allocation>1</allocation>
+                <allocation-timestamp>2021-10-12T18:22:42.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>1</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpacks-white-L">
+                <allocation>1</allocation>
+                <allocation-timestamp>2021-10-12T18:22:43.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>1</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="hydra-38-backpacks-white-S">
+                <allocation>1</allocation>
+                <allocation-timestamp>2021-10-12T18:22:43.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>1</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-gray-L">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:07.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-gray-M">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:07.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-gray-S">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:07.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>27</ats>
+                <on-order>0</on-order>
+                <turnover>3</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-green-L">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:08.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-green-M">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:08.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-green-S">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:08.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-peach-L">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:10.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-peach-M">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:10.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-peach-S">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:10.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-pink-L">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:09.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-pink-M">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:08.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-pink-S">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:08.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-teal-L">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:09.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-teal-M">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:09.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+            <record product-id="women-s-fave-lite-lfc-full-zip-teal-S">
+                <allocation>30</allocation>
+                <allocation-timestamp>2021-10-05T16:42:09.000Z</allocation-timestamp>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+                <ats>30</ats>
+                <on-order>0</on-order>
+                <turnover>0</turnover>
+            </record>
+
+        </records>
+    </inventory-list>
+</inventory>

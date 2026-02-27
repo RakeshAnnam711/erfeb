@@ -1,0 +1,621 @@
+.product-detail {
+    margin-bottom: $spacer;
+    .primary-images {
+        img {
+            aspect-ratio: $pdp-image-aspectratio;
+        }
+        .slider-container {
+            margin-bottom: 0;
+        }
+        .primary-images-main.product-has-thumbnails {
+            margin-bottom: $slider-thumbnail-spacing;
+        }
+        @include media-breakpoint-up(lg) {
+            &>.row {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .primary-images-thumbnails {
+                flex-basis: $slider-thumbnail-width-lg;
+                max-width: $slider-thumbnail-width-lg;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .primary-images-main {
+                padding-left: 0;
+                padding-right: 0;
+                &.product-has-thumbnails {
+                    flex-basis: calc(100% - #{$slider-thumbnail-width-lg} - #{$slider-thumbnail-spacing});
+                    max-width: calc(100% - #{$slider-thumbnail-width-lg} - #{$slider-thumbnail-spacing});
+                    margin-left: $slider-thumbnail-spacing;
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        // override to provide extra space for product attributes without copying over bundleDetails and setDetails templates to core
+        @include media-breakpoint-only(sm) {
+            &+.col-sm-6 {
+                max-width: 100%;
+                flex-basis: 100%;
+            }
+        }
+    }
+    .row > .product-data {
+        @include media-breakpoint-up(md) {
+            padding-left: $pdp-right-column-spacing-md;
+        }
+        @include media-breakpoint-up(lg) {
+            padding-left: $pdp-right-column-spacing-lg;
+        }
+        @include media-breakpoint-up(xl) {
+            padding-left: $pdp-right-column-spacing-xl;
+        }
+    }
+    .product-name {
+        @include header($pdp-name-header-value);
+        color: $pdp-name-header-color;
+        a {
+            text-decoration: none;
+        }
+    }
+    .attribute,
+    .product-option {
+        margin-top: $pdp-attribute-vertical-spacing;
+        @include media-breakpoint-up(md) {
+            margin-top: $pdp-attribute-vertical-spacing-md;
+        }
+        @include media-breakpoint-up(lg) {
+            margin-top: $pdp-attribute-vertical-spacing-lg;
+        }
+        label {
+            display: block;
+        }
+    }
+    .qty-cart-container {
+        margin-top: $spacer;
+        margin-bottom: $spacer;
+    }
+    .quantity {
+        display: flex;
+        align-items: center;
+        margin-bottom: $spacer;
+
+        label {
+            @include label-styles;
+            margin-right: 10px;
+            &:after {
+                content: ':';
+            }
+        }
+    }
+    .quantity-stepper,
+    .quantity-select {
+        @include media-breakpoint-up(sm) {
+            width: calc(100% - 10px);
+        }
+    }
+    .simple-quantity {
+        margin-top: $spacer;
+    }
+    .availability-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: $form-label-margin-bottom;
+        margin-top: $pdp-attribute-vertical-spacing;
+        @include media-breakpoint-up(md) {
+            margin-top: $pdp-attribute-vertical-spacing-md;
+        }
+        @include media-breakpoint-up(lg) {
+            margin-top: $pdp-attribute-vertical-spacing-lg;
+        }
+    }
+    .swatch-circle {
+        @include swatch($pdp-color-swatch-size, $white);
+        margin: calc(#{$pdp-color-swatch-spacing} / 2) $pdp-color-swatch-spacing calc(#{$pdp-color-swatch-spacing} / 2) 0;
+    }
+    .swatch-thumbnail {
+        @include swatch($pdp-color-swatch-thumbnail-size, $white, 'thumbnail');
+        margin: calc(#{$pdp-color-swatch-thumbnail-spacing} / 2) $pdp-color-swatch-thumbnail-spacing calc(#{$pdp-color-swatch-thumbnail-spacing} / 2) 0;
+    }
+    [disabled] .swatch,
+    .swatch.unselectable {
+        cursor: not-allowed;
+        &.color-value.selected::after {
+            background-color: $gray;
+        }
+    }
+    label.color ~ a:hover {
+        text-decoration: none; // Removes weird dash after the swatch circle on hover.
+    }
+    .non-color-attribute-swatches {
+        @include clearfix();
+        .swatch-tile-container {
+            float: left;
+            display: block;
+            margin: calc(#{$pdp-non-color-swatch-spacing} / 2) $pdp-non-color-swatch-spacing calc(#{$pdp-non-color-swatch-spacing} / 2) 0;
+            .swatch {
+                background: none;
+                display: block;
+                position: relative;
+                padding: 0;
+                border: none;
+                .swatch-value {
+                    @include swatch-non-color($pdp-non-color-swatch-min-width);
+                }
+                .description {
+                    display: block;
+                    text-align: center;
+                    font-size: $non-color-swatch-description-font-size;
+                    color: $non-color-swatch-description-font-color;
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+    .social-container {
+        padding-top: $pdp-attribute-vertical-spacing;
+        .social-icons {
+            align-items: center;
+            li:not(:last-child) {
+                margin-right: $pdp-social-icon-spacing;
+            }
+            .share-icons {
+                font-size: $pdp-social-icon-size;
+                color: $pdp-social-icon-color;
+                &:hover {
+                    color: $pdp-social-icon-color-hover;
+                }
+            }
+        }
+    }
+    .product-number-rating {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-top: $spacer;
+        clear: left;
+    }
+    .product-number {
+        color: $pdp-product-number-color;
+        font-size: $pdp-product-number-font-size;
+    }
+    .ratings {
+        margin-left: $spacer*2;
+        .fa-star {
+            @include icon($icon-star, before, $pdp-rating-star-size, $product-rating-star-color);
+        }
+        .fa-star-half-o {
+            @include icon($icon-star-half, before, $pdp-rating-star-size, $product-rating-star-color);
+        }
+        .fa-star-o {
+            @include icon($icon-star-empty, before, $pdp-rating-star-size, $product-rating-star-color);
+        }
+    }
+    .promotions {
+        margin-top: $spacer;
+        .promotion {
+            color: $pdp-promo-color;
+        }
+    }
+    .prices {
+        margin-top: $spacer;
+        margin-bottom: $spacer;
+        @include media-breakpoint-up(sm) {
+            margin-bottom: calc(#{$spacer} / 2);
+        }
+        @include media-breakpoint-up(md) {
+            margin-top: 0;
+        }
+        .price {
+            font-size: $pdp-price-font-size;
+            font-family: $pdp-price-font;
+        }
+    }
+    .size-chart {
+        font-size: $paragraph-font-size-small;
+        h2 {
+            @include header(4);
+        }
+        .sizinginformation {
+            .nav-tabs .nav-link.active {
+                background-color: $page-background-color;
+            }
+            .tab-content {
+                border: $tab-border-width solid $tab-border-color;
+                margin-bottom: $spacer;
+                .sizechart {
+                    margin-top: -#{$tab-border-width};
+                }
+                .sizecharttable {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    .attribute .size-chart {
+        position: absolute;
+        right: $spacer;
+    }
+    .color-attribute {
+        display: block;
+        float: left;
+    }
+    label,
+    .non-input-label {
+        @include label-styles;
+        display: block;
+    }
+
+    // product sets
+    .set-item,
+    &.set-item {
+        padding: 0;
+        .attribute.quantity {
+            align-self: flex-end;
+            margin-bottom: calc(#{$pdp-non-color-swatch-spacing} / 2);
+        }
+        .size-chart {
+            margin-top: calc(#{$pdp-attribute-vertical-spacing} - calc(#{$pdp-non-color-swatch-spacing} / 2));
+            @include media-breakpoint-up(md) {
+                margin-top: calc(#{$pdp-attribute-vertical-spacing-md} - calc(#{$pdp-non-color-swatch-spacing} / 2));
+            }
+            @include media-breakpoint-up(lg) {
+                margin-top: calc(#{$pdp-attribute-vertical-spacing-lg} - calc(#{$pdp-non-color-swatch-spacing} / 2));
+            }
+        }
+    }
+
+    .set-items {
+        padding-top: $product-set-list-padding-top;
+
+        @include media-breakpoint-up(lg) {
+           &.product-has-thumbnails {
+                margin-left: calc(#{$slider-thumbnail-width-lg} - #{$slider-thumbnail-spacing});
+            }
+        }
+
+        .product-set-item-main-image {
+            margin-bottom: $spacer;
+        }
+    }
+
+    .product-set-contains {
+        @include header($product-set-contains-header-value);
+        color: $pdp-name-header-color;
+        border-top: $product-set-item-list-border-color solid $product-set-contains-border-width;
+        border-bottom: $product-set-item-list-border-color solid $product-set-contains-border-width;
+        margin: $product-set-contains-margin;
+        padding: $product-set-contains-padding;
+        background-color: $product-set-contains-background;
+        + .product-set-item-detail {
+            border-top: 0;
+            margin-top: 0;
+        }
+    }
+
+    .product-set-item-detail {
+        border-top: $product-set-item-list-border-color solid $product-set-item-list-border-width;
+        margin-top: $product-set-item-list-margin-top;
+        padding-top: $product-set-item-list-padding-top;
+
+        .set-item-product-name {
+            @include header($product-set-item-list-product-name-header-value);
+            color: $product-set-item-list-product-name-header-color;
+            a {
+                text-decoration: $product-set-item-list-product-name-text-decoration;
+            }
+        }
+
+        .set-item-headline-and-description {
+            display: $product-set-item-list-headline-and-description-display;
+        }
+
+        .set-item-price {
+            .price {
+                @include header($product-set-item-list-product-price-header-value);
+                color: $product-set-item-list-product-price-color;
+            }
+        }
+
+        .mini-attributes {
+            .attribute,
+            .availability-container,
+            .qty-cart-container {
+                margin-top: $product-set-item-list-attr-margin-top;
+            }
+
+            .qty-cart-container {
+                margin-bottom: 0;
+            }
+
+            .attribute .size-chart {
+                @include media-breakpoint-up(xl) {
+                    padding-right: 8px; // fix for row padding change
+                }
+            }
+        }
+    }
+
+    // product bundles
+    .product-bundle {
+        .addtocart-sticky-bar {
+            [class*=add-to-cart].btn.btn-primary {
+                width: 100%;
+            }
+        }
+
+        .bundle-footer {
+            .qty-cart-container {
+                .quantity {
+                    &.d-none {
+                        + .prices-add-to-cart-actions {
+                            // fix cart btn width when qty is hidden
+                            flex: 0 0 100%;
+                            max-width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .bundle-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(#{$product-bundle-item-min-width}, 1fr));
+        grid-gap: $product-bundle-item-grid-gap;
+
+        .bundle-item {
+            padding: $spacer;
+            border-top: 1px solid $product-bundle-item-top-border-color;
+
+            .zoomImg {
+                display: none !important; // hiding the zoom for smaller product bundle items since its too large
+            }
+
+            .product-name {
+                @include header($product-bundle-item-name-font-size);
+            }
+
+            // fixing alignment of product attributes
+            .product-number-rating {
+                flex-direction: column;
+                .ratings {
+                    margin-left: 0;
+                }
+            }
+
+            .product-number-rating,
+            .ratings,
+            .availability-container,
+            .attribute,
+            .product-option {
+                margin-top: $product-bundle-item-pdp-attribute-vertical-spacing;
+                @include media-breakpoint-up(md) {
+                    margin-top: $product-bundle-item-pdp-attribute-vertical-spacing-md;
+                }
+                @include media-breakpoint-up(lg) {
+                    margin-top: $product-bundle-item-pdp-attribute-vertical-spacing-lg;
+                }
+            }
+
+            .product-option {
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+.tabs {
+    margin-top: $spacer;
+    margin-bottom: $spacer;
+    padding-top: $pdp-tabs-vertical-spacing;
+    @include media-breakpoint-up(md) {
+        padding-top: $pdp-tabs-vertical-spacing-md;
+    }
+    @include media-breakpoint-up(lg) {
+        padding-top: $pdp-tabs-vertical-spacing-lg;
+    }
+
+    .nav-link {
+        @include header($pdp-tabs-header-value);
+    }
+
+    &.product-has-thumbnails {
+        @include media-breakpoint-up(lg) {
+            padding-left: $slider-thumbnail-width-lg;
+        }
+    }
+}
+
+.main-content-group {
+    .main-content-item {
+        margin-top: $spacer;
+        margin-bottom: $spacer;
+        padding-top: $pdp-description-detail-vertical-spacing;
+        @include media-breakpoint-up(md) {
+            padding-top: $pdp-description-detail-vertical-spacing-md;
+        }
+        @include media-breakpoint-up(lg) {
+            padding-top: $pdp-description-detail-vertical-spacing-lg;
+        }
+    }
+
+    &.product-has-thumbnails {
+        @include media-breakpoint-up(lg) {
+            padding-left: $slider-thumbnail-width-lg;
+        }
+    }
+    .card {
+        .card-header {
+            .title {
+                @include header($pdp-description-detail-header-value);
+            }
+        }
+        .card-body {
+            padding-bottom: $pdp-description-detail-vertical-spacing;
+            @include media-breakpoint-up(md) {
+                padding-bottom: $pdp-description-detail-vertical-spacing-md;
+            }
+            @include media-breakpoint-up(lg) {
+                padding-bottom: $pdp-description-detail-vertical-spacing-lg;
+            }
+        }
+    }
+    .main-attributes {
+        margin-bottom: $card-margin-bottom;
+    }
+    .product-attributes {
+        .attribute-name {
+            @include header($pdp-description-detail-header-value);
+        }
+    }
+    // dividing lines when sections are collapsible
+    .product-attributes + .collapsible-content.collapsible-sm.border-top,
+    .collapsible-content.collapsible-sm.border-top {
+        @include media-breakpoint-down(sm) {
+            border-top: $pdp-description-detail-divider;
+        }
+    }
+    .product-attributes + .collapsible-content.collapsible-xl.border-top,
+    .collapsible-content.collapsible-xl.border-top {
+        border-top: $pdp-description-detail-divider;
+    }
+}
+
+.prices-add-to-cart-actions {
+    .add-to-cart {
+        @include icon($pdp-add-to-cart-button-icon, before);
+    }
+}
+
+.cart-and-ipay {
+    text-align: center;
+
+    // fix for bootstrap column padding making right edge of qty unclickable
+    &.row:not(.no-gutters) {
+        margin-left: 0;
+        margin-right: 0;
+        > .col-sm-12 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    .btn {
+        width: 100%;
+    }
+    @include media-breakpoint-up(sm) {
+        padding-bottom: 0;
+    }
+    .add-to-cart-global,
+    .update-cart-product-global {
+        @include icon($pdp-add-to-cart-button-icon, before);
+    }
+}
+
+.add-to-cart-messages {
+    @include toast-message();
+}
+
+.add-to-basket-alert {
+    @include toast-alert();
+}
+
+
+//** Sticky Add to Cart and Related Styles **//
+.jumplink-anchor {
+    position: absolute;
+    top: -150px;
+}
+.addtocart-sticky-bar {
+    pointer-events: none;
+    display: block;
+    position: fixed;
+    top: 0;
+    background: $pdp-sticky-addtocart-background;
+    width: 100%;
+    left: 0;
+    z-index: $z-index-pdp-sticky-add-to-cart;
+    padding: 10px 0;
+    opacity: $pdp-sticky-addtocart-opacity;
+    transform: translateY(-100%);
+    transition: $pdp-sticky-addtocart-open-transition;
+    overflow: hidden;
+    box-shadow: $pdp-sticky-addtocart-shadow;
+    .name,
+    .links {
+        margin: auto;
+    }
+    h1.product-name {
+        @include header($pdp-sticky-addtocart-name-header-value);
+        color: $pdp-name-header-color;
+        margin: 0;
+    }
+    a.jumplink {
+        margin: 0 15px;
+        position: relative;
+        z-index: 10;
+
+        &.selected,
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .sticky-attribute {
+        float: left;
+        &+.sticky-attribute {
+            margin-left: $pdp-sticky-addtocart-attribute-spacing;
+        }
+    }
+    .attribute {
+        margin-top: 0;
+        label,
+        .non-input-label,
+        .size-chart {
+            display: none;
+        }
+        .swatch-circle{
+            width: $pdp-sticky-addtocart-color-swatch-size;
+            height: $pdp-sticky-addtocart-color-swatch-size;
+            margin: calc(#{$pdp-sticky-addtocart-color-swatch-spacing} / 2) $pdp-sticky-addtocart-color-swatch-spacing calc(#{$pdp-sticky-addtocart-color-swatch-spacing} / 2) 0;
+        }
+        .swatch-thumbnail {
+            width: $pdp-sticky-addtocart-color-swatch-thumbnail-size;
+            height: $pdp-sticky-addtocart-color-swatch-thumbnail-size;
+            margin: calc(#{$pdp-sticky-addtocart-color-swatch-thumbnail-spacing} / 2) $pdp-sticky-addtocart-color-swatch-thumbnail-spacing calc(#{$pdp-sticky-addtocart-color-swatch-thumbnail-spacing} / 2) 0;
+        }
+        .custom-select {
+            font-size: $pdp-sticky-addtocart-attribute-select-font-size;
+            line-height: $pdp-sticky-addtocart-attribute-select-line-height;
+            padding: $pdp-sticky-addtocart-attribute-select-padding;
+            height: $pdp-sticky-addtocart-attribute-select-height;
+        }
+    }
+    .cart-and-ipay {
+        text-align: right;
+        padding-bottom: 0;
+        [class*=add-to-cart].btn.btn-primary {
+            font-size: $pdp-sticky-addtocart-button-font-size;
+            line-height: $pdp-sticky-addtocart-button-line-height;
+            padding: $pdp-sticky-addtocart-button-padding;
+            letter-spacing: $pdp-sticky-addtocart-button-letter-spacing;
+            width: auto;
+        }
+    }
+
+    // behaviors to account for show/hide of enhanced sticky header
+    .sticky-header & {
+        transition: transform $header-transition-speed ease-out;
+    }
+    .sticky-header.scroll-direction-up .showstickybar & {
+        transform: translateY(var(--header-height));
+        transition: transform $header-transition-speed ease-out 50ms;
+    }
+}
+.showstickybar {
+    .addtocart-sticky-bar {
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}
+

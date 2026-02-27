@@ -1,0 +1,6 @@
+<iscomment> load frontend module </iscomment>
+<link rel="stylesheet" href="${URLUtils.staticURL('css/bambuser/overview.css').toString()}"  media="none">
+<div class="js_bambuser-config" data-config="${pdict.config}"></div>
+<div class="js_bambuser-fab-config" data-config="${pdict.configFAB}" fabSkipPage="${pdict.fabSkipPage}" miniplayerSkipPage="${pdict.miniplayerSkipPage}"></div>
+<div class="basket-items" data-basket-action="${URLUtils.url('Bambuser-GetBasket')}"></div>
+<script defer src="${URLUtils.staticURL('js/bambuser/client.js')}"></script>

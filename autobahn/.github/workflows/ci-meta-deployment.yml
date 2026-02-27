@@ -1,0 +1,438 @@
+name: Continuous Build - Metadata
+
+run-name: Metadata Build ${{ github.event_name }} from ${{ github.ref_name }} to ${{ inputs.environment }}${{ inputs.sandbox }} by @${{ github.actor }}
+
+on:
+    push:
+        branches:
+            - develop
+            - master
+            - hotfix/**
+            - release/**
+        tags:
+            - 'trigger-build-meta'
+        paths:
+            - 'package.json'
+            - 'project.dw.json'
+            - 'data/clientmeta/**'
+            - 'data/meta/**'
+            - 'autobahn/data/clientmeta/**'
+            - 'autobahn/data/meta/**'
+
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: Where to deploy to
+                required: true
+                default: 'development'
+                type: choice
+                options:
+                    - development
+                    - staging
+                    - sandbox
+            sandbox:
+                description: 'If sandbox environment number: ex. "001" or "001, 002"'
+                required: false
+            build_commands:
+                description: 'list of matching package.json commands: ex. (data:meta, data:initialize)'
+                required: false
+                default: 'data:meta'
+            build_cartridges:
+                description: 'list of matching cartridge names (rvw_autobahn_core, autobahn_client_core)'
+                required: false
+
+    workflow_call:
+        inputs:
+            environment:
+                required: true
+                type: string
+            sandbox:
+                required: false
+                type: string
+            build_commands:
+                required: false
+                type: string
+        secrets:
+            API_CLIENT_SECRET:
+                required: true
+            SLACK_WEBHOOK:
+                required: true
+
+env:
+    PROD_QUALITY_CODE: ${{ (contains(github.ref, '/master') || contains(github.ref, '/release/') || contains(github.ref, '/hotfix/')) }}
+
+concurrency:
+    group: meta-${{ github.ref }}-${{ inputs.environment }}${{ inputs.sandbox }}
+
+jobs:
+    build_metadata:
+        name: Build and Import Metadata
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        env:
+            AVATAR_URL: '${{ github.event.sender.avatar_url }}'
+            BRANCH: '${{ github.head_ref || github.ref_name }}'
+            REPO_NAME: '${{ github.event.repository.full_name }}'
+        steps:
+            -   name: GitHub Generic Variables & Configs
+                env:
+                    DW_JSON: './project.dw.json'
+                run: |
+                    if [ -z "$AVATAR_URL" ]; then
+                        AVATAR_URL='${{ github.event.repository.owner.avatar_url }}'
+                    fi
+                    if [ -z "$AVATAR_URL" ]; then
+                        AVATAR_URL='${{ github.event.organization.avatar_url }}'
+                    fi
+
+                    echo "AVATAR_URL=$AVATAR_URL" >> $GITHUB_ENV
+
+                    BRANCH="${BRANCH/#refs\/heads\//}"
+
+                    echo "DW_JSON: $DW_JSON"
+
+                    echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+                    echo "DW_JSON=$DW_JSON" >> $GITHUB_ENV
+                    echo "RUN_SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK != '' }}" >> $GITHUB_ENV
+
+            -   name: GitHub Message Variables
+                id: github-message-variable
+                continue-on-error: true
+                run: |
+                    COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+                    COMMIT_MESSAGE="${COMMIT_MESSAGE//[$'\t\r\n']/, }"
+                    COMMIT_MESSAGE="${COMMIT_MESSAGE//[\'\"]/}"
+
+                    echo "HEAD_COMMIT_MESSAGE=${COMMIT_MESSAGE[*]}" >> $GITHUB_ENV
+
+            -   name: GitHub Message Error
+                if: steps.github-message-variable.outcome != 'success'
+                run: |
+                    echo "HEAD_COMMIT_MESSAGE=Commit contains double quotes, cannot parse. Run against ${{ env.BRANCH }} branch." >> $GITHUB_ENV
+
+            -   name: GitHub PUSH Variables
+                if: (always() && github.event_name == 'push')
+                env:
+                    ACTOR: '${{ github.event.triggering_actor }}'
+                    COMPARE_URL: '${{ github.event.compare }}'
+                run: |
+                    if [ -z "$ACTOR" ]; then
+                        ACTOR='${{ github.event.sender.login }}'
+                    fi
+
+                    if [ -z "$HEAD_COMMIT_MESSAGE" ]; then
+                        echo "HEAD_COMMIT_MESSAGE=Job run against ${{ env.BRANCH }} branch." >> $GITHUB_ENV
+                    fi
+
+                    echo "ACTOR=$ACTOR" >> $GITHUB_ENV
+                    echo "COMPARE_URL=$COMPARE_URL" >> $GITHUB_ENV
+
+            -   name: GitHub WORKFLOW_DISPATCH Variables
+                if: (always() && github.event_name == 'workflow_dispatch')
+                env:
+                    ACTOR: '${{ github.event.sender.login }}'
+                    COMPARE_URL: 'N/A'
+                run: |
+                    if [ -z "$ACTOR" ]; then
+                        ACTOR='${{ github.event.organization.login }}'
+                    fi
+
+                    if [ -z "$HEAD_COMMIT_MESSAGE" ]; then
+                        echo "HEAD_COMMIT_MESSAGE=Manual run against ${{ env.BRANCH }} branch." >> $GITHUB_ENV
+                    fi
+
+                    echo "ACTOR=$ACTOR" >> $GITHUB_ENV
+                    echo "COMPARE_URL=$COMPARE_URL" >> $GITHUB_ENV
+
+            #   Minimal checkout via sparse checkout limited files
+            -   name: Sparse checkout config files, set git and autobahn working directory
+                env:
+                    AUTOBAHN_WORKING_DIRECTORY: './'
+                    GIT_ROOT: './'
+                run: |
+                    REPO=https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}
+                    git clone --branch "$BRANCH" --single-branch --filter=blob:none --no-checkout --depth 1 --sparse "$REPO" .
+                    git sparse-checkout set '!**/*' '/*' 'autobahn/*' '**/data/**/*' --no-cone
+                    git checkout
+
+                    : #* Reset directory focus for AB Projects (Subtree)
+                    if [[ -d "autobahn" ]]; then
+                        AUTOBAHN_WORKING_DIRECTORY="./autobahn/"
+                        GIT_ROOT="../"
+                    fi
+
+                    : #* Set base job variables
+                    echo "AUTOBAHN_WORKING_DIRECTORY=$AUTOBAHN_WORKING_DIRECTORY" >> $GITHUB_ENV
+                    echo "GIT_ROOT=$GIT_ROOT" >> $GITHUB_ENV
+
+            #   Delete Tag Trigger
+            -   name: Remove trigger-build-meta tag
+                if: contains(github.ref, 'tags/trigger-build-meta')
+                run: git push --delete origin trigger-build-meta
+
+            #   Setup environment based variables
+            -   name: Check if build should proceed & Setup Metadata Variables
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                env:
+                    ENVIRONMENT: '${{ github.event.inputs.environment || inputs.environment }}'
+                run: |
+                    if [[ -f $DW_JSON ]]; then
+                        echo "$(jq '.' $DW_JSON)"
+                    else
+                        echo "File ($DW_JSON) not found."
+                        exit 1
+                    fi
+
+                    if ${{ github.event_name != 'workflow_dispatch' }}; then
+                        if ${{ env.PROD_QUALITY_CODE == 'true' }}; then
+                            ENVIRONMENT="staging"
+                        else
+                            ENVIRONMENT="$(jq -r .defaultDeployEnvironment $DW_JSON)"
+                        fi
+                    fi
+
+                    echo "ALLOW_SUCCESS_NOTIFICATIONS=$(jq -r .allowSlackSuccessNotifications $DW_JSON)" >> $GITHUB_ENV
+                    echo "AUTOBAHN_NVMRC_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
+                    echo "CLIENT_ID=$(jq -r .clientId $DW_JSON)" >> $GITHUB_ENV
+                    echo "ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
+
+            #   Set deployment environment, e.g. staging, development or sandbox
+            -   name: Setup Deployment Targets
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                run: |
+                    DOMAINS=()
+                    IFS=','
+
+                    : #* Enable complex string replace patterns
+                    shopt -s extglob
+
+                    if ${{ env.ENVIRONMENT == 'sandbox' }}; then
+                        SANDBOX_NUMBERS_ARRAY=()
+
+                        if ${{ github.event_name == 'workflow_dispatch' }}; then
+                            SANDBOX_NUMBERS_STRING="${{ github.event.inputs.sandbox || inputs.sandbox }}"
+                        fi
+
+                        if [[ -z $SANDBOX_NUMBERS_STRING ]]; then
+                            if jq -e '.sandboxNumber | if (type == "array") then true else false end' $DW_JSON; then
+                                SANDBOX_NUMBERS_ARRAY=("$(jq -r '.sandboxNumber | join(",")' $DW_JSON)")
+                            else
+                                SANDBOX_NUMBERS_STRING="$(jq -r .sandboxNumber $DW_JSON)"
+                            fi
+                        fi
+
+                        if [[ -z $SANDBOX_NUMBERS_ARRAY ]]; then
+                            SANDBOX_NUMBERS_STRING="${SANDBOX_NUMBERS_STRING//+( )/ }"
+                            SANDBOX_NUMBERS_STRING="${SANDBOX_NUMBERS_STRING//, /,}"
+                            SANDBOX_NUMBERS_STRING="${SANDBOX_NUMBERS_STRING// /,}"
+                            SANDBOX_NUMBERS_ARRAY=("${SANDBOX_NUMBERS_STRING}")
+                        fi
+
+                        for SANDBOX_NUMBER_VALUE in ${SANDBOX_NUMBERS_ARRAY[*]}; do
+                            DOMAINS+=("$(jq -r .sandboxDomainPrefix $DW_JSON)$SANDBOX_NUMBER_VALUE$(jq -r .sandboxDomainPostfix $DW_JSON)")
+                        done
+                    elif ${{ env.ENVIRONMENT == 'staging' || env.ENVIRONMENT == 'development' }}; then
+                        if ${{ env.ENVIRONMENT == 'development' }}; then
+                            if jq -e '.developmentDomain | if (type == "array") then true else false end' $DW_JSON; then
+                                DOMAIN_ARRAY=("$(jq -r '.developmentDomain | join(",")' $DW_JSON)")
+                            else
+                                DOMAIN_STRING="$(jq -r '.developmentDomain' $DW_JSON)"
+                            fi
+                        fi
+
+                        if ${{ env.ENVIRONMENT == 'staging' }}; then
+                            if jq -e '.stagingDomain | if (type == "array") then true else false end' $DW_JSON; then
+                                DOMAIN_ARRAY=("$(jq -r '.stagingDomain | join(",")' $DW_JSON)")
+                            else
+                                DOMAIN_STRING="$(jq -r '.stagingDomain' $DW_JSON)"
+                            fi
+                        fi
+
+                        if [[ -z $DOMAIN_ARRAY ]]; then
+                            DOMAIN_STRING="${DOMAIN_STRING//+( )/ }"
+                            DOMAIN_STRING="${DOMAIN_STRING//, /,}"
+                            DOMAIN_STRING="${DOMAIN_STRING// /,}"
+                            DOMAIN_ARRAY=("${DOMAIN_STRING}")
+                        fi
+
+                        for DOMAIN_VALUE in ${DOMAIN_ARRAY[*]}; do
+                            DOMAINS+=("$DOMAIN_VALUE")
+                        done
+                    else
+                        echo "Deployment instance could not be determined."
+                        exit 1;
+                    fi
+
+                    IFS=':'
+                    echo "DOMAINS=${DOMAINS[*]}" >> $GITHUB_ENV
+
+            #   Setup node version based on repo file, apply AB root node cache based on AB package-lock
+            -   name: Setting up Node.js
+                uses: actions/setup-node@v4
+                with:
+                    node-version-file: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}.nvmrc
+                    cache: 'npm'
+                    cache-dependency-path: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}**/package-lock.json
+
+            #   Install top level CI Dependencies, does not modify package-lock
+            -   name: NodePM CI
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                run: npm ci --ignore-scripts
+
+            #   Import data folders
+            -   name: Package and Import Storefront Metadata
+                id: pack-zip-upload
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                run: |
+                    OFS=$IFS
+                    DATA_COMMAND="$(jq -r .defaultDataCommand $DW_JSON)"
+                    DATA_CARTRIDGES=""
+                    DATA_JSON=""
+
+                    LOCAL_DWJSON="dw.json"
+                    cat /dev/null > $LOCAL_DWJSON
+                    CLIENT_SECRET_JSON=", \"clientSecret\": \"${{ secrets.API_CLIENT_SECRET }}\""
+
+                    if ${{ github.event_name == 'workflow_dispatch' }}; then
+                        DATA_COMMAND="${{ github.event.inputs.build_commands || inputs.build_commands }}"
+
+                        if ${{ github.event.inputs.build_cartridges != '' }}; then
+                            DATA_CARTRIDGES="${{ github.event.inputs.build_cartridges }}"
+                            IFS=','
+                            read -ra CARTRIDGE <<< "$DATA_CARTRIDGES"
+
+                            DATA_JSON=", \"dataFinal\": \"\", \"dataFor\": ["
+                            DATA_FOR_ARRAY=()
+
+                            for i in "${CARTRIDGE[@]}"; do
+                                DATA_FOR_ARRAY+=("\"${i//[[:blank:]]/}\"")
+                            done
+
+                            DATA_JSON+="${DATA_FOR_ARRAY[*]}]"
+                            IFS=$OFS
+                        fi
+                    fi
+
+                    IFS=',' read -ra DATA_COMMANDS <<< "$DATA_COMMAND"
+                    IFS=':' read -ra DOMAINS_ARRAY <<< "${DOMAINS[*]}"
+                    IFS=$OFS
+
+                    echo "DATA_COMMAND=$DATA_COMMAND" >> $GITHUB_ENV
+                    if ${{ env.DATA_CARTRIDGES == '' }}; then
+                        echo "DATA_CARTRIDGES=$DATA_CARTRIDGES" >> $GITHUB_ENV
+                    else
+                        echo "DATA_CARTRIDGES=all" >> $GITHUB_ENV
+                    fi
+
+                    for CMD in ${DATA_COMMANDS[*]}; do
+                        K=${CMD//[[:blank:]]/}
+
+                        if ${{ env.STAGING == 'true' }}; then
+                            if jq -e 'if (.allowStagingInitialize != true) then true else false end' "$DW_JSON"; then
+                                if [[ "$K" == *"clientkeys"* ]]; then
+                                    echo "ClientKeys command not allowed. Skipping ${K}."
+                                    continue
+                                fi
+
+                                if [[ "$K" == *"clienttest"* ]]; then
+                                    echo "ClientTest command not allowed. Skipping ${K}."
+                                    continue
+                                fi
+
+                                if [[ "$K" == *"devkeys"* ]]; then
+                                    echo "DevKeys command not allowed. Skipping ${K}."
+                                    continue
+                                fi
+
+                                if [[ "$K" == *"devtest"* ]]; then
+                                    echo "DevTest command not allowed. Skipping ${K}."
+                                    continue
+                                fi
+
+                                if [[ "$K" == *"initialize"* ]]; then
+                                    echo "Initialize command not allowed. Skipping ${K}."
+                                    continue
+                                fi
+                            fi
+                        fi
+
+                        for INDEX in ${!DOMAINS_ARRAY[@]}; do
+                            HOSTNAME_JSON="\"hostname\": \"${DOMAINS_ARRAY[$INDEX]}\""
+
+                            : #* Creating this file allows npm sub commands to execute correctly
+                            echo "{ $HOSTNAME_JSON $CLIENT_SECRET_JSON $DATA_JSON }" > "$LOCAL_DWJSON"
+                            echo "{ $HOSTNAME_JSON $CLIENT_SECRET_JSON $DATA_JSON }"
+
+                            npm run "$K"
+                            echo
+                        done
+                    done
+
+                    if [ -z "$DATA_CARTRIDGES" ]; then
+                      echo "DATA_CARTRIDGES=all" >> $GITHUB_ENV
+                    else
+                      echo "DATA_CARTRIDGES=$DATA_CARTRIDGES" >> $GITHUB_ENV
+                    fi
+
+            #   Re-Index Jobs should be configured to all active storefronts
+            -   name: Trigger Asynchronous Re-Index
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                continue-on-error: true
+                run: |
+                    : #* Clear out current temp dw.json file
+                    rm -rf "dw.json"
+
+                    npx sfcc-ci client:auth --selfsigned $(jq -r .clientId "$DW_JSON") "${{ secrets.API_CLIENT_SECRET }}"
+
+                    IFS=':' read -ra DOMAINS_ARRAY <<< "${DOMAINS[*]}"
+                    for INDEX in ${!DOMAINS_ARRAY[@]}; do
+                        npx sfcc-ci job:run "Reindex" -i ${DOMAINS_ARRAY[$INDEX]}
+                        npx sfcc-ci job:run "RebuildURLs" -i ${DOMAINS_ARRAY[$INDEX]}
+                    done
+
+                    npx sfcc-ci auth:logout
+
+            -   name: Slack Success Data
+                if: env.RUN_SLACK_WEBHOOK == 'true' && success() && env.ALLOW_SUCCESS_NOTIFICATIONS == 'true'
+                env:
+                    SLACK_COLOR: ${{ (steps.pack-zip-upload.outcome == 'success' && 'good') || 'danger' }}
+                    SLACK_TITLE: CI Metadata Deployment${{ (steps.pack-zip-upload.outcome != 'success' && ' FAILED') || '' }}
+                run: |
+                    echo "SLACK_COLOR=$SLACK_COLOR" >> $GITHUB_ENV
+                    echo "SLACK_TITLE=$SLACK_TITLE" >> $GITHUB_ENV
+
+            -   name: Slack Error Data
+                if: env.RUN_SLACK_WEBHOOK == 'true' && failure()
+                env:
+                    SLACK_COLOR: 'danger'
+                    SLACK_TITLE: CI Metadata Deployment FAILED
+                run: |
+                    echo "SLACK_COLOR=$SLACK_COLOR" >> $GITHUB_ENV
+                    echo "SLACK_TITLE=$SLACK_TITLE" >> $GITHUB_ENV
+
+            -   name: Slack Cancelled Data
+                if: env.RUN_SLACK_WEBHOOK == 'true' && cancelled() && env.ALLOW_SUCCESS_NOTIFICATIONS == 'true'
+                env:
+                    SLACK_COLOR: '#cccccc'
+                    SLACK_TITLE: CI Metadata Deployment CANCELLED
+                run: |
+                    echo "SLACK_COLOR=$SLACK_COLOR" >> $GITHUB_ENV
+                    echo "SLACK_TITLE=$SLACK_TITLE" >> $GITHUB_ENV
+
+            #   Integrated slack notification
+            -   name: Slack Notification
+                # Run 'notifications' job only when (failure() || ((success() || cancelled()) && !!allow_success_notifications)), will not to run step if Slack Success MSGs are not allowed
+                if: env.RUN_SLACK_WEBHOOK == 'true' && (((success() || cancelled()) && env.ALLOW_SUCCESS_NOTIFICATIONS == 'true') || failure())
+                env:
+                    SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+                    SLACK_AUTHOR: ${{ env.ACTOR }}
+                    SLACK_ICON_URL: ${{ env.AVATAR_URL }}
+                    SLACK_MESSAGE: Commit ${{ env.HEAD_COMMIT_MESSAGE }}
+                    SLACK_USERNAME: BuildBot - ${{ env.ACTOR || 'Manual' }}
+                    SLACK_FOOTER: ${{ env.REPO_NAME }} - ${{ github.job }}
+                run: |
+                    JSON_STRING='{"username":"${{ env.SLACK_USERNAME }}","icon_url":"${{ env.SLACK_ICON_URL }}","attachments":[{"fallback":"${{ env.SLACK_MESSAGE }}","color":"${{ env.SLACK_COLOR }}","author_name":"${{ env.SLACK_AUTHOR }}","title":"${{ env.SLACK_TITLE }}","text":"${{ env.SLACK_MESSAGE }}","footer":"${{ env.SLACK_FOOTER }}","fields":[{"title":"Target environment(s)","value":"${{ env.DOMAINS }}"},{"title":"Metadata Command(s)","value":"${{ env.DATA_COMMAND }}"},{"title":"Changes","value":"${{ env.COMPARE_URL }}"},{"title":"Metadata Cartridge(s)","value":"${{ env.DATA_CARTRIDGES }}"},{"title":"Ref","value":"${{ github.ref }}","short":true},{"title":"Event","value":"${{ github.event_name }}","short":true}]}]}'
+                    JSON_STRING=$JSON_STRING | jq @json
+                    echo -E "$JSON_STRING"
+
+                    curl -X POST -H "Content-Type: application/json" -d "$JSON_STRING" ${{ secrets.SLACK_WEBHOOK }}

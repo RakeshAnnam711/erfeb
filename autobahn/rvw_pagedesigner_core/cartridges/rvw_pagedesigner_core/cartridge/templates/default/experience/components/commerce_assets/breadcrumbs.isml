@@ -1,0 +1,3 @@
+<div class="${pdict.containerClass}">
+    <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+</div>

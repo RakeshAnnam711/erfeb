@@ -1,0 +1,661 @@
+{
+    "step-types": {
+        "script-module-step":
+        [
+            {
+                "@type-id": "custom.GlobaleAppSettings",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Global-e AppSettings",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/settings.js",
+                "function": "fetchAppSettings",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleCountries",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Global-e Countries",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/settings.js",
+                "function": "fetchCountries",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleCountryCoefficients",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Global-e Country Coefficients",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/settings.js",
+                "function": "fetchCountryCoefficients",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleCultures",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Global-e Cultures",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/settings.js",
+                "function": "fetchCultures",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleCurrencies",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Global-e Currencies",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/settings.js",
+                "function": "fetchCurrencies",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleCurrencyRates",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Global-e Currency Rates",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/settings.js",
+                "function": "fetchCurrencyRates",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleRoundingRules",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Global-e Rounding Rules",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/settings.js",
+                "function": "fetchRoundingRules",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleActiveHubDetails",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Global-e Active Hub Details",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/settings.js",
+                "function": "fetchActiveHubDetails",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleLoadRecentProductCountryS",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Loads Recent Product Country S data",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/productRestrictions",
+                "function": "fetchProductRestrictions",
+                "transactional": "false",
+                "timeout-in-seconds": "3600",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleImportRecentProductCountryS",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Imports Recent Product Country S data",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/productRestrictions",
+                "function": "importProductRestrictionFeed",
+                "transactional": "false",
+                "timeout-in-seconds": "3600",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleArchiveRecentProductCountryS",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Archives Recent Product Country S data",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/productRestrictions",
+                "function": "archiveProductRestrictionFeed",
+                "transactional": "false",
+                "timeout-in-seconds": "3600",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleUpdateOrderStatus",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Sends the Order status update to Global-e",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/order",
+                "function": "UpdateOrderStatus",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleCreateOrderRefund",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Sends the CreateOrderRefund request to Global-e",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/order",
+                "function": "CreateOrderRefund",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleUpdateOrderDispatch",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Sends the UpdateOrderDispatchV2 request to Global-e",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/order",
+                "function": "UpdateOrderDispatch",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleGenerateCatalogFeed",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Generates Catalog file and stores it in IMPEX/* folder",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/catalog",
+                "function": "generate",
+                "transactional": "false",
+                "timeout-in-seconds": "7200",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleUploadCatalogFeed",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Uploads generated Catalog file from IMPEX/* to Global-e SFTP folder",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/catalog",
+                "function": "upload",
+                "transactional": "false",
+                "timeout-in-seconds": "3600",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleGenerateRestrictedItemsFeed",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Generates Restricted Items file and stores it in IMPEX/* folder",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/restrictedItems",
+                "function": "generate",
+                "transactional": "false",
+                "timeout-in-seconds": "7200",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleUploadRestrictedItemsFeed",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Uploads generated Restricted Items file from IMPEX/* to Global-e SFTP folder",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/restrictedItems",
+                "function": "upload",
+                "transactional": "false",
+                "timeout-in-seconds": "3600",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleUpdateRMA",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Sends the UpdateRMA request to Global-e",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/order",
+                "function": "UpdateOrderRMA",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleInventoryVoidReservation",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Processes GLOBALE_INVENTORY_NOTIFICATION custom objects (async processing)",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/inventory",
+                "function": "VoidReservation",
+                "transactional": "false",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleGenerateCachePriceBooksXML",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Generates Cache Price Books XML file and stores it in IMPEX/* folder",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/cachePriceBooks",
+                "function": "generate",
+                "transactional": "false",
+                "timeout-in-seconds": "7200",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name":"geDisableJobStep",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "description":"Disables running the job step."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.GlobaleCancelExpiredPayByLinkOrders",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Cancels Expired Pay By Link Orders",
+                "module": "int_globale/cartridge/scripts/factories/globale/jobs/payByLink",
+                "function": "cancel",
+                "transactional": "false",
+                "timeout-in-seconds": "7200",
+                "status-codes": {
+                    "status":
+                    [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        },
+                        {
+                            "@code": "FINISHED",
+                            "description": "Used when the step finished successfully."
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

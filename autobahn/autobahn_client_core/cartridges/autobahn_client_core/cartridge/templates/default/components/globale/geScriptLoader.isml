@@ -1,0 +1,9 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}" scope="page"/>
+<isif condition="${globaleSession.get('geEnabled')}">
+    <iscomment> <link rel="stylesheet" href="${URLUtils.staticURL('/css/globale/flags.css')}" />
+    <link rel="stylesheet" href="${URLUtils.staticURL('/css/globale/styles.css')}" /> </iscomment>
+    <script type="text/javascript" id="globale-script-loader-data" src="${URLUtils.staticURL('/js/geScriptLoader.js')}" async>
+        <isinclude url="${URLUtils.url('Globale-ScriptLoaderData')}"/>
+    </script>
+</isif>

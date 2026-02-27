@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customer-groups xmlns="http://www.demandware.com/xml/impex/customergroup/2007-06-30">
+    <customer-group group-id="GlobaleCustomers">
+        <description>Global-e International Customers</description>
+        <membership-rule>
+            <included-customers>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>session.custom.geOperatedCountry</attribute-path>
+                        <operator>exists</operator>
+                    </condition>
+                    <condition>
+                        <attribute-path>session.custom.geOperatedCountry</attribute-path>
+                        <operator>is-true</operator>
+                    </condition>
+                </condition-group>
+            </included-customers>
+            <excluded-customers>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>session.custom.geOperatedCountry</attribute-path>
+                        <operator>does-not-exist</operator>
+                    </condition>
+                </condition-group>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>session.custom.geOperatedCountry</attribute-path>
+                        <operator>is-false</operator>
+                    </condition>
+                </condition-group>
+            </excluded-customers>
+        </membership-rule>
+        <custom-attributes/>
+    </customer-group>
+
+    <customer-group group-id="NonGlobaleCustomers">
+        <description>Non-Global-e Customers (Domestic Customers)</description>
+        <membership-rule>
+            <included-customers>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>session.custom.geOperatedCountry</attribute-path>
+                        <operator>does-not-exist</operator>
+                    </condition>
+                </condition-group>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>session.custom.geOperatedCountry</attribute-path>
+                        <operator>is-false</operator>
+                    </condition>
+                </condition-group>
+            </included-customers>
+            <excluded-customers>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>session.custom.geOperatedCountry</attribute-path>
+                        <operator>exists</operator>
+                    </condition>
+                    <condition>
+                        <attribute-path>session.custom.geOperatedCountry</attribute-path>
+                        <operator>is-true</operator>
+                    </condition>
+                </condition-group>
+            </excluded-customers>
+        </membership-rule>
+        <custom-attributes/>
+    </customer-group>
+
+</customer-groups>

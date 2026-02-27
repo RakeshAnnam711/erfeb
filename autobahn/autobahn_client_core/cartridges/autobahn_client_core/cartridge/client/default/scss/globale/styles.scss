@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+globale {
+    display: none;
+}
+
+.globale-selector {
+    &.country-selector {
+        cursor: pointer;
+        display: flex;
+        height: 100%;
+        .btn {
+            display: flex;
+            border: 0;
+            @media (max-width: 1024px) {
+                padding: 9px;
+            }
+        }
+    }
+    &.menu-item {
+        @media (min-width: 992px) {
+            display: none;
+        }
+        @media (max-width: 768.98px) {
+            border-top: 1px solid #eee;
+        }
+        .btn {
+            @media (min-width: 769px) {
+                color: #fff;
+                padding: .8rem;
+            }
+            @media (max-width: 768.98px) {
+                color: #444;
+            }
+        }
+    }
+}
+
+// #checkout-main {
+//     padding: 0;
+//     margin-top: 4.5em;
+// }
+
+.header-banner {
+    .header-right {
+        .store-finder {
+            padding: 0 0 0 15px !important;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.carousel {
+    .icon-prev,
+    .icon-next {
+        background-color: $white;
+        font-size: 18px;
+        padding: $spacer;
+        color: $black;
+    }
+    .icon-prev {
+        @include icon($icon-arrow-left, before);
+    }
+    .icon-next {
+        @include icon($icon-arrow-right, before);
+    }
+    .carousel-control-prev {
+        justify-content: flex-start;
+    }
+    .carousel-control-next {
+        justify-content: flex-end;
+    }
+}

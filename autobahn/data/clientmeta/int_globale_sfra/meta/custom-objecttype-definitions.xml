@@ -1,0 +1,1208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <custom-type type-id="GLOBALE_APP_SETTINGS">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="name">
+            <display-name xml:lang="x-default">Name</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="apiVersion">
+                <display-name xml:lang="x-default">APIVersion</display-name>
+                <description xml:lang="x-default">Version identifier of Global-e API</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="clientSettings">
+                <display-name xml:lang="x-default">ClientSettings</display-name>
+                <description xml:lang="x-default">Dictionary of client-side settings</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="serverSettings">
+                <display-name xml:lang="x-default">ServerSettings</display-name>
+                <description xml:lang="x-default">Dictionary of server-side settings</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="webClientVersion">
+                <display-name xml:lang="x-default">WebClientVersion</display-name>
+                <description xml:lang="x-default">Version identifier of Global-e client-side (JS) code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccUseGEShippingPrice">
+                <display-name xml:lang="x-default">Use Global-e Shipping Price (B2B)</display-name>
+                <description xml:lang="x-default">Use Global-e Shipping Price (B2B)</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccWhitelistedServerIps">
+                <display-name xml:lang="x-default">Whitelisted Global-e Server IP's</display-name>
+                <description xml:lang="x-default">A list of IP addresses of Global-e servers separated by a semicolon (;) that should be whitelisted.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccSendCartSendHubId">
+                <display-name xml:lang="x-default">Send HubId in SendCart</display-name>
+                <description xml:lang="x-default">Send HubId in SendCart Payload</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccLanguagesConfiguration">
+                <display-name xml:lang="x-default">Languages Switcher Configuration</display-name>
+                <description xml:lang="x-default">Languages Switcher Configuration</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccParseCountryCodeFromRequestLocale">
+                <display-name xml:lang="x-default">Parse CountryCode from RequestLocale</display-name>
+                <description xml:lang="x-default">Use SFCC locale country code to define shipping country</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccShippingSwitcherConfiguration">
+                <display-name xml:lang="x-default">Shipping Switcher Configuration</display-name>
+                <description xml:lang="x-default">Shipping Switcher Configuration</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccCartHashValidation">
+                <display-name xml:lang="x-default">SFCC Cart Hash Validation</display-name>
+                <description xml:lang="x-default">Enable SFCC Cart Hash Validation</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccPlaceOrderOnPaymentUpdate">
+                <display-name xml:lang="x-default">Place Order On Payment Update</display-name>
+                <description xml:lang="x-default">SFCC order remains in 'Created' status until payment notification from Global-e</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccUseFixedPricesOnly">
+                <display-name xml:lang="x-default">Use Only Fixed Prices</display-name>
+                <description xml:lang="x-default">Use only fixed prices for Supported Countries. Products without fixed prices will show null</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccCreateNewAddressesFromCheckout">
+                <display-name xml:lang="x-default">Save GE Address</display-name>
+                <description xml:lang="x-default">Allows to create and save new addresses from GE checkout</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccCultureMapping">
+                <display-name xml:lang="x-default">Culture Mapping</display-name>
+                <description xml:lang="x-default">Culture Mapping allows overriding Global-e cultures for popups</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccCheckoutCultureMapping">
+                <display-name xml:lang="x-default">Checkout Culture Mapping</display-name>
+                <description xml:lang="x-default">Checkout Culture Mapping allows overriding Global-e cultures for checkout</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccDynamicCountryCurrencyMapping">
+                <display-name xml:lang="x-default">Dynamic Country/Currency Mapping</display-name>
+                <description xml:lang="x-default">Allows overriding Global-e default currency code for dynamic price countries</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccAllowedCurrencies">
+                <display-name xml:lang="x-default">Allowed country currencies</display-name>
+                <description xml:lang="x-default">Allowed country currencies (price book caching approach)</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccDefaultCountryCodeMapping">
+                <display-name xml:lang="x-default">Default Country Code Mapping</display-name>
+                <description xml:lang="x-default">Default Country Code Mapping</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccMerchantBaseCurrencyCode">
+                <display-name xml:lang="x-default">Merchant Base Currency Code</display-name>
+                <description xml:lang="x-default">Merchant Base Currency Code(Site default currency is used if empty)</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccCachePriceBooksConfig">
+                <display-name xml:lang="x-default">Cache Price Books Configuration</display-name>
+                <description xml:lang="x-default">Cache Price Books Configuration</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccJWTAuthConfiguration">
+                <display-name xml:lang="x-default">JWT Authentication Configuration</display-name>
+                <description xml:lang="x-default">JWT Authentication Configuration (GE to SFCC)</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccJWTApiAuthConfiguration">
+                <display-name xml:lang="x-default">JWT API Authentication Configuration</display-name>
+                <description xml:lang="x-default">JWT API Authentication Configuration (SFCC to GE)</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccKlarnaConfigurations">
+                <display-name xml:lang="x-default">SFCC Klarna Configurations</display-name>
+                <description xml:lang="x-default">SFCC Klarna OSM Configurations</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccLocalizationConfiguration">
+                <display-name xml:lang="x-default">SendCartV2 Localization Configuration</display-name>
+                <description xml:lang="x-default">SendCartV2 Localization Configuration</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccUseProductCodeSecondaryInFulfillmentEnabled">
+                <display-name xml:lang="x-default">SFCC Use ProductCodeSecondary In Fulfilment Enabled</display-name>
+                <description xml:lang="x-default">SFCC Use ProductCodeSecondary In Fulfilment Enabled</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccDoWebStoreValidation">
+                <display-name xml:lang="x-default">SFCC Do WebStore Validation</display-name>
+                <description xml:lang="x-default">Do WebStore Validation</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccPayByLinkConfigurations">
+                <display-name xml:lang="x-default">Pay By Link Configurations</display-name>
+                <description xml:lang="x-default">Pay By Link Configurations</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccReconciliationCurrency">
+                <display-name xml:lang="x-default">Reconciliation Currency</display-name>
+                <description xml:lang="x-default">Uses if a merchant has more than 1 reconciliation currency</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_app_settings">
+                <display-name xml:lang="x-default">Global-e App Settings</display-name>
+                <attribute attribute-id="name" />
+                <attribute attribute-id="apiVersion" />
+                <attribute attribute-id="webClientVersion" />
+                <attribute attribute-id="serverSettings" />
+                <attribute attribute-id="clientSettings" />
+                <attribute attribute-id="sfccUseGEShippingPrice" />
+                <attribute attribute-id="sfccWhitelistedServerIps" />
+                <attribute attribute-id="sfccSendCartSendHubId" />
+                <attribute attribute-id="sfccLanguagesConfiguration" />
+                <attribute attribute-id="sfccParseCountryCodeFromRequestLocale" />
+                <attribute attribute-id="sfccShippingSwitcherConfiguration" />
+                <attribute attribute-id="sfccCartHashValidation" />
+                <attribute attribute-id="sfccPlaceOrderOnPaymentUpdate" />
+                <attribute attribute-id="sfccUseFixedPricesOnly" />
+                <attribute attribute-id="sfccCreateNewAddressesFromCheckout" />
+                <attribute attribute-id="sfccCultureMapping" />
+                <attribute attribute-id="sfccCheckoutCultureMapping" />
+                <attribute attribute-id="sfccDynamicCountryCurrencyMapping" />
+                <attribute attribute-id="sfccAllowedCurrencies" />
+                <attribute attribute-id="sfccDefaultCountryCodeMapping" />
+                <attribute attribute-id="sfccMerchantBaseCurrencyCode" />
+                <attribute attribute-id="sfccCachePriceBooksConfig" />
+                <attribute attribute-id="sfccJWTAuthConfiguration" />
+                <attribute attribute-id="sfccJWTApiAuthConfiguration" />
+                <attribute attribute-id="sfccKlarnaConfigurations" />
+                <attribute attribute-id="sfccLocalizationConfiguration" />
+                <attribute attribute-id="sfccUseProductCodeSecondaryInFulfillmentEnabled"/>
+                <attribute attribute-id="sfccDoWebStoreValidation"/>
+                <attribute attribute-id="sfccPayByLinkConfigurations"/>
+                <attribute attribute-id="sfccReconciliationCurrency"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_COUNTRIES">
+        <display-name xml:lang="x-default">Global-e Countries</display-name>
+        <description xml:lang="x-default">A custom object type to hold the countries from Global-e</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="code">
+            <display-name xml:lang="x-default">Code</display-name>
+            <description xml:lang="x-default">2-char ISO country code</description>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="defaultCurrencyCode">
+                <display-name xml:lang="x-default">DefaultCurrencyCode</display-name>
+                <description xml:lang="x-default">3-char ISO currency code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="isStateMandatory">
+                <display-name xml:lang="x-default">IsStateMandatory</display-name>
+                <description xml:lang="x-default">TRUE if State or province (region) is mandatory for addresses in this country</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="isOperatedByGlobalE">
+                <display-name xml:lang="x-default">IsOperatedByGlobalE</display-name>
+                <description xml:lang="x-default">Flag to be used as a Mode indicator. Countries that are not operated by Global-e must still be available for selection as a shipping destination on the merchant’s site. However Global-e functionality must be disabled for such countries</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="name">
+                <display-name xml:lang="x-default">Name</display-name>
+                <description xml:lang="x-default">Country name</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="siteUrl">
+                <display-name xml:lang="x-default">SiteURL</display-name>
+                <description xml:lang="x-default">URL of a country-specific site owned by the merchant. Used to allow redirection to the merchant’s country-specific domain for a selected country</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="useCountryVAT">
+                <display-name xml:lang="x-default">UseCountryVAT</display-name>
+                <description xml:lang="x-default">TRUE if VAT rate specific to this shipping country must be applied to the product prices. Otherwise, VAT rates defined for the products on the merchant’s site must be used. This setting is used to support trade agreements between the countries such as EEA, when end customer must pay VAT for the shipping country in certain cases</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="defaultVATRateType">
+                <display-name xml:lang="x-default">DefaultVATRateType</display-name>
+                <description xml:lang="x-default">Default (most widely used) VAT rate type or class for this country</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="supportsFixedPrices">
+                <display-name xml:lang="x-default">SupportsFixedPrices</display-name>
+                <description xml:lang="x-default">TRUE if fixed product prices are allowed for this country. Product prices may be fixed only in the Default Currency for this Country</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="vatExemptionDisabled">
+                <display-name xml:lang="x-default">VATExemptionDisabled</display-name>
+                <description xml:lang="x-default">Used in order to identify, if no VAT case is supported</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="countryCode3">
+                <display-name xml:lang="x-default">CountryCode3</display-name>
+                <description xml:lang="x-default">ISO3 Country Code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="gobale_countries">
+                <display-name xml:lang="x-default">Global-e Countries</display-name>
+                <attribute attribute-id="siteUrl" />
+                <attribute attribute-id="name" />
+                <attribute attribute-id="defaultCurrencyCode" />
+                <attribute attribute-id="isStateMandatory" />
+                <attribute attribute-id="isOperatedByGlobalE" />
+                <attribute attribute-id="code" />
+                <attribute attribute-id="countryCode3" />
+                <attribute attribute-id="useCountryVAT" />
+                <attribute attribute-id="defaultVATRateType" />
+                <attribute attribute-id="supportsFixedPrices" />
+                <attribute attribute-id="vatExemptionDisabled" />
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_COUNTRY_COEFFICIENTS">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="countryCode">
+            <display-name xml:lang="x-default">CountryCode</display-name>
+            <description xml:lang="x-default">2-char ISO country code</description>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="includeVAT">
+                <display-name xml:lang="x-default">IncludeVAT</display-name>
+                <description xml:lang="x-default">This attribute is applicable only to Country level (i.e. not applicable to ProductClass level). One of the possible values of IncludeVATOptions enumeration designated to control the way VAT is handled in browsing on the Merchant’s site and in checkout on Global-e</description>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="rate">
+                <display-name xml:lang="x-default">Rate</display-name>
+                <description xml:lang="x-default">Country Coefficient rate decimal value. All the prices displayed to the end customer shipping to the country involved must be multiplied by this value</description>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_country_coefficients">
+                <display-name xml:lang="x-default">Global-e Country Coefficients</display-name>
+                <attribute attribute-id="rate" />
+                <attribute attribute-id="includeVAT" />
+                <attribute attribute-id="countryCode" />
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_PRODUCT_CLASS_COEFFICIENTS">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="key">
+            <display-name xml:lang="x-default">Key</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="rate">
+                <display-name xml:lang="x-default">Rate</display-name>
+                <description xml:lang="x-default">Country Coefficient rate decimal value. All the prices displayed to the end customer shipping to the country involved must be multiplied by this value</description>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="countryCode">
+                <display-name xml:lang="x-default">CountryCode</display-name>
+                <description xml:lang="x-default">2-char ISO country code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="productClassCode">
+                <display-name xml:lang="x-default">ProductClassCode</display-name>
+                <description xml:lang="x-default">Product class code used by the merchant to classify products for using different country coefficient rates per classes of products instead of the single country level default (when no rate is defined for a certain product class, the country level default rate should be used by the merchant for the respective product)</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_product_coefficients">
+                <display-name xml:lang="x-default">Global-e Product Class Coefficients</display-name>
+                <attribute attribute-id="productClassCode" />
+                <attribute attribute-id="rate" />
+                <attribute attribute-id="countryCode" />
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_CULTURES">
+        <display-name xml:lang="x-default">Global-e Cultures</display-name>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="code">
+            <display-name xml:lang="x-default">Country code</display-name>
+            <description xml:lang="x-default">2-char ISO country code</description>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="regionCode">
+                <display-name xml:lang="x-default">Region Code</display-name>
+                <description xml:lang="x-default">Region code (unique in the respective Country)</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="cityCode">
+                <display-name xml:lang="x-default">City Code</display-name>
+                <description xml:lang="x-default">City code (unique in the respective Region)</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="isRTL">
+                <display-name xml:lang="x-default">IsRTL</display-name>
+                <description xml:lang="x-default">TRUE for “right-to-left” languages such as Hebrew and Arabic</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="localizedName">
+                <display-name xml:lang="x-default">Localized Name</display-name>
+                <description xml:lang="x-default">Culture name in the respective language, such as “עברית” for he-IL (Hebrew-Israel) culture</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="name">
+                <display-name xml:lang="x-default">Name</display-name>
+                <description xml:lang="x-default">Culture name</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="culture">
+                <display-name xml:lang="x-default">Culture Code</display-name>
+                <description xml:lang="x-default">ISO culture code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_cultures">
+                <display-name xml:lang="x-default">Global-e Cultures</display-name>
+                <attribute attribute-id="code" />
+                <attribute attribute-id="regionCode" />
+                <attribute attribute-id="cityCode" />
+                <attribute attribute-id="culture" />
+                <attribute attribute-id="localizedName" />
+                <attribute attribute-id="isRTL" />
+                <attribute attribute-id="name" />
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_CURRENCIES">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="code">
+            <display-name xml:lang="x-default">Code</display-name>
+            <description xml:lang="x-default">3-char ISO currency code</description>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="maxDecimalPlaces">
+                <display-name xml:lang="x-default">MaxDecimalPlaces</display-name>
+                <description xml:lang="x-default">Number of decimal places indicating the fractional (“cents”) part of the price. For example Bahraini Dinar “cents” has 3 decimal places, US Dollar has 2, and Japanese Yen has 0</description>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="name">
+                <display-name xml:lang="x-default">Name</display-name>
+                <description xml:lang="x-default">Currency name</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="symbol">
+                <display-name xml:lang="x-default">Symbol</display-name>
+                <description xml:lang="x-default">Currency symbol (e.g. $ for USD)</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_currencies">
+                <display-name xml:lang="x-default">Global-e Currencies</display-name>
+                <attribute attribute-id="maxDecimalPlaces" />
+                <attribute attribute-id="symbol" />
+                <attribute attribute-id="name" />
+                <attribute attribute-id="code" />
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_CURRENCY_RATES">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="key">
+            <display-name xml:lang="x-default">Key</display-name>
+            <description xml:lang="x-default">SourceCurrencyCode - TargetCurrencyCode</description>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="rate">
+                <display-name xml:lang="x-default">Rate</display-name>
+                <description xml:lang="x-default">Currency rate decimal value</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sourceCurrencyCode">
+                <display-name xml:lang="x-default">SourceCurrencyCode</display-name>
+                <description xml:lang="x-default">3-char ISO currency code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="targetCurrencyCode">
+                <display-name xml:lang="x-default">TargetCurrencyCode</display-name>
+                <description xml:lang="x-default">3-char ISO currency code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="rateData">
+                <display-name xml:lang="x-default">Rate Data</display-name>
+                <description xml:lang="x-default">Currency data used by global-e to verify the rate</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_currency_rates">
+                <display-name xml:lang="x-default">Global-e Currency Rates</display-name>
+                <attribute attribute-id="rate" />
+                <attribute attribute-id="key" />
+                <attribute attribute-id="targetCurrencyCode" />
+                <attribute attribute-id="sourceCurrencyCode" />
+                <attribute attribute-id="rateData" />
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_ROUNDING_RULES">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="key">
+            <display-name xml:lang="x-default">Key</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="countryCode">
+                <display-name xml:lang="x-default">CountryCode</display-name>
+                <description xml:lang="x-default">2-char ISO country code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="currencyCode">
+                <display-name xml:lang="x-default">CurrencyCode</display-name>
+                <description xml:lang="x-default">3-char ISO currency code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="roundingRanges">
+                <display-name xml:lang="x-default">RoundingRanges</display-name>
+                <description xml:lang="x-default">List of decimal ranges and their respective rounding behaviors</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="roundingRuleId">
+                <display-name xml:lang="x-default">RoundingRuleId</display-name>
+                <description xml:lang="x-default">Rule identifier denoting the respective Rounding Rule on Global-e side. This value must be further specified when calling SaveProductsList and SendCart methods</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_rounding_rules">
+                <display-name xml:lang="x-default">Global-e Rounding Rules</display-name>
+                <attribute attribute-id="roundingRuleId" />
+                <attribute attribute-id="currencyCode" />
+                <attribute attribute-id="countryCode" />
+                <attribute attribute-id="roundingRanges" />
+                <attribute attribute-id="key" />
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_HUB_DETAILS">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="key">
+            <display-name xml:lang="x-default">Key</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+            <field-length>0</field-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="address1">
+                <display-name xml:lang="x-default">Address1</display-name>
+                <description xml:lang="x-default">Address line 1</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="address2">
+                <display-name xml:lang="x-default">Address2</display-name>
+                <description xml:lang="x-default">Address line 2</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="city">
+                <display-name xml:lang="x-default">City</display-name>
+                <description xml:lang="x-default">City name</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="countryCode">
+                <display-name xml:lang="x-default">CountryCode</display-name>
+                <description xml:lang="x-default">2-char ISO country code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="countryName">
+                <display-name xml:lang="x-default">CountryName</display-name>
+                <description xml:lang="x-default">Country name</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="email">
+                <display-name xml:lang="x-default">Email</display-name>
+                <description xml:lang="x-default">E-mail address</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="fax">
+                <display-name xml:lang="x-default">Fax</display-name>
+                <description xml:lang="x-default">Fax</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="hubID">
+                <display-name xml:lang="x-default">HubID</display-name>
+                <description xml:lang="x-default">Hub identifier on Global-e system</description>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="hubName">
+                <display-name xml:lang="x-default">HubName</display-name>
+                <description xml:lang="x-default">Name of the Hub</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="phone1">
+                <display-name xml:lang="x-default">Phone1</display-name>
+                <description xml:lang="x-default">Phone #1</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="phone2">
+                <display-name xml:lang="x-default">Phone2</display-name>
+                <description xml:lang="x-default">Phone #2</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="stateCode">
+                <display-name xml:lang="x-default">StateCode</display-name>
+                <description xml:lang="x-default">State or province ISO code such as AZ for Arizona (if applicable)</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="stateOrProvice">
+                <display-name xml:lang="x-default">StateOrProvice</display-name>
+                <description xml:lang="x-default">State or province name</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zip">
+                <display-name xml:lang="x-default">Zip</display-name>
+                <description xml:lang="x-default">Zip or postal code</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_hub_details">
+                <display-name xml:lang="x-default">Global-e Hub Details</display-name>
+                <attribute attribute-id="zip" />
+                <attribute attribute-id="key" />
+                <attribute attribute-id="countryName" />
+                <attribute attribute-id="fax" />
+                <attribute attribute-id="hubName" />
+                <attribute attribute-id="countryCode" />
+                <attribute attribute-id="address1" />
+                <attribute attribute-id="stateCode" />
+                <attribute attribute-id="address2" />
+                <attribute attribute-id="phone2" />
+                <attribute attribute-id="phone1" />
+                <attribute attribute-id="city" />
+                <attribute attribute-id="email" />
+                <attribute attribute-id="stateOrProvice" />
+                <attribute attribute-id="hubID" />
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_ORDER_NOTIFICATION">
+        <display-name xml:lang="x-default">Global-e Order Notification</display-name>
+        <description xml:lang="x-default">The custom objects are used for initiating order update notifications</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <retention-days>7</retention-days>
+        <key-definition attribute-id="ID">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="geNotificationPayload">
+                <display-name xml:lang="x-default">Notification Payload</display-name>
+                <description xml:lang="x-default">The notification payload</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="geNotificationType">
+                <display-name xml:lang="x-default">Notification Type</display-name>
+                <description xml:lang="x-default">Possible values are: OrderStatusUpdate, OrderDispatchUpdate, OrderRefundUpdate, OrderRMAUpdate, OrderRMACreate</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">OrderStatusUpdate (SFCC to GE)</display>
+                        <value>OrderStatusUpdate</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">OrderDispatchUpdate (SFCC to GE)</display>
+                        <value>OrderDispatchUpdate</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">OrderRefundUpdate (SFCC to GE)</display>
+                        <value>OrderRefundUpdate</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">OrderRMAUpdate (SFCC to GE)</display>
+                        <value>OrderRMAUpdate</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">OrderRMACreate (GE to SFCC)</display>
+                        <value>OrderRMACreate</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="geOrderId">
+                <display-name xml:lang="x-default">Order Id</display-name>
+                <description xml:lang="x-default">SFCC or Global-e order ID</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="GLOBALE">
+                <display-name xml:lang="x-default">GLOBALE</display-name>
+                <attribute attribute-id="ID"/>
+                <attribute attribute-id="geNotificationType"/>
+                <attribute attribute-id="geOrderId"/>
+                <attribute attribute-id="geNotificationPayload"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="lastModified" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_INVENTORY_NOTIFICATION">
+        <display-name xml:lang="x-default">Global-e Inventory Notification</display-name>
+        <description xml:lang="x-default">The custom objects are used for storing inventory update notifications</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <retention-days>7</retention-days>
+        <key-definition attribute-id="ID">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="geNotificationPayload">
+                <display-name xml:lang="x-default">Notification Payload</display-name>
+                <description xml:lang="x-default">The notification payload</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="geNotificationType">
+                <display-name xml:lang="x-default">Notification Type</display-name>
+                <description xml:lang="x-default">Possible values are: VoidReservation</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">VoidReservation (GE to SFCC)</display>
+                        <value>VoidReservation</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="geOrderId">
+                <display-name xml:lang="x-default">Order Id</display-name>
+                <description xml:lang="x-default">SFCC or Global-e order ID</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="GLOBALE">
+                <display-name xml:lang="x-default">GLOBALE</display-name>
+                <attribute attribute-id="ID"/>
+                <attribute attribute-id="geNotificationType"/>
+                <attribute attribute-id="geOrderId"/>
+                <attribute attribute-id="geNotificationPayload"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="lastModified" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="DEMO_GLOBALE_GIFT_CARDS">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="cardID">
+            <display-name xml:lang="x-default">Card ID</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="currentBalance">
+                <display-name xml:lang="x-default">Current Balance</display-name>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="initialBalance">
+                <display-name xml:lang="x-default">Initial Balance</display-name>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="originalCurrencyCode">
+                <display-name xml:lang="x-default">Currency Code</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="redeemRequestJSON">
+                <display-name xml:lang="x-default">Redeem Request JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="redeemResponseJSON">
+                <display-name xml:lang="x-default">Redeem Response JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="refundRequestJSON">
+                <display-name xml:lang="x-default">Refund Request JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="refundResponseJSON">
+                <display-name xml:lang="x-default">Refund Response JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_gift_cards">
+                <display-name xml:lang="x-default">Global-e Gift Cards</display-name>
+                <attribute attribute-id="cardID"/>
+                <attribute attribute-id="originalCurrencyCode"/>
+                <attribute attribute-id="initialBalance"/>
+                <attribute attribute-id="currentBalance"/>
+                <attribute attribute-id="redeemRequestJSON"/>
+                <attribute attribute-id="redeemResponseJSON"/>
+                <attribute attribute-id="refundRequestJSON"/>
+                <attribute attribute-id="refundResponseJSON"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="lastModified" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="DEMO_GLOBALE_LOYALTY_CARDS">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="cardID">
+            <display-name xml:lang="x-default">Card ID</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="currentBalance">
+                <display-name xml:lang="x-default">Current Balance</display-name>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="initialBalance">
+                <display-name xml:lang="x-default">Initial Balance</display-name>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="originalCurrencyCode">
+                <display-name xml:lang="x-default">Currency Code</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="redeemRequestJSON">
+                <display-name xml:lang="x-default">Redeem Request JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="redeemResponseJSON">
+                <display-name xml:lang="x-default">Redeem Response JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="refundRequestJSON">
+                <display-name xml:lang="x-default">Refund Request JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="refundResponseJSON">
+                <display-name xml:lang="x-default">Refund Response JSON</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_loyalty_cards">
+                <display-name xml:lang="x-default">Global-e Loyalty Cards</display-name>
+                <attribute attribute-id="cardID"/>
+                <attribute attribute-id="originalCurrencyCode"/>
+                <attribute attribute-id="initialBalance"/>
+                <attribute attribute-id="currentBalance"/>
+                <attribute attribute-id="redeemRequestJSON"/>
+                <attribute attribute-id="redeemResponseJSON"/>
+                <attribute attribute-id="refundRequestJSON"/>
+                <attribute attribute-id="refundResponseJSON"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="lastModified" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="GLOBALE_RESTRICTED_ITEMS">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="name">
+            <display-name xml:lang="x-default">Name</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="countriesExclusions">
+                <display-name xml:lang="x-default">Countries Exclusions</display-name>
+                <type>text</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sourceHandler">
+                <display-name xml:lang="x-default">Source Handler</display-name>
+                <type>text</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="globale_restricted_items">
+                <display-name xml:lang="x-default">Global-e Restricted Items</display-name>
+                <attribute attribute-id="name"/>
+                <attribute attribute-id="sourceHandler"/>
+                <attribute attribute-id="countriesExclusions"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+</metadata>

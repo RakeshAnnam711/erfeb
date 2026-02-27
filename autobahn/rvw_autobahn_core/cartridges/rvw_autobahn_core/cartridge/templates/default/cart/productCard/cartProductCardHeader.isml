@@ -1,0 +1,6 @@
+<isif condition="${lineItem.isBonusProductLineItem}">
+    <label>${Resource.msg('msg.bonus.product','cart',null)}:</label>
+</isif>
+<div class="line-item-header">
+    <a class="line-item-name" href="${lineItem.productType === 'giftCertificate' ? URLUtils.url('GiftCertificate-Purchase') : URLUtils.url('Product-Show', 'pid', lineItem.id)}">${lineItem.productName}</a>
+</div>

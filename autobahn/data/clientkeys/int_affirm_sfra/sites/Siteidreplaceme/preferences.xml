@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances>
+            <preference preference-id="AffirmExpressCheckoutOn">false</preference>
+            <preference preference-id="AffirmMode">sandbox</preference>
+            <preference preference-id="AffirmOnline">true</preference>
+            <preference preference-id="AffirmStaticJS">false</preference>
+            <preference preference-id="AffirmPaymentMaxTotal">5000.0</preference>
+            <preference preference-id="AffirmPrivateKey">dc9eBKhwGP1ov2kVY6H1BYIvUjpC89MV</preference>
+            <preference preference-id="AffirmProductMessage">true</preference>
+            <preference preference-id="AffirmPublicKey">KRIYW4XA1PQDXIUY</preference>
+        </all-instances>
+        <development/>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+

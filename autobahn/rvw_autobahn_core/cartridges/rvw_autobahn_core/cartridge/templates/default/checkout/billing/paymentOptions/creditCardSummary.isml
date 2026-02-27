@@ -1,0 +1,13 @@
+<div class="credit-card-type">
+    ${Resource.msg('msg.payment.type.credit', 'confirmation', null) + ' ' + payment.type}
+</div>
+<div class="credit-card-number">
+    <isif condition="${!empty(payment.maskedCreditCardNumber)}" >
+        <isprint value="${payment.maskedCreditCardNumber}" />
+    </isif>
+</div>
+<div class="credit-card-expiration-date">
+    <isif condition="${!empty(payment.expirationMonth)}" >
+        ${Resource.msg('msg.card.type.ending', 'confirmation', null) + ' ' + (!empty(payment.expirationMonth) ? (payment.expirationMonth + '/') : '') + (!empty(payment.maskedExpirationYear) ? payment.maskedExpirationYear : '')}
+    </isif>
+</div>

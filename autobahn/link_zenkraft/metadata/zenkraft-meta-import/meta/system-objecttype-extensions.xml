@@ -1,0 +1,1009 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="enableZenkraftEstimatedDeliveryDates">
+                <display-name xml:lang="x-default">Enable Zenkraft Estimated Delivery Dates</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="companyWideLeadTime">
+                <display-name xml:lang="x-default">Company-wide Lead Time</display-name>
+                <description xml:lang="x-default">Company-wide days required  to send out product</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftEDDCutoffTime">
+                <display-name xml:lang="x-default">Delivery Date Cutoff Time</display-name>
+                <description xml:lang="x-default">After this time of day, estimated delivery dates will have a day added to them. For example, if this time is set as 5pm, and the estimated date returned from the Zenkraft API is 2 days from now, 1 more day will be added to the delivery date.</description>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableZenkraftShipping">
+                <display-name xml:lang="x-default">Enable Zenkraft Shipping Methods</display-name>
+                <description xml:lang="x-default">Enable/Disable the display of Zenkraft shipping information on the shipping method list of checkout.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableZenkraftShippingRates">
+                <display-name xml:lang="x-default">Enable Zenkraft Shipping Rates</display-name>
+                <description xml:lang="x-default">Enabling this feature will force the site to use shipping rates retrieved from Zenkraft instead of rates configured in Business Manager.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftCarrier">
+                <display-name xml:lang="x-default">Carrier ID</display-name>
+                <description xml:lang="x-default">This is the carrier ID (ex: fedex, dhl) used when getting shipping information. It must match a valid carrier ID in Zenkraft. The API documentation here: https://api.zenkraft.com/#objects has a list of carriers under the Service Types section.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftReturnsCarrier">
+                <display-name xml:lang="x-default">Returns Carrier ID</display-name>
+                <description xml:lang="x-default">This is the carrier ID (ex: fedex, dhl) used when getting shipping information for returns. It must match a valid carrier ID in Zenkraft. The API documentation here: https://api.zenkraft.com/#objects has a list of carriers under the Service Types section.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftReturnApprovalCatalogCategories">
+                <display-name xml:lang="x-default">Catalog categories requiring return approval.</display-name>
+                <description xml:lang="x-default">List of comma separated with no white space catalog categories requiring return approval.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftReturnApprovalCustomerGroups">
+				<display-name xml:lang="x-default">Customer groups requiring returns approval.</display-name>
+				<description xml:lang="x-default">List of comma separated with no white space customer groups requiring return approval.</description>
+				<type>string</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+			</attribute-definition>
+            <attribute-definition attribute-id="zenkraftCurrencyCode">
+                <display-name xml:lang="x-default">Currency Code</display-name>
+                <description xml:lang="x-default">Currency Code to use for Zenkraft rates, etc. (ex: USD)</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>USD</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftDefaultProductWeight">
+                <display-name xml:lang="x-default">Default Product Weight</display-name>
+                <description xml:lang="x-default">This is the default weight used when determining shipping information. It is only used if a weight is not defined on the product.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>1.0</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftDimensionUnits">
+                <display-name xml:lang="x-default">Dimension Units</display-name>
+                <description xml:lang="x-default">Units to be used for dimensions. IN = Inches, CM = Centimeters</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Inches</display>
+                        <value>IN</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Centimeters</display>
+                        <value>CM</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftMasterAPIKey">
+                <display-name xml:lang="x-default">Zenkraft Master API Key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftPackagingType">
+                <display-name xml:lang="x-default">Packaging Type</display-name>
+                <description xml:lang="x-default">packaging_type from the Zenkraft API Docs</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>your_packaging</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftReturnsPackagingType">
+                <display-name xml:lang="x-default">Returns Packaging Type</display-name>
+                <description xml:lang="x-default">packaging_type from the Zenkraft API Docs for Returns</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>your_packaging</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftProdMode">
+                <display-name xml:lang="x-default">Zenkraft Production Mode</display-name>
+                <description xml:lang="x-default">This should be turned on for production environments only. The default is Test Mode.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftDebugLog">
+                <display-name xml:lang="x-default">Enable Zenkraft Debug Logs</display-name>
+                <description xml:lang="x-default">If enabled, requests and responses will be logged in the Zenkraft API Admin.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderCity">
+                <display-name xml:lang="x-default">Sender Address City</display-name>
+                <description xml:lang="x-default">City representing where items will ship from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderCompany">
+                <display-name xml:lang="x-default">Sender Company</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>Zenkraft Default</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderCountryCode">
+                <display-name xml:lang="x-default">Sender Address Country Code</display-name>
+                <description xml:lang="x-default">Country Code representing where items will ship from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderEmail">
+                <display-name xml:lang="x-default">Sender Email Address</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>api@zenkraft.com</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderName">
+                <display-name xml:lang="x-default">Sender Name</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>Zenkraft Default</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderPhone">
+                <display-name xml:lang="x-default">Sender Phone Number</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>1231234567</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderPostalCode">
+                <display-name xml:lang="x-default">Sender Address Postal Code</display-name>
+                <description xml:lang="x-default">Postal Code representing where items will ship from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderStateCode">
+                <display-name xml:lang="x-default">Sender Address State Code</display-name>
+                <description xml:lang="x-default">State Code representing where items will ship from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftSenderStreet">
+                <display-name xml:lang="x-default">Sender Address Street</display-name>
+                <description xml:lang="x-default">Street address representing where items will ship from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientCity">
+                <display-name xml:lang="x-default">Recipient Address City</display-name>
+                <description xml:lang="x-default">City representing where items will ship to.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientCompany">
+                <display-name xml:lang="x-default">Recipient Company</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>Zenkraft Default</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientCountryCode">
+                <display-name xml:lang="x-default">Recipient Address Country Code</display-name>
+                <description xml:lang="x-default">Country Code representing where items will ship to.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="syncReturnWithZenkraft">
+                <display-name xml:lang="x-default">Sync Return with Zenkraft</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientEmail">
+                <display-name xml:lang="x-default">Recipient Email Address</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>api@zenkraft.com</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientName">
+                <display-name xml:lang="x-default">Recipient Name</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>Zenkraft Default</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientPhone">
+                <display-name xml:lang="x-default">Recipient Phone Number</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>1231234567</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientPostalCode">
+                <display-name xml:lang="x-default">Recipient Address Postal Code</display-name>
+                <description xml:lang="x-default">Postal Code representing where items will ship to.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientStateCode">
+                <display-name xml:lang="x-default">Recipient Address State Code</display-name>
+                <description xml:lang="x-default">State Code representing where items will ship to.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRecipientStreet">
+                <display-name xml:lang="x-default">Recipient Address Street</display-name>
+                <description xml:lang="x-default">Street address representing where items will ship to.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftShippingAccount">
+                <display-name xml:lang="x-default">Shipping Account ID</display-name>
+                <description xml:lang="x-default">Number representing the Shipping Account ID (ex: 394893489238983)</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftReturnsShippingAccount">
+                <display-name xml:lang="x-default">Returns Shipping Account ID</display-name>
+                <description xml:lang="x-default">Number representing the Returns Shipping Account ID (ex: 394893489238983)</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="orderDaysAvailableForReturn">
+                <display-name xml:lang="x-default">Available days to submit return after order creation</display-name>
+                <description xml:lang="x-default">Set the number of days after order creation in which the customer is allowed to automatically require a return.</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>0</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="setOrderReturnsOneToOneRelation">
+                <display-name xml:lang="x-default">Set returns to be one to one related with order</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftShippingService">
+                <display-name xml:lang="x-default">Shipping Service</display-name>
+                <description xml:lang="x-default">Must match the ID that is in Zenkraft, ex. fedex_ground</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>fedex_ground</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftWeightUnits">
+                <display-name xml:lang="x-default">Weight Units</display-name>
+                <description xml:lang="x-default">Weight Units to be used with Zenkraft.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Pounds</display>
+                        <value>LB</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Kilograms</display>
+                        <value>KG</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftShipLabelFileType">
+                <display-name xml:lang="x-default">Shipping Label File Type for Shipments to Customer</display-name>
+                <description xml:lang="x-default">ex: PDF, GIF, JPG, etc.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>PDF</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftReturnLabelFileType">
+                <display-name xml:lang="x-default">Shipping Label File Type For Returns</display-name>
+                <description xml:lang="x-default">ex: PDF, GIF, JPG, etc.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>PDF</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="twilioFromPhone">
+                <display-name xml:lang="x-default">Twilio From Phone Number</display-name>
+                <description xml:lang="x-default">Phone Number used to send SMS messages.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>+15005550006</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableZenkraftFeedback">
+                <display-name xml:lang="x-default">Enable Feedback on Tracking Page</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftAdvancedJSON">
+                <display-name xml:lang="x-default">Enable Advanced JSON Configuration</display-name>
+                <description xml:lang="x-default">This will enable/disable the Zenkraft Advanced JSON Configuration. If enabled, a valid JSON object needs to be configured in that JSON configuration site preference. If a valid JSON object does not exist, then the normal site preference configurations will be used.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftAdvancedJSONObject">
+                <display-name xml:lang="x-default">Zenkraft Advanced JSON Object</display-name>
+                <description xml:lang="x-default">Be sure to check the documentation to make sure that you are creating a valid object.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableZenkraftTrackingPage">
+                <display-name xml:lang="x-default">Enable Zenkraft Tracking page</display-name>
+                <description xml:lang="x-default">Enables the Tracking page. If enabled the page can be loaded via the 'Zenkraft-Track?tracknumber=777436548000&amp;carrier=fedex&amp;order=00001201' route.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="returnReasonsConfig">
+                <display-name xml:lang="x-default">Return Reasons Configuration</display-name>
+                <description xml:lang="x-default">JSON object representing reasons for returns and sub-reasons.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="useParcelObjectforTracking">
+                <display-name xml:lang="x-default">Use Parcel Object for Tracking</display-name>
+                <description xml:lang="x-default">Enable to use parcelObject for tracking instead of system Shipment</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableZenkraftTrackingOnOrderHistory">
+                <display-name xml:lang="x-default">Enable Zenkraft Tracking On Order History</display-name>
+                <description xml:lang="x-default">If enabled, tracking, carrier, and status will be displayed on the Order History.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftTrackingAccountSettingsJSON">
+                <display-name xml:lang="x-default">Zenkraft Tracking Settings JSON</display-name>
+                <description xml:lang="x-default">Tracking settings to allow for separate accounts per carrier. ex:&#13;
+{&#13;
+    "fedex": {&#13;
+        "DEBUG": "true",&#13;
+        "SHIPPING_ACCOUNT": "1234567890"&#13;
+    }&#13;
+}</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="googleMapsAPIKey">
+                <display-name xml:lang="x-default">Google Maps API Key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableZenkraftReturnsRequireLogin">
+                <display-name xml:lang="x-default">Enable Zenkraft returns to require login</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="catalogCategoriesForNonReturnableItems">
+                <display-name xml:lang="x-default">Catalog categories for non returnable items</display-name>
+                <description xml:lang="x-default">List of comma separated with no white space catalog categories of products that cannot be returned</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="trackingPageRequiresLogin">
+                <display-name xml:lang="x-default">Tracking page requires login</display-name>
+                <description xml:lang="x-default">Require customers to be authenticated to get order tracking information</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="twilioAccountSID">
+                <display-name xml:lang="x-default">Twilio Account SID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="twilioAuthToken">
+                <display-name xml:lang="x-default">Twilio Auth Token</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="twilioBaseURL">
+                <display-name xml:lang="x-default">Twilio Base URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>https://api.twilio.com/2010-04-01</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableZenkraftReturnsApproval">
+                <display-name xml:lang="x-default">Returns Require Approval</display-name>
+                <description xml:lang="x-default">If enabled, all returns will need to be approved before label can be downloaded.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftEnableShipNotifications">
+                <display-name xml:lang="x-default">Enable Shipping Notifications</display-name>
+                <description xml:lang="x-default">Enable Shipping Notifications on the Shipment Tracking page</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Zenkraft">
+                <display-name xml:lang="x-default">Zenkraft General</display-name>
+                <attribute attribute-id="zenkraftMasterAPIKey"/>
+                <attribute attribute-id="zenkraftProdMode"/>
+                <attribute attribute-id="zenkraftDebugLog"/>
+                <attribute attribute-id="enableZenkraftShipping"/>
+                <attribute attribute-id="enableZenkraftShippingRates"/>
+                <attribute attribute-id="zenkraftCarrier"/>
+                <attribute attribute-id="zenkraftPackagingType"/>
+                <attribute attribute-id="zenkraftCurrencyCode"/>
+                <attribute attribute-id="zenkraftDimensionUnits"/>
+                <attribute attribute-id="zenkraftWeightUnits"/>
+                <attribute attribute-id="zenkraftDefaultProductWeight"/>
+                <attribute attribute-id="zenkraftSenderStreet"/>
+                <attribute attribute-id="zenkraftSenderCity"/>
+                <attribute attribute-id="zenkraftSenderStateCode"/>
+                <attribute attribute-id="zenkraftSenderPostalCode"/>
+                <attribute attribute-id="zenkraftSenderCountryCode"/>
+                <attribute attribute-id="zenkraftShippingAccount"/>
+                <attribute attribute-id="zenkraftSenderCompany"/>
+                <attribute attribute-id="zenkraftSenderName"/>
+                <attribute attribute-id="zenkraftSenderPhone"/>
+                <attribute attribute-id="zenkraftSenderEmail"/>
+                <attribute attribute-id="zenkraftShipLabelFileType"/>
+                <attribute attribute-id="googleMapsAPIKey"/>
+            </attribute-group>
+            <attribute-group group-id="ZenkraftReturnLabel">
+                <display-name xml:lang="x-default">Zenkraft Returns</display-name>
+                <attribute attribute-id="zenkraftReturnsShippingAccount"/>
+                <attribute attribute-id="zenkraftReturnsCarrier"/>
+                <attribute attribute-id="zenkraftShippingService"/>
+                <attribute attribute-id="zenkraftReturnsPackagingType"/>
+                <attribute attribute-id="zenkraftRecipientStreet"/>
+                <attribute attribute-id="zenkraftRecipientCity"/>
+                <attribute attribute-id="zenkraftRecipientStateCode"/>
+                <attribute attribute-id="zenkraftRecipientPostalCode"/>
+                <attribute attribute-id="zenkraftRecipientCountryCode"/>
+                <attribute attribute-id="zenkraftRecipientCompany"/>
+                <attribute attribute-id="zenkraftRecipientName"/>
+                <attribute attribute-id="zenkraftRecipientPhone"/>
+                <attribute attribute-id="zenkraftRecipientEmail"/>
+                <attribute attribute-id="zenkraftReturnLabelFileType"/>
+                <attribute attribute-id="returnReasonsConfig"/>
+                <attribute attribute-id="enableZenkraftReturnsApproval"/>
+                <attribute attribute-id="zenkraftDimensionUnits"/>
+                <attribute attribute-id="zenkraftWeightUnits"/>
+                <attribute attribute-id="syncReturnWithZenkraft"/>
+                <attribute attribute-id="zenkraftReturnApprovalCatalogCategories"/>
+                <attribute attribute-id="zenkraftReturnApprovalCustomerGroups"/>
+                <attribute attribute-id="orderDaysAvailableForReturn"/>
+                <attribute attribute-id="setOrderReturnsOneToOneRelation"/>
+                <attribute attribute-id="catalogCategoriesForNonReturnableItems"/>
+                <attribute attribute-id="enableZenkraftReturnsRequireLogin"/>
+            </attribute-group>
+            <attribute-group group-id="ZenkraftNotifications">
+                <display-name xml:lang="x-default">Zenkraft Shipping Notifications</display-name>
+                <attribute attribute-id="twilioAccountSID"/>
+                <attribute attribute-id="twilioAuthToken"/>
+                <attribute attribute-id="zenkraftEnableShipNotifications"/>
+                <attribute attribute-id="twilioBaseURL"/>
+                <attribute attribute-id="twilioFromPhone"/>
+                <attribute attribute-id="enableZenkraftFeedback"/>
+            </attribute-group>
+             <attribute-group group-id="ZenkraftTracking">
+                <display-name xml:lang="x-default">Zenkraft Tracking Page Settings</display-name>
+                <attribute attribute-id="enableZenkraftTrackingPage"/>
+                <attribute attribute-id="zenkraftTrackingAccountSettingsJSON"/>
+                <attribute attribute-id="enableZenkraftTrackingOnOrderHistory"/>
+                <attribute attribute-id="useParcelObjectforTracking"/>
+                <attribute attribute-id="trackingPageRequiresLogin"/>
+            </attribute-group>
+            <attribute-group group-id="ZenkraftAdvanced">
+                <display-name xml:lang="x-default">Zenkraft Advanced Configuration</display-name>
+                <attribute attribute-id="zenkraftAdvancedJSON"/>
+                <attribute attribute-id="zenkraftAdvancedJSONObject"/>
+            </attribute-group>
+            <attribute-group group-id="zenkraftEDD">
+                <display-name xml:lang="x-default">Zenkraft Estimated Delivery</display-name>
+                <attribute attribute-id="enableZenkraftEstimatedDeliveryDates"/>
+                <attribute attribute-id="zenkraftEDDCutoffTime"/>
+                <attribute attribute-id="companyWideLeadTime"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ShippingMethod">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="zenkraftID">
+                <display-name xml:lang="x-default">Zenkraft Shipping Method ID</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRateMarkup">
+                <display-name xml:lang="x-default">Zenkraft Rate Markup</display-name>
+                <description xml:lang="x-default">If either Percentage or Amount is chose as the type, this markup is added to the shipping rate accordingly.</description>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+			<attribute-definition attribute-id="dropOffMethod">
+                <display-name xml:lang="x-default">Drop Off Method?</display-name>
+                <description xml:lang="x-default">Is this shipping method used as a drop off method. If so, when selected the user will select an available address for shipping</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+			<attribute-definition attribute-id="futureDateDelivery">
+                <display-name xml:lang="x-default">Future date delivery</display-name>
+                <description xml:lang="x-default">Set maximum number of days for delivery cut off date.</description>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-value>0.0</min-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="shippingMethodAccountID">
+                <display-name xml:lang="x-default">Zenkraft Shipping Account ID</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRateMarkupType">
+                <display-name xml:lang="x-default">Zenkraft Rate Markup Type</display-name>
+                <description xml:lang="x-default">This allows you to add markup to the rate returned from Zenkraft. If set to None, there is no markup, if set to Percentage or Amount, the markup is added with the value.</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Amount</display>
+                        <value>Amount</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Percentage</display>
+                        <value>Percent</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="zenkraft">
+                <display-name xml:lang="x-default">Zenkraft</display-name>
+				<attribute attribute-id="zenkraftID"/>
+                <attribute attribute-id="shippingMethodAccountID"/>
+                <attribute attribute-id="zenkraftRateMarkupType"/>
+                <attribute attribute-id="zenkraftRateMarkup"/>
+                <attribute attribute-id="dropOffMethod"/>
+                <attribute attribute-id="futureDateDelivery"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Shipment">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="shipmentType">
+                <display-name xml:lang="x-default">When this attribute equals 'instore', the checkout flow will assign the shipping method (005) which has a no shipping charge.</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftCarrier">
+                <display-name xml:lang="x-default">Zenkraft Carrier</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftLabelUrl">
+                <display-name xml:lang="x-default">Zenkraft Label URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_carrier">
+                <display-name xml:lang="x-default">Zenkraft Carrier</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_estimated_date">
+                <display-name xml:lang="x-default">Zenkraft Estimated Date</display-name>
+                <type>date</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_last_notification_sent">
+                <display-name xml:lang="x-default">Zenkraft Last Notification Sent</display-name>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_notification_type">
+                <display-name xml:lang="x-default">Zenkraft Notification type</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_shipment_description">
+                <display-name xml:lang="x-default">Zenkraft Shipment Description</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_shipment_status">
+                <display-name xml:lang="x-default">Zenkraft Shipment Status</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_time">
+                <display-name xml:lang="x-default">Zenkraft Time</display-name>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_delivered_date">
+                <display-name xml:lang="x-default">Zenkraft Delivered Date</display-name>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraft_tracking_stage">
+                <display-name xml:lang="x-default">Zenkraft Tracking Stage</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+              <attribute-definition attribute-id="zenkraftRequestedDeliveryDate">
+                <display-name xml:lang="x-default">Zenkraft requested delivery date.</display-name>
+                <type>date</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftDOPULocationCode">
+                <display-name xml:lang="x-default">Zenkraft drop off location code.</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftDOPULocationName">
+                <display-name xml:lang="x-default">Zenkraft drop off location name.</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="zenkraft">
+                <display-name xml:lang="x-default">Zenkraft</display-name>
+                <attribute attribute-id="zenkraftLabelUrl"/>
+                <attribute attribute-id="zenkraftCarrier"/>
+                <attribute attribute-id="zenkraft_checkpoints"/>
+                <attribute attribute-id="zenkraftRequestedDeliveryDate"/>
+                <attribute attribute-id="zenkraftDOPULocationName"/>
+                <attribute attribute-id="zenkraftDOPULocationCode"/>
+                <attribute attribute-id="zenkraft_delivered_date"/>
+            </attribute-group>
+            <attribute-group group-id="zenkraftNotification">
+                <display-name xml:lang="x-default">Zenkraft Notification</display-name>
+                <attribute attribute-id="zenkraft_shipment_description"/>
+                <attribute attribute-id="zenkraft_tracking_stage"/>
+                <attribute attribute-id="zenkraft_estimated_date"/>
+                <attribute attribute-id="zenkraft_last_notification_sent"/>
+                <attribute attribute-id="zenkraft_shipment_status"/>
+                <attribute attribute-id="zenkraft_notification_type"/>
+                <attribute attribute-id="zenkraft_time"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ShippingLineItem">
+        <system-attribute-definitions>
+            <attribute-definition attribute-id="UUID">
+                <min-length>0</min-length>
+                <field-length>28</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="creationDate"/>
+            <attribute-definition attribute-id="lastModified"/>
+        </system-attribute-definitions>
+    </type-extension>
+
+    <type-extension type-id="ShippingMethod">
+        <system-attribute-definitions>
+            <attribute-definition attribute-id="ID">
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="UUID">
+                <min-length>0</min-length>
+                <field-length>28</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="creationDate"/>
+            <attribute-definition attribute-id="description">
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="displayName">
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="lastModified"/>
+            <attribute-definition attribute-id="taxClassID">
+                <min-length>0</min-length>
+            </attribute-definition>
+        </system-attribute-definitions>
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="displayImage">
+                <display-name xml:lang="x-default">Display Image.</display-name>
+                <description xml:lang="x-default">Image displays next to shipping method listing on checkout. 144 x 144 suggested size</description>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="displayImageSelected">
+                <display-name xml:lang="x-default">Display Image Selected</display-name>
+                <description xml:lang="x-default">displays next to shipping method listing in checkout when method is selected. 144 x 144 suggested size</description>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="dropOffMethod">
+                <display-name xml:lang="x-default">Drop Off Method?</display-name>
+                <description xml:lang="x-default">Is this shipping method used as a drop off method. If so, when selected the user will select an available address for shipping</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="estimatedArrivalTime">
+                <display-name xml:lang="x-default">Estimated Arrival Time</display-name>
+                <description xml:lang="x-default">Estimated days until delivery</description>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftID">
+                <display-name xml:lang="x-default">Zenkraft Shipping Method ID</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="futureDateDelivery">
+                <display-name xml:lang="x-default">Future date delivery</display-name>
+                <description xml:lang="x-default">Set maximum number of days for delivery cut off date.</description>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-value>0.0</min-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRateMarkup">
+                <display-name xml:lang="x-default">Zenkraft Rate Markup</display-name>
+                <description xml:lang="x-default">If either Percentage or Amount is chose as the type, this markup is added to the shipping rate accordingly.</description>
+                <type>double</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftRateMarkupType">
+                <display-name xml:lang="x-default">Zenkraft Rate Markup Type</display-name>
+                <description xml:lang="x-default">This allows you to add markup to the rate returned from Zenkraft. If set to None, there is no markup, if set to Percentage or Amount, the markup is added with the value.</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Amount</display>
+                        <value>Amount</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Percentage</display>
+                        <value>Percent</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="shippingMethodAttr">
+                <display-name xml:lang="x-default">Shipping Method Attributes</display-name>
+                <attribute attribute-id="estimatedArrivalTime"/>
+                <attribute attribute-id="displayImageSelected"/>
+                <attribute attribute-id="displayImage"/>
+            </attribute-group>
+            <attribute-group group-id="zenkraft">
+                <display-name xml:lang="x-default">Zenkraft</display-name>
+                <attribute attribute-id="zenkraftID"/>
+                <attribute attribute-id="zenkraftRateMarkupType"/>
+                <attribute attribute-id="zenkraftRateMarkup"/>
+                <attribute attribute-id="dropOffMethod"/>
+                <attribute attribute-id="futureDateDelivery"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Product">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="leadTime">
+                <display-name xml:lang="x-default">Lead time of the product</display-name>
+                <description xml:lang="x-default">The days required by the company to send out this product</description>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="zenkraft">
+                <display-name xml:lang="x-default">Zenkraft</display-name>
+                <attribute attribute-id="leadTime"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Category">
+      <custom-attribute-definitions>
+            <attribute-definition attribute-id="leadTime">
+                <display-name xml:lang="x-default">Lead time of the product</display-name>
+                <description xml:lang="x-default">The days required by the company to send out this product</description>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="zenkraft">
+                <display-name xml:lang="x-default">Zenkraft</display-name>
+                <attribute attribute-id="leadTime"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="trackingNo">
+                <display-name xml:lang="x-default">Tracking Number</display-name>
+                <description xml:lang="x-default">Tracking Number from Zenkraft</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="zenkraftLabelUrl">
+                <display-name xml:lang="x-default">Zenkraft Label URL</display-name>
+                <description xml:lang="x-default">URL of the shipping label associated with this shipment</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="zenkraft">
+                <display-name xml:lang="x-default">Zenkraft</display-name>
+                <attribute attribute-id="trackingNo"/>
+                <attribute attribute-id="zenkraftLabelUrl"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>
+
+

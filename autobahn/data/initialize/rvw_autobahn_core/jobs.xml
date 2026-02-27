@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="RebuildURLs" priority="0">
+        <description/>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="template_114">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_114">
+                <step step-id="RebuildURLs" type="UpdateStorefrontURLs" enforce-restart="false">
+                    <description/>
+                    <parameters/>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-once enabled="true">
+                <date>2022-06-01Z</date>
+                <time>03:00:00.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+    <job job-id="Reindex" priority="0">
+        <description/>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="template_49">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_49">
+                <step step-id="Full Reindex" type="SearchReindex" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="Product related search indexes">true</parameter>
+                        <parameter name="Active data search index">true</parameter>
+                        <parameter name="Content search index">true</parameter>
+                        <parameter name="Indexer Type">Full Index Rebuild</parameter>
+                    </parameters>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-once enabled="true">
+                <date>2022-06-01Z</date>
+                <time>03:00:00.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+</jobs>

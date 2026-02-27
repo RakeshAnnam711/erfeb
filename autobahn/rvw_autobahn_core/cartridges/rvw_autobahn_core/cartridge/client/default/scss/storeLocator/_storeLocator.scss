@@ -1,0 +1,144 @@
+.store-locator-container {
+    .btn-storelocator-search {
+        @include button(primary)
+    }
+    .detect-location-spacer {
+        margin-bottom: $spacer;
+    }
+    .search-form {
+        width: 100%;
+    }
+    .results-card {
+        &>.card-body {
+            padding-right: 0;
+            padding-bottom: 0;
+        }
+    }
+    .filter-results {
+        margin-bottom: $spacer-xl;
+        padding-right: $card-body-padding-right;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .btn {
+            margin-bottom: $spacer-sm;
+            margin-right: $spacer-sm;
+        }
+    }
+    .results {
+        @include media-breakpoint-up(md) {
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-right: 0;
+            max-height: $store-results-container-max-height;
+        }
+        &-card {
+            > .card-header label {
+                @include label-styles;
+            }
+        }
+        .store-result {
+            display: flex;
+            margin-bottom: $spacer-xl;
+            .map-marker {
+                flex-shrink: 0;
+            }
+        }
+    }
+}
+
+.store-details {
+    .store-name {
+        a {
+            display: block;
+            margin-bottom: $spacer-sm;
+        }
+        p {
+            font-style: italic;
+            font-weight: normal;
+            margin-bottom: $spacer-sm;
+        }
+    }
+    .store-map {
+        display: block;
+    }
+    .store-map,
+    .store-hours {
+        margin-bottom: $spacer-sm;
+    }
+    ul,
+    address {
+        margin-bottom: 0;
+    }
+
+    // styling for cart and checkout flow
+    .data-checkout-stage .shipping-section &,
+    .product-summary-block .shipment-block &,
+    .product-summary-block .multi-shipping &,
+    .cart-page .line-item-store & {
+        .store-name a {
+            font-size: inherit;
+            letter-spacing: $default-text-letter-spacing;
+        }
+    }
+    .cart-page .line-item-store & {
+        margin-top: $spacer-sm;
+    }
+}
+
+.map-marker {
+    width: $store-map-marker-size;
+    height: $store-map-marker-size;
+    text-align: center;
+    line-height: $store-map-marker-size;
+    position: relative;
+    letter-spacing: 0;
+    margin-right: $spacer;
+    span {
+        @include horizontal-center;
+        color: $store-type-map-marker-default-label-color;
+        top: 0;
+        width: $store-map-marker-size;
+    }
+}
+
+.gm-style .gm-style-iw,
+.gm-style .gm-style-iw-c {
+    border-color: $popover-border-color;
+    border-radius: $popover-border-radius;
+    box-shadow: $popover-box-shadow;
+    max-width: $popover-max-width;
+    .store-details {
+        margin-left: 0;
+        font-family: $store-map-canvas-marker-font-family;
+        font-size: $store-map-canvas-marker-font-size;
+        line-height: $store-map-canvas-marker-line-height;
+        address {
+            line-height: 1.75;
+        }
+        .store-hours {
+            margin-bottom: 5px;
+        }
+    }
+    .title {
+        font-size: $store-map-canvas-marker-title-font-size;
+    }
+}
+
+.store-locator-no-results {
+    padding-right: $card-body-padding-right;
+    display: none;
+}
+
+.store-locator-no-apiKey {
+    display: none;
+}
+
+.map-canvas {
+    height: $store-map-canvas-height-sm;
+    display: block;
+
+    @include media-breakpoint-up(md) {
+        height: $store-map-canvas-height;
+    }
+}

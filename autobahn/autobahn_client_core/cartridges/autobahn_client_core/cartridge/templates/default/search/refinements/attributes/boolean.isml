@@ -1,0 +1,24 @@
+<li class="col-sm-4 col-md-12 ${!refinementValue.selectable ? 'disabled' : ''}">
+    <button data-href="${refinementValue.url}" data-seo-href="${refinementValue.seoRefineUrl || refinementValue.url}" class="d-flex align-items-start ${!refinementValue.selectable ? 'disabled' : ''}" ${!refinementValue.selectable ? 'disabled' : ''} aria-label="${refinementValue.displayValue}">
+        <iscomment>Checkbox</iscomment>
+        <isif condition="${refinementValue.selected && refinementValue.selectable}">
+            <i class="fa fa-check-square flex-shrink-0"></i>
+        <iselse/>
+            <i class="fa fa-square-o flex-shrink-0"></i>
+        </isif>
+
+        <iscomment>Label</iscomment>
+        <span class="${refinementValue.selected && refinementValue.selectable ? 'selected' : ''}" aria-hidden="true">
+            ${refinementValue.displayValue}
+        </span>
+
+        <span class="refinement-count">
+            (${refinementValue.hitCount.toFixed()})
+        </span>
+
+        <span class="sr-only selected-assistive-text">
+            ${refinementValue.selected && refinementValue.selectable ? Resource.msg('msg.assistive.selected.text', 'common', null) : ''}
+            ${refinementValue.title}
+        </span>
+    </button>
+</li>
