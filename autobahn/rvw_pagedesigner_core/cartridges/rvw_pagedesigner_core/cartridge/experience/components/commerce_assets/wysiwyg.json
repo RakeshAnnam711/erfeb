@@ -1,0 +1,33 @@
+{
+    "name": "WYSIWYG",
+    "description": "A 'What You See Is What You Get' rich text editor for adding custom content to the page.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "htmlArea",
+            "name": "Content",
+            "description": "Content to display on the page.",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "wysiwyg",
+                    "name": "WYSIWYG",
+                    "type": "markup",
+                    "description": "This can be used to add any type of custom content.",
+                    "required": true,
+                    "searching": {
+                        "searchable": true,
+                        "refinable": false
+                    }
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

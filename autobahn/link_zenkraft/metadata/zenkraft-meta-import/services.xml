@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="zenkraft-dopu-creds">
+        <url>https://api.zenkraft.com/dopu</url>
+        <user-id/>
+        <password masked="true">********</password>
+    </service-credential>
+
+    <service-credential service-credential-id="zenkraft-rate-creds">
+        <url>https://api.zenkraft.com/rate</url>
+        <user-id/>
+        <password masked="true">********</password>
+    </service-credential>
+
+    <service-credential service-credential-id="zenkraft-ship-creds">
+        <url>https://api.zenkraft.com/ship</url>
+        <user-id/>
+        <password masked="true">********</password>
+    </service-credential>
+
+    <service-credential service-credential-id="zenkraft-track-creds">
+        <url>https://api.zenkraft.com/track</url>
+        <user-id/>
+        <password masked="true">********</password>
+    </service-credential>
+
+    <service-credential service-credential-id="zenkraft-label-creds">
+        <url>https://api.zenkraft.com/merge</url>
+        <user-id/>
+        <password masked="true">********</password>
+    </service-credential>
+
+    <service-profile service-profile-id="service-zenkraft">
+        <timeout-millis>20000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="http.zenkraft.dopu">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>zenkraft-dopu</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>service-zenkraft</profile-id>
+        <credential-id>zenkraft-dopu-creds</credential-id>
+    </service>
+
+    <service service-id="http.zenkraft.rate">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>zenkraft-rate</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>service-zenkraft</profile-id>
+        <credential-id>zenkraft-rate-creds</credential-id>
+    </service>
+
+    <service service-id="http.zenkraft.ship">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>zenkraft-ship</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>service-zenkraft</profile-id>
+        <credential-id>zenkraft-ship-creds</credential-id>
+    </service>
+
+    <service service-id="http.zenkraft.label">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>zenkraft-label</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>service-zenkraft</profile-id>
+        <credential-id>zenkraft-label-creds</credential-id>
+    </service>
+
+    <service service-id="http.zenkraft.track">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>zenkraft-track</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>service-zenkraft</profile-id>
+        <credential-id>zenkraft-track-creds</credential-id>
+    </service>
+</services>

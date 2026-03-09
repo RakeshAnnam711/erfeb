@@ -1,0 +1,104 @@
+{
+    "name": "Video",
+    "description": "This is a video component.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "videoSettings",
+            "name": "Video Settings",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "type",
+                    "name": "Video Type",
+                    "description": "What type of video it is. YouTube, Vimeo, or self-hosted MP4s are supported.",
+                    "type": "enum",
+                    "values": [
+                        "YouTube",
+                        "Vimeo",
+                        "Hosted"
+                    ],
+                    "required": true
+                },
+                {
+                    "id": "videoID",
+                    "name": "Video ID",
+                    "description": "The video's ID can be found in its URL, for example: in this YouTube URL (https://www.youtube.com/watch?v=i-r-GBrkfsY), the ID is i-r-GBrkfsY. If the video is self-hosted, provide a full URL for it.",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "id": "thumbnailImage",
+                    "name": "Thumbnail Image",
+                    "description": "An optional image to be displayed before the video starts playing.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "modal",
+                    "name": "Play in modal",
+                    "description": "Select this option to launch the video on a modal.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "autoplay",
+                    "name": "Autoplay",
+                    "description": "Select this option to have the video start playing automatically.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "playWhenFullyInView",
+                    "name": "Play the video only when fully in view",
+                    "description": "If selected, the video will not play until the entire component is visible in the viewport window. Default behavior is to start playing as soon as any portion is visible on the screen. Note: Only applicable when Autoplay is enabled.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "hideControls",
+                    "name": "Hide Video Controls",
+                    "description": "Select this option to hide the video controls.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "mute",
+                    "name": "Mute Video",
+                    "description": "Select this option to mute the video.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "loop",
+                    "name": "Loop Video",
+                    "description": "Select this option to automatically replay the video when it finishes.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "aspectRatio",
+                    "name": "Aspect Ratio",
+                    "description": "Choose the aspect ratio of the video. Most videos are 16:9, which is the default.",
+                    "type": "enum",
+                    "values": [
+                        "16:9",
+                        "9:16",
+                        "4:3",
+                        "3:4",
+                        "1:1"
+                    ],
+                    "default_value": "16:9",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

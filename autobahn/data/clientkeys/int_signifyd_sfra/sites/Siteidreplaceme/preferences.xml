@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances>
+            <preference preference-id="SignifydEnableCartridge">true</preference>
+            <preference preference-id="SignifydApiKey">rfad2KnJrEfzCRHoARKmHDEoOT9V7858</preference>
+            <preference preference-id="SignifydHoldOrderEnable">true</preference>
+        </all-instances>
+        <development>
+            <preference preference-id="SignifydApiKey">rfad2KnJrEfzCRHoARKmHDEoOT9V7858</preference>
+        </development>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+

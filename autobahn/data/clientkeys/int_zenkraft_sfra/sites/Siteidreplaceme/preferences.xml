@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances/>
+        <development>
+            <preference preference-id="enableZenkraftEstimatedDeliveryDates">true</preference>
+            <preference preference-id="enableZenkraftShipping">true</preference>
+            <preference preference-id="enableZenkraftShippingRates">true</preference>
+            <preference preference-id="zenkraftCarrier">ups</preference>
+            <preference preference-id="zenkraftCurrencyCode">USD</preference>
+            <preference preference-id="zenkraftDebugLog">true</preference>
+            <preference preference-id="zenkraftDefaultProductWeight">1</preference>
+            <preference preference-id="zenkraftDimensionUnits">IN</preference>
+            <preference preference-id="zenkraftMasterAPIKey">4sKjfWspCOlGHrHP2sM9oF4JtnfuYLs7UztkfEYPXP6haVFuVu</preference>
+            <preference preference-id="zenkraftPackagingType">your_packaging</preference>
+            <preference preference-id="zenkraftProdMode">false</preference>
+            <preference preference-id="zenkraftSenderCity">Jersey City</preference>
+            <preference preference-id="zenkraftSenderCompany">What Goes Around Comes Around</preference>
+            <preference preference-id="zenkraftSenderCountryCode">US</preference>
+            <preference preference-id="zenkraftSenderEmail">help@whatgoesaroundnyc.com</preference>
+            <preference preference-id="zenkraftSenderName">Shipping</preference>
+            <preference preference-id="zenkraftSenderPhone">212-564-6650</preference>
+            <preference preference-id="zenkraftSenderPostalCode">07310</preference>
+            <preference preference-id="zenkraftSenderStateCode">NJ</preference>
+            <preference preference-id="zenkraftSenderStreet">812 Jersey Ave</preference>
+            <preference preference-id="zenkraftShipLabelFileType">PDF</preference>
+            <preference preference-id="zenkraftShippingAccount">603201235</preference>
+            <preference preference-id="zenkraftWeightUnits">LB</preference>
+            <preference preference-id="googleMapsAPIKey">AIzaSyA6S8r0FG4JiQNbhsV4RmxibApZj2MFhBE</preference>
+        </development>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+

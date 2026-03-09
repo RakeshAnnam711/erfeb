@@ -1,0 +1,158 @@
+{
+    "name": "Blog Page",
+    "description": "A page with dynamic blog components and additional attributes. This page will show on the Blog Landing page once a category is chosen.",
+    "attribute_definition_groups": [
+        {
+            "id": "pageAttributes",
+            "name": "Page Settings",
+            "attribute_definitions": [
+                {
+                    "id": "blogCreationDate",
+                    "name": "Blog Creation Date",
+                    "description": "This will be used to sort on the landing page, with the most recent blogs first.",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "dateTimePicker"
+                    }
+                },
+                {
+                    "id": "blogAuthor",
+                    "name": "Author",
+                    "description": "Enter the name of the author of this blog.",
+                    "type": "string",
+                    "required": false,
+                    "searching": {
+                        "searchable": true,
+                        "refinable": false
+                    }
+                },
+                {
+                    "id": "tileImage",
+                    "name": "Tile Image",
+                    "description": "An image to appear with the blog preview on the blog landing page, in search results, and for Open Graph SEO data.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "transparentNavShow",
+                    "name": "Show Transparent Nav",
+                    "description": "Default false. Set to true for nav to be transparent.",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": false
+                },
+                {
+                    "id": "transparentNavDarkMode",
+                    "name": "Transparent Nav Dark Mode",
+                    "description": "Default false which shows light mode. Set to true for nav to be dark mode for pages that have light backgrounds.",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": false
+                },
+                {
+                    "id": "customClass",
+                    "name": "Custom Class",
+                    "description": "Add a custom class to be applied to this page. For example, use 'background--light-gray to set the background color to light gray.'",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id": "pageheader",
+            "name": "Header Region",
+            "default_component_constructors": [
+                {
+                    "type_id": "commerce_layouts.blogTitle",
+                    "name": "Blog Title Component"
+                }
+            ],
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "main",
+            "name": "Main Region",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"belowFold",
+            "name":"Below Fold (lazy load)",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        }
+    ]
+}

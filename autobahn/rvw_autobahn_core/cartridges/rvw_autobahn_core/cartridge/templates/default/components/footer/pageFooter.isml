@@ -1,0 +1,51 @@
+<footer id="footercontent">
+    <div class="container">
+        <div class="footer-container row">
+            <div class="footer-item col-md-4">
+                <div class="store">
+                    <iscontentasset aid="footerStoreLocator" />
+                </div>
+                <div class="email-signup-form">
+                    <iscontentasset aid="footerSignUp" />
+                </div>
+                <div class="social-back-to-top">
+                    <iscontentasset aid="footerSocial" />
+                </div>
+            </div>
+            <div class="footer-item col-md-2 offset-md-1 collapsible-sm">
+                <iscontentasset aid="footerColumn1" />
+            </div>
+            <div class="footer-item col-md-2 collapsible-sm">
+                <iscontentasset aid="footerColumn2" />
+            </div>
+            <div class="footer-item col-md-2 collapsible-sm">
+                <iscontentasset aid="footerColumn3" />
+            </div>
+            <div class="col-md-1 text-right">
+                <button class="back-to-top" title="${Resource.msg('button.back_to_top', 'common', null)}"
+                    aria-label="${Resource.msg('button.back_to_top', 'common', null)}">
+                    <span class="fa-stack fa-lg" aria-hidden="true">
+                        <i class="fa-circle fa-inverse fa-stack-2x"></i>
+                        <i class="fa-arrow-up fa-stack-1x"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <hr class="hidden-sm-down" />
+        <div class="row pt-2">
+            <div class="col-md-8 text-center text-md-left copyright-notice copyright">
+                <iscontentasset aid="footerCopy" />
+            </div>
+            <div class="col-md-4 text-center text-md-right postscript">
+                <iscontentasset aid="footerBottomRight" />
+            </div>
+        </div>
+    </div>
+</footer>
+
+<isinclude template="cart/cartRemoveProductModal" />
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('wishlistEnable')}">
+    <isinclude template="wishlist/components/modalShowListsWrapper" />
+</isif>
+
+<isprint value="${dw.system.HookMgr.callHook('app.template.domInject', 'postFooter', pdict) || ''}"  encoding="off" />

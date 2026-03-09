@@ -1,0 +1,3 @@
+<isif condition="${!empty(order.shippedToFirstName) || !empty(order.shippedToLastName)}">
+<p>${Resource.msg('label.orderhistory.shippedto','account',null)} ${order.shippedToFirstName || ''} ${order.shippedToLastName || ''}</p>
+</isif>

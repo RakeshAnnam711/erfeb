@@ -1,0 +1,47 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/discountStatusBar.js');
+</isscript>
+
+<div class="container discount-status-bar ${pdict.containerClass}" data-url="${URLUtils.url('DiscountStatusBar-Show', 'campaignId', pdict.campaignId, 'completionMessage', pdict.completionMessage)}" data-kit-id="${pdict.kitId}">
+    <div class="discount-status-bar-data row">
+        <isif condition="${pdict.checkpoints.length > 0}">
+            <div class="row col-12 col-md-9 discount-status-bar-checkpoints no-gutters">
+                <isset name="allThresholdsMet" value="${false}" scope="page"/>
+                <isloop items="${pdict.checkpoints}" var="checkpoint" status="loopStatus">
+                    <div class="col-12 col-sm discount-checkpoint-section">
+                        <div class="discount-status-bar-progress">
+                            <div class="discount-status-bar-progress-fill" style="width: ${checkpoint.fillPercentage}%"></div>
+                        </div>
+                        <div class="discount-checkpoint ${checkpoint.applied ? 'applied' : ''}">
+                            <isloop items="${checkpoint.message}" var="message">
+                                <div class="discount-checkpoint-promo-message">${message}</div>
+                            </isloop>
+                            <div class="discount-checkpoint-threshold">${checkpoint.threshold.toFormattedString()}</div>
+                            <div class="discount-checkpoint-icon"></div>
+                        </div>
+                    </div>
+                    <isif condition="${loopStatus.last && checkpoint.applied}">
+                        <isset name="allThresholdsMet" value="${true}" scope="page"/>
+                    </isif>
+                </isloop>
+            </div>
+        <iselse/>
+            <div class="col-12 col-md-9 discount-status-bar-no-promo-message">
+                <isprint value="${Resource.msg('discountstatusbar.nopromomessage', 'components', null)}" encoding="on"/>
+            </div>
+        </isif>
+        <div class="col-12 col-md-3 discount-status-bar-info">
+            <isif condition="${allThresholdsMet}">
+                <div class="discount-status-bar-completion-text">
+                    <isprint value="${pdict.completionMessage}" encoding="off" />
+                </div>
+            <iselse/>
+                <div class="discount-status-bar-total">${pdict.total.toFormattedString()}</div>
+            </isif>
+            <a class="discount-status-bar-checkout-btn" href="${URLUtils.https('Checkout-Begin')}">
+                ${!empty(pdict.buttonText) ? pdict.buttonText : Resource.msg('button.checkout', 'cart', null)}
+            </a>
+        </div>
+    </div>
+</div>

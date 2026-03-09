@@ -1,0 +1,37 @@
+<isinclude template="emails/header" />
+
+<table>
+    <tr>
+        <td style="font-size:12px;font-family:arial;padding:20px 0;vertical-align:top;">
+            <isif condition="${empty(pdict.recipientName)}">
+                <p>${Resource.msg('email.giftcertificate.dearcustomer','checkout',null)}</p>
+            <iselse/>
+                <p>${StringUtils.format(Resource.msg('email.giftcertificate.dear','checkout', null), pdict.recipientName)}</p>
+            </isif>
+            <p>
+                <isif condition="${empty(pdict.senderName)}">
+                    ${Resource.msg('email.giftcertificate.someone','checkout',null)}
+                <iselse/>
+                    <isprint value="${pdict.senderName}"/>
+                </isif>
+                ${StringUtils.format(Resource.msg('email.giftcertificate.hassentyou','checkout', null), pdict.amount)}<a href="${URLUtils.httpHome()}">${Resource.msg('email.giftcertificate.dwonlinestore','checkout',null)}</a>${Resource.msg('email.giftcertificate.period','checkout',null)}
+            </p>
+
+            <isif condition="${!empty(pdict.message)}">
+                <isif condition="${empty(pdict.senderName)}">
+                    <p>${Resource.msg('email.giftcertificate.msgleftforyou','checkout',null)}</p>
+                <iselse/>
+                    <p><isprint value="${pdict.senderName}"/> ${Resource.msg('email.giftcertificate.msghasbeenleftforyou','checkout',null)}</p>
+                </isif>
+                <p><isprint value="${pdict.message}"/></p>
+            </isif>
+
+            <p>
+                ${Resource.msg('email.giftcertificate.toredeem','checkout',null)}
+                <isprint value="${pdict.giftCertificateCode}"/>
+            </p>
+        </td>
+    </tr>
+</table>
+
+<isinclude template="emails/footer" />

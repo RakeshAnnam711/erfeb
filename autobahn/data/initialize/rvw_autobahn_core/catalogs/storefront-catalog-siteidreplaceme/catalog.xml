@@ -1,0 +1,951 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="sitecatalogidreplaceme">
+    <header>
+        <image-settings>
+            <internal-location base-path="/"/>
+            <view-types>
+                <view-type>large</view-type>
+                <view-type>medium</view-type>
+                <view-type>small</view-type>
+                <view-type>swatch</view-type>
+            </view-types>
+            <alt-pattern>${productname}</alt-pattern>
+            <title-pattern>${productname}</title-pattern>
+        </image-settings>
+    </header>
+
+    <category category-id="root">
+        <display-name xml:lang="x-default">Sitenamereplaceme Storefront Catalog - EN</display-name>
+        <online-flag>true</online-flag>
+        <template/>
+        <page-attributes/>
+        <attribute-groups>
+            <attribute-group group-id="storefrontAttributes">
+                <display-name xml:lang="x-default">Storefront Attributes</display-name>
+            </attribute-group>
+        </attribute-groups>
+        <refinement-definitions>
+            <refinement-definition type="category" bucket-type="none">
+                <display-name xml:lang="x-default">Category</display-name>
+                <sort-mode>category-position</sort-mode>
+                <cutoff-threshold>5</cutoff-threshold>
+            </refinement-definition>
+            <refinement-definition type="attribute" bucket-type="values" attribute-id="refinementColor" system="false">
+                <display-name xml:lang="x-default">Color</display-name>
+                <value-set>refinement-category</value-set>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <unbucketed-values-mode>show-values</unbucketed-values-mode>
+                <cutoff-threshold>5</cutoff-threshold>
+                <bucket-definitions>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Beige</display-name>
+                        <value-list xml:lang="x-default">beige</value-list>
+                        <presentation-id>beige</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Black</display-name>
+                        <value-list xml:lang="x-default">black</value-list>
+                        <presentation-id>black</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Blue</display-name>
+                        <value-list xml:lang="x-default">blue</value-list>
+                        <presentation-id>blue</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Navy</display-name>
+                        <value-list xml:lang="x-default">navy</value-list>
+                        <presentation-id>navy</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Brown</display-name>
+                        <value-list xml:lang="x-default">brown</value-list>
+                        <presentation-id>brown</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Green</display-name>
+                        <value-list xml:lang="x-default">green</value-list>
+                        <presentation-id>green</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Grey</display-name>
+                        <value-list xml:lang="x-default">grey</value-list>
+                        <presentation-id>grey</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Orange</display-name>
+                        <value-list xml:lang="x-default">orange</value-list>
+                        <presentation-id>orange</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Pink</display-name>
+                        <value-list xml:lang="x-default">pink</value-list>
+                        <presentation-id>pink</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Purple</display-name>
+                        <value-list xml:lang="x-default">purple</value-list>
+                        <presentation-id>purple</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Red</display-name>
+                        <value-list xml:lang="x-default">red</value-list>
+                        <presentation-id>red</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">White</display-name>
+                        <value-list xml:lang="x-default">white</value-list>
+                        <presentation-id>white</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Yellow</display-name>
+                        <value-list xml:lang="x-default">yellow</value-list>
+                        <presentation-id>yellow</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">Miscellaneous</display-name>
+                        <value-list xml:lang="x-default">miscellaneous</value-list>
+                        <presentation-id>miscellaneous</presentation-id>
+                    </attribute-bucket>
+                </bucket-definitions>
+            </refinement-definition>
+            <refinement-definition type="price" bucket-type="thresholds">
+                <display-name xml:lang="x-default">Price</display-name>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <cutoff-threshold>5</cutoff-threshold>
+                <bucket-definitions>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€0 - €19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€20 - €49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€50 - €99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€100 - €499.00</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€500 - €999.99</display-name>
+                        <threshold>1000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€1000 - €1499.99</display-name>
+                        <threshold>1500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€1500 - €1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€2000 - €2499.99</display-name>
+                        <threshold>2500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€2500 - €4999.99</display-name>
+                        <threshold>5000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€5000 - €9999.99</display-name>
+                        <threshold>10000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $999.99</display-name>
+                        <threshold>1000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$1,000 - $1,499.99</display-name>
+                        <threshold>1500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$1,500 - $1,999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$2,000 - $2,499.99</display-name>
+                        <threshold>2500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$2,500 - $4,999.99</display-name>
+                        <threshold>5000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$5,000  - $9,999.99</display-name>
+                        <threshold>10000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$10,000 - $14,999.99</display-name>
+                        <threshold>15000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$15,000 +</display-name>
+                        <threshold>100000</threshold>
+                    </price-bucket>
+                </bucket-definitions>
+            </refinement-definition>
+            <refinement-definition type="attribute" bucket-type="none" attribute-id="isNew" system="false">
+                <display-name xml:lang="x-default">New Arrival</display-name>
+                <value-set>search-result</value-set>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <cutoff-threshold>5</cutoff-threshold>
+            </refinement-definition>
+            <refinement-definition type="attribute" bucket-type="none" attribute-id="brand" system="true">
+                <display-name xml:lang="x-default">brand</display-name>
+                <value-set>search-result</value-set>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <cutoff-threshold>5</cutoff-threshold>
+            </refinement-definition>
+            <refinement-definition type="attribute" bucket-type="values" attribute-id="badgeNames" system="false">
+                <display-name xml:lang="x-default">Badge Name</display-name>
+                <value-set>search-result</value-set>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <unbucketed-values-mode>show-values</unbucketed-values-mode>
+                <cutoff-threshold>5</cutoff-threshold>
+            </refinement-definition>
+        </refinement-definitions>
+        <product-detail-page-meta-tag-rules>
+            <page-meta-tag-rule rule-id="Product Detail Page Description"/>
+            <page-meta-tag-rule rule-id="Product Detail Page Title"/>
+            <page-meta-tag-rule rule-id="Product Detail Page Robots"/>
+            <page-meta-tag-rule rule-id="Product Detail Page Open Graph URL"/>
+        </product-detail-page-meta-tag-rules>
+        <product-listing-page-meta-tag-rules>
+            <page-meta-tag-rule rule-id="Product Listing Page Open Graph URL"/>
+            <page-meta-tag-rule rule-id="Product Listing Page Robots - Global"/>
+            <page-meta-tag-rule rule-id="Product Listing Page Title"/>
+        </product-listing-page-meta-tag-rules>
+    </category>
+
+    <category category-id="footwear">
+        <display-name xml:lang="x-default">FOOTWEAR</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <position>137</position>
+        <template/>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">false</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="showInMenuAlways">true</custom-attribute>
+        </custom-attributes>
+    </category>
+
+    <category category-id="gear">
+        <display-name xml:lang="x-default">GEAR</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <template/>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">false</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="showInMenuAlways">true</custom-attribute>
+        </custom-attributes>
+    </category>
+
+    <category category-id="kids">
+        <display-name xml:lang="x-default">KIDS</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <position>138.0</position>
+        <template/>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">false</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="showInMenuAlways">true</custom-attribute>
+        </custom-attributes>
+    </category>
+
+    <category category-id="mens">
+        <display-name xml:lang="x-default">MENS</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <position>11.0</position>
+        <template/>
+        <page-attributes>
+            <page-title xml:lang="x-default">Men's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
+            <page-description xml:lang="x-default">Men's range. Hard-wearing boots, jackets and clothing for unbeatable comfort day in, day out. Practical, easy-to-wear styles wherever you're headed.</page-description>
+            <page-keywords xml:lang="x-default">mens boots, mens shoes, mens clothing, mens apparel, mens jackets</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">true</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbanner-mens.jpg</custom-attribute>
+        </custom-attributes>
+        <refinement-definitions>
+            <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
+        </refinement-definitions>
+    </category>
+
+    <category category-id="nutrition">
+        <display-name xml:lang="x-default">NUTRITION</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <template/>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">false</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="showInMenuAlways">true</custom-attribute>
+        </custom-attributes>
+    </category>
+
+    <category category-id="sale">
+        <display-name xml:lang="x-default">SALE</display-name>
+        <online-flag>false</online-flag>
+        <parent>root</parent>
+        <position>136</position>
+        <template/>
+        <page-attributes>
+            <page-title xml:lang="x-default">Clearance items</page-title>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+        </custom-attributes>
+    </category>
+
+    <category category-id="womens">
+        <display-name xml:lang="x-default">WOMENS</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <position>10</position>
+        <template/>
+        <page-attributes>
+            <page-title xml:lang="x-default">Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
+            <page-description xml:lang="x-default">Women's range. Fashionable and stylish Shoes, jackets and  all other clothing for unbeatable comfort day in, day out. Practical and fashionable styles wherever the occasion.</page-description>
+            <page-keywords xml:lang="x-default">womens boots, womens shoes, wome sandals, womens clothing, womens apparel, womens jackets</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">true</custom-attribute>
+            <custom-attribute attribute-id="megamenuAsset1">megamenu-womens-1</custom-attribute>
+            <custom-attribute attribute-id="megamenuAsset2">megamenu-womens-2</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbanner-womens.jpg</custom-attribute>
+        </custom-attributes>
+        <refinement-definitions>
+            <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
+        </refinement-definitions>
+    </category>
+
+    <category category-id="womens-clothing">
+        <display-name xml:lang="x-default">Clothing</display-name>
+        <online-flag>true</online-flag>
+        <parent>womens</parent>
+        <position>17</position>
+        <thumbnail>home-rain-gear-hero-450-600@2x.jpg</thumbnail>
+        <image>home-rain-gear-hero-450-600@2x.jpg</image>
+        <template>search/searchResults</template>
+        <page-attributes>
+            <page-title xml:lang="x-default">Womens Clothing Including Outerwear, Tops, Bottoms &amp; More</page-title>
+            <page-description xml:lang="x-default">Shop Women's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Commerce Cloud</page-description>
+            <page-keywords xml:lang="x-default">womens outerwear, womens tops, womens bottoms</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">false</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="showInMenuAlways">false</custom-attribute>
+            <custom-attribute attribute-id="sizeChartID">womens-clothing</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">home-rain-gear-hero-450-600@2x.jpg</custom-attribute>
+        </custom-attributes>
+        <refinement-definitions>
+            <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
+                <display-name xml:lang="x-default">Size</display-name>
+                <value-set>search-result</value-set>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <unbucketed-values-mode>show-values</unbucketed-values-mode>
+                <cutoff-threshold>5</cutoff-threshold>
+                <bucket-definitions>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">XS</display-name>
+                        <value-list xml:lang="x-default">XS,9XS</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">S</display-name>
+                        <value-list xml:lang="x-default">S,9SM,9SM_1</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">M</display-name>
+                        <value-list xml:lang="x-default">M,9MD</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">L</display-name>
+                        <value-list xml:lang="x-default">L,9LG</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">XL</display-name>
+                        <value-list xml:lang="x-default">XL,9XL</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">XXL</display-name>
+                        <value-list xml:lang="x-default">XXL</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">0</display-name>
+                        <value-list xml:lang="x-default">000</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">2P</display-name>
+                        <value-list xml:lang="x-default">002_1</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">4</display-name>
+                        <value-list xml:lang="x-default">004</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">4P</display-name>
+                        <value-list xml:lang="x-default">004_1</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">6</display-name>
+                        <value-list xml:lang="x-default">006</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">6P</display-name>
+                        <value-list xml:lang="x-default">006_1</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">8</display-name>
+                        <value-list xml:lang="x-default">008</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">8P</display-name>
+                        <value-list xml:lang="x-default">008_1</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">5</display-name>
+                        <value-list xml:lang="x-default">050</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">6</display-name>
+                        <value-list xml:lang="x-default">060</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">6.5</display-name>
+                        <value-list xml:lang="x-default">065</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">7</display-name>
+                        <value-list xml:lang="x-default">070</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">7.5</display-name>
+                        <value-list xml:lang="x-default">075</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">8</display-name>
+                        <value-list xml:lang="x-default">080</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">8.5</display-name>
+                        <value-list xml:lang="x-default">085</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">9</display-name>
+                        <value-list xml:lang="x-default">090</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">9.5</display-name>
+                        <value-list xml:lang="x-default">095</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">10</display-name>
+                        <value-list xml:lang="x-default">100</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">11</display-name>
+                        <value-list xml:lang="x-default">110</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">10</display-name>
+                        <value-list xml:lang="x-default">010</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">10P</display-name>
+                        <value-list xml:lang="x-default">010_1</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">12</display-name>
+                        <value-list xml:lang="x-default">012</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">12P</display-name>
+                        <value-list xml:lang="x-default">012_1</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">14</display-name>
+                        <value-list xml:lang="x-default">014</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">14P</display-name>
+                        <value-list xml:lang="x-default">014_1</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">16L</display-name>
+                        <value-list xml:lang="x-default">16L</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">16R</display-name>
+                        <value-list xml:lang="x-default">16R</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">16</display-name>
+                        <value-list xml:lang="x-default">016</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">14.5</display-name>
+                        <value-list xml:lang="x-default">145</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">15</display-name>
+                        <value-list xml:lang="x-default">150</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">15.5</display-name>
+                        <value-list xml:lang="x-default">155</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">15L</display-name>
+                        <value-list xml:lang="x-default">15L</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">15R</display-name>
+                        <value-list xml:lang="x-default">15R</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">16</display-name>
+                        <value-list xml:lang="x-default">160</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">16.5</display-name>
+                        <value-list xml:lang="x-default">165</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">17</display-name>
+                        <value-list xml:lang="x-default">170</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">17.5</display-name>
+                        <value-list xml:lang="x-default">175</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">18</display-name>
+                        <value-list xml:lang="x-default">180</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">18.5</display-name>
+                        <value-list xml:lang="x-default">185</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">19</display-name>
+                        <value-list xml:lang="x-default">190</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">20</display-name>
+                        <value-list xml:lang="x-default">200</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">22</display-name>
+                        <value-list xml:lang="x-default">220</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">14W</display-name>
+                        <value-list xml:lang="x-default">14W</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">16W</display-name>
+                        <value-list xml:lang="x-default">16W</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">18W</display-name>
+                        <value-list xml:lang="x-default">18W</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">20W</display-name>
+                        <value-list xml:lang="x-default">20W</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">22W</display-name>
+                        <value-list xml:lang="x-default">22W</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">24W</display-name>
+                        <value-list xml:lang="x-default">24W</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">28</display-name>
+                        <value-list xml:lang="x-default">28</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">29</display-name>
+                        <value-list xml:lang="x-default">29</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">30</display-name>
+                        <value-list xml:lang="x-default">30</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">31</display-name>
+                        <value-list xml:lang="x-default">31</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">32</display-name>
+                        <value-list xml:lang="x-default">32</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">33</display-name>
+                        <value-list xml:lang="x-default">33</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">34</display-name>
+                        <value-list xml:lang="x-default">34</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">36</display-name>
+                        <value-list xml:lang="x-default">036</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">38</display-name>
+                        <value-list xml:lang="x-default">038</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">39</display-name>
+                        <value-list xml:lang="x-default">039</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">40</display-name>
+                        <value-list xml:lang="x-default">040</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">41</display-name>
+                        <value-list xml:lang="x-default">041</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">42</display-name>
+                        <value-list xml:lang="x-default">042</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">43</display-name>
+                        <value-list xml:lang="x-default">043</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">44</display-name>
+                        <value-list xml:lang="x-default">044</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">46</display-name>
+                        <value-list xml:lang="x-default">046</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">48</display-name>
+                        <value-list xml:lang="x-default">048</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">36</display-name>
+                        <value-list xml:lang="x-default">36</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">38</display-name>
+                        <value-list xml:lang="x-default">38</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">40</display-name>
+                        <value-list xml:lang="x-default">40</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">42</display-name>
+                        <value-list xml:lang="x-default">42</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">44</display-name>
+                        <value-list xml:lang="x-default">44</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">46</display-name>
+                        <value-list xml:lang="x-default">46</value-list>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">48</display-name>
+                        <value-list xml:lang="x-default">48</value-list>
+                    </attribute-bucket>
+                </bucket-definitions>
+            </refinement-definition>
+            <refinement-definition type="price" bucket-type="thresholds">
+                <display-name xml:lang="x-default">Price</display-name>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <cutoff-threshold>5</cutoff-threshold>
+                <bucket-definitions>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€0 - €19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€20 - €49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€50 - €99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€100 - €499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€500 - €1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                </bucket-definitions>
+            </refinement-definition>
+        </refinement-definitions>
+    </category>
+
+    <category category-id="womens-clothing-tops">
+        <display-name xml:lang="x-default">Tops</display-name>
+        <online-flag>true</online-flag>
+        <parent>womens-clothing</parent>
+        <position>11.0</position>
+        <image>images/slot/sub_banners/cat-banner-womens-tops.jpg</image>
+        <template>search/searchResults</template>
+        <page-attributes>
+            <page-title xml:lang="x-default">Women's Tops including Short &amp; Long Sleeve, Casual, Classic &amp; More</page-title>
+            <page-description xml:lang="x-default">Shop Women's Shirts. Short and long sleeve, Oxford, smart, casual and classic styles for unbeatable comfort from your desk to the great outdoors at Commerce Cloud.</page-description>
+            <page-keywords xml:lang="x-default">womens shirt, womens dress shirt, womens woven shirt, womens office shirt, womens casual shirt</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">false</custom-attribute>
+            <custom-attribute attribute-id="megamenuAsset1">test-chromeless</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="sizeChartID">womens-clothing</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womens-clothing-tops.jpg</custom-attribute>
+        </custom-attributes>
+        <refinement-definitions>
+            <refinement-definition type="attribute" bucket-type="none" attribute-id="topType" system="false">
+                <display-name xml:lang="x-default">Type | Use</display-name>
+                <value-set>search-result</value-set>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <cutoff-threshold>5</cutoff-threshold>
+            </refinement-definition>
+            <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
+                <display-name xml:lang="x-default">Size</display-name>
+                <value-set>refinement-category</value-set>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <unbucketed-values-mode>show-values</unbucketed-values-mode>
+                <cutoff-threshold>5</cutoff-threshold>
+                <bucket-definitions>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">2</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">4</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">6</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">8</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">10</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">12</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">14</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">16</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">18</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">25</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">27</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">29</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">31</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">33</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">34</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">35</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">36</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">38</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">40</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">42</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">44</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">46</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">XS</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">S</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">M</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">L</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">XL</display-name>
+                    </attribute-bucket>
+                    <attribute-bucket>
+                        <display-name xml:lang="x-default">XXL</display-name>
+                    </attribute-bucket>
+                </bucket-definitions>
+            </refinement-definition>
+            <refinement-definition type="price" bucket-type="thresholds">
+                <display-name xml:lang="x-default">Price</display-name>
+                <sort-mode>value-name</sort-mode>
+                <sort-direction>ascending</sort-direction>
+                <cutoff-threshold>5</cutoff-threshold>
+                <bucket-definitions>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€0 - €19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€20 - €49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€50 - €99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€100 - €499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€500 - €1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                </bucket-definitions>
+            </refinement-definition>
+        </refinement-definitions>
+    </category>
+
+    <category-assignment category-id="gear" product-id="hydra-38-backpack">
+        <primary-flag>true</primary-flag>
+    </category-assignment>
+
+    <category-assignment category-id="womens" product-id="women-s-fave-lite-lfc-full-zip"/>
+
+    <category-assignment category-id="womens-clothing" product-id="women-s-fave-lite-lfc-full-zip"/>
+
+    <category-assignment category-id="womens-clothing-tops" product-id="women-s-fave-lite-lfc-full-zip">
+        <primary-flag>true</primary-flag>
+    </category-assignment>
+
+</catalog>

@@ -1,0 +1,71 @@
+<div class="container product-detail bundle-item" data-pid="${product.id}">
+
+    <div class="row">
+        <!-- Product Images Carousel -->
+        <div class="col px-2">
+            <isinclude template="product/components/imageCarousel" />
+        </div>
+
+        <div class="${imageColumnClass} px-4 pt-3">
+            <!-- Product Name -->
+            <div class="row">
+                <div class="col">
+                    <h1 class="product-name m-0">${product.productName}</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <isinclude template="product/components/pidRating" />
+                </div>
+            </div>
+
+            <div class="attributes">
+                <!-- Attributes and Quantity -->
+                <isinclude template="product/components/mainAttributes" />
+
+                <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                    <div data-attr="${attr.id}" class="row swatch">
+                        <div class="col">
+                            <isinclude template="product/components/variationAttribute" />
+                        </div>
+                    </div>
+                </isloop>
+
+
+                <!-- Size Chart -->
+                <isif condition="${product.variationAttributes && product.sizeChartId}">
+                    <div class="row">
+                        <span class="col-12 col-md-10 size-chart">
+                        <isinclude template="product/components/sizeChart" />
+                    </span>
+                    </div>
+                </isif>
+
+                <!-- Product Options -->
+                <isif condition="${product.options.length}">
+                    <isloop items="${product.options}" var="option">
+                        <div class="row">
+                            <div class="col">
+                                <isif condition="${option.selectedValueId !== ''}">
+                                    <isinclude template="product/components/optionStatic" />
+                                </isif>
+                            </div>
+                        </div>
+                    </isloop>
+                </isif>
+
+                <!-- Availability -->
+                <div class="availability row product-availability" data-ready-to-order="${product.readyToOrder}" data-available="${product.available}">
+                    <isinclude template="product/components/availability" />
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <isinclude template="product/components/quantityStatic" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

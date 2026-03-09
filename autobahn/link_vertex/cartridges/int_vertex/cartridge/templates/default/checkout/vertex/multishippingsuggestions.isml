@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="${URLUtils.staticURL('/css/vertex.css')}" />  
+
+<isset name="VertexAddressSuggestions" value="${pdict.suggests}" scope="page" />
+<isset name="VertexAddressSuggestionsError" value="${pdict.error}" scope="page" />
+
+<iscomment>VertexInc Address Cleansing select field</iscomment>
+<div class="multisuggestion" data-ischanged="false">
+	<div class="vertexError">
+		<isif condition="${VertexAddressSuggestionsError == 'error'}">
+			<div class="vertexHint">
+				${Resource.msg('form.taxlookuperror','vertex',null)}
+			</div>
+		<iselse>
+			<isif condition="${VertexAddressSuggestions.length}" > 
+				<div class="select-address form-row">
+					<label for="VertexAddressSuggestions">
+						${Resource.msg('form.suggestionselect','vertex',null)}
+					</label>
+					<div class="field-wrapper" id="vertex-suggestions">
+							<select id="${session.forms.multishipping.editAddress.htmlName}" name="${session.forms.multishipping.editAddress.htmlName}" class="input-select">
+								<isloop items="${VertexAddressSuggestions}" var="address" status="loopstate" >
+									<isset name="aid" value="${empty(address.key) ? address.ID : address.key}" scope="page"/>
+									<option value="${aid}" ${aid == pdict.SelectedAddressID ? "selected='selected'" : ""} data-address='<isprint value="${JSON.stringify(address).replace("'","^")}" encoding="on"/>'>
+										${loopstate.first ? '('+ address.key +')':'('+  address.displayValue + ')'} ${Resource.msgf('address.saved.dropdown.format', 'forms', null, address.address1, address.city, address.stateCode, address.postalCode)}
+									</option>
+								</isloop>
+							</select>
+					</div>
+				</div>
+			</isif>
+			<div class="vertexHint">
+				${Resource.msg('form.suggestionhint','vertex',null)}
+			</div>
+		</isif>
+	</div>
+</div>

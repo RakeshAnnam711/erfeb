@@ -1,0 +1,23 @@
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<isif condition="${currentSite.getCustomPreferenceValue('showGoogleLogin') || currentSite.getCustomPreferenceValue('showFacebookLogin')}">
+    <form action="" class="login-oauth form-group row" method="post" name="login-oauth-form">
+        <isif condition="${currentSite.getCustomPreferenceValue('showGoogleLogin')}">
+            <div class="col-12 col-md-6">
+                <a href="${URLUtils.https('Login-OAuthLogin', 'oauthProvider', 'Google', 'oauthLoginTargetEndPoint', pdict.oAuthReentryEndpoint)}" class="btn btn-block btn-outline-primary oauth-google"
+                role="button" aria-pressed="true">
+                    <i class="fa fa-google" aria-hidden="true"></i>
+                    ${Resource.msg('button.text.oauth.google', 'login', null)}
+                </a>
+            </div>
+        </isif>
+        <isif condition="${currentSite.getCustomPreferenceValue('showFacebookLogin')}">
+            <div class="col-12 col-md-6">
+                <a href="${URLUtils.https('Login-OAuthLogin', 'oauthProvider', 'Facebook', 'oauthLoginTargetEndPoint', pdict.oAuthReentryEndpoint)}" class="btn btn-block btn-outline-primary oauth-facebook"
+                role="button" aria-pressed="true">
+                        <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                        ${Resource.msg('button.text.oauth.facebook', 'login', null)}
+                </a>
+            </div>
+        </isif>
+    </form>
+</isif>

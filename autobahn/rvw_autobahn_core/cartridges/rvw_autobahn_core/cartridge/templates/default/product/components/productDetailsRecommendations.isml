@@ -1,0 +1,20 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="product" value="${pdict.product}" scope="page" />
+
+<div class="recommendations">
+    <iscomment>Page Designer Recommendations</iscomment>
+    <iscontentasset aid="product-recommendations" personalized="true"/>
+
+    <iscomment>Einstein Recommendations</iscomment>
+    <isslot id="product-recommendations-m" description="Recommended products" context="global" context-object="${pdict.product.raw}" />
+
+    <iscomment>Explicit Recommendations</iscomment>
+    <isif condition="${!empty(product.recommendations)}">
+        <isset name="title" value="${Resource.msg('label.recommendedproducts', 'product', null)}" scope="page"/>
+        <isset name="recommendations" value="${product.recommendations}" scope="page"/>
+        <div class="product-slider-slot container">
+            <isinclude template="product/components/productSlider"/>
+        </div>
+    </isif>
+</div>

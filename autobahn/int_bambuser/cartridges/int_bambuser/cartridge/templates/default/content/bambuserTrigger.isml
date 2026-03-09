@@ -1,0 +1,11 @@
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('bambuser_enabled')}">
+    <h1 class="bambuser-hero-trigger">
+        <div class="js_bambuser-stream-trigger" data-stream-id="${pdict.content.bambuserStreamId}">
+            <isinclude url="${URLUtils.url('Bambuser-Config')}" />
+            <!-- dwMarker="content" dwContentID="${pdict.content.UUID}" -->
+            <isprint value="${pdict.content.body}" encoding="htmlcontent" />
+            <!-- END_dwmarker -->
+            <script src="${URLUtils.staticURL('js/bambuser/client.js')}"></script>
+        </div>
+    </h1>
+</isif>

@@ -1,0 +1,4 @@
+ <isif condition="${!empty(pdict.asset)}">
+    <isset name="contentAsset" value="${pdict.asset}" scope="page"/>
+    <isinclude template="search/components/contentTile" />
+</isif>

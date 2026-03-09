@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="pluginSEO_enableHrefLangs">
+                <display-name xml:lang="x-default">Enable HREFLang</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pluginSEO_enableOpenGraph">
+                <display-name xml:lang="x-default">Enable OpenGraph</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pluginSEO_enablePageMetaData">
+                <display-name xml:lang="x-default">Enable PageMetaData</display-name>
+                <description xml:lang="x-default">Selecting No only disables plugin seo Cartridge and Hook Metadata application and overrides. SFCC and AB PageMetaData calculations are not affected.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pluginSEO_enableSchema">
+                <display-name xml:lang="x-default">Enable Schema</display-name>
+                <description xml:lang="x-default">Selecting No only disables plugin seo cartridge Breadcrumbs, Webpage, and Hook Schema application and overrides. SFCC and AB Schema calculations are not affected.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pluginSEO_enableProductOfflineRedirection">
+                <display-name xml:lang="x-default">Enable Product Offline Redirection</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pluginSEO_enableCategoryOfflineRedirection">
+                <display-name xml:lang="x-default">Enable Category Offline Redirection</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Plugin SEO Extensions">
+                <display-name xml:lang="x-default">Plugin SEO Extensions</display-name>
+                <attribute attribute-id="pluginSEO_enableHrefLangs"/>
+                <attribute attribute-id="pluginSEO_enableOpenGraph"/>
+                <attribute attribute-id="pluginSEO_enablePageMetaData"/>
+                <attribute attribute-id="pluginSEO_enableSchema"/>
+                <attribute attribute-id="pluginSEO_enableProductOfflineRedirection"/>
+                <attribute attribute-id="pluginSEO_enableCategoryOfflineRedirection"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

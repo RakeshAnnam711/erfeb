@@ -1,0 +1,32 @@
+'use strict';
+
+module.exports = {
+    base: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/base'),
+    productAttribute: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/productAttribute'),
+    cartItemId: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/cartItemId'),
+    parentCartItemId: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/parentCartItemId'),
+    cartItemOptionId: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/cartItemOptionId'),
+    productName: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/productName'),
+    productDescription: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/productDescription'),
+    productDescriptionEnglish: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/productDescriptionEnglish'),
+    productUrl: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/productUrl'),
+    productImage: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/productImage'),
+    giftMessage: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/giftMessage'),
+    price: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/price'),
+    listPrice: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/listPrice'),
+    originalListPrice: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/originalListPrice'),
+    originalSalePrice: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/originalSalePrice'),
+    salePriceBeforeRounding: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/salePriceBeforeRounding'),
+    brand: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/brand'),
+    categories: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/categories'),
+    attributes: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/attributes'),
+    attributesEnglish: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/attributesEnglish'),
+    metadata: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/metadata'),
+    product: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/product'),
+    productType: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/productType'),
+    productCode: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/productCode'),
+    virtual: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/virtual'),
+    giftCard: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/giftCard'),
+    bundle: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/bundle'),
+    estimatedDeliveryDate: require('*/cartridge/models/globale/sendCart/giftCertificate/decorators/estimatedDeliveryDate')
+};

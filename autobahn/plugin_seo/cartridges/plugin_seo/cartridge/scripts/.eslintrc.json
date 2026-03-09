@@ -1,0 +1,7 @@
+{
+    "globals": {
+        "empty": "readonly",
+        "request": "readonly",
+        "response": "readonly"
+    }
+}

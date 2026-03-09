@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="Marketing-Cloud.Authentication">
+        <!-- If connenctions unsuccessful after whitelisting w/ SF, attempt using IP address EX <url>https://123.123.123.123:OptPort/optional/path</url> -->
+        <url>https://[[MC_ENTERPRISE_SUBDOMAIN_SITEPREF]].auth.marketingcloudapis.com</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Marketing-Cloud.FTPAuthSitePrefs">
+        <!-- If connenctions unsuccessful after whitelisting w/ SF, attempt using IP address EX <url>https://123.123.123.123:OptPort/optional/path</url> -->
+        <url>[[siteprefid|MarketingCloudTenantSpecificEndpointSubdomain]].ftp.marketingcloudops.com</url>
+        <user-id>[[siteprefid|MarketingCloudFTPUserId]]</user-id>
+        <password>[[siteprefid|MarketingCloudFTPPassword]]</password>
+    </service-credential>
+
+    <service-credential service-credential-id="Marketing-Cloud.FTPAuth">
+        <!-- If connenctions unsuccessful after whitelisting w/ SF, attempt using IP address EX <url>https://123.123.123.123:OptPort/optional/path</url> -->
+        <url>MC_ENTERPRISE_SUBDOMAIN_SITEPREF_REPLACEME.ftp.marketingcloudops.com</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="MarketingCloud.Soap-Base">
+        <!-- If connenctions unsuccessful after whitelisting w/ SF, attempt using IP address EX <url>https://123.123.123.123:OptPort/optional/path</url> -->
+        <url>https://[[MC_ENTERPRISE_SUBDOMAIN_SITEPREF]].soap.marketingcloudapis.com</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Marketing-Cloud.Rest-Base">
+        <!-- If connenctions unsuccessful after whitelisting w/ SF, attempt using IP address EX <url>https://123.123.123.123:OptPort/optional/path</url> -->
+        <url>https://[[MC_ENTERPRISE_SUBDOMAIN_SITEPREF]].rest.marketingcloudapis.com</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Marketing-Cloud.ConversionTracking">
+        <url>https://[[MC_ENTERPRISE_SUBDOMAIN_SITEPREF]].pub.sfmc-content.com</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Service-Cloud.Rest-Base">
+        <!-- If connenctions unsuccessful after whitelisting w/ SF, attempt using IP address EX <url>https://123.123.123.123:OptPort/optional/path</url> -->
+        <url>https://[[SC_ENTERPRISE_SUBDOMAIN_SITEPREF]].my.salesforce.com</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-profile service-profile-id="MarketingCloud">
+        <timeout-millis>10000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="MarketingCloud.SFTP">
+        <timeout-millis>10000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="ServiceCloud">
+        <timeout-millis>3000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="MarketingCloud.HTTP.Authentication">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>MarketingCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>MarketingCloud</profile-id>
+        <credential-id>Marketing-Cloud.Authentication</credential-id>
+    </service>
+
+    <service service-id="MarketingCloud.HTTP.Rest">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>MarketingCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>MarketingCloud</profile-id>
+        <credential-id>Marketing-Cloud.Rest-Base</credential-id>
+    </service>
+
+    <service service-id="MarketingCloud.HTTP.Soap">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>MarketingCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>MarketingCloud</profile-id>
+        <credential-id>MarketingCloud.Soap-Base</credential-id>
+    </service>
+
+    <service service-id="MarketingCloud.SFTP">
+        <service-type>SFTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>MarketingCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>MarketingCloud.SFTP</profile-id>
+        <credential-id>Marketing-Cloud.FTPAuthSitePrefs</credential-id>
+    </service>
+
+    <service service-id="ServiceCloud.HTTP.Rest">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ServiceCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ServiceCloud</profile-id>
+        <credential-id>Service-Cloud.Rest-Base</credential-id>
+    </service>
+
+    <service service-id="MarketingCloud.ConversionTracking">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>MarketingCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>MarketingCloud</profile-id>
+        <credential-id>Marketing-Cloud.ConversionTracking</credential-id>
+    </service>
+
+</services>

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<promotions xmlns="http://www.demandware.com/xml/impex/promotion/2008-01-31">
+    <campaign campaign-id="TaxJarTests">
+        <description>Campaign for TaxJar application and integration tests</description>
+        <enabled-flag>true</enabled-flag>
+        <campaign-scope>
+            <applicable-online/>
+        </campaign-scope>
+        <customer-groups match-mode="any">
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+    </campaign>
+
+    <promotion promotion-id="TaxJarProductAmountOff">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarProductAmountOff</callout-msg>
+        <details xml:lang="x-default">TaxJarProductAmountOff</details>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677203</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <amount>10.0</amount>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarShippingPercentOff">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarShippingPercentOff</callout-msg>
+        <details xml:lang="x-default">TaxJarShippingPercentOff</details>
+        <shipping-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677265</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <shipping-methods>
+                <method-id>EUR003</method-id>
+                <method-id>EUR002</method-id>
+                <method-id>EUR001</method-id>
+                <method-id>021</method-id>
+                <method-id>012</method-id>
+                <method-id>005</method-id>
+                <method-id>004</method-id>
+                <method-id>003</method-id>
+                <method-id>002</method-id>
+                <method-id>001</method-id>
+            </shipping-methods>
+            <discounts condition-type="shipment-total">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <percentage>10.0</percentage>
+                </discount>
+            </discounts>
+        </shipping-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarOrderBonusProduct">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarOrderBonusProduct</callout-msg>
+        <details xml:lang="x-default">TaxJarOrderBonusProduct</details>
+        <order-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677258</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <discount-only-qualifying-products>false</discount-only-qualifying-products>
+            <discounts condition-type="order-total">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <bonus>
+                        <bonus-products>
+                            <product-id>708141677258</product-id>
+                        </bonus-products>
+                    </bonus>
+                </discount>
+            </discounts>
+            <exclude-discounted-products>false</exclude-discounted-products>
+        </order-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarOrderPercentOff">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarOrderPercentOff</callout-msg>
+        <details xml:lang="x-default">TaxJarOrderPercentOff</details>
+        <order-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677234</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <discount-only-qualifying-products>true</discount-only-qualifying-products>
+            <discounts condition-type="order-total">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <percentage>20.0</percentage>
+                </discount>
+            </discounts>
+            <exclude-discounted-products>false</exclude-discounted-products>
+        </order-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarProductFixedPrice">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarProductFixedPrice</callout-msg>
+        <details xml:lang="x-default">TaxJarProductFixedPrice</details>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677210</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <fixed-price>10.0</fixed-price>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarOrderAmountOff">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarOrderAmountOff</callout-msg>
+        <details xml:lang="x-default">TaxJarOrderAmountOff</details>
+        <order-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677241</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <discount-only-qualifying-products>true</discount-only-qualifying-products>
+            <discounts condition-type="order-total">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <amount>20.0</amount>
+                </discount>
+            </discounts>
+            <exclude-discounted-products>false</exclude-discounted-products>
+        </order-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarShippingAmountOff">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarShippingAmountOff</callout-msg>
+        <details xml:lang="x-default">TaxJarShippingAmountOff</details>
+        <shipping-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677272</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <shipping-methods>
+                <method-id>EUR003</method-id>
+                <method-id>EUR002</method-id>
+                <method-id>EUR001</method-id>
+                <method-id>021</method-id>
+                <method-id>012</method-id>
+                <method-id>005</method-id>
+                <method-id>004</method-id>
+                <method-id>003</method-id>
+                <method-id>002</method-id>
+                <method-id>001</method-id>
+            </shipping-methods>
+            <discounts condition-type="shipment-total">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <amount>5.0</amount>
+                </discount>
+            </discounts>
+        </shipping-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarProductPercentOff">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarProductPercentOff</callout-msg>
+        <details xml:lang="x-default">TaxJarProductPercentOff</details>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677197</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <percentage>20.0</percentage>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarShippingFixedPrice">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarShippingFixedPrice</callout-msg>
+        <details xml:lang="x-default">TaxJarShippingFixedPrice</details>
+        <shipping-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677289</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <shipping-methods>
+                <method-id>EUR003</method-id>
+                <method-id>EUR002</method-id>
+                <method-id>EUR001</method-id>
+                <method-id>021</method-id>
+                <method-id>012</method-id>
+                <method-id>005</method-id>
+                <method-id>004</method-id>
+                <method-id>003</method-id>
+                <method-id>002</method-id>
+                <method-id>001</method-id>
+            </shipping-methods>
+            <discounts condition-type="shipment-total">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <fixed-price>5.0</fixed-price>
+                </discount>
+            </discounts>
+        </shipping-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="TaxJarProductBonusProduct">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <exclusivity>no</exclusivity>
+        <callout-msg xml:lang="x-default">TaxJarProductBonusProduct</callout-msg>
+        <details xml:lang="x-default">TaxJarProductBonusProduct</details>
+        <product-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>708141677227</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <discounts condition-type="product-amount">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <bonus>
+                        <bonus-products>
+                            <product-id>708141677227</product-id>
+                        </bonus-products>
+                    </bonus>
+                </discount>
+            </discounts>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion-campaign-assignment promotion-id="TaxJarProductAmountOff" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarShippingPercentOff" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarOrderBonusProduct" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarOrderPercentOff" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarProductFixedPrice" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarOrderAmountOff" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarShippingAmountOff" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarProductPercentOff" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarShippingFixedPrice" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="TaxJarProductBonusProduct" campaign-id="TaxJarTests">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+</promotions>

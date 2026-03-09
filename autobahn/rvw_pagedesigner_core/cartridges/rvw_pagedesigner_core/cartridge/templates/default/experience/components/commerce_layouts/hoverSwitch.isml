@@ -1,0 +1,8 @@
+<div class="hover-switch ${pdict.customClass}">
+    <div class="hover-switch--load">
+        <isprint value="${pdict.regions.onLoad.render()}" encoding="off"/>
+    </div>
+    <div class="hover-switch--hover">
+        <isprint value="${pdict.regions.onHover.render()}" encoding="off"/>
+    </div>
+</div>

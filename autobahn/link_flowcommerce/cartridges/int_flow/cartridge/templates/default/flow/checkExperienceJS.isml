@@ -1,0 +1,61 @@
+<script id='js-flow-session' data-currency='${ pdict.sessionCurrency }'>
+    function initFlowCountryPicker(optionsObject) {
+        optionsObject.onSelection = function(country) {
+            if (country.iso_3166_3 === "${ pdict.defaultCountryCode }") {
+                window.location.href = '<isprint encoding="jsblock" value="${ URLUtils.url(pdict.urlAction) } "/>';
+                return;
+            } else {
+                return {
+                    country: country.iso_3166_3,
+                    currency: country.currency,
+                    language: country.language
+                };
+            }
+        };
+        optionsObject.onSessionUpdate = function(status, session) {
+            window.location.href = '<isprint encoding="jsblock" value="${ URLUtils.url('Home-Show', 'flow_experience', 'FLOW_EXPERIENCE') } "/>'.replace('FLOW_EXPERIENCE', session.experience.key);
+        };
+        <isif condition="${ !pdict.experience }">
+            optionsObject.currentExperience = optionsObject.countries[0];
+        </isif>
+        flow.countryPicker.createCountryPicker(optionsObject);
+    }
+
+    flow.cmd('on', 'ready', function () {
+        if (flow.session.getCountry()       != '${ pdict.country }' || 
+            flow.session.getCurrency()      != '${ pdict.currency }' || 
+            flow.session.getLanguage()      != '${ pdict.language }'
+        ) {
+            flow.session.update({ 
+                'country'   : '${ pdict.country }',
+                'language'  : '${ pdict.language }',
+                'currency'  : '${ pdict.currency }'
+            }, {
+                onSuccess: function (session) {
+                    var key = session.experience ? session.experience.key : '';
+                    $.ajax({
+                        url: '<isprint encoding="jsblock" value="${ URLUtils.url('Flow-SetExperience') } "/>?experience=' + key,
+                        method: 'POST',
+                        dataType: 'json'
+                    });
+                }
+            });
+        } else if (flow.session.getExperience() != '${ pdict.experience }') {
+            $.ajax({
+                url: '<isprint encoding="jsblock" value="${ URLUtils.url('Flow-SetExperience') } "/>?experience=' + session.experience.key,
+                method: 'POST',
+                dataType: 'json'
+            });
+        }
+
+        <isif condition="${ dw.system.Site.getCurrent().getCustomPreferenceValue('flowUseCountryPicker') }">
+            $.ajax({
+                url: '<isprint encoding="jsblock" value="${ URLUtils.url('Flow-CountryPickerOptions') } "/>',
+                method: 'GET',
+                dataType: 'json'
+            }).done(function (response) {
+                initFlowCountryPicker(response.options);
+            });
+        </isif>
+    });
+</script>

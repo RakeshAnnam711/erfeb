@@ -1,0 +1,31 @@
+<isset name="productCountPreset"
+       value="${pdict.productSearch.pageSize * pdict.productSearch.pageNumber}"
+       scope="page" />
+
+<isloop items="${pdict.productSearch.productIds}" var="product" status="productPosition">
+    <isif condition="${!empty(product) && !empty(product.promoTile)}">
+        <!-- PROMO TILE -->
+        <div class="plp-product-tile promo-tile">
+            <isprint value="${product.promoTile}" encoding="off" />
+        </div>
+
+    <iselse/>
+        <!-- AJAX PRODUCT TILE -->
+        <div class="plp-product-tile js-tile"
+             data-pid="${product.productID}"
+             data-tile-url="${URLUtils.url(
+                'Tile-Show',
+                'pid', product.productID,
+                'pview', 'tile',
+                'swatches', true,
+                'ratings', true,
+                'productPosition', (productCountPreset + productPosition.count - 1),
+                'cgid', pdict.productSearch.category ? pdict.productSearch.category.id : ''
+             )}">
+            <!-- Tile HTML injected via JS -->
+              <!-- SKELETON STRUCTURE -->
+            <div class="plp-tile-skeleton"></div>
+        </div>
+
+    </isif>
+</isloop>

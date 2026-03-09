@@ -1,0 +1,36 @@
+.seoTextBlockWrapper{
+	h2,h3,h4 {
+		font-family: 'didot';
+	}
+
+	blockquote{
+		margin-inline-start: 40px;
+	}
+
+	a{
+		color: var(--brand-tertiary, #9E6B30);
+		text-decoration: underline;
+	}
+
+	ol{
+		padding-left: 16px;
+	}
+
+	li{
+		list-style-position: inside;
+	}
+
+	.seo-body{
+		display: flex;
+		flex-direction: column;
+		&.center{
+			align-items: center;
+		}
+		&.left{
+			align-items: flex-start;
+		}
+		&.right{
+			align-items: flex-end;
+		}	
+	}
+}

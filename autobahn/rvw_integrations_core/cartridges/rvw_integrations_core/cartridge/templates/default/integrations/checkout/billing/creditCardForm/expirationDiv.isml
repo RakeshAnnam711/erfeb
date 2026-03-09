@@ -1,0 +1,18 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/billing/creditCardForm.isml
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+    <isset name="saStyle" value="${CsSaType && (CsSaType == 'SA_REDIRECT' || CsSaType == 'SA_IFRAME') ? "hidden" : '' }" scope="page" />
+    <div class="row" ${saStyle !=null && saStyle ? saStyle : ''}>
+<iselse/>
+    <div class="row">
+</isif>
+

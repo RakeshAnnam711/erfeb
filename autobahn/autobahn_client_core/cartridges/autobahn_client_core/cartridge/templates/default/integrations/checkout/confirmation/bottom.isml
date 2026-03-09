@@ -1,0 +1,27 @@
+
+<iscomment>AFFRIM INCLUDE</iscomment>
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('AffirmOnline')}">
+    <isinclude url="${URLUtils.http('Affirm-Tracking', 'orderId', pdict.order.orderNumber)}"/>
+</isif>
+
+<iscomment>BAMBUSER INCLUDE</iscomment>
+<isscript>
+    var assets = assets || require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/bambuser/conversionTracker.js');
+</isscript>
+
+<div class="sr-only" id="order" data-order="${JSON.stringify(pdict.orderBambuser)}">
+</div>
+
+<iscomment>NORTHBEAM INCLUDE</iscomment>
+<isset name="conversionTrackerValue" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('bambuser_conversion_tracker')}" scope="page"/>
+<isset name="conversionTrackerURL" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('bambuser_conversion_tracker_url').value}" scope="page"/>
+<input type="hidden" name="conversionTracker" class="js-conversion-tracker" value="${conversionTrackerValue}" src="${conversionTrackerURL}"/>
+<isset name="isNorthBeamEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('isNorthBeamEnabled')}"  scope="page"/>
+<input type="hidden" name="orderNorthBeam" class="orderNorthBeam" value="${JSON.stringify(pdict.orderNorthBeam)}"/>
+<iscomment> <isif condition="${isNorthBeamEnabled}">
+<script type="application/javascript">
+    window.Northbeam = window.Northbeam || {};
+    window.Northbeam.firePurchaseEvent(JSON.parse(document.getElementsByClassName("orderNorthBeam")[0].value));
+</script>
+</isif> </iscomment>

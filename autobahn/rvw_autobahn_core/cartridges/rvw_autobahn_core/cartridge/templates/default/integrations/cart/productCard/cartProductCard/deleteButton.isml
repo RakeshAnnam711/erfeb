@@ -1,0 +1,8 @@
+<iscomment>
+    This template gets overwritten in rvw_integrations_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_integrations_core
+</iscomment>
+<isinclude template="components/deleteButton" />

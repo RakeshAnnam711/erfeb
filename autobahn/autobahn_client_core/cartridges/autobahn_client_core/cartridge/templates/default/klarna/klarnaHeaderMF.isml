@@ -1,0 +1,10 @@
+<isset name="KlarnaDataEnvironment" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('KlarnaDataEnvironment')}" scope="page" />
+<isset name="KlarnaScript" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('KlarnaScript')}" scope="page" />
+<isset name="KlarnaClientId" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('KlarnaClientId')}" scope="page" />
+
+<script
+    async
+    data-environment="${KlarnaDataEnvironment}"
+    src="${KlarnaScript}"
+    data-client-id="${KlarnaClientId}"
+></script>

@@ -1,0 +1,19 @@
+<p>Use the dropdown below to switch between available themes for this site.</p>
+<p>Note: This will also update the theme for the entire site for your current session. To switch back, choose 'Default' below.</p>
+
+<div class="row">
+    <div class="col-md-6 pb-md-3 pb-lg-0">
+        <select class="form-control custom-select" id="sgThemeToggler">
+            <isif condition="${pdict.siteContext && 'logos' in pdict.siteContext && pdict.siteContext.logos.length > 0}">
+                <isloop items="${pdict.siteContext.logos}" var="logo">
+                    <isset name="isSelected" value="${pdict.siteContext.ID === logo.siteID}" scope="page"/>
+                    <option value="${logo.siteID}" ${isSelected ? 'selected' : ''}>${logo.siteName}</option>
+                </isloop>
+            <iselse/>
+                <option value="default">Default</option>
+                <option value="dark">Dark (sample theme)</option>
+            </isif>
+        </select>
+    </div>
+    <div class="col-md-6 pb-3 pb-md-0"></div>
+</div>

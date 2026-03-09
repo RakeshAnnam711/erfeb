@@ -1,0 +1,51 @@
+<body>
+    <style type="text/css">
+        table {border-spacing: 0 !important;}
+        body {margin: 0; padding: 0;}
+        @media screen and (max-width:680px){
+            table.wrapper{min-width:300px !important; padding-left:16px!important; padding-right:16px!important;}
+            table.main,
+            .header img {width:100% !important;}
+            table.social td{padding-left:4px !important; padding-right:4px !important;}
+
+        }
+        @media screen and (max-width: 390px){
+            table.footlink-wrapper{width:100% !important;}
+        }
+        * {font-family:'BrandonGrotesque','Helvetica Neue',Helvetica,Arial,sans-serif;}
+    </style>
+
+    <table class="wrapper" width="100%" style="padding-top:30px;">
+        <tr>
+            <td class="wrapper-inner" align="center">
+                <table class="main" align="center" width="640">
+                    <tr>
+                        <td class="header" align="center">
+                            <a class="logo" href="https://www.whatgoesaroundnyc.com">
+                                <img src="https://www.whatgoesaroundnyc.com/on/demandware.static/Sites-WGACA-Site/-/en_US/v1633518149266/images/logo.png"
+                                    width="600" border="0" alt="What Goes Around Comes Around Logo"
+                                />
+                            </a>
+                        </td>
+                    </tr>
+                        <td>
+                            <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-top: 8px;">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" style="font-family:'BrandonGrotesqueMedium',Arial,sans-serif;font-size:12px;font-weight:bold;line-height:18px;color:#000000;text-transform:uppercase;letter-spacing:1px;">
+                                            <span style="width:20%;text-align:center;white-space:nowrap;margin-left:8px;margin-right:8px;"><a style="text-decoration:none;color:#000000;" href="https://www.whatgoesaroundnyc.com/featured/new-arrivals.html" target="_blank" rel="noopener">Featured</a></span>
+
+                                            <span style="width:20%;text-align:center;white-space:nowrap;margin-left:8px;margin-right:8px;"><a style="text-decoration:none;color:#000000;" href="https://www.whatgoesaroundnyc.com/brand.html" target="_blank" rel="noopener">Shop By Brands</a></span>
+                                            <span style="width:20%;text-align:center;white-space:nowrap;margin-left:8px;margin-right:8px;"><a style="text-decoration:none;color:#000000;" href="https://www.whatgoesaroundnyc.com/bags.html" target="_blank" rel="noopener">Bags</a></span>
+                                            <span style="width:20%;text-align:center;white-space:nowrap;margin-left:8px;margin-right:8px;"><a style="text-decoration:none;color:#000000;" href="https://www.whatgoesaroundnyc.com/accessories.html" target="_blank" rel="noopener">Accessories</a></span>
+                                            <a style="text-decoration:none;color:#000000" href="https://www.whatgoesaroundnyc.com/sale.html" target="_blank" rel="noopener">Sale</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><hr></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    <tr>
+                        <td class="main-content">

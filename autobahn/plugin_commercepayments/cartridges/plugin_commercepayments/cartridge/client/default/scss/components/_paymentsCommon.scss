@@ -1,0 +1,34 @@
+.hide-gift-certificates-applied {
+    display: none;
+}
+
+.gift-certificates-applied-total {
+    color: $danger;
+}
+
+.salesforce-payments-errors {
+    font-size: 0.8em;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    border: 1px solid lightblue;
+    border-radius: $border-radius;
+    background: #fee url(../../images/exclamation.svg) 0.5rem 0.5rem/1rem no-repeat;
+}
+
+.salesforce-payments-errors:empty {
+    display: none;
+}
+
+.salesforce-paymentrequest-element-errors {
+    margin-top: 0.75rem;
+}
+
+.salesforce-paymentrequest-element[disabled] {
+    display: none;
+}
+
+.salesforce-secure-payment {
+    margin-left: 1.2rem;
+    font-size: 0.8em;
+    padding: 0.3rem 0.5rem 0.5rem 1.5rem;
+    background: url(../../images/padlock.svg) no-repeat;
+}

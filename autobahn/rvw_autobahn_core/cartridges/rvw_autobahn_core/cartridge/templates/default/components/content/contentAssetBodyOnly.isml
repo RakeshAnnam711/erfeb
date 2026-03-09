@@ -1,0 +1,5 @@
+<isif condition="${pdict.content.body !== null}"><!-- dwMarker="content" dwContentID="${pdict.content.UUID}" dwContentBMID="${pdict.content.ID}" -->
+    <isprint value="${pdict.content.body}" encoding="off"/>
+<iselse/>
+    ${Resource.msg('global.nocontent','common',null)} <!-- dwMarker="content" dwContentID="${pdict.cid}" -->
+</isif>

@@ -1,0 +1,21 @@
+<isdecorate template="common/layout/page">
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/paymentInstruments.js');
+    </isscript>
+
+    <div class="container account-page">
+
+        <iscontentasset aid="accountHeaderPayment"/>
+
+        <!---Breadcrumbs--->
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <isinclude template="integrations/account/accountAddPayment"/>
+            </div>
+        </div>
+    </div>
+</isdecorate>

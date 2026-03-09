@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dcext xmlns="http://www.demandware.com/xml/impex/dcext/2016-04-05" site-id="Siteidreplaceme">
+    <apple-pay instance-type="development">
+        <enabled-flag>true</enabled-flag>
+        <merchant-id></merchant-id>
+        <display-name>Adyen Merchant Id</display-name>
+        <country-code>US</country-code>
+        <merchant-capabilities>
+            <capability-3ds/>
+        </merchant-capabilities>
+        <supported-networks>
+            <amex/>
+            <discover/>
+            <master-card/>
+            <visa/>
+        </supported-networks>
+        <required-shipping-address-fields>
+            <email/>
+            <name/>
+            <phone/>
+            <postal-address/>
+        </required-shipping-address-fields>
+        <required-billing-address-fields>
+            <name/>
+            <postal-address/>
+        </required-billing-address-fields>
+        <https-redirect>true</https-redirect>
+        <inject-mini-cart>true</inject-mini-cart>
+        <inject-cart>true</inject-cart>
+        <psp-api-enabled-flag>true</psp-api-enabled-flag>
+        <psp-api-version>v1</psp-api-version>
+        <psp-url>https://pal-test.adyen.com/pal/adapter/Demandware/authorise</psp-url>
+        <psp-basic-auth-flag>true</psp-basic-auth-flag>
+        <psp-username></psp-username>
+        <psp-password></psp-password>
+        <psp-merchant-id></psp-merchant-id>
+        <psp-jws-flag>false</psp-jws-flag>
+        <psp-jws-key-alias></psp-jws-key-alias>
+    </apple-pay>
+</dcext>
+

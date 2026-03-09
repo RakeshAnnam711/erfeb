@@ -1,0 +1,50 @@
+<iscomment>CSS is now loaded via consolidated-components.scss in global.scss</iscomment>
+
+<div class="wgaca-hero-banner ${pdict.enableContainer} ${pdict.heroBannerContainerClass}"
+	style = "
+        --title-font-size-mobile: ${pdict.titleFontSizeMobile};
+		--title-font-size-tablet: ${pdict.titleFontSizeTablet};
+        --title-color-mobile: ${pdict.titleColorMobile};
+		--title-color-tablet: ${pdict.titleColorTablet};
+        --subtitle-font-size-mobile: ${pdict.subTitleFontSizeMobile};
+		--subtitle-font-size-tablet: ${pdict.subTitleFontSizeTablet};
+        --subtitle-color-mobile: ${pdict.subTitleColorMobile};
+		--subtitle-color-tablet: ${pdict.subTitleColorTablet};
+        --content-background-color-tablet: ${pdict.contentBackgroundColorTablet};
+		--content-background-color-mobile: ${pdict.contentBackgroundColorMobile};
+		--text-width: ${pdict.textWidth};
+		--text-width-tablet: ${pdict.textWidthTablet};
+		--tertiary-button-color: ${pdict.tertiaryButtonColor};
+		--tertiary-button-color-tablet: ${pdict.tertiaryButtonColorTablet};
+		--tertiary-button-color-mobile: ${pdict.tertiaryButtonColorMobile};
+    "
+>
+	<div class="${pdict.contentStack} flex-lg-row">
+
+		<a href="${pdict.bannerLink}" tabindex="0" aria-label="Hero-Banner:${!empty(pdict.title) ? pdict.title : 'Banner Link'}">
+			<div class="hero-image">
+				<picture>
+					<source media="(min-width: 767px)" srcset="${pdict.desktopImage.src.desktop}">
+					<img src="${pdict.mobileImage.src.desktop}" alt="${pdict.alt}" title="${pdict.alt}" fetchpriority="high">
+				</picture>
+			</div>
+
+			<div class="hero-content content-background-color ${pdict.textAndCtaPlacement} ${pdict.contentClass}" style="text-align: ${pdict.contentAlignment};">
+				<div class="title ${pdict.titleClass}" style="color: ${pdict.titleColor}; font-size: ${pdict.titleFontSize};">
+					<isprint value="${pdict.title}" encoding="off" />
+				</div>
+				<div class="subTitle ${pdict.subTitleClass}" style="color: ${pdict.subTitleColor}; font-size: ${pdict.subTitleFontSize};">
+					<isprint value="${pdict.subTitle}" encoding="off" />
+				</div>
+				<isif condition="${pdict.buttonText}">
+				<div class="shop-button btn ${pdict.buttonStyle} ${pdict.buttonClass}"
+					style="<isif condition="${pdict.removeButtonBorder}">border: none;</isif>">
+					${pdict.buttonText}
+				</div>
+				</isif>
+			</div>
+
+		</a>
+
+	</div>
+</div>

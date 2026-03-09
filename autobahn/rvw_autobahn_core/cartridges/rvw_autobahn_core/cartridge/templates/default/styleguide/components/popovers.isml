@@ -1,0 +1,22 @@
+<div id="popovers" class="sg__header3">Popovers <a
+    role="button"
+    tabindex="0"
+    class="icon-search tooltip-icon"
+    data-toggle="popover"
+    data-placement="bottom"
+    title="Find it in the Storefront"
+    data-content="<p>Not currently in use.</p>"></a>
+</div>
+<p>In situations where you need to add a button or display more elaborate content than will work in a tooltip, popovers are the way to go. Documentation can be found <a href="https://getbootstrap.com/docs/4.0/components/popovers/" target="_blank" rel="noopener">here</a>. Like tooltips, popovers can be created using either data attributes or JavaScript.</p>
+<div class="row">
+    <div class="col-md-6">
+        <a role="button" tabindex="0" data-toggle="popover" data-content="<p>Click here for more information:</p><a href='https://getbootstrap.com/docs/4.0/components/popovers/' class='btn btn-primary btn-sm btn-block' target='_blank' rel='noopener'>Button</a>" data-placement="top" class="btn btn-primary">Click to view Popover</a>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><a role="button" tabindex="0" data-toggle="popover" data-content="<p>Click here for more information:</p><a href='https://getbootstrap.com/docs/4.0/components/popovers/' class='btn btn-primary btn-sm btn-block' target='_blank' rel='noopener'>Button</a>" data-placement="top" class="btn btn-primary">Click to view Popover</a></script></code></pre>
+        <pre><code class='language-javascript'><script type="text/plain" class="language-javascript">$('.element').popover({
+    content: 'Click here for more information...',
+    placement: 'top'
+});</script></code></pre>
+    </div>
+</div>

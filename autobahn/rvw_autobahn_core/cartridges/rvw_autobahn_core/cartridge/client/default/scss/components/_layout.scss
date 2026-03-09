@@ -1,0 +1,272 @@
+
+/*
+* PAGE DESIGNER LAYOUT GRID SPACING
+*/
+.experience-region > [class*='experience-commerce_layouts'] {
+    // vertical spacing between layout containers
+    &:not(:first-child),
+    .pd-async-region &:first-child {
+        > div:first-child {
+            margin-top: $page-designer-layout-spacing;
+        }
+    }
+}
+
+[class*='experience-commerce_layouts'] {
+    // vertical spacing between layout items on mobile
+    .region[class*='col-md'] {
+        @include media-breakpoint-down(sm) {
+            // single column in mobile
+            &+.region[class*='col-12']:not(.order-1),
+            &.order-2[class*='col-12'] {
+                margin-top: $spacer*2;
+            }
+            // 2 column in mobile
+            &+.region[class*='col-6']:not(:nth-child(1)):not(:nth-child(2)) {
+                margin-top: $spacer*2;
+            }
+            // 3 column in mobile
+            &+.region[class*='col-4']:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)) {
+                margin-top: $spacer*2;
+            }
+        }
+    }
+
+    // prevent full bleed column layouts from adding horizontal scroll
+    .container-fluid {
+        overflow-x: hidden;
+    }
+
+    .region {
+        // when column alignment is set to stretch, set children to 100% height
+        &.align-self-stretch {
+            > .experience-component {
+                height: 100%;
+                > div {
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    //enables setting class on layout's custom class
+    .no-gutters  {
+        .row {
+            padding-right: $spacer;
+            padding-left: $spacer;
+            @include media-breakpoint-up(xl) {
+                padding-right: $spacer-xl;
+                padding-left: $spacer-xl;
+            }
+            & > [class*=" col-"] {
+                padding-right: 0;
+                padding-left: 0;
+            }
+        }
+    }
+
+    .has-background-image {
+        position: relative;
+        &>.container {
+            position: relative;
+            .column-background {
+                width: calc(100% - #{$spacer*2});
+                @include media-breakpoint-up(xl) {
+                    width: calc(100% - #{$spacer-xl*2});
+                }
+            }
+        }
+        .column-background {
+            @include absolute-center;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            .full-bleed & {
+                width: calc(100vw + 2px); // 2px for Chrome bug where you can sometimes see a gap at the browser edges
+            }
+            &.column-background-tablet,
+            &.column-background-desktop {
+                display: none;
+            }
+            @include media-breakpoint-up(md) {
+                &.column-background-mobile,
+                &.column-background-desktop {
+                    display: none;
+                }
+                &.column-background-tablet {
+                    display: block;
+                }
+            }
+            @include media-breakpoint-up(lg) {
+                &.column-background-mobile,
+                &.column-background-tablet {
+                    display: none;
+                }
+                &.column-background-desktop {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+/*
+* LAYOUT GRID ASPECT RATIOS
+*/
+.region-square,
+.region-landscape,
+.region-portrait {
+    position: relative;
+    .experience-component {
+        position: absolute;
+        top: 0;
+        overflow: hidden;
+        padding-left: 0;
+        padding-right: 0;
+        max-width: calc(100% - #{$spacer*2});
+        @include media-breakpoint-up(xl) {
+            max-width: calc(100% - #{$spacer-xl*2});
+        }
+    }
+}
+.region-square {
+    @include aspect-ratio($aspect-ratio-square);
+}
+.region-landscape {
+    @include aspect-ratio($aspect-ratio-landscape);
+}
+.region-portrait {
+    @include aspect-ratio($aspect-ratio-portrait);
+}
+div.sf-interactions-proxyHoverContainer a {
+    overflow: visible;
+}
+
+// Hover Switch layout component
+.hover-switch {
+    &--hover {
+        display: none;
+    }
+    &:hover {
+        .hover-switch {
+            &--load {
+                display: none;
+            }
+            &--hover {
+                display: block;
+            }
+        }
+    }
+}
+
+// Make sure promo tiles on PLP are sized appropriately
+.product-grid {
+    .experience-region,
+    .experience-component,
+    .chromeless {
+        height: 100%;
+    }
+    // hero as a promo tile
+    .hero {
+        min-height: calc(100% - #{$product-tile-grid-margin-bottom});
+        margin-bottom: $product-tile-grid-margin-bottom;
+    }
+}
+
+.folder-nav-layout {
+    padding: 0;
+
+    @include media-breakpoint-down(sm) {
+        .folder-nav-menu {
+            padding: $spacer;
+        }
+
+        .folder-based-navigation {
+            .card .card-body a {
+                &.active {
+                    color: $folder-nav-active-link-color;
+                    font-weight: $folder-nav-active-link-font-weight;
+                }
+                + .card {
+                    margin-top: $spacer;
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        .folder-nav-menu {
+            width: $folder-nav-desktop-width;
+            max-width: $folder-nav-desktop-width;
+            background: $folder-nav-desktop-background;
+        }
+
+        .folder-nav-content {
+            width: calc(100% - #{$folder-nav-desktop-width});
+            max-width: calc(100% - #{$folder-nav-desktop-width});
+        }
+
+        .folder-based-navigation {
+            position: sticky;
+            top: calc(#{$header-height-md} + #{$spacer});
+            padding-top: $spacer;
+            padding-left: $spacer;
+            overflow-x: hidden;
+            overflow-y: auto;
+            max-height: calc(100vh - (#{$header-height-md} + #{$header-promo-bar-line-height} + #{$header-promo-bar-padding-top} + #{$header-promo-bar-padding-bottom}));
+            .multi-brand & {
+                max-height: calc(100vh - (#{$header-height-md} + #{$header-promo-bar-line-height} + #{$header-promo-bar-padding-top} + #{$header-promo-bar-padding-bottom} + #{$pre-nav-height-md}));
+            }
+            .card {
+                margin-bottom: 0;
+                border: none;
+                .card-header {
+                    background: transparent;
+                }
+                .card-title {
+                    @include header($folder-nav-desktop-title-size);
+                    padding: 0;
+                    margin-bottom: $folder-nav-desktop-title-bottom-margin;
+                    cursor: text;
+                }
+                .card-body {
+                    padding: 0;
+                    margin-bottom: $spacer;
+                    background: transparent;
+                    a {
+                        padding: $folder-nav-desktop-link-padding;
+                        &.active {
+                            color: $folder-nav-active-link-color;
+                            font-weight: $folder-nav-active-link-font-weight;
+                        }
+                        + .card {
+                            margin-top: $spacer;
+                        }
+                    }
+                    .card {
+                        padding-left: $spacer;
+                        border-left: 1px solid $folder-nav-desktop-nested-folder-border-color;
+                    }
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        .folder-based-navigation {
+            top: calc(#{$header-height-lg} + #{$spacer});
+            max-height: calc(100vh - (#{$header-height-lg} + #{$header-promo-bar-line-height} + #{$header-promo-bar-padding-top} + #{$header-promo-bar-padding-bottom}));
+            .multi-brand & {
+                max-height: calc(100vh - (#{$header-height-lg} + #{$header-promo-bar-line-height} + #{$header-promo-bar-padding-top} + #{$header-promo-bar-padding-bottom} + #{$pre-nav-height-md}));
+            }
+        }
+    }
+}
+
+.pd-async-region.loading {
+    min-height: calc(#{$spinner-size} + calc(#{$spacer} * 3));
+    position: relative; // for loading spinner positioning
+}

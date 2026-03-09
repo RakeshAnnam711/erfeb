@@ -1,0 +1,39 @@
+$credit-card-sprite-image-height: 30px;
+
+.card-number-wrapper {
+    position: relative;
+    input {
+        padding-right: calc(#{$input-padding-right} + 48px);
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: calc(calc(#{$input-height} / 2) - calc(#{$credit-card-sprite-image-height} / 2));
+        right: calc(#{$input-padding-right} / 2);
+        background-repeat: no-repeat;
+        background-image: url('../../images/credit.png');
+        background-size: contain;
+        width: 48px;
+        height: $credit-card-sprite-image-height;
+    }
+    &[data-type="visa"]::after {
+        background-image: url('../../images/payment-types.png');
+        background-size: auto;
+        background-position: -162px -110px;
+    }
+    &[data-type="mastercard"]::after {
+        background-image: url('../../images/payment-types.png');
+        background-size: auto;
+        background-position: -295px -110px;
+    }
+    &[data-type="amex"]::after {
+        background-image: url('../../images/payment-types.png');
+        background-size: auto;
+        background-position: -230px -15px;
+    }
+    &[data-type="discover"]::after {
+        background-image: url('../../images/payment-types.png');
+        background-size: auto;
+        background-position: -95px -110px;
+    }
+}

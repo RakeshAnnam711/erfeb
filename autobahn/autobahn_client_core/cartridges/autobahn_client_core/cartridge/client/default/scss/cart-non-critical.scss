@@ -1,0 +1,290 @@
+@charset "UTF-8";
+
+@import "variables";
+@import "~core/bootstrap-custom-import";
+@import "mixins";
+@import "components/common";
+
+@import "cart/cart";
+
+.toggle-cart-product-messages {
+    @include toast-message();
+}
+
+// non-critical cart page container
+.cart-page {
+    .bundled-line-item {
+        &:not(:empty) {
+            border-top: 1px solid $card-body-border-color;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            padding: $spacer 0px;
+        }
+        &~.bundled-line-item {
+            border-top: 1px solid $card-body-border-color;
+        }
+    }
+
+    .form-control.is-invalid {
+        background: none !important;
+    }
+
+    .checkout-btn {
+        @include icon($icon-checkout_lock, before);
+    }
+
+    // Affirm cart status
+    .cart-affirm-status{
+        .affirm-as-low-as{
+            color: #565656;
+            font-size: 14px;
+        }
+        a.affirm-modal-trigger{
+            color: #565656;
+            text-decoration: underline;
+            text-transform: capitalize;
+        }
+    }
+
+    // you may also like section
+    .frenzy_cart_page_section, .frenzy_cross_sell_carousel_section{
+        padding-bottom: 32px;
+        margin: 0;
+        .frenzy_container {
+            padding: 0;
+            .frenzy_recommendation_title {
+                font-size: 24px;
+                line-height: 24px;
+                margin-bottom: 35px;
+                font-weight: 500;
+            }
+            .frenzy_recommendation_contain {
+                padding: 0 24px;
+                margin: 0;
+                .recommendation_product_items {
+                    overflow-x: auto;
+                    margin: 0;
+                    padding: 0;
+                    // -webkit-overflow-scrolling: touch; // ensures smooth scroll on iOS
+                    // scroll-behavior: smooth;
+                    &::-webkit-scrollbar {
+                        width: 4px;
+                        height: 4px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background: #000000;
+                        border-radius: 10px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background: transparent;
+                        border: 1px solid #ccc;
+                    }
+                    &::-webkit-scrollbar-track-piece {
+                        background-color: #C2C4C4;
+                    }
+
+                    .frenzy_grid {
+                        position: relative;
+                        padding: 0 8px;
+                        flex: 0 0 20%;
+                        max-width: 20%;
+                        @include media-breakpoint-down(md){
+                            flex: 0 0 25%;
+                            max-width: 25%;
+                        }
+                        @include media-breakpoint-down(sm){
+                            flex: 0 0 33.33333%;
+                            max-width: 33.33333%;
+                        }
+                        @include media-breakpoint-down(xs){
+                            flex: 0 0 50%;
+                            max-width: 50%;
+                        }
+                        .frenzy_product_item {
+                            padding: 15px 0;
+                            background-color: #FFFFFF;
+                            .wishlist-icon {
+                                position: absolute;
+                                top: 0;
+                                right: 10px;
+                                &:before {
+                                    font-size: 24px;
+                                    color: inherit;
+                                }
+                                &:hover, &.selected{
+                                    color:#ba4257;
+                                }
+                            }
+                            figure,
+                            figure a,
+                            figure a:before {
+                                max-height: 175px;
+                                margin: 0 auto;
+                            }
+                            figure {
+                                border: none;   // to remove border on image
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                flex-wrap: wrap;
+                                flex-direction: column;
+                                margin-bottom: 0;
+                                line-height: 0;
+                                position: relative;
+                                img{
+                                    height: 100%;
+                                    width: 100%;
+                                }
+                            }
+                            .frenzy_product_item_detail {
+                                padding: 10px 10px 20px;
+                                text-align: left;
+                                .frenzy_product_brand{
+                                    line-height: 20px;
+                                    margin: 0 0 6px 0;
+                                    font-size: 16px;
+                                    font-weight: 500;
+                                    letter-spacing: .075em;
+                                    text-transform: uppercase;
+                                    @include media-breakpoint-down(sm){
+                                        height: 40px;
+                                    }
+                                }
+                                .frenzy_product_title {
+                                    line-height: normal;
+                                    font-family: brandon-grotesque, sans-serif;
+                                    font-size: 16px;
+                                    font-weight: 400;
+                                    color: #565656;
+                                    text-transform: capitalize;
+                                    a {
+                                        color: inherit;
+                                    }
+                                }
+                            }
+                            .frenzy_product_price_meta {
+                                position: absolute;
+                                bottom: 0;
+                                span{
+                                    font-size: 16px;
+                                    color: #000;
+                                    font-weight: 500;
+                                }
+                            }
+                            .btn-primary{
+                                width: auto;
+                                padding: 10px 10px 0;
+                                border: 0;
+                                background-color: transparent;
+                                color: #000;
+                                text-decoration: underline;
+                                letter-spacing: normal;
+                                text-align: left;
+                                &:hover{
+                                    color: var(--brand-tertiary, #9E6B30);
+                                }
+                            }
+                        }
+                        @include media-breakpoint-up(md){
+                            padding: 0 15px;
+                        }
+                    }
+                }
+                @include media-breakpoint-up(md){
+                    margin: 0 24px;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+.promo-code-form{
+    display: block;
+    .form-group{
+        .coupon-success-message{
+            display: none;
+            color: #027E0D;
+            font-size: 12px;
+        }
+        .invalid-feedback{
+            color: #C61B1B;
+            font-size: 12px;
+        } 
+        // promo codes list
+        .added-promo-list{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            visibility: unset !important;
+            .added-promo-list-item{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                .coupon-status-applied{
+                    color: #027E0D;
+                }
+                .coupon-status-not-applied{
+                    color: #D61810;
+                }
+                .remove-coupon {
+                    display: flex;
+                }
+            }
+        }
+    }
+}
+
+#globalePopupWrapper.globale_popup_wrapper #globale_csc_popup .gePopupsContainer {
+    max-width: calc(100vw) !important;
+}
+
+.consentopen .cart-page .checkout-continue{
+    @include media-breakpoint-down(xs) {
+        bottom: 132px;
+    }
+}
+
+
+// remove coupon modal section
+#removeCouponModal{
+    &.show{
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        padding: 0 !important;
+    }
+    .modal-title{
+        font-weight: 400;
+        font-size: 18px;
+    }
+    .modal-footer{
+        gap: 12px;
+        button{
+            margin: 0;
+            flex: 1;
+        }
+    }
+}
+
+#express-container{
+    margin-top: 10px;
+
+    .applepay button{
+        width: 100%;
+        height: 42px;
+    }
+}
+
+// Cart modals
+.delete-coupon-confirmation-body {
+    .coupon-to-remove {
+        margin: $spacer 0 0;
+        font-weight: bold;
+    }
+}

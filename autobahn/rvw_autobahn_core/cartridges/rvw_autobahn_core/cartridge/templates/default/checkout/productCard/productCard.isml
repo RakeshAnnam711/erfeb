@@ -1,0 +1,103 @@
+<div class="product-line-item" data-product-line-item="${lineItem.UUID}">
+
+        <div class="product-line-item-details d-flex flex-row">
+            <a class="item-image" href="${lineItem.productType === 'giftCertificate' ? URLUtils.url('GiftCertificate-Purchase') : URLUtils.url('Product-Show', 'pid', lineItem.id)}">
+                <img class="product-image"
+                    src="${lineItem.images.small[0].url}"
+                    alt="${lineItem.images.small[0].alt}"
+                    title="${lineItem.images.small[0].title}"
+                    onerror="this.onerror=null;this.src='${URLUtils.staticURL('/images/noimage-small.png')}'"
+                />
+            </a>
+            <div class="item-attributes">
+                <div class="line-item-header">
+                    <isif condition=${miniCart}>
+                        <isinclude template="checkout/productCard/productCardProductNameAndRemove" />
+                    <iselse/>
+                        <isinclude template="checkout/productCard/productCardProductName" />
+                    </isif>
+                </div>
+
+                <isloop items="${lineItem.variationAttributes}" var="attribute">
+                    <p class="line-item-attributes">${attribute.displayName}: ${attribute.displayValue}</p>
+                </isloop>
+
+                <isif condition="${lineItem.productType === 'giftCertificate'}">
+                    <isif condition="${!miniCart}">
+                        <p title="${lineItem.senderName}" data-value="${lineItem.senderName}" class="line-item-attributes ${pdict.giftCertificateForm.purchase.from.htmlName}-${lineItem.UUID}">${pdict.giftCertificateForm.purchase.from.label}: ${lineItem.senderName}</p>
+                        <p title="${lineItem.recipientName}" data-value="${lineItem.recipientName}" class="line-item-attributes ${pdict.giftCertificateForm.purchase.recipient.htmlName}-${lineItem.UUID}">${pdict.giftCertificateForm.purchase.recipient.label}: ${lineItem.recipientName}</p>
+                    </isif>
+                    <p title="${lineItem.recipientEmail}" data-value="${lineItem.recipientEmail}" class="line-item-attributes ${pdict.giftCertificateForm.purchase.recipientEmail.htmlName}-${lineItem.UUID}">${pdict.giftCertificateForm.purchase.recipientEmail.label}: ${lineItem.recipientEmail}</p>
+                    <isif condition="${!miniCart}">
+                        <p title="${lineItem.message || ''}" class="line-item-attributes ${pdict.giftCertificateForm.purchase.message.htmlName}-${lineItem.UUID}">${pdict.giftCertificateForm.purchase.message.label}: ${lineItem.message || ''}</p>
+                    </isif>
+                </isif>
+
+                <div class="item-options">
+                    <isloop items="${lineItem.options}" var="option">
+                        <div class="line-item-option">${lineItem.productType === 'bundle' ? option.lineItemText : option.displayName}</div>
+                    </isloop>
+                </div>
+
+                <isif condition="${(pdict.order && !pdict.order.orderStatus) || miniCart}">
+                    <isinclude template="cart/productCard/cartProductCardAvailability" />
+                </isif>
+
+                <isif condition="${lineItem.itemType === 'digital'}">
+                    <div class="digital-product-delivery">
+                        <p class="line-item-attributes"><span class="delivery-type-label">${Resource.msg('label.deliveryType','product',null)}:</span> <span class="digital-delivery-label">${Resource.msg('label.digitalDelivery','product',null)}</span></p>
+                    </div>
+                </isif>
+
+                <isinclude template="integrations/checkout/productCard/productCardIntegrationsItemAttributesBottom" />
+            </div>
+        </div>
+        <isif condition="${lineItem.productType === 'bundle'}">
+            <hr>
+            <div class="bundle-includes">${Resource.msg('msg.bundle.includes','cart',null)}</div>
+            <!--- individual bundled line items --->
+            <isinclude template="cart/productCard/cartProductCardBundledItems" />
+        </isif>
+
+    <div class="row align-items-start item-price-qty">
+        <!--- item price --->
+        <isif condition="${lineItem.price}">
+            <div class="col line-item-unit-price">
+                <div class="line-item-pricing-info">
+                    <span class="line-item-total-text unit-price-label">
+                        ${Resource.msg('label.each.item.price','cart',null)}
+                    </span><br/>
+                    <isset name="price" value="${lineItem.price}" scope="page"/>
+                    <div class="unit-price">
+                        <isinclude template="/product/components/pricing/main" />
+                    </div>
+                </div>
+            </div>
+        </isif>
+        <!--- quantity --->
+
+        <div class="col line-item-quantity">
+            <isif condition="${miniCart && lineItem.hideQty == false}">
+                <isinclude template="checkout/productCard/productCardQuantitySelector" />
+            <iselse/>
+                <isinclude template="checkout/productCard/productCardQuantityDisplay" />
+            </isif>
+        </div>
+        <!--- line item total price --->
+        <div class="col line-item-total-price">
+            <p class="line-item-pricing-info">
+                <span class="line-item-total-text line-item-total-price-label">
+                    ${Resource.msg('label.total.price','cart',null)}
+                </span>
+            </p>
+            <div class="item-total-${lineItem.UUID} price">
+                <isinclude template="checkout/productCard/productCardProductTotalPrice" />
+            </div>
+        </div>
+    </div>
+    <isif condition="${miniCart}">
+        <div class="line-item-promo item-${lineItem.UUID}">
+            <isinclude template="checkout/productCard/productCardProductPromotions" />
+        </div>
+    </isif>
+</div>

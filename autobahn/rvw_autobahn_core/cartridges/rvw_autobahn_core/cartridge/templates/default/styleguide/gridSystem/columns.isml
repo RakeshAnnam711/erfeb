@@ -1,0 +1,51 @@
+<div id="columns" class="sg__header3">Columns</div>
+<p>There are three column size variations: Mobile, Desktop, and Desktop XL. Gutter widths can be customized by updating the values in the <span class="pre">$grid-gutter-widths</span> array in <span class="pre">scss/_variables.scss</span>.</p>
+<div class="row pl-md-3">
+    <div class="col-md-6 grid-columns">
+        <div class="container grid-columns__xs">
+            <div class="row sg__header4">
+                <strong>Mobile:&nbsp;</strong>
+                <span class="grid-columns__breakpoint-xs"></span>&nbsp;|&nbsp;<span>Gutter:&nbsp;</span>
+                <span class="grid-columns__gutter-size-xs"></span>
+            </div>
+            <div class="row text-center">
+                <div class="col"><div>column</div></div>
+                <div class="col"><div>column</div></div>
+                <div class="col"><div>column</div></div>
+            </div>
+        </div>
+        <div class="container grid-columns__md">
+            <div class="row sg__header4">
+                <strong>Desktop:&nbsp;</strong>
+                <span class="grid-columns__breakpoint-md"></span>&nbsp;|&nbsp;<span>Gutter:&nbsp;</span>
+                <span class="grid-columns__gutter-size-md"></span>
+            </div>
+            <div class="row text-center">
+                <div class="col"><div>column</div></div>
+                <div class="col"><div>column</div></div>
+                <div class="col"><div>column</div></div>
+            </div>
+        </div>
+        <div class="container grid-columns__xl">
+            <div class="row sg__header4">
+                <strong>Desktop XL:&nbsp;</strong>
+                <span class="grid-columns__breakpoint-xl"></span>&nbsp;|&nbsp;<span>Gutter:&nbsp;</span>
+                <span class="grid-columns__gutter-size-xl"></span>
+            </div>
+            <div class="row text-center">
+                <div class="col"><div>column</div></div>
+                <div class="col"><div>column</div></div>
+                <div class="col"><div>column</div></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pt-3 pt-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="container">
+    <div class="row">
+        <div class="col"><div>column</div></div>
+        <div class="col"><div>column</div></div>
+        <div class="col"><div>column</div></div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>

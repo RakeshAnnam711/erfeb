@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <custom-type type-id="flowNotification">
+        <display-name xml:lang="x-default">Flow Notification</display-name>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="notificationId">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="flowOrderId">
+                <display-name xml:lang="x-default">Flow Order Id</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfccOrderId">
+                <display-name xml:lang="x-default">SFCC Order Number</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="notification">
+                <display-name xml:lang="x-default">Notification</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="data">
+                <display-name xml:lang="x-default">Data</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="flow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <attribute attribute-id="notificationId"/>
+                <attribute attribute-id="flowOrderId"/>
+                <attribute attribute-id="sfccOrderId"/>
+                <attribute attribute-id="notification"/>
+                <attribute attribute-id="data"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+</metadata>

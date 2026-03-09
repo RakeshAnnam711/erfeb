@@ -1,0 +1,62 @@
+<div id="inputFields" class="sg__header3">Input Fields</div>
+<p>In order to get form styles applied to labels, help text, and error messages, form elements should be wrapped in a div with a class of <span class="pre">form-group</span>.</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="textInput">Label</label>
+            <input type="text" class="form-control" id="textInput" aria-describedby="textInputHelp"
+                placeholder="Text input field" />
+            <span id="textInputHelp" class="form-text">Help text</span>
+        </div>
+
+        <p class="mt-4 mb-1">Add the class below for a smaller version:</p>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="customInputSizeOptions" id="customInputSmall">
+            <label class="custom-control-label" for="customInputSmall"><span class="pre">form-control-sm</span></label>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="form-group">
+    <label for="textInput">Label</label>
+    <input type="text" class="form-control" id="textInput" aria-describedby="textInputHelp" placeholder="Text input field"/>
+    <span id="textInputHelp" class="form-text">Help text</span>
+</div></script></code></pre>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Disabled input field" disabled/>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><input type="text" class="form-control" placeholder="Disabled input field" disabled/></script></code></pre>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="text" class="form-control is-invalid" placeholder="Invalid input field" />
+            <small class="invalid-feedback">Error text</small>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><input type="text" class="form-control is-invalid" placeholder="Invalid input field" />
+<small class="invalid-feedback">Error text</small></script></code></pre>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="textArea">Textarea</label>
+            <textarea class="form-control" id="textArea" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="form-group">
+    <label for="textArea">Textarea</label>
+    <textarea class="form-control" id="textArea" rows="3"></textarea>
+</div></script></code></pre>
+    </div>
+</div>

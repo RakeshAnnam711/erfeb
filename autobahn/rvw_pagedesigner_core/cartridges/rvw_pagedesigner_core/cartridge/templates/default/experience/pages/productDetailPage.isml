@@ -1,0 +1,15 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<isdecorate template="/common/layout/page">
+    <div class="pdp page-designer ${pdict.customClass}" id="${pdict.page.ID}">
+        <isprint value="${pdict.regions.main.render()}" encoding="off"/>
+
+        <isif condition="${!pdict.chromeless && pdict.belowFoldPopulated}">
+            <isif condition="${'product' in pdict && !empty(pdict.product) && 'id' in pdict.product && !empty(pdict.product.id)}">
+                <div id="belowFoldRegion" class="pd-async-region" data-url="${URLUtils.url('Product-Show', 'pid', pdict.product.id, 'ajaxRegion', pdict.regions.belowFold.region.ID)}"></div>
+            <iselse/>
+                <div id="belowFoldRegion" class="pd-async-region" data-url="${URLUtils.url('Page-Show', 'cid', pdict.page.ID, 'ajaxRegion', pdict.regions.belowFold.region.ID)}"></div>
+            </isif>
+        </isif>
+    </div>
+</isdecorate>
