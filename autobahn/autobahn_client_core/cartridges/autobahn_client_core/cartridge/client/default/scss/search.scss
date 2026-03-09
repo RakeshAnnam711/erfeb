@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+.filter-sticky{
+    position: fixed;
+    top: 130px;
+    height: calc(100vh - 175px);
+    width: 25%;
+    z-index: 99;
+    // overflow-y: auto !important;
+    max-width: 360px;
+}
+// @import '~base/search';
+.grid-footer {
+    margin-bottom: 20px;
+    .spinner-border {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        vertical-align: -.125em;
+        border: .25em solid currentcolor;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: .75s linear infinite spinner-border;
+        animation: .75s linear infinite spinner-border;
+    }
+    @keyframes spinner-border {
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+}
+.product-grid-inner {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    margin: 0 !important;
+    justify-items: flex-start !important;
+    opacity: 0;
+    contain: layout style;
+    
+    &.tiles-ready {
+        opacity: 1;
+    }
+
+    .plp-product-tile {
+        max-width: 300px;
+        width: 100%;
+    }
+    @media screen and (max-width: 1589px) {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        &.three-tile {
+        grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+        .plp-product-tile {
+		        max-width: 300px;
+		    }
+        }
+        .plp-product-tile {
+            max-width: 280px;
+        }
+    }
+    @media screen and (max-width: 1450px) {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+        &.three-tile {
+        	grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        	.plp-product-tile {
+		        max-width: 300px;
+		    }
+        }
+
+        .plp-product-tile {
+            max-width: 280px;
+        }
+    }
+
+    @media screen and (max-width: 700px) {
+        margin: 0;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 20px;
+    }
+}
+
+.plp-product-tile:empty {
+    display: none;
+}
+
+.plp-tile-skeleton {
+    width: 100%;
+    height: 496px; 
+    background-color: #f3f3f3;
+    border-radius: 4px;
+}

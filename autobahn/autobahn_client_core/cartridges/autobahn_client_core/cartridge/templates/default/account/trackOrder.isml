@@ -1,0 +1,25 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/login.js');
+    </isscript>
+
+    <div class="container trackOrder-page">
+
+        <!---Breadcrumbs--->
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+
+        <h1 class="page-title mb-3">Check Order Status</h1>
+
+        <div class="row justify-content-center equal-height">
+            <div class="col-md-6">
+                <div class="card w-100">
+                    <isinclude template="account/components/trackOrderForm" />
+                </div>
+            </div>
+        </div>
+    </div>
+</isdecorate>

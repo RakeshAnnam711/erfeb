@@ -1,0 +1,70 @@
+<form action="${pdict.actionUrl}" class="login" method="POST" name="login-form" id="registered-customer">
+    <div class="login-form-wrapper">
+    <div class="form-group required">
+        <label class="form-control-label" for="email">
+            ${Resource.msg('label.input.login.email', 'login', null)}
+            <span class="sr-only">Fields marked with an asterisk are required.</span>
+        </label>
+        <input type="email" id="email" required aria-required="true"  aria-label="Email address" class="form-control required" name="dwfrm_coRegisteredCustomer_email" <isprint value=${pdict.forms.registeredCustomerForm.email.attributes} encoding="off"/> aria-describedby="form-email-error"  value="${pdict.userName}" placeholder="Enter email">
+        <div class="invalid-feedback" id="form-email-error"></div>
+    </div>
+
+    <div class="form-group required">
+        <label class="form-control-label" for="login-form-password">
+                ${Resource.msg('label.input.login.password', 'login', null)}
+        </label>
+        <div class="login-password-wrapper">
+            <input type="password" id="password" required aria-required="true" class="form-control required" <isprint value=${pdict.forms.registeredCustomerForm.password.attributes} encoding="off"/>  aria-describedby="form-password-error"  placeholder="Enter Password">
+            <i id="togglePasswordLogin" class="icon-Show" aria-pressed="false" aria-label="Show password" tabindex="0" role="button"></i>
+            <div class="invalid-feedback" id="form-password-error"></div>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <iscomment> <div class="form-group custom-control custom-checkbox pull-left remember-me">
+            <input type="checkbox" class="custom-control-input" id="rememberMe" name="loginRememberMe" value="true"
+                <isif condition="${pdict.rememberMe}">checked</isif>
+            >
+            <label class="custom-control-label" for="rememberMe">
+                ${Resource.msg('label.checkbox.login.rememberme', 'login', null)}
+            </label>
+        </div> </iscomment>
+
+        <div class="pull-right forgot-password text-right">
+            <a
+                id="password-reset"
+                class="d-sm-none"
+                title="${Resource.msg('link.login.forgotpassword', 'login', null)}"
+                data-toggle="modal"
+                href="${URLUtils.url('Account-PasswordReset')}"
+                data-target="#requestPasswordResetModal">
+                ${Resource.msg('link.login.forgotpassword', 'login', null)}
+            </a>
+
+            <a
+                id="password-reset"
+                class="hidden-xs-down"
+                title="${Resource.msg('link.login.forgotpassword', 'login', null)}"
+                data-toggle="modal"
+                href="${URLUtils.url('Account-PasswordResetDialogForm')}"
+                data-target="#requestPasswordResetModal">
+                ${Resource.msg('link.login.forgotpassword', 'login', null)}
+            </a>
+        </div>
+    </div>
+
+     <div class="login-policy-text">
+            ${Resource.msg('description.privacypolicy.terms.login','login',null)}
+            <a href="${URLUtils.url('Page-Show','cid','terms')}" class="login-privacy-policy-link" aria-label="${Resource.msg('link.login.termsandconditions', 'login', null)}">${Resource.msg('link.login.termsandconditions', 'login', null)}</a>
+            ${Resource.msg('description.privacypolicy.terms.and','login',null)}
+            <a href="${URLUtils.url('Page-Show','cid','privacy-security')}" class="login-privacy-policy-link" aria-label="${Resource.msg('link.login.privacypolicy', 'login', null)}">
+                ${Resource.msg('link.login.privacypolicy', 'login', null)}
+            </a>
+    </div>
+
+    <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+    </div>
+    <div class="login-submit-button">
+        <button type="submit" class="btn btn-block btn-primary submit-customer-login" aria-label="${Resource.msg('button.text.loginform', 'login', null)}">${Resource.msg('button.text.loginform', 'login', null)}</button>
+    </div>
+</form>

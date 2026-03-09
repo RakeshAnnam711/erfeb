@@ -1,0 +1,12 @@
+<div class="line-item-availability availability-${lineItem.UUID} d-flex w-100 w-md-auto">
+    <isif condition="${lineItem.availability}">
+        <isloop items="${lineItem.availability.messages}" var="message">
+            <p class="line-item-attributes m-auto text-center">${message}</p>
+        </isloop>
+        <isif condition="${lineItem.availability.inStockDate}">
+            <p class="line-item-attributes line-item-instock-date m-auto text-center">
+                ${lineItem.availability.inStockDate}
+            </p>
+        </isif>
+    </isif>
+</div>

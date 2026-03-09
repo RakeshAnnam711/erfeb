@@ -1,0 +1,45 @@
+<isdecorate template="common/layout/page">
+    <script async src="https://cdn.tangiblee.com/analytics/1.0/managed/www.whatgoesaroundnyc.com/revision_1/variation_original/ta-bundle.min.js"></script>
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/checkoutRegistration.js');
+    </isscript>
+
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+
+    <div class="container receipt py-3 ${pdict.order.shipping.length > 1 ? 'multi-ship' : ''} ${pdict.order.hideShipping ? 'hide-shipping' : ''}">
+
+        <div class="checkout-order-confirmation">
+            <iscontentasset aid="orderConfirmationHeader"/>
+
+            <div class="row py-3">
+                <div class="col-12">
+                    <iscontentasset aid="orderConfirmationSubheader"/>
+                    <isif condition="${pdict.order.orderEmail}">
+                        <p class="order-thank-you-email-msg"><isprint value="${Resource.msgf('info.receive.email.confirmation', 'confirmation', null, pdict.order.orderEmail)}" encoding="htmlcontent" /></p>
+                    </isif>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <isinclude template="checkout/confirmation/confirmationDetails" />
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="${URLUtils.url('Search-Show', 'cgid', 'new-arrivals')}" class="btn btn-primary btn-block order-confirmation-continue-shopping" role="button" aria-label="${Resource.msg('button.continue.shopping','confirmation',null)}" aria-pressed="true">
+                                ${Resource.msg('button.continue.shopping','confirmation',null)}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <isinclude template="integrations/checkout/confirmation/bottom"/>
+
+    <script src="https://go.launchingdeals.com/util/pixel?product=WGACR&orderTotal=${pdict.order.totals.subTotal.replace(/^\$\s*/,'')}"></script>
+    </isdecorate>

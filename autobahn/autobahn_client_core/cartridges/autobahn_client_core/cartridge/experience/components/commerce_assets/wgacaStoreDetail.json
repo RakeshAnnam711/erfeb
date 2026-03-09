@@ -1,0 +1,137 @@
+{
+    "name": "Store Detail",
+    "description": "Show Title, sub title and CTA",
+    "group": "wgaca_assets",
+    "attribute_definition_groups": [
+    	{
+	    	"id": "titleContainer",
+	      	"attribute_definitions": [
+	     		{
+	          		"id": "title",
+	          		"name": "Title",
+	          		"type": "string",
+	          		"required": true
+	        	},
+	        	{
+	          		"id": "titleColor",
+	          		"name": "Title Color",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "titleFontSize",
+	          		"name": "Title Font Size",
+	          		"description": "Title font size, default is 16px",
+	          		"type": "enum",
+                    "values": ["16px", "20px", "24px", "28px", "34px", "38px"],
+                    "default_value": "16px",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "letterSpacing",
+	          		"name": "Letter Spacing",
+	          		"description": "Spacing between the letters, default spacing is 1px",
+	          		"type": "enum",
+                    "values": ["1px", "2px", "3px", "4px"],
+                    "default_value": "1px",
+	          		"required": false
+	        	}
+	      	]
+	    },
+	    {
+	    	"id": "subTitleContainer",
+	      	"attribute_definitions": [
+	     		{
+	          		"id": "subTitle",
+	          		"name": "Sub Title",
+	          		"type": "string",
+	          		"required": true
+	        	},
+	        	{
+	          		"id": "subTitleColor",
+	          		"name": "Title Color",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "subTitleFontSize",
+	          		"name": "Sub Title Font Size",
+	          		"description": "Sub Title font size, default is 16px",
+	          		"type": "enum",
+                    "values": ["16px", "20px", "24px", "28px", "34px", "38px"],
+                    "default_value": "16px",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "subTitleLetterSpacing",
+	          		"name": "Sub Title Letter Spacing",
+	          		"description": "Spacing between the letters, default spacing is 1px",
+	          		"type": "enum",
+                    "values": ["1px", "2px", "3px", "4px"],
+                    "default_value": "1px",
+	          		"required": false
+	        	}
+	      	]
+	    },
+	    {
+	    	"id": "ctaConfiguration",
+	      	"attribute_definitions": [
+	     		{
+	          		"id": "buttonText",
+	          		"name": "Button Text",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+					"id": "buttonStyle",
+					"name": "Button Style",
+					"description": "Select button styling, default is btn-primary",
+					"type": "enum",
+				    "values": ["btn-primary", "btn-secondary", "btn-tertiary"],
+				    "default_value": "btn-primary",
+					"required": false
+			  	},
+	        	{
+	          		"id": "ctaUrl",
+	          		"name": "CTA Url",
+	          		"type": "url",
+	          		"required": false
+	        	}
+	      	]
+	    },
+	    {
+	    	"id": "description",
+	      	"attribute_definitions": [
+	     		{
+	          		"id": "storeDescription",
+	          		"name": "Store Description",
+	          		"type": "text",
+	          		"required": false
+	        	}
+	      	]
+	    },
+	    {
+	    	"id": "timings",
+	      	"attribute_definitions": [
+	     		{
+	          		"id": "storeTimings",
+	          		"name": "Store Timings",
+	          		"type": "text",
+	          		"required": false
+	        	}
+	      	]
+	    },
+	    {
+	    	"id": "contact",
+	      	"attribute_definitions": [
+	     		{
+	          		"id": "storeContact",
+	          		"name": "Store Contact",
+	          		"type": "text",
+	          		"required": false
+	        	}
+	      	]
+	    }
+    ],
+    "region_definitions": []
+}

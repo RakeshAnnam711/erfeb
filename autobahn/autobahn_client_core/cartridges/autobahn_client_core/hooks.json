@@ -1,0 +1,5 @@
+{
+    "hooks": [
+        {"name": "globale.getPLICustomMetadata", "script": "./cartridge/scripts/hooks/globaleCustomMetadata.js"}
+    ]
+}

@@ -1,0 +1,20 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+
+<iscontentasset aid="headerScriptInjection" bodyonly="true" />
+
+<iscomment>
+    hook for Marketing Cloud connector & other integration which need to inject
+    logic or markup into the page header
+        IMPORTANT: Note that this hook will be called to cached as well as uncached pages
+        Refrain from calling processing intensive logic in here
+        do not include shopper specific information.
+</iscomment>
+
+${dw.system.HookMgr.callHook('app.template.htmlHead', 'htmlHead', pdict) || ''}
+
+<iscomment> <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('AffirmOnline')}"> </iscomment>
+<iscomment> <isinclude template="affirm/affirmHeaderMF" /> </iscomment>
+<iscomment> </isif> </iscomment>
+
+<iscomment> Klarna </iscomment>
+<iscomment> <isinclude template="klarna/klarnaHeaderMF" /> </iscomment>

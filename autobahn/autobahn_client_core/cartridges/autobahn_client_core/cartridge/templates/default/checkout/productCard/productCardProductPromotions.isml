@@ -1,0 +1,19 @@
+<isif condition="${lineItem.appliedPromotions}">
+    <isloop items="${lineItem.appliedPromotions}" var="appliedPromotion">
+        <div>
+            <isprint value="${appliedPromotion.callOutMsg}" encoding="off"/>
+        </div>
+    </isloop>
+<iselse/>
+    <isset name="productLineItem" value="${dw.catalog.ProductMgr.getProduct(lineItem.id)}" scope="page"/>
+    <isset name="promotionLineItem" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(productLineItem)}" scope="page"/>
+    <isif condition="${promotionLineItem.length > 0}">
+        <isloop items="${promotionLineItem}" var="promotion">
+            <isif condition="${promotion.custom.enableSpecialPromotionCalloutMsg}">
+                <div>
+                    <isprint value="${promotion.calloutMsg}" encoding="off"/>
+                </div>
+            </isif>
+        </isloop>
+    </isif>
+</isif>
