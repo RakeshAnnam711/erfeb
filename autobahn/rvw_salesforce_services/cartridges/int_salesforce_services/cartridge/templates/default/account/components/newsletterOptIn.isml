@@ -1,0 +1,12 @@
+<isset name="brandName" value="${!empty(pdict.siteContext.name) ? pdict.siteContext.name : ''}" scope="page" />
+<isset name="newsletterOptIn" value="${pdict.forms.newsletterOptIn}" scope="page" />
+
+<input
+    type="checkbox" checked="checked"
+    class="custom-control-input" id="add-to-newsletter-list"
+    <isprint value="${pdict.forms.guestCustomerForm.newsletterOptIn.addtoemaillist.attributes}" encoding="off" />
+>
+
+<label class="custom-control-label" for="add-to-newsletter-list">
+        ${Resource.msgf('form.newsletter.email.optin', 'forms', null, brandName)}
+</label>

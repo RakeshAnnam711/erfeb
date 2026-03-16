@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+
+    <!-- Base Credentials -->
+    <service-credential service-credential-id="credentials.avatax.rest">
+        <url>https://sandbox-rest.avatax.com/</url>
+        <user-id>userid</user-id>
+        <password masked="true">password</password>
+    </service-credential>
+
+    <service-credential service-credential-id="logentries.avatax.rest">
+        <url>https://webhook.logentries.com/noformat/logs/</url>
+        <user-id></user-id>
+        <password masked="true"></password>
+    </service-credential>
+
+    <!-- Autobahn Credentials -->
+    <service-credential service-credential-id="credentials.avatax.rest">
+        <url>https://sandbox-rest.avatax.com/</url>
+        <user-id>2000889536</user-id>
+        <password>6A53D94559F5E7F3</password>
+    </service-credential>
+
+    <service-credential service-credential-id="logentries.avatax.rest">
+        <url>https://webhook.logentries.com/noformat/logs/</url>
+        <user-id></user-id>
+        <password masked="true"></password>
+    </service-credential>
+
+    <service-profile service-profile-id="logentries.avatax.profile">
+        <timeout-millis>20000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="profile.avatax.rest">
+        <timeout-millis>3000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="avatax.rest.all">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>profile.avatax.rest</profile-id>
+        <credential-id>credentials.avatax.rest</credential-id>
+    </service>
+
+    <service service-id="logentries.avatax.svc">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>logentries.avatax.profile</profile-id>
+        <credential-id>logentries.avatax.rest</credential-id>
+    </service>
+
+</services>

@@ -1,0 +1,75 @@
+<isdecorate template="common/layout/page">
+    <isinclude template="/components/modules" sf-toolkit="off" />
+    <section class="wishlist-details" data-list-id="${pdict.listSelected && pdict.listSelected.ID ? pdict.listSelected.ID : ''}">
+        <header class="wishlist-details-header wishlist-header container-fluid}">
+            <div class="wishlist-details-header-container container">
+                <div class="wishlist-details-header-name">
+                    <a href="${URLUtils.url('Wishlist-Show', 'sz', pdict.landingPageSize)}" class="wishlist-details-header-back" aria-label="${Resource.msg('button.back', 'wishlist', null)}"></a>
+                    <span class="wishlist-details-header-text">
+                        ${pdict.listSelected && pdict.listSelected.name ? pdict.listSelected.name : 'Wishlist'}
+                    </span>
+                </div>
+                <isif condition="${customer.authenticated && (pdict.listSelected && pdict.listSelected.listOwner && pdict.listSelected.listOwner === customer.ID)}">
+                    <div class="wishlist-details-public-toggle custom-control custom-checkbox">
+                        <input
+                            class="custom-control-input public-toggle-input"
+                            type="checkbox"
+                            value=""
+                            id="isPublicList"
+                            name="is-public-list"
+                            data-id="${pdict.listSelected.ID}"
+                            data-url="${pdict.listSelected.makePublicUrl}"
+                            ${pdict.listSelected.isPublic ? 'checked' : ''}
+                        />
+                        <label class="custom-control-label make-list-public" for="isPublicList">
+                            ${Resource.msg('checkbox.make.public', 'wishlist', null)}
+                        </label>
+                    </div>
+                <iselse/>
+                    <iscomment>Blank div to maintain col spacing for guest users</iscomment>
+                    <div class="wishlist-details-public-toggle"></div>
+                </isif>
+                <button type="button" class="wishlist-details-deselect d-none">
+                    ${Resource.msg('button.deselect', 'wishlist', null)}
+                </button>
+                <nav class="wishlist-details-nav open ${pdict.listSelected && pdict.listSelected.products && pdict.listSelected.products.length > 0 ? '' : 'd-none'}">
+                    <div class="wishlist-details-action-btns">
+                        <button type="button" class="wishlist-details-select-all btn">
+                            ${Resource.msg('button.detail.selectall', 'wishlist', null)}
+                        </button>
+                        <isif condition="${customer.authenticated && (pdict.listSelected && pdict.listSelected.listOwner && pdict.listSelected.listOwner === customer.ID)}">
+                            <button
+                                type="button"
+                                class="wishlist-details-share"
+                                data-toggle="modal"
+                                data-target="#wishlistModalShareList"
+                                title="${Resource.msg('error.share.list', 'wishlist', null)}"
+                                ${!pdict.listSelected.isPublic ? 'disabled' : ''}
+                            >
+                                ${Resource.msg('button.share', 'wishlist', null)}
+                            </button>
+                        </isif>
+                        <button
+                            type="button"
+                            class="wishlist-details-add-cart"
+                            data-url="${pdict.urls.addToCart}"
+                            data-gtmdata="${JSON.stringify(product.gtmData)}"
+                        >
+                            ${Resource.msg('button.detail.addalltocart', 'wishlist', null)}
+                        </button>
+                    </div>
+                    <isinclude template="wishlist/wishlistDetails/components/overlayDetailSelected"/>
+                </nav>
+            </div>
+        </header>
+
+        <isinclude template="wishlist/wishlistDetails/components/detailNotes"/>
+        
+        <isinclude template="wishlist/wishlistDetails/components/detailProducts"/>
+
+        <iscontentasset aid="shipping-learnmore-modal" />
+    </section>
+    <isinclude template="wishlist/wishlistDetails/components/modalDeleteProduct"/>
+    <isinclude template="wishlist/wishlistDetails/components/modalDeleteProducts"/>
+    <isinclude template="wishlist/wishlistDetails/components/modalShareList"/>
+</isdecorate>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site xmlns="http://www.demandware.com/xml/impex/site/2007-04-30" site-id="WGACA">
+    <name>WGACA</name>
+    <currency>USD</currency>
+    <taxation>net</taxation>
+    <custom-cartridges>
+        autobahn_client_core:
+        rvw_integrations_core:
+        rvw_autobahn_core:
+        rvw_pagedesigner_core:
+        rvw_som_integration:
+        rvw_flow_integration:
+        int_bambuser:
+        bambuser_sfra_changes:
+        flow_sfra_changes:
+        int_flow_sfra:
+        int_flow:
+        int_zenkraft_sfra:
+        paypal_credit_financing_options:
+        paypal_credit_messaging:
+        int_paypal:
+        int_affirm_sfra:
+        int_affirm:
+        int_signifyd_sfra:
+        plugin_seo:
+        plugin_gtm:
+        rvw_taxjar_integration:
+        int_taxjar_sfra:
+        int_taxjar:
+        rvw_adyen_integration:
+        app_adyen_SFRA:
+        int_adyen_SFRA:
+        int_salesforce_services:
+        rvw_integrations_base:
+        app_storefront_base:
+        plugin_sitemap:
+        bm_pagedesigner_custom:
+        bm_autobahn_core:
+        bc_job_components
+    </custom-cartridges>
+    <storefront-status>protected</storefront-status>
+    <storefront-password>wgaca123</storefront-password>
+</site>

@@ -1,0 +1,192 @@
+// delete wishlist modal
+.wishlist-modal-delete-list-delete-button {
+    @include button($wishlist-modal-delete-list-delete-button);
+}
+.wishlist-modal-delete-list-cancel-btn {
+    @include button($wishlist-modal-delete-list-cancel-button);
+}
+
+// delete product modal
+.wishlist-modal-delete-product-delete-btn {
+    @include button($wishlist-modal-delete-product-delete-button);
+}
+.wishlist-modal-delete-product-cancel-btn {
+    @include button($wishlist-modal-delete-product-cancel-button);
+}
+
+// edit wishlist modal
+.wishlist-edit-list-footer {
+    .wishlist-edit-list-save-btn {
+        @include button($wishlist-edit-list-save-button);
+    }
+    .wishlist-edit-list-delete-btn {
+        @include button($wishlist-edit-list-delete-button);
+    }
+}
+
+// share wishlist modal
+.wishlist-modal-share-list {
+    .wishlist-modal-share-list-form-group {
+        margin-top: 0;
+        .wishlist-modal-share-list-form-control {
+            border-right: 0;
+        }
+    }
+    .wishlist-modal-share-list-submit {
+        @include button($wishlist-modal-share-list-submit-button);
+    }
+    .wishlist-modal-share-list-email-btn {
+        @include button($wishlist-share-list-email-button);
+    }
+}
+
+// show lists modal
+.wishlist-modal-show-lists {
+    z-index: $z-index-wishlist-modal;
+    .wishlist-modal-show-lists-header {
+        position: relative;
+        display: flex;
+        .wishlist-modal-show-lists-header-back {
+            @include icon($wishlist-modal-header-icon-back);
+            margin-right: $spacer-sm;
+        }
+        .wishlist-modal-show-lists-header-close,
+        .wishlist-modal-show-lists-header-back {
+            &.hide {
+                display: none;
+            }
+            &.show {
+                display: block;
+            }
+        }
+    }
+    .modal-body {
+        min-height: 120px; // space for loading spinner
+    }
+    .modal-footer {
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            top: calc(#{-$modal-body-padding} + #{-$spacer});
+            left: 0;
+            width: 100%;
+            height: calc(#{$modal-body-padding} + #{$spacer});
+            background: linear-gradient(transparent, $card-body-background); // fade at bottom when modal body scrolls
+        }
+    }
+    .wishlist-all-lists {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .wishlist-modal-show-lists-keep {
+        margin-bottom: $spacer;
+        padding: 0;
+        text-align: center;
+    }
+    .wishlist-create-list-remove-from-all {
+        order: 1;
+        margin-bottom: $spacer;
+        @include button($wishlist-create-list-remove-from-all-button);
+    }
+    .wishlist-create-list-no-list-created {
+        text-align: center;
+    }
+    .wishlist-show-new-list-form-btn {
+        @include button($wishlist-modal-show-new-list-form-button);
+    }
+    .wishlist-modal-show-lists-toggle-lists {
+        .wishlist-modal-show-lists-toggle-lists-options {
+            display: flex;
+            flex-direction: column;
+        }
+        .wishlist-favorite-product-btn {
+            @include button($wishlist-modal-show-lists-item-button);
+            min-height: calc(#{$spacer + $wishlist-modal-list-image-size});
+            display: flex;
+            text-transform: none;
+            align-items: center;
+            margin-bottom: $spacer;
+            order: 2;
+            &:after {
+                margin-left: auto;
+            }
+            &.selected {
+                border-color: $wishlist-modal-show-lists-item-button-selected-border-color;
+                color: $wishlist-modal-show-lists-item-button-selected-color;
+                background-color: $wishlist-modal-show-lists-item-button-selected-background-color;
+                .wishlist-create-list-product-name-count {
+                    color: $wishlist-modal-show-lists-item-button-selected-color;
+                }
+            }
+            .wishlist-favorite-product-image {
+                width: $wishlist-modal-list-image-size;
+                height: $wishlist-modal-list-image-size;
+                margin-right: $wishlist-modal-show-lists-item-image-margin-right;
+            }
+            .wishlist-create-list-product-name {
+                padding-right: $wishlist-create-list-product-name-padding-right;
+            }
+            .wishlist-create-list-product-name-count {
+                display: flex;
+                text-align: left;
+            }
+        }
+    }
+}
+
+// create lists modal
+.wishlist-modal-show-lists,
+.wishlist-modal-create-list {
+    .wishlist-create-list-btn {
+        @include button($wishlist-create-list-button);
+    }
+    .wishlist-create-list-form {
+        display: flex;
+        flex-direction: column;
+        .form-group {
+            margin-top: 0;
+            margin-bottom: $spacer;
+        }
+    }
+}
+
+// Search Results Modal
+.wishlist-search-results-modal {
+    .modal-body {
+        padding: 0;
+    }
+    .wishlist-search-results {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .wishlist-search-results-item {
+        + .wishlist-search-results-item {
+            border-top: 1px solid $wishlist-search-results-border-color;
+        }
+    }
+    .wishlist-search-results-link {
+        padding: $wishlist-search-results-padding;
+        display: flex;
+        justify-content: space-between;
+        text-decoration: none;
+        &:hover {
+            background-color: $wishlist-search-result-background-color-hover;
+        }
+    }
+    .wishlist-search-results-name {
+        @include header($wishlist-search-result-name-size);
+        color: $wishlist-search-result-name-color;
+        padding-right: $spacer;
+    }
+    .wishlist-search-results-count {
+        font-size: $wishlist-search-result-count-font-size;
+        color: $wishlist-search-result-count-color;
+        white-space: nowrap;
+    }
+    .wishlist-no-results {
+        padding: $modal-body-padding;
+    }
+}

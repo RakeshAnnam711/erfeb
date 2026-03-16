@@ -1,0 +1,2224 @@
+@import "bootstrap/scss/functions";
+@import "utilities/icons";
+
+/*
+ * COLORS
+ */
+$brand-primary: var(--brand-primary, #000000) !default;
+$brand-secondary: var(--brand-secondary, #636f77) !default;
+$brand-tertiary: var(--brand-tertiary, #a3b7c4) !default;
+
+$black: #222222 !default;
+$white: #FFFFFF !default;
+$off-white: #F2F2F2 !default;
+$light-gray: #C5C5C5 !default;
+$gray: #BEBEBE !default;
+$dark-gray: #767676 !default;
+
+$green: #008827 !default;
+$red: #A3080F !default;
+$yellow: #FFCC00 !default;
+$blue: #3091E7 !default;
+$success: $green !default;
+$danger: $red !default;
+$warning: $yellow !default;
+$info: $blue !default;
+$sale: $red !default;
+
+$colors: (
+    'brand-primary': $brand-primary,
+    'brand-secondary': $brand-secondary,
+    'brand-tertiary': $brand-tertiary,
+    'white': $white,
+    'off-white': $off-white,
+    'light-gray': $light-gray,
+    'gray': $gray,
+    'dark-gray': $dark-gray,
+    'black': $black,
+    'green': $green,
+    'red': $red,
+    'yellow': $yellow,
+    'blue': $blue,
+    'success': $success,
+    'danger': $danger,
+    'warning': $warning,
+    'info': $info
+) !default;
+
+$swatch-colors: (
+    'beige': #f5f5dc,
+    'black': $black,
+    'blue': $blue,
+    'brown': #a52a2a,
+    'green': $green,
+    'grey': #8f979d,
+    'navy': #000080,
+    'orange': #ffa500,
+    'pink': #fe249a,
+    'purple': #800080,
+    'red': #f00,
+    'white': $white,
+    'yellow': #ff0
+) !default;
+
+// Font weights list, contains base weight as well as commonly used weights.
+$font-weights: (
+    100: 100,
+    200: 200,
+    300: 300,
+    400: 400,
+    500: 500,
+    600: 600,
+    700: 700,
+    800: 800,
+    900: 900
+) !default;
+
+
+/*
+* GRID SYSTEM
+*/
+// These values should match the Breakpoints values in SiteConstants.js and the contentImageBreakpoints site pref
+$grid-breakpoints: (
+    xs: 0,
+    sm: 544px,
+    md: 769px,
+    lg: 1024px,
+    xl: 1440px
+) !default;
+
+// Containers are set to higher values than corresponding breakpoints to allow them to be full width
+$container-max-widths: (
+    md: 1420px,
+    lg: 1430px,
+    xl: 1440px
+) !default;
+
+$spacer-sm: 5px !default;
+$spacer: 16px !default; // This value should match the Spacer value in scripts/constants/SiteConstants.js
+$spacer-xl: 24px !default;
+$negative-spacer-sm: -#{$spacer-sm} !default;
+$negative-spacer: -#{$spacer} !default;
+$negative-spacer-xl: -#{$spacer-xl} !default;
+
+$grid-gutter-widths: (
+    xs: $spacer*2,
+    md: $spacer*2,
+    xl: $spacer-xl*2 // Note: changing this will update all column and container spacing, but will not affect uses of $spacer variable
+) !default;
+
+
+/*
+* Z Indexes
+*/
+$z-index-toast: 1100 !default;
+$z-index-wishlist-modal: 1060 !default;
+$z-index-modal: 1050 !default;
+$z-index-modal-backdrop: 1000 !default;
+$z-index-header-fixed: 400 !default;
+$z-index-header-promo-banner: 350 !default;
+$z-index-header: 300 !default;
+$z-index-refinement-drawer: 250 !default;
+$z-index-pdp-sticky-add-to-cart: 200 !default;
+$z-index-sticky-footer: 200 !default;
+$z-index-wishlist-icon: 50 !default;
+$z-index-consent-drawer: 2147483601 !default; //This is set so high due to integrations like FreshChat that use z-index of 2147483600
+
+
+/*
+* ASPECT RATIOS
+*/
+$aspect-ratio-square: calc(1 / 1 * 100%) !default;
+$aspect-ratio-landscape: calc(1 / 1.5 * 100%) !default;
+$aspect-ratio-portrait: calc(1.5 / 1 * 100%) !default;
+$aspect-ratio-one-one: calc(1 / 1 * 100%) !default;
+$aspect-ratio-sixteen-nine: calc(9 / 16 * 100%) !default;
+$aspect-ratio-nine-sixteen: calc(16 / 9 * 100%) !default;
+$aspect-ratio-four-three: calc(3 / 4 * 100%) !default;
+$aspect-ratio-three-four: calc(4 / 3 * 100%) !default;
+// horizontal versions used for enforcing horizontal width in hero videos
+$aspect-ratio-one-one-horizontal: calc(1 / 1 * 100vh) !default;
+$aspect-ratio-sixteen-nine-horizontal: calc(16 / 9 * 100vh) !default;
+$aspect-ratio-nine-sixteen-horizontal: calc(9 / 16 * 100vh) !default;
+$aspect-ratio-four-three-horizontal: calc(4 / 3 * 100vh) !default;
+$aspect-ratio-three-four-horizontal: calc(3 / 4 * 100vh) !default;
+
+
+/*
+* MISC
+*/
+$transition-speed: 200ms !default; // This value should match the TransitionSpeed value in scripts/constants/SiteConstants.js
+$hero-transition-speed-long: 1000ms !default;
+$hero-transition-speed-medium: 600ms !default;
+$hero-transition-speed-short: 200ms !default;
+$base-font-size: 16px !default;
+$base-line-height: 1.43 !default;
+$base-font-color: var(--base-font-color, $black) !default;
+$border-radius: var(--border-radius, 0px) !default;
+$border-color: var(--base-border-color, $light-gray) !default;
+$page-background-color: $white !default;
+$leading-lines-border-color: transparent !default;
+$leading-lines-border-width: 0 !default;
+$spinner-size: 80px;
+
+
+/*
+* FONTS (setup is handled in utilities/_fonts.scss)
+*/
+$primary-font: var(--primary-font, 'Roboto', sans-serif) !default;
+$secondary-font: var(--secondary-font, Georgia, Times, 'Times New Roman', serif) !default;
+$tertiary-font: var(--tertiary-font, 'Roboto', sans-serif) !default;
+$header-font: var(--header-font, $primary-font) !default;
+$body-font: $primary-font !default;
+
+$fonts: (
+    primary: $primary-font,
+    secondary: $secondary-font,
+    tertiary: $tertiary-font,
+    header: $header-font,
+    body: $body-font
+) !default;
+
+
+/*
+* TEXT
+*/
+// Stand Alone Text Defaults
+$default-text-font: $primary-font !default;
+$default-text-font-size: var(--base-font-size, 13px) !default;
+$default-text-line-height: 1.4 !default;
+$default-text-font-weight: normal !default;
+$default-text-letter-spacing: 0.1em !default;
+
+// Paragraphs
+$paragraph-font-size: calc(#{$default-text-font-size}) !default; // paragraph size on mobile
+$paragraph-line-height: $default-text-line-height !default;
+$paragraph-lg-font-size: calc(#{$default-text-font-size}) !default; // paragraph size on desktop
+$paragraph-lg-line-height: $default-text-line-height !default;
+$paragraph-font-size-large: calc(#{$default-text-font-size} + 1px) !default; // large paragraph size on mobile
+$paragraph-line-height-large: $default-text-line-height !default;
+$paragraph-lg-font-size-large: calc(#{$default-text-font-size} + 2px) !default;  // large paragraph size on desktop
+$paragraph-lg-line-height-large: $default-text-line-height !default;
+$paragraph-font-size-small: calc(#{$default-text-font-size} - 2px) !default; // small paragraph size on mobile
+$paragraph-line-height-small: $default-text-line-height !default;
+$paragraph-lg-font-size-small: calc(#{$default-text-font-size} - 1px) !default; // small paragraph size on desktop
+$paragraph-lg-line-height-small: $default-text-line-height !default;
+$paragraph-letter-spacing: $default-text-letter-spacing !default;
+$paragraph-bottom-margin: $spacer !default;
+
+// Links
+$link-color: $brand-primary !default;
+$link-color-hover: $brand-secondary !default;
+$link-dark-theme-color: $white !default;
+$link-dark-theme-color-hover: $white !default;
+$link-font-weight: normal !default;
+$link-text-decoration: underline !default;
+$link-text-decoration-hover: underline !default;
+// BS variable (odd naming convention)
+$link-hover-color: $link-color-hover !default;
+
+//Lists
+$list-padding-left: $spacer !default;
+$list-item-bottom-margin: $default-text-font-size/2 !default;
+$list-item-marker-color: $dark-gray !default;
+$ordered-list-marker-font: $secondary-font !default;
+$ordered-list-marker-font-size: $default-text-font-size !default;
+$ordered-list-marker-font-style: normal !default;
+$ordered-list-marker-font-weight: $default-text-font-weight !default;
+
+/*
+* HEADERS
+*/
+// Mobile header values
+$h1-font-family: var(--h1-font, $header-font) !default;
+$h1-font-size: var(--h1-mobile-size, 28px) !default;
+$h1-line-height: 1.14 !default;
+$h1-font-weight: 700 !default;
+$h1-letter-spacing: 0.01em !default;
+$h1-text-transform: none !default;
+$h1-font-style: normal !default;
+$h1-margin-bottom: 0px !default;
+
+$h2-font-family: var(--h2-font, $header-font) !default;
+$h2-font-size: var(--h2-mobile-size, 24px) !default;
+$h2-line-height: 1.17 !default;
+$h2-font-weight: 700 !default;
+$h2-letter-spacing: 0.01em !default;
+$h2-text-transform: none !default;
+$h2-font-style: normal !default;
+$h2-margin-bottom: $h1-margin-bottom !default;
+
+$h3-font-family: var(--h3-font, $header-font) !default;
+$h3-font-size: var(--h3-mobile-size, 20px) !default;
+$h3-line-height: 1.2 !default;
+$h3-font-weight: 400 !default;
+$h3-letter-spacing: 0.01em !default;
+$h3-text-transform: none !default;
+$h3-font-style: normal !default;
+$h3-margin-bottom: $h1-margin-bottom !default;
+
+$h4-font-family: var(--h4-font, $header-font) !default;
+$h4-font-size: var(--h4-mobile-size, 16px) !default;
+$h4-line-height: 1.25 !default;
+$h4-font-weight: 400 !default;
+$h4-letter-spacing: 0.01em !default;
+$h4-text-transform: none !default;
+$h4-font-style: normal !default;
+$h4-margin-bottom: $h1-margin-bottom !default;
+
+$h5-font-family: var(--h5-font, $header-font) !default;
+$h5-font-size: var(--h5-mobile-size, 14px) !default;
+$h5-line-height: 1.25 !default;
+$h5-font-weight: 400 !default;
+$h5-letter-spacing: 0.01em !default;
+$h5-text-transform: none !default;
+$h5-font-style: normal !default;
+$h5-margin-bottom: $h1-margin-bottom !default;
+
+$h6-font-family: var(--h6-font, $header-font) !default;
+$h6-font-size: var(--h6-mobile-size, 13px) !default;
+$h6-line-height: $default-text-line-height !default;
+$h6-font-weight: $default-text-font-weight !default;
+$h6-letter-spacing: $default-text-letter-spacing !default;
+$h6-text-transform: none !default;
+$h6-font-style: normal !default;
+$h6-margin-bottom: $h1-margin-bottom !default;
+
+// Medium desktop header values
+$h1-md-font-size: var(--h1-tablet-size, $h1-font-size) !default;
+$h1-md-line-height: $h1-line-height !default;
+$h1-md-font-weight: $h1-font-weight !default;
+$h1-md-letter-spacing: $h1-letter-spacing !default;
+$h1-md-text-transform: $h1-text-transform !default;
+$h1-md-font-style: $h1-font-style !default;
+$h1-md-margin-bottom: $h1-margin-bottom !default;
+
+$h2-md-font-size: var(--h2-tablet-size, $h2-font-size) !default;
+$h2-md-line-height: $h2-line-height !default;
+$h2-md-font-weight: $h2-font-weight !default;
+$h2-md-letter-spacing: $h2-letter-spacing !default;
+$h2-md-text-transform: $h2-text-transform !default;
+$h2-md-font-style: $h2-font-style !default;
+$h2-md-margin-bottom: $h2-margin-bottom !default;
+
+$h3-md-font-size: var(--h3-tablet-size, $h3-font-size) !default;
+$h3-md-line-height: $h3-line-height !default;
+$h3-md-font-weight: $h3-font-weight !default;
+$h3-md-letter-spacing: $h3-letter-spacing !default;
+$h3-md-text-transform: $h3-text-transform !default;
+$h3-md-font-style: $h3-font-style !default;
+$h3-md-margin-bottom: $h3-margin-bottom !default;
+
+$h4-md-font-size: var(--h4-tablet-size, $h4-font-size) !default;
+$h4-md-line-height: $h4-line-height !default;
+$h4-md-font-weight: $h4-font-weight !default;
+$h4-md-letter-spacing: $h4-letter-spacing !default;
+$h4-md-text-transform: $h4-text-transform !default;
+$h4-md-font-style: $h4-font-style !default;
+$h4-md-margin-bottom: $h4-margin-bottom !default;
+
+$h5-md-font-size: var(--h5-tablet-size, $h5-font-size) !default;
+$h5-md-line-height: $h5-line-height !default;
+$h5-md-font-weight: $h5-font-weight !default;
+$h5-md-letter-spacing: $h5-letter-spacing !default;
+$h5-md-text-transform: $h5-text-transform !default;
+$h5-md-font-style: $h5-font-style !default;
+$h5-md-margin-bottom: $h5-margin-bottom !default;
+
+$h6-md-font-size: var(--h6-tablet-size, $h6-font-size) !default;
+$h6-md-line-height: $h6-line-height !default;
+$h6-md-font-weight: $h6-font-weight !default;
+$h6-md-letter-spacing: $h6-letter-spacing !default;
+$h6-md-text-transform: $h6-text-transform !default;
+$h6-md-font-style: $h6-font-style !default;
+$h6-md-margin-bottom: $h6-margin-bottom !default;
+
+// Large desktop header values
+$h1-lg-font-size: var(--h1-desktop-size, 54px) !default;
+$h1-lg-line-height: 1.11 !default;
+$h1-lg-font-weight: $h1-font-weight !default;
+$h1-lg-letter-spacing: $h1-letter-spacing !default;
+$h1-lg-text-transform: $h1-text-transform !default;
+$h1-lg-font-style: $h1-font-style !default;
+$h1-lg-margin-bottom: $h1-margin-bottom !default;
+
+$h2-lg-font-size: var(--h2-desktop-size, 40px) !default;
+$h2-lg-line-height: 1.15 !default;
+$h2-lg-font-weight: $h2-font-weight !default;
+$h2-lg-letter-spacing: $h2-letter-spacing !default;
+$h2-lg-text-transform: $h2-text-transform !default;
+$h2-lg-font-style: $h2-font-style !default;
+$h2-lg-margin-bottom: $h2-margin-bottom !default;
+
+$h3-lg-font-size: var(--h3-desktop-size, 24px) !default;
+$h3-lg-line-height: 1.17 !default;
+$h3-lg-font-weight: $h3-font-weight !default;
+$h3-lg-letter-spacing: $h3-letter-spacing !default;
+$h3-lg-text-transform: $h3-text-transform !default;
+$h3-lg-font-style: $h3-font-style !default;
+$h3-lg-margin-bottom: $h3-margin-bottom !default;
+
+$h4-lg-font-size: var(--h4-desktop-size, 20px) !default;
+$h4-lg-line-height: 1.2 !default;
+$h4-lg-font-weight: $h4-font-weight !default;
+$h4-lg-letter-spacing: $h4-letter-spacing !default;
+$h4-lg-text-transform: $h4-text-transform !default;
+$h4-lg-font-style: $h4-font-style !default;
+$h4-lg-margin-bottom: $h4-margin-bottom !default;
+
+$h5-lg-font-size: var(--h5-desktop-size, 16px) !default;
+$h5-lg-line-height: 1.2 !default;
+$h5-lg-font-weight: $h5-font-weight !default;
+$h5-lg-letter-spacing: $h5-letter-spacing !default;
+$h5-lg-text-transform: $h5-text-transform !default;
+$h5-lg-font-style: $h5-font-style !default;
+$h5-lg-margin-bottom: $h5-margin-bottom !default;
+
+$h6-lg-font-size: var(--h6-desktop-size, 16px) !default;
+$h6-lg-line-height: $h6-line-height !default;
+$h6-lg-font-weight: $h6-font-weight !default;
+$h6-lg-letter-spacing: $h6-letter-spacing !default;
+$h6-lg-text-transform: $h6-text-transform !default;
+$h6-lg-font-style: $h6-font-style !default;
+$h6-lg-margin-bottom: $h6-margin-bottom !default;
+
+
+$headers: (
+    h1 $h1-font-family $h1-font-size $h1-line-height $h1-font-weight $h1-letter-spacing $h1-text-transform $h1-font-style $h1-margin-bottom
+        $h1-md-font-size $h1-md-line-height $h1-md-font-weight $h1-md-letter-spacing $h1-md-text-transform $h1-md-font-style $h1-md-margin-bottom
+        $h1-lg-font-size $h1-lg-line-height $h1-lg-font-weight $h1-lg-letter-spacing $h1-lg-text-transform $h1-lg-font-style $h1-lg-margin-bottom,
+    h2 $h2-font-family $h2-font-size $h1-line-height $h2-font-weight $h2-letter-spacing $h2-text-transform $h2-font-style $h2-margin-bottom
+        $h2-md-font-size $h2-md-line-height $h2-md-font-weight $h2-md-letter-spacing $h2-md-text-transform $h2-md-font-style $h2-md-margin-bottom
+        $h2-lg-font-size $h2-lg-line-height $h2-lg-font-weight $h2-lg-letter-spacing $h2-lg-text-transform $h2-lg-font-style $h2-lg-margin-bottom,
+    h3 $h3-font-family $h3-font-size $h3-line-height $h3-font-weight $h3-letter-spacing $h3-text-transform $h3-font-style $h3-margin-bottom
+        $h3-md-font-size $h3-md-line-height $h3-md-font-weight $h3-md-letter-spacing $h3-md-text-transform $h3-md-font-style $h3-md-margin-bottom
+        $h3-lg-font-size $h3-lg-line-height $h3-lg-font-weight $h3-lg-letter-spacing $h3-lg-text-transform $h3-lg-font-style $h3-lg-margin-bottom,
+    h4 $h4-font-family $h4-font-size $h4-line-height $h4-font-weight $h4-letter-spacing $h4-text-transform $h4-font-style $h4-margin-bottom
+        $h4-md-font-size $h4-md-line-height $h4-md-font-weight $h4-md-letter-spacing $h4-md-text-transform $h4-md-font-style $h4-md-margin-bottom
+        $h4-lg-font-size $h4-lg-line-height $h4-lg-font-weight $h4-lg-letter-spacing $h4-lg-text-transform $h4-lg-font-style $h4-lg-margin-bottom,
+    h5 $h5-font-family $h5-font-size $h5-line-height $h5-font-weight $h5-letter-spacing $h5-text-transform $h5-font-style $h5-margin-bottom
+        $h5-md-font-size $h5-md-line-height $h5-md-font-weight $h5-md-letter-spacing $h5-md-text-transform $h5-md-font-style $h5-md-margin-bottom
+        $h5-lg-font-size $h5-lg-line-height $h5-lg-font-weight $h5-lg-letter-spacing $h5-lg-text-transform $h5-lg-font-style $h5-lg-margin-bottom,
+    h6 $h6-font-family $h6-font-size $h6-line-height $h6-font-weight $h6-letter-spacing $h6-text-transform $h6-font-style $h6-margin-bottom
+        $h6-md-font-size $h6-md-line-height $h6-md-font-weight $h6-md-letter-spacing $h6-md-text-transform $h6-md-font-style $h6-md-margin-bottom
+        $h6-lg-font-size $h6-lg-line-height $h6-lg-font-weight $h6-lg-letter-spacing $h6-lg-text-transform $h6-lg-font-style $h6-lg-margin-bottom
+) !default;
+
+
+/*
+* BANNER STYLES
+*/
+$b1-font-family: var(--b1-font, $header-font) !default;
+$b1-font-size: var(--b1-mobile-size, 72px) !default;
+$b1-line-height: 1.19 !default;
+$b1-font-weight: 700 !default;
+$b1-letter-spacing: 0 !default;
+$b1-text-transform: none !default;
+$b1-font-style: normal !default;
+
+$b2-font-family: var(--b2-font, $header-font) !default;
+$b2-font-size: var(--b2-mobile-size, 60px) !default;
+$b2-line-height: 1.19 !default;
+$b2-font-weight: 700 !default;
+$b2-letter-spacing: 0 !default;
+$b2-text-transform: none !default;
+$b2-font-style: normal !default;
+
+$b3-font-family: var(--b3-font, $header-font) !default;
+$b3-font-size: var(--b3-mobile-size, 48px) !default;
+$b3-line-height: 1.19 !default;
+$b3-font-weight: 700 !default;
+$b3-letter-spacing: 0 !default;
+$b3-text-transform: none !default;
+$b3-font-style: normal !default;
+
+$b4-font-family: var(--b4-font, $header-font) !default;
+$b4-font-size: var(--b4-mobile-size, 36px) !default;
+$b4-line-height: 1.19 !default;
+$b4-font-weight: 700 !default;
+$b4-letter-spacing: 0 !default;
+$b4-text-transform: none !default;
+$b4-font-style: normal !default;
+
+// Medium Banner Breakpoint values
+$b1-md-font-family: $b1-font-family !default;
+$b1-md-font-size: var(--b1-tablet-size, $b1-font-size) !default;
+$b1-md-line-height: $b1-line-height !default;
+$b1-md-font-weight: $b1-font-weight !default;
+$b1-md-letter-spacing: $b1-letter-spacing !default;
+$b1-md-text-transform: $b1-text-transform !default;
+$b1-md-font-style: $b1-font-style !default;
+
+$b2-md-font-family: $b2-font-family !default;
+$b2-md-font-size: var(--b2-tablet-size, $b2-font-size) !default;
+$b2-md-line-height: $b2-line-height !default;
+$b2-md-font-weight: $b2-font-weight !default;
+$b2-md-letter-spacing: $b2-letter-spacing !default;
+$b2-md-text-transform: $b2-text-transform !default;
+$b2-md-font-style: $b2-font-style !default;
+
+$b3-md-font-family: $b3-font-family !default;
+$b3-md-font-size: var(--b3-tablet-size, $b3-font-size) !default;
+$b3-md-line-height: $b3-line-height !default;
+$b3-md-font-weight: $b3-font-weight !default;
+$b3-md-letter-spacing: $b3-letter-spacing !default;
+$b3-md-text-transform: $b3-text-transform !default;
+$b3-md-font-style: $b3-font-style !default;
+
+$b4-md-font-family: $b4-font-family !default;
+$b4-md-font-size: var(--b4-tablet-size, $b4-font-size) !default;
+$b4-md-line-height: $b4-line-height !default;
+$b4-md-font-weight: $b4-font-weight !default;
+$b4-md-letter-spacing: $b4-letter-spacing !default;
+$b4-md-text-transform: $b4-text-transform !default;
+$b4-md-font-style: $b4-font-style !default;
+
+// Large desktop banner values
+$b1-lg-font-family: $b1-font-family !default;
+$b1-lg-font-size: var(--b1-desktop-size, 96px) !default;
+$b1-lg-line-height: $b1-line-height !default;
+$b1-lg-font-weight: $b1-font-weight !default;
+$b1-lg-letter-spacing: $b1-letter-spacing !default;
+$b1-lg-text-transform: $b1-text-transform !default;
+$b1-lg-font-style: $b1-font-style !default;
+
+$b2-lg-font-family: $b2-font-family !default;
+$b2-lg-font-size: var(--b2-desktop-size, 84px) !default;
+$b2-lg-line-height: $b2-line-height !default;
+$b2-lg-font-weight: $b2-font-weight !default;
+$b2-lg-letter-spacing: $b2-letter-spacing !default;
+$b2-lg-text-transform: $b2-text-transform !default;
+$b2-lg-font-style: $b2-font-style !default;
+
+$b3-lg-font-family: $b3-font-family !default;
+$b3-lg-font-size: var(--b3-desktop-size, 72px) !default;
+$b3-lg-line-height: $b3-line-height !default;
+$b3-lg-font-weight: $b3-font-weight !default;
+$b3-lg-letter-spacing: $b3-letter-spacing !default;
+$b3-lg-text-transform: $b3-text-transform !default;
+$b3-lg-font-style: $b3-font-style !default;
+
+$b4-lg-font-family: $b4-font-family !default;
+$b4-lg-font-size: var(--b4-desktop-size, 60px) !default;
+$b4-lg-line-height: $b4-line-height !default;
+$b4-lg-font-weight: $b4-font-weight !default;
+$b4-lg-letter-spacing: $b4-letter-spacing !default;
+$b4-lg-text-transform: $b4-text-transform !default;
+$b4-lg-font-style: $b4-font-style !default;
+
+$banners: (
+    b1 $b1-font-family $b1-font-size $b1-line-height $b1-font-weight $b1-letter-spacing $b1-text-transform $b1-font-style $b1-md-font-size $b1-md-line-height
+        $b1-md-font-weight $b1-md-letter-spacing $b1-md-text-transform $b1-md-font-style $b1-lg-font-size $b1-lg-line-height
+        $b1-lg-font-weight $b1-lg-letter-spacing $b1-lg-text-transform $b1-lg-font-style,
+    b2 $b2-font-family $b2-font-size $b2-line-height $b2-font-weight $b2-letter-spacing $b2-text-transform $b2-font-style $b2-md-font-size $b2-md-line-height
+        $b2-md-font-weight $b2-md-letter-spacing $b2-md-text-transform $b2-md-font-style $b2-lg-font-size $b2-lg-line-height
+        $b2-lg-font-weight $b2-lg-letter-spacing $b2-lg-text-transform $b2-lg-font-style,
+    b3 $b3-font-family $b3-font-size $b3-line-height $b3-font-weight $b3-letter-spacing $b3-text-transform $b3-font-style $b3-md-font-size $b3-md-line-height
+        $b3-md-font-weight $b3-md-letter-spacing $b3-md-text-transform $b3-md-font-style $b3-lg-font-size $b3-lg-line-height
+        $b3-lg-font-weight $b3-lg-letter-spacing $b3-lg-text-transform $b3-lg-font-style,
+    b4 $b4-font-family $b4-font-size $b4-line-height $b4-font-weight $b4-letter-spacing $b4-text-transform $b4-font-style $b4-md-font-size $b4-md-line-height
+        $b4-md-font-weight $b4-md-letter-spacing $b4-md-text-transform $b4-md-font-style $b4-lg-font-size $b4-lg-line-height
+        $b4-lg-font-weight $b4-lg-letter-spacing $b4-lg-text-transform $b4-lg-font-style
+);
+
+
+/*
+* BUTTONS
+*/
+$button-font: var(--button-font, $primary-font) !default;
+$button-font-size: var(--button-font-size, $default-text-font-size) !default;
+$button-line-height: 18px !default;
+$button-font-weight: var(--button-font-weight, normal) !default;
+$button-padding-top: var(--button-padding-y, 12px) !default;
+$button-padding-bottom: var(--button-padding-y, 12px) !default;
+$button-padding-left: var(--button-padding-x, 20px) !default;
+$button-padding-right: var(--button-padding-x, 20px) !default;
+$button-letter-spacing: 0.1em !default;
+$button-text-transform: var(--button-text-transform, none) !default;
+$button-border-radius: var(--button-border-radius, $border-radius) !default;
+$button-border-width: 1px !default;
+$button-icon-size: 20px !default;
+$button-text-align: center !default;
+
+// Primary button
+$button-primary-font: $button-font !default;
+$button-primary-font-weight: $button-font-weight !default;
+$button-primary-text-transform: $button-text-transform !default;
+$button-primary-color: var(--button-primary-color, $white) !default;
+$button-primary-color-hover: var(--button-primary-color-hover, $white) !default;
+$button-primary-dark-theme-color: $button-primary-color !default;
+$button-primary-dark-theme-color-hover: $button-primary-color-hover !default;
+$button-primary-background: var(--button-primary-background, $brand-primary) !default;
+$button-primary-background-hover: var(--button-primary-background-hover, $brand-secondary) !default;
+$button-primary-border-radius: $button-border-radius !default;
+$button-primary-border-width: var(--button-primary-border-width, 1px) !default;
+$button-primary-border-color: var(--button-primary-border-color, $brand-primary) !default;
+$button-primary-border-color-hover: var(--button-primary-border-color-hover, $brand-secondary) !default;
+$button-primary-text-decoration: none !default;
+$button-primary-text-decoration-hover: none !default;
+$button-primary-padding-top: $button-padding-top !default;
+$button-primary-padding-bottom: $button-padding-bottom !default;
+$button-primary-padding-left: $button-padding-left !default;
+$button-primary-padding-right: $button-padding-right !default;
+$button-primary-text-align: $button-text-align !default;
+
+// Secondary button
+$button-secondary-font: $button-font !default;
+$button-secondary-font-weight: $button-font-weight !default;
+$button-secondary-text-transform: $button-text-transform !default;
+$button-secondary-color: var(--button-secondary-color, $brand-primary) !default;
+$button-secondary-color-hover: var(--button-secondary-color-hover, $white) !default;
+$button-secondary-dark-theme-color: $button-secondary-color !default;
+$button-secondary-dark-theme-color-hover: $button-secondary-color-hover !default;
+$button-secondary-background: var(--button-secondary-background, $white) !default;
+$button-secondary-background-hover: var(--button-secondary-background-hover, $brand-secondary) !default;
+$button-secondary-border-radius: $button-border-radius !default;
+$button-secondary-border-width: var(--button-secondary-border-width, 1px) !default;
+$button-secondary-border-color: var(--button-secondary-border-color, $brand-secondary) !default;
+$button-secondary-border-color-hover: var(--button-secondary-border-color-hover, $brand-secondary) !default;
+$button-secondary-text-decoration: none !default;
+$button-secondary-text-decoration-hover: none !default;
+$button-secondary-padding-top: $button-padding-top !default;
+$button-secondary-padding-bottom: $button-padding-bottom !default;
+$button-secondary-padding-left: $button-padding-left !default;
+$button-secondary-padding-right: $button-padding-right !default;
+$button-secondary-text-align: $button-text-align !default;
+
+// Tertiary Button
+$button-tertiary-font: $button-font !default;
+$button-tertiary-font-weight: $button-font-weight !default;
+$button-tertiary-text-transform: $button-text-transform !default;
+$button-tertiary-color: var(--button-tertiary-color, $brand-primary) !default;
+$button-tertiary-color-hover: var(--button-tertiary-color-hover, $brand-secondary) !default;
+$button-tertiary-dark-theme-color: $white !default;
+$button-tertiary-dark-theme-color-hover: $white !default;
+$button-tertiary-background: transparent !default;
+$button-tertiary-background-hover: transparent !default;
+$button-tertiary-border-radius: $button-border-radius !default;
+$button-tertiary-border-width: $button-border-width !default;
+$button-tertiary-border-color: transparent !default;
+$button-tertiary-border-color-hover: transparent !default;
+$button-tertiary-text-decoration: var(--button-tertiary-text-decoration, underline) !default;
+$button-tertiary-text-decoration-hover: var(--button-tertiary-text-decoration-hover, underline) !default;
+$button-tertiary-padding-top: $button-padding-top !default;
+$button-tertiary-padding-bottom: $button-padding-bottom !default;
+$button-tertiary-padding-left: 0 !default;
+$button-tertiary-padding-right: 0 !default;
+$button-tertiary-text-align: $button-text-align !default;
+
+// Small Button
+$button-sm-font-size: 14px !default;
+$button-sm-line-height: 18px !default;
+$button-sm-padding-top: $spacer-sm !default;
+$button-sm-padding-bottom: $spacer-sm !default;
+$button-sm-padding-left: 20px !default;
+$button-sm-padding-right: 20px !default;
+$button-sm-letter-spacing: 0.05em !default;
+$button-sm-icon-size: 22px !default;
+$button-sm-primary-padding-top: $button-sm-padding-top !default;
+$button-sm-primary-padding-bottom: $button-sm-padding-bottom !default;
+$button-sm-primary-padding-left: $button-sm-padding-left !default;
+$button-sm-primary-padding-right: $button-sm-padding-right !default;
+$button-sm-secondary-padding-top: $button-sm-padding-top !default;
+$button-sm-secondary-padding-bottom: $button-sm-padding-bottom !default;
+$button-sm-secondary-padding-left: $button-sm-padding-left !default;
+$button-sm-secondary-padding-right: $button-sm-padding-right !default;
+$button-sm-tertiary-padding-top: $button-sm-padding-top !default;
+$button-sm-tertiary-padding-bottom: $button-sm-padding-bottom !default;
+$button-sm-tertiary-padding-left: 0 !default;
+$button-sm-tertiary-padding-right: 0 !default;
+
+
+/*
+* FORMs
+*/
+// Form Group
+$form-group-margin-top: $spacer-xl !default;
+
+// Inputs
+$input-border-color: $light-gray !default;
+$input-border-color-focus: $brand-tertiary !default;
+$input-border-color-hover: $brand-secondary !default;
+$input-background-color: $white !default;
+$input-outline: none !default;
+$input-outline-focus: none !default;
+$input-outline-hover: none !default;
+$input-box-shadow: none !default;
+$input-box-shadow-focus: none !default;
+$input-box-shadow-hover: 0 0 0 1px $brand-secondary !default;
+$input-text-color: $base-font-color !default;
+$input-placeholder-color: $dark-gray !default;
+$input-border-width: 1px !default;
+$input-border-radius: $border-radius !default;
+$input-font: $body-font !default;
+$input-font-size: 16px !default; // this must be 16px or more to prevent automatic zooming on iPhones
+$input-font-size-md: $default-text-font-size !default;
+$input-font-line-height: 16px !default;
+$input-font-letter-spacing: $default-text-letter-spacing !default;
+$input-padding-top: 12px !default;
+$input-padding-bottom: 14px !default;
+$input-padding-left: 20px !default;
+$input-padding-right: 20px !default;
+$input-height: calc(#{$input-font-line-height} + #{$input-padding-top} + #{$input-padding-bottom} + (#{$input-border-width}*2)) !default;
+$input-unavailable: lighten($black, 50%);
+
+// Small input
+$input-sm-font-size: 11px !default;
+$input-sm-font-line-height: 14px !default;
+$input-sm-padding-top: 8px !default;
+$input-sm-padding-bottom: 6px !default;
+$input-sm-padding-left: 10px !default;
+$input-sm-padding-right: 10px !default;
+$input-sm-height: calc(#{$input-sm-font-line-height} + #{$input-sm-padding-top} + #{$input-sm-padding-bottom} + (#{$input-border-width}*2)) !default;
+
+// Labels
+$form-label-color: $base-font-color !default;
+$form-label-font: $primary-font !default;
+$form-label-font-weight: normal !default;
+$form-label-font-size: $default-text-font-size !default;
+$form-label-line-height: $default-text-line-height !default;
+$form-label-margin-bottom: 6px !default;
+$form-label-text-transform: none !default;
+$form-label-letter-spacing: $default-text-letter-spacing !default;
+
+// Help text
+$form-help-text-color: $dark-gray !default;
+$form-help-text-font-size: 10px !default;
+$form-help-text-line-height: 12px !default;
+$form-help-text-letter-spacing: 0.05em !default;
+$form-help-text-margin-top: 4px !default;
+
+// Validation
+$form-validation-color: map-get($colors, danger) !default;
+$form-validation-font-size: $form-label-font-size !default;
+
+// Radio buttons and check boxes
+$radiocheck-label-font: $form-label-font !default;
+$radiocheck-label-font-weight: $form-label-font-weight !default;
+$radiocheck-label-font-size: $form-label-font-size !default;
+$radiocheck-label-text-transform: none !default;
+$radiocheck-label-letter-spacing: $form-label-letter-spacing !default;
+$radiocheck-background-color: $white !default;
+$radiocheck-background-color-selected: $brand-primary !default;
+$radiocheck-background-color-error: lighten($danger, 55%) !default;
+$radiocheck-border-color: $gray !default;
+$radiocheck-border-color-selected: $black !default;
+$radiocheck-border-color-error: $danger !default;
+$radiocheck-icon-color: $white !default;
+$radiocheck-button-size: 20px !default;
+$radiocheck-button-margin: 10px !default; // spacing between icon and text label
+$radiocheck-vertical-spacing: 3px !default; // the margin between items when more than one are listed
+$radiobutton-selected-inset-amount: 6px !default;
+
+// Select dropdowns
+$select-icon-size: 12px !default;
+$select-padding-right: $input-padding-right + $select-icon-size + $spacer-sm !default;
+// Small dropdown
+$select-sm-icon-size: 10px !default;
+$select-sm-padding-right: $input-sm-padding-right + $select-sm-icon-size + $spacer-sm !default;
+
+// Quantity stepper
+$quantity-stepper-icon-size: 10px !default;
+$quantity-stepper-icon-size-small: 8px !default;
+
+// Inline Button + Input group
+$inline-input-button-border-color: $brand-secondary !default;
+$inline-input-button-border-color-hover: $black !default;
+$inline-input-button-background-color: transparent !default;
+$inline-input-button-box-shadow: none !default;
+$inline-input-button-box-shadow-hover: none !default;
+$inline-input-button-text-color: $input-text-color !default;
+$inline-input-button-placeholder-color: $input-placeholder-color !default;
+$inline-input-button-border-width: 0 0 1px 0 !default;
+$inline-input-button-border-radius: 0 !default;
+$inline-input-button-font-size: $input-font-size !default;
+$inline-input-button-font-line-height: $input-font-line-height !default;
+$inline-input-button-font-letter-spacing: $input-font-letter-spacing !default;
+$inline-input-button-padding-top: $input-padding-top !default;
+$inline-input-button-padding-bottom: $input-padding-bottom !default;
+$inline-input-button-padding-left: $input-padding-left !default;
+$inline-input-button-padding-right: $input-padding-right !default;
+
+
+/*
+* BREADCRUMBS
+*/
+$breadcrumb-font-size: 11px !default;
+$breadcrumb-line-height: 20px !default;
+$breadcrumb-letter-spacing: .05em !default;
+$breadcrumb-font-weight: 500 !default;
+$breadcrumb-text-decoration: none !default;
+$breadcrumb-text-decoration-hover: underline !default;
+$breadcrumb-divider: '/' !default;
+$breadcrumb-divider-color: $link-color !default;
+$breadcrumb-item-padding: calc(#{$spacer} / 2) !default;
+$breadcrumb-item-color: $link-color !default;
+$breadcrumb-item-color-hover: $link-color-hover !default;
+
+
+/*
+* TOOLTIPS
+*/
+$tooltip-background-color: $white !default;
+$tooltip-text-color: $black !default;
+$tooltip-font-size: 10px !default;
+$tooltip-border-radius: $border-radius !default;
+$tooltip-box-shadow: 0 2px 6px rgba($black, 0.1) !default;
+$tooltip-padding: 12px 25px !default;
+$tooltip-max-width: 200px !default;
+$tooltip-text-align: center !default;
+$tooltip-opacity: 1 !default;
+$tooltip-icon: $icon-info !default;
+$tooltip-icon-size: 120% !default;
+
+
+/*
+* POPOVERS
+*/
+$popover-font-size: 12px !default;
+$popover-border-color: transparent !default;
+$popover-box-shadow: $tooltip-box-shadow !default;
+$popover-header-background-color: $dark-gray !default;
+$popover-header-text-color: $white !default;
+$popover-header-padding: $spacer-sm $spacer !default;
+$popover-body-background-color: $white !default;
+$popover-body-padding: $spacer !default;
+$popover-border-radius: $border-radius !default;
+$popover-max-width: 300px !default;
+
+
+/*
+* MODALS
+*/
+$modal-backdrop-background-color: rgba($black, 0.6) !default;
+$modal-background-color: transparent !default;
+$modal-border: none !default;
+$modal-border-radius: $border-radius !default;
+$modal-box-shadow: 0 2px 6px rgba($black, 0.1) !default;
+$modal-max-width: 500px !default;
+$modal-sm-max-width: 300px !default;
+$modal-lg-max-width: 900px !default;
+$modal-xl-max-width: 1140px !default;
+$modal-margins-mobile: 8px !default;
+$modal-margins-desktop: $spacer*2 auto !default;
+// Header
+$modal-header-padding: 10px 20px 9px !default;
+$modal-header-background-color: $brand-secondary !default;
+$modal-header-text-color: $white !default;
+$modal-header-border-color: transparent !default;
+$modal-header-title-size: 4 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$modal-header-close-icon-size: 14px !default;
+// Body
+$modal-body-padding: 20px !default;
+$modal-body-background-color: $white !default;
+$modal-body-text-color: $base-font-color !default;
+// Footer
+$modal-footer-padding: 0 20px 20px !default;
+$modal-footer-background-color: $white !default;
+$modal-footer-text-color: $base-font-color !default;
+$modal-footer-border-color: transparent !default;
+
+
+/*
+* ALERTS (also affects toast messages)
+*/
+$alert-border-radius: $border-radius !default;
+$alert-padding: $spacer !default;
+$alert-success-color: $success !default;
+$alert-success-background: desaturate(lighten($alert-success-color, 67%), 67%) !default;
+$alert-success-text: darken($alert-success-color, 10%) !default;
+$alert-warning-color: $warning !default;
+$alert-warning-background: desaturate(lighten($alert-warning-color, 45%), 25%) !default;
+$alert-warning-text: darken($alert-warning-color, 20%) !default;
+$alert-danger-color: $danger !default;
+$alert-danger-background: desaturate(lighten($alert-danger-color, 60%), 60%) !default;
+$alert-danger-text: darken($alert-danger-color, 10%) !default;
+$alert-info-color: $info !default;
+$alert-info-background: desaturate(lighten($alert-info-color, 35%), 12%) !default;
+$alert-info-text: darken($alert-info-color, 35%) !default;
+
+
+/*
+* TOAST MESSAGES
+*/
+$toast-padding: $spacer !default;
+$toast-box-shadow: 0 2px 4px rgba($black, 0.4) !default;
+
+
+/*
+* CARDS
+*/
+$card-border-radius: $border-radius !default;
+$card-border-color: $light-gray !default;
+$card-header-background: $white !default;
+$card-header-color: $brand-primary !default;
+$card-header-border-color: $light-gray !default;
+$card-header-padding-top: 17px !default;
+$card-header-padding-right: 20px !default;
+$card-header-padding-bottom: 22px !default;
+$card-header-padding-left: 20px !default;
+$card-header-font-family: $primary-font !default;
+$card-header-font-size: 16px !default;
+$card-header-line-height: 20px !default;
+$card-header-letter-spacing: .01em !default;
+$card-header-text-transform: none !default;
+$card-header-font-weight: normal !default;
+$card-body-font-size: $default-text-font-size !default;
+$card-body-line-height: $default-text-line-height !default;
+$card-body-letter-spacing: $default-text-letter-spacing !default;
+$card-body-background: $white !default;
+$card-body-border-color: $light-gray !default;
+$card-body-color: $base-font-color !default;
+$card-body-padding-bottom: 20px !default;
+$card-body-padding-left: 20px !default;
+$card-body-padding-right: 20px !default;
+$card-body-padding-top: 0 !default;
+$card-no-header-body-padding-top: 20px !default;
+$card-footer-background: $white !default;
+$card-footer-color: $card-header-color !default;
+$card-footer-border-color: $card-header-border-color !default;
+$card-footer-padding: $card-header-padding-top $card-header-padding-right $card-header-padding-bottom $card-header-padding-left !default;
+$card-ghost-opacity: 0.5 !default;
+$card-form-value-color: $dark-gray !default;
+$card-header-border-bottom-width: 0 !default;
+$card-margin-bottom: $spacer !default;
+$card-wishlist-border-bottom: 1px solid $light-gray !default;
+$card-wishlist-margin-bottom: 20px !default;
+$card-wishlist-padding-bottom: 20px !default;
+
+// 'aside' card variation - used on PLP refinements
+$card-aside-header-padding-top: 20px !default;
+$card-aside-header-padding-right: $card-header-padding-right !default;
+$card-aside-header-padding-bottom: 20px !default;
+$card-aside-header-padding-left: 0 !default;
+$card-aside-header-font-size: 13px !default;
+$card-aside-header-font-weight: bold !default;
+$card-aside-header-line-height: 18px !default;
+$card-aside-body-padding: 0 !default;
+$card-aside-border-width: 1px 0 !default;
+$card-aside-border-color: $card-border-color !default;
+$card-aside-body-border: none !default;
+$card-aside-footer-border: none !default;
+
+
+/*
+* COLLAPSIBLE
+*/
+$collapsible-border-color: $card-header-border-color !default;
+$collapsible-header-background: $card-header-background !default;
+$collapsible-header-color: $card-header-color !default;
+$collapsible-header-icon-color: $black !default;
+$collapsible-header-icon-size: 12px !default;
+$collapsible-body-background: $card-body-background !default;
+$collapsible-body-color: $card-body-color !default;
+$collapsible-header-icon-expand: $icon-plus !default;
+$collapsible-header-icon-close: $icon-minus !default;
+
+
+/*
+* ACCORDION
+*/
+$accordion-header-text-align: left !default;
+$accordion-header-icon-expand: $collapsible-header-icon-expand !default;
+$accordion-header-icon-close: $collapsible-header-icon-close !default;
+$accordion-header-icon-color: $collapsible-header-icon-color !default;
+$accordion-header-icon-size: $collapsible-header-icon-size !default;
+
+
+/*
+* TABS
+*/
+$tab-font: 14px $primary-font !default;
+$tab-text-transform: none !default;
+$tab-font-weight: bold !default;
+$tab-letter-spacing: 0.05em !default;
+$tab-border-width: 1px !default;
+$tab-border-radius-top-left: $border-radius !default;
+$tab-border-radius-top-right: $border-radius !default;
+$tab-border-radius-bottom-left: 0 !default;
+$tab-border-radius-bottom-right: 0 !default;
+$tab-padding-top: 15px !default;
+$tab-padding-right: $spacer !default;
+$tab-padding-bottom: 11px !default;
+$tab-padding-left: $spacer !default;
+$tab-text-decoration: none !default;
+$tab-background: transparent !default;
+$tab-color: $dark-gray !default;
+$tab-border-color: var(--tab-border-color, $border-color) !default;
+$tab-border-top: var(--tab-border-top, none) solid $tab-border-color !default;
+$tab-border-right: var(--tab-border-right, none) solid $tab-border-color !default;
+$tab-border-bottom: var(--tab-border-bottom, 1px) solid $tab-border-color !default;
+$tab-border-left: var(--tab-border-left, none) solid $tab-border-color !default;
+// active state
+$tab-text-decoration-active: none !default;
+$tab-background-active: transparent !default;
+$tab-color-active: $brand-primary !default;
+$tab-border-color-active: var(--tab-border-color-active, $tab-border-color) !default;
+$tab-border-top-active: var(--tab-border-top-active, 1px) solid $tab-border-color-active !default;
+$tab-border-right-active: var(--tab-border-right-active, 1px) solid $tab-border-color-active !default;
+$tab-border-bottom-active: var(--tab-border-bottom-active, none) solid $tab-border-color-active !default;
+$tab-border-left-active: var(--tab-border-left-active, 1px) solid $tab-border-color-active !default;
+// hover state
+$tab-text-decoration-hover: none !default;
+$tab-background-hover: transparent !default;
+$tab-color-hover: $brand-primary !default;
+$tab-border-top-hover: none !default;
+$tab-border-right-hover: none !default;
+$tab-border-bottom-hover: $tab-border-bottom !default;
+$tab-border-left-hover: none !default;
+$tab-border-top-active: $tab-border-width solid $tab-border-color !default;
+$tab-border-right-active: $tab-border-width solid $tab-border-color !default;
+$tab-border-bottom-active: none !default;
+$tab-border-left-active: $tab-border-width solid $tab-border-color !default;
+
+// Link style tabs
+$link-tab-font: $tab-font !default;
+$link-tab-text-transform: $tab-text-transform !default;
+$link-tab-text-decoration: $link-text-decoration !default;
+$link-tab-font-weight: $link-font-weight !default;
+$link-tab-letter-spacing: $tab-letter-spacing !default;
+$link-tab-color: $link-color !default;
+$link-tab-padding-top: calc(#{$spacer} / 2) !default;
+$link-tab-padding-right: $spacer !default;
+$link-tab-padding-bottom: calc(#{$spacer} / 2) !default;
+$link-tab-padding-left: $spacer !default;
+// hover state
+$link-tab-text-transform-hover: $link-tab-text-transform !default;
+$link-tab-text-decoration-hover: $link-text-decoration-hover !default;
+$link-tab-font-weight-hover: $link-tab-font-weight !default;
+$link-tab-color-hover: $link-color-hover !default;
+// active state
+$link-tab-text-transform-active: $link-tab-text-transform !default;
+$link-tab-text-decoration-active: none !default;
+$link-tab-font-weight-active: bold !default;
+$link-tab-color-active: $link-color !default;
+
+// Pills style tabs
+$pills-tab-font: $tab-font !default;
+$pills-tab-text-transform: $tab-text-transform !default;
+$pills-tab-text-decoration: $tab-text-decoration !default;
+$pills-tab-font-weight: $tab-font-weight !default;
+$pills-tab-letter-spacing: $tab-letter-spacing !default;
+$pills-tab-color: $tab-color !default;
+$pills-tab-background: transparent !default;
+$pills-tab-padding-top: calc(#{$spacer} / 2) !default;
+$pills-tab-padding-right: $spacer !default;
+$pills-tab-padding-bottom: calc(#{$spacer} / 2) !default;
+$pills-tab-padding-left: $spacer !default;
+$pills-tab-border-radius: 6px;
+// hover state
+$pills-tab-text-transform-hover: $pills-tab-text-transform !default;
+$pills-tab-text-decoration-hover: $pills-tab-text-decoration !default;
+$pills-tab-font-weight-hover: $pills-tab-font-weight !default;
+$pills-tab-color-hover: $tab-color-hover !default;
+$pills-tab-background-hover: $pills-tab-background !default;
+// active state
+$pills-tab-text-transform-active: $pills-tab-text-transform !default;
+$pills-tab-text-decoration-active: $pills-tab-text-decoration !default;
+$pills-tab-font-weight-active: bold !default;
+$pills-tab-color-active: $white !default;
+$pills-tab-background-active: $blue !default;
+
+
+/*
+* SLIDER
+*/
+// title
+$slider-heading-size: 3 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$slider-heading-text-align: center !default;
+// nav buttons
+$slider-button-prev-icon: $icon-arrow-left-thin !default;
+$slider-button-next-icon: $icon-arrow-right-thin !default;
+$slider-button-color: rgba($black, 0.5) !default;
+$slider-button-background: transparent !default;
+$slider-button-color-hover: $black !default;
+$slider-button-background-hover: transparent !default;
+$slider-button-icon-size: 24px !default;
+$slider-button-width: 60px !default;
+// pagination bullets
+$slider-bullet-size: 12px !default;
+$slider-bullet-size-active: $slider-bullet-size !default;
+$slider-bullet-margin-top: $spacer-sm * 2 !default;
+$slider-bullet-margin-right: $spacer-sm !default;
+$slider-bullet-margin-bottom: $spacer-sm * 2 !default;
+$slider-bullet-margin-left: $spacer-sm !default;
+$slider-bullet-background: rgba($black, 0.5) !default;
+$slider-bullet-border: none !default;
+$slider-bullet-background-active: $black !default;
+$slider-bullet-border-active: none !default;
+$bullets-outside-size: $slider-bullet-size + $slider-bullet-margin-top + $slider-bullet-margin-bottom !default;
+
+//pagination bullets - short lines
+$slider-short-lines-bullet-background-color: $brand-tertiary !default;
+$slider-short-lines-bullet-active-background-color: $brand-primary !default;
+$slider-short-lines-bullet-size-width: 20px !default;
+$slider-short-lines-bullet-size-height: 2px !default;
+$slider-short-lines-bullet-active-size-height: 4px !default;
+
+// pagination bullets - pause/play button
+$slider-bullet-controller-size: 25px !default;
+$slider-bullet-pause-icon-color: $brand-primary !default;
+$slider-bullet-play-icon-color: $light-gray !default;
+$slider-bullet-controller-inset-amount: 0 !default;
+$slider-bullet-controller-padding: 10px !default;
+$slider-bullet-with-pagination-padding-right: 5px !default;
+
+// thumbnail nav
+$slider-thumbnail-prev-icon: $slider-button-prev-icon !default;
+$slider-thumbnail-next-icon: $slider-button-next-icon !default;
+$slider-thumbnail-button-color: $black !default;
+$slider-thumbnail-button-color-hover: $black !default;
+$slider-thumbnail-button-background-color: $page-background-color !default;
+$slider-thumbnail-button-background-color-hover: $page-background-color !default;
+$slider-thumbnail-button-size: 11px !default;
+$slider-thumbnail-button-icon-size: 12px !default;
+$slider-thumbnail-border-width: 0 !default;
+$slider-thumbnail-border-color: transparent !default;
+$slider-thumbnail-border-active-width: 0 0 2px 0 !default;
+$slider-thumbnail-border-active-color: $black !default;
+$slider-thumbnail-spacing: 1px !default;
+$slider-thumbnail-width: 63px !default;
+$slider-thumbnail-width-md: 63px !default;
+$slider-thumbnail-width-lg: 63px !default;
+$slider-thumbnail-play-icon-size: 26px !default;
+
+// dots for thumbnails
+$slider-thumbnail-dots-border-radius: 50% !default;
+
+// light theme
+$slider-light-button-color: rgba($white, 0.7) !default;
+$slider-light-button-background: transparent !default;
+$slider-light-button-color-hover: $white !default;
+$slider-light-button-background-hover: transparent !default;
+$slider-light-bullet-background: rgba($white, 0.5) !default;
+$slider-light-bullet-border: none !default;
+$slider-light-bullet-background-active: $white !default;
+$slider-light-bullet-border-active: none !default;
+$slider-light-short-lines-bullet-background-color: rgba($white, 0.5) !default;
+$slider-light-short-lines-bullet-active-background-color: $white !default;
+$slider-light-bullet-pause-icon-color: $white !default;
+$slider-light-bullet-play-icon-color: $white !default;
+
+
+// flag icons location in relation to target location of the css file.
+$fi-css-path: "../fonts/flags" !default;
+
+
+/*
+* DROPDOWNS
+*/
+$dropdown-menu-border: 1px solid $light-gray !default;
+$dropdown-menu-border-radius: $border-radius !default;
+$dropdown-menu-shadow: 0 2px 2px rgba($black, 0.2) !default;
+$dropdown-megamenu-border: none !default;
+$dropdown-icon: $icon-expand !default;
+$dropdown-icon-size: 10px !default;
+$dropdown-item-color: $link-color !default;
+$dropdown-item-border-color: $light-gray !default;
+$dropdown-item-inview-background: $light-gray !default;
+$dropdown-item-inview-color: $link-color-hover !default;
+$dropdown-item-hover-background: $light-gray !default;
+$dropdown-item-hover-color: $link-color-hover !default;
+$dropdown-item-padding: $spacer !default;
+$dropdown-item-closemenu-background-color: $light-gray !default;
+$dropdown-fadein-speed: $transition-speed !default; // set to zero to disable fade effect
+$dropdown-font-size: 14px !default;
+
+
+/*
+* NAVIGATION LINKS // generic navigation links styling (header, footer, etc)
+*/
+$nav-link-font-family: $primary-font !default;
+$nav-link-font-size: 14px !default;
+$nav-link-font-weight: var(--primary-nav-font-weight, normal) !default;
+$nav-link-text-transform: var(--primary-nav-text-transform, none) !default;
+$nav-link-color: var(--primary-nav-color, $brand-primary) !default;
+$nav-link-line-height: 20px !default;
+$nav-link-letter-spacing: .03em !default;
+$nav-link-text-decoration: none !default;
+$nav-link-text-decoration-hover: none !default;
+$nav-sub-link-font-size: 14px !default;
+
+
+/*
+* HEADER
+*/
+// Promo bar
+$header-promo-bar-background: $black !default;
+$header-promo-bar-color: $white !default;
+$header-promo-bar-padding-top: 10px !default;
+$header-promo-bar-padding-bottom: 10px !default;
+$header-promo-bar-font-size: 11px !default;
+$header-promo-bar-link-font-size: 11px !default;
+$header-promo-bar-line-height: 20px !default;
+
+//Favicon — only used in styleguide
+$header-favicon-image: var(--brand-favicon, url('../images/favicons/favicon-32x32.png')) !default;
+
+// Pre-nav header bar
+$pre-nav-height: 30px !default;
+$pre-nav-height-md: 40px !default;
+$pre-nav-background: $off-white !default;
+$pre-nav-background-active: $white !default;
+$pre-nav-logo-filter: grayscale(1) !default;
+$pre-nav-logo-filter-active: grayscale(0) !default;
+$pre-nav-text-color: $dark-gray !default;
+$pre-nav-font-family: $primary-font !default;
+$pre-nav-font-weight: normal !default;
+$pre-nav-font-size: 11px !default;
+$pre-nav-text-transform: uppercase !default;
+
+// Main header
+$header-background: var(--header-background-color, $white) !default;
+$header-fixed-shadow: $dropdown-menu-shadow !default;
+$header-height: 50px !default;
+$header-height-md: 70px !default;
+$header-height-lg: 64px !default;
+// these are set at the top of this file
+$header-logo-image: '../images/logo.png' !default;
+$header-logo-image-url: url($header-logo-image) !default;
+$header-logo-image-sm: var(--brand-logo-mobile, $header-logo-image-url) !default;
+$header-logo-image-sm-fixed: $header-logo-image-sm !default;
+$header-logo-image-md: var(--brand-logo-desktop, $header-logo-image-url) !default;
+$header-logo-image-md-fixed: $header-logo-image-md !default;
+$header-logo-image-lg: $header-logo-image-md !default;
+$header-logo-image-lg-fixed: $header-logo-image-lg !default;
+$header-logo-width: var(--brand-logo-mobile-size, 160px) !default;
+$header-logo-width-md: var(--brand-logo-desktop-size, 212px) !default;
+$header-logo-width-lg: $header-logo-width-md !default;
+$header-logo-padding-y: var(--header-logo-padding-y, 0px) !default;
+$header-logo-height: 100% !default;
+$header-logo-transparent-nav-brightness: 0 !default;
+$header-logo-transparent-nav-invert: 1 !default;
+
+$header-transition-speed: 400ms !default;
+$header-link-color: var(--primary-nav-color, $brand-primary) !default;
+$header-link-color-hover: var(--primary-nav-color-hover, $header-link-color) !default;
+$header-link-color-hover-item-thats-not-hovered: var(--header-link-color-hover-not-hovered, $dark-gray);
+$header-link-highlight-color: $red !default;
+$header-link-highlight-color-hover: $brand-secondary !default;
+$header-link-nohover-highlight-color: $dark-gray !default;
+$header-link-border-color: transparent !default;
+$header-link-font: $nav-link-font-family !default;
+$header-link-font-size: 14px !default;
+$header-link-top-level-font-size: $header-link-font-size !default;
+$header-link-font-weight: $nav-link-font-weight !default;
+$header-link-line-height: $nav-link-line-height !default;
+$header-link-letter-spacing: .05em !default;
+// $header-link-underline-position-top: 100% !default; no longer referenced
+$header-link-underline-position-bottom: 0px !default;
+$header-link-underline-color-inview: $brand-primary !default; // active state for left-align logo desktop view only, set to transparent to disable
+$header-link-underline-height-inview: 1px !default;
+$header-link-underline-color: $brand-primary !default; // hover state for left-align logo desktop view only, set to transparent to disable
+$header-link-underline-height: 1px !default;
+$header-link-text-transform: $nav-link-text-transform !default;
+$header-link-font-size-logo-center: 14px !default;
+$header-search-desktop-width: 125px !default;
+$header-search-desktop-width-focus: 200px !default;
+$header-search-desktop-expanded-border-color: $light-gray !default;
+$header-search-desktop-border-width: 0 1px 0 1px !default;
+$header-search-icon-font-size: 22px !default;
+$header-search-icon-color: $header-link-color !default;
+$header-search-icon-color-hover: $brand-secondary !default;
+$header-search-text-font-size: 16px !default; //minimum of 16px required to prevent zooming on iphones
+$header-minicart-count-background: $brand-tertiary !default;
+$header-minicart-count-color: $white !default;
+$header-minicart-icon-font-size: 22px !default;
+$header-link-dropdown-text-align: center !default; // used for account + support
+$header-link-dropdown-menu-border: none !default;
+$header-link-dropdown-menu-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08) !default;
+$header-link-dropdown-menu-padding: 16px 0 !default;
+$header-link-dropdown-menu-font-size: 11px !default;
+$header-link-dropdown-menu-li-padding: 8px !default;
+
+$header-transparent-background: transparent !default;
+$header-transparent-border-bottom: transparent !default;
+$header-transparent-link-color: transparent !default;
+$header-transparent-link-color-hover: transparent !default;
+$header-transparent-search-desktop-expanded-border-color: transparent !default;
+
+$header-transparent-text-color-light: $white !default;
+$header-transparent-text-color-dark: $black !default;
+$header-transparent-minicart-count-background-color-light: $black !default;
+$header-transparent-minicart-count-background-color-dark: $red !default;
+
+// Checkout header
+$header-checkout-locale-display: block !default;
+$header-checkout-account-display: block !default;
+$header-checkout-support-display: block !default;
+$header-checkout-minicart-display: block !default;
+// Main navbar
+$header-navbar-border-bottom-width: 1px !default;
+$header-navbar-border-bottom-color: $border-color !default;
+$header-navbar-link-spacing: 36px !default; // space between top-level menu items
+$header-navbar-dropdown-icon: none !default; // desktop only - mobile falls back to standard dropdown icon ($dropdown-icon)
+$header-navbar-dropdown-icon-size: 10px !default;
+$header-navbar-account-icon: $icon-account !default;
+$header-navbar-account-icon-size: 22px !default;
+$header-navbar-account-icon-size-logged-in: calc(#{$header-navbar-account-icon-size} + 2px); //circles need a bit more space optically to match other shapes
+$header-navbar-account-icon-logged-in-background-border-radius: 100%;
+$header-navbar-account-letter-font-size: calc(#{$header-navbar-account-icon-size} / 1.5);
+$header-navbar-account-letter-font-weight: bold;
+$header-navbar-account-letter-font-family: $body-font;
+$header-navbar-account-font-size: 0 !default; // set to 0 if you only want an icon to show for account desktop only
+$header-navbar-account-margin: 8px 0 0 !default;
+$header-navbar-background: var(--header-navbar-background-color, $brand-secondary) !default; // center-logo desktop layout only
+$header-navbar-color: var(--header-navbar-text-color, $white) !default; // center-logo desktop layout only
+$header-navbar-background-hover: var(--header-navbar-background-color-hover, $white) !default; // center-logo desktop layout only
+$header-navbar-color-hover: var(--header-navbar-text-color-hover, $header-navbar-background) !default; // center-logo desktop layout only
+$header-navbar-background-inview: $header-navbar-background-hover !default; // center-logo desktop layout only
+$header-navbar-color-inview: $header-navbar-color-hover !default; // center-logo desktop layout only
+$header-navbar-toggler-icon-size: 18px !default; // hamburger menu icon size, mobile only
+$header-navbar-highlight-color: $brand-primary !default; // center-logo desktop layout only
+$header-navbar-highlight-background-hover: $white !default; // center-logo desktop layout only
+$header-navbar-highlight-color-hover: $brand-secondary !default; // center-logo desktop layout only
+// Secondary navbar
+$header-secondary-nav-background: $header-background !default;
+$header-secondary-nav-link-top-level-font-size: $nav-link-font-size !default;
+$header-secondary-nav-link-top-level-font-family: $nav-link-font-family  !default;
+$header-secondary-nav-link-top-level-font-weight: $nav-link-font-weight !default;
+$header-secondary-nav-link-top-level-line-height: $default-text-line-height !default;
+$header-secondary-nav-link-top-level-letter-spacing: $nav-link-letter-spacing !default;
+$header-secondary-nav-link-top-level-text-transform: $nav-link-text-transform !default;
+$header-secondary-nav-link-top-level-color: $nav-link-color !default;
+$header-secondary-nav-link-top-level-text-decoration: $nav-link-text-decoration !default;
+$header-secondary-nav-link-top-level-text-decoration-hover: $nav-link-text-decoration-hover !default;
+$header-secondary-nav-link-underline-height: $header-link-underline-height !default;
+$header-secondary-nav-link-underline-color: $header-link-underline-color !default;
+$header-secondary-nav-link-underline-position-bottom: $header-link-underline-position-bottom !default;
+$header-secondary-nav-link-highlight-color: $header-link-highlight-color !default;
+$header-secondary-nav-link-highlight-color-hover: $header-link-highlight-color-hover !default;
+$header-secondary-nav-link-underline-height-inview: $header-link-underline-height-inview !default;
+$header-secondary-nav-link-underline-color-inview: $header-link-underline-color-inview !default;
+$header-secondary-navbar-link-spacing: $header-navbar-link-spacing !default;
+$header-secondary-navbar-link-padding-y: 12px !default;
+$header-secondary-navbar-link-padding-x: calc(#{$header-secondary-navbar-link-spacing} / 2) !default;
+$header-secondary-navbar-link-padding: $header-secondary-navbar-link-padding-y $header-secondary-navbar-link-padding-x !default;
+$header-secondary-navbar-border-bottom-width: $header-navbar-border-bottom-width !default;
+$header-secondary-navbar-border-bottom-color: $header-navbar-border-bottom-color !default;
+$header-secondary-navbar-link-spacing: $header-secondary-navbar-link-spacing !default; // space between top-level menu items
+$header-secondary-navbar-background: hsl(var(--brand-secondary-hue), var(--brand-secondary-saturation), calc(var(--brand-secondary-lightness) + 25%)) !default;//$header-navbar-background !default; // center-logo desktop layout only
+$header-secondary-navbar-color: $header-navbar-color !default; // center-logo desktop layout only
+$header-secondary-navbar-background-hover: $header-navbar-background-hover !default; // center-logo desktop layout only
+$header-secondary-navbar-background-inview: $header-navbar-background-inview !default; // center-logo desktop layout only
+$header-secondary-navbar-color-hover: $header-navbar-color-hover !default; // center-logo desktop layout only
+$header-secondary-navbar-color-inview: $header-navbar-color-inview !default; // center-logo desktop layout only
+$header-secondary-navbar-highlight-color: $header-navbar-highlight-color !default; // center-logo desktop layout only
+$header-secondary-navbar-highlight-background-hover: $header-navbar-highlight-background-hover !default; // center-logo desktop layout only
+$header-secondary-navbar-highlight-color-hover: $header-navbar-highlight-color-hover !default; // center-logo desktop layout only
+$header-secondary-nav-transparent-text-color-light: $header-transparent-text-color-light !default;
+$header-secondary-nav-transparent-text-color-dark: $header-transparent-text-color-dark !default;
+
+
+// Megamenu
+$megamenu-background: $white !default;
+$megamenu-box-shadow: $header-fixed-shadow !default;
+$megamenu-padding-top-bottom: 30px !default;
+$megamenu-padding: $megamenu-padding-top-bottom $spacer !default;
+$megamenu-header-font: $header-link-font !default;
+$megamenu-header-font-size: $nav-link-font-size !default;
+$megamenu-header-line-height: $nav-link-line-height !default;
+$megamenu-header-font-weight: var(--secondary-nav-font-weight, normal) !default;
+$megamenu-header-text-transform: var(--secondary-nav-text-transform, none) !default;
+$megamenu-header-color: var(--secondary-nav-color, $brand-primary) !default;
+$megamenu-header-color-hover: var(--secondary-nav-color-hover, $brand-primary) !default;
+$megamenu-header-background-hover: transparent !default;
+$megamenu-title-margin-bottom: 30px !default;
+$megamenu-title-text-decoration: none !default;
+$megamenu-secondary-font: $body-font !default;
+$megamenu-secondary-font-size: $nav-sub-link-font-size !default;
+$megamenu-secondary-color: var(--tertiary-nav-color, $brand-secondary) !default;
+$megamenu-secondary-color-hover: var(--tertiary-nav-color-hover, $brand-primary) !default;
+$megamenu-secondary-color-inview: $brand-primary !default;
+$megamenu-secondary-font-weight: var(--tertiary-nav-font-weight, normal) !default;
+$megamenu-secondary-text-transform: var(--tertiary-nav-text-transform, none) !default;
+$megamenu-secondary-indentation: 2px !default;
+$megamenu-link-padding-top: 10px !default;
+$megamenu-link-padding-bottom: $megamenu-link-padding-top !default;
+$megamenu-link-padding-left: $spacer-sm !default;
+$megamenu-link-padding-right: $megamenu-link-padding-left !default;
+$megamenu-asset-link-list-font-family: $megamenu-header-font !default;
+$megamenu-asset-link-list-font-size: 18px !default;
+$megamenu-asset-link-list-text-transform: none !default;
+$megamenu-asset-link-list-padding: $megamenu-link-padding-top $megamenu-link-padding-right $megamenu-link-padding-bottom $megamenu-link-padding-left !default;
+$megamenu-asset-link-list-text-decoration: none !default;
+//Megamenu Left nav — Styles for mega-left megamenu only
+$megamenu-left-nav-width: 15% !default;
+$megamenu-left-nav-border-width: 2px !default;
+$megamenu-left-nav-border-color: $off-white !default;
+$megamenu-left-nav-border-color-hover: $brand-secondary !default;
+$megamenu-left-nav-font-size: $megamenu-asset-link-list-font-size !default;
+$megamenu-left-nav-text-transform: var(--secondary-nav-text-transform, $megamenu-header-text-transform) !default;
+$megamenu-left-nav-tertiary-title-font-size: $megamenu-header-font-size !default;
+$megamenu-left-nav-tertiary-title-font-weight: $megamenu-header-font-weight !default;
+$megamenu-left-nav-tertiary-title-text-transform: $megamenu-header-text-transform !default;
+
+//Subcategory styles
+$megamenu-subcategory-max-height: 500px;
+
+//Megamenu Offset View All Link Styles - applies to different level on mega-left vs mega-standard, but refers to the "view all link" that is positioned at the bottom of the dropdown (level 2 or level 3)
+$view-all-link-font-weight: bold;
+$view-all-link-text-transform: uppercase;
+
+// Search suggestions
+$header-suggestions-results-width: 350px !default;
+$header-suggestions-image-size: 30px !default;
+$header-suggestions-header-font: $header-font !default;
+$header-suggestions-header-font-size: 15px !default;
+$header-suggestions-header-color: $black !default;
+$header-suggestions-header-text-transform: none !default;
+$header-suggestions-border: $dropdown-menu-border !default;
+$header-suggestions-item-font: $body-font !default;
+$header-suggestions-item-font-size: $default-text-font-size !default;
+$header-suggestions-item-category-parent-color: $gray !default;
+
+
+/*
+* FOOTER
+*/
+$footer-background: var(--footer-background-color, $header-background) !default;
+$footer-padding-bottom: var(--footer-padding-y, 60px) !default;
+$footer-padding-top: var(--footer-padding-y, 72px) !default;
+$footer-margin-top: var(--footer-margin-top, 100px) !default;
+$footer-border-top-color: $border-color !default;
+$footer-border-top-width: 1px !default;
+$footer-title-font-size: 16px !default;
+$footer-title-line-height: 22px !default;
+$footer-title-font-weight: bold !default;
+$footer-link-font-size: $nav-link-font-size !default;
+$footer-title-font-family: $nav-link-font-family !default;
+$footer-title-text-transform: $nav-link-text-transform !default;
+$footer-title-font-color: var(--footer-header-text-color, var(--primary-nav-color, $brand-primary)) !default;
+$footer-title-border-color: $light-gray !default;
+$footer-link-color: var(--footer-link-color, var(--secondary-nav-color, $nav-link-color)) !default;
+$footer-link-color-hover: var(--footer-link-color-hover, var(--secondary-nav-color-hover, var(--primary-nav-color, $brand-secondary))) !default;
+$footer-link-height: 34px !default;
+$footer-icon-size: 40px !default;
+$footer-copyright-font-size: 11px !default;
+$footer-copyright-color: $dark-gray !default;
+$footer-copyright-mix-blend-mode: normal !default;
+$footer-social-links-margin: 20px 10px !default;
+$footer-backtotop-color: $footer-link-color !default;
+$footer-hr-margin: 72px 0 10px 0 !default;
+$footer-hr-color: transparent !default;
+$footer-signup-font-size: 16px !default;
+$footer-signup-line-height: 22px !default;
+$footer-signup-letter-spacing: .01em !default;
+
+
+/*
+* PAGE-LEVEL SETTINGS
+*/
+$page-header-padding-top: $spacer !default;
+$page-header-padding-bottom: $spacer !default;
+$page-header-padding-top-md: 44px !default;
+$page-header-padding-bottom-md: 44px !default;
+
+
+/*
+* PRODUCT
+*/
+// Price
+$product-strike-through-price-color: $dark-gray !default;
+
+// Ratings
+$product-rating-star-icon-font: $icomoon-font-family !default;
+$product-rating-star-color: var(--product-tile-star-color, $black) !default;
+
+// Color swatches - Default type (patterns and colors)
+$color-swatch-border-radius: 50% !default;
+$color-swatch-hover-shadow-size: 3px !default;
+$color-swatch-hover-shadow-color: $gray !default;
+$color-swatch-hover-shadow: 0 0 0 calc(#{$color-swatch-hover-shadow-size} - 1px) $page-background-color, 0 0 0 $color-swatch-hover-shadow-size $color-swatch-hover-shadow-color !default;
+$color-swatch-selected-shadow-color: $black !default;
+$color-swatch-selected-shadow-size: 3px !default;
+$color-swatch-selected-shadow: 0 0 0 calc(#{$color-swatch-selected-shadow-size} - 1px) $page-background-color, 0 0 0 $color-swatch-selected-shadow-size $color-swatch-selected-shadow-color !default;
+$color-swatch-selected-icon-display: none !default; // use 'block' to show icon when swatch is selected, 'none' to hide
+$color-swatch-selected-icon: $icon-checkmark !default;
+$color-swatch-selected-icon-size: 14px !default;
+$color-swatch-selected-icon-color: $white !default;
+$color-swatch-selected-icon-background: rgba($black, 0.7) !default;
+
+// Color swatches - Thumbnail type (product image)
+$color-swatch-thumbnail-border-radius: 0 !default;
+$color-swatch-thumbnail-hover-shadow-color: $dark-gray !default;
+$color-swatch-thumbnail-hover-shadow-size: 2px !default;
+$color-swatch-thumbnail-hover-shadow: inset 0px -#{$color-swatch-thumbnail-hover-shadow-size} 0px $color-swatch-thumbnail-hover-shadow-color !default;
+$color-swatch-thumbnail-selected-shadow-color: $black !default;
+$color-swatch-thumbnail-selected-shadow-size: 2px !default;
+$color-swatch-thumbnail-selected-shadow: inset 0px -#{$color-swatch-thumbnail-selected-shadow-size} 0px $color-swatch-thumbnail-selected-shadow-color !default;
+$color-swatch-thumbnail-selected-icon-display: none !default; // use 'block' to show icon when swatch is selected, 'none' to hide
+$color-swatch-thumbnail-selected-icon: $icon-checkmark !default;
+$color-swatch-thumbnail-selected-icon-size: 14px !default;
+$color-swatch-thumbnail-selected-icon-color: $white !default;
+$color-swatch-thumbnail-selected-icon-background: rgba($black, 0.7) !default;
+
+// Non-color swatches (size, width, etc.)
+$non-color-swatch-background: $white !default;
+$non-color-swatch-color: $black !default;
+$non-color-swatch-border-radius: 0 !default;
+$non-color-swatch-border-width: 1px !default;
+$non-color-swatch-border-color: $gray !default;
+$non-color-swatch-padding: 9px !default;
+$non-color-swatch-hover-border-color: $dark-gray !default;
+$non-color-swatch-hover-box-shadow: none !default;
+$non-color-swatch-selected-border-color: $black !default;
+$non-color-swatch-selected-box-shadow: none !default;
+$non-color-swatch-description-font-size: 12px !default;
+$non-color-swatch-description-font-color: $gray !default;
+$non-color-swatch-selected-background: $white !default;
+$non-color-swatch-selected-color: $black !default;
+$non-color-swatch-selected-icon-display: none !default;
+$non-color-swatch-selected-icon: $icon-checkmark !default;
+$non-color-swatch-selected-icon-size: 16px !default;
+$non-color-swatch-selected-icon-background-color: $brand-primary !default;
+$non-color-swatch-selected-icon-color: $white !default;
+
+// PDP
+$pdp-image-aspectratio: #{1/1} !default;
+$pdp-name-header-value: 3 !default;
+$pdp-name-header-color: $black !default;
+$pdp-price-font-size: 20px !default;
+$pdp-price-color: $black !default;
+$pdp-price-font: $body-font !default;
+$pdp-product-number-font-size: 13px !default;
+$pdp-product-number-color: $dark-gray !default;
+$pdp-rating-star-size: 14px !default;
+$pdp-rating-star-size-large: 20px !default;
+$pdp-rating-star-size-large-md: $pdp-rating-star-size-large !default;
+$pdp-reviews-link-display: none !default;
+$pdp-reviews-link-font-size: 13px !default;
+$pdp-reviews-link-color: $light-gray !default;
+$pdp-reviews-link-color-hover: $dark-gray !default;
+$pdp-right-column-spacing-md: $spacer !default; // desktop only (additional space between images and data
+$pdp-right-column-spacing-lg: 40px !default; // ""
+$pdp-right-column-spacing-xl: 80px !default; // ""
+$pdp-attribute-vertical-spacing: 24px !default;
+$pdp-attribute-vertical-spacing-md: 24px !default;
+$pdp-attribute-vertical-spacing-lg: 44px !default;
+$pdp-color-swatch-spacing: 20px !default;
+$pdp-color-swatch-size: var(--pdp-color-swatch-size, 18px) !default;
+$pdp-color-swatch-thumbnail-size: var(--pdp-color-swatch-thumbnail-size, 44px) !default;
+$pdp-color-swatch-thumbnail-spacing: 1px !default;
+$pdp-non-color-swatch-min-width: var(--pdp-non-color-swatch-size, $pdp-color-swatch-thumbnail-size) !default;
+$pdp-non-color-swatch-spacing: 8px !default;
+$pdp-add-to-cart-button-icon: $icon-content-blank !default;
+$pdp-promo-color: $base-font-color !default;
+$pdp-social-icon-color: $link-color !default;
+$pdp-social-icon-color-hover: $link-color-hover !default;
+$pdp-social-icon-size: 30px !default;
+$pdp-social-icon-spacing: 30px !default;
+$pdp-description-detail-header-value: 6 !default;
+$pdp-description-detail-divider: 1px solid $border-color !default; // only applies when these are collapsible
+$pdp-description-detail-vertical-spacing: $spacer !default;
+$pdp-description-detail-vertical-spacing-md: 30px !default;
+$pdp-description-detail-vertical-spacing-lg: 60px !default;
+$pdp-tabs-vertical-spacing: $spacer !default;
+$pdp-tabs-vertical-spacing-md: 30px !default;
+$pdp-tabs-vertical-spacing-lg: 60px !default;
+$pdp-asset-max-width: 700px !default;
+$pdp-tabs-header-value: 6 !default;
+
+// PDP STICKY ADD TO CART
+$pdp-sticky-addtocart-background: $white !default;
+$pdp-sticky-addtocart-opacity: 1 !default;
+$pdp-sticky-addtocart-open-transition: transform $transition-speed linear !default;
+$pdp-sticky-addtocart-shadow: $dropdown-menu-shadow !default;
+$pdp-sticky-addtocart-name-header-value: 4 !default;
+$pdp-sticky-addtocart-color-swatch-size: $pdp-color-swatch-size !default;
+$pdp-sticky-addtocart-color-swatch-spacing: 10px !default;
+$pdp-sticky-addtocart-color-swatch-thumbnail-size: $input-sm-height !default;
+$pdp-sticky-addtocart-color-swatch-thumbnail-spacing: $pdp-color-swatch-thumbnail-spacing !default;
+$pdp-sticky-addtocart-attribute-spacing: $spacer !default;
+$pdp-sticky-addtocart-attribute-select-font-size: $input-sm-font-size !default;
+$pdp-sticky-addtocart-attribute-select-line-height: $input-sm-font-line-height !default;
+$pdp-sticky-addtocart-attribute-select-padding: $input-sm-padding-top $select-sm-padding-right $input-sm-padding-bottom $input-sm-padding-left !default;
+$pdp-sticky-addtocart-attribute-select-height: $input-sm-height !default;
+$pdp-sticky-addtocart-button-font-size: $button-sm-font-size !default;
+$pdp-sticky-addtocart-button-line-height: $button-sm-line-height !default;
+$pdp-sticky-addtocart-button-padding: $button-sm-padding-top $button-sm-padding-right $button-sm-padding-bottom $button-sm-padding-left !default;
+$pdp-sticky-addtocart-button-letter-spacing: $button-sm-letter-spacing !default;
+
+// QUICKVIEW
+$quickview-selected-bonus-product-font-size: 10px !default;
+$quickview-selected-bonus-product-font-size-sm: 16px !default;
+
+// PRODUCT CARDS (order detail, checkout summary, order confirmation)
+$product-card-image-size-sm: 100px !default;
+$product-card-image-size-lg: 176px !default; // used on cart page large screens
+$product-card-product-name-font-family: $primary-font !default;
+$product-card-product-name-font-size: normal !default; // use small, normal, or large, corresponding with the paragraph-font-size mixin params
+$product-card-product-name-text-transform: none !default;
+$product-card-product-name-font-weight: normal !default;
+$product-card-product-name-text-decoration: none !default;
+$product-card-attribute-size: $default-text-font-size !default;
+$product-card-attribute-color: $dark-gray !default;
+$product-card-border-color: $card-body-border-color !default;
+$product-card-item-border-width: 1px !default;
+$product-card-price-qty-row-background: $white !default;
+$product-card-price-qty-row-border-color: $card-body-border-color !default;
+$product-card-remove-icon: $icon-close !default;
+$product-card-remove-icon-size: 11px !default;
+$product-card-remove-icon-background: $white !default;
+$product-card-remove-icon-color: inherit !default;
+$product-card-promo-color: $green !default;
+$product-card-promo-font-size: $default-text-font-size !default;
+
+// PLP - PRODUCT GRID
+$plp-name-header-display-with-slot: none !default;
+$product-refinement-font-size: $radiocheck-label-font-size !default;
+$product-refinement-swatch-size: 20px !default;
+$product-refinement-swatch-img-size: 30px !default;
+$product-refinement-swatch-border: 1px solid rgba($black, 0.3) !default;
+$product-refinement-swatch-spacing: 12px !default;
+$product-refinement-non-color-swatch-min-width: 44px !default;
+$product-refinement-non-color-swatch-spacing: 10px !default;
+$product-refinements-drawer-width: calc(100% - 50px) !default;
+$product-refinements-drawer-max-width: $header-suggestions-results-width !default; // mobile only
+$product-refinements-drawer-padding-bottom: 200px !default;
+$product-refinement-secondary-link-text-decoration: none !default;
+$product-refinement-secondary-link-padding: 8px 0 !default;
+$product-refinement-secondary-link-line-height: $default-text-line-height !default;
+$product-refinement-header-padding: 20px !default;
+$product-refinement-header-background-color: $modal-header-background-color !default;
+$product-refinement-header-border-color: $modal-header-border-color !default;
+$product-refinement-header-color: $white !default;
+$product-refinement-header-title-size: 4 !default;
+$product-refinement-value-padding-bottom: 20px !default;
+$product-refinement-value-grid-padding-bottom: 10px !default;
+$product-filter-font-size: 13px !default;
+$product-filter-font-weight: normal !default;
+$product-filter-color: $black !default;
+$product-filter-border: 1px solid $light-gray !default;
+$product-filter-border-radius: $border-radius !default;
+$product-filter-padding-top: 8px !default;
+$product-filter-padding-right: 25px !default;
+$product-filter-padding-bottom: 7px !default;
+$product-filter-padding-left: 10px !default;
+$product-filter-background: $white !default;
+$product-filter-icon-size: 10px !default;
+$product-filter-spacing: $spacer-sm !default;
+$product-filter-swatch-size: $product-filter-font-size + $product-filter-padding-top + $product-filter-padding-bottom + 2px !default;
+$product-miscellaneous-swatch-background: linear-gradient(0deg, rgba(130, 30, 145, 1) 0, rgba(130, 30, 145, 1) 25%, rgba(237, 209, 52, 1) 25%, rgba(255, 255, 0, 1) 50%, rgba(237, 209, 52, 1) 50%, #59ba00 50%, #59ba00 76%, #111 76%, #111 100%), linear-gradient(0deg, rgba(14, 92, 209, 1) 0, rgba(14, 92, 209, 1) 50%, rgba(226, 11, 11, 1) 50%, rgba(226, 11, 11, 1) 100%) !default;
+
+$product-refinement-horizontal-padding-top: $spacer !default;
+$product-refinement-horizontal-padding-bottom: $spacer !default;
+$product-refinement-horizontal-dropdown-menu-padding: 16px !default;
+$product-refinement-horizontal-dropdown-menu-max-width: 300px !default;
+
+$product-refinement-horizontal-onedropdown-border-top: 1px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-border-bottom: 1px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-border-right: 1px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-border-left: 1px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-margin-top: 15px !default;
+$product-refinement-horizontal-onedropdown-max-width: map-get($grid-breakpoints, xl) - map-get($grid-gutter-widths, xl) !default;
+$product-refinement-horizontal-onedropdown-btn-padding-top: 6px !default;
+$product-refinement-horizontal-onedropdown-btn-padding-bottom: 6px !default;
+$product-refinement-horizontal-onedropdown-btn-padding-right: 10px !default;
+$product-refinement-horizontal-onedropdown-btn-padding-left: 12px !default;
+$product-refinement-horizontal-onedropdown-btn-border-top: 1px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-btn-border-bottom: 1px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-btn-border-right: 1px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-btn-border-left: 1px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-btn-background-color: transparent !default;
+$product-refinement-horizontal-onedropdown-btn-width: 150px !default;
+$product-refinement-horizontal-onedropdown-sortby-btn-width: 150px !default;
+$product-refinement-horizontal-onedropdown-filterby-btn-width: 12px !default;
+$product-refinement-horizontal-onedropdown-filterby-btn-height: 12px !default;
+$product-refinement-horizontal-onedropdown-sticky-bar-left: 0 !default;
+$product-refinement-horizontal-onedropdown-sticky-bar-zindex: $z-index-header - 2 !default;
+$product-refinement-horizontal-onedropdown-sticky-bar-padding: $spacer !default;
+$product-refinement-horizontal-onedropdown-sticky-bar-background-color: $white !default;
+$product-refinement-horizontal-onedropdown-sticky-bar-border-bottom: 0px solid $border-color !default;
+$product-refinement-horizontal-onedropdown-sticky-bar-bottom-shadow: $header-fixed-shadow !default;
+
+$product-refinement-horizontal-multipledropdowns-btn-border-top: 1px solid $border-color !default;
+$product-refinement-horizontal-multipledropdowns-btn-border-bottom: 1px solid $border-color !default;
+$product-refinement-horizontal-multipledropdowns-btn-border-left: 1px solid $border-color !default;
+$product-refinement-horizontal-multipledropdowns-btn-border-right: 1px solid $border-color !default;
+$product-refinement-horizontal-multipledropdowns-btn-padding-top: 6px !default;
+$product-refinement-horizontal-multipledropdowns-btn-padding-bottom: 6px !default;
+$product-refinement-horizontal-multipledropdowns-btn-padding-left: 12px !default;
+$product-refinement-horizontal-multipledropdowns-btn-padding-right: 10px !default;
+$product-refinement-horizontal-multipledropdowns-height: calc(16px + 12px + 14px + (1px*2)) !default;
+$product-refinement-horizontal-multipledropdowns-margin-right: $spacer !default;
+$product-refinement-horizontal-multipledropdowns-margin-bottom: 0px !default;
+$product-refinement-horizontal-multipledropdowns-min-width: 150px !default;
+$product-refinement-horizontal-multipledropdowns-max-height: 500px !default;
+$product-refinement-horizontal-multipledropdowns-dropdown-menu-min-width: 300px !default;
+$product-refinement-horizontal-multipledropdowns-dropdown-menu-margin-top: 0 !default;
+$product-refinement-horizontal-multipledropdowns-dropdown-menu-btn-padding-bottom: 20px !default;
+$product-refinement-horizontal-multipledropdowns-sort-btn-column-span: 3 !default; //column span out of 12
+
+// PRODUCT TILES (product grid, recommended sliders)
+$product-tile-grid-margin-bottom: 45px !default;
+$product-tile-image-hover-shadow-color: $black !default;
+$product-tile-image-hover-shadow-size: 2px !default;
+$product-tile-image-hover-shadow: inset 0px -#{$product-tile-image-hover-shadow-size} 0px $product-tile-image-hover-shadow-color !default;
+$product-tile-image-margin-bottom: 10px !default;
+$product-tile-image-transformation: scale(1.035) !default;
+$product-tile-image-aspectratio: #{1/1} !default;
+$product-tile-swatch-size: var(--product-tile-swatch-size, 18px) !default;
+$product-tile-swatch-spacing: 8px !default;
+$product-tile-swatch-thumbnail-size: var(--product-tile-thumbnail-size, 30px) !default;
+$product-tile-swatch-thumbnail-spacing: 1px !default;
+$product-tile-swatch-margin-bottom: 10px !default;
+$product-tile-swatch-color-count-color: $brand-secondary !default;
+$product-tile-title-font: var(--product-name-font, $header-font) !default;
+$product-tile-title-font-size-mobile: var(--product-name-font-size-mobile, $default-text-font-size) !default;
+$product-tile-title-font-size-desktop: var(--product-name-font-size-desktop, $product-tile-title-font-size-mobile) !default;
+$product-tile-title-font-weight: normal !default;
+$product-tile-title-text-decoration: none !default;
+$product-tile-title-text-decoration-hover: none !default;
+$product-tile-title-color: $base-font-color !default;
+$product-tile-title-color-hover: $base-font-color !default;
+$product-tile-title-margin-bottom: 2px !default;
+$product-tile-price-font-size: var(--product-tile-price-size, 13px) !default;
+$product-tile-price-color: var(--product-tile-price-color, $base-font-color) !default;
+$product-tile-price-strike-through-color: $product-strike-through-price-color !default;
+$product-tile-price-margin-bottom: 10px !default;
+$product-tile-sale-color: var(--product-tile-sale-color, $sale) !default;
+$product-tile-promotion-margin-bottom: 10px !default;
+$product-tile-rating-margin-bottom: 20px !default;
+$product-tile-rating-star-color: $product-rating-star-color !default;
+$product-tile-rating-star-size: var(--product-tile-star-size, 11px) !default;
+$product-tile-reviews-link-display: none !default;
+$product-tile-reviews-link-font-size: 11px !default;
+$product-tile-reviews-link-color: $light-gray !default;
+$product-tile-reviews-link-color-hover: $dark-gray !default;
+$product-tile-quickview-link-icon: $icon-plus !default;
+$product-tile-quickview-link-size: 30px !default; // Quickview link appears on desktop only
+$product-tile-quickview-link-icon-size: 14px !default;
+$product-tile-quick-add-to-cart-link-icon-size: 20px !default;
+$product-tile-quickview-link-color: rgba($black, 0.7) !default;
+$product-tile-quickview-link-background-color: rgba($white, 0.7) !default;
+$product-tile-quickview-link-box-shadow: none !default;
+$product-tile-quick-action-buttons-spacer: $spacer !default;
+$product-tile-wishlist-link-icon: $icon-favorite !default;
+$product-tile-wishlist-link-icon-selected: $icon-favorite-selected !default;
+$product-tile-wishlist-link-size: 30px !default;
+$product-tile-wishlist-link-icon-size: 14px !default;
+$product-tile-wishlist-link-color: rgba($black, 0.7) !default;
+$product-tile-wishlist-link-background-color: rgba($white, 0.7) !default;
+$product-tile-wishlist-link-box-shadow: none !default;
+$product-tile-wishlist-link-border-radius: 50% !default;
+
+// PRODUCT TILES (badges)
+$product-tile-badges-margin: 1px !default;
+$product-tile-badge-padding: 2px 3px !default;
+$product-tile-badge-padding-lg: 5px 6px !default;
+$product-tile-badge-margin-bottom: 1px !default;
+$product-tile-badge-font-weight: bold !default;
+$product-tile-badge-font-size: 10px !default;
+$product-tile-badge-font-size-lg: $default-text-font-size !default;
+$product-tile-badge-text-align: left !default;
+$product-tile-badge-line-height: $default-text-line-height !default;
+$product-tile-badge-font-family: $body-font !default;
+$product-tile-badge-background: $white !default;
+$product-tile-badge-color: $base-font-color !default;
+$product-tile-badge-border-radius: $border-radius !default;
+$product-tile-badge-border-width: 1px !default;
+$product-tile-badge-border-style: solid !default;
+$product-tile-badge-border-color: transparent !default;
+
+// PRODUCT SETS
+$product-set-list-padding-top: 44px !default;
+$product-set-contains-header-value: 5 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$product-set-contains-padding: $spacer-xl 0 !default;
+$product-set-contains-margin: $product-set-contains-padding !default;
+$product-set-contains-border-width: 1px !default;
+$product-set-contains-background: transparent !default;
+$product-set-item-list-padding-top: $product-set-list-padding-top !default;
+$product-set-item-list-margin-top: $product-set-item-list-padding-top - $spacer !default;
+$product-set-item-list-product-name-header-value: 4 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$product-set-item-list-product-name-header-color: $pdp-name-header-color !default;
+$product-set-item-list-product-price-header-value: $product-set-item-list-product-name-header-value !default; // This number should be 1-6, corresponding with h1-h6 headers
+$product-set-item-list-product-price-color: $product-set-item-list-product-name-header-color;
+$product-set-item-list-product-name-text-decoration: none !default;
+$product-set-item-list-headline-and-description-display: block !default;
+$product-set-item-list-attr-margin-top: $spacer-xl !default;
+$product-set-item-list-border-color: $border-color !default;
+$product-set-item-list-border-width: 1px !default;
+
+// PRODUCT BUNDLES
+$product-bundle-item-name-font-size: 3 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$product-bundle-item-min-width: 400px !default;
+$product-bundle-item-grid-gap: $spacer*2 $spacer !default;
+$product-bundle-item-top-border-color: $border-color !default;
+$product-bundle-item-pdp-attribute-vertical-spacing: calc(#{$spacer} / 2) !default;
+$product-bundle-item-pdp-attribute-vertical-spacing-md: $product-bundle-item-pdp-attribute-vertical-spacing !default;
+$product-bundle-item-pdp-attribute-vertical-spacing-lg: $product-bundle-item-pdp-attribute-vertical-spacing-md !default;
+
+
+/*
+* MINICART
+*/
+$minicart-size: 350px !default;
+$minicart-totals-font-family: $primary-font !default;
+$minicart-totals-font-size: small !default; // use small, normal, or large, corresponding with the paragraph-font-size mixin params
+$minicart-totals-font-weight: bold !default;
+$minicart-totals-text-transform: none !default;
+
+
+/*
+* CART AND CHECKOUT
+*/
+$cart-card-margin-bottom: -1px !default;
+$cart-number-of-items-font-size: $default-text-font-size !default;
+$cart-product-name-text-overflow: ellipsis !default;
+$cart-product-name-white-space: nowrap !default;
+$cart-product-quantity-label-display: none !default;
+$cart-recommended-products-border-top: 1px solid $border-color !default;
+$cart-recommended-products-margin-top: 130px !default; // container margin
+$cart-recommended-products-padding-top: 95px !default; // container padding
+$checkout-mobile-footer-background: rgba($white, 0.8) !default;
+$checkout-mobile-footer-box-shadow: 0 2px 6px rgba($black, 0.6) !default;
+$checkout-approaching-discount-color: $green !default;
+$checkout-promo-message-color: $green !default;
+$checkout-totals-font-family: $primary-font !default;
+$checkout-totals-font-size: 16px !default;
+$checkout-totals-font-weight: normal !default;
+$checkout-totals-text-transform: none !default;
+$checkout-spacer: 41px !default;
+$checkout-btn-spacer: 10px !default;
+$checkout-selected-payment-background: $off-white !default;
+$checkout-selected-payment-color: $brand-primary !default;
+$checkout-selected-payment-border: 1px solid $brand-primary !default;
+
+
+/*
+* PAGE DESIGNER MODULES
+*/
+$page-designer-layout-spacing: $spacer*2 !default; // This sets the default spacing between layout containers
+
+
+/*
+* HERO ASSETS
+*/
+$hero-title-size: 1 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$hero-subtitle-font: $header-font !default;
+$hero-subtitle-font-size: $paragraph-font-size-small !default;
+$hero-subtitle-text-transform: none !default;
+$hero-textblock-outer-padding: $spacer !default;
+$hero-textblock-outer-padding-md: $spacer !default;
+$hero-textblock-outer-padding-lg: 50px !default;
+$hero-textblock-inner-padding: $spacer !default;
+$hero-textblock-inner-padding-md: $spacer !default;
+$hero-textblock-inner-padding-lg: $spacer !default;
+$hero-textblock-background-opacity: 0.7 !default;
+$hero-textblock-border-width: 1px !default;
+$hero-textblock-items-vertical-spacing: $spacer !default;
+$hero-min-height-short: 150px !default;
+$hero-min-height-short-md: 80px !default;
+$hero-min-height-short-lg: 80px !default;
+$hero-min-height-medium: 250px !default;
+$hero-min-height-medium-md: 300px !default;
+$hero-min-height-medium-lg: 350px !default;
+$hero-min-height-tall: 600px !default;
+$hero-min-height-tall-md: 650px !default;
+$hero-min-height-tall-lg: 700px !default;
+$hero-colortheme-dark: $black !default;
+$hero-colortheme-light: $white !default;
+$hero-video-aspect-ratio: $aspect-ratio-sixteen-nine !default;
+$hero-video-horizontal-aspect-ratio: $aspect-ratio-sixteen-nine-horizontal !default;
+$hero-animation-delay: 0ms !default; // This value should match the ComponentAnimationDelay value in scripts/constants/SiteConstants.js
+
+
+/*
+* CATEGORY TILE ASSETS
+*/
+$category-tile-border-radius: $border-radius !default;
+$category-tile-primary-font-size: $paragraph-font-size-large !default;
+$category-tile-secondary-font-size: $paragraph-lg-font-size !default;
+$category-tile-text-shadow: 0 0 2px rgba($black, 0.6) !default; // When text is in image area only
+$category-tile-text-background: rgba($black, 0.3) !default; // When text is in image area only
+$category-tile-text-inside-color: $white !default; // When text is in image area only
+$category-tile-hover-zoom-amount: 1.2 !default; // Only applicable if zoom is enabled
+$category-tile-aspect-ratio-square: $aspect-ratio-square !default;
+$category-tile-aspect-ratio-landscape: $aspect-ratio-landscape !default;
+$category-tile-aspect-ratio-portrait: $aspect-ratio-portrait !default;
+$category-tile-video-aspect-ratio: $aspect-ratio-sixteen-nine !default;
+$category-tile-video-horizontal-aspect-ratio: $aspect-ratio-sixteen-nine-horizontal !default;
+
+
+/*
+* IMAGE TEXT BLOCK ASSETS
+*/
+$image-text-block-border-radius: $category-tile-border-radius !default;
+$image-text-block-subtitle-font-size: $paragraph-font-size-small !default;
+$image-text-block-primary-font-size: $category-tile-primary-font-size !default;
+$image-text-block-secondary-font-size: $category-tile-secondary-font-size !default;
+$image-text-block-text-shadow: $category-tile-text-shadow !default; // When text is in image area only
+$image-text-block-text-background: $category-tile-text-background !default; // When text is in image area only
+$image-text-block-text-inside-color: $category-tile-text-inside-color !default; // When text is in image area only
+$image-text-block-hover-zoom-amount: $category-tile-hover-zoom-amount !default; // Only applicable if zoom is enabled
+$image-text-block-aspect-ratio-square: $category-tile-aspect-ratio-square !default;
+$image-text-block-aspect-ratio-landscape: $category-tile-aspect-ratio-landscape !default;
+$image-text-block-aspect-ratio-portrait: $category-tile-aspect-ratio-portrait !default;
+$image-text-block-video-aspect-ratio: $aspect-ratio-sixteen-nine !default;
+$image-text-block-video-horizontal-aspect-ratio: $aspect-ratio-sixteen-nine-horizontal !default;
+
+
+/*
+* PHOTO HOTSPOTS ASSETS
+*/
+$photo-hotspot-size: 20px !default;
+$photo-hotspot-background: rgba($white, 0.6) !default;
+$photo-hotspot-background-dark: rgba($black, 0.3) !default;
+$photo-hotspot-border-color-inner: transparent !default;
+$photo-hotspot-border-color-inner-dark: transparent !default;
+$photo-hotspot-border-size-inner: 3px !default;
+$photo-hotspot-border-color-outer: $white !default;
+$photo-hotspot-border-color-outer-dark: $black !default;
+$photo-hotspot-border-size-outer: 3px !default;
+$photo-hotspot-border-radius: 50% !default;
+$photo-hotspot-icon: $icon-plus !default;
+$photo-hotspot-icon-color: $white !default;
+$photo-hotspot-icon-color-dark: $black !default;
+$photo-hotspot-icon-size: 10px !default;
+$photo-hotspot-shadow: none !default;
+$photo-hotspot-size-hover: 40px !default;
+$photo-hotspot-background-hover: rgba($white, 0.8) !default;
+$photo-hotspot-background-hover-dark: rgba($black, 0.5) !default;
+$photo-hotspot-border-color-inner-hover: transparent !default;
+$photo-hotspot-border-color-inner-hover-dark: transparent !default;
+$photo-hotspot-border-size-inner-hover: 3px !default;
+$photo-hotspot-border-color-outer-hover: $white !default;
+$photo-hotspot-border-color-outer-hover-dark: $black !default;
+$photo-hotspot-border-size-outer-hover: 3px !default;
+$photo-hotspot-hover-icon: $icon-plus !default;
+$photo-hotspot-tooltip-max-width: 300px !default;
+$photo-hotspot-text-spacing: 8px !default;
+$photo-hotspot-text-product-divider: 1px solid $border-color !default;
+$photo-hotspot-attribute-spacing: 8px !default;
+$photo-hotspot-tooltip-image-size: 75px !default;
+$photo-hotspot-tooltip-product-name-font-size: $default-text-font-size !default;
+$photo-hotspot-tooltip-product-name-color: $black !default;
+$photo-hotspot-tooltip-product-name-text-overflow: ellipsis !default;
+$photo-hotspot-tooltip-product-name-whitespace: nowrap !default;
+$photo-hotspot-tooltip-price-font-size: $default-text-font-size !default;
+$photo-hotspot-tooltip-price-color: $dark-gray !default;
+$photo-hotspot-tooltip-message-display: block !default;
+$photo-hotspot-tooltip-message-font-size: 10px !default;
+$photo-hotspot-tooltip-message-text-transform: uppercase !default;
+$photo-hotspot-tooltip-message-color: $dark-gray !default;
+$photo-hotspot-tooltip-sale-price-color: $sale !default;
+
+
+/*
+* VIDEO ASSETS
+*/
+$video-play-icon: $icon-play-hollow !default;
+$video-play-icon-color: $white !default;
+$video-play-icon-size: 50px !default;
+$video-pause-icon: $icon-pause !default;
+$video-pause-icon-color: $white !default;
+$video-pause-icon-color-hover: $brand-secondary !default;
+$video-pause-icon-size: 50px !default;
+$video-modal-size: 'xl' !default; // sm, lg, or xl
+
+
+/*
+* BLOG LANDING
+*/
+$blog-nav-background-color: $off-white !default;
+$blog-nav-border-color: $border-color !default;
+$blog-nav-item-text-decoration: none !default;
+$blog-nav-item-active-font-weight: bold !default;
+
+
+/*
+* BLOG DETAIL
+*/
+$blog-detail-category-color: $dark-gray !default;
+$blog-detail-date-color: $dark-gray !default;
+$blog-detail-category-date-separator-color: $dark-gray !default;
+$blog-detail-category-date-separator: '|' !default;
+$blog-detail-category-date-separator-spacer-left: 10px !default;
+$blog-detail-category-date-separator-spacer-right: 10px !default;
+$blog-detail-title-size: 2 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$blog-detail-title-margin-top: 10px !default;
+$blog-detail-author-color: $dark-gray !default;
+$blog-detail-author-margin-top: 10px !default;
+$blog-detail-social-icons-border-top: none !default;
+$blog-detail-social-icons-margin-top: 80px !default;
+$blog-detail-social-icons-padding-top: 0 !default;
+$blog-detail-social-icon-color: $link-color !default;
+$blog-detail-social-icon-color-hover: $link-color-hover !default;
+$blog-detail-social-icon-size: 30px !default;
+$blog-detail-social-icon-spacing: 30px !default;
+$blog-detail-footer-text-align: center !default;
+$blog-detail-search-words-border-top: 1px solid $border-color !default;
+$blog-detail-search-words-margin-top: 20px !default;
+$blog-detail-search-words-padding-top: 20px !default;
+$blog-detail-search-words-separator: ',' !default;
+$blog-detail-search-words-spacer-left: 0 !default;
+$blog-detail-search-words-spacer-right: 7px !default;
+
+
+/*
+* CONTENT TILES
+*/
+$content-tile-image-aspect-ratio: $aspect-ratio-square !default;
+$content-tile-image-zoom-amount: 1.2 !default; // set to 1 to turn zooming off
+$content-tile-grid-margin-bottom: $product-tile-grid-margin-bottom !default;
+$content-tile-image-hover-shadow-color: $product-tile-image-hover-shadow-color !default;
+$content-tile-image-hover-shadow-size: $product-tile-image-hover-shadow-size !default;
+$content-tile-image-hover-shadow: $product-tile-image-hover-shadow !default;
+$content-tile-image-margin-bottom: $product-tile-image-margin-bottom !default;
+$content-tile-category-font: $default-text-font !default;
+$content-tile-category-font-size: $paragraph-font-size-small !default;
+$content-tile-category-font-weight: $product-tile-title-font-weight !default;
+$content-tile-category-text-decoration: $product-tile-title-text-decoration !default;
+$content-tile-category-text-decoration-hover: $product-tile-title-text-decoration-hover !default;
+$content-tile-category-color: $dark-gray !default;
+$content-tile-category-color-hover: $dark-gray !default;
+$content-tile-category-margin-bottom: 7px !default;
+$content-tile-name-font: $header-font !default;
+$content-tile-name-font-size: 18px !default;
+$content-tile-name-font-weight: $product-tile-title-font-weight !default;
+$content-tile-name-text-decoration: $product-tile-title-text-decoration !default;
+$content-tile-name-text-decoration-hover: $product-tile-title-text-decoration-hover !default;
+$content-tile-name-color: $product-tile-title-color !default;
+$content-tile-name-color-hover: $product-tile-title-color-hover !default;
+$content-tile-name-margin-bottom: 10px !default;
+$content-tile-date-font: $header-font !default;
+$content-tile-date-font-size: $paragraph-font-size-small !default;
+$content-tile-date-font-weight: $product-tile-title-font-weight !default;
+$content-tile-date-text-decoration: $product-tile-title-text-decoration !default;
+$content-tile-date-text-decoration-hover: $product-tile-title-text-decoration-hover !default;
+$content-tile-date-text-transform: uppercase !default;
+$content-tile-date-color: $product-tile-title-color !default;
+$content-tile-date-color-hover: $product-tile-title-color-hover !default;
+$content-tile-date-margin-bottom: 7px !default;
+$content-tile-description-font: $default-text-font !default;
+$content-tile-description-font-size: $default-text-font-size !default;
+$content-tile-description-font-weight: $default-text-font-weight !default;
+$content-tile-description-text-decoration: none !default;
+$content-tile-description-text-decoration-hover: none !default;
+$content-tile-description-color: $base-font-color !default;
+$content-tile-description-color-hover: $base-font-color !default;
+
+
+/*
+* DISCOUNT STATUS BAR
+*/
+$discount-status-bar-background: $dark-gray !default;
+$discount-status-bar-text-color: $white !default;
+$discount-status-bar-padding: $spacer !default;
+$discount-status-bar-promo-message-font-size: $default-text-font-size !default;
+$discount-status-bar-promo-message-line-height: $default-text-line-height !default;
+$discount-status-bar-promo-message-margin-bottom: 8px !default;
+$discount-status-bar-threshold-font-size: 13px !default;
+$discount-status-bar-threshold-line-height: $default-text-line-height !default;
+$discount-status-bar-threshold-margin-top: 8px !default;
+$discount-status-bar-icon: $icon-checkmark !default;
+$discount-status-bar-icon-size: 24px !default;
+$discount-status-bar-icon-border-radius: 50% !default;
+$discount-status-bar-icon-color: $white !default;
+$discount-status-bar-icon-background-color: $light-gray !default;
+$discount-status-bar-icon-active-color: $white !default;
+$discount-status-bar-icon-active-background-color: $green !default;
+$discount-status-bar-progress-height: 8px !default;
+$discount-status-bar-progress-border-color: $white !default;
+$discount-status-bar-progress-border-radius: 4px !default;
+$discount-status-bar-progress-border-size: 1px !default;
+$discount-status-bar-progress-fill-background-color: $white !default;
+$discount-status-bar-total-font: $primary-font !default;
+$discount-status-bar-total-font-size: 20px !default;
+$discount-status-bar-total-line-height: $default-text-line-height !default;
+$discount-status-bar-total-margin-bottom: $spacer !default;
+$discount-status-bar-checkout-btn-style: secondary !default;
+$discount-status-bar-completion-text-color: $white !default;
+$discount-status-bar-completion-text-font: $primary-font !default;
+$discount-status-bar-completion-text-font-size: $default-text-font-size !default;
+$discount-status-bar-completion-text-line-height: $default-text-line-height !default;
+$discount-status-bar-completion-text-margin-bottom: $discount-status-bar-total-margin-bottom !default;
+
+
+/*
+* STORE LOCATOR
+*/
+$store-map-canvas-height-sm: 250px !default;
+$store-map-canvas-height: 450px !default;
+$store-map-canvas-marker-font-family: $primary-font !default;
+$store-map-canvas-marker-title-font-size: 18px !default;
+$store-map-canvas-marker-font-size: $popover-font-size !default;
+$store-map-canvas-marker-line-height: 1.5 !default;
+$store-map-marker-size: 32px !default;
+$store-results-container-max-height: 350px !default;
+$store-type-map-marker-default-label-color: $white !default;
+
+
+/*
+* STORE DETAIL PAGE
+*/
+$store-detail-name-header-value: 3 !default;
+$store-detail-name-header-color: $black !default;
+$store-detail-attribute-vertical-spacing: 8px !default;
+$store-detail-attribute-label-font-weight: bold !default;
+$store-detail-additional-margin-top: 30px !default;
+$store-detail-image-margin-top: 30px !default;
+$store-detail-map-link-margin-top: $spacer !default;
+
+
+/*
+* ACCOUNT
+*/
+$account-login-tabs-margin-bottom: 20px !default;
+$account-wishlist-social-link-size: 30px !default;
+$account-wishlist-social-link-icon-size: 30px !default;
+$account-wishlist-social-link-color: rgba($black, 0.7) !default;
+$account-wishlist-social-link-background-color: rgba($white, 0.7) !default;
+$account-wishlist-social-link-box-shadow: none !default;
+$account-wishlist-social-link-border-radius: 50% !default;
+
+
+/*
+* WISHLIST
+*/
+$wishlist-header-background-color: $white !default;
+$wishlist-header-padding: $spacer 0 !default;
+// Landing Page
+$wishlist-landing-create-list-button: secondary !default;
+$wishlist-landing-create-list-button-size: normal !default; // small or normal
+$wishlist-landing-search-list-button: secondary !default;
+$wishlist-landing-search-list-button-size: normal !default; // small or normal
+$wishlist-landing-header-button-spacing: $spacer !default;
+$wishlist-landing-title-header: 2 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$wishlist-landing-message-margin: $spacer-xl 0 !default; // used for guest users only
+$wishlist-card-empty-message-color: $base-font-color !default;
+$wishlist-landing-notes-padding: $spacer-sm !default;
+$wishlist-landing-notes-toggle-button: tertiary !default;
+$wishlist-landing-notes-toggle-button-align: right !default;
+
+// Landing Page - Search List
+$wishlist-search-results-button: primary !default; // button in search popover
+$wishlist-search-results-padding: $spacer !default; // padding for each search results link
+$wishlist-search-results-border-color: $border-color !default;
+$wishlist-search-result-background-color-hover: $off-white !default;
+$wishlist-search-result-name-size: 5 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$wishlist-search-result-name-color: $base-font-color !default;
+$wishlist-search-result-count-font-size: 12px !default;
+$wishlist-search-result-count-color: $dark-gray !default;
+
+// Detail Page
+$wishlist-details-header-text-header: 3 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$wishlist-details-header-back-icon: $icon-arrow-left-thin !default;
+$wishlist-details-header-back-icon-size: $base-font-size !default;
+$wishlist-details-action-button-style: tertiary !default; // applies to 'select all', 'share list', 'add all to cart', 'move', and 'remove' buttons
+$wishlist-details-action-button-size: small !default; // small or normal
+$wishlist-details-action-button-spacing: $spacer !default;
+$wishlist-details-action-button-divider-color: $border-color !default; // set to 'transparent' to remove divider
+$wishlist-detail-notes-padding: $wishlist-landing-notes-padding !default;
+$wishlist-detail-notes-toggle-button: $wishlist-landing-notes-toggle-button !default;
+$wishlist-detail-notes-toggle-button-align: $wishlist-landing-notes-toggle-button-align !default;
+$wishlist-detail-notes-logged-out-padding: $spacer !default;
+$wishlist-public-private-color: $dark-gray !default;
+$wishlist-public-icon: $icon-globe !default;
+$wishlist-public-icon-color: $wishlist-public-private-color !default;
+$wishlist-private-icon: $icon-lock !default;
+$wishlist-private-icon-color: $wishlist-public-private-color !default;
+$wishlist-modal-header-icon-back: $icon-arrow-left-thin !default;
+$wishlist-modal-list-image-size: 40px !default;
+
+// Card
+$wishlist-card-header-background: $card-header-background !default;
+$wishlist-card-border-color: $card-border-color !default;
+$wishlist-card-border-radius: $card-border-radius !default;
+$wishlist-card-attribute-color: $product-card-attribute-color !default;
+$wishlist-card-footer-link-divider: 1px solid $border-color !default; // set to 'none' to remove divider
+$wishlist-card-product-vertical-spacing: $spacer !default;
+$wishlist-card-product-toggle-top: 10px !default;
+$wishlist-card-product-toggle-right: 10px !default;
+$wishlist-card-product-add-button: primary !default;
+$wishlist-card-quickview-button: primary !default; // Appears for Product Sets only
+
+// List Look Up Results Page
+$wishlist-search-results-header-margin: 0 0 $spacer 0 !default;
+$wishlist-search-results-header-title-header: 3 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$wishlist-search-results-number-padding: 0 $spacer-sm 0 0 !default;
+$wishlist-search-results-no-results-margin: $spacer-xl 0 0 0 !default;
+
+// Overlay for Selected Wishlist
+$wishlist-overlay-detail-selected-add-button-style: primary !default;
+$wishlist-overlay-detail-selected-add-button-size: normal !default; // small or normal
+
+// Show List Modal
+$wishlist-modal-show-lists-item-button: secondary !default; // button style to use for list items in modal
+$wishlist-modal-show-lists-item-button-selected-border-color: $button-secondary-border-color-hover !default;
+$wishlist-modal-show-lists-item-button-selected-background-color: $button-secondary-background-hover !default;
+$wishlist-modal-show-lists-item-button-selected-color: $button-secondary-color-hover !default;
+$wishlist-modal-show-lists-item-image-margin-right: $spacer !default;
+$wishlist-modal-show-new-list-form-button: primary !default;
+
+// Create List Modal
+$wishlist-create-list-button: primary !default;
+$wishlist-create-list-remove-from-all-button: tertiary !default;
+$wishlist-create-list-product-name-padding-right: $spacer-sm !default;
+
+// Edit List Modal
+$wishlist-edit-list-save-button: primary !default;
+$wishlist-edit-list-delete-button: secondary !default;
+
+// Delete List / Delete Product Modals
+$wishlist-modal-delete-list-delete-button: primary !default;
+$wishlist-modal-delete-list-cancel-button: secondary !default;
+$wishlist-modal-delete-product-delete-button: primary !default;
+$wishlist-modal-delete-product-cancel-button: secondary !default;
+
+// Share List Modal
+$wishlist-modal-share-list-submit-button: primary !default;
+$wishlist-share-list-email-button: primary !default;
+
+/*
+* GIFTCERTIFICATES
+*/
+$giftcertificate-balancemsg-font-size: 18px !default;
+$giftcertificate-balancemsg-font-weight: bold !default;
+
+
+/*
+* PAYMENTMETHODS
+*/
+$paymentmethod-error-font-weight: bold !default;
+
+
+/*
+* ACCESSIBILITY
+*/
+$outline-focus-width: 2px !default;
+$outline-focus-style: solid !default;
+$outline-focus-color: $dark-gray !default;
+
+
+/*
+* CONSENT DRAWER
+*/
+$consent-min-height: 85px !default;
+$consent-border-top-width: 1px !default;
+$consent-border-top-style: solid !default;
+$consent-border-top-color: $brand-tertiary !default;
+$consent-background-color: $off-white !default;
+$consent-paragraph-margin: 4px !default;
+$consent-paragraph-font-size: 12px !default;
+$consent-paragraph-line-height: 12px !default;
+
+/*
+* FOLDER-BASED NAVIGATION (e.g. Customer Service pages)
+*/
+$folder-nav-active-link-color: $link-color !default;
+$folder-nav-active-link-font-weight: bold !default;
+$folder-nav-desktop-width: 250px !default;
+$folder-nav-desktop-background: $off-white !default;
+$folder-nav-desktop-title-size: 5 !default; // This number should be 1-6, corresponding with h1-h6 headers
+$folder-nav-desktop-title-bottom-margin: 3px !default;
+$folder-nav-desktop-link-padding: 2px 0 2px 5px !default;
+$folder-nav-desktop-nested-folder-border-color: $border-color !default;
+
+/*
+* CUSTOM SCROLLBARS
+*/
+$custom-scrollbar-size: 8px;
+$custom-scrollbar-background-color: $off-white;
+$custom-scrollbar-foreground-color: $light-gray;

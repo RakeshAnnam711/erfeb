@@ -1,0 +1,40 @@
+.breadcrumb {
+    display: flex;
+    @include remove-list-styling();
+    margin: 0;
+    font-size: $breadcrumb-font-size;
+    line-height: $breadcrumb-line-height;
+    letter-spacing: $breadcrumb-letter-spacing;
+    .breadcrumb-item {
+        a {
+            color: $breadcrumb-item-color;
+            font-weight: $breadcrumb-font-weight;
+            text-decoration: $breadcrumb-text-decoration;
+            &:hover {
+                color: $breadcrumb-item-color-hover;
+                text-decoration: $breadcrumb-text-decoration-hover;
+            }
+        }
+        &+.breadcrumb-item {
+            display: flex;
+            &:before {
+                //display: inline-block;
+                content: $breadcrumb-divider;
+                color: $breadcrumb-divider-color;
+                font-weight: $breadcrumb-font-weight;
+                padding: 0 $breadcrumb-item-padding;
+            }
+            &:last-of-type a {
+                color: $breadcrumb-item-color-hover;
+            }
+        }
+        h1 {
+            font-size: inherit;
+            font-family: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            margin: 0;
+        }
+    }
+}

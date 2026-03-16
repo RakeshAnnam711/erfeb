@@ -1,0 +1,36 @@
+<isinclude template="components/modules"/>
+<isdecorate template="common/layout/page">
+    <isscript>
+        var pageClass = 'page';
+        var contentId = '';
+
+        if (pdict.content != null && 'ID' in pdict.content && pdict.content.ID !=null) {
+            contentId = pdict.content.ID;
+            pageClass = 'page-' + pdict.content.ID;
+        }
+    </isscript>
+    <div class="${pageClass} folder-nav-layout container">
+        <div class="row no-gutters">
+
+            <isif condition="${pdict.content.primaryFolderID}">
+                <div class="col-12 col-md folder-nav-menu order-2 order-md-1">
+                    <isinclude url="${URLUtils.url('Page-FolderBasedNavigation','folderid', pdict.content.primaryFolderID, 'contentid', contentId)}"/>
+                </div>
+            </isif>
+
+            <div class="col-12 col-md folder-nav-content order-1 order-md-2 pt-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+                            <isinclude template="components/content/contentAssetInc"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+</isdecorate>

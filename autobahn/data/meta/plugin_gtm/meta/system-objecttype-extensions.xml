@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="GTMEnable">
+                <display-name xml:lang="x-default">Enable GTM</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="GTMID">
+                <display-name xml:lang="x-default">GTM ID</display-name>
+                <description xml:lang="x-default">This is the ID you get from GTM</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="GTMAuth">
+    <display-name xml:lang="x-default">GTM Auth</display-name>
+    <description xml:lang="x-default">The gtm_auth token for GTM preview mode</description>
+    <type>string</type>
+    <mandatory-flag>false</mandatory-flag>
+    <externally-managed-flag>false</externally-managed-flag>
+    <min-length>0</min-length>
+</attribute-definition>
+
+<attribute-definition attribute-id="GTMPreview">
+    <display-name xml:lang="x-default">GTM Preview</display-name>
+    <description xml:lang="x-default">The gtm_preview environment key for GTM preview mode</description>
+    <type>string</type>
+    <mandatory-flag>false</mandatory-flag>
+    <externally-managed-flag>false</externally-managed-flag>
+    <min-length>0</min-length>
+</attribute-definition>
+
+            <!--
+            UPGRADE NOTICE:
+            The option to enable GA4 data formats is now DEPRECATED.
+            GA4 data formats are now Standard as Google has shutdown the Google Unversal Analytics format.
+
+            This attribute may be removed from SFCC instances after production launch or when appropriate.
+            <attribute-definition attribute-id="GTMGA4Enable">
+                <display-name xml:lang="x-default">Enable GA4</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            -->
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="GTM">
+                <display-name xml:lang="x-default">GTM</display-name>
+                <attribute attribute-id="GTMEnable"/>
+                <attribute attribute-id="GTMID"/>
+                <attribute attribute-id="GTMAuth"/>
+                <attribute attribute-id="GTMPreview"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

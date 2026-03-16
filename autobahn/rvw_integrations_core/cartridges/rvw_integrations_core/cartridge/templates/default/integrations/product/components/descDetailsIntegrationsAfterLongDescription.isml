@@ -1,0 +1,11 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Product Details Page
+
+    It gets called by rvw_autobahn_core:templates/default/product/components/descriptionAndDetails.isml
+</iscomment>
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('PP_ShowCreditFinancialBanners')}">
+    <isinclude template="paypal/assets/paypalcreditbanner"/>
+</isif>

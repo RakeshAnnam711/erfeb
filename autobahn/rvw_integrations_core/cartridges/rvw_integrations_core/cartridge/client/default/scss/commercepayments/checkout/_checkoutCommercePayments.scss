@@ -1,0 +1,95 @@
+.data-checkout-stage {
+    .salesforce-paymentrequest-element {
+        display: block;
+    }
+
+    // Customer ------------------------------
+    &[data-checkout-stage=customer] {
+        .salesforce-paymentrequest-element {
+            display: none;
+        }
+    }
+}
+
+.salesforce-paymentrequest-element:not(:empty) {
+    margin-bottom: 1rem;
+}
+
+.express-checkout-buttons {
+    min-height: 2.75rem;
+
+    .salesforce-paymentrequest-element {
+        border: $card-border-width solid transparent;
+
+        &:not(:empty) {
+            margin: 0;
+        }
+    }
+}
+.data-checkout-stage {
+    .card.ghost {
+        display: none;
+    }
+
+    .salesforce-paymentrequest-element {
+        display: block;
+    }
+
+    // Customer ------------------------------
+    &[data-checkout-stage=customer] {
+        .salesforce-paymentrequest-element {
+            display: none;
+        }
+    }
+}
+
+.express-checkout-buttons {
+    min-height: 2.75rem;
+}
+
+.salesforce-paymentrequest-element {
+    line-height: 0;
+    min-height: 40px;
+    border: $card-border-width solid transparent;
+
+    &:not(.salesforce-paymentrequest-element-loading) {
+        // 2 buttons horizontal 50%
+        div:first-child:nth-last-child(2),
+        div:first-child:nth-last-child(2) ~ div {
+            display: inline-block;
+            width: calc(50% - #{$spacer-sm});
+            margin-top: 0;
+        }
+        div:first-child:nth-last-child(2) {
+            margin-right: $spacer-sm;
+        }
+        div:first-child:nth-last-child(2) ~ div {
+            margin-left: $spacer-sm;
+        }
+    }
+}
+
+.salesforce-paymentrequest-element-loading {
+    div {
+        display: none;
+    }
+}
+
+@keyframes express-checkout-buttons-background {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 200% 0;
+    }
+}
+
+.salesforce-paymentrequest-element-skeleton button {
+    background: $gray-100; /* For browsers that do not support gradients */
+    background: linear-gradient(45deg, $gray-300, $gray-200, $gray-300, $gray-200, $gray-300, $gray-200, $gray-300, $gray-200, $gray-300, $gray-200); /* Standard syntax */
+    background-size: 200% 200%;
+    animation: express-checkout-buttons-background 10s linear infinite;
+    width: 100%;
+    height: 40px;
+}

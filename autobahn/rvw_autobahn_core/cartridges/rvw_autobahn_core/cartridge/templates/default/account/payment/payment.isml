@@ -1,0 +1,48 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/paymentInstruments.js');
+    </isscript>
+
+    <div class="container account-page">
+        <isinclude template="account/payment/deletePaymentModal"/>
+
+        <iscontentasset aid="accountHeaderPayment"/>
+
+        <!---Breadcrumbs--->
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+        <isif condition="${pdict.noSavedPayments}">
+            <div class="row justify-content-center h3 no-saved-payments">
+                <p>${Resource.msg('msg.no.saved.payments','payment',null)}</p>
+            </div>
+        </isif>
+
+        <isinclude template="account/payment/savedPayments"/>
+
+        <isinclude template="integrations/account/payment/payment/additionalPayment" />
+
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="row">
+                    <isif condition="${pdict.addPaymentUrl}">
+                        <div class="col">
+                            <a href="${pdict.addPaymentUrl}" class="btn btn-save btn-block btn-primary" aria-label="${Resource.msg('label.payment.addnewpayment','payment',null)}">${Resource.msg('button.addnew','payment',null)}</a>
+                        </div>
+                    <iselse>
+                        <isif condition="${pdict.noSavedPayments}">
+                            <h4 class="col-12 text-center pt-3">${Resource.msg('unavailable.message','account',null)}</h4>
+                        </isif>
+                    </isif>
+                    <div class="col text-right">
+                        <a href="${URLUtils.url('Account-Show')}" class="text-center back-to-account-link" aria-label="${Resource.msg('label.addressbook.myaccount','account',null)}">
+                          ${Resource.msg('link.profile.backtomyaccount','account',null)}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</isdecorate>

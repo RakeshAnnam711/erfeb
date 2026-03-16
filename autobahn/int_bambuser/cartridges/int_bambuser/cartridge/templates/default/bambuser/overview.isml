@@ -1,0 +1,92 @@
+
+
+
+
+<isdecorate template="common/layout/page">
+    <!-- bambuser config object -->
+    <isinclude url="${URLUtils.url('Bambuser-Config')}" />
+
+    <!-- bambuser config object -->
+    <link rel="stylesheet" href="${URLUtils.staticURL('css/bambuser/overview.css').toString()}">
+    <div class="bambuser-wrapper">
+        <div class="wrapper-inner">
+            <div class="text-wrapper">
+                <h1>${Resource.msg('bambuser.title', 'bambuser', null)}</h1>
+                <p>${Resource.msg('bambuser.subtitle', 'bambuser', null)}</p>
+            </div>
+            <isif condition="${pdict.shows.upcoming}">
+                <div class="section-wrapper">
+                    <div class="section-title">
+                        <h2>${Resource.msg('bambuser.section.upcoming', 'bambuser', null)}</h2>
+                    </div>
+                    <div class="button-wrapper">
+                        <ul>
+                            <isloop items="${pdict.shows.upcoming}" var="show" status="loopstatus">
+                                <li>
+                                    <button class="js_bambuser-stream-trigger" data-stream-id="${show.id}">
+                                        ${show.title}
+                                        <isif condition="${show.scheduledStartAt}">
+                                            <p class="label date">
+                                                ${Resource.msgf('bambuser.label.startsat', 'bambuser', null, StringUtils.formatCalendar(new dw.util.Calendar(new Date(show.scheduledStartAt)), 'MM/dd/YY hh:mm a'))}
+                                            </p>
+                                        </isif>
+                                    </button>
+                                </li>
+                            </isloop>
+                        </ul>
+                    </div>
+                </div>
+            </isif>
+            <isif condition="${pdict.shows.live}">
+                <div class="section-wrapper">
+                    <div class="section-title">
+                        <h2>${Resource.msg('bambuser.section.live', 'bambuser', null)}</h2>
+                    </div>
+                    <div class="button-wrapper">
+                        <ul>
+                            <isloop items="${pdict.shows.live}" var="show" status="loopstatus">
+                                <li>
+                                    <button class="js_bambuser-stream-trigger" data-stream-id="${show.id}">
+                                        ${show.title}
+                                        <isif condition="${show.isLive}">
+                                            <p class="label is-live">
+                                                ${Resource.msg('bambuser.label.live', 'bambuser', null)}
+                                            </p>
+                                        </isif>
+                                    </button>
+                                </li>
+                            </isloop>
+                        </ul>
+                    </div>
+                </div>
+            </isif>
+            <isif condition="${pdict.shows.ended}">
+                <div class="section-wrapper">
+                    <div class="section-title">
+                        <h2>${Resource.msg('bambuser.section.ended', 'bambuser', null)}</h2>
+                    </div>
+                    <div class="button-wrapper">
+                        <ul>
+                            <isloop items="${pdict.shows.ended}" var="show" status="loopstatus">
+                                <li>
+                                    <button class="js_bambuser-stream-trigger" data-stream-id="${show.id}">
+                                        ${show.title}
+                                        <isif condition="${show.endedAt}">
+                                            <p class="label date">
+                                                ${Resource.msgf('bambuser.label.endedat', 'bambuser', null, StringUtils.formatCalendar(new dw.util.Calendar(new Date(show.endedAt)), 'MM/dd/YY hh:mm a'))}
+                                            </p>
+                                        </isif>
+                                    </button>
+                                </li>
+                            </isloop>
+                        </ul>
+                    </div>
+                </div>
+            </isif>
+        </div>
+    </div>
+
+
+    <iscomment> load frontend module </iscomment>
+    <script src="${URLUtils.staticURL('js/bambuser/client.js')}"></script>
+</isdecorate>

@@ -1,0 +1,98 @@
+{
+    "step-types": {
+        "chunk-script-module-step": [{
+                "@type-id":"custom.GoogleMerchant.ProductExport",
+                "description":"Export Google Merchant Product Feed",
+                "@supports-site-context":"true",
+                "@supports-organization-context":"false",
+                "@supports-parallel-execution":"false",
+                "module":"bm_autobahn_core/cartridge/scripts/jobsteps/googlemerchantProductExport.js",
+                "before-step-function":"beforeStep",
+                "total-count-function":"getTotalCount",
+                "read-function":"read",
+                "process-function":"process",
+                "after-chunk-function":"afterChunk",
+                "write-function":"write",
+                "after-step-function":"afterStep",
+                "chunk-size":1000,
+                "parameters": {
+                    "parameters": [
+                        {
+                            "@name":"CurrencyCode",
+                            "description":"Use ISO 4217 Codes, defaults to USD",
+                            "@type":"string",
+                            "@required":"true",
+                            "@trim":"true",
+                            "default-value":"USD"
+                        },
+                        {
+                            "@name":"UnitsInInches",
+                            "description":"Check to use inches (in), uncheck for centimeters (cm)",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "@trim":"true",
+                            "default-value":"true"
+                        },
+                        {
+                            "@name":"SkipMaster",
+                            "description":"Flag to Skip Master Products",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "@trim":"true",
+                            "default-value":"true"
+                        },
+                        {
+                            "@name":"AvailableOnly",
+                            "description":"Flag to Include Available Products Only",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "@trim":"true",
+                            "default-value":"true"
+                        },
+                        {
+                            "@name":"OnlineOnly",
+                            "description":"Flag to Include Online Products Only",
+                            "@type":"boolean",
+                            "@required":"false",
+                            "@trim":"true",
+                            "default-value":"true"
+                        },
+                        {
+                            "@name":"LocaleID",
+                            "description":"Locale ID otherwise default locale",
+                            "@type":"string",
+                            "@required":"false",
+                            "@trim":"true"
+                        },
+                        {
+                            "@name":"ImageViewTypes",
+                            "description":"Product Image View Type(s)",
+                            "@type":"string",
+                            "@required":"false",
+                            "@trim":"true"
+                        },
+                        {
+                            "@name":"Delimiter",
+                            "description":"CSV Delimiter",
+                            "@type":"string",
+                            "@required":"false",
+                            "@trim":"true",
+                            "default-value":"|"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [{
+                            "@code":"ERROR",
+                            "description":"Used when an error occurred."
+                        },
+                        {
+                            "@code":"OK",
+                            "description":"Used when everything went well."
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

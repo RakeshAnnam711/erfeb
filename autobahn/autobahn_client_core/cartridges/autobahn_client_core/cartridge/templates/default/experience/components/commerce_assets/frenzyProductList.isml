@@ -1,0 +1,49 @@
+<div class="slider d-none">
+    <isset name="currentLocale" value="${(request.getLocale().ID || 'en-us').toLowerCase().replace('_','-')}" scope="page"/>
+    <isloop iterator="${pdict.productsData.matching_products}" alias="product" status="loopStatus">
+        <div class="slide" data-position="${loopStatus.count}">
+            <div class="product">
+                <div class="product-tile on-hover">
+                    <div class="product-tile-image-container image-container ${pdict.frenzyData.tileBackground != 'undefined' ? 'enable-tile-background' : ''}" <isif condition="${pdict.frenzyData.tileBackground != 'undefined'}">style="background-color: ${pdict.frenzyData.tileBackground}"</isif>>
+                    <button data-href='${pdict.Wishlist_ToggleProduct}'
+                        class="wishlist wishlist-toggle-product"
+                        data-wishlistpid="${product.sku}"
+                        data-productname="${product.org_product}"
+                        data-gtmdata='<isprint value="${JSON.stringify(product.gtmData)}" encoding="off" />'
+                        aria-label="Toggle wishlist for ${product.org_product}">
+                            <div class="wishlist-icon wishlist-icon-div" data-id='${product.sku}'></div>
+                    </button>
+                        <a href="${(dw.system.System.getInstanceType() !== dw.system.System.PRODUCTION_SYSTEM ? product.org_prod_url.replace(/.*\/\/.*\.com\//gi,'/') : product.org_prod_url).replace('en-us', currentLocale)}" class="product-click-track" data-id="${product.sku}" data-eventname="${pdict.frenzyData.event_name}" data-userid="${pdict.frenzyData.user_id}" data-queryid="${pdict.productsData.request_id}" aria-label="${pdict.frenzyData.altTitle}: View details for ${product.org_product}" data-page-type="Homepage-${pdict.frenzyData.title}">
+                           <div class="tile-img-wrapper">
+                                <img class="product-tile-image tile-image lazyload"
+                                    src="${URLUtils.staticURL('/images/noimage-card.png')}"
+                                    data-src="${product.org_image_url}"
+                                    alt="${pdict.frenzyData.altTitle}: ${product.org_product}"
+                                    title="${product.org_product}"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <isif condition="${pdict.frenzyData.productName}">
+                                <div class="product-title text-center">${product.org_product}</div>
+                            </isif>
+                            <isif condition="${pdict.frenzyData.productPrice}">
+                                <div class="price text-center">$ ${product.org_price}</div>
+                            </isif>
+                            <iscomment> <div class="product-details">
+                                <div class="brand">${product.org_brand}</div>
+                                <div class="name">${product.org_product}</div>
+                            </div> </iscomment>
+                             <div class="pdp-link">
+                                <div class="link product-click-track">
+                                    <div class="brand">${product.org_brand}</div>
+                                    <div class="name">${product.org_product}</div>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </isloop>
+</div>

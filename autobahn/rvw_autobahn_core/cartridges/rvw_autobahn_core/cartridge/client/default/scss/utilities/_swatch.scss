@@ -1,0 +1,185 @@
+@mixin swatch($diameter, $color, $style: 'circle') {
+    width: $diameter;
+    height: $diameter;
+    background-color: $color;
+    background-size: cover;
+    display: block;
+    position: relative;
+    text-align: center;
+    @if $style == 'thumbnail' {
+        border-radius: $color-swatch-thumbnail-border-radius;
+    } @else {
+        border-radius: $color-swatch-border-radius;
+    }
+    @include swatch-select($style);
+}
+
+@mixin swatch-select($style: '') {
+    &.color-value {
+        transition: box-shadow $transition-speed ease-out;
+        @if $style == 'thumbnail' {
+            &:hover:not(.unselectable) {
+                box-shadow: $color-swatch-thumbnail-hover-shadow;
+            }
+            &.selected {
+                box-shadow: $color-swatch-thumbnail-selected-shadow;
+                @include icon($color-swatch-thumbnail-selected-icon, after, calc(#{$color-swatch-thumbnail-selected-icon-size} / 2), $color-swatch-thumbnail-selected-icon-color);
+                &::after {
+                    position: absolute;
+                    top: calc(#{$color-swatch-thumbnail-selected-icon-size} / -3);
+                    right: calc(#{$color-swatch-thumbnail-selected-icon-size} / -3);
+                    display: $color-swatch-thumbnail-selected-icon-display;
+                    background: $color-swatch-thumbnail-selected-icon-background;
+                    width: $color-swatch-thumbnail-selected-icon-size;
+                    height: $color-swatch-thumbnail-selected-icon-size;
+                    line-height: $color-swatch-thumbnail-selected-icon-size;
+                    padding-left: 1px;
+                    text-align: center;
+                    border-radius: 50%;
+                    z-index: 1;
+                }
+            }
+            &.unselectable {
+                @include strike-through-swatch(calc(100% + 15px));
+            }
+        } @else {
+            &:hover {
+                box-shadow: $color-swatch-hover-shadow;
+            }
+            &.selected {
+                box-shadow: $color-swatch-selected-shadow;
+                @include icon($color-swatch-selected-icon, after, calc(#{$color-swatch-selected-icon-size} / 2), $color-swatch-selected-icon-color);
+                &::after {
+                    @include absolute-center;
+                    display: $color-swatch-selected-icon-display;
+                    background: $color-swatch-selected-icon-background;
+                    width: $color-swatch-selected-icon-size;
+                    height: $color-swatch-selected-icon-size;
+                    line-height: $color-swatch-selected-icon-size;
+                    padding-left: 1px;
+                    text-align: center;
+                    border-radius: 50%;
+                    z-index: 1;
+                }
+            }
+            &.unselectable {
+                @include strike-through-swatch(100%);
+            }
+        }
+        &.unselectable,
+        &.unavailable {
+            @include disabled;
+            pointer-events: auto;
+            position: relative;
+        }
+        &.unselectable {
+            cursor: not-allowed;
+        }
+        &.out-of-stock {
+            @include strike-through-swatch(calc(100% + 15px), $gray, $white);
+            cursor: pointer;
+            @include disabled;
+            &.selected:after {
+                display: block;
+            }
+        }
+    }
+    &.non-color-swatch-value {
+        transition: border $transition-speed ease-out, box-shadow $transition-speed ease-out;
+        &:not(.unselectable):hover {
+            border-color: $non-color-swatch-hover-border-color;
+            box-shadow: $non-color-swatch-hover-box-shadow;
+        }
+
+        &.selected,
+        &.selected:hover {
+            background: $non-color-swatch-selected-background;
+            color: $non-color-swatch-selected-color;
+            border-color: $non-color-swatch-selected-border-color;
+            box-shadow: $non-color-swatch-selected-box-shadow;
+            @include icon($non-color-swatch-selected-icon, after, calc(#{$non-color-swatch-selected-icon-size} / 2), $non-color-swatch-selected-icon-color);
+            &::after {
+                position: absolute;
+                top: calc(#{$non-color-swatch-selected-icon-size} / -3);
+                right: calc(#{$non-color-swatch-selected-icon-size} / -3);
+                background: $non-color-swatch-selected-icon-background-color;
+                width: $non-color-swatch-selected-icon-size;
+                height: $non-color-swatch-selected-icon-size;
+                line-height: $non-color-swatch-selected-icon-size;
+                padding-left: 1px;
+                text-align: center;
+                border-radius: 50%;
+                display: $non-color-swatch-selected-icon-display;
+            }
+        }
+
+        &.unselectable,
+        &.unavailable {
+            @include disabled;
+            pointer-events: auto;
+            position: relative;
+        }
+        &.unselectable {
+            @include strike-through-swatch(calc(100% + 15px), $gray, $white);
+            cursor: not-allowed;
+        }
+        &.out-of-stock {
+            @include strike-through-swatch(calc(100% + 15px), $gray, $white);
+            cursor: pointer;
+            @include disabled;
+            &.selected:after {
+                display: block;
+            }
+        }
+    }
+}
+
+@mixin swatch-non-color($min-width) {
+    position: relative;
+    color: $non-color-swatch-color;
+    background: $non-color-swatch-background;
+    border: $non-color-swatch-border-width solid $non-color-swatch-border-color;
+    border-radius: $non-color-swatch-border-radius;
+    padding: 0 $non-color-swatch-padding;
+    display: block;
+    min-width: $min-width;
+    line-height: calc(#{$min-width} - #{$non-color-swatch-border-width}*2);
+    @include swatch-select;
+}
+
+@each $color in map-keys($swatch-colors) {
+    $colorValue: #{map-get($swatch-colors, $color)};
+    .swatch-circle-#{$color} {
+        width: $product-refinement-swatch-size;
+        height: $product-refinement-swatch-size;
+        background-color: $colorValue;
+        border-radius: $color-swatch-border-radius;
+        display: inline-block;
+        position: relative;
+    }
+}
+
+.swatch-circle-miscellaneous {
+    background: $product-miscellaneous-swatch-background;
+    background-repeat: repeat-y, repeat;
+    background-size: 50% 100%, 100% 100%;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    display: inline-block;
+    height: $product-refinement-swatch-size;
+    width: $product-refinement-swatch-size;
+    position: relative;
+    transform: rotate(35deg);
+    &.swatch-mark.color-value.selected::after {
+        transform: translate(50%, -50%) rotate(-35deg);
+    }
+}
+
+// add borders for extra visibility to color swatches that are too light
+.swatch-circle-white,
+.swatch[data-displayvalue="Sugar"],
+.swatch[data-displayvalue="White"] {
+    &:not(.swatch-thumbnail) {
+        border: 1px solid $border-color;
+    }
+}

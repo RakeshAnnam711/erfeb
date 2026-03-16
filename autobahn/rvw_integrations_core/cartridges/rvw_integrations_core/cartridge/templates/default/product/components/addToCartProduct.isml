@@ -1,0 +1,36 @@
+<iscomment>
+    This overwrites what is in rvw_autobahn_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+
+    TODO: Move integration injections to hook logic and reduce temlpate complexity
+</iscomment>
+<div class="row cart-and-ipay commercepayments">
+    <div class="col-sm-12 bisnform ${product.showBISN ? '' : 'd-none'}">
+        <iscomment> <isinclude url="${URLUtils.url('Product-ShowBackInStockNotification','pid', product.id)}"/> </iscomment>
+    </div>
+
+    <div class="col-sm-12 addtocartbutton ${product.showBISN ? 'd-none' : ''}">
+        <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}"/>
+        <button class="add-to-cart btn btn-primary"
+                data-toggle="modal" data-target="#chooseBonusProductModal"
+                <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
+                    data-gtmdata="${JSON.stringify(product.gtmData)}" <iscomment> formatted as 'product.gtmGA4Data' </iscomment>
+                </isif>
+                data-pid="${product.id}"
+                ${!product.readyToOrder || !product.available ? "disabled" : ""}
+                cypress-target="addToCartButton">
+            <i class="fa fa-shopping-bag"></i>
+            ${Resource.msg('button.addtocart', 'common', null)}
+        </button>
+        <isif condition="${typeof hideExtensions === 'undefined' || hideExtensions !== 'true'}">
+            <isinclude template="product/components/addToCartButtonExtension"/>
+        </isif>
+
+        <isprint value="${dw.system.HookMgr.callHook('app.template.domInject', 'productAddToCart', pdict) || ''}"  encoding="off" />
+    </div>
+</div>
+

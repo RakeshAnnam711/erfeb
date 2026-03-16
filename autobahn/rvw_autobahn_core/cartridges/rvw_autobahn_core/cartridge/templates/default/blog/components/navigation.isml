@@ -1,0 +1,39 @@
+<isset name="nextCategoryRow" value="" scope="page"/>
+
+<isloop items="${blogCategories}" var="blogCategory" status="loopStatus">
+    <isset name="isActive" value="${'activeIds' in pdict && pdict.activeIds.indexOf(blogCategory.ID) !== -1}" scope="page"/>
+
+    <isif condition="${loopStatus.first}">
+        <ul class="nav justify-content-center ${topLevel === true ? 'top-level' : ''}">
+
+        <isif condition="${topLevel === true}">
+            <li class="nav-item ${'contentSearch' in pdict && pdict.contentSearch.queryPhrase == 'blogCategories' ? 'active' : ''}">
+                <a class="nav-link" href="${URLUtils.url('Search-ShowContent', 'fdid', pdict.rootFolderId)}" data-query="">${Resource.msg('link.all', 'search', null)}</a>
+            </li>
+        </isif>
+    </isif>
+        
+    <li class="nav-item ${isActive ? 'active' : ''}">
+        <a class="nav-link" href="${URLUtils.url('Search-ShowContent', 'fdid', blogCategory.ID)}" data-query="${blogCategory.ID}">${blogCategory.displayName}</a>
+    </li>
+
+    <isif condition="${loopStatus.last}">
+        </ul>
+    </isif>
+
+    <iscomment>Check subcategories for active item and render next row </iscomment>
+    <isif condition="${!empty(blogCategory.onlineSubFolders)}">
+        <isloop items="${blogCategory.onlineSubFolders}" var ="subFolder">
+            <isif condition="${isActive && !empty(blogCategory.onlineSubFolders)}">
+                <isset name="nextCategoryRow" value="${blogCategory.onlineSubFolders}" scope="page"/>
+            </isif>
+        </isloop>
+    </isif>
+
+</isloop>
+
+<isif condition="${!empty(nextCategoryRow)}">
+    <isset name="topLevel" value="${false}" scope="page"/>
+    <isset name="blogCategories" value="${nextCategoryRow}" scope="page"/>
+    <isinclude template="blog/components/navigation" />
+</isif>

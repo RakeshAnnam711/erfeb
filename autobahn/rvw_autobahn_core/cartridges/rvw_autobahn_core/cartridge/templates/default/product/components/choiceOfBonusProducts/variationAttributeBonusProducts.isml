@@ -1,0 +1,73 @@
+<iscomment>
+
+Template Notes:
+
+- This template is intended to be referenced from an <isinclude> tag within an <isloop> in another
+  source template.  This template is only used with choice of bonus products promotions
+</iscomment>
+<isset name="noSwatchOverride" value="${false}" scope="page" />
+<isset name="hideVariant" value="${product.pdpHideSingleVariants && attr.isOnlyVariant}" scope="page"/>
+<isset name="outOfStockEnabled" value="${pdict.abConfigs.viewOutOfStockItems}" scope="page"/>
+
+<isif condition="${!hideVariant}">
+    <div class="attribute">
+        <isif condition="${attr.swatchable && attr.id == 'color' && noSwatchOverride !== true}">
+
+            <span class="${attr.id} non-input-label color-label">
+                ${attr.displayName}: <span class="color-display-value">${empty(product.selectedColorName)  ? Resource.msgf('select.variant.value','product',null, attr.displayName) : product.selectedColorName}</span>
+            </span>
+
+            <!-- Circular Swatch Image Attribute Values -->
+            <isloop items="${attr.values}" var="attrValue">
+                <isif condition="${product.productType === 'master'}">
+                    <isset name="image" value="${attrValue.images[attrValue.images.type]}" scope="page"/>
+                    <button class="color-attribute"
+                            aria-label="${Resource.msg('label.select', 'common', null)} ${attr.displayName} ${attrValue.displayValue}"
+                            aria-describedby="${attrValue.id}"
+                            data-url="${attrValue.url}" ${ product.productType === "master"}
+                    >
+                        <span data-attr-value="${attrValue.value}"
+                            data-displayvalue="${attrValue.displayValue}"
+                            class="swatch
+                                ${attr.id}-value
+                                ${attrValue.images.type === 'thumbnail' ? 'swatch-thumbnail' : 'swatch-circle'}
+                                swatch-value
+                                ${attrValue.selected ? 'selected' : ''}
+                                ${attrValue.selectable ? 'selectable' : 'unselectable'}
+                            "
+                            style="background-image: url('${image.length > 0 ? image[0].url : ''}')"
+                        >
+                        </span>
+                        <span id="${attrValue.id}" class="sr-only selected-assistive-text">
+                            ${attrValue.selected ? Resource.msg('msg.assistive.selected.text', 'common', null) : ''}
+                        </span>
+                    </button>
+                </isif>
+            </isloop>
+
+        <iselseif condition="${attr.swatchable && noSwatchOverride !== true}"/>
+            <isinclude template="product/components/nonColorSwatches"/>
+        <iselse/>
+            <!-- Select <Attribute> Label -->
+            <label class="${attr.id}" for="bonus-${attr.id}-${productLoopStatus && productLoopStatus.count ? productLoopStatus.count : '1' }">
+                ${Resource.msg('label.select', 'common', null)} ${attr.displayName}
+            </label>
+
+            <!-- Attribute Values Drop Down Menu -->
+            <select class="custom-select form-control select-${attr.id}" name="select-${attr.id}" id="bonus-${attr.id}-${productLoopStatus && productLoopStatus.count ? productLoopStatus.count : '1' }" ${ product.productType === "variant" ? "disabled" : "" }>
+                <option value="${attr.resetUrl}">
+                    ${Resource.msg('label.select', 'common', null)} ${attr.displayName}
+                </option>
+                <isloop items="${attr.values}" var="attrValue">
+                    <option value="${attrValue.url}" data-attr-value="${attrValue.value}"
+                        ${!attrValue.selectable ? 'disabled' : ''}
+                        ${attrValue.selected ? 'selected' : ''}
+                    >
+                        ${attrValue.displayValue}
+                    </option>
+                </isloop>
+            </select>
+
+        </isif>
+    </div>
+</isif>

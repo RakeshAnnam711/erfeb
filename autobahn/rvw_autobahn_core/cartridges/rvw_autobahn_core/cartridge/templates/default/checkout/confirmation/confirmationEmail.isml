@@ -1,0 +1,228 @@
+<iscomment>
+    This template gets overwritten in rvw_integrations_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_integrations_core
+</iscomment>
+<isinclude template="emails/header" />
+    <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: auto;">
+            <tr>
+                <td style="background-color: #FFFFFF; border-bottom: 1px solid #BEBEBE;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #222222;">
+                                <h1 style="margin: 0 0 10px; font-size: 25px; line-height: 30px; color: #222222; font-weight: normal;">${Resource.msg('msg.placed.order.thank.you', 'confirmation', null)}</h1>
+                            </td>
+                            <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #222222; text-align: right;">
+                                <p>
+                                    <strong>${Resource.msg('label.order.number', 'confirmation', null)}</strong>
+                                    <br />
+                                    <span>${pdict.order.orderNumber}</span>
+                                </p>
+                                <p>
+                                    <strong>${Resource.msg('label.order.date', 'confirmation', null)}</strong>
+                                    <br />
+                                    <span><isprint value="${pdict.order.creationDate}" style="DATE_LONG" /></span>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color: #FFFFFF">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td style="padding: 20px 20px 20px; vertical-align: top;">
+                                <!--- Shipping Address --->
+                                <isloop items="${pdict.order.shipping}" var="shippingModel" status="shippingLoop">
+                                    <isinclude template="checkout/confirmation/shippingTitle"/>
+                                    <isset name="address" value="${shippingModel.shippingAddress}" scope="page"/>
+                                    <isinclude template="checkout/addressSummary" />
+                                    <div style="margin-top: 10px;">
+                                        <strong>${Resource.msg('label.order.shipping.method', 'confirmation', null)}</strong>
+                                    </div>
+                                    <isloop items="${shippingModel.shippingLineItems}" var="shippingLineItem" status="sloopstatus">
+                                        <div class="leading-lines m-0 d-flex justify-content-between shipping-items">
+                                            <div class="order-receipt-label"><span>
+                                                    <isif condition="${sloopstatus.index === 0}">
+                                                        <span class="display-name">${shippingModel.selectedShippingMethod.displayName}</span>
+                                                        <isif condition="${shippingModel.selectedShippingMethod.estimatedArrivalTime}">
+                                                            <span class="text-muted arrival-time">(${shippingModel.selectedShippingMethod.estimatedArrivalTime})</span>
+                                                        </isif>
+                                                    <iselse>
+                                                        ${shippingLineItem.lineItemText}
+                                                    </isif>
+                                                   ${': ' + shippingLineItem.adjustedPrice.formatted}
+                                            </span></div>
+                                        </div>
+                                    </isloop>
+
+                                    <isif condition="${shippingModel.isGift}">
+                                        <p style="margin: 0 0 10px;">
+                                            <strong>
+                                                ${Resource.msg('heading.gift.message', 'checkout', null)}
+                                            </strong>
+                                            ${shippingModel.giftMessage}
+                                        </p>
+                                    </isif>
+
+                                    <isif condition="${pdict.order.shipping.length > 1}">
+                                        <div style="margin-top: 10px;">
+                                            <strong>${Resource.msg('label.order.products', 'confirmation', null)}:</strong> <br/>
+                                        </div>
+                                        <isloop items="${shippingModel.productLineItems.items}" var="lineItem">
+                                            <p style="margin: 0 0 10px;">
+                                                ${Resource.msg('label.order.product.name', 'confirmation', null)}: ${lineItem.productName}
+                                                <br/>
+
+                                                <isif condition="${lineItem.productType === 'bundle'}">
+                                                    <isloop items="${lineItem.bundledProductLineItems}" var="bundledLineItem">
+                                                        ${Resource.msg('label.order.bundled.item.name', 'confirmation', null)}: ${bundledLineItem.productName}
+                                                            <br/>
+                                                            <isloop items="${bundledLineItem.variationAttributes}" var="attribute">
+                                                                ${attribute.displayName}: ${attribute.displayValue}
+                                                                <br/>
+                                                            </isloop>
+                                                    </isloop>
+                                                <iselse/>
+                                                    <isloop items="${lineItem.variationAttributes}" var="attribute">
+                                                        ${attribute.displayName}: ${attribute.displayValue}
+                                                        <br/>
+                                                    </isloop>
+                                                </isif>
+
+                                                <!--- item price --->
+                                                ${Resource.msg('label.each.item.price','cart',null)} -
+                                                ${lineItem.priceTotal.price}
+                                                <br/>
+                                                <!--- quantity --->
+                                                ${Resource.msg('field.selectquantity','cart',null)}
+                                                - <isprint value="${lineItem.quantity}" formatter="##" />
+                                                <br/>
+
+                                                <!--- line item total price --->
+                                                ${Resource.msg('label.total.price','cart',null)}
+                                                - ${lineItem.priceTotal.price}
+                                                <br/>
+                                            </p>
+                                        </isloop>
+                                    </isif>
+                                </isloop>
+                                <p style="margin: 0 0 10px;">${pdict.order.totals.totalShippingCost}</p>
+                            </td>
+                            <isif condition="${!pdict.order.totals.grandTotalValueOrNull}">
+                                <td style="padding: 20px 20px 20px; vertical-align: top;">
+                                    <!--- Billing Address --->
+                                    <strong>${Resource.msg('label.order.billing.address', 'confirmation', null)}</strong>
+                                    <br/>
+                                    <isset name="address" value="${pdict.order.billing.billingAddress.address}" scope="page"/>
+                                    <isinclude template="checkout/addressSummary" />
+
+                                    <br/>
+
+                                    <!--- Payment information --->
+                                    <div>
+                                        <strong>${Resource.msg('label.order.payment.info', 'confirmation', null)}</strong>
+                                        <br/>
+                                        <div>
+                                            <isinclude template="checkout/confirmation/confirmationPaymentInfo"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </isif>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px 20px 20px;">
+                                <isif condition="${pdict.order.shipping.length === 1}">
+                                    <strong>${Resource.msg('label.order.products', 'confirmation', null)}:</strong> <br />
+                                    <isloop items="${pdict.order.items.items}" var="lineItem">
+                                        <p style="margin: 0 0 10px;">
+                                            ${Resource.msg('label.order.product.name', 'confirmation', null)}: ${lineItem.productName}
+                                            <br />
+                                            <isif condition="${lineItem.productType === 'bundle'}">
+                                                <isloop items="${lineItem.bundledProductLineItems}" var="bundledLineItem">
+                                                    ${Resource.msg('label.order.bundled.item.name', 'confirmation', null)}:
+                                                    ${bundledLineItem.productName}
+                                                    <br />
+                                                    <isloop items="${bundledLineItem.variationAttributes}" var="attribute">
+                                                        ${attribute.displayName}: ${attribute.displayValue}
+                                                        <br />
+                                                    </isloop>
+                                                </isloop>
+                                            <iselse/>
+                                                <isloop items="${lineItem.variationAttributes}" var="attribute">
+                                                    ${attribute.displayName}: ${attribute.displayValue}
+                                                    <br />
+                                                </isloop>
+                                            </isif>
+                                            <isif condition="${lineItem.bonusProductLineItemUUID === 'bonus'}">
+                                                <isloop items="${lineItem.bonusProducts}" var="bonusProduct" status="loopState">
+                                                    <isif condition="${loopState.first}">
+                                                        <br />
+                                                        ${Resource.msg('text.lineitem.bonus.msg', 'cart', null)}
+                                                    </isif>
+                                                    ${bonusProduct.productName}
+                                                    <isloop items="${bonusProduct.variationAttributes}" var="attribute">
+                                                        ${attribute.displayName}: ${attribute.displayValue}
+                                                        <br />
+                                                    </isloop>
+                                                    <!--- item price --->
+                                                    ${Resource.msg('label.each.item.price', 'cart', null)} -
+                                                    ${bonusProduct.priceTotal.price}
+                                                    <br />
+                                                    <!--- quantity --->
+                                                    ${Resource.msg('field.selectquantity', 'cart', null)}
+                                                    -
+                                                    <isprint value="${bonusProduct.quantity}" formatter="##" />
+                                                    <br />
+                                                    <isif condition="${loopState.last}">
+                                                        <br />
+                                                    </isif>
+                                                </isloop>
+                                            </isif>
+
+                                            <!--- item price --->
+                                            ${Resource.msg('label.each.item.price', 'cart', null)} -
+                                            ${lineItem.priceTotal.price}
+                                            <br />
+                                            <!--- quantity --->
+                                            ${Resource.msg('field.selectquantity', 'cart', null)}
+                                            -
+                                            <isprint value="${lineItem.quantity}" formatter="##" />
+                                            <br />
+
+                                            <!--- line item total price --->
+                                            ${Resource.msg('label.total.price', 'cart', null)}
+                                            - ${lineItem.priceTotal.price}
+                                            <br />
+                                        </p>
+                                    </isloop>
+                                    <isloop items="${pdict.order.giftCertificateLineItems.items}" var="lineItem">
+                                        <p style="margin: 0 0 10px;">
+                                            ${Resource.msg('label.order.product.name', 'confirmation', null)}: ${lineItem.productName}
+                                            <br />
+                                            ${pdict.giftCertificateForm.purchase.from.label}: ${lineItem.senderName}
+                                            <br />
+                                            ${pdict.giftCertificateForm.purchase.recipient.label}: ${lineItem.recipientName}
+                                            <br />
+                                            ${pdict.giftCertificateForm.purchase.recipientEmail.label}: ${lineItem.recipientEmail}
+                                            <br />
+                                            ${pdict.giftCertificateForm.purchase.message.label}: ${lineItem.message || ''}
+                                            <br />
+                                            ${Resource.msg('label.total.price', 'cart', null)}
+                                            - ${lineItem.priceTotal.price}
+                                            <br />
+                                        </p>
+                                    </isloop>
+                                </isif>
+                                <isinclude template="checkout/confirmation/confirmationOrderTotal" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+    </table>
+
+<isinclude template="emails/footer" />

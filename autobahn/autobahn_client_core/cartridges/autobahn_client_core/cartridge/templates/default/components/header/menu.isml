@@ -1,0 +1,71 @@
+<iscomment> menuLevel increments up as we get deeper into nav levels. It is used to designed a 'menu-level-X' at the containing UL for each new set of links </iscomment>
+<isset name="menuLevel" value="${1}" scope="page" />
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets');
+    assets.addJs('js/components/megamenu.js');
+</isscript>
+
+<nav class="navbar navbar-expand-lg bg-inverse col-12" aria-label="Category Navigation">
+    <div class="close-menu d-lg-none">
+        <button class="back" role="button" aria-label="${Resource.msg('label.header.menu.back', 'common', null)}">
+            <span class="icon icon-arrow-left"></span>
+            ${Resource.msg('link.header.menu.back', 'common', null)}
+        </button>
+    </div>
+    <div class="menu-group" role="navigation">
+        <ul class="nav navbar-nav menu-level-${menuLevel.toFixed()}">
+            <isinclude url="${URLUtils.url('Account-Header', 'mobile', true)}" />
+            <isif condition="${pdict.categories}">
+                <isloop items="${pdict.categories}" var="category">
+                    <isset name="menuHighlightClass" value="${category.highlight ? 'highlight' : ''}" scope="page" />
+                    <isif condition="${category.subCategories}">
+                        <isset name="megamenuClass" value="${category.megamenu ? 'megamenu' : ''}" scope="page"/>
+                        <isset name="secondLevelCategory" value="${!empty(category.fullCategory) ? category.fullCategory : null}" scope="page"/>
+
+                        <li class="nav-item custom-dropdown ${megamenuClass} ${menuHighlightClass}">
+                            <a href="<isprint value="${category.url}" encoding="htmldoublequote"/>" id="${category.id}" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}" data-category-id="${category.id}">${category.name}</a>
+                            <isset name="menuItem" value="${category}" scope="page" />
+                            <iscomment> menuLevel is incremented up as we include another level of navigation</iscomment>
+                            <isset name="menuLevel" value="${menuLevel + 1}" scope="page" />
+                            <isif condition="${category.megamenu}">
+                                <isinclude template="components/header/megamenu" />
+                            <iselse/>
+                                <isinclude template="components/header/menuItem" />
+                            </isif>
+                            <iscomment> menuLevel is incremented down to maintain a proper value for the next instance of the isloop </iscomment>
+                            <isset name="menuLevel" value="${menuLevel - 1}" scope="page" />
+                        </li>
+                    <iselse/>
+
+                        <li class="nav-item ${menuHighlightClass}" role="menuitem">
+                            <a href="<isprint value="${category.url}" encoding="htmldoublequote"/>" id="${category.id}" class="nav-link" role="link" tabindex="0" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}" aria-label="${category.name}">${category.name}</a>
+                        </li>
+                    </isif>
+                </isloop>
+            </isif>
+            <li class="nav-item d-lg-none" role="menuitem"><iscontentasset aid="headerSupportMobile"/></li>
+
+            <ul class="header-support-options d-lg-none">
+                <li class="nav-item d-lg-none" role="menuitem">
+                    <a class="nav-link" href="${URLUtils.https('TrackOrder-Show')}" role="menuitem" tabindex="-1">Check Order Status</a>
+                </li>
+                <li class="nav-item d-lg-none" role="menuitem">
+                    <a class="nav-link" href="${URLUtils.https('ContactUs-Landing')}" role="menuitem" tabindex="-1">Contact Us</a>
+                </li>
+                <li class="nav-item d-lg-none" role="menuitem">
+                    <a class="nav-link" href="${URLUtils.https('Page-Show', 'cid', 'faqs')}" role="menuitem" tabindex="-1">FAQs</a>
+                </li>
+            <ul>
+        </ul>
+    </div>
+</nav>
+
+
+<script>
+  window.addEventListener('load', function () {
+    // Force a small scroll and scroll back to top to trigger any lazy nav logic
+    window.scrollBy(0, 1);
+    window.scrollBy(0, -1);
+  });
+</script>

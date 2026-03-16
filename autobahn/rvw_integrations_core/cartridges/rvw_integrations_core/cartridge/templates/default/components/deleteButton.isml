@@ -1,0 +1,19 @@
+<iscomment>
+    This overwrites what is in rvw_autobahn_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<button type="button" class="remove-btn remove-product" data-toggle="modal"
+        data-target="#removeProductModal" data-pid="${lineItem.id}"
+        data-name="${lineItem.productName}"
+        data-action="${lineItem.productType === 'giftCertificate' ? pdict.actionUrls.removeGiftCertificateLineItem : pdict.actionUrls.removeProductLineItemUrl}"
+        data-uuid="${lineItem.UUID}"
+        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
+            data-gtmdata="${JSON.stringify(lineItem.gtmData)}" <iscomment> formatted as 'lineItem.gtmGA4Data' </iscomment>
+        </isif>
+        aria-label="${Resource.msgf('text.remove.line.item','cart', null, lineItem.productName)}">
+    <span aria-hidden="true">&times;</span>
+</button>

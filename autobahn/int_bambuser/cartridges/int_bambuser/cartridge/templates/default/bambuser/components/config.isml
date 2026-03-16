@@ -1,0 +1,2 @@
+<iscomment> bambuser config object  </iscomment>
+<div class="js_bambuser-config" data-config="${pdict.config}"></div>

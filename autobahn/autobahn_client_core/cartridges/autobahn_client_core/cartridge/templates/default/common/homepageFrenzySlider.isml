@@ -1,0 +1,2 @@
+<div class="frenzy_home_page_section" data-currency="$ {{amount}}"></div>
+<script src="${URLUtils.staticURL('/js/thirdParty/frenzy-recommendations.js')}" defer></script>

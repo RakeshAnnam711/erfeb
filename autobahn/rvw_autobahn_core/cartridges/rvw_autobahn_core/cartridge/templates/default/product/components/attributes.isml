@@ -1,0 +1,32 @@
+<isif condition="${product.attributes && product.attributes.length}">
+    <div class="main-content-item">
+        <div class="product-attributes card no-borders collapsible-sm">
+            <div class="card-header" id="collapsible-attributes-title">
+                <button type="button" class="card-title title" aria-expanded="false" aria-controls="collapsible-attributes">
+                    ${Resource.msg('label.attributes', 'product', null)}
+                </button>
+            </div>
+            <div class="card-body" role="region" aria-labelledby= "collapsible-attributes-title">
+                <div class="value content" id="collapsible-attributes">
+                    <isloop items="${product.attributes}" var="attrGroup">
+                        <isif condition="${attrGroup.ID !== 'mainAttributes'}">
+                            <h3 class="attribute-name">
+                                ${attrGroup.name}
+                            </h3>
+                            <ul>
+                                <isloop items="${attrGroup.attributes}" var="attr">
+                                    <li class="attribute-values">
+                                        ${attr.label}:
+                                        <isloop items="${attr.value}" var="value">
+                                            ${value}
+                                        </isloop>
+                                    </li>
+                                </isloop>
+                            </ul>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+        </div>
+    </div>
+</isif>

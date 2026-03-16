@@ -1,0 +1,28 @@
+
+<isif condition="${!empty(hotspot.primaryText)}">
+    <div class="photo-hotspots-tooltip-text primary-text ${hotspot.primaryTextClass}"><isprint value="${hotspot.primaryText}" encoding="off" /></div>
+</isif>
+
+<isif condition="${!empty(hotspot.secondaryText)}">
+    <div class="photo-hotspots-tooltip-text secondary-text ${hotspot.secondaryTextClass}"><isprint value="${hotspot.secondaryText}" encoding="off" /></div>
+</isif>
+
+<isif condition="${!empty(hotspot.product)}">
+    <a 
+        class="photo-hotspots-tooltip-product quickview d-flex flex-row"
+        data-toggle="modal"
+        data-target="#quickViewModal"
+        data-pid="${hotspot.product.id}"
+        href="${URLUtils.url('Product-ShowQuickView', 'pid', hotspot.product.id)}"
+    >
+        <div class="product-image" style="background-image: url(${hotspot.product.image.url});"></div>
+        <div class="product-attributes">
+            <div class="product-name"><isprint value="${hotspot.product.name}" encoding="on"/></div>
+            <div class="product-price">
+                <isset name="price" value="${hotspot.product.price}" scope="page" />
+                <isinclude template="product/components/pricing/main" />
+            </div>
+            <div class="product-message">${Resource.msg('photohotspots.tooltip.message', 'components', null)}</div>
+        </div>
+    </a>
+</isif>

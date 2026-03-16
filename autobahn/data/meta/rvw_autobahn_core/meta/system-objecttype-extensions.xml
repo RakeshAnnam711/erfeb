@@ -1,0 +1,2184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="Basket">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="preferredStoreID">
+                <display-name xml:lang="x-default">Preferred Store ID set by guest customer (fallback to session and profile)</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    </type-extension>
+
+    <type-extension type-id="Category">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="contentSubLinksOnly">
+                <display-name xml:lang="x-default">Content Sub Links Only</display-name>
+                <description xml:lang="x-default">If true, this attribute will show a mega menu for this category with only the asset specified in Megamenu Asset 1. Intended for top level categories without subcategories.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableMegamenu">
+                <display-name xml:lang="x-default">Enable MegaMenu</display-name>
+                <description xml:lang="x-default">Set to yes to enable a megamenu-style dropdown for this category.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="megamenuAsset1">
+                <display-name xml:lang="x-default">MegaMenu Asset 1 ID</display-name>
+                <description xml:lang="x-default">Enter a content asset or Page Designer ID to be displayed in the left-hand slot of the MegaMenu dropdown for this category.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="megamenuAsset2">
+                <display-name xml:lang="x-default">MegaMenu Asset 2 ID</display-name>
+                <description xml:lang="x-default">Enter a content asset or Page Designer ID to be displayed in the right-hand slot of the MegaMenu for this category.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableSecondaryNavMenu">
+                <display-name xml:lang="x-default">Enable Secondary Nav</display-name>
+                <description xml:lang="x-default">Set to yes to enable a secondary navigation (below main nav) for this category.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="menuHighlight">
+                <display-name xml:lang="x-default">Highlight Category in Menu</display-name>
+                <description xml:lang="x-default">Used to highlight a specific category or categories in the main navigation via a text color change. Ex: Display the Sale category text color red while the rest of the menu be black.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="isFeatured">
+                <display-name xml:lang="x-default">Show in featured column</display-name>
+                <description xml:lang="x-default">This attribute is used to flag featured category</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="featureheading">
+                <display-name xml:lang="x-default">Heading to be displayed for featured sub-categories</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpAssetIds">
+                <display-name xml:lang="x-default">PDP Asset IDs</display-name>
+                <description xml:lang="x-default">IDs for one or more content assets to be displayed on the PDP.</description>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="theme">
+                <display-name xml:lang="x-default">Theme Stylesheet</display-name>
+                <description xml:lang="x-default">Enter the file name for a custom theme, e.g. "theme-dark.css"</description>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>50</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="showInMenu">
+                <display-name xml:lang="x-default">Show in Menu Navigation</display-name>
+                <description xml:lang="x-default">If marked, this category will display in the nav IF it also has an online product or subcategory. Subcategories only show if their parent category is marked as showInMenu or showInMenuAlways.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="showInMenuAlways">
+                <display-name xml:lang="x-default">Always Show In Menu</display-name>
+                <description xml:lang="x-default">If marked, this category will display in the nav regardless of all requirments. (no need to have products, subcategories, or marked showInMenu(above))</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="showViewAllLink">
+                <display-name xml:lang="x-default">Show View All Link</display-name>
+                <description xml:lang="x-default">MEGA MENU ONLY: If checked a "View All &lt;category name&gt;" link for this category will appear at the end of the sub category list.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="customAttributes">
+                <display-name xml:lang="x-default">Custom</display-name>
+                <attribute attribute-id="sizeChartID"/>
+                <attribute attribute-id="showInMenu"/>
+                <attribute attribute-id="showInMenuAlways" />
+                <attribute attribute-id="menuHighlight"/>
+                <attribute attribute-id="enableMegamenu"/>
+                <attribute attribute-id="enableSecondaryNavMenu"/>
+                <attribute attribute-id="showViewAllLink"/>
+                <attribute attribute-id="megamenuAsset1"/>
+                <attribute attribute-id="megamenuAsset2"/>
+                <attribute attribute-id="contentSubLinksOnly"/>
+                <attribute attribute-id="alternativeUrl"/>
+                <attribute attribute-id="pdpAssetIds"/>
+                <attribute attribute-id="theme"/>
+                <attribute attribute-id="isFeatured"/>
+                <attribute attribute-id="featureheading"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="CustomerGroup">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="isSiteContextGroup">
+                <display-name xml:lang="x-default">Is Brand ContextGroup</display-name>
+                <description xml:lang="x-default">Is this customer group used to track current brand experience via Session Property</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="customAttributes">
+                <display-name xml:lang="x-default">Autobahn Custom</display-name>
+                <attribute attribute-id="isSiteContextGroup"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="CustomerPaymentInstrument">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="defaultPaymentInstrument">
+                <display-name xml:lang="x-default">Default Payment Instrument</display-name>
+                <description xml:lang="x-default">If true, this attribute will make this the default payment instrument for the customer</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="customAttributes">
+                <display-name xml:lang="x-default">Autobahn Custom</display-name>
+                <attribute attribute-id="defaultPaymentInstrument"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Product">
+        <system-attribute-definitions>
+            <attribute-definition attribute-id="longDescription">
+                <display-name xml:lang="x-default">DEPRECATED: Product Details</display-name>
+                <description xml:lang="x-default">Attribute is available for Non-storefront purposes.</description>
+                <visible-flag>false</visible-flag>
+                <order-required-flag>false</order-required-flag>
+                <field-height>1</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="shortDescription">
+                <display-name xml:lang="x-default">DEPRECATED: Short Description</display-name>
+                <description xml:lang="x-default">Attribute is available for Non-storefront purposes.</description>
+                <visible-flag>false</visible-flag>
+                <order-required-flag>false</order-required-flag>
+                <field-height>1</field-height>
+            </attribute-definition>
+        </system-attribute-definitions>
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="backInStockNotificationDisabled">
+                <display-name xml:lang="x-default">Back in Stock Notifications are Disabled</display-name>
+                <description xml:lang="x-default">With this enabled, Back-in-stock notifications will be disabled for this product. The default is that this property is not set, meaning that notifications are enabled. To disable for all products turn off the 'viewBackInStockNotificationForm' site preference.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="badgeClasses">
+                <display-name xml:lang="x-default">Badge Classes</display-name>
+                <type>set-of-string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <field-length>50</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="badgeNames">
+                <display-name xml:lang="x-default">Badge Names</display-name>
+                <type>set-of-string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <field-length>50</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="collapsibleTitle1">
+                <display-name xml:lang="x-default">Collapsible Content Title - 1</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="collapsibleContent1">
+                <display-name xml:lang="x-default">Collapsible Content - 1</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="collapsibleTitle2">
+                <display-name xml:lang="x-default">Collapsible Content Title - 2</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="collapsibleContent2">
+                <display-name xml:lang="x-default">Collapsible Content - 2</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="collapsibleTitle3">
+                <display-name xml:lang="x-default">Collapsible Content Title - 3</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="collapsibleContent3">
+                <display-name xml:lang="x-default">Collapsible Content - 3</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="collapsibleTitle4">
+                <display-name xml:lang="x-default">Collapsible Content Title - 4</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="collapsibleContent4">
+                <display-name xml:lang="x-default">Collapsible Content - 4</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="headline">
+                <display-name xml:lang="x-default">Headline</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="headlineDescription">
+                <display-name xml:lang="x-default">Headline Description</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="itemType">
+                <display-name xml:lang="x-default">Item Type</display-name>
+                <description xml:lang="x-default">Classifies the type of the product or item.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Digital</display>
+                        <value>digital</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Physical</display>
+                        <value>physical</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityDropdownLimit">
+                <display-name xml:lang="x-default">Quantity Dropdown Limit</display-name>
+                <description xml:lang="x-default">The max number of options to show in the quantity selector.</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>10</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpAssetIds">
+                <display-name xml:lang="x-default">PDP Asset IDs</display-name>
+                <description xml:lang="x-default">IDs for one or more content assets to be displayed on the PDP.</description>
+                <type>set-of-string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpGalleryAssetIds">
+                <display-name xml:lang="x-default">PDP Gallery Asset IDs</display-name>
+                <description xml:lang="x-default">Enter one or more content asset IDs to be added to the product image gallery. Recommended usage is a Page Designer video component with a thumbnail image.</description>
+                <type>set-of-string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <field-length>50</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpCollapsibleContentDesktop1">
+                <display-name xml:lang="x-default">PDP Make Content 1 Collapsible (open or closed) or Not Collapsible on Desktop</display-name>
+                <description xml:lang="x-default">Determine if content will be collapsible and open, collapsible and closed, or not collapsible on PDP in desktop (mobile is collapsible by default).</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show collapsible content closed</display>
+                        <value>collapsed-closed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show collapsible content open</display>
+                        <value>collapsed-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show content as not collapsible</display>
+                        <value>not-collapsible</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpCollapsibleContentDesktop2">
+                <display-name xml:lang="x-default">PDP Make Content 2 Collapsible (open or closed) or Not Collapsible on Desktop</display-name>
+                <description xml:lang="x-default">Determine if content will be collapsible and open, collapsible and closed, or not collapsible on PDP in desktop (mobile is collapsible by default).</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show collapsible content closed</display>
+                        <value>collapsed-closed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show collapsible content open</display>
+                        <value>collapsed-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show content as not collapsible</display>
+                        <value>not-collapsible</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpCollapsibleContentDesktop3">
+                <display-name xml:lang="x-default">PDP Make Content 3 Collapsible (open or closed) or Not Collapsible on Desktop</display-name>
+                <description xml:lang="x-default">Determine if content will be collapsible and open, collapsible and closed, or not collapsible on PDP in desktop (mobile is collapsible by default).</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show collapsible content closed</display>
+                        <value>collapsed-closed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show collapsible content open</display>
+                        <value>collapsed-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show content as not collapsible</display>
+                        <value>not-collapsible</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpCollapsibleContentDesktop4">
+                <display-name xml:lang="x-default">PDP Make Content 4 Collapsible (open or closed) or Not Collapsible on Desktop</display-name>
+                <description xml:lang="x-default">Determine if content will be collapsible and open, collapsible and closed, or not collapsible on PDP in desktop (mobile is collapsible by default).</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show collapsible content closed</display>
+                        <value>collapsed-closed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show collapsible content open</display>
+                        <value>collapsed-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show content as not collapsible</display>
+                        <value>not-collapsible</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="sizeChartOverride">
+                <display-name xml:lang="x-default">Override for Size Chart</display-name>
+                <description xml:lang="x-default">Add a content asset ID for a PDP-specific size chart. If there is a asset ID that will be use it as opposed to the asset defined at the category level.</description>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="tabContent1">
+                <display-name xml:lang="x-default">Tab Content - 1</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="tabContent2">
+                <display-name xml:lang="x-default">Tab Content - 2</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="tabContent3">
+                <display-name xml:lang="x-default">Tab Content - 3</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="tabContent4">
+                <display-name xml:lang="x-default">Tab Content - 4</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="tabTitle1">
+                <display-name xml:lang="x-default">Tab Title - 1</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="tabTitle2">
+                <display-name xml:lang="x-default">Tab Title - 2</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="tabTitle3">
+                <display-name xml:lang="x-default">Tab Title - 3</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="tabTitle4">
+                <display-name xml:lang="x-default">Tab Title - 4</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="swatchableAttributes">
+                <display-name xml:lang="x-default">Swatchable Attributes on PDP</display-name>
+                <description xml:lang="x-default">Array of attributes you want to display as a swatch. example: ['color','size']</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-height>1</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpAttributeGroupsShow">
+                <display-name xml:lang="x-default">PDP Attribute Groups That Show</display-name>
+                <description xml:lang="x-default">Inclusion list of attribute group id's that will be pulled into the attributes file that then shows above the collapsible content.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-height>1</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="enablePdpStickyAddToCart">
+                <display-name xml:lang="x-default">Enable PDP Sticky Add To Cart</display-name>
+                <description xml:lang="x-default">Enables Sticky Add to cart bar at the top of the PDP once a user scrolls past the inline add to cart btn</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableVariantSelectionInPdpStickyAddToCart">
+                <display-name xml:lang="x-default">Enable Variant Selection in PDP Sticky Add To Cart</display-name>
+                <description xml:lang="x-default">If enablePdpStickyAddToCart, is set to "true", and this option is set to true, then variant selection on the PDP Sticky will show (on Desktop version only). Otherwise, only name and add to cart button will show in the sticky</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="hideQty">
+                <display-name xml:lang="x-default">Hide Quantity</display-name>
+                <description xml:lang="x-default">Hides the Quantity on PDP, minicart, and cart page</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpHideSingleVariants">
+                <display-name xml:lang="x-default">PDP Hide Single Variants</display-name>
+                <description xml:lang="x-default">Set to 'yes' to hide variant options on the PDP if there's only one variant available.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpImageColumnWidth">
+                <display-name xml:lang="x-default">PDP Image Column Width</display-name>
+                <description xml:lang="x-default">Choose the width of the column containing the main product image (on desktop.) Useful for fine-tuning the PDP layout to account for different image aspect-ratios and amount of product attributes.</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">1/12</display>
+                        <value>1/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">2/12</display>
+                        <value>2/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">3/12</display>
+                        <value>3/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">4/12</display>
+                        <value>4/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">5/12</display>
+                        <value>5/12</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">6/12</display>
+                        <value>6/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">7/12</display>
+                        <value>7/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">8/12</display>
+                        <value>8/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">9/12</display>
+                        <value>9/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">10/12</display>
+                        <value>10/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">11/12</display>
+                        <value>11/12</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="useDefaultProductVariant">
+                <display-name xml:lang="x-default">Use Default Variant</display-name>
+                <description xml:lang="x-default">Indicates that default variant is set (there is also a product specific attribute as well)</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="variationAttributesToUse">
+                <display-name xml:lang="x-default">Variation Attributes to Use</display-name>
+                <description xml:lang="x-default">Indicates which variation attributes to select when using default variant</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="content">
+                <display-name xml:lang="x-default">Content</display-name>
+                <attribute attribute-id="headline"/>
+                <attribute attribute-id="headlineDescription"/>
+            </attribute-group>
+            <attribute-group group-id="collapsibleContent">
+                <display-name xml:lang="x-default">Collapsible Content</display-name>
+                <attribute attribute-id="collapsibleTitle1"/>
+                <attribute attribute-id="collapsibleContent1"/>
+                <attribute attribute-id="collapsibleTitle2"/>
+                <attribute attribute-id="collapsibleContent2"/>
+                <attribute attribute-id="collapsibleTitle3"/>
+                <attribute attribute-id="collapsibleContent3"/>
+                <attribute attribute-id="collapsibleTitle4"/>
+                <attribute attribute-id="collapsibleContent4"/>
+            </attribute-group>
+            <attribute-group group-id="tabs">
+                <display-name xml:lang="x-default">Tabs</display-name>
+                <attribute attribute-id="tabTitle1"/>
+                <attribute attribute-id="tabContent1"/>
+                <attribute attribute-id="tabTitle2"/>
+                <attribute attribute-id="tabContent2"/>
+                <attribute attribute-id="tabTitle3"/>
+                <attribute attribute-id="tabContent3"/>
+                <attribute attribute-id="tabTitle4"/>
+                <attribute attribute-id="tabContent4"/>
+            </attribute-group>
+            <attribute-group group-id="Order">
+                <display-name xml:lang="x-default">Order Attributes</display-name>
+                <attribute attribute-id="unit" system="true"/>
+                <attribute attribute-id="quantityDropdownLimit"/>
+                <attribute attribute-id="minOrderQuantity" system="true"/>
+                <attribute attribute-id="stepQuantity" system="true"/>
+                <attribute attribute-id="taxClassID" system="true"/>
+                <attribute attribute-id="EAN" system="true"/>
+                <attribute attribute-id="UPC" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="autobahnAttributes">
+                <display-name xml:lang="x-default">Autobahn Attributes</display-name>
+                <attribute attribute-id="enablePdpStickyAddToCart"/>
+                <attribute attribute-id="enableVariantSelectionInPdpStickyAddToCart"/>
+                <attribute attribute-id="hideQty"/>
+                <attribute attribute-id="itemType"/>
+                <attribute attribute-id="pdpAssetIds"/>
+                <attribute attribute-id="pdpAttributeGroupsShow"/>
+                <attribute attribute-id="pdpCollapsibleContentDesktop1"/>
+                <attribute attribute-id="pdpCollapsibleContentDesktop2"/>
+                <attribute attribute-id="pdpCollapsibleContentDesktop3"/>
+                <attribute attribute-id="pdpCollapsibleContentDesktop4"/>
+                <attribute attribute-id="pdpGalleryAssetIds"/>
+                <attribute attribute-id="pdpHideSingleVariants"/>
+                <attribute attribute-id="pdpImageColumnWidth"/>
+                <attribute attribute-id="sizeChartOverride"/>
+                <attribute attribute-id="swatchableAttributes"/>
+                <attribute attribute-id="useDefaultProductVariant"/>
+                <attribute attribute-id="variationAttributesToUse"/>
+                <attribute attribute-id="backInStockNotificationDisabled"/>
+            </attribute-group>
+            <attribute-group group-id="badges">
+                <display-name xml:lang="x-default">Badges</display-name>
+                <attribute attribute-id="badgeNames"/>
+                <attribute attribute-id="badgeClasses"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ProductLineItem">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="itemType">
+                <display-name xml:lang="x-default">Item Type</display-name>
+                <description xml:lang="x-default">Classifies the type of the product or item.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Digital</display>
+                        <value>digital</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Physical</display>
+                        <value>physical</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    <group-definitions>
+        <attribute-group group-id="autobahnAttributes">
+                <display-name xml:lang="x-default">Autobahn Attributes</display-name>
+                <attribute attribute-id="itemType"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Profile">
+        <system-attribute-definitions>
+            <attribute-definition attribute-id="gender">
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Male</display>
+                        <value>1</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Female</display>
+                        <value>2</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Other</display>
+                        <value>3</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Rather not say</display>
+                        <value>4</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </system-attribute-definitions>
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="preferredStoreID">
+                <display-name xml:lang="x-default">Preferred Store ID set by customer</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="store">
+                <display-name xml:lang="x-default">Store</display-name>
+                <attribute attribute-id="preferredStoreID"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="countriesJSONOverride">
+                <display-name xml:lang="x-default">Override config/countries.json</display-name>
+                <description xml:lang="x-default">JSON Configuration to replace cartridge config/countries.json file. Invalid JSON will be ignored.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-height>10</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="customerServiceNumber">
+                <display-name xml:lang="x-default">Add a Customer Service Number</display-name>
+                <description xml:lang="x-default">This number shows on the cart page and checkout page.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpThumbnailType">
+                <display-name xml:lang="x-default">PDP Thumbnail Type</display-name>
+                <description xml:lang="x-default">PDP thumbnail type of images or slider pagination style (dots or short lines). Default is images for all screen sizes.</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Images</display>
+                        <value>images</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Dots</display>
+                        <value>dots</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Images Desktop / Dots Mobile</display>
+                        <value>imagesDesktopDotsMobile</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpCollapseRefinementsDesktop">
+                <display-name xml:lang="x-default">Collapse PLP Refinements on Desktop</display-name>
+                <description xml:lang="x-default">Set to 'yes' to initially show desktop PLP refinements in a collapsed state. Only applicable for the vertical layout.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpCollapseRefinementsMobile">
+                <display-name xml:lang="x-default">Collapse PLP Refinements on Mobile</display-name>
+                <description xml:lang="x-default">Set to 'yes' to initially show mobile PLP refinements in a collapsed state.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="contactUsFormTopics">
+                <display-name xml:lang="x-default">Contact Us Form Topic Options</display-name>
+                <description xml:lang="x-default">Options you want to display on the Contact Us form topics select field.</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="contentImageBreakpoints">
+                <display-name xml:lang="x-default">Content Image Breakpoints</display-name>
+                <description xml:lang="x-default">Define sizes here in pixels. This will be used to generate content images. In order to disable 2x images for retina displays, update the 2x values here to match the non-2x values from the lines above them.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="contentImageFormat">
+                <display-name xml:lang="x-default">Content Image Format</display-name>
+                <description xml:lang="x-default">Choose a file type to convert content images to during optimization.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">jpg</display>
+                        <value>jpg</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">jp2</display>
+                        <value>jp2</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">png</display>
+                        <value>png</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">gif</display>
+                        <value>gif</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Do not convert</display>
+                        <value>none</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="contentImageQuality">
+                <display-name xml:lang="x-default">Content Image Quality</display-name>
+                <description xml:lang="x-default">Enter a number between 0 and 100 to specify the quality at which content images should be optimized.</description>
+                <type>double</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-length>10</field-length>
+                <default-value>80.0</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="disConfiguration">
+                <display-name xml:lang="x-default">disConfiguration</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableConsentTracking">
+                <display-name xml:lang="x-default">Enable Consent Tracking</display-name>
+                <description xml:lang="x-default">Set to 'no' to disable the consent tracking drawer.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableCookieConsent">
+                <display-name xml:lang="x-default">Enable Cookie Consent</display-name>
+                <description xml:lang="x-default">Enables of Disables the setting of a consent cookie when consent is accepted. If set to 'no', a session variable will be used instead.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="cookieConsentAge">
+                <display-name xml:lang="x-default">The Max Age for consent cookie in seconds.</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>604800</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="headerFixed">
+                <display-name xml:lang="x-default">Fixed Header</display-name>
+                <description xml:lang="x-default">Set to Yes to enable a static fixed header on mobile and desktop. Set to Enhanced to enable a dynamic fixed header that reappears when you scroll back up the page.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">No</display>
+                        <value>false</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Yes</display>
+                        <value>true</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Enhanced</display>
+                        <value>enhanced</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="headerCountrySelectorSource">
+                <display-name xml:lang="x-default">Header Country Selector Source</display-name>
+                <description xml:lang="x-default">Choose between different site locales and cartridge countries.json.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Cartridge config/countries.(js|json)</display>
+                        <value>code</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Storefront locale definitions</display>
+                        <value>locales</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="headerLayout">
+                <display-name xml:lang="x-default">Header Layout</display-name>
+                <description xml:lang="x-default">Choose between different layouts for the site header.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Left-aligned logo</display>
+                        <value>logo-left</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Centered logo</display>
+                        <value>logo-center</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="headerNavLayout">
+                <display-name xml:lang="x-default">Header Navigation Layout</display-name>
+                <description xml:lang="x-default">Choose between different layouts for the navigation in the site header.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Left-aligned Navigation</display>
+                        <value>nav-left</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Centered Navigation</display>
+                        <value>nav-center</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="loginRedirectExclusions">
+                <display-name xml:lang="x-default">Login Redirect Exclude List</display-name>
+                <description xml:lang="x-default">Exclude pages with these strings (E.g.: '/, /home, /Home-Show') in the URL from redirecting after login. Will go to Account overview. Type 'ALL' to have all pages land on Account overview.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>ALL</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="megamenuNavLayout">
+                <display-name xml:lang="x-default">Megamenu Layout</display-name>
+                <description xml:lang="x-default">Choose between different layouts for the navigation in the megamenu dropdown.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">All items in-view</display>
+                        <value>mega-standard</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Secondary left nav showing tertiary+ on hover</display>
+                        <value>mega-left</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="navMenuCategoryDepth">
+                <display-name xml:lang="x-default">Nav Menu Category Depth</display-name>
+                <description xml:lang="x-default">Maximum category model recursive depth used for rendering site navigation. Avoid data modeling subcategories beyond 4 levels from the root category as most site navigations will not render beyond 3 or 4 subcategory levels. Reduce performance impact on sandboxes and non-cached instances with large storefront catalogs.</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>4</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="headerSearch">
+                <display-name xml:lang="x-default">Header Search Expanded</display-name>
+                <description xml:lang="x-default">Header search showing expanded input or icon without input expanded</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show search field expanded</display>
+                        <value>search-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Search form condensed show icon only</display>
+                        <value>search-icon-only</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="headerSearchMinTermLength">
+                <display-name xml:lang="x-default">Header Search Minimum Term Length</display-name>
+                <description xml:lang="x-default">Min characters to show suggestions. If under 3 is desired, also update the value in Merchant Tools >  Search >  Search Indexes > Language Options.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">1</display>
+                        <value>1</value>
+                    </value-definition>
+                     <value-definition>
+                        <display xml:lang="x-default">2</display>
+                        <value>2</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">3</display>
+                        <value>3</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">4</display>
+                        <value>4</value>
+                    </value-definition>
+                     <value-definition>
+                        <display xml:lang="x-default">5</display>
+                        <value>5</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="headerSearchMaxSuggestions">
+                <display-name xml:lang="x-default">Header Search Max Suggestion dropdown</display-name>
+                <description xml:lang="x-default">How many products should be suggested in the search dropdown.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">1</display>
+                        <value>1</value>
+                    </value-definition>
+                     <value-definition>
+                        <display xml:lang="x-default">2</display>
+                        <value>2</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">3</display>
+                        <value>3</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">4</display>
+                        <value>4</value>
+                    </value-definition>
+                     <value-definition>
+                        <display xml:lang="x-default">5</display>
+                        <value>5</value>
+                    </value-definition>
+                     <value-definition>
+                        <display xml:lang="x-default">6</display>
+                        <value>6</value>
+                    </value-definition>
+                     <value-definition>
+                        <display xml:lang="x-default">7</display>
+                        <value>7</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">8</display>
+                        <value>8</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">9</display>
+                        <value>9</value>
+                    </value-definition>
+                     <value-definition>
+                        <display xml:lang="x-default">10</display>
+                        <value>10</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="googleApiKey">
+                <display-name xml:lang="x-default">google map and Places api key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="googlePlacesEnabled">
+                <display-name xml:lang="x-default">Google Places Enabled</display-name>
+                <description xml:lang="x-default">Toggle whether Google Places is enabled</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="googleMerchantProductFeedFileLocation">
+                <display-name xml:lang="x-default">Google Merchant Product Feed File Location</display-name>
+                <description xml:lang="x-default">Where to place file from google merchant product feed export</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>impex/src/googlemerchant/catalog</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdHomePageID">
+                <display-name xml:lang="x-default">Page Designer ID for Home page</display-name>
+                <description xml:lang="x-default">ID of the homepage created in Page Designer, defaults to 'homepage'. If no page is found that is visible for the locale/site, will fall back to the base SFRA homepage.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>homepage</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpCollapsibleContentDesktop1">
+                <display-name xml:lang="x-default">PDP Make Content 1 Collapsible (open or closed) or Not Collapsible on Desktop</display-name>
+                <description xml:lang="x-default">Determine if content will be collapsible and open, collapsible and closed, or not collapsible on PDP in desktop (mobile is collapsible by default).</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show collapsible content closed</display>
+                        <value>collapsed-closed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show collapsible content open</display>
+                        <value>collapsed-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show content as not collapsible</display>
+                        <value>not-collapsible</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpCollapsibleContentDesktop2">
+                <display-name xml:lang="x-default">PDP Make Content 2 Collapsible (open or closed) or Not Collapsible on Desktop</display-name>
+                <description xml:lang="x-default">Determine if content will be collapsible and open, collapsible and closed, or not collapsible on PDP in desktop (mobile is collapsible by default).</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show collapsible content closed</display>
+                        <value>collapsed-closed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show collapsible content open</display>
+                        <value>collapsed-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show content as not collapsible</display>
+                        <value>not-collapsible</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpCollapsibleContentDesktop3">
+                <display-name xml:lang="x-default">PDP Make Content 3 Collapsible (open or closed) or Not Collapsible on Desktop</display-name>
+                <description xml:lang="x-default">Determine if content will be collapsible and open, collapsible and closed, or not collapsible on PDP in desktop (mobile is collapsible by default).</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show collapsible content closed</display>
+                        <value>collapsed-closed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show collapsible content open</display>
+                        <value>collapsed-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show content as not collapsible</display>
+                        <value>not-collapsible</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpCollapsibleContentDesktop4">
+                <display-name xml:lang="x-default">PDP Make Content 4 Collapsible (open or closed) or Not Collapsible on Desktop</display-name>
+                <description xml:lang="x-default">Determine if content will be collapsible and open, collapsible and closed, or not collapsible on PDP in desktop (mobile is collapsible by default).</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Show collapsible content closed</display>
+                        <value>collapsed-closed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show collapsible content open</display>
+                        <value>collapsed-expanded</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Show content not collapsible</display>
+                        <value>not-collapsible</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpHideSingleVariants">
+                <display-name xml:lang="x-default">PDP Hide Single Variants</display-name>
+                <description xml:lang="x-default">Set to 'yes' to hide variant options on the PDP if there's only one variant available.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpAttributeGroupsShow">
+                <display-name xml:lang="x-default">PDP Attribute Groups That Show</display-name>
+                <description xml:lang="x-default">Inclusion list of attribute group id's that will be pulled into the attributes file that then shows above the collapsible content.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-height>1</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpImageColumnWidth">
+                <display-name xml:lang="x-default">PDP Image Column Width</display-name>
+                <description xml:lang="x-default">Choose the width of the column containing the main product image (on desktop.) Useful for fine-tuning the PDP layout to account for different image aspect-ratios and amount of product attributes.</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">1/12</display>
+                        <value>1/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">2/12</display>
+                        <value>2/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">3/12</display>
+                        <value>3/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">4/12</display>
+                        <value>4/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">5/12</display>
+                        <value>5/12</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">6/12</display>
+                        <value>6/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">7/12</display>
+                        <value>7/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">8/12</display>
+                        <value>8/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">9/12</display>
+                        <value>9/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">10/12</display>
+                        <value>10/12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">11/12</display>
+                        <value>11/12</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpQuickbuyButtonOrIcon">
+                <display-name xml:lang="x-default">PLP Quickview Button or Icon</display-name>
+                <description xml:lang="x-default">On the PLP, show the Quickview Button or just an Icon</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">hide</display>
+                        <value>hide</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">icon</display>
+                        <value>icon</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">button</display>
+                        <value>button</value>
+                    </value-definition>
+                </value-definitions>
+                <default-value>button</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpQuickAddToCartButtonOrIcon">
+                <display-name xml:lang="x-default">PLP Quick Add-to-cart Button or Icon</display-name>
+                <description xml:lang="x-default">On the PLP, show the Quick Add-to-cart Button or just an Icon</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">hide</display>
+                        <value>hide</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">icon</display>
+                        <value>icon</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">button</display>
+                        <value>button</value>
+                    </value-definition>
+                </value-definitions>
+                <default-value>hide</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="pdpSwatchTypeAsImage">
+                <display-name xml:lang="x-default">Use Image for Color Swatch on PDP</display-name>
+                <description xml:lang="x-default">No or empty is the swatch image type (circle), yes is the small image type (product thumbnail) (PDP version)</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpSwatchShow">
+                <display-name xml:lang="x-default">PLP Swatch Show on Hover or Always</display-name>
+                <description xml:lang="x-default">Switch between always showing the swatches in the PLP tiles, or only showing on hover of the tile itself.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">on-hover</display>
+                        <value>on-hover</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">always-show</display>
+                        <value>always-show</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpPromotionShow">
+                <display-name xml:lang="x-default">PLP Show Product Level Promotion in Product Tile</display-name>
+                <description xml:lang="x-default">Hides by default unless set to show.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpSwatchTypeAsImage">
+                <display-name xml:lang="x-default">Use Image for Color Swatch on PLP</display-name>
+                <description xml:lang="x-default">No or empty is the swatch image type (circle), yes is the small image type (product thumbnail) (PLP version)</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpContentAlignment">
+                <display-name xml:lang="x-default">Product Tile Content Alignment</display-name>
+                <description xml:lang="x-default">On the PLP, how should the product tile info display</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Left</display>
+                        <value>left</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Center</display>
+                        <value>center</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Right</display>
+                        <value>right</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpHoverEffects">
+                <display-name xml:lang="x-default">Product Tile Hover Effect</display-name>
+                <description xml:lang="x-default">Which effect should be used when hovering on a product tile</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Bottom Border</display>
+                        <value>bottom-border</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Zoom Image</display>
+                        <value>zoom-image</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Underline Title</display>
+                        <value>underline-title</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">None</display>
+                        <value>none</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="enablePLPStickyRefinementBar">
+                <display-name xml:lang="x-default">Enable PLP Sticky Refinement Bar</display-name>
+                <description xml:lang="x-default">Enables Sticky refinement bar at the top of the PLP once a user scrolls past the header. Only applicable to the horizontal multiple and one dropdown.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="quickviewShowHeadlineAndDescription">
+                <display-name xml:lang="x-default">Quickview Show headline and headline description</display-name>
+                <description xml:lang="x-default">Default is to not show. Content that would show can be found at the product level.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeTypePreferences">
+                <display-name xml:lang="x-default">Store Type Preferences</display-name>
+                <description xml:lang="x-default">Store Type Preferences in JSON format</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableMultiBrand">
+                <display-name xml:lang="x-default">Enable Multi Brand Functionality</display-name>
+                <description xml:lang="x-default">Enables multi brand functionality logic</description>
+                <type>boolean</type>
+                 <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="siteContextJSON">
+                <display-name xml:lang="x-default">Multi Brand Site Context</display-name>
+                <description xml:lang="x-default">Multi Brand Site Context in JSON format</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="subcategoryLayoutDirection">
+                <display-name xml:lang="x-default">Subcategory List Layout Direction</display-name>
+                <description xml:lang="x-default">FOR MEGAMENU: Determines if the lists of subcategories are organized in rows that wrap or stack vertically in columns that wrap to a new column.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Rows - Horizontal</display>
+                        <value>subcat-rows</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Columns - Vertical</display>
+                        <value>subcat-columns</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableVariantSelectionInPdpStickyAddToCart">
+                <display-name xml:lang="x-default">Enable Variant Selection in PDP Sticky Add To Cart</display-name>
+                <description xml:lang="x-default">If enablePdpStickyAddToCart, is set to "true", and this option is set to true, then variant selection on the PDP Sticky will show (on Desktop version only). Otherwise, only name and add to cart button will show in the sticky</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="swatchableAttributes">
+                <display-name xml:lang="x-default">Swatchable Attributes on PDP</display-name>
+                <description xml:lang="x-default">Array of attributes you want to display as a swatch. example: ['color','size']</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-height>1</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="enablePdpStickyAddToCart">
+                <display-name xml:lang="x-default">Enable PDP Sticky Add To Cart</display-name>
+                <description xml:lang="x-default">Enables Sticky Add to cart bar at the top of the PDP once a user scrolls past the inline add to cart btn</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableQuantityStepper">
+                <display-name xml:lang="x-default">Enable Quantity Stepper</display-name>
+                <description xml:lang="x-default">Set to 'yes' to replace the standard quantity select dropdown with a plus/minus quantity stepper.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="hideQty">
+                <display-name xml:lang="x-default">Hide Quantity</display-name>
+                <description xml:lang="x-default">Hides the Quantity on PDP, minicart, and cart page</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+
+            <attribute-definition attribute-id="productsPerRowMobile">
+                <display-name xml:lang="x-default">Products Per Row - Mobile</display-name>
+                <description xml:lang="x-default">Products per row that show on product grid page, mobile ONLY - default 2 per row</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">One</display>
+                        <value>one</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Two</display>
+                        <value>two</value>
+                    </value-definition>
+                </value-definitions>
+                <default-value>two</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="productsPerRowDesktop">
+                <display-name xml:lang="x-default">Products Per Row - Desktop</display-name>
+                <description xml:lang="x-default">Products per row that show on product grid page, desktop ONLY - default 3 per row</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Three</display>
+                        <value>three</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Four</display>
+                        <value>four</value>
+                    </value-definition>
+                </value-definitions>
+                <default-value>three</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="contentPerRowMobile">
+                <display-name xml:lang="x-default">Content Per Row - Mobile</display-name>
+                <description xml:lang="x-default">Content items per row that show on content grid page, mobile ONLY - default 2 per row</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">One</display>
+                        <value>1</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Two</display>
+                        <value>2</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="contentPerRowDesktop">
+                <display-name xml:lang="x-default">Content Per Row - Desktop</display-name>
+                <description xml:lang="x-default">Content items per row that show on content grid page, mobile ONLY - default 4 per row</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Two</display>
+                        <value>2</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Three</display>
+                        <value>3</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Four</display>
+                        <value>4</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="badgeDisplayLocation">
+                <display-name xml:lang="x-default">Badge Display Location</display-name>
+                <description xml:lang="x-default">Choose where the badge will display on the product tile. All badges will display under the image on mobile.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Display over image</display>
+                        <value>badge-image-over</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Display under the image</display>
+                        <value>badge-image-under</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="filterType">
+                <display-name xml:lang="x-default">Filter Type</display-name>
+                <description xml:lang="x-default">Filter type options include vertical, horizontal-multiple-dropdowns, and horizontal-one-dropdown. Default is vertical.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Vertical</display>
+                        <value>vertical</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Horizontal Multiple Dropdowns</display>
+                        <value>horizontal-multiple-dropdowns</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Horizontal One Dropdown</display>
+                        <value>horizontal-one-dropdown</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpShowSecondaryProductImage">
+                <display-name xml:lang="x-default">Show Secondary Product Image on PLP</display-name>
+                <description xml:lang="x-default">Set to true by default. Note: secondary product never shows on mobile.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="showGoogleLogin">
+                <display-name xml:lang="x-default">Show Google Login</display-name>
+                <description xml:lang="x-default">Show Google login button that appears on account and checkout. Hides by default.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="showFacebookLogin">
+                <display-name xml:lang="x-default">Show Facebook Login</display-name>
+                <description xml:lang="x-default">Show Facebook login button that appears on account and checkout. Hides by default.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+
+            <!-- Wishlist Attributes -->
+            <attribute-definition attribute-id="wishlistEnable">
+                <display-name xml:lang="x-default">Enable Wishlist</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="giftCertificateEnabled">
+                <display-name xml:lang="x-default">Enable Gift Certificate purchases and redemptions</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="giftCertificateMin">
+                <display-name xml:lang="x-default">The minimum amount a gift certificate can be purchased for</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>5</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="giftCertificateMax">
+                <display-name xml:lang="x-default">The maximum amount a gift certificate can be purchased for</display-name>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>5000</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="GiftCertificateQuantityLimitPerOrder">
+                <display-name xml:lang="x-default">Max Quantity of Gift Certificates per order</display-name>
+                <description xml:lang="x-default">The maximum quantity of Gift Certificates allowed per order</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>1</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="giftCertificateActivatedByExternalSystem">
+                <display-name xml:lang="x-default">Activate Gift Certificates via External System</display-name>
+                <description xml:lang="x-default">Enabled (Yes): GCs will be disabled and pending until external system (like SOM) calls hook. Disabled (No): GCs will be enabled on order.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="blogDefaultPageSize">
+                <display-name xml:lang="x-default">Blog Results Per Page</display-name>
+                <description xml:lang="x-default">The number of results to show on the Blog Landing page. Default is 12.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">12</display>
+                        <value>12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">24</display>
+                        <value>24</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">36</display>
+                        <value>36</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">48</display>
+                        <value>48</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">60</display>
+                        <value>60</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="blogParentFolders">
+                <display-name xml:lang="x-default">Blog Parent Folders</display-name>
+                <description xml:lang="x-default">Enter one or more folder IDs to be used as blogs (i.e. content search results, categorized by nested folders).</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="blogsPerRowDesktop">
+                <display-name xml:lang="x-default">Blogs Results Per Row - Desktop</display-name>
+                <description xml:lang="x-default">How many blog results to show per row on desktop for the Blog Landing Page.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Two</display>
+                        <value>2</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Three</display>
+                        <value>3</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Four</display>
+                        <value>4</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="blogsPerRowMobile">
+                <display-name xml:lang="x-default">Blog Results Per Row - Mobile</display-name>
+                <description xml:lang="x-default">How many blog results to show per row on mobile for the Blog Landing Page.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">One</display>
+                        <value>1</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Two</display>
+                        <value>2</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="quantityDropdownLimit">
+                <display-name xml:lang="x-default">Quantity Dropdown Limit</display-name>
+                <description xml:lang="x-default">The max number of options to show in the quantity selector.</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>10</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="plpDefaultPageSize">
+                <display-name xml:lang="x-default">PLP Number of Products that Show Per Page</display-name>
+                <description xml:lang="x-default">Default is 12 products showing on PLP.</description>
+                <type>enum-of-int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">12</display>
+                        <value>12</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">24</display>
+                        <value>24</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">36</display>
+                        <value>36</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">48</display>
+                        <value>48</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">60</display>
+                        <value>60</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="customerServiceEmail">
+                <display-name xml:lang="x-default">Customer Service Email</display-name>
+                <description xml:lang="x-default">Using noreply@salesforce.com will block all emails on PIG instances</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+                <default-value>noreply@sink.salesforce.com</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableRecaptcha">
+                <display-name xml:lang="x-default">Enable Google recaptcha v3 checking on eligible forms</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableBMAuthRecaptchaBypass">
+                <display-name xml:lang="x-default">Enable BM Authentication bypass of Google recaptcha. Example: Customer Service Center integration</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="recaptchaFailThreshold">
+                <display-name xml:lang="x-default">Between 1.0 (good) and 0.0 (bot). Form submissions with a score less than or equal to this number will be rejected.</display-name>
+                <type>double</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>0.5</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="recaptchaSiteKey">
+                <display-name xml:lang="x-default">Site Key for recaptcha use</display-name>
+                <description xml:lang="x-default">Site Key for recaptcha use generated at https://www.google.com/recaptcha/admin</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value></default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="recaptchaSecretKey">
+                <display-name xml:lang="x-default">Secret Key for recaptcha use</display-name>
+                <description xml:lang="x-default">Secret Key for recaptcha use generated at https://www.google.com/recaptcha/admin</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value></default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="useDefaultProductVariant">
+                <display-name xml:lang="x-default">Use Default Product Variant</display-name>
+                <description xml:lang="x-default">Indicates that default variant is set (there is also a product specific attribute as well)</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="variationAttributesToUse">
+                <display-name xml:lang="x-default">Variation Attributes to Use</display-name>
+                <description xml:lang="x-default">Indicates which variation attributes to select when using default variant</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="multishippingWithoutBopisEnabled">
+                <display-name xml:lang="x-default">Multishipping Enabled (without BOPIS)</display-name>
+                <description xml:lang="x-default">Enable multishipping checkbox in checkout when more than 1 item in cart and not a buy online pickup in store order</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="skipReviewStepInCheckout">
+                <display-name xml:lang="x-default">Skip Review Step in Checkout</display-name>
+                <description xml:lang="x-default">The 'Submit Payment' button will function instead like a 'Place Order' button. Paypal and other payment methods that skip the billing page will 'Place Order' instead of going to the review step.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="viewBackInStockNotificationForm">
+                <display-name xml:lang="x-default">Back in Stock Enabled</display-name>
+                <description xml:lang="x-default">If true, then back in stock notifications are enabled for all products available on the storefront.&#13;
+It will also be likely that the related site preference "viewOutOfStockItems", should be enabled in order for out of stock products to be selectable on the PDP and allow the customer to subscribe to notifications of a specific product.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="viewOutOfStockItems">
+                <display-name xml:lang="x-default">Enable Out-of-stock items to be selectable</display-name>
+                <description xml:lang="x-default">With this enabled, Out-of-stock items will be 'selectable'.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeHeaderSelectorAutoLocationRadius">
+                <display-name xml:lang="x-default">The radius to look for and automatically select nearby stores</display-name>
+                <description xml:lang="x-default">The radius to look for and automatically select nearby stores. A value of 0 will disable automatically selecting a nearby store.</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>0</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeHeaderSelectorEnabled">
+                <display-name xml:lang="x-default">Enable Store Selector In Header</display-name>
+                <description xml:lang="x-default">Enables store selector in header.  Selection is saved to current session and customer profile</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeSearchRadiusOptions">
+                <display-name xml:lang="x-default">Store Search Radius Options</display-name>
+                <description xml:lang="x-default">Individual search radius options for store search selection. The first will be the default option.</description>
+                <type>set-of-int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>15</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfraOrderConfirmationEmailDisabled">
+                <display-name xml:lang="x-default">Disable SFRA Order Confirmation Email</display-name>
+                <description xml:lang="x-default">If true, SFRA fallback email address will not be triggered. If false, SFRA email will be triggered if Order Confirmation hook (Marketing Cloud, etc) is not Enabled or Fails.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="extraShippingTaxCodeJSON">
+                <display-name xml:lang="x-default">Extra Shipping Tax Codes in JSON</display-name>
+                <description xml:lang="x-default">Used to add extra shipping taxes (ie CO retail delivery tax)</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>{ "US": { "CO": { "codes": [ { "ID": "OF400000", "amountInCents": 28, "description": { "default": "CO retail delivery fee", "de": "jah fee" } } ] } } }</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="sfraEmailHelpersEmailFilters">
+                <display-name xml:lang="x-default">Allowed Email Recipient Filter</display-name>
+                <description xml:lang="x-default">Array of RegExp patterns to filter against EmailHelpers dw.net.Mail.send() configurations. Value plugs into "new RegExp('{value}','gi')"</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Storefront Configs">
+                <display-name xml:lang="x-default">Storefront Configurations</display-name>
+                <attribute attribute-id="contactUsFormTopics"/>
+                <attribute attribute-id="customerServiceEmail"/>
+                <attribute attribute-id="customerServiceNumber"/>
+                <attribute attribute-id="googleApiKey"/>
+                <attribute attribute-id="googlePlacesEnabled"/>
+                <attribute attribute-id="GoogleVerificationTag"/>
+                <attribute attribute-id="googleMerchantProductFeedFileLocation"/>
+            </attribute-group>
+            <attribute-group group-id="Autobahn Configs">
+                <display-name xml:lang="x-default">Autobahn Configurations</display-name>
+                <attribute attribute-id="availableForInStorePickup"/>
+                <attribute attribute-id="badgeDisplayLocation"/>
+                <attribute attribute-id="blogParentFolders"/>
+                <attribute attribute-id="blogDefaultPageSize"/>
+                <attribute attribute-id="blogsPerRowDesktop"/>
+                <attribute attribute-id="blogsPerRowMobile"/>
+                <attribute attribute-id="contentImageBreakpoints"/>
+                <attribute attribute-id="contentImageFormat"/>
+                <attribute attribute-id="contentImageQuality"/>
+                <attribute attribute-id="contentPerRowDesktop"/>
+                <attribute attribute-id="contentPerRowMobile"/>
+                <attribute attribute-id="cookieConsentAge"/>
+                <attribute attribute-id="countriesJSONOverride"/>
+                <attribute attribute-id="enableConsentTracking"/>
+                <attribute attribute-id="enableCookieConsent"/>
+                <attribute attribute-id="enablePLPStickyRefinementBar"/>
+                <attribute attribute-id="enablePdpStickyAddToCart"/>
+                <attribute attribute-id="enableQuantityStepper"/>
+                <attribute attribute-id="enableVariantSelectionInPdpStickyAddToCart"/>
+                <attribute attribute-id="extraShippingTaxCodeJSON"/>
+                <attribute attribute-id="filterType"/>
+                <attribute attribute-id="headerCountrySelectorSource"/>
+                <attribute attribute-id="headerFixed"/>
+                <attribute attribute-id="headerLayout"/>
+                <attribute attribute-id="headerNavLayout"/>
+                <attribute attribute-id="headerSearch"/>
+                <attribute attribute-id="headerSearchMinTermLength"/>
+                <attribute attribute-id="headerSearchMaxSuggestions"/>
+                <attribute attribute-id="hideQty"/>
+                <attribute attribute-id="loginRedirectExclusions"/>
+                <attribute attribute-id="megamenuNavLayout"/>
+                <attribute attribute-id="navMenuCategoryDepth"/>
+                <attribute attribute-id="pdHomePageID"/>
+                <attribute attribute-id="pdpAttributeGroupsShow"/>
+                <attribute attribute-id="pdpCollapsibleContentDesktop1"/>
+                <attribute attribute-id="pdpCollapsibleContentDesktop2"/>
+                <attribute attribute-id="pdpCollapsibleContentDesktop3"/>
+                <attribute attribute-id="pdpCollapsibleContentDesktop4"/>
+                <attribute attribute-id="pdpHideSingleVariants"/>
+                <attribute attribute-id="pdpImageColumnWidth"/>
+                <attribute attribute-id="pdpSwatchTypeAsImage"/>
+                <attribute attribute-id="pdpThumbnailType"/>
+                <attribute attribute-id="plpCollapseRefinementsDesktop"/>
+                <attribute attribute-id="plpCollapseRefinementsMobile"/>
+                <attribute attribute-id="plpContentAlignment"/>
+                <attribute attribute-id="plpDefaultPageSize"/>
+                <attribute attribute-id="plpHoverEffects"/>
+                <attribute attribute-id="plpPromotionShow"/>
+                <attribute attribute-id="plpQuickAddToCartButtonOrIcon"/>
+                <attribute attribute-id="plpQuickbuyButtonOrIcon"/>
+                <attribute attribute-id="plpShowSecondaryProductImage"/>
+                <attribute attribute-id="plpSwatchShow"/>
+                <attribute attribute-id="plpSwatchTypeAsImage"/>
+                <attribute attribute-id="productsPerRowDesktop"/>
+                <attribute attribute-id="productsPerRowMobile"/>
+                <attribute attribute-id="quantityDropdownLimit"/>
+                <attribute attribute-id="quickviewShowHeadlineAndDescription"/>
+                <attribute attribute-id="enableMultiBrand"/>
+                <attribute attribute-id="siteContextJSON"/>
+                <attribute attribute-id="skipReviewStepInCheckout"/>
+                <attribute attribute-id="storeHeaderSelectorAutoLocationRadius"/>
+                <attribute attribute-id="storeHeaderSelectorEnabled"/>
+                <attribute attribute-id="storeSearchRadiusOptions"/>
+                <attribute attribute-id="storeTypePreferences"/>
+                <attribute attribute-id="subcategoryLayoutDirection"/>
+                <attribute attribute-id="swatchableAttributes"/>
+                <attribute attribute-id="useDefaultProductVariant"/>
+                <attribute attribute-id="variationAttributesToUse"/>
+                <attribute attribute-id="viewOutOfStockItems"/>
+                <attribute attribute-id="viewBackInStockNotificationForm"/>
+                <attribute attribute-id="sfraOrderConfirmationEmailDisabled"/>
+                <attribute attribute-id="sfraEmailHelpersEmailFilters"/>
+            </attribute-group>
+            <attribute-group group-id="Dynamic Imaging Service">
+                <display-name xml:lang="x-default">Dynamic Imaging Service</display-name>
+                <attribute attribute-id="disConfiguration"/>
+            </attribute-group>
+            <attribute-group group-id="GiftCertificate">
+                <display-name xml:lang="x-default">Gift Certificate Configuration</display-name>
+                <attribute attribute-id="giftCertificateEnabled"/>
+                <attribute attribute-id="giftCertificateMin"/>
+                <attribute attribute-id="giftCertificateMax"/>
+                <attribute attribute-id="GiftCertificateQuantityLimitPerOrder"/>
+                <attribute attribute-id="giftCertificateActivatedByExternalSystem"/>
+            </attribute-group>
+            <attribute-group group-id="Recaptcha">
+                <display-name xml:lang="x-default">Recaptcha</display-name>
+                <attribute attribute-id="enableRecaptcha"/>
+                <attribute attribute-id="recaptchaFailThreshold"/>
+                <attribute attribute-id="recaptchaSiteKey"/>
+                <attribute attribute-id="recaptchaSecretKey"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SourceCodeGroup">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="theme">
+                <display-name xml:lang="x-default">Theme Stylesheet</display-name>
+                <description xml:lang="x-default">Enter the file name for a custom theme, e.g. "theme-dark.css"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>50</field-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="theme">
+                <display-name xml:lang="x-default">Theme</display-name>
+                <attribute attribute-id="theme"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Store">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="storeType">
+                <display-name xml:lang="x-default">Store Type</display-name>
+                <description xml:lang="x-default">Selected store type will render different pins on the map. If no store type is chosen the default pin will display.</description>
+                <type>enum-of-string</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <!-- <value-definitions>Moved to initialize/autobahn_client_core/meta to prevent overriding client requirements for values</value-definitions> -->
+            </attribute-definition>
+            <attribute-definition attribute-id="additionalDetails">
+                <display-name xml:lang="x-default">Additional Details</display-name>
+                <description xml:lang="x-default">An extra field to use for any additional information you want to display on the Store Detail page.</description>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Basic">
+                <display-name xml:lang="x-default">Basic Attributes</display-name>
+                <attribute attribute-id="ID" system="true"/>
+                <attribute attribute-id="name" system="true"/>
+                <attribute attribute-id="inventoryListID" system="true"/>
+                <attribute attribute-id="storeType"/>
+            </attribute-group>
+            <attribute-group group-id="Details">
+                <display-name xml:lang="x-default">Store Details</display-name>
+                <attribute attribute-id="storeHours" system="true"/>
+                <attribute attribute-id="storeEvents" system="true"/>
+                <attribute attribute-id="image" system="true"/>
+                <attribute attribute-id="longitude" system="true"/>
+                <attribute attribute-id="latitude" system="true"/>
+                <attribute attribute-id="additionalDetails"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>

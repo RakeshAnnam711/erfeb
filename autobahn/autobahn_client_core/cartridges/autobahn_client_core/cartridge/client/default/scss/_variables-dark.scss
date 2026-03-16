@@ -1,0 +1,24 @@
+/*
+* This is an example file for setting up a theme
+* Note: This is not a complete theme, just a simple flip of white and black plus a new font
+* This same pattern, along with the variables setup in global-dark.scss, can be used for setting up site-specific variables
+*/
+
+// Colors
+$white: #000000;
+$black: #FFFFFF;
+$dark-gray: #CCCCCC;
+$light-gray: #999999;
+$red: #ff75a4;
+$base-font-color: $black;
+
+// Fonts
+$primary-font: brandon-grotesque !default;
+$link-color: $base-font-color;
+$link-color-hover: $base-font-color;
+
+// Components
+$header-promo-bar-background: $white;
+$header-transparent-text-color-light: $black;
+$header-transparent-text-color-dark: $white;
+$nav-link-color: $black;

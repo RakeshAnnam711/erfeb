@@ -1,0 +1,17 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+
+    <div class="container account-page">
+
+        <iscontentasset aid="accountHeaderDashboard"/>
+
+        <!---Breadcrumbs--->
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+        <isinclude template="account/dashboardProfileCards"/>
+    </div>
+</isdecorate>

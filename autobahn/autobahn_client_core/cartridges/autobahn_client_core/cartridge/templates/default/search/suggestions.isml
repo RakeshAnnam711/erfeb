@@ -1,0 +1,162 @@
+<isset name="isFenzyEnabled" value="${('enableFrenzyRecommendationOnSearch' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.enableFrenzyRecommendationOnSearch)}" scope="page"/>
+
+<ul
+    class="suggestions container"
+    role="listbox"
+    id="search-results"
+    style="
+        --search-suggestion-product-size: 120px;
+        --search-suggestion-product-tile-width: 150px;
+        --search-suggestion-product-gap: 10px;
+        --search-suggestion-product-columns: 6;
+        --search-suggestion-product-title-font-size:15px;
+        --search-suggestion-product-image-to-title-gap: 20px;
+        --search-suggestion-header-line-gap: 1px;
+        --search-suggestion-section-to-next-title-gap: 1px;
+        --search-suggestion-value-gap: 5px;
+        --search-suggestion-category-gap: 5px;
+    ">
+    <iscomment> Auto suggestion based on user query </iscomment>
+    <isif condition="${pdict.suggestions.phrase_suggestions && pdict.suggestions.phrase_suggestions.phrases.length > 0}">
+        <li class="suggestions-header d-inline-block">
+            <div class="do-you-mean">${Resource.msg('label.suggest.suggetionsfor', 'search', null)} ${JSON.stringify(pdict.suggestions.query)}</div>
+        </li>
+        <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="${Resource.msg('label.suggest.suggetionsfor', 'search', null)} ${JSON.stringify(pdict.suggestions.query)}">
+            <isloop items="${pdict.suggestions.phrase_suggestions.phrases}" var="phrase" status="listindex">
+                <isset name="phraseValue" value="${phrase.value || phrase}" scope="page" />
+                <div class="suggestions-item term" id="phrase-1-${listindex.index}" role="option">
+                    <iscomment>
+                        Frenzy version kept for reference:
+                        <a class="name" href="${isFenzyEnabled ? URLUtils.url('Frenzy-Search', 'q', phraseValue) : URLUtils.url('Search-Show', 'q', phraseValue)}" role="option" aria-label="${phraseValue}">${phraseValue}</a>
+                    </iscomment>
+                    <a class="name" href="${URLUtils.url('Search-Show', 'q', phraseValue)}" role="option" aria-label="${phraseValue}">
+                        ${phraseValue}
+                    </a>
+                </div>
+            </isloop>
+        </div>
+    </isif>
+
+    <iscomment> Product suggestions based on user query </iscomment>
+    <isif condition="${pdict.suggestions.product && pdict.suggestions.product.available && pdict.suggestions.product.products.length > 0}">
+        <li class="suggestions-header">${Resource.msg('label.suggest.products', 'search', null)}</li>
+        <li class="suggestions-items suggestions-products">
+            <isloop items="${pdict.suggestions.product.products}" var="product" status="listindex">
+                <div class="suggestions-item" id="product-${listindex.index}" role="option">
+                    <a class="suggestions-products-a" href="${product.url}" aria-label="${product.name}">
+                        <div class="swatch-thumbnail" style="background-image: url(${product.imageUrl})"></div>
+                        <div class="frenzy_product_desc">
+                            <isif condition="${product.brand}">
+                                <div class="frenzy_product_brand">${product.brand}</div>
+                            </isif>
+                            <h3 class="frenzy_product_title">${product.name}</h3>
+                            <isif condition="${product.description}">
+                                <div class="frenzy_product_subtitle">${product.description}</div>
+                            </isif>
+                        </div>
+                    </a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+
+    <iscomment> Category suggestions </iscomment>
+    <isif condition="${pdict.suggestions.category && pdict.suggestions.category.available && pdict.suggestions.category.categories.length > 0}">
+        <isif condition="${!pdict.suggestions.query}">
+            <li class="suggestions-header">Popular Categories</li>
+            <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="Popular Categories">
+                <isloop items="${pdict.suggestions.category.categories}" var="category" status="listindex">
+                    <div class="suggestions-item term" id="category-${listindex.index}" role="option">
+                        <a class="name" href="${category.url}" role="option" aria-label="${category.name}">${category.name}</a>
+                    </div>
+                </isloop>
+            </div>
+        <iselse/>
+            <li class="suggestions-header">Categories</li>
+            <div class="suggestions-items suggestion-terms suggestions-categories" role="listbox" aria-label="Categories">
+                <isloop items="${pdict.suggestions.category.categories}" var="category" status="listindex">
+                    <div class="suggestions-item term" id="category-${listindex.index}" role="option">
+                        <a class="name" href="${category.url}" role="option" aria-label="${category.name}">${category.name}</a>
+                    </div>
+                </isloop>
+            </div>
+        </isif>
+    </isif>
+
+    <iscomment>
+        Popular searches are intentionally hidden from suggestions.
+        Frenzy/non-Frenzy block kept for reference:
+        <isif condition="${pdict.suggestions.popular && pdict.suggestions.popular.phrases && pdict.suggestions.popular.phrases.length > 0}">
+            <li class="suggestions-header d-inline-block">${Resource.msg('label.suggest.popular', 'search', null)}</li>
+            <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="Popular searches">
+                ...
+            </div>
+        </isif>
+    </iscomment>
+
+    <iscomment> Brand suggestions </iscomment>
+    <isif condition="${pdict.suggestions.brand && pdict.suggestions.brand.available && pdict.suggestions.brand.phrases.length > 0}">
+        <li class="suggestions-header d-inline-block">Popular Brands</li>
+        <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="Popular Brands">
+            <isloop items="${pdict.suggestions.brand.phrases}" var="phrase" status="listindex">
+                <div class="suggestions-item term" id="brand-${listindex.index}" role="option">
+                    <a class="name" href="${phrase.url}" role="option" aria-label="${phrase.value}">${phrase.value}</a>
+                </div>
+            </isloop>
+        </div>
+    </isif>
+
+    <iscomment>
+        Recent searches hidden intentionally.
+        <isif condition="${pdict.suggestions.recent && pdict.suggestions.recent.available && pdict.suggestions.recent.phrases.length > 0}">
+            <li class="suggestions-header d-inline-block">${Resource.msg('label.suggest.recent', 'search', null)}</li>
+            <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="${Resource.msg('label.suggest.recent', 'search', null)}">
+                <isloop items="${pdict.suggestions.recent.phrases}" var="phrase" status="listindex">
+                    <div class="suggestions-item term" id="recent-${listindex.index}" role="option">
+                        <a class="name" href="${phrase.url}" role="option" aria-label="${phrase.value}">${phrase.value}</a>
+                    </div>
+                </isloop>
+            </div>
+        </isif>
+    </iscomment>
+
+    <iscomment>
+        Content suggestions hidden intentionally.
+        <isif condition="${pdict.suggestions.content && pdict.suggestions.content.available && pdict.suggestions.content.contents.length > 0}">
+            <li class="suggestions-header d-inline-block">${Resource.msg('label.suggest.content', 'search', null)}</li>
+            <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="${Resource.msg('label.suggest.content', 'search', null)}">
+                <isloop items="${pdict.suggestions.content.contents}" var="content" status="listindex">
+                    <isif condition="${listindex.index < 3}">
+                        <div class="suggestions-item term" id="content-${listindex.index}" role="option">
+                            <a class="name" href="${content.url}" role="option" aria-label="${content.name}">${content.name}</a>
+                        </div>
+                    </isif>
+                </isloop>
+            </div>
+        </isif>
+    </iscomment>
+
+    <iscomment>
+        Frenzy bestsellers kept and gated:
+        <isif condition="${isFenzyEnabled && pdict.suggestions.bestsellers && pdict.suggestions.bestsellers.matching_products && pdict.suggestions.product.products.length <= 0}">
+            <li class="suggestions-header">${Resource.msg('label.suggest.popular.products', 'search', null)}</li>
+            <li class="suggestions-items suggestions-products">
+                <isloop items="${pdict.suggestions.bestsellers.matching_products}" var="product" status="listindex">
+                    <div class="suggestions-item" id="product-${listindex.index}" role="option">
+                        <a class="suggestions-products-a" href="${product.value.org_prod_url}" aria-label="${product.value.org_product}">
+                            <div class="swatch-thumbnail" style="background-image: url(${product.value.org_image_url})"></div>
+                            <span class="name">${product.value.org_product}</span>
+                        </a>
+                    </div>
+                </isloop>
+            </li>
+        </isif>
+    </iscomment>
+</ul>
+
+<span id="search-result-count" class="sr-only">
+    ${pdict.suggestions.message}
+</span>
+<span id="search-assistive-text" class="sr-only">
+    ${Resource.msg('label.header.search.assistive_msg', 'common', null)}
+</span>

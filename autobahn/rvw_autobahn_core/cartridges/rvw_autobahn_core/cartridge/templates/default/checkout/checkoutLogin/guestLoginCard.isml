@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-header-custom">${Resource.msg('heading.guest.checkout', 'checkout', null)}</h2>
+    </div>
+    <div class="card-body">
+        <p>
+            ${Resource.msg('msg.guest.checkout1', 'checkout', null)}
+            ${Resource.msg('msg.guest.checkout2', 'checkout', null)}
+        </p>
+        <a
+            href="${URLUtils.https('Checkout-Begin')}"
+            class="btn btn-block btn-primary checkout-as-guest">
+            ${Resource.msg('button.checkout.as.guest', 'checkout', null)}
+        </a>
+    </div>
+</div>

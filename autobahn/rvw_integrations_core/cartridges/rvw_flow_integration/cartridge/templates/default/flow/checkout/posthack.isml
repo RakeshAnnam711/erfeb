@@ -1,0 +1,65 @@
+<form method="post" action="${pdict.url}" name="posthackform"></form>
+
+<isset name="enableRecaptcha" value="${dw.system.Site.current.getCustomPreferenceValue('enableRecaptcha') || false}" scope="page"/>
+
+<isif condition="${enableRecaptcha}">
+    <isscript>
+        var recaptchaMiddleware = require('*/cartridge/scripts/middleware/recaptcha');
+        var service = recaptchaMiddleware.recaptchaVerifyService();
+    </isscript>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=${service.configuration.credential.user}"></script>
+</isif>
+
+<script>
+    var form = document.forms['posthackform'];
+    var enableRecaptcha = ${enableRecaptcha};
+
+    if (enableRecaptcha) {
+        var actionName = 'submitFlow';
+
+        /**
+         * Submit with recaptcha
+         */
+        grecaptcha.ready(function() {
+            grecaptcha.execute('${service.configuration.credential.user}', {action: actionName}).then(function(token) {
+                const data = new URLSearchParams();
+
+                data.append('dwfrm_recaptcha_recaptchaToken', token);
+                data.append('dwfrm_recaptcha_recaptchaAction', actionName);
+
+                fetch(form.action, {method: 'POST', body: data})
+                    .then((response) => response.json())
+                    .then(goToConfirmation);
+            });
+        });
+    } else {
+        fetch(form.action, {method: 'POST'})
+            .then((response) => response.json())
+            .then(goToConfirmation);
+    }
+
+    /**
+     * Forward to order order confirmation via post hack
+     * @param data
+     */
+    function goToConfirmation(data) {
+        var input;
+
+        form.action = data.continueUrl;
+
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'orderID';
+        input.value = data.orderID;
+        form.appendChild(input);
+
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'orderToken';
+        input.value = data.orderToken;
+        form.appendChild(input);
+
+        form.submit();
+    }
+</script>

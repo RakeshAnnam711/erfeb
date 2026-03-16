@@ -1,0 +1,117 @@
+<isdecorate template="common/layout/page">
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var miniCart = false;
+
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addCss('/css/cart.css');
+    </isscript>
+
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+
+    <div class="cart-error-messaging cart-error">
+        <isif condition="${!empty(pdict.valid) && pdict.valid.hasOwnProperty('error') && pdict.valid.error && pdict.items.length !== 0}">
+            <div class="alert alert-danger alert-dismissible valid-cart-error fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                ${pdict.valid.message}
+            </div>
+        </isif>
+    </div>
+
+    <div class="cart-page container pt-3 ${pdict.hideShipping ? 'hide-shipping' : ''}">
+        <h1 class="page-title">${Resource.msg('title.cart','cart',null)}</h1>
+        <div class="row cart-header">
+            <div class="col-sm-4 hidden-xs-down">
+                <a class="continue-shopping-link" href="${URLUtils.url('Home-Show')}" title="${Resource.msg('link.continue.shopping','cart',null)}">
+                    ${Resource.msg('link.continue.shopping','cart',null)}
+                </a>
+            </div>
+            <div class='number-of-items-container col-sm-4 text-center <isif condition="${!empty(pdict.items)}">text-md-right</isif>'>
+                <h2 class="number-of-items">${pdict.numItems == 1 ? Resource.msgf('label.number.item.in.cart','cart', null, pdict.numItems) : Resource.msgf('label.number.items.in.cart','cart', null, pdict.numItems)}</h2>
+            </div>
+            <div class="col-sm-4 text-right hidden-xs-down">
+                <div>
+                    <span>${Resource.msg('info.need.help','cart',null)}</span>
+                    <span><a class="help-phone-number" href="tel:${pdict.customerServiceNumber}">${pdict.customerServiceNumber}</a></span>
+                </div>
+            </div>
+        </div>
+
+        <isif condition="${pdict.items.length === 0}">
+            <div class="cart-empty">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2>${Resource.msg('info.cart.empty.msg','cart',null)}</h2>
+                    </div>
+                </div>
+            </div>
+        <iselse/>
+            <div class="cart">
+                <div class="row">
+                    <!---product cards--->
+                    <div class="col-md-7">
+                        <isloop items="${pdict.items}" var="lineItem">
+                            <isif condition="${lineItem.productType === 'bundle'}">
+                                <isinclude template="cart/productCard/cartBundleCard" />
+                            <iselse/>
+                                <isif condition="${lineItem.noProduct === true}">
+                                    <isif condition="${lineItem.productType === 'giftCertificate'}">
+                                        <isinclude template="cart/productCard/giftCertificateCartProductCard" />
+                                    <iselse/>
+                                        <isinclude template="cart/productCard/uncategorizedCartProductCard" />
+                                    </isif>
+                                    <iselse/>
+                                        <isinclude template="cart/productCard/cartProductCard" />
+                                </isif>
+                            </isif>
+                        </isloop>
+                        <isinclude template="cart/cartApproachingDiscount" />
+
+                        <isinclude template="integrations/cart/cartIntegrationsBottomProductCards"/>
+
+                    </div>
+                    <!---totals, and checkout actions--->
+                    <div class="col-md-5 totals">
+                        <div class="card">
+                            <div class="card-body">
+                                <isinclude template="cart/cartPromoCode" />
+                                <div class="coupons-and-promos">
+                                    <isinclude template="cart/cartCouponDisplay" />
+                                </div>
+                            </div>
+                            
+                            <div class="card-body">
+                                <isif condition="${!pdict.hideShipping}">
+                                    <div class="row shipping-method">
+                                        <isinclude template="cart/cartShippingMethodSelection" />
+                                    </div>
+                                </isif>
+                                <isinclude template="cart/cartTotals" />
+                            </div>
+                            <div class="card-body checkout-continue">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <isinclude template="cart/checkoutButtons" />
+                                        <isinclude template="integrations/cart/cartIntegrationsCheckoutButtons"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <isinclude template="integrations/cart/cartIntegrationsTotals"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <isinclude template="cart/cartRemoveCouponModal"/>
+            <isinclude template="giftCertificate/editGiftCertificateLineItemModal"/>
+        </isif>
+
+        <iscontentasset aid="cart-recommendations" />
+    </div>
+</isdecorate>

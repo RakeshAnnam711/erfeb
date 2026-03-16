@@ -1,0 +1,3 @@
+
+<isinclude template="account/order/orderHistoryCardBody" />
+<isinclude template="account/order/orderHistoryCardFooter" />

@@ -1,0 +1,42 @@
+@import "~core/wishlist/helpers";
+
+// heart icon on products
+.wishlist-toggle-product {
+    .wishlist-icon {
+        @media screen and (min-width: 1200px) {
+            &:hover {
+                @include icon($product-tile-wishlist-link-icon-selected, before, $product-tile-wishlist-link-icon-size, #ba4257);
+            }
+        }
+        &.selected {
+            @include icon($product-tile-wishlist-link-icon-selected, before, $product-tile-wishlist-link-icon-size, #ba4257);
+        }
+    }
+
+    &:not(.move) {
+        top: 0;
+    }
+}
+
+#wishlistDetailNotes{
+    .wishlist-detail-notes-toggle:focus:not(:hover) {
+        color: var(--brand-primary, #000000); 
+    }
+}
+
+.wishlist-details-nav{
+    .wishlist-details-action-btns{
+        .wishlist-details-share:focus:not(:hover),
+        .wishlist-details-add-cart:focus:not(:hover) {
+            color: var(--brand-primary, #000000);
+        }
+    }
+}
+
+#wishlistLanding{
+    .wishlist-landing-message{
+        .wishlist-landing-login,.wishlist-landing-create-account{
+            text-decoration: underline;
+        }
+    }
+}

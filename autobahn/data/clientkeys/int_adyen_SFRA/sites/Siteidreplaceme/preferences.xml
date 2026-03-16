@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances>
+            <preference preference-id="adyenCartridgeEnabled">true</preference>
+            <preference preference-id="Adyen_API_Key">AQE0hmfuXNWTK0Qc+iSHmmUsgOueW6pfAoZEXEZZy324v3REi8lyJB1tvVGjCt0tdXs77FI4/hDBXVsNvuR83LVYjEgiTGAH-Jj+QqNKWF/MdYdXzBWth/qlNko+l7LhZU/uKzFe+8CE=-i1ib7hQ[7ZHD_=>nM7N</preference>
+            <preference preference-id="Adyen_ClientKey">test_6EH5PHTJTZGW3D2P7YKPDFZ4QQZ3W7ZO</preference>
+            <preference preference-id="Adyen_Frontend_Region">US</preference>
+            <preference preference-id="Adyen_merchantCode">WhatGoesAroundComesAroundECOM</preference>
+            <preference preference-id="Adyen_Mode">TEST</preference>
+            <preference preference-id="Adyen_notification_password">WGACA2025</preference>
+            <preference preference-id="Adyen_notification_user">WGACAN0t1fication$</preference>
+            <preference preference-id="Adyen_SFRA6_Compatibility">true</preference>
+            <preference preference-id="AdyenBasketFieldsEnabled">true</preference>
+            <preference preference-id="AdyenCardHolderName_enabled">false</preference>
+            <preference preference-id="adyenFraudEnabled">true</preference>
+            <preference preference-id="adyenFraudFailOnFraud">true</preference>
+            <preference preference-id="adyenFraudReviewOnManualFlag">true</preference>
+            <preference preference-id="AdyenGiving_charityName"></preference>
+            <preference preference-id="AdyenGiving_enabled">false</preference>
+            <preference preference-id="AdyenLevel23DataEnabled">true</preference>
+            <preference preference-id="AdyenOneClickEnabled">true</preference>
+            <preference preference-id="AdyenRecurringEnabled">true</preference>
+        </all-instances>
+        <development/>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>

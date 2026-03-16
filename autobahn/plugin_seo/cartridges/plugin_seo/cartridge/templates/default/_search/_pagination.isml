@@ -1,0 +1,67 @@
+<isset name="pagination" value="${pdict.productSearch.paginationDetails}" scope="page" />
+<isset name="paginationLinks" value="${pagination.allLinks}" scope="page" />
+<isset name="currentPageNo" value="${pagination.currentPageNumber}" scope="page" />
+<isset name="pageCount" value="${paginationLinks.length}" scope="page" />
+<isset name="minPagesToDisplayDots" value="${require('*/cartridge/config/seoPreferences').paginationMinimumPagesToDisplayDots}" scope="page" />
+<isset name="maxPageNoToDisplay" value="${pageCount - minPagesToDisplayDots + 1}" scope="page" />
+
+<isif condition="${!empty(pagination)}">
+    <div class="d-flex pagination-links align-items-end justify-content-center mt-4">
+        <isloop items="${paginationLinks}" var="paginationLink" status="status">
+            <isif condition="${status.count === 1}">
+                <a href="${paginationLink.url}" class="btn btn-outline-primary pagination-link mx-1 ${paginationLink.active ? 'active bg-color-light-grey': ''}" >
+                    ${status.count}
+                </a>
+            </isif>
+
+            <isif condition="${currentPageNo > (minPagesToDisplayDots - 1) && status.count === 1}">
+                <div class="pagination-skip mx-1">...</div>
+            </isif>
+
+            <isif condition="${(status.count > 1 && status.count < minPagesToDisplayDots && currentPageNo < minPagesToDisplayDots)
+            || (status.count > maxPageNoToDisplay && currentPageNo > maxPageNoToDisplay && status.count < pageCount)
+            || (status.count >= (minPagesToDisplayDots - 1) && status.count <= (maxPageNoToDisplay + 1) && currentPageNo >= minPagesToDisplayDots && currentPageNo <= maxPageNoToDisplay && ((status.count === currentPageNo - 1) || status.count === currentPageNo || (status.count === currentPageNo + 1)))
+            || ((currentPageNo === (minPagesToDisplayDots - 1) || currentPageNo === (maxPageNoToDisplay + 1)) && ((status.count === currentPageNo - 1) || (status.count === currentPageNo + 1)))}">
+                <a href="${paginationLink.url}" class="btn btn-outline-primary pagination-link mx-1 ${paginationLink.active ? 'active bg-color-light-grey': ''}" >
+                    ${status.count}
+                </a>
+            </isif>
+
+            <isif condition="${currentPageNo < (pageCount - minPagesToDisplayDots + 2) && status.count === (pageCount - 1)}">
+                <div class="pagination-skip mx-1">...</div>
+            </isif>
+
+            <isif condition="${status.count === pageCount}">
+                <a href="${paginationLink.url}" class="btn btn-outline-primary pagination-link mx-1 ${paginationLink.active ? 'active bg-color-light-grey': ''}" >
+                    ${status.count}
+                </a>
+            </isif>
+        </isloop>
+    </div>
+
+    <div class="pagination-arrows d-flex justify-content-between align-items-center mt-3 mb-2">
+        <div class="d-flex align-items-center">
+            <isif condition="${pageCount > 1 && currentPageNo > 1}">
+                <a class="pagination-arrow pagination-arrow--first px-2" href="${pagination.firstLink.url}"><i class="fa fa-angle-double-left"></i></a>
+                <isif condition="${!empty(pagination.prevLink)}">
+                    <a class="pagination-arrow-step text-uppercase mx-2" href="${pagination.prevLink.url}">${Resource.msg('button.previous', 'common', null)}</a>
+                </isif>
+            </isif>
+        </div>
+        <div class="d-flex align-items-center">
+            <isif condition="${pageCount > 1 && currentPageNo < pageCount}">
+                <isif condition="${!empty(pagination.nextLink)}">
+                    <a class="pagination-arrow-step text-uppercase mx-2" href="${pagination.nextLink.url}">${Resource.msg('button.next', 'common', null)}</a>
+                </isif>
+                <a class="pagination-arrow pagination-arrow--last px-2" href="${pagination.lastLink.url}"><i class="fa fa-angle-double-right"></i></span></a>
+            </isif>
+        </div>
+    </div>
+</isif>
+
+<isif condition="${!empty(pagination.prevLink)}">
+   <link rel="prev" href="${pagination.prevLink.url}">
+</isif>
+<isif condition="${!empty(pagination.nextLink)}">
+   <link rel="next" href="${pagination.nextLink.url}">
+</isif>

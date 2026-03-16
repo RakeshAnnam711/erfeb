@@ -1,0 +1,20 @@
+<div class="row" itemscope itemtype="https://schema.org/ItemList">
+    <isloop items="${pdict.contentSearch.contents}" var="contentAsset" status="s">
+        <isset name="index" value="${s.index}" scope="page"/>
+        <div class="${pdict.contentSearch.mobileRowClass} ${pdict.contentSearch.desktopRowClass}" itemprop="itemListElement" data-index="${s.index}">
+            <isinclude template="search/components/contentTile" />
+        </div>
+    </isloop>
+</div>
+
+<div class="col-12 blog-grid-footer">
+    <isif condition="${pdict.contentSearch.showMoreButton}">
+        <div class="col show-more-blogs">
+            <div class="text-center">
+                <button class="btn btn-secondary col-12 col-sm-4" data-url="${URLUtils.url('Search-ShowContent', 'ajax', true, 'customStartingPage', parseInt(pdict.customStartingPage, 10) + 1, 'fdid', pdict.contentSearch.queryPhrase)}">
+                    ${Resource.msg('button.more', 'search', null)}
+                </button>
+            </div>
+        </div>
+    </isif>
+</div>

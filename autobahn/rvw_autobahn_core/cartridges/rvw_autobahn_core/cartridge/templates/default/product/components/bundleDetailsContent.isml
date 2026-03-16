@@ -1,0 +1,161 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets');
+    assets.addJs('/js/productDetail.js');
+</isscript>
+
+<iscomment>
+    It is necessary to set both "bundle" and "product" to pdict.product here as it changes per product downstream
+</iscomment>
+
+<isset name="bundle" value="${pdict.product}" scope="page" />
+<isset name="product" value="${pdict.product}" scope="page" />
+<isset name="isProductSet" value="${product.productType === 'set'}" scope="page" />
+<isset name="isBundle" value="${true}" scope="page" />
+<isset name="isBundleMainProduct" value="${true}" scope="page" />
+<isset name="pdpImageColumnWidth" value="${product.pdpImageColumnWidth ? product.pdpImageColumnWidth.split('/')[0] : pdict.abConfigs.pdpImageColumnWidth.split('/')[0]}" scope="page"/>
+<isset name="bundleColumnWidth" value="${'col-12 col-md-' + pdpImageColumnWidth}" scope="page" />
+<isset name="productDataColumnClass" value="${'col-12 col-md-' + (12 - pdpImageColumnWidth)}" scope="page"/>
+<iscomment>Override column settings for Page Designer component if applicable</iscomment>
+<isif condition="${'pdpImageColumnWidth' in pdict}">
+    <isset name="productDataColumnClass" value="${'col-12 col-md-' + (12 - parseInt(pdict.pdpImageColumnWidth.split('/')[0]))}" scope="page"/>
+</isif>
+
+<isobject object="${product.raw}" view="detail" />
+
+    <div class="container product-detail" data-pid="${product.id}">
+        <div class="row">
+            <div class="col-12">
+                <!---Breadcrumbs--->
+                <div class="product-breadcrumb page-header">
+                    <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row product-bundle">
+            <div class="d-md-none col-12">
+                <h1 class="product-name">${bundle.productName}</h1>
+            </div>
+
+            <!-- Product Images Carousel -->
+            <isinclude template="product/components/imageCarousel" />
+
+            <div class="product-data ${productDataColumnClass}">
+                 <!-- Product Name -->
+                <div class="row">
+                    <div class="col">
+                        <h1 class="product-name hidden-sm-down">${bundle.productName}</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="prices top-prices clearfix">
+                            <isset name="price" value="${bundle.price}" scope="page" />
+                            <isinclude template="product/components/pricing/main" />
+                        </div>
+                        <isinclude template="product/components/pidRating" />
+                    </div>
+                </div>
+
+                <isif condition="${!empty(bundle.headline)}">
+                    <div class="row mt-3">
+                        <div class="col">
+                            ${bundle.headline}
+                        </div>
+                    </div>
+                    <hr>
+                </isif>
+
+                <div class="row">
+                    <div class="col-12 bundle-footer">
+                        <!-- Quantity -->
+                        <isset name="loopState" value="${{count: 1}}" scope="page" />
+                        <isset name="product" value="${bundle}" scope="page" />
+
+                        <div class="product-options">
+                            <isif condition="${bundle.options && bundle.options.length > 0}">
+                                <isinclude template="product/components/options" />
+                            </isif>
+                        </div>
+                        <isset name="product" value="${bundle}" scope="page" />
+
+                        <iscomment>Sticky Add to Cart</iscomment>
+                        <isif condition="${bundle.bundledProducts[0].enableStickyAddToCart}">
+                            <isinclude template="product/components/addToCartStickyBar" />
+                        </isif>
+
+                         <!-- Availability -->
+                        <div class="availability clearfix global-availability" data-ready-to-order="${bundle.readyToOrder}">
+                            <isinclude template="product/components/availabilityBundleContainer" />
+                        </div>
+
+                        <isinclude template="integrations/product/components/bundleDetails/afterAvailability" />
+
+                        <isinclude template="integrations/product/components/beforeAddToCart"/>
+
+                        <!-- Add To Cart and Quantity -->
+                        <div class="row qty-cart-container no-gutters" id="qty-cart-container">
+                            <!-- Quantity Drop Down Menu -->
+                            <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 align-items-start ${product.hideQty ? 'd-none' : ''}">
+                                <isinclude template="product/components/quantity" />
+                            </div>
+
+                            <div class="prices-add-to-cart-actions col-12 col-sm-6 col-md-7 col-lg-9">
+
+                                <!-- Add To Cart -->
+                                <isinclude template="product/components/addToCartGlobal" />
+                            </div>
+                        </div>
+
+                        <!-- Applicable Promotions -->
+                        <div class="promotions">
+                            <isinclude template="product/components/promotions" />
+                        </div>
+
+                        <!-- Social Sharing Icons -->
+                        <div class="row">
+                            <isinclude template="product/components/socialIcons" />
+                        </div>
+
+                        <isif condition="${!empty(product.headlineDescription)}">
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <isprint value="${product.headlineDescription}" encoding="off" />
+                                </div>
+                            </div>
+                        </isif>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <isinclude template="product/components/bundleItems" />
+
+        <iscomment> Resetting product variable to match overall bundle: it changes in /bundleItems </iscomment>
+        <isset name="product" value="${bundle}" scope="page" />
+
+        <!-- Collapsible Content -->
+        <div class="col-12">
+            <isinclude template="product/components/collapsibleContent" />
+        </div>
+
+        <!-- Tabs -->
+        <div class="col-12">
+            <isinclude template="product/components/tabs" />
+        </div>
+    </div>
+
+    <isif condition="${!empty(product.pdpAssetIds)}">
+        <div class="pdp-assets container">
+            <isloop items="${product.pdpAssetIds}" var="assetId">
+                <div class="pdp-asset">
+                    <iscontentasset aid="${assetId}" personalized="true" />
+                </div>
+            </isloop>
+        </div>
+    </isif>
+
+</isobject>

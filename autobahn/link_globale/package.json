@@ -1,0 +1,133 @@
+{
+  "name": "globale",
+  "version": "23.4.0",
+  "description": "Global-e Controllers/Pipelines & SFRA cartridges",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.19.0"
+  },
+  "scripts": {
+    "test": "sgmf-scripts --test test/unit/**/*.js",
+    "cover": "sgmf-scripts --cover 'test/unit'",
+    "test:integration": "sgmf-scripts --integration 'test/integration/**/*.js'",
+    "test:acceptance:local": "npx codeceptjs run --",
+    "test:acceptance:sauce": "npx codeceptjs run --",
+    "test:acceptance:parallel": "npx codeceptjs run-multiple parallel",
+    "test:acceptance:multibrowsers": "npx codeceptjs run-multiple multibrowsers",
+    "test:acceptance:report": "./node_modules/.bin/allure serve tests/acceptance/report",
+    "bdd:snippets": "./node_modules/.bin/codeceptjs bdd:snippets --",
+    "compile:scss:sitegenesis": "sgmf-scripts --compile css --cartridgeName int_globale_sitegenesis",
+    "compile:scss:sfra": "sgmf-scripts --compile css --cartridgeName int_globale_sfra",
+    "compile:scss:sfra:popups": "sgmf-scripts --compile css --cartridgeName int_globale_sfra_popups",
+    "compile:scss:sitegenesis:popups": "sgmf-scripts --compile css --cartridgeName int_globale_sitegenesis_popups",
+    "compile:scss": "npm run compile:scss:sitegenesis && npm run compile:scss:sfra && npm run compile:scss:sfra:popups && npm run compile:scss:sitegenesis:popups",
+    "compile:js:sitegenesis": "sgmf-scripts --compile js --cartridgeName int_globale_sitegenesis",
+    "compile:js:sfra": "sgmf-scripts --compile js --cartridgeName int_globale_sfra",
+    "compile:js:sfra:popups": "sgmf-scripts --compile js --cartridgeName int_globale_sfra_popups",
+    "compile:js:sitegenesis:popups": "sgmf-scripts --compile js --cartridgeName int_globale_sitegenesis_popups",
+    "compile:js": "npm run compile:js:sitegenesis && npm run compile:js:sfra && npm run compile:js:sfra:popups && npm run compile:js:sitegenesis:popups",
+    "build": "npm run compile:js && npm run compile:scss",
+    "lint": "npm run lint:css && npm run lint:js",
+    "lint:css": "sgmf-scripts --lint css",
+    "lint:js": "sgmf-scripts --lint js",
+    "upload": "sgmf-scripts --upload",
+    "uploadCartridge": "sgmf-scripts --uploadCartridge int_globale && sgmf-scripts --uploadCartridge int_globale_sitegenesis && sgmf-scripts --uploadCartridge int_globale_sfra",
+    "uploadCartridge:sitegenesis": "sgmf-scripts --uploadCartridge int_globale && sgmf-scripts --uploadCartridge int_globale_sitegenesis",
+    "uploadCartridge:sfra": "sgmf-scripts --uploadCartridge int_globale && sgmf-scripts --uploadCartridge int_globale_sfra",
+    "uploadCartridge:sfra:popups": "sgmf-scripts --uploadCartridge int_globale && sgmf-scripts --uploadCartridge int_globale_sfra_popups",
+    "uploadCartridge:sitegenesis:popups": "sgmf-scripts --uploadCartridge int_globale && sgmf-scripts --uploadCartridge int_globale_sitegenesis_popups",
+    "watch": "sgmf-scripts --watch",
+    "watch:static": "sgmf-scripts --watch static"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalesforceCommerceCloud/link_globale.git"
+  },
+  "author": "Aleksandr Muliar <aleksandr.muliar@global-e.com> (https://www.linkedin.com/in/alnimu/)",
+  "contributors": [
+    {
+      "name": "Ivan Melnyk",
+      "email": "ivan.melnyk@global-e.com",
+      "url": "https://www.linkedin.com/in/ivan-melnyk/"
+    },
+    {
+      "name": "Volodymyr Dendevych",
+      "email": "volodymyr.dendevych@global-e.com",
+      "url": "https://www.linkedin.com/in/volodymyr-dendevych-4b6a92122/"
+    }
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/SalesforceCommerceCloud/link_globale",
+  "devDependencies": {
+    "@babel/core": "^7.6.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@tridnguyen/config": "^2.3.1",
+    "@wdio/selenium-standalone-service": "^7.31.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^3.5.0",
+    "chai-subset": "^1.6.0",
+    "chalk": "^1.1.3",
+    "cheerio": "0.22.0",
+    "cldr-data": "^36.0.1",
+    "codeceptjs": "^3.5.11",
+    "css-loader": "^6.0.0",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "debug": "^4.1.1",
+    "deepmerge": "^3.3.0",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-sitegenesis": "~1.0.0",
+    "globalize": "^1.4.2",
+    "husky": "^4.2.5",
+    "isml-linter": "^5.26.4",
+    "lodash": "^4.17.15",
+    "mini-css-extract-plugin": "^2.7.6",
+    "minimist": "^1.2.6",
+    "mocha": "^10.0.0",
+    "mocha-junit-reporter": "^2.0.2",
+    "moment-timezone": "^0.5.26",
+    "nyc": "^15.1.0",
+    "postcss-loader": "^7.0.0",
+    "prettier": "3.0.0",
+    "properties-parser": "^0.3.1",
+    "proxyquire": "1.7.4",
+    "request-promise": "^4.2.6",
+    "sass": "^1.69.7",
+    "sass-loader": "^13.3.2",
+    "selenium-standalone": "^9.3.1",
+    "sgmf-scripts": "^3.0.0",
+    "shelljs": "^0.8.5",
+    "should": "^13.2.3",
+    "sinon": "^17.0.1",
+    "style-loader": "^0.21.0",
+    "stylelint": "^15.4.0",
+    "stylelint-config-standard-scss": "^11.0.0",
+    "url": "^0.11.0",
+    "webdriverio": "^7.30.0",
+    "webpack-remove-empty-scripts": "^1.0.4",
+    "xml2js": "^0.4.22"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.14",
+    "bootstrap": "^4.6.1",
+    "cleave.js": "^1.5.3",
+    "flag-icon-css": "^2.9.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 10"
+  ],
+  "packageName": "int_globale_sfra",
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
+}

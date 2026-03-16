@@ -1,0 +1,564 @@
+{
+    "name": "Search Results",
+    "description": "Component to display the results grid of a category search.",
+    "group": "dynamic_components",
+    "attribute_definition_groups": [
+        {
+            "id": "productList",
+            "name": "Product List",
+            "description": "These can be used to override the default display settings for the page. For example, adding the following to the Query String field will cause the page to load already refined by the color yellow: {\"preferences\":{\"refinementColor\":\"Yellow\"}}",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "category",
+                    "name": "Category",
+                    "type": "category",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "category"
+                    }
+                },
+                {
+                    "id": "queryString",
+                    "name": "URL Search Query String",
+                    "type": "string",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "queryString"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "promoTiles",
+            "name": "Promo Tiles",
+            "description": "Place any component in a Promo Tile region (open the Page Structure tab to view) and it will appear in the corresponding slot in the search results.",
+            "attribute_definitions": [
+                {
+                    "id": "promoTile1ColumnSpan",
+                    "name": "Promo Tile 1 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile1ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile2ColumnSpan",
+                    "name": "Promo Tile 2 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile2ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile3ColumnSpan",
+                    "name": "Promo Tile 3 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile3ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile4ColumnSpan",
+                    "name": "Promo Tile 4 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile4ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile5ColumnSpan",
+                    "name": "Promo Tile 5 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile5ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile6ColumnSpan",
+                    "name": "Promo Tile 6 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile6ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile7ColumnSpan",
+                    "name": "Promo Tile 7 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile7ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile8ColumnSpan",
+                    "name": "Promo Tile 8 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile8ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile9ColumnSpan",
+                    "name": "Promo Tile 9 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile9ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile10ColumnSpan",
+                    "name": "Promo Tile 10 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile10ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile11ColumnSpan",
+                    "name": "Promo Tile 11 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile11ColumnSpan"
+                        }
+                    },
+                    "required": false
+                },
+                {
+                    "id": "promoTile12ColumnSpan",
+                    "name": "Promo Tile 12 - Column Span",
+                    "description": "How many columns should this asset span. Default is 1",
+                    "type": "custom",
+                    "editor_definition": {
+                        "type": "promoTileSpanSelector",
+                        "configuration": {
+                            "name": "promoTile12ColumnSpan"
+                        }
+                    },
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id": "promoTile1",
+            "name": "Promo Tile 1",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile2",
+            "name": "Promo Tile 2",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile3",
+            "name": "Promo Tile 3",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile4",
+            "name": "Promo Tile 4",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile5",
+            "name": "Promo Tile 5",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile6",
+            "name": "Promo Tile 6",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile7",
+            "name": "Promo Tile 7",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile8",
+            "name": "Promo Tile 8",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile9",
+            "name": "Promo Tile 9",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile10",
+            "name": "Promo Tile 10",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile11",
+            "name": "Promo Tile 11",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id": "promoTile12",
+            "name": "Promo Tile 12",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        }
+    ]
+}

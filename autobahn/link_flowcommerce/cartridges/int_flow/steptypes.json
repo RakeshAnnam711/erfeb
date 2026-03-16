@@ -1,0 +1,221 @@
+{
+    "step-types": {
+        "script-module-step": [{
+            "@type-id": "custom.Flow.uploadFilesToFlow",
+            "@supports-parallel-execution": false,
+            "@supports-organization-context": false,
+            "description": "Upload files to the Flow SFTP server",
+            "module": "int_flow/cartridge/scripts/flow/jobsteps/uploadFilesToFlow.js",
+            "function": "uploadFilesToFlow",
+            "parameters": {
+                "parameter": [
+                    {
+                        "@name": "remoteFolder",
+                        "@type": "string",
+                        "@required": false,
+                        "description": "Remote folder on Flow SFTP, relative to home directory",
+                        "@trim": true,
+                        "default-value": "sfcc/to-flow"
+                    },
+                    {
+                        "@name": "disabled",
+                        "description": "Mark the step as disabled. This will skip the step and returns a OK status",
+                        "@type": "boolean",
+                        "@required": false,
+                        "@trim": true,
+                        "default-value": "false"
+                    }
+                ]
+            },
+            "status-codes": {
+                "status": [{
+                    "@code": "ERROR",
+                    "description": "Used when an error occurred."
+                },
+                {
+                    "@code": "OK",
+                    "description": "Used when everything went well."
+                }]
+            }
+        },
+        {
+            "@type-id": "custom.Flow.downloadPricebooksFromFlow",
+            "@supports-parallel-execution": false,
+            "@supports-organization-context": false,
+            "description": "Download pricebooks from the Flow SFTP server",
+            "module": "int_flow/cartridge/scripts/flow/jobsteps/downloadPriceBooksFromFlow.js",
+            "function": "downloadPriceBooksFromFlow",
+            "parameters": {
+                "parameter": [
+                    {
+                        "@name": "remoteFolder",
+                        "@type": "string",
+                        "@required": false,
+                        "description": "Remote folder on Flow SFTP, relative to home directory",
+                        "@trim": true,
+                        "default-value": "sfcc/from-flow"
+                    }
+                ]
+            },
+            "status-codes": {
+                "status": [{
+                    "@code": "ERROR",
+                    "description": "Used when an error occurred."
+                },
+                {
+                    "@code": "OK",
+                    "description": "Used when everything went well."
+                }]
+            }
+        },
+        {
+            "@type-id": "custom.Flow.cleanArchives",
+            "@supports-organization-context": false,
+            "description": "Removes old files from the flow archive folders",
+            "module": "int_flow/cartridge/scripts/flow/jobsteps/cleanArchives.js",
+            "function": "cleanArchives",
+            "parameters": {
+                "parameter": [
+                    {
+                        "@name": "fileAgeInDays",
+                        "@type": "double",
+                        "@required": false,
+                        "description": "How many days to keep the file",
+                        "@trim": true,
+                        "default-value": "7"
+                    }
+                ]
+            },
+            "status-codes": {
+                "status": [{
+                    "@code": "ERROR",
+                    "description": "Used when an error occurred."
+                },
+                {
+                    "@code": "OK",
+                    "description": "Used when everything went well."
+                }]
+            }
+        },
+        {
+            "@type-id": "custom.Flow.exportProductImages",
+            "@supports-organization-context": false,
+            "description": "Exports product images as a CSV file",
+            "module": "int_flow/cartridge/scripts/flow/jobsteps/exportProductImages.js",
+            "function": "exportProductImages",
+            "parameters": {
+                "parameter": [
+                    {
+                        "@name": "productImageSize",
+                        "@type": "string",
+                        "@required": false,
+                        "description": "Product image size to export to Flow",
+                        "@trim": true,
+                        "default-value": "large"
+                    }
+                ]
+            },
+            "status-codes": {
+                "status": [{
+                    "@code": "ERROR",
+                    "description": "Used when an error occurred."
+                },
+                {
+                    "@code": "OK",
+                    "description": "Used when everything went well."
+                }]
+            }
+        },
+        {
+            "@type-id": "custom.Flow.generateShippingMethodsImportFile",
+            "@supports-organization-context": false,
+            "description": "Generates shipping methods import file from flow API",
+            "module": "int_flow/cartridge/scripts/flow/jobsteps/generateShippingMethodsImportFile.js",
+            "function": "generateShippingMethodsImportFile",
+            "status-codes": {
+                "status": [{
+                    "@code": "ERROR",
+                    "description": "Used when an error occurred."
+                },
+                {
+                    "@code": "OK",
+                    "description": "Used when everything went well."
+                }]
+            }
+        },
+        {
+            "@type-id": "custom.Flow.updateOrderFraudStatus",
+            "@supports-organization-context": false,
+            "description": "Updates order fraud status and places order",
+            "module": "int_flow/cartridge/scripts/flow/jobsteps/updateOrderFraudStatus.js",
+            "function": "updateOrderFraudStatus",
+            "parameters": {
+                "parameter": [
+                    {
+                        "@name": "startDate",
+                        "@type": "datetime-string",
+                        "@required": false,
+                        "description": "Datetime string, filters results to orders created after this date",
+                        "@trim": true
+                    }
+                ]
+            },
+            "status-codes": {
+                "status": [{
+                    "@code": "ERROR",
+                    "description": "Used when an error occurred."
+                },
+                {
+                    "@code": "OK",
+                    "description": "Used when everything went well."
+                }]
+            }
+        },
+        {
+            "@type-id": "custom.Flow.generateConfigurationJsonFiles",
+            "@supports-organization-context": false,
+            "description": "Generates flowExperiences.json & countries.json files",
+            "module": "int_flow/cartridge/scripts/flow/jobsteps/generateConfigurationJsonFiles.js",
+            "function": "generateConfigurationJsonFiles",
+            "status-codes": {
+                "status": [{
+                    "@code": "ERROR",
+                    "description": "Used when an error occurred."
+                },
+                {
+                    "@code": "OK",
+                    "description": "Used when everything went well."
+                }]
+            }
+        },
+        {
+            "@type-id": "custom.Flow.processFlowNotifications",
+            "@supports-organization-context": false,
+            "description": "Processes the Flow Notification custom objects",
+            "module": "int_flow/cartridge/scripts/flow/jobsteps/processFlowNotifications.js",
+            "function": "processFlowNotifications",
+            "parameters": {
+                "parameter": [
+                    {
+                        "@name": "toAddresses",
+                        "@type": "string",
+                        "@required": false,
+                        "description": "Comma seperated list of addresses to send notifications",
+                        "@trim": true,
+                        "default-value": "logs-sfcc@flow.io"
+                    }
+                ]
+            },
+            "status-codes": {
+                "status": [{
+                    "@code": "ERROR",
+                    "description": "Used when an error occurred."
+                },
+                {
+                    "@code": "OK",
+                    "description": "Used when everything went well."
+                }]
+            }
+        }]
+    }
+}

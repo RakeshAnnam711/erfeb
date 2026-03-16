@@ -1,0 +1,12 @@
+{
+    "name": "Link to Asset",
+    "description": "View the included asset in a new tab.",
+    "resources": {
+        "scripts": [
+            "/experience/editors/assetIncludeLink.js"
+        ],
+        "styles": [
+            "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+        ]
+    }
+}

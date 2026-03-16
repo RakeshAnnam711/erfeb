@@ -1,0 +1,229 @@
+<isset name="filterType" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('filterType').value}"
+    scope="page" />
+<isset name="filterBarGrid" value="col-lg-3" scope="page" />
+<isset name="refinmentBarHorizontalClass" value="" scope="page" />
+
+<isif condition="${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown'}">
+    <isset name="filterBarGrid" value="col-sm-12" scope="page" />
+    <isset name="refinmentBarHorizontalClass" value="refinement-bar-horizontal" scope="page" />
+    <isif condition="${filterType == 'horizontal-one-dropdown'}">
+        <isset name="refinmentBarHorizontalClass" value="refinement-bar-horizontal-one-dropdown" scope="page" />
+    </isif>
+</isif>
+<isset name="hideSearchTabsClass" value="hide-search-tabs" scope="page" />
+<isset name="productActive" value="active" scope="page" />
+<isset name="contentActive" value="" scope="page" />
+<isif condition="${!pdict.productSearch.isCategorySearch && pdict.contentCount > 0}">
+    <isset name="hideSearchTabsClass" value="" scope="page" />
+</isif>
+<isif condition="${pdict.productSearch.productIds.length === 0 && pdict.contentCount > 0}">
+    <isset name="productActive" value="" scope="page" />
+    <isset name="contentActive" value="active" scope="page" />
+</isif>
+<isset name="placeholder_PLPBanner" value="${URLUtils.staticURL('/images/placeholder_Category_Navigation_banner.png')}" scope="page" />
+<isset name="displaySearchQuery" value="${pdict.noResultsQuery || pdict.productSearch.originalSearchQuery || pdict.productSearch.searchKeywords || ''}" scope="page" />
+<isset name="isNoResultsFallback" value="${pdict.noResultsFallback || pdict.productSearch.noResultsFallback}" scope="page" />
+<div class="plp_wrapper">
+    <iscomment> PLP Hero Banner </iscomment>
+    <div class="container page-header search-results-header plp-hero-banner">
+        <isif condition="${pdict.fullCategory.custom.h1ContentTracker != null}">
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <iscomment> Mobile PLP Banner </iscomment>
+                    <iscomment> <div class="hero-banner d-xl-none">
+                        <img src="${pdict.fullCategory.custom.heroBannerMobile.absURL}" alt="category-img" onerror="this.onerror=null;this.src='${placeholder_PLPBanner}'"/>
+                    </div> </iscomment>
+                    <iscomment> Desktop PLP Banner </iscomment>
+                    <div class="hero-banner d-none d-lg-block">
+                        <img src="${pdict.fullCategory.custom.heroBanner.absURL}" alt="" role="presentation" fetchpriority="high" onerror="this.onerror=null;this.src='${placeholder_PLPBanner}'"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="content-tracker-header">
+                        <isprint value="${pdict.fullCategory.custom.h1ContentTracker}" encoding="off" />
+                    </div>
+                </div>
+            </div>
+        <iselse>
+            <h1 class="page-header-title">
+                <isif condition="${pdict.productSearch.isCategorySearch}">
+                    ${pdict.productSearch.category.name}
+                <iselse/>
+                    ${Resource.msg('label.header.banner','search',null)}
+                </isif>
+            </h1>
+        </isif>
+    </div>
+
+    <div class="search-results">
+        <div class="container">
+            <div class="row search-nav ${hideSearchTabsClass}">
+                <div class="nav-tabs-wrapper">
+                    <ul class="nav nav-tabs nav-fill" role="tablist">
+                        <li class="nav-item" role="tab">
+                            <a class="nav-link ${productActive} product-search" href="#product-search-results"
+                                aria-controls="product-search-results" data-toggle="tab" aria-selected="true"
+                                tabindex="0" id="product-tab">
+                                ${Resource.msgf('tab.nav.search.productsresults', 'search', null, '(' + pdict.productSearch.count + ')')}
+                            </a>
+                        </li>
+                    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableArticles')}">
+                        <isif condition="${!pdict.productSearch.isCategorySearch && pdict.contentCount > 0}">
+                            <li class="nav-item" role="tab">
+                                <a class="nav-link ${contentActive} content-search" href="#content-search-results-pane"
+                                    aria-controls="content-search-results-pane" data-toggle="tab" aria-selected="false" tabindex="-1"
+                                    id="articles-tab"
+                                    data-url="${URLUtils.url('Search-Content', 'q', pdict.productSearch.searchKeywords, 'startingPage', 0)}">
+                                    ${Resource.msgf('tab.nav.search.artclesresults', 'search', null, '(' + pdict.contentCount + ')')}
+                                </a>
+                            </li>
+                        </isif>
+                    </isif>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane ${productActive}" id="product-search-results" role="tabpanel" tabindex="0"
+                aria-labelledby="product-tab">
+
+                    <div class="container">
+                        <div class="grid-header">
+                            <!--- PLP Hero Banner --->
+                            <div class="row plp-top-bar">
+                                <div class="col-lg-4 result-count order-lg-1">
+                                    <isif condition="${!pdict.breadcrumbs.isEmpty()}">
+                                        <header class="container page-header">
+                                            <isinclude template="components/breadcrumbs/pageBreadcrumbs" />
+                                        </header>
+                                    </isif>
+                                </div>
+
+                                <div class="col-6 text-right d-lg-none filter-btn-area">
+                                    <isif condition="${pdict.productSearch.productIds.length > 0}">
+                                        <button type="button" class="btn filter-results col-12">
+                                            <span class="icon-filter"></span>
+                                            ${Resource.msg('button.filter', 'search', null)}
+                                        </button>
+                                    </isif>
+                                </div>
+                                <div class="col-6 col-lg-4 sort-by-dropdown text-right order-lg-2  ${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown' ? 'd-block d-lg-none' : ''}">
+                                    <isif condition="${pdict.productSearch.productIds.length > 0}">
+                                        <isinclude template="search/sortOrderMenu" />
+                                    </isif>
+                                </div>
+                                <div class="col-12 col-lg-4 result-count filter-count order-lg-1" aria-live="polite">
+                                    <h2 class="sr-only">Results found</h2>
+                                    <isif condition = "${pdict.productSearch.count != 0}">
+                                    <span aria-hidden="true">Results found:</span>
+                                        <span>${pdict.productSearch.count}</span>
+                                    <iscomment>
+                                        <isif condition="${isNoResultsFallback && !empty(displaySearchQuery)}">
+                                            <div aria-hidden="true">No search results found:</div>
+                                            <div>Try Filters:</div>
+                                        <iselse/>
+                                            <span aria-hidden="true">Results found:</span>
+                                            <span>${pdict.productSearch.count}</span>
+                                        </isif>
+                                    </iscomment>
+                                    </isif>
+                                    <iscomment> <isinclude template="search/resultsCount" /> </iscomment>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <!--- Selected filters bar --->
+                            <iscomment> <div class="row filter-bar" data-filter-bar-style-mobile="vertical"
+                                data-filter-bar-style-desktop="${filterType}">
+                                <isif condition="${!empty(pdict.productSearch.selectedFilters)}">
+                                    <isinclude template="search/filterBar" />
+                                </isif>
+
+                                <div class="result-count d-none d-lg-block">
+                                    <isinclude template="search/resultsCount" />
+                                </div>
+                            </div> </iscomment>
+                        </div>
+
+                        <!--- No Result Found --->
+                        <div id="noresultfound" class="result-count col-md-12 ">
+                            <isif condition="${pdict.productSearch.productIds.length <= 0}">
+                                <iscomment> <a class="text-link reset pr-2"
+                                    href="${pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)}
+                                    ${Resource.msg('button.filter', 'search', null)}</a> </iscomment>
+                                <iscomment> <isinclude template="search/resultsCount" /> </iscomment>
+                                <div class="content">
+                                    <div>
+                                        No search results found for "${displaySearchQuery}".
+                                    </div>
+                                        <div>
+                                        Reset filters and try again.
+                                        <a class="text-link reset pr-2"
+                                        href="${pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)}
+                                    </a>
+                                    </div>
+                                    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnNoResults')}">
+                                        <div class="einstein_section overflow-hidden px-5 w-100 text-left">
+                                            <div class="einstein-scroll">
+                                                <isslot id="einstein-emptycart-recommendations" description="Einstein No Results Recommendations" context="global" />
+                                            </div>
+                                        </div>
+                                    </isif>
+                                </div>
+                            </isif>
+                        </div>
+
+                        <div class="row refinement-wrapper">
+                            <isif condition="${pdict.productSearch.productIds.length > 0}">
+                            <!--- Refinement bar / Filter View --->
+                            <div id="filterView" class="refinement-bar d-lg-block ${filterBarGrid} ${refinmentBarHorizontalClass}">
+                                <iscomment>refineurl is not available when rendered by page designer</iscomment>
+                                <isif condition="${!empty(pdict.refineurl)}">
+                                    <isinclude url="${pdict.refineurl}" />
+                                <iselse/>
+                                    <isinclude template="search/searchRefineBar" />
+                                </isif>
+                            </div>
+
+                            <!--- Product Tiles --->
+                                <!--- Product Grid --->
+                                <div class="col-lg-9">
+                                    <isinclude template="search/productGrid" />
+                                </div>
+                            </isif>
+                        </div>
+                    </div>
+
+            </div>
+            <!--- Content Grid --->
+            <div class="tab-pane ${contentActive} container" id="content-search-results-pane" role="tabpanel"
+                aria-labelledby="articles-tab">
+                <div id="content-search-results" class="content-grid-header"></div>
+            </div>
+
+            <!--- Commenting out Frequently Asked Questions from PLP screen  --->
+            <iscomment> <isif condition="${pdict.fullCategory.custom.faqOnPlp != null}">
+                <div id="accordion" class="faq-accordion">
+                    <div class="card-header">
+                        <div class="collapsed card-link" data-toggle="collapse" href="#collapseOne">
+                            <div class="title">${Resource.msg('faq.label', 'search', null)}</div>
+                        </div>
+                    </div>
+                    <div id="collapseOne" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <isprint value="${pdict.fullCategory.custom.faqOnPlp}" encoding="off" />
+                        </div>
+                    </div>
+                </div>
+            </isif> </iscomment>
+
+        <iscomment> <isif condition="${pdict.fullCategory.custom.h2ContentTracker != null}">
+                <div class="content-tracker-footer">
+                    <isprint value="${pdict.fullCategory.custom.h2ContentTracker}" encoding="off" />
+                </div>
+            </isif> </iscomment>
+
+        </div>
+    </div>
+</div>

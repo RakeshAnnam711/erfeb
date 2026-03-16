@@ -1,0 +1,64 @@
+<isif condition="${pdict.title}">
+    <div class="slider-title text-${pdict.titleAlign} ${pdict.titleClass}">
+        <isprint value="${pdict.title}" encoding="off" />
+    </div>
+</isif>
+
+<isif condition="${pdict.useGrid}">
+    <div class="container-fluid px-0 ${pdict.containerClass}">
+        <div class="row">
+            <isloop items="${pdict.productResults}" var="item" status="loopStatus">
+                <div class="${pdict.columnClass}">
+                    <isset name="tileURL" value="${URLUtils.url('Tile-Show', 'pid', item.productID, 'pview', 'tile', 'ratings', pdict.displayRatings, 'swatches', pdict.displaySwatches, 'showQuickView', pdict.displayQuickview, 'showQuickAddToCart', pdict.displayQuickAddToCart)}" scope="page" />
+
+                    <isif condition="${!empty(pdict.refinementValues) && !empty(pdict.refinementValues.key)}">
+                        <isset name="tileURL" value="${tileURL.append('key', pdict.refinementValues.key).append('values', pdict.refinementValues.values)}" scope="page" />
+                    </isif>
+
+                    <isif condition="${!empty(pdict.productSearch) && !empty(pdict.productSearch.category) && !empty(pdict.productSearch.category.id)}">
+                        <isset name="tileURL" value="${tileURL.append('cgid', pdict.productSearch.category.id)}" scope="page" />
+                    </isif>
+
+                    <isinclude url="${tileURL}" />
+                </div>
+            </isloop>
+        </div>
+    </div>
+<iselse/>
+    <div
+        id="${pdict.id}"
+        class="slider-container ${pdict.containerClass} pagination-style-${pdict.paginationStyle} ${pdict.displayIndicators.sm} ${pdict.displayIndicators.md} ${pdict.displayIndicators.lg} ${pdict.displayControls.sm} ${pdict.displayControls.md} ${pdict.displayControls.lg} ${pdict.insideIndicators.sm} ${pdict.insideIndicators.md} ${pdict.insideIndicators.lg} ${pdict.insideControls.sm} ${pdict.insideControls.md} ${pdict.insideControls.lg} ${pdict.percentageOfNextSlide.sm} ${pdict.percentageOfNextSlide.md} ${pdict.percentageOfNextSlide.lg} ${pdict.percentageOfPrevSlide.sm} ${pdict.percentageOfPrevSlide.md} ${pdict.percentageOfPrevSlide.lg} ${pdict.controlsTheme}"
+        data-slider-autoplay="${pdict.autoplay}"
+        data-slider-gutter="${pdict.gutters.sm}"
+        data-slider-gutter-md="${pdict.gutters.md}"
+        data-slider-gutter-lg="${pdict.gutters.lg}"
+        data-slider-items="${pdict.slidesToDisplay.sm}"
+        data-slider-items-md="${pdict.slidesToDisplay.md}"
+        data-slider-items-lg="${pdict.slidesToDisplay.lg}"
+        data-slider-loop="${!pdict.disableLoop}"
+        data-slider-speed="${pdict.speed}"
+        data-slider-mode="${pdict.mode}"
+        data-slider-animatein="${pdict.animateIn}"
+        data-slider-animateout="${pdict.animateOut}"
+        data-slider-pause-button-placement ="${pdict.pauseButtonPlacement}"
+    >
+        <div class="slider">
+            <isloop items="${pdict.productResults}" var="item" status="loopStatus">
+                <div data-position="${loopStatus.index}" class="slide">
+                    <isset name="tileURL" value="${URLUtils.url('Tile-Show', 'pid', item.productID, 'pview', 'tile', 'ratings', pdict.displayRatings, 'swatches', pdict.displaySwatches, 'showQuickView', pdict.displayQuickview, 'showQuickAddToCart', pdict.displayQuickAddToCart)}" scope="page" />
+
+                    <isif condition="${!empty(pdict.refinementValues) && !empty(pdict.refinementValues.key)}">
+                        <isset name="tileURL" value="${tileURL.append('key', pdict.refinementValues.key).append('values', pdict.refinementValues.values)}" scope="page" />
+                    </isif>
+
+                    <isif condition="${!empty(pdict.productSearch) && !empty(pdict.productSearch.category) && !empty(pdict.productSearch.category.id)}">
+                        <isset name="tileURL" value="${tileURL.append('cgid', pdict.productSearch.category.id)}" scope="page" />
+                    </isif>
+
+                    <isinclude url="${tileURL}" />
+                </div>
+            </isloop>
+        </div>
+    </div>
+</isif>
+

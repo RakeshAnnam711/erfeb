@@ -1,0 +1,78 @@
+<a class="category-tile text-placement-${pdict.category.textPlacement} aspect-ratio-${pdict.category.aspectRatio} ${pdict.category.zoom} ${pdict.backgroundClass}" href="${pdict.category.url}">
+    <div class="image-cropper">
+
+        <iscomment>Image is set as custom image in Page Designer</iscomment>
+        <isif condition="${!empty(pdict.image) || !empty(pdict.backgroundVideo)}">
+            <div class="image-wrapper-${pdict.category.compID} image-wrapper image-wrapper-custom">
+                <isif condition="${!empty(pdict.image)}">
+                    <span class="background-image background-image-mobile" role="img" aria-label="${pdict.backgroundImageAlt || pdict.image.alt || pdict.category.name}"
+                          style="background-image: url('${pdict.image.src.mobile}');
+                                 background-image: -webkit-image-set(url(${pdict.image.src.mobile}) 1x, url(${pdict.image.src.mobile2x}) 2x);
+                                 background-image: image-set(url(${pdict.image.src.mobile}) 1x, url(${pdict.image.src.mobile2x}) 2x);
+                                 background-position-x: ${pdict.image.focalPointX};
+                                 background-position-y: ${pdict.image.focalPointY};
+                                 background-size: ${pdict.category.imagesize};">
+                    </span>
+                    <span class="background-image background-image-tablet" role="img" aria-label="${pdict.backgroundImageAlt || pdict.image.alt || pdict.category.name}"
+                          style="background-image: url('${pdict.image.src.tablet}');
+                                 background-image: -webkit-image-set(url(${pdict.image.src.tablet}) 1x, url(${pdict.image.src.tablet2x}) 2x);
+                                 background-image: image-set(url(${pdict.image.src.tablet}) 1x, url(${pdict.image.src.tablet2x}) 2x);
+                                 background-position-x: ${pdict.image.focalPointX};
+                                 background-position-y: ${pdict.image.focalPointY};
+                                 background-size: ${pdict.category.imagesize};">
+                    </span>
+                    <span class="background-image background-image-desktop" role="img" aria-label="${pdict.backgroundImageAlt || pdict.image.alt || pdict.category.name}"
+                          style="background-image: url('${pdict.image.src.desktop}');
+                                 background-image: -webkit-image-set(url(${pdict.image.src.desktop}) 1x, url(${pdict.image.src.desktop2x}) 2x);
+                                 background-image: image-set(url(${pdict.image.src.desktop}) 1x, url(${pdict.image.src.desktop2x}) 2x);
+                                 background-position-x: ${pdict.image.focalPointX};
+                                 background-position-y: ${pdict.image.focalPointY};
+                                 background-size: ${pdict.category.imagesize};">
+                    </span>
+                </isif>
+
+                <iscomment>Custom video is set in Page Designer</iscomment>
+                <isif condition="${!empty(pdict.backgroundVideo)}">
+                    <div class="background-image video-container">
+                        <div class="video-aspect-ratio">
+                            <isif condition="${pdict.backgroundVideo.type === 'hosted'}">
+                                <video id="player-${pdict.componentID}-background" class="video-player video-js"
+                                    data-video="${pdict.backgroundVideo.type}"
+                                    data-player-attr="${pdict.backgroundVideo.params}"
+                                    data-video-id="${pdict.backgroundVideo.id}">
+                                    <source src="${pdict.backgroundVideo.id}" type="video/${pdict.backgroundVideo.fileType}"/>
+                                </video>
+                            <iselse/>
+                                <div id="player-${pdict.componentID}-background" class="video-player"
+                                    data-video="${pdict.backgroundVideo.type}"
+                                    data-video-id="${pdict.backgroundVideo.id}"
+                                    data-player-attr="${pdict.backgroundVideo.params}">
+                                </div>
+                            </isif>
+                        </div>
+                    </div>
+                </isif>
+            </div>
+
+        <iscomment>Image is coming from category object attribute</iscomment>
+        <iselse/>
+            <div class="image-wrapper image-wrapper-category">
+                <isif condition="${!empty(pdict.category.imageURL)}">
+                    <span class="background-image" role="img" aria-label="${pdict.category.name}"
+                          style="background-image: url('${pdict.category.imageURL}');
+                                 background-size: ${pdict.category.imagesize};
+                                 background-position: ${pdict.category.offset};"
+                    ></span>
+                </isif>
+            </div>
+        </isif>
+
+    </div>
+
+    <div class="category-tile-text text-${pdict.category.textAlignment}">
+        <div class="primary-text ${pdict.category.nameClass}">${pdict.category.name}</div>
+        <isif condition="${!empty(pdict.category.secondaryText)}">
+            <div class="secondary-text ${pdict.category.secondaryTextClass}">${pdict.category.secondaryText}</div>
+        </isif>
+    </div>
+</a>

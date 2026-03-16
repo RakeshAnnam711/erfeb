@@ -1,0 +1,22 @@
+@import "~core/components/breadcrumb";
+
+.breadcrumb {
+    .breadcrumb-item {
+        a {
+            display: inline-block;
+            &:hover {
+                color: $brand-tertiary;
+            }
+        }
+        &+.breadcrumb-item {
+            &:last-of-type a {
+                color: $breadcrumb-item-color;
+                font-weight: 500;
+
+                &:hover {
+                    color: $brand-tertiary;
+                }
+            }
+        }
+    }
+}

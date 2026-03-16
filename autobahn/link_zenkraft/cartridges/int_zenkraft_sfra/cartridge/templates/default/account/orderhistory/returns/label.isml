@@ -1,0 +1,36 @@
+<div class="card-body display-return-label js-return-label" style="display:none;">
+    <div class="row">
+        <div class="col-4 returns-download">
+            <div class="label-image">
+                <img class="sample-label-image" style="display:none;" src="${URLUtils.staticURL('/images/sample-label.png').toString()}"/>
+                <a class="btn btn-block btn-primary return-label-download" download="return-label" title="return-label" href="">${Resource.msg('btn.download','returns',null)}</a>
+            </div>
+        </div>
+        <div class="col-4 returns-nearest-location">
+            <div class="location-progress">${Resource.msg('retrieving.location','returns',null)}</div>
+            <div class="nearest-location" style="display:none;">
+                <h4>${Resource.msg('title.location','returns',null)}</h4>
+                <div class="nearest-loc-distance"></div>
+                <div class="nearest-loc-address">
+                    <h5>${Resource.msg('title.address','returns',null)}</h5>
+                    <div class="nearest-loc-address-street"></div>
+                    <div class="nearest-loc-address-city"></div>
+                    <div class="nearest-loc-address-postal"></div>
+                </div>
+                <div class="show-more-locations">
+                    <button class="btn btn-block btn-outline-primary btn-show-more-locations" data-url="${URLUtils.https('Zenkraft-GetNearestDropOffLocations').toString()}">Other Locations</button>
+                </div>
+                <isinclude template="components/dropOffModal"/>
+            </div>
+        </div>
+        <div class="col-4 returns-map">
+            <div class="return-map-container" style="position:relative;height: 100%;width: 100%;">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 more-address-results"></div>
+    </div>
+</div>
+
+

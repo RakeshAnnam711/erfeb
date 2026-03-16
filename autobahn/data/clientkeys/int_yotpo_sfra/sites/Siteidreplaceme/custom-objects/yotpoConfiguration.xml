@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="yotpoConfiguration" object-id="default">
+        <object-attribute attribute-id="appKey">u2FuXSQyRAlZSkldnA7nnVzxs7mhZ6qMH76EfKfi</object-attribute>
+        <object-attribute attribute-id="clientSecretKey">MmGK6vInSuD4WAvvhY6vjy1u8S1b82v4nfI4vwHa</object-attribute>
+        <object-attribute attribute-id="enablePurchaseFeed">true</object-attribute>
+        <object-attribute attribute-id="enableRatings">true</object-attribute>
+        <object-attribute attribute-id="enableReviews">true</object-attribute>
+        <object-attribute attribute-id="utokenAuthCode">1hlugzw2VWOJ29riIMyARhAnJuHh7QnnrgutPLFz</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="yotpoConfiguration" object-id="en_US">
+        <object-attribute attribute-id="appKey">u2FuXSQyRAlZSkldnA7nnVzxs7mhZ6qMH76EfKfi</object-attribute>
+        <object-attribute attribute-id="clientSecretKey">MmGK6vInSuD4WAvvhY6vjy1u8S1b82v4nfI4vwHa</object-attribute>
+        <object-attribute attribute-id="enablePurchaseFeed">true</object-attribute>
+        <object-attribute attribute-id="enableRatings">true</object-attribute>
+        <object-attribute attribute-id="enableReviews">true</object-attribute>
+        <object-attribute attribute-id="utokenAuthCode">0bLoMTqhWtL3suWHlRK09CakJPXPAKYleWE6TfAH</object-attribute>
+    </custom-object>
+
+</custom-objects>

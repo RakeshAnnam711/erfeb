@@ -1,0 +1,99 @@
+.minicart {
+    position: relative;
+    .popover {
+        top: 100%;
+        left: auto;
+        right: -1px;
+        min-width: $minicart-size;
+        max-width: $minicart-size;
+        min-height: $minicart-size;
+        display: none;
+        z-index: $z-index-header-popover;
+        &.show {
+            display: block;
+        }
+    }
+    .minicart-label {
+        @include label-styles;
+        display: inline;
+    }
+    .cart {
+        padding-top: calc(#{$spacer} / 2);
+        background-color: $body-bg;
+    }
+    .remove-line-item .remove-btn {
+        position: absolute;
+        top: -22px;
+        margin: 5px;
+        left: auto;
+        right: 0;
+    }
+    .product-summary {
+        max-height: 50vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: $spacer;
+        padding-top: $spacer;
+        width: 100%;
+        .line-item-header {
+            position: relative;
+        }
+        .line-item-name {
+            white-space: normal;
+            width: calc(100% - #{$product-card-remove-icon-size} - #{$spacer}/2);
+        }
+    }
+    .minicart-item {
+        &+.minicart-item {
+            margin-top: calc(#{$spacer} - (#{$spacer} / 2));
+            padding-top: $spacer;
+            border-top: $product-card-item-border-width solid $product-card-border-color;
+            border-radius: $card-border-radius;
+        }
+        &:first-child {
+            .product-line-item {
+                margin-top: 0;
+            }
+        }
+    }
+    .product-line-item {
+        position: relative;
+    }
+    .item-price-qty {
+        .col {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+    .quantity,
+    .quantity-stepper {
+        width: 100%;
+        max-width: 90px; // fix for bug in IE11
+    }
+    .quantity {
+        min-width: 50px;
+    }
+    .line-item-promo > div {
+        padding: 0 0 calc(#{$spacer} / 2);
+    }
+    .minicart-footer {
+        padding-top: $spacer;
+        border-top: 1px solid $card-body-border-color;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .estimated-total {
+        font-family: $minicart-totals-font-family;
+        font-weight: $minicart-totals-font-weight;
+        text-transform: $minicart-totals-text-transform;
+        p {
+            @include paragraph-font-size($minicart-totals-font-size);
+        }
+    }
+    .single-approaching-discount {
+        color: $checkout-approaching-discount-color;
+        padding-top: calc(#{$spacer} / 2);
+    }
+}

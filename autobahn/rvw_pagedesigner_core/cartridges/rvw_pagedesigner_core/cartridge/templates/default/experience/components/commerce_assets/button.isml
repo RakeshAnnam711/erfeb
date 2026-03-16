@@ -1,0 +1,55 @@
+<isif condition="${!empty(pdict.buttonAction)}">
+    <div class='button ${pdict.containerClass}'>
+        <isif condition="${!empty(pdict.buttonVideo)}">
+            <div class="video-container aspect-ratio-16-9">
+                <isif condition="${pdict.buttonVideo.type === 'hosted'}">
+                    <video id="player-${pdict.componentID}-button" class="video-player video-js"
+                        data-video="${pdict.buttonVideo.type}"
+                        data-player-attr="${pdict.buttonVideo.params}"
+                        data-video-id="${pdict.buttonVideo.id}">
+                        <source src="${pdict.buttonVideo.id}" type="video/${pdict.buttonVideo.fileType}"/>
+                    </video>
+                <iselse/>
+                    <div id="player-${pdict.componentID}-button" class="video-player"
+                        data-video="${pdict.buttonVideo.type}"
+                        data-video-id="${pdict.buttonVideo.id}"
+                        data-player-attr="${pdict.buttonVideo.params}">
+                    </div>
+                </isif>
+                <a class="video-thumbnail ${!empty(pdict.buttonClass) ? pdict.buttonClass : pdict.buttonStyle}" href="${pdict.buttonAction}">
+                    <isprint value="${pdict.buttonText}" />
+                </a>
+            </div>
+        <iselse/>
+            <a class="${!empty(pdict.buttonClass) ? pdict.buttonClass : pdict.buttonStyle}" href="${pdict.buttonAction}" ${pdict.isExternalLink ? "rel='noopener noreferrer'" : ""} ${pdict.buttonOpenNewTab ? "target='_blank' rel='noopener'" : ""}>
+                <isprint value="${pdict.buttonText}" />
+            </a>
+        </isif>
+    </div>
+<iselseif condition="${!empty(pdict.regions.modalBody)}" />
+    <div class='button has-modal ${pdict.containerClass}'>
+        <button data-toggle="modal" data-target="${'#'+pdict.modalID}" type="button" class="${!empty(pdict.buttonClass) ? pdict.buttonClass : pdict.buttonStyle}">
+            <isprint value="${pdict.buttonText}" />
+        </button>
+
+        <div id="${pdict.modalID}" class="modal fade ${pdict.modalClass}" tabindex="-1" role="dialog" aria-labelledby="${pdict.modalID}">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            ${pdict.modalTitle}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="page-designer chromeless" id="${pdict.modalID}">
+                            <isprint value="${pdict.regions.modalBody.render()}"  encoding="off"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</isif>

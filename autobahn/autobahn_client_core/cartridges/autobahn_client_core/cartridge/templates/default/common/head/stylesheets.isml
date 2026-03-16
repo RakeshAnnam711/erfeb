@@ -1,0 +1,37 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript> var siteContext = pdict.siteContext || {}; </isscript>
+<isinclude url="${URLUtils.url.apply(URLUtils, ['Page-IncludeStylesheet'].concat(siteContext.urlParametersArray || []))}" />
+
+<iscomment>Load Typekit fonts (brandon-grotesque and didot) - required for all pages including checkout</iscomment>
+<link rel="stylesheet" href="https://use.typekit.net/ujn6twx.css?display=swap" />
+<iscomment> <script src="${URLUtils.staticURL('/lib/slick.min.css')}" async></script> </iscomment>
+
+
+<iscomment>Performance: Preload critical CSS for faster rendering</iscomment>
+<iscomment> <link id="globalStyles" rel="stylesheet" href="${URLUtils.staticURL('/css/slick.min.css')}" /> </iscomment>
+<iscomment>Vendor CSS: load as &lt;link&gt; for caching and faster render. These mirror vendor imports present in global.scss</iscomment>
+<link rel="stylesheet" href="https://unpkg.com/tiny-slider@2.9.4/dist/tiny-slider.css" integrity="" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://unpkg.com/tiny-slider@2.9.4/dist/tiny-slider.css" /></noscript>
+<iscomment> <link rel="stylesheet" href="https://unpkg.com/video.js@7.20.3/dist/video-js.min.css" integrity="" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://unpkg.com/video.js@7.20.3/dist/video-js.min.css" /></noscript>
+<script>!function(e){var t=function(t,n,o){var i=e.createElement("link");i.rel="stylesheet",i.href=t,i.media="only x",i.onload=function(){i.media=n||"all"},o&&o.appendChild(i)};t("https://unpkg.com/tiny-slider@2.9.4/dist/tiny-slider.css"),t("https://unpkg.com/video.js@7.20.3/dist/video-js.min.css")}(document);</script> </iscomment>
+<isloop items="${ require('*/cartridge/scripts/assets.js').styles }" var="style">
+    <isset name="integrity" value="${'integrity=\"' + style.integrity + '\" crossorigin=\"anonymous\"'}" scope="page" />
+    <iscomment>Performance: Load non-critical CSS asynchronously</iscomment>
+    <isif condition="${style.src.indexOf('search.css') !== -1 || style.src.indexOf('plp.css') !== -1}">
+        <link rel="preload" href="${style.src}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+        <noscript><link rel="stylesheet" href="${style.src}" ${style.integrity != null ? integrity : ''} /></noscript>
+    <iselse/>
+        <link rel="stylesheet" href="${style.src}" ${style.integrity != null ? integrity : ''} />
+    </isif>
+</isloop>
+<script>
+// Async CSS loader for non-critical stylesheets
+!function(e){"use strict";var t=function(t,n){var o=e.createElement("link"),r=e.getElementsByTagName("script")[0];o.rel="stylesheet",o.href=t,o.media="only x",o.onload=function(){o.media=n||"all"},r.parentNode.insertBefore(o,r)};var n=e.querySelectorAll("link[rel=preload][as=style]");for(var o=0;o<n.length;o++){t(n[o].href,"all")}}(document);
+</script>
+
+
+
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('flowEnabled') && dw.system.Site.current.getCustomPreferenceValue('flowUseCountryPicker')}">
+    <link rel="stylesheet" href="${URLUtils.staticURL('/css/flow_country_picker.css')}" />
+</isif>

@@ -1,0 +1,9 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/experience/components/commerce_assets/wgacaSliderCategoryProducts.js');
+</isscript>
+<iscomment>CSS is now loaded via consolidated-components.scss in global.scss</iscomment>
+
+<div class="slider-category-product slider-home ${pdict.showShadow}">
+    <isinclude url="${URLUtils.http('Components-SliderCategoryProducts', 'categoryID', pdict.categoryID, 'productsToDisplay', pdict.productsToDisplay, 'section', pdict.section,'display', JSON.stringify(pdict.display))}" />
+</div>

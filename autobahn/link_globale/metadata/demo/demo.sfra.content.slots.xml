@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slot-configurations xmlns="http://www.demandware.com/xml/impex/slot/2008-09-08">
+    <slot-configuration slot-id="404-promo-m" context="global" configuration-id="Promo Zune" default="true" assigned-to-site="true">
+        <description>Free Microsoft Zune with Purchase of $500 (or equivalent in your Currency) or More in Electronics</description>
+        <template>slots/content/htmlSlotContainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune with Purchase of $500 (or equivalent in your Currency) or More in Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="error-promo-m" context="global" configuration-id="Zune Promo Image" assigned-to-site="true">
+        <template>slots/content/htmlSlotContainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 (or equivalent in your Currency) Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="header-banner-m" context="global" configuration-id="free2dayshiporderover300" default="true" assigned-to-site="true">
+        <description>HTML slot for Free 2 Day Shipping</description>
+        <template>slots/content/htmlSlotContainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;div class="header-promotion"&gt;&lt;strong&gt;FREE 2-Day SHIPPING&lt;/strong&gt; FOR ORDERS OVER $300&lt;/div&gt;</body>
+            </html>
+        </content>
+        <customer-groups>
+            <customer-group group-id="NonGlobaleCustomers"/>
+        </customer-groups>
+    </slot-configuration>
+
+    <slot-configuration slot-id="header-banner-m" context="global" configuration-id="freeinternationalshiping" assigned-to-site="true">
+        <description>HTML slot for Free International Shipping</description>
+        <template>slots/content/htmlSlotContainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;div class="header-promotion"&gt;&lt;strong&gt;FREE INTERNATIONAL SHIPPING&lt;/strong&gt; Use DEMO-FREE-SHIPPING Coupon Code&lt;/div&gt;</body>
+            </html>
+        </content>
+        <customer-groups>
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+    </slot-configuration>
+
+</slot-configurations>

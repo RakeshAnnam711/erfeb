@@ -1,0 +1,25 @@
+<div id="tooltips" class="sg__header3">Tooltips <a
+    role="button"
+    tabindex="0"
+    class="icon-search tooltip-icon"
+    data-toggle="popover"
+    data-placement="bottom"
+    title="Find it in the Storefront"
+    data-content="
+        <ul>
+            <li>Payment form on checkout page <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Checkout-Begin', 'stage', 'payment')}' target='_blank' rel='noopener'></a></li>
+        </ul>
+    "></a>
+</div>
+<p>The custom tooltips that come with SFRA have been replaced with Bootstrap Tooltips in order to provide more flexibility and better positioning. Full configuration options can be found <a href="https://getbootstrap.com/docs/4.0/components/tooltips/" target="_blank" rel="noopener">here</a>. You can create a new tooltip either with data attributes or via JavaScript.</p>
+<div class="row">
+    <div class="col-md-6">
+        <p>Hover over the info icon to view the tooltip. <button data-toggle="tooltip" aria-label="tooltip" title="This is a tooltip!"  class="tooltip-icon"></button></p>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button data-toggle="tooltip" aria-label="tooltip" title="This is a tooltip!" class="tooltip-icon"></button></script></code></pre>
+        <pre><code class='language-javascript'><script type="text/plain" class="language-javascript">$('.element').tooltip({
+    title: 'This is a tooltip!'
+});</script></code></pre>
+    </div>
+</div>
