@@ -26,7 +26,6 @@ module.exports = function productTile(product, apiProduct, productType, params, 
         quantity: 1
     }
     decorators.base(product, apiProduct, productType);
-    decorators.searchPrice(product, productSearchHit, promotionCache.promotions, productHelper.getProductSearchHit, promotions);
     decorators.ratings(product);
     decorators.promotions(product, promotions);
     badges(product, apiProduct);
@@ -36,7 +35,21 @@ module.exports = function productTile(product, apiProduct, productType, params, 
         setProductsImages(product, apiProduct, { types: ['card'], quantity: 'single' });
     }
 
-    if (apiProduct.master) {
+    if (!productSearchHit) {
+        var fallbackProduct = apiProduct.master
+            && apiProduct.variationModel
+            && apiProduct.variationModel.getDefaultVariant()
+            ? apiProduct.variationModel.getDefaultVariant()
+            : apiProduct;
+
+        decorators.price(product, fallbackProduct, promotions);
+        decorators.images(product, fallbackProduct, { types: ['card'], quantity: 'all' });
+        Object.defineProperty(product, 'variationAttributes', {
+            enumerable: true,
+            value: []
+        });
+    } else if (apiProduct.master) {
+        decorators.searchPrice(product, productSearchHit, promotionCache.promotions, productHelper.getProductSearchHit, promotions);
         var productHelpers = require('*/cartridge/scripts/helpers/productHelpers');
         var defaultVariantSettings = productHelpers.defaultVariantSettings(apiProduct);
         var selectedVariant = productSearchHit.firstRepresentedProduct;
@@ -55,6 +68,7 @@ module.exports = function productTile(product, apiProduct, productType, params, 
         decorators.searchVariationAttributes(product, productSearchHit, selectedVariant);
         decorators.images(product, selectedVariant, { types: ['card'], quantity: 'all' });
     } else {
+        decorators.searchPrice(product, productSearchHit, promotionCache.promotions, productHelper.getProductSearchHit, promotions);
         decorators.searchVariationAttributes(product, productSearchHit, null);
         decorators.images(product, apiProduct, { types: ['card'], quantity: 'all' });
     }

@@ -237,6 +237,28 @@
 						"description": "Used when everything went well."
 					}]
 				}
+            },
+                {
+                "@type-id": "custom.zeta.zetaProductExport",
+				"@supports-site-context": "true",
+                "@supports-organization-context": "false",
+				"description": "Exports product to eBay API productsup",
+				"module": "autobahn_client_core/cartridge/scripts/jobs/zetaProductExport.js",
+				"function": "exportZetaProductsFeed",
+				"parameters": {
+					"parameter": [
+					]
+				},
+				"status-codes": {
+					"status": [{
+						"@code": "ERROR",
+						"description": "Used when an error occurred."
+					},
+					{
+						"@code": "OK",
+						"description": "Used when everything went well."
+					}]
+				}
             }
 
         ]

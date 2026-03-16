@@ -1,10 +1,6 @@
 <div class="price-filter-wrapper">
     <isif condition="${refinement.isPriceRefinement}">
-        <iscomment>
-            Keep dynamic range for reference:
-            <input type="hidden" id="minMaxPriceValue" value="${refinement.values[0].displayValue}" />
-        </iscomment>
-        <input type="hidden" id="minMaxPriceValue" value="0 - 2000" />
+        <input type="hidden" id="minMaxPriceValue" value="${refinement.values[0].displayValue}" />
         <input type="hidden" id="refineUrl" value="${refinement.values[0].url}" />
         <div class="price-input">
             <div class="field">
@@ -17,7 +13,7 @@
                 <input type="number" class="input-max" name="max" aria-label="Maximum price filter input" />
             </div>
         </div>
-        <p class="error d-none"> Price filter value should be in range  0 - 2000</p>
+        <p class="error d-none"> Price filter value should be in range  ${refinement.values[0].displayValue}</p>
         <div class="slider">
             <div class="progress"></div>
         </div>

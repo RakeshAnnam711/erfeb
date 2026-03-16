@@ -145,6 +145,7 @@ $z-index-pdp-sticky-add-to-cart: 200 !default;
 $z-index-sticky-footer: 100 !default;
 $z-index-wishlist-icon: 50 !default;
 $z-index-consent-drawer: 2147483601 !default; //This is set so high due to integrations like FreshChat that use z-index of 2147483600
+$z-index-header-popover: 10000 !default;
 
 
 /*

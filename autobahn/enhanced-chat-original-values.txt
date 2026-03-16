@@ -1,0 +1,30 @@
+Enhanced Chat Original Values
+Date: 2026-03-13
+
+These are the original hard-coded values that existed in
+`autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/components/footer/enhanceChat.isml`
+before the preference-driven refactor.
+
+Primary hard-coded configuration
+- language: en_US
+- orgId: 00Df4000001SZOK
+- deploymentName: WGACA_Enhanced_Chat
+- siteUrl: https://wgaca.my.site.com/ESWWGACAEnhancedChat1771950888388
+- scrt2Url: https://wgaca.my.salesforce-scrt.com
+- bootstrapJs: https://wgaca.my.site.com/ESWWGACAEnhancedChat1771950888388/assets/js/bootstrap.min.js
+
+Commented sandbox/development configuration found in template comments
+- language: en_US
+- orgId: 00DE200000Eun1B
+- deploymentName: WGACA_Enhanced_Chat
+- siteUrl: https://wgaca--upgrade.sandbox.my.site.com/ESWWGACAEnhancedChat1770843176069
+- scrt2Url: https://wgaca--upgrade.sandbox.my.salesforce-scrt.com
+- bootstrapJs: https://wgaca--upgrade.sandbox.my.site.com/ESWWGACAEnhancedChat1770843176069/assets/js/bootstrap.min.js
+
+Suggested mapping to site preference attributes
+- enhancedChatEnabled: true when chat should load
+- enhancedChatLanguage: en_US
+- enhancedChatOrgId: use one of the orgId values above
+- enhancedChatDeploymentName: WGACA_Enhanced_Chat
+- enhancedChatSiteUrl: use one of the siteUrl values above
+- enhancedChatScrt2Url: use one of the scrt2Url values above

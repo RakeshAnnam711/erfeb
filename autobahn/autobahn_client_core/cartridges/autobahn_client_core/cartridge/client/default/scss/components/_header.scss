@@ -769,6 +769,7 @@ button.site-country {
             .dropdown-menu {
                 border: $header-link-dropdown-menu-border;
                 box-shadow: $header-link-dropdown-menu-box-shadow;
+                z-index: $z-index-header-popover;
                 .dropdown-item {
                     + .dropdown-item {
                         border: none;

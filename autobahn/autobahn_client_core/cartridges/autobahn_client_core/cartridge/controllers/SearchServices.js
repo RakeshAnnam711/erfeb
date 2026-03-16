@@ -13,17 +13,23 @@ var Site = require('dw/system/Site');
 
 var cache = require('*/cartridge/scripts/middleware/cache');
 var preferences = require('*/cartridge/config/preferences.js');
-var POPULAR_BRANDS = [
-    'Louis Vuitton',
-    'Chanel',
-    'Dior',
-    'Gucci'
-];
-var POPULAR_CATEGORIES = [
-    'Bags',
-    'Necklaces',
-    'Men',
-];
+
+function getPreferenceList(preferenceId) {
+    var preferenceValue = Site.getCurrent().getCustomPreferenceValue(preferenceId);
+
+    if (empty(preferenceValue)) {
+        return [];
+    }
+
+    return String(preferenceValue)
+        .split(',')
+        .map(function (value) {
+            return value && value.trim();
+        })
+        .filter(function (value) {
+            return !empty(value);
+        });
+}
 
 /**
  * SearchServices-GetSuggestions : The SearchServices-GetSuggestions endpoint is responsible for searching as you type and displaying the suggestions from that search
@@ -41,10 +47,6 @@ server.replace('GetSuggestions', cache.applyDefaultCache, function (req, res, ne
     var CategorySuggestions = require('*/cartridge/models/search/suggestions/category');
     var ContentSuggestions = require('*/cartridge/models/search/suggestions/content');
     var ProductSuggestions = require('*/cartridge/models/search/suggestions/product');
-    // Frenzy modules are intentionally kept; they execute only when the BM flag is enabled.
-    var PopularSearchesSuggestions = require('*/cartridge/models/search/suggestions/PopularSearches');
-    var AutoSuggest = require('*/cartridge/models/search/suggestions/AutoSuggest');
-    var BestSellers = require('*/cartridge/models/search/suggestions/BestSellers');
     var SearchPhraseSuggestions = require('*/cartridge/models/search/suggestions/searchPhrase');
     var categorySuggestions;
     var contentSuggestions;
@@ -57,41 +59,39 @@ server.replace('GetSuggestions', cache.applyDefaultCache, function (req, res, ne
     var stripeMidValue = req.querystring.stripeMidValue;
     var suggestions;
     var minChars = preferences.minTermLength;
-    var maxSuggestions = 3;
+    var maxSuggestions = preferences.maxSuggestions;
     var maxProductSuggestions = 6;
     var maxCategorySuggestions = 6;
-    var bestSellersMaxSuggestions = 4;
-    // Frenzy is intentionally disabled for now.
-    // Keep original BM flag line for quick rollback:
-    // var useFrenzySearchBar = Site.current.getCustomPreferenceValue('enableFrenzyRecommendationOnSearchBar') === true;
-    var useFrenzySearchBar = false;
+    var popularBrands = getPreferenceList('headerSearchPopularBrands');
+    var popularCategories = getPreferenceList('headerSearchPopularCategories');
 
     if (!searchTerms || searchTerms.length < minChars) {
-        var staticBrandSuggestions = POPULAR_BRANDS.map(function (brandName) {
+        var staticBrandSuggestions = popularBrands.map(function (brandName) {
             return {
                 value: brandName,
                 url: URLUtils.url('Search-Show', 'q', brandName)
             };
         });
-        var staticCategorySuggestions = POPULAR_CATEGORIES.map(function (categoryName) {
+        var staticCategorySuggestions = popularCategories.map(function (categoryName) {
             return {
                 name: categoryName,
                 url: URLUtils.url('Search-Show', 'q', categoryName)
             };
         });
+        var staticSuggestionCount = staticBrandSuggestions.length + staticCategorySuggestions.length;
 
         res.render('search/suggestions', {
             suggestions: {
                 product: { available: false, products: [], phrases: [] },
-                category: { available: true, categories: staticCategorySuggestions },
+                category: { available: staticCategorySuggestions.length > 0, categories: staticCategorySuggestions },
                 content: { available: false, contents: [] },
                 recent: { available: false, phrases: [] },
                 popular: { available: false, phrases: [] },
                 phrase_suggestions: { phrases: [] },
                 bestsellers: { matching_products: [] },
-                brand: { available: true, phrases: staticBrandSuggestions },
+                brand: { available: staticBrandSuggestions.length > 0, phrases: staticBrandSuggestions },
                 query: '',
-                message: Resource.msgf('label.header.search.result.count.msg', 'common', null, ['' + (staticBrandSuggestions.length + staticCategorySuggestions.length)])
+                message: Resource.msgf('label.header.search.result.count.msg', 'common', null, ['' + staticSuggestionCount])
             }
         });
         next();
@@ -110,32 +110,12 @@ server.replace('GetSuggestions', cache.applyDefaultCache, function (req, res, ne
     popularSuggestions = new SearchPhraseSuggestions(suggestions.popularSearchPhrases, maxSuggestions);
     brandSuggestions = new SearchPhraseSuggestions(suggestions.brandSuggestions, maxSuggestions);
 
-    // Non-Frenzy default for "Suggestions For..."
     autoSuggest = {
         phrases: (productSuggestions && productSuggestions.phrases) ? productSuggestions.phrases : []
     };
     var bestSellers = {
         matching_products: []
     };
-
-    // Frenzy path kept for reference but disabled.
-    /*
-    if (useFrenzySearchBar) {
-        var frenzyPopularSuggestions = new PopularSearchesSuggestions(maxSuggestions);
-        var frenzyAutoSuggest = new AutoSuggest(searchTerms, maxSuggestions, minChars);
-        var frenzyBestSellers = new BestSellers(bestSellersMaxSuggestions);
-
-        if (frenzyPopularSuggestions && frenzyPopularSuggestions.phrases && frenzyPopularSuggestions.phrases.length) {
-            popularSuggestions = frenzyPopularSuggestions;
-        }
-        if (frenzyAutoSuggest && frenzyAutoSuggest.phrases && frenzyAutoSuggest.phrases.length) {
-            autoSuggest = frenzyAutoSuggest;
-        }
-        if (frenzyBestSellers && frenzyBestSellers.matching_products) {
-            bestSellers = frenzyBestSellers;
-        }
-    }
-    */
 
     if (productSuggestions.available || contentSuggestions.available
         || categorySuggestions.available

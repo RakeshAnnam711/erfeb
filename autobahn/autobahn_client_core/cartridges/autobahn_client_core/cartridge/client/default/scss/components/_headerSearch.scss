@@ -258,6 +258,18 @@
         padding: 0;
         margin: 0;
         height: auto;
+        &.suggestions--prominent {
+            --search-suggestion-product-size: 120px;
+            --search-suggestion-product-tile-width: 150px;
+            --search-suggestion-product-gap: 10px;
+            --search-suggestion-product-columns: 6;
+            --search-suggestion-product-title-font-size: 15px;
+            --search-suggestion-product-image-to-title-gap: 20px;
+            --search-suggestion-header-line-gap: 1px;
+            --search-suggestion-section-to-next-title-gap: 1px;
+            --search-suggestion-value-gap: 5px;
+            --search-suggestion-category-gap: 5px;
+        }
         .suggestions-items{
                 .suggestions-item{
                     .name{
@@ -327,8 +339,10 @@
             &.suggestions-products-a {
                 display: flex;
                 flex-direction: column;
+                align-items: flex-start;
                 gap: var(--search-suggestion-product-image-to-title-gap);
                 color: $black;
+                width: 100%;
                 max-width: var(--search-suggestion-product-tile-width);
                 .swatch-thumbnail {
                     width: var(--search-suggestion-product-size);
@@ -341,11 +355,42 @@
             background-position: bottom;
             background-size: contain;
             background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
         }
+        .suggestion-product-desc,
+        .frenzy_product_desc {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 100%;
+        }
+        .suggestion-product-brand,
+        .frenzy_product_brand {
+            color: $black;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.075em;
+            line-height: 1.25;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .suggestion-product-title,
+        .frenzy_product_title,
         .name {
             font-weight: 500;
+            color: #565656;
             font-size: var(--search-suggestion-product-title-font-size);
             line-height: var(--search-suggestion-product-title-line-height);
+            margin: 0;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -356,6 +401,17 @@
                 text-underline-offset: 6px;
                 text-decoration-thickness: 2px;
             }
+        }
+        .suggestion-product-subtitle,
+        .frenzy_product_subtitle {
+            color: #646666;
+            font-size: 0.8125rem;
+            line-height: 1.4;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .category-parent {
             color: $header-suggestions-item-category-parent-color;

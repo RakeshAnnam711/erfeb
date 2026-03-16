@@ -1,0 +1,16 @@
+Final fix for PLP highest-price product removal after applying price filter:
+
+Root cause:
+- The server-side price max value (`pmax`) was being converted and passed directly into `productSearch.setPriceMax(...)`.
+- After currency conversion / float rounding, the upper bound could become slightly lower than the actual highest product price.
+- Because of that, the highest-priced product was getting excluded when the price filter was applied.
+
+Final file changed:
+autobahn_client_core/cartridges/autobahn_client_core/cartridge/scripts/search/search.js
+
+Final change made:
+- Adjusted server-side `pmax` handling to add a small buffer before calling `productSearch.setPriceMax(...)`.
+- This keeps the upper price bound inclusive after conversion and rounding.
+
+Why this fixes the issue:
+- The highest-priced product is no longer dropped from the result set when `pmax` matches the top product price.

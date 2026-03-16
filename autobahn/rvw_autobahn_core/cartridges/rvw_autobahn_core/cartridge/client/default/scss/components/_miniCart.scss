@@ -9,6 +9,7 @@
         max-width: $minicart-size;
         min-height: $minicart-size;
         display: none;
+        z-index: $z-index-header-popover;
         &.show {
             display: block;
         }

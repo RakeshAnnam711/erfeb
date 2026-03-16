@@ -67,16 +67,18 @@
                                 ${Resource.msgf('tab.nav.search.productsresults', 'search', null, '(' + pdict.productSearch.count + ')')}
                             </a>
                         </li>
+                    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableArticles')}">
                         <isif condition="${!pdict.productSearch.isCategorySearch && pdict.contentCount > 0}">
                             <li class="nav-item" role="tab">
                                 <a class="nav-link ${contentActive} content-search" href="#content-search-results-pane"
-                                    aria-controls="content-search-results-pane" data-toggle="tab"
-                                    aria-selected="false" tabindex="-1" id="articles-tab"
+                                    aria-controls="content-search-results-pane" data-toggle="tab" aria-selected="false" tabindex="-1"
+                                    id="articles-tab"
                                     data-url="${URLUtils.url('Search-Content', 'q', pdict.productSearch.searchKeywords, 'startingPage', 0)}">
                                     ${Resource.msgf('tab.nav.search.artclesresults', 'search', null, '(' + pdict.contentCount + ')')}
                                 </a>
                             </li>
                         </isif>
+                    </isif>
                     </ul>
                 </div>
             </div>
@@ -113,12 +115,14 @@
                                 </div>
                                 <div class="col-12 col-lg-4 result-count filter-count order-lg-1" aria-live="polite">
                                     <h2 class="sr-only">Results found</h2>
+                                    <isif condition = "${pdict.productSearch.count != 0}">
                                     <isif condition="${isNoResultsFallback && !empty(displaySearchQuery)}">
-                                        <div aria-hidden="true">No search results found:</div>
-                                        <div>Try Filters:</div>
+                                        <div aria-hidden="true">${Resource.msg('label.search.noresults.fallback', 'search', null)}</div>
+                                        <div>${Resource.msg('label.search.noresults.tryfilters', 'search', null)}</div>
                                     <iselse/>
-                                        <span aria-hidden="true">Results found:</span>
+                                        <span aria-hidden="true">${Resource.msg('label.search.results.found', 'search', null)}</span>
                                         <span>${pdict.productSearch.count}</span>
+                                    </isif>
                                     </isif>
                                     <iscomment> <isinclude template="search/resultsCount" /> </iscomment>
                                 </div>
@@ -147,14 +151,21 @@
                                 <iscomment> <isinclude template="search/resultsCount" /> </iscomment>
                                 <div class="content">
                                     <div>
-                                        No search results found for "${displaySearchQuery}".
+                                        ${Resource.msgf('label.search.noresults.query', 'search', null, displaySearchQuery)}
                                     </div>
-                                        <div>
-                                        Reset filters and try again.
+                                    <div>
+                                        ${Resource.msg('label.search.noresults.reset', 'search', null)}
                                         <a class="text-link reset pr-2"
                                         href="${pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)}
                                     </a>
                                     </div>
+                                    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnNoResults')}">
+                                        <div class="einstein_section overflow-hidden px-5 w-100">
+                                            <div class="einstein-scroll">
+                                                <isslot id="einstein-emptycart-recommendations" description="Einstein No Results Recommendations" context="global" />
+                                            </div>
+                                        </div>
+                                    </isif>
                                 </div>
                             </isif>
                         </div>

@@ -187,6 +187,8 @@ function search (req, res) {
             result.productSearch.searchKeywords = req.querystring.q;
             result.productSearch.noResultsFallback = true;
             result.productSearch.originalSearchQuery = req.querystring.q;
+            result.productSearch.resetLink = URLUtils.url('Search-Show', 'q', req.querystring.q);
+            result.productSearch.resetAJAXLink = URLUtils.url('Search-ShowAjax', 'q', req.querystring.q);
             result.apiProductSearch = fallbackSearch;
             result.refineurl = URLUtils.url('Search-Refinebar', 'q', fallbackPhrase, 'sz', 30);
             result.noResultsQuery = req.querystring.q;

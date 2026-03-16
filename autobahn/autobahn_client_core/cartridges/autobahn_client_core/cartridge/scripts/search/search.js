@@ -59,7 +59,9 @@ base.setProductProperties = function (productSearch, httpParams, selectedCategor
             if (httpParams.pmax) {
                 var rawPmax = parseFloat(httpParams.pmax.replace(/,/g, ''));
                 var usdPmax = isUSD ? rawPmax : rawPmax / rate;
-                productSearch.setPriceMax(usdPmax);
+                // Adding the upper bound inclusive after conversion and float rounding.
+                var maxPriceBuffer = isUSD ? 0.01 : Math.max(0.01, 1 / rate);
+                productSearch.setPriceMax(usdPmax + maxPriceBuffer);
             }
         } catch (e) {
             Logger.error('Error converting price to USD: {0}', e.message);
