@@ -8,22 +8,267 @@ var server = require('server');
 server.extend(module.superModule);
 
 var Resource = require('dw/web/Resource');
+var Cookie = require('dw/web/Cookie');
 var URLUtils = require('dw/web/URLUtils');
-var Site = require('dw/system/Site');
-
+var ProductSearchModel = require('dw/catalog/ProductSearchModel');
+var CatalogMgr = require('dw/catalog/CatalogMgr');
 var cache = require('*/cartridge/scripts/middleware/cache');
-var preferences = require('*/cartridge/config/preferences.js');
-var POPULAR_BRANDS = [
-    'Louis Vuitton',
-    'Chanel',
-    'Dior',
-    'Gucci'
-];
-var POPULAR_CATEGORIES = [
-    'Bags',
-    'Necklaces',
-    'Men',
-];
+var productPreferences = require('*/cartridge/config/preferences');
+var images = require('*/cartridge/models/product/decorators/images');
+
+var PRODUCT_TILE_ENDPOINT = productPreferences.suggestionsActionEnpoint || 'Product-Show';
+var PRODUCT_IMAGE_SIZE = productPreferences.imageSize || 'medium';
+var LAST_SEARCH_COOKIE = 'autobahn_last_search_term';
+var LAST_SEARCH_COOKIE_AGE = 60 * 60 * 24 * 30;
+
+function getImageUrl(product) {
+    var imageProduct = product.master ? product.variationModel.defaultVariant : product;
+    var imageObject = {};
+
+    images(imageObject, imageProduct, { types: [PRODUCT_IMAGE_SIZE], quantity: 'single' });
+
+    if (imageObject.images
+        && imageObject.images[PRODUCT_IMAGE_SIZE]
+        && imageObject.images[PRODUCT_IMAGE_SIZE][0]
+        && imageObject.images[PRODUCT_IMAGE_SIZE][0].url) {
+        return imageObject.images[PRODUCT_IMAGE_SIZE][0].url;
+    }
+
+    return '';
+}
+
+function getBrandName(product) {
+    if (product.brand) {
+        return product.brand;
+    }
+
+    if (product.manufacturerName) {
+        return product.manufacturerName;
+    }
+
+    if (product.custom && product.custom.brand) {
+        return product.custom.brand;
+    }
+
+    return '';
+}
+
+function getPrimaryCategory(product) {
+    return product.primaryCategory || null;
+}
+
+function buildEmptySearchFallback(maxProductItems, maxCategoryItems, maxBrandItems) {
+    var popularProducts = [];
+    var popularCategories = [];
+    var popularBrands = [];
+    var productSearch = new ProductSearchModel();
+    var rootCategory = CatalogMgr.siteCatalog && CatalogMgr.siteCatalog.root;
+    var hits;
+    var seenCategoryIds = {};
+    var seenBrands = {};
+    var total;
+
+    if (rootCategory) {
+        productSearch.setCategoryID(rootCategory.ID);
+        productSearch.setRecursiveCategorySearch(true);
+
+        if (rootCategory.defaultSortingRule) {
+            productSearch.setSortingRule(rootCategory.defaultSortingRule);
+        }
+    }
+
+    productSearch.setOrderableProductsOnly(true);
+    productSearch.search();
+    hits = productSearch.productSearchHits;
+
+    while (hits && hits.hasNext()) {
+        var hit = hits.next();
+        var product = hit.product;
+        var category;
+        var brandName;
+
+        if (!product) {
+            continue;
+        }
+
+        if (popularProducts.length < maxProductItems) {
+            popularProducts.push({
+                name: product.name,
+                imageUrl: getImageUrl(product),
+                url: URLUtils.url(PRODUCT_TILE_ENDPOINT, 'pid', product.ID)
+            });
+        }
+
+        category = getPrimaryCategory(product);
+        if (category && !seenCategoryIds[category.ID] && popularCategories.length < maxCategoryItems) {
+            seenCategoryIds[category.ID] = true;
+            popularCategories.push({
+                name: category.displayName,
+                url: URLUtils.url('Search-Show', 'cgid', category.ID)
+            });
+        }
+
+        brandName = getBrandName(product);
+        if (brandName && !seenBrands[brandName] && popularBrands.length < maxBrandItems) {
+            seenBrands[brandName] = true;
+            popularBrands.push({
+                value: brandName,
+                url: URLUtils.url('Search-Show', 'q', brandName)
+            });
+        }
+
+        if (popularProducts.length >= maxProductItems
+            && popularCategories.length >= maxCategoryItems
+            && popularBrands.length >= maxBrandItems) {
+            break;
+        }
+    }
+
+    total = popularProducts.length + popularCategories.length + popularBrands.length;
+
+    return {
+        product: {
+            available: popularProducts.length > 0,
+            products: popularProducts,
+            phrases: []
+        },
+        category: {
+            available: popularCategories.length > 0,
+            categories: popularCategories
+        },
+        content: { available: false, contents: [] },
+        recent: { available: false, phrases: [] },
+        popular: { available: false, phrases: [] },
+        phrase_suggestions: { phrases: [] },
+        bestsellers: { matching_products: [] },
+        brand: {
+            available: popularBrands.length > 0,
+            phrases: popularBrands
+        },
+        query: '',
+        message: Resource.msgf('label.header.search.result.count.msg', 'common', null, ['' + total])
+    };
+}
+
+function buildEmptySearchSuggestions(maxProductItems, maxCategoryItems, maxBrandItems) {
+    var lastSearchTerm = getLastSearchTerm();
+
+    if (lastSearchTerm) {
+        var storedSearchSuggestions = buildTypedSearchSuggestions(
+            lastSearchTerm,
+            null,
+            maxBrandItems,
+            maxProductItems,
+            maxCategoryItems
+        );
+
+        if (storedSearchSuggestions.hasVisibleSuggestions) {
+            storedSearchSuggestions.payload.query = '';
+            storedSearchSuggestions.payload.phrase_suggestions = { phrases: [] };
+            storedSearchSuggestions.payload.recent = { available: false, phrases: [] };
+            storedSearchSuggestions.payload.popular = { available: false, phrases: [] };
+            return storedSearchSuggestions.payload;
+        }
+    }
+
+    return buildEmptySearchFallback(maxProductItems, maxCategoryItems, maxBrandItems);
+}
+
+function getLastSearchTerm() {
+    var httpCookies = request.httpCookies;
+    var lastSearchCookie = httpCookies && httpCookies[LAST_SEARCH_COOKIE];
+
+    if (lastSearchCookie && lastSearchCookie.value) {
+        return lastSearchCookie.value;
+    }
+
+    return '';
+}
+
+function setLastSearchTerm(searchTerms) {
+    var lastSearchCookie;
+
+    if (!searchTerms) {
+        return;
+    }
+
+    lastSearchCookie = new Cookie(LAST_SEARCH_COOKIE, searchTerms);
+    lastSearchCookie.setPath('/');
+    lastSearchCookie.setMaxAge(LAST_SEARCH_COOKIE_AGE);
+    response.addHttpCookie(lastSearchCookie);
+}
+
+function buildTypedSearchSuggestions(searchTerms, stripeMidValue, maxSuggestions, maxProductSuggestions, maxCategorySuggestions) {
+    var SuggestModel = require('dw/suggest/SuggestModel');
+    var suggestions = new SuggestModel();
+
+    suggestions.setFilteredByFolder(false);
+    suggestions.setSearchPhrase(searchTerms);
+    suggestions.setMaxSuggestions(Math.max(maxSuggestions, maxProductSuggestions));
+
+    return buildPhraseSuggestionsPayload(
+        suggestions,
+        searchTerms,
+        stripeMidValue,
+        maxSuggestions,
+        maxProductSuggestions,
+        maxCategorySuggestions
+    );
+}
+
+function buildPhraseSuggestionsPayload(suggestions, searchTerms, stripeMidValue, maxSuggestions, maxProductSuggestions, maxCategorySuggestions) {
+    var CategorySuggestions = require('*/cartridge/models/search/suggestions/category');
+    var ContentSuggestions = require('*/cartridge/models/search/suggestions/content');
+    var ProductSuggestions = require('*/cartridge/models/search/suggestions/product');
+    var SearchPhraseSuggestions = require('*/cartridge/models/search/suggestions/searchPhrase');
+    var categorySuggestions = new CategorySuggestions(suggestions, maxCategorySuggestions);
+    var contentSuggestions = new ContentSuggestions(suggestions, maxSuggestions);
+    var productSuggestions = new ProductSuggestions(suggestions, maxProductSuggestions, searchTerms, stripeMidValue);
+    var recentSuggestions = new SearchPhraseSuggestions(suggestions.recentSearchPhrases, maxSuggestions);
+    var popularSuggestions = new SearchPhraseSuggestions(suggestions.popularSearchPhrases, maxSuggestions);
+    var brandSuggestions = new SearchPhraseSuggestions(suggestions.brandSuggestions, maxSuggestions);
+    var autoSuggest = {
+        phrases: (productSuggestions && productSuggestions.phrases) ? productSuggestions.phrases : []
+    };
+    var bestSellers = {
+        matching_products: []
+    };
+
+    return {
+        hasSuggestions: productSuggestions.available || contentSuggestions.available
+            || categorySuggestions.available
+            || recentSuggestions.available
+            || popularSuggestions.available
+            || (autoSuggest.phrases && autoSuggest.phrases.length)
+            || brandSuggestions.available,
+        hasVisibleSuggestions: productSuggestions.available || categorySuggestions.available || brandSuggestions.available,
+        payload: {
+            product: productSuggestions,
+            category: categorySuggestions,
+            content: contentSuggestions,
+            recent: recentSuggestions,
+            popular: popularSuggestions,
+            phrase_suggestions: autoSuggest,
+            bestsellers: bestSellers,
+            brand: brandSuggestions,
+            query: searchTerms,
+            message: Resource.msgf(
+                'label.header.search.result.count.msg',
+                'common',
+                null,
+                ['' + (
+                    productSuggestions.products.length
+                    + contentSuggestions.contents.length
+                    + categorySuggestions.categories.length
+                    + recentSuggestions.phrases.length
+                    + popularSuggestions.phrases.length
+                    + autoSuggest.phrases.length
+                    + brandSuggestions.phrases.length
+                )]
+            )
+        }
+    };
+}
 
 /**
  * SearchServices-GetSuggestions : The SearchServices-GetSuggestions endpoint is responsible for searching as you type and displaying the suggestions from that search
@@ -37,131 +282,38 @@ var POPULAR_CATEGORIES = [
  * @param {serverfunction} - get
  */
 server.replace('GetSuggestions', cache.applyDefaultCache, function (req, res, next) {
-    var SuggestModel = require('dw/suggest/SuggestModel');
-    var CategorySuggestions = require('*/cartridge/models/search/suggestions/category');
-    var ContentSuggestions = require('*/cartridge/models/search/suggestions/content');
-    var ProductSuggestions = require('*/cartridge/models/search/suggestions/product');
-    // Frenzy modules are intentionally kept; they execute only when the BM flag is enabled.
-    var PopularSearchesSuggestions = require('*/cartridge/models/search/suggestions/PopularSearches');
-    var AutoSuggest = require('*/cartridge/models/search/suggestions/AutoSuggest');
-    var BestSellers = require('*/cartridge/models/search/suggestions/BestSellers');
-    var SearchPhraseSuggestions = require('*/cartridge/models/search/suggestions/searchPhrase');
-    var categorySuggestions;
-    var contentSuggestions;
-    var productSuggestions;
-    var recentSuggestions;
-    var popularSuggestions;
-    var autoSuggest;
-    var brandSuggestions;
     var searchTerms = req.querystring.q;
     var stripeMidValue = req.querystring.stripeMidValue;
-    var suggestions;
-    var minChars = preferences.minTermLength;
     var maxSuggestions = 3;
     var maxProductSuggestions = 6;
-    var maxCategorySuggestions = 6;
-    var bestSellersMaxSuggestions = 4;
-    // Frenzy is intentionally disabled for now.
-    // Keep original BM flag line for quick rollback:
-    // var useFrenzySearchBar = Site.current.getCustomPreferenceValue('enableFrenzyRecommendationOnSearchBar') === true;
-    var useFrenzySearchBar = false;
+    var maxCategorySuggestions = 4;
+    var maxBrandSuggestions = 4;
 
-    if (!searchTerms || searchTerms.length < minChars) {
-        var staticBrandSuggestions = POPULAR_BRANDS.map(function (brandName) {
-            return {
-                value: brandName,
-                url: URLUtils.url('Search-Show', 'q', brandName)
-            };
-        });
-        var staticCategorySuggestions = POPULAR_CATEGORIES.map(function (categoryName) {
-            return {
-                name: categoryName,
-                url: URLUtils.url('Search-Show', 'q', categoryName)
-            };
-        });
-
+    if (!searchTerms) {
         res.render('search/suggestions', {
-            suggestions: {
-                product: { available: false, products: [], phrases: [] },
-                category: { available: true, categories: staticCategorySuggestions },
-                content: { available: false, contents: [] },
-                recent: { available: false, phrases: [] },
-                popular: { available: false, phrases: [] },
-                phrase_suggestions: { phrases: [] },
-                bestsellers: { matching_products: [] },
-                brand: { available: true, phrases: staticBrandSuggestions },
-                query: '',
-                message: Resource.msgf('label.header.search.result.count.msg', 'common', null, ['' + (staticBrandSuggestions.length + staticCategorySuggestions.length)])
-            }
+            suggestions: buildEmptySearchSuggestions(
+                maxProductSuggestions,
+                maxCategorySuggestions,
+                maxBrandSuggestions
+            )
         });
         next();
         return;
     }
 
-    suggestions = new SuggestModel();
-    suggestions.setFilteredByFolder(false);
-    suggestions.setSearchPhrase(searchTerms);
-    // Allow more product suggestions while keeping other sections configurable.
-    suggestions.setMaxSuggestions(Math.max(maxSuggestions, maxProductSuggestions));
-    categorySuggestions = new CategorySuggestions(suggestions, maxCategorySuggestions);
-    contentSuggestions = new ContentSuggestions(suggestions, maxSuggestions);
-    productSuggestions = new ProductSuggestions(suggestions, maxProductSuggestions, searchTerms, stripeMidValue);
-    recentSuggestions = new SearchPhraseSuggestions(suggestions.recentSearchPhrases, maxSuggestions);
-    popularSuggestions = new SearchPhraseSuggestions(suggestions.popularSearchPhrases, maxSuggestions);
-    brandSuggestions = new SearchPhraseSuggestions(suggestions.brandSuggestions, maxSuggestions);
+    setLastSearchTerm(searchTerms);
 
-    // Non-Frenzy default for "Suggestions For..."
-    autoSuggest = {
-        phrases: (productSuggestions && productSuggestions.phrases) ? productSuggestions.phrases : []
-    };
-    var bestSellers = {
-        matching_products: []
-    };
+    var typedSearchSuggestions = buildTypedSearchSuggestions(
+        searchTerms,
+        stripeMidValue,
+        maxSuggestions,
+        maxProductSuggestions,
+        maxCategorySuggestions
+    );
 
-    // Frenzy path kept for reference but disabled.
-    /*
-    if (useFrenzySearchBar) {
-        var frenzyPopularSuggestions = new PopularSearchesSuggestions(maxSuggestions);
-        var frenzyAutoSuggest = new AutoSuggest(searchTerms, maxSuggestions, minChars);
-        var frenzyBestSellers = new BestSellers(bestSellersMaxSuggestions);
-
-        if (frenzyPopularSuggestions && frenzyPopularSuggestions.phrases && frenzyPopularSuggestions.phrases.length) {
-            popularSuggestions = frenzyPopularSuggestions;
-        }
-        if (frenzyAutoSuggest && frenzyAutoSuggest.phrases && frenzyAutoSuggest.phrases.length) {
-            autoSuggest = frenzyAutoSuggest;
-        }
-        if (frenzyBestSellers && frenzyBestSellers.matching_products) {
-            bestSellers = frenzyBestSellers;
-        }
-    }
-    */
-
-    if (productSuggestions.available || contentSuggestions.available
-        || categorySuggestions.available
-        || recentSuggestions.available
-        || popularSuggestions.available
-        || (autoSuggest.phrases && autoSuggest.phrases.length)
-        || brandSuggestions.available) {
-        var total = productSuggestions.products.length + contentSuggestions.contents.length
-            + categorySuggestions.categories.length
-            + recentSuggestions.phrases.length
-            + popularSuggestions.phrases.length
-            + autoSuggest.phrases.length
-            + brandSuggestions.phrases.length;
+    if (typedSearchSuggestions.hasSuggestions) {
         res.render('search/suggestions', {
-            suggestions: {
-                product: productSuggestions,
-                category: categorySuggestions,
-                content: contentSuggestions,
-                recent: recentSuggestions,
-                popular: popularSuggestions,
-                phrase_suggestions: autoSuggest,
-                bestsellers: bestSellers,
-                brand: brandSuggestions,
-                query: searchTerms,
-                message: Resource.msgf('label.header.search.result.count.msg', 'common', null, ['' + total])
-            }
+            suggestions: typedSearchSuggestions.payload
         });
     } else {
         res.json({});

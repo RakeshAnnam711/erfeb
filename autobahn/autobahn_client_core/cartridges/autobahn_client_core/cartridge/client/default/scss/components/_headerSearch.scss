@@ -1,22 +1,21 @@
 .site-search {
     position: relative;
     width: 100%;
-    // Search suggestion layout controls (edit these values freely)
-    --search-suggestion-product-size: 56px;
-    --search-suggestion-product-tile-width: 76px;
-    --search-suggestion-product-gap: 8px;
-    --search-suggestion-product-title-font-size: 12px;
+    --search-suggestion-product-size: 120px;
+    --search-suggestion-product-tile-width: 150px;
+    --search-suggestion-product-gap: 10px;
+    --search-suggestion-product-title-font-size: 15px;
     --search-suggestion-product-title-line-height: 1.25;
-    --search-suggestion-product-image-to-title-gap: 8px;
+    --search-suggestion-product-image-to-title-gap: 20px;
     --search-suggestion-product-columns: 6;
     --search-suggestion-category-columns: 1;
-    --search-suggestion-category-gap: 1px;
+    --search-suggestion-category-gap: 5px;
     --search-suggestion-section-gap: 1px;
     --search-suggestion-header-top: 5px;
     --search-suggestion-header-line-gap: 1px;
     --search-suggestion-title-to-values-gap: 1px;
-    --search-suggestion-value-gap: 1px;
-    --search-suggestion-section-to-next-title-gap: 8px;
+    --search-suggestion-value-gap: 5px;
+    --search-suggestion-section-to-next-title-gap: 1px;
     #suggestions-search-field{
         border-bottom: 1px solid #B0B4B4;
         display: flex;
@@ -311,7 +310,7 @@
             gap: var(--search-suggestion-value-gap);
         }
         &.suggestions-categories {
-            display: grid;
+            display: flex;
             grid-template-columns: repeat(var(--search-suggestion-product-columns), minmax(0, 1fr));
             gap: var(--search-suggestion-category-gap);
             @include media-breakpoint-down(md) {
@@ -338,9 +337,17 @@
         }
         .swatch-thumbnail {
             @include swatch($header-suggestions-image-size-large, $white, 'thumbnail');
-            background-position: bottom;
-            background-size: contain;
-            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .swatch-thumbnail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: bottom;
+            display: block;
         }
         .name {
             font-weight: 500;
