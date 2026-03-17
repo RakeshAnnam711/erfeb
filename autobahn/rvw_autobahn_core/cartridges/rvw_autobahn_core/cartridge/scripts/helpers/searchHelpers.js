@@ -156,15 +156,21 @@ function search (req, res) {
             var sortingOptions = CatalogMgr.getSortingOptions();
             var fallbackParams = { sz: 30 };
             var rootCategory = CatalogMgr.getSiteCatalog().getRoot();
-            var fallbackPhrase = 'a';
+            var fallbackCategory = CatalogMgr.getCategory('new-arrivals');
+            var activeFallbackCategory = fallbackCategory && fallbackCategory.isOnline() ? fallbackCategory : rootCategory;
 
             // Keep user's explicit sorting choice if present.
             if (req.querystring.srule) {
                 fallbackParams.srule = req.querystring.srule;
             }
 
-            // Search broadly to ensure fallback products and refinements load.
-            fallbackSearch.setSearchPhrase(fallbackPhrase);
+            if (activeFallbackCategory) {
+                fallbackSearch.setCategoryID(activeFallbackCategory.ID);
+                fallbackParams.cgid = activeFallbackCategory.ID;
+                if (!fallbackParams.srule && activeFallbackCategory.defaultSortingRule) {
+                    fallbackSearch.setSortingRule(activeFallbackCategory.defaultSortingRule);
+                }
+            }
             fallbackSearch.setRecursiveCategorySearch(true);
             fallbackSearch.search();
 
@@ -188,7 +194,7 @@ function search (req, res) {
             result.productSearch.noResultsFallback = true;
             result.productSearch.originalSearchQuery = req.querystring.q;
             result.apiProductSearch = fallbackSearch;
-            result.refineurl = URLUtils.url('Search-Refinebar', 'q', fallbackPhrase, 'sz', 30);
+            result.refineurl = URLUtils.url('Search-Refinebar', 'cgid', fallbackParams.cgid, 'sz', 30);
             result.noResultsQuery = req.querystring.q;
             result.noResultsFallback = true;
         }

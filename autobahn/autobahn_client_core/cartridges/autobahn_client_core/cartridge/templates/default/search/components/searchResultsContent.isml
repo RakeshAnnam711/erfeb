@@ -132,6 +132,13 @@
                                 </div>
                             </div>
                         </div>
+                        <isif condition="${isNoResultsFallback && !empty(displaySearchQuery) && pdict.productSearch.productIds.length > 0}">
+                            <div class="row">
+                                <div class="col-12 text-center mb-4">
+                                    No search results found for "${displaySearchQuery}".
+                                </div>
+                            </div>
+                        </isif>
                         <div class="col-sm-12">
                             <!--- Selected filters bar --->
                             <iscomment> <div class="row filter-bar" data-filter-bar-style-mobile="vertical"
@@ -157,11 +164,11 @@
                                     <div>
                                         No search results found for "${displaySearchQuery}".
                                     </div>
-                                        <div>
+                                    <div>
                                         Reset filters and try again.
                                         <a class="text-link reset pr-2"
                                         href="${pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)}
-                                    </a>
+                                        </a>
                                     </div>
                                     <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnNoResults')}">
                                         <div class="einstein_section overflow-hidden px-5 w-100 text-left">

@@ -110,6 +110,51 @@ function search(req, res) {
         result.schemaData = schemaHelper.getListingPageSchema(productSearch.productIds);
     }
 
+    // Mirror the core fallback behavior for zero-result keyword searches.
+    if (req.querystring.q && Number(result.productSearch.count) === 0) {
+        var fallbackSearch = new ProductSearchModel();
+        var fallbackParams = { sz: 30 };
+        var rootCategory = CatalogMgr.getSiteCatalog().getRoot();
+        var fallbackCategory = CatalogMgr.getCategory('new-arrivals');
+        var activeFallbackCategory = fallbackCategory && fallbackCategory.isOnline() ? fallbackCategory : rootCategory;
+        var fallbackSearchParams = { sz: 30 };
+
+        if (req.querystring.srule) {
+            fallbackParams.srule = req.querystring.srule;
+            fallbackSearchParams.srule = req.querystring.srule;
+        }
+
+        if (activeFallbackCategory) {
+            fallbackSearchParams.cgid = activeFallbackCategory.ID;
+            fallbackParams.cgid = activeFallbackCategory.ID;
+        }
+
+        fallbackSearch = this.setupSearch(fallbackSearch, fallbackSearchParams, req.httpParameterMap);
+        fallbackSearch.search();
+
+        var fallbackCount = Number(fallbackSearch.count) || 0;
+        if (fallbackCount > 30) {
+            var maxStart = fallbackCount - 30;
+            var pageBlockCount = Math.floor(maxStart / 30) + 1;
+            fallbackParams.start = Math.floor(Math.random() * pageBlockCount) * 30;
+        }
+
+        result.productSearch = new ProductSearch(
+            fallbackSearch,
+            fallbackParams,
+            fallbackParams.srule,
+            CatalogMgr.getSortingOptions(),
+            rootCategory
+        );
+        result.productSearch.searchKeywords = req.querystring.q;
+        result.productSearch.noResultsFallback = true;
+        result.productSearch.originalSearchQuery = req.querystring.q;
+        result.apiProductSearch = fallbackSearch;
+        result.refineurl = URLUtils.url('Search-Refinebar', 'cgid', fallbackParams.cgid, 'sz', 30);
+        result.noResultsQuery = req.querystring.q;
+        result.noResultsFallback = true;
+    }
+
     return result;
 }
 
