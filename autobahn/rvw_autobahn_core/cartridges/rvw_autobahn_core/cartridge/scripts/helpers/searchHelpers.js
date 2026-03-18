@@ -150,27 +150,20 @@ function search (req, res) {
             result.schemaData = schemaHelper.getListingPageSchema(result.productSearch.productIds);
         }
 
-        // If no matches for a keyword search, show a fallback PLP with mixed products and refinements.
+        // If no matches for a keyword search, show a fallback PLP using the new-arrivals keyword.
         if (req.querystring.q && Number(result.productSearch.count) === 0) {
             var fallbackSearch = new ProductSearchModel();
             var sortingOptions = CatalogMgr.getSortingOptions();
             var fallbackParams = { sz: 30 };
             var rootCategory = CatalogMgr.getSiteCatalog().getRoot();
-            var fallbackCategory = CatalogMgr.getCategory('new-arrivals');
-            var activeFallbackCategory = fallbackCategory && fallbackCategory.isOnline() ? fallbackCategory : rootCategory;
+            var fallbackPhrase = 'new-arrivals';
 
             // Keep user's explicit sorting choice if present.
             if (req.querystring.srule) {
                 fallbackParams.srule = req.querystring.srule;
             }
 
-            if (activeFallbackCategory) {
-                fallbackSearch.setCategoryID(activeFallbackCategory.ID);
-                fallbackParams.cgid = activeFallbackCategory.ID;
-                if (!fallbackParams.srule && activeFallbackCategory.defaultSortingRule) {
-                    fallbackSearch.setSortingRule(activeFallbackCategory.defaultSortingRule);
-                }
-            }
+            fallbackSearch.setSearchPhrase(fallbackPhrase);
             fallbackSearch.setRecursiveCategorySearch(true);
             fallbackSearch.search();
 
@@ -194,7 +187,7 @@ function search (req, res) {
             result.productSearch.noResultsFallback = true;
             result.productSearch.originalSearchQuery = req.querystring.q;
             result.apiProductSearch = fallbackSearch;
-            result.refineurl = URLUtils.url('Search-Refinebar', 'cgid', fallbackParams.cgid, 'sz', 30);
+            result.refineurl = URLUtils.url('Search-Refinebar', 'q', fallbackPhrase, 'sz', 30);
             result.noResultsQuery = req.querystring.q;
             result.noResultsFallback = true;
         }
