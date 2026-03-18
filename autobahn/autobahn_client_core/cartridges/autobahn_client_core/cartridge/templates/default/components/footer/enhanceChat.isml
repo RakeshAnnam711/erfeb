@@ -1,78 +1,50 @@
-<style>
+<isset name="enhancedChatEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedChatEnabled')}" scope="page" />
+<isset name="enhancedChatOrgId" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedChatOrgId')}" scope="page" />
+<isset name="enhancedChatDeploymentName" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedChatDeploymentName')}" scope="page" />
+<isset name="enhancedChatSiteUrl" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedChatSiteUrl')}" scope="page" />
+<isset name="enhancedChatScrt2Url" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedChatScrt2Url')}" scope="page" />
+<isset name="enhancedChatLanguage" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedChatLanguage') || 'en_US'}" scope="page" />
 
-/* Desktop*/
-.embedded-messaging > .embeddedMessagingFrame.isMinimized,
-.embedded-messaging > .embeddedMessagingFrame.isMaximized {
-    right: 80px !important;
-    left: auto !important;
-    bottom: 10px !important;
-}
+<isif condition="${enhancedChatEnabled && !empty(enhancedChatOrgId) && !empty(enhancedChatDeploymentName) && !empty(enhancedChatSiteUrl) && !empty(enhancedChatScrt2Url)}">
+    <script type="text/javascript">
+        (function () {
+            var enhancedChatConfig = {
+                orgId: '<isprint value="${enhancedChatOrgId}" encoding="jshtml" />',
+                deploymentName: '<isprint value="${enhancedChatDeploymentName}" encoding="jshtml" />',
+                siteUrl: '<isprint value="${enhancedChatSiteUrl}" encoding="jshtml" />',
+                scrt2Url: '<isprint value="${enhancedChatScrt2Url}" encoding="jshtml" />',
+                language: '<isprint value="${enhancedChatLanguage}" encoding="jshtml" />'
+            };
 
-.embeddedMessagingConversationButtonWrapper
-.embeddedMessagingConversationButton {
-    right: 80px !important;
-    left: auto !important;
-    bottom: 10px !important;
-}
-/* Mobile & Tablet */
-@media only screen and (max-width: 768px) {
-  .embedded-messaging > .embeddedMessagingFrame.isMaximized {
-      /* left: 16px !important;
-      right: 16px !important; */
-      height:80%;
-      width: auto !important;
-      max-width: calc(100vw - 50px) !important;
-      border-radius: 12px !important;
-  }
-}
-</style>
+            function initEmbeddedMessaging() {
+                try {
+                    embeddedservice_bootstrap.settings.language = enhancedChatConfig.language;
+                    embeddedservice_bootstrap.init(
+                        enhancedChatConfig.orgId,
+                        enhancedChatConfig.deploymentName,
+                        enhancedChatConfig.siteUrl,
+                        {
+                            scrt2URL: enhancedChatConfig.scrt2Url
+                        }
+                    );
+                } catch (error) {
+                    window.console.error('Error loading embedded messaging:', error);
+                }
+            }
 
+            function loadEmbeddedMessaging() {
+                var script = document.createElement('script');
+                script.src = enhancedChatConfig.siteUrl + '/assets/js/bootstrap.min.js';
+                script.onload = initEmbeddedMessaging;
+                document.body.appendChild(script);
+            }
 
-<iscomment> This Script is associated with sandox/Development enivironment.</iscomment>
-<script type='text/javascript'>
- function initEmbeddedMessaging() {
-  try {
-    console.log("Initializing Embedded Messaging bot enabled by Salesforcecore...");
-   embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-
-   embeddedservice_bootstrap.init(
-    '00Df4000001SZOK',
-    'WGACA_Enhanced_Chat',
-    'https://wgaca.my.site.com/ESWWGACAEnhancedChat1771950888388',
-    {
-     scrt2URL: 'https://wgaca.my.salesforce-scrt.com'
-    }
-   );
-  } catch (err) {
-   console.error('Error loading Embedded Messaging: ', err);
-  }
- };
-</script>
-<script type='text/javascript'
-    src='https://wgaca.my.site.com/ESWWGACAEnhancedChat1771950888388/assets/js/bootstrap.min.js'
-    onload='initEmbeddedMessaging()'></script>
-
-<iscomment> This Script is associated with sandox/Development enivironment.
-
- <script type='text/javascript'>
-function initEmbeddedMessaging() {
-  try {
-    console.log("Initializing Embedded Messaging bot enabled by Salesforcecore...");
-   embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-
-   embeddedservice_bootstrap.init(
-    '00DE200000Eun1B',
-    'WGACA_Enhanced_Chat',
-    'https://wgaca--upgrade.sandbox.my.site.com/ESWWGACAEnhancedChat1770843176069',
-    {
-     scrt2URL: 'https://wgaca--upgrade.sandbox.my.salesforce-scrt.com'
-    }
-   );
-  } catch (err) {
-   console.error('Error loading Embedded Messaging: ', err);
-  }
-};
-</script>
-<script type='text/javascript' src='https://wgaca--upgrade.sandbox.my.site.com/ESWWGACAEnhancedChat1770843176069/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script> </iscomment>
-
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', loadEmbeddedMessaging);
+            } else {
+                loadEmbeddedMessaging();
+            }
+        }());
+    </script>
+</isif>
 
