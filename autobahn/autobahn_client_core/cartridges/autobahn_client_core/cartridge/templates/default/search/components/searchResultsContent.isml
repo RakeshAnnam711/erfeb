@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="col-12 col-lg-4 result-count filter-count order-lg-1" aria-live="polite">
                                     <h2 class="sr-only">Results found</h2>
-                                    <isif condition = "${pdict.productSearch.count != 0}">
+                                    <isif condition = "${pdict.productSearch.count != 0 && !isNoResultsFallback}">
                                     <span aria-hidden="true">Results found:</span>
                                         <span>${pdict.productSearch.count}</span>
                                     <iscomment>
