@@ -1,7 +1,6 @@
 <div class="site-search">
     <form role="search"
-        action="${('enableFrenzyRecommendationOnSearch' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences
-                .custom.enableFrenzyRecommendationOnSearch) ? URLUtils.url('Frenzy-Search'): URLUtils.url('Search-Show')}" method="get"
+        action="${URLUtils.url('Search-Show')}" method="get"
         name="simpleSearch" data-searchfallbackurl="${URLUtils.url('Search-Show')}">
         <input type="hidden" name="stripeMidValue" value="">
         <div id="input-suggestions-wrapper" class="input-suggestions-wrapper">

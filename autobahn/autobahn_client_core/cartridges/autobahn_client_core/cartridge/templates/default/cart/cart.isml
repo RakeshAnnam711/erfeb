@@ -164,16 +164,6 @@
 
         <iscomment> YOU MAY ALSO LIKE SECTION </iscomment>
         <isif condition="${pdict.items.length === 0}">
-            <iscomment> <isinclude template="cart/cartFernzySlider" />
-            <script>
-                window.addEventListener("load", function() {
-                    let get_frenzy_cart_page_section = document.querySelector('.frenzy_cart_page_section');
-                    // Load Recommendation Section
-                    if(get_frenzy_cart_page_section){
-                        getHomepageProductsApi?.();
-                    }
-                });
-            </script> </iscomment>
         <iselse/>
         <iscomment> einstein full cart recommendation </iscomment>
         <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnCart')}">
@@ -183,35 +173,8 @@
                 </div>
             </div>
         </isif>
-            <iscomment> <isinclude template="cart/cartProductFernzySlider" /> </iscomment>
-            <script>
-                function fetchRecommendationProductsApi(skuRecommendation, currentSkus) {
-                    let get_frenzy_recommendation_section = document.querySelector('.frenzy_cross_sell_carousel_section');
-                    var productSKU = "${productSKU}";
-                    var skuId = productSKU;
-                    if (currentSkus && !currentSkus.includes(productSKU)) {
-                        skuId = currentSkus[0];
-                    }
-                    // Load Recommendation Section
-                    if(get_frenzy_recommendation_section){
-                        getRecommendationProductsApi?.(skuRecommendation ? skuId : null);
-                    }
-                }
-                window.addEventListener("load", function() {
-                    fetchRecommendationProductsApi(true);
-                });
-
-            </script>
 
         </isif>
-        <script>
-            document.addEventListener('cart:refetchFrenzyRecommendation', function (e) {
-                fetchRecommendationProductsApi(true, e.detail?.skuList);
-            });
-            document.addEventListener('cart:refetchFrenzyRecommendationForEmptyCart', function () {
-                fetchRecommendationProductsApi(false);
-            });
-        </script>
         <iscomment> <iscontentasset aid="cart-recommendations" /> </iscomment>
     </div>
 </isdecorate>

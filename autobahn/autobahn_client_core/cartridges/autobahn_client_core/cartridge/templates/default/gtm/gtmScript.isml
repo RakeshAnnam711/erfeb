@@ -235,8 +235,7 @@ if (pushDataLayer) {
                     previousPageType === 'SKU Search'||
                     previousPageType === 'search_products_carousel' ||
                     previousPageType === 'search_popularProducts_carousel' ||
-                    previousPageType === 'Mini Cart' ||
-                    previousPageType === 'frenzysearch';
+                    previousPageType === 'Mini Cart';
 
                 if (isNonCategorySource) {
                     dataLayerEvent.ecommerce.items.forEach(function (item) {
@@ -255,7 +254,7 @@ if (pushDataLayer) {
 
                 if (
                     homepageClickTarget === 'Home Page Featured' &&
-                    (currentPageType === 'PLP Page' || currentPageType === 'frenzysearch')
+                    currentPageType === 'PLP Page'
                 ) {
                     sessionStorage.setItem('previousPageType', homepageClickTarget);
                     sessionStorage.removeItem('homepageClickTarget');
@@ -278,12 +277,6 @@ if (pushDataLayer) {
                 let previousPageType = sessionStorage.getItem('previousPageType') || '';
                 const currentPageType = sessionStorage.getItem('currentPageType') || '';
 
-                if (
-                    previousPageType === 'SKU Search' &&
-                    (currentPageType === 'PLP Page' || currentPageType === 'frenzysearch')
-                ) {
-                    previousPageType = 'frenzysearch';
-                }
 
                 const listId = previousPageType.toLowerCase().replace(/\s+/g, '_') || '';
                 const listName = previousPageType || '';

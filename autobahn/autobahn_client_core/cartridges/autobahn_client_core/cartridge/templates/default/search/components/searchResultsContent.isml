@@ -25,35 +25,37 @@
 <isset name="isNoResultsFallback" value="${pdict.noResultsFallback || pdict.productSearch.noResultsFallback}" scope="page" />
 <div class="plp_wrapper">
     <iscomment> PLP Hero Banner </iscomment>
-    <div class="container page-header search-results-header plp-hero-banner">
-        <isif condition="${pdict.fullCategory.custom.h1ContentTracker != null}">
-            <div class="row no-gutters">
-                <div class="col-lg-6">
-                    <iscomment> Mobile PLP Banner </iscomment>
-                    <iscomment> <div class="hero-banner d-xl-none">
-                        <img src="${pdict.fullCategory.custom.heroBannerMobile.absURL}" alt="category-img" onerror="this.onerror=null;this.src='${placeholder_PLPBanner}'"/>
-                    </div> </iscomment>
-                    <iscomment> Desktop PLP Banner </iscomment>
-                    <div class="hero-banner d-none d-lg-block">
-                        <img src="${pdict.fullCategory.custom.heroBanner.absURL}" alt="" role="presentation" fetchpriority="high" onerror="this.onerror=null;this.src='${placeholder_PLPBanner}'"/>
+    <isif condition = "${!isNoResultsFallback}">
+        <div class="container page-header search-results-header plp-hero-banner">
+            <isif condition="${pdict.fullCategory.custom.h1ContentTracker != null}">
+                <div class="row no-gutters">
+                    <div class="col-lg-6">
+                        <iscomment> Mobile PLP Banner </iscomment>
+                        <iscomment> <div class="hero-banner d-xl-none">
+                            <img src="${pdict.fullCategory.custom.heroBannerMobile.absURL}" alt="category-img" onerror="this.onerror=null;this.src='${placeholder_PLPBanner}'"/>
+                        </div> </iscomment>
+                        <iscomment> Desktop PLP Banner </iscomment>
+                        <div class="hero-banner d-none d-lg-block">
+                            <img src="${pdict.fullCategory.custom.heroBanner.absURL}" alt="" role="presentation" fetchpriority="high" onerror="this.onerror=null;this.src='${placeholder_PLPBanner}'"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="content-tracker-header">
+                            <isprint value="${pdict.fullCategory.custom.h1ContentTracker}" encoding="off" />
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="content-tracker-header">
-                        <isprint value="${pdict.fullCategory.custom.h1ContentTracker}" encoding="off" />
-                    </div>
-                </div>
-            </div>
-        <iselse>
-            <h1 class="page-header-title">
-                <isif condition="${pdict.productSearch.isCategorySearch}">
-                    ${pdict.productSearch.category.name}
-                <iselse/>
-                    ${Resource.msg('label.header.banner','search',null)}
-                </isif>
-            </h1>
-        </isif>
-    </div>
+            <iselse>
+                <h1 class="page-header-title">
+                    <isif condition="${pdict.productSearch.isCategorySearch}">
+                        ${pdict.productSearch.category.name}
+                    <iselse/>
+                        ${Resource.msg('label.header.banner','search',null)}
+                    </isif>
+                </h1>
+            </isif>
+        </div>
+    </isif>
 
     <div class="search-results">
         <div class="container">
@@ -93,10 +95,12 @@
                             <!--- PLP Hero Banner --->
                             <div class="row plp-top-bar">
                                 <div class="col-lg-4 result-count order-lg-1">
-                                    <isif condition="${!pdict.breadcrumbs.isEmpty()}">
-                                        <header class="container page-header">
-                                            <isinclude template="components/breadcrumbs/pageBreadcrumbs" />
-                                        </header>
+                                    <isif condition = "${!isNoResultsFallback}">
+                                            <isif condition="${!pdict.breadcrumbs.isEmpty()}">
+                                                <header class="container page-header">
+                                                    <isinclude template="components/breadcrumbs/pageBreadcrumbs" />
+                                                </header>
+                                            </isif>
                                     </isif>
                                 </div>
 
@@ -108,7 +112,7 @@
                                         </button>
                                     </isif>
                                 </div>
-                                <div class="col-6 col-lg-4 sort-by-dropdown text-right order-lg-2  ${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown' ? 'd-block d-lg-none' : ''}">
+                                <div class="col-6 col-lg-4 sort-by-dropdown text-right order-lg-2  ${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown' ? 'd-block d-lg-none' : ''}${!isNoResultsFallback?'':'pt-2'}">
                                     <isif condition="${pdict.productSearch.productIds.length > 0}">
                                         <isinclude template="search/sortOrderMenu" />
                                     </isif>
@@ -200,6 +204,13 @@
                                 </div>
                             </isif>
                         </div>
+                        <isif condition="${isNoResultsFallback && !empty(displaySearchQuery) && pdict.productSearch.productIds.length > 0}">
+                            <div class="row">
+                                <div class="col-12 text-center mt-4">
+                                    No search results found for "${displaySearchQuery}".
+                                </div>
+                            </div>
+                        </isif>
                     </div>
 
             </div>

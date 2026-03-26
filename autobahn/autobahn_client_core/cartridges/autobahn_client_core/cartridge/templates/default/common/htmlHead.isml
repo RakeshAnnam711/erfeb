@@ -4,7 +4,7 @@
         && dw.system.Site.current.preferences.custom.grafanaScript != ''}">
         <isprint value="${dw.system.Site.current.preferences.custom.grafanaScript}" encoding="off"/>
     </isif>
-
+    
     <isinclude template="/common/oneTrustScript" />
 
     <iscomment>All uncached data can be injected here</iscomment>
@@ -136,7 +136,6 @@
         </isif>
      src="https://go.launchingdeals.com/util/hit" defer></script>
 
-    <isinclude template="common/head/frenzyCookieInit" />
     <script>
         window.Customer = {
             isLoggedIn: ${pdict.CurrentCustomer.authenticated ? 'true' : 'false'},
