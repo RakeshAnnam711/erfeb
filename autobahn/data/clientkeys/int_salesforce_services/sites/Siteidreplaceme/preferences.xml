@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances>
+            <preference preference-id="MarketingCloudCollectJsEnabled">true</preference>
+            <preference preference-id="MarketingCloudUseContactIdForSubscriberKey"></preference>
+            <preference preference-id="MarketingCloudForNewsletterEnabled">true</preference>
+            <preference preference-id="MarketingCloudForOrderConfirmationEnabled">false</preference>
+            <preference preference-id="MarketingCloudForAccountCreationEnabled">true</preference>
+            <preference preference-id="MarketingCloudForPasswordChangeEnabled">true</preference>
+            <preference preference-id="MarketingCloudForPasswordResetEnabled">true</preference>
+            <preference preference-id="MarketingCloudForGiftCertificateEnabled">true</preference>
+
+            <preference preference-id="sfraOrderConfirmationEmailDisabled">true</preference>
+
+            <preference preference-id="MarketingCloudAccountId">100003081</preference>
+            <preference preference-id="MarketingCloudClientId">ok38zrj7mmlldar6izn7fscd</preference>
+            <preference preference-id="MarketingCloudClientSecret">uPvRPtV754UD3HbiaJu8BzlF</preference>
+            <preference preference-id="MarketingCloudTenantSpecificEndpointSubdomain">mccmb8kfvf5zjhx2-0m07klck1jq</preference>
+            <preference preference-id="MarketingCloudFTPUserId">100003081_8</preference>
+            <preference preference-id="MarketingCloudFTPPassword">hfc2qzq3BKB.rhn3ryn</preference>
+            <preference preference-id="DataExtensionExternalKeyForNewsletter"></preference>
+            <preference preference-id="JourneyEventDefinitionKeyForNewsletter">WebsiteEmailSignup</preference>
+            <preference preference-id="DataExtensionExternalKeyForBackInStock"></preference>
+            <preference preference-id="TriggeredSendExternalKeyForOrderConfirmation"></preference>
+            <preference preference-id="TriggeredSendExternalKeyForAccountCreation"></preference>
+            <preference preference-id="TriggeredSendExternalKeyForAccountCreation">DEV_AccountCreated</preference>
+            <preference preference-id="TriggeredSendExternalKeyForGiftCertificate"></preference>
+            <preference preference-id="TriggeredSendExternalKeyForPasswordReset"></preference>
+            <preference preference-id="TriggeredSendExternalKeyForPasswordChange"></preference>
+            <preference preference-id="TriggeredSendExternalKeyForPasswordReset">DEV_PasswordReset</preference>
+            <preference preference-id="TriggeredSendExternalKeyForPasswordChange">DEV_PasswordChanged</preference>
+            <preference preference-id="ServiceCloudTenantSpecificEndpointSubdomain"></preference>
+            <preference preference-id="ServiceCloudConsumerKey"></preference>
+            <preference preference-id="ServiceCloudConsumerSecret"></preference>
+            <preference preference-id="ServiceCloudUserName"></preference>
+            <preference preference-id="ServiceCloudPassword"></preference>
+            <preference preference-id="ServiceCloudSecurityToken"></preference>
+            <preference preference-id="ServiceCloudVersion"></preference>
+            <preference preference-id="ServiceCloudServiceIdForRestApi"></preference>
+            <preference preference-id="ServiceCloudEndpoint-Query"></preference>
+            <preference preference-id="ServiceCloudEndpoint-Authentication"></preference>
+            <preference preference-id="ServiceCloudEndpoint-SObject"></preference>
+            <preference preference-id="ServiceCloud-PersonAccountRecordTypeId"></preference>
+            <preference preference-id="ServiceCloud-CustomerListId"></preference>
+            <preference preference-id="ShowLiveChat"></preference>
+            <preference preference-id="ChatBaseUrl"></preference>
+            <preference preference-id="ServerInstanceUrl"></preference>
+            <preference preference-id="ChatOrganizationId"></preference>
+            <preference preference-id="AgentContentUrl"></preference>
+            <preference preference-id="DeploymentId"></preference>
+            <preference preference-id="ButtonId"></preference>
+            <preference preference-id="BaseLiveAgentUrl"></preference>
+            <preference preference-id="ESWLiveAgentDevName"></preference>
+            <preference preference-id="LiveAgentName"></preference>
+            <preference preference-id="ServiceJSURL"></preference>
+            <preference preference-id="ButtonSourceAttribute"></preference>
+            <preference preference-id="OfflineSupportEnabled"></preference>
+            <preference preference-id="InitEswUrl"></preference>
+            <preference preference-id="ConversionTrackingToken"></preference>
+            <preference preference-id="ConversionTrackingEventCodeResource"></preference>
+        </all-instances>
+        <development/>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>

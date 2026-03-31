@@ -1,0 +1,8 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}" scope="page"/>
+<isif condition="${globaleSession.get('geEnabled')}">
+    <span class="btn">
+        <i class="flag-icon flag-icon-${globaleSession.get('geCountry').toLowerCase()}"></i>
+        <isprint value="${globaleSession.get('geCountryName')}" />
+    </span>
+</isif>

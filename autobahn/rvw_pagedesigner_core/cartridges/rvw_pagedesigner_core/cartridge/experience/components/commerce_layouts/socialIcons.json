@@ -1,0 +1,45 @@
+{
+    "name": "Social Icons",
+    "description": "Component to display social media icons to share the page. Supported on the Store and Blog page types.",
+    "group": "dynamic_components",
+    "attribute_definition_groups": [
+        {
+            "id": "iconSettings",
+            "name": "Icon Settings",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container Class",
+                    "description": "Add a custom class to be applied to the component's container.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "hidePinterest",
+                    "name": "Hide Pinterest",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "hideFacebook",
+                    "name": "Hide Facebook",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "hideTwitter",
+                    "name": "Hide Twitter",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "hideShareLink",
+                    "name": "Hide Share Link",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

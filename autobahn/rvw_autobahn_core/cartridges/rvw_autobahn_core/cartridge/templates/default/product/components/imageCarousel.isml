@@ -1,0 +1,98 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="numberSlides" value="${(product.images['large'].length + ('pdpGalleryAssets' in product ? product.pdpGalleryAssets.length : 0)).toFixed()}" scope="page" />
+<isset name="hasSingleImage" value="${numberSlides > 1 ? false : true}" scope="page"/>
+<isset name="imageColumnClass" value="${'col-12 col-md-' + parseInt(product.pdpImageColumnWidth.split('/')[0])}" scope="page"/>
+<isset name="pdpThumbnailType" value="${pdict.abConfigs.pdpThumbnailType}" scope="page"/>
+<iscomment>Override column settings for Bundle main sections</iscomment>
+<isif condition="${isBundle}">
+    <isset name="imageColumnClass" value="${isBundleMainProduct ? bundleColumnWidth : 'col-12 col-md-12'}" scope="page"/>
+</isif>
+<iscomment>Override column settings for Product Sets main sections</iscomment>
+<isif condition="${isProductSet}">
+    <isset name="imageColumnClass" value="${setImageColumnClass ? setImageColumnClass : imageColumnClass}" scope="page"/>
+</isif>
+<iscomment>Override column settings for Page Designer component if applicable</iscomment>
+<isif condition="${'pdpImageColumnWidth' in pdict}">
+    <isset name="imageColumnClass" value="${'col-12 col-md-' + parseInt(pdict.pdpImageColumnWidth.split('/')[0])}" scope="page"/>
+</isif>
+<div class="primary-images ${imageColumnClass}">
+    <div class="row">
+        <div class='primary-images-main col-12 ${hasSingleImage ? "col-12" : "col-lg-9 product-has-thumbnails"}${pdpThumbnailType == 'dots' ? '-dots col-lg-12' : ' order-lg-2'}' cypress-target="pdpCarouselPrimaryImagesMain">
+            <div class="slider-container slider-buttons-hidden slider-buttons-hidden-md slider-buttons-hidden-lg slider-bullets-hidden slider-bullets-hidden-md slider-bullets-hidden-lg"
+                data-slider-thumbnail-container="${'#'}slider-pdp-${product.id}"
+                data-slider-loop="false"
+                data-slider-gutter="1"
+                data-slider-gutter-md="1"
+                data-slider-gutter-lg="1"
+            >
+                <div class="slider">
+                    <isloop items="${product.images['large']}" var="image" status="loopStatus">
+                        <div class="slide" data-zoom-image="${product.images['hi-res'][loopStatus.index].url}">
+                            <img src="${image.url}" class="d-block img-fluid" alt="${image.alt} image number ${(parseInt(image.index)).toFixed(0)}" itemprop="image" onerror="this.onerror=null;this.src='${URLUtils.staticURL('/images/noimage-large.png')}'" />
+                            <isif condition="${pdict.isWishlistModal !== true}">
+                                <iswishlisticon
+                                    wishlistpid="${product.wishlistpid}"
+                                    productname="${product.productName}"
+                                    addmessage="${'wishlist.addto.wishlist.icon'}"
+                                    removemessage="${'wishlist.removefrom.wishlist.icon'}"
+                                    includeicon="true"
+                                />
+                            </isif>
+                        </div>
+                    </isloop>
+
+                    <iscomment>Add any assets found in pdpGalleryAssets</iscomment>
+                    <isif condition="${!empty(product.pdpGalleryAssets)}">
+                        <isloop items="${product.pdpGalleryAssets}" var="asset">
+                            <div class="pdp-gallery-asset slide no-zoom">
+                                <iscontentasset aid="${asset.id}"/>
+                            </div>
+                        </isloop>
+                    </isif>
+                </div>
+            </div>
+            <isinclude template="/product/components/badges" />
+        </div>
+
+        <isset name="thumbnailCount" value="${0}" scope="page" />
+        <div class="col-12 primary-images-thumbnails${pdpThumbnailType == 'dots' ? '-dots' : ' col-lg-3 order-lg-1'} ${hasSingleImage ? 'd-none' : ''}">
+            <div id="slider-pdp-${product.id}" class="${pdpThumbnailType != 'images' ? 'slider-thumbnail-dots' : ''} slider-container slider-thumbnails slider-buttons-inside slider-buttons-inside-md slider-buttons-inside-lg ${pdpThumbnailType == 'dots' ? '' : 'slider-thumbnails-vertical-lg'}"
+                data-slider-items="${numberSlides}"
+                data-slider-items-md="${numberSlides}"
+                data-slider-items-lg="${numberSlides}"
+                data-slider-gutter="1"
+                data-slider-gutter-md="1"
+                data-slider-gutter-lg="1"
+                data-slider-loop="false"
+                cypress-target="pdpCarouselSliderThumbnails"
+            >
+                <div class="slider">
+                    <isloop items="${product.images['large']}" var="image">
+                        <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                        <div class="slide">
+                            <img src="${image.url}" class="d-block img-fluid" alt="${image.alt} image number ${thumbnailCount.toFixed()}" itemprop="image" onerror="this.onerror=null;this.src='${URLUtils.staticURL('/images/noimage-large.png')}'" />
+                        </div>
+                    </isloop>
+
+                    <iscomment>Add thumbnail images found in pdpGalleryAssets</iscomment>
+                    <isif condition="${!empty(product.pdpGalleryAssets)}">
+                        <isloop items="${product.pdpGalleryAssets}" var="asset">
+                            <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                            <div class="pdp-gallery-asset slide video-container">
+                                <img src="${asset.thumbnail}" class="d-block img-fluid" alt="image number ${thumbnailCount.toFixed()}" itemprop="image" onerror="this.onerror=null;this.src='${URLUtils.staticURL('/images/noimage-large.png')}'" />
+                                <isif condition="${asset.isVideo}">
+                                    <span class="video-thumbnail-button"></span>
+                                </isif>
+                            </div>
+                        </isloop>
+                    </isif>
+                </div>
+                <div class="slider-thumbnail-controls d-none">
+                    <div class='prev icon-arrow-left-thin'></div>
+                    <div class='next icon-arrow-right-thin'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

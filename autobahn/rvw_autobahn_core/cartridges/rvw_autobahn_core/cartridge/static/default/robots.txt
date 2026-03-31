@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Default robots.txt to be overwritten or replaced by BM Configuration #

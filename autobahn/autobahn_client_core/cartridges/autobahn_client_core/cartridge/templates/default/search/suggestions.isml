@@ -1,0 +1,102 @@
+<isset name="isFenzyEnabled" value="${('enableFrenzyRecommendationOnSearch' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.enableFrenzyRecommendationOnSearch)}" scope="page"/>
+
+<ul
+    class="suggestions container"
+    role="listbox"
+    id="search-results">
+    <iscomment> Auto suggestion based on user query </iscomment>
+    <isif condition="${pdict.suggestions.phrase_suggestions && pdict.suggestions.phrase_suggestions.phrases.length > 0}">
+        <li class="suggestions-header d-inline-block">
+            <div class="do-you-mean">${Resource.msg('label.suggest.suggetionsfor', 'search', null)} ${JSON.stringify(pdict.suggestions.query)}</div>
+        </li>
+        <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="${Resource.msg('label.suggest.suggetionsfor', 'search', null)} ${JSON.stringify(pdict.suggestions.query)}">
+            <isloop items="${pdict.suggestions.phrase_suggestions.phrases}" var="phrase" status="listindex">
+                <isset name="phraseValue" value="${phrase.value || phrase}" scope="page" />
+                <div class="suggestions-item term" id="phrase-1-${listindex.index}" role="option">
+                    <a class="name" href="${URLUtils.url('Search-Show', 'q', phraseValue)}" role="option" aria-label="${phraseValue}">
+                        ${phraseValue}
+                    </a>
+                </div>
+            </isloop>
+        </div>
+    </isif>
+
+    <iscomment> Category suggestions </iscomment>
+    <isif condition="${pdict.suggestions.category && pdict.suggestions.category.available && pdict.suggestions.category.categories.length > 0}">
+        <isif condition="${!pdict.suggestions.query}">
+            <li class="suggestions-header">${Resource.msg('label.suggest.popular.categories', 'search', null)}</li>
+            <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="${Resource.msg('label.suggest.popular.categories', 'search', null)}">
+                <isloop items="${pdict.suggestions.category.categories}" var="category" status="listindex">
+                    <div class="suggestions-item term" id="category-${listindex.index}" role="option">
+                        <a class="name" href="${category.url}" role="option" aria-label="${category.name}">${category.name}</a>
+                    </div>
+                </isloop>
+            </div>
+        <iselse/>
+            <li class="suggestions-header">${Resource.msg('label.suggest.categories', 'search', null)}</li>
+            <div class="suggestions-items suggestion-terms suggestions-categories" role="listbox" aria-label="${Resource.msg('label.suggest.categories', 'search', null)}">
+                <isloop items="${pdict.suggestions.category.categories}" var="category" status="listindex">
+                    <div class="suggestions-item term" id="category-${listindex.index}" role="option">
+                        <a class="name" href="${category.url}" role="option" aria-label="${category.name}">${category.name}</a>
+                    </div>
+                </isloop>
+            </div>
+        </isif>
+    </isif>
+
+    <iscomment> Brand suggestions </iscomment>
+    <isif condition="${pdict.suggestions.brand && pdict.suggestions.brand.available && pdict.suggestions.brand.phrases.length > 0}">
+        <li class="suggestions-header d-inline-block">
+            <isif condition="${!pdict.suggestions.query}">
+                ${Resource.msg('label.suggest.popular.brands', 'search', null)}
+            <iselse/>
+                ${Resource.msg('label.suggest.brand', 'search', null)}
+            </isif>
+        </li>
+        <div class="suggestions-items suggestion-terms row-wise-values" role="listbox" aria-label="${!pdict.suggestions.query ? Resource.msg('label.suggest.popular.brands', 'search', null) : Resource.msg('label.suggest.brand', 'search', null)}">
+            <isloop items="${pdict.suggestions.brand.phrases}" var="phrase" status="listindex">
+                <div class="suggestions-item term" id="brand-${listindex.index}" role="option">
+                    <a class="name" href="${phrase.url}" role="option" aria-label="${phrase.value}">${phrase.value}</a>
+                </div>
+            </isloop>
+        </div>
+    </isif>
+
+    <iscomment> Product suggestions based on user query </iscomment>
+    <isif condition="${pdict.suggestions.product && pdict.suggestions.product.available && pdict.suggestions.product.products.length > 0}">
+        <li class="suggestions-header">
+            <isif condition="${!pdict.suggestions.query}">
+                ${Resource.msg('label.suggest.popular.products', 'search', null)}
+            <iselse/>
+                ${Resource.msg('label.suggest.products', 'search', null)}
+            </isif>
+        </li>
+        <li class="suggestions-items suggestions-products">
+            <isloop items="${pdict.suggestions.product.products}" var="product" status="listindex">
+                <div class="suggestions-item" id="product-${listindex.index}" role="option">
+                    <a class="suggestions-products-a" href="${product.url}" aria-label="${product.name}">
+                        <div class="swatch-thumbnail">
+                            <img class="swatch-thumbnail-image" src="${product.imageUrl}" alt="${product.name}" />
+                        </div>
+                        <div class="frenzy_product_desc">
+                            <isif condition="${product.brand}">
+                                <div class="frenzy_product_brand">${product.brand}</div>
+                            </isif>
+                            <h3 class="frenzy_product_title">${product.name}</h3>
+                            <isif condition="${product.description}">
+                                <div class="frenzy_product_subtitle">${product.description}</div>
+                            </isif>
+                        </div>
+                    </a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+</ul>
+
+<span id="search-result-count" class="sr-only">
+    ${pdict.suggestions.message}
+</span>
+<span id="search-assistive-text" class="sr-only">
+    ${Resource.msg('label.header.search.assistive_msg', 'common', null)}
+</span>

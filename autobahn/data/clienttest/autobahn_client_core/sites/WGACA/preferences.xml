@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <standard-preferences>
+        <all-instances>
+            <preference preference-id="SiteCatalog">storefront-catalog-wgaca</preference>
+            <preference preference-id="SiteInventoryList">wgaca-web</preference>
+            <preference preference-id="SiteLibrary">WGACASharedLibrary</preference>
+            <preference preference-id="SitePriceBooks">wgaca-discount-pricebook:wgaca-web-pricebook</preference>
+        </all-instances>
+    </standard-preferences>
+    <custom-preferences/>
+</preferences>
+

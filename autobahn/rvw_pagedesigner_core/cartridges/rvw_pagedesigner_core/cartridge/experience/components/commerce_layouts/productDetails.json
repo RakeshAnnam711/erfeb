@@ -1,0 +1,56 @@
+{
+    "name": "Product Detail",
+    "description": "Component to display the main section of the Product Detail Page.",
+    "group": "dynamic_components",
+    "attribute_definition_groups": [
+        {
+            "id": "productInfo",
+            "name": "Product Info",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product",
+                    "name": "Product",
+                    "type": "product",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "product"
+                    }
+                },
+                {
+                    "id": "category",
+                    "name": "Category",
+                    "type": "category",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "category"
+                    }
+                },
+                {
+                    "id": "pdpImageColumnWidth",
+                    "name": "PDP Image Column Width",
+                    "description": "Choose the width of the column containing the main product image (on desktop.) Useful for fine-tuning the PDP layout to account for different image aspect-ratios and amount of product attributes. Only change this if you want to override the default site settings.",
+                    "type": "enum",
+                    "values": ["inherit", "1/12", "2/12", "3/12", "4/12", "5/12", "6/12", "7/12", "8/12", "9/12", "10/12", "11/12"],
+                    "default_value": "inherit",
+                    "required": false
+                },
+                {
+                    "id": "testProductID",
+                    "name": "Test Product ID",
+                    "description": "This product will be rendered within Page Designer for testing purposes. The default product is 25519349M.",
+                    "type": "string",
+                    "default_value": "25519349M",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

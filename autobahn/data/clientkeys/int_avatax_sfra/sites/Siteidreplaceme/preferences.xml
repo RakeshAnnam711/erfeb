@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances/>
+        <development>
+            <!-- TODO: Autobahn -->
+            <preference preference-id="ATSettings">{"fallbackCalculation":true,"taxCalculation":false,"addressValidation":false,"taxationpolicy":"net","saveTransactions":true,"commitTransactions":false,"companyCode":"default","useCustomCustomerCode":"customer_email","customCustomerAttribute":"","defaultShippingMethodTaxCode":"FR","locationCode":"","line1":"","line2":"","line3":"","city":"","state":"","zipCode":"","countryCode":"us"}</preference>
+            <!-- Base -->
+            <preference preference-id="ATSettings">{"taxCalculation":true,"addressValidation":false,"taxationpolicy":"net","saveTransactions":true,"commitTransactions":false,"companyCode":"default","useCustomCustomerCode":"customer_number","customCustomerAttribute":"","defaultShippingMethodTaxCode":"FR","locationCode":"","line1":"","line2":"","line3":"","city":"","state":"","zipCode":"","countryCode":""}</preference>
+        </development>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+

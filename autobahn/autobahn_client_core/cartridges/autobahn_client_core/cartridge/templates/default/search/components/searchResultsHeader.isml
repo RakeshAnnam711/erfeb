@@ -1,0 +1,5 @@
+<header class="page-header search-results-header">
+    <div class="container">
+        <iscomment> <isinclude template="components/breadcrumbs/pageBreadcrumbs"/> </iscomment>
+    </div>
+</header>

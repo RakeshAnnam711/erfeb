@@ -1,0 +1,137 @@
+<isset name="renderedQuantity" value="${false}" scope="page" />
+
+<isloop items="${pdict.products}" var="product" status="productLoopStatus">
+    <isset name="productDataColumnClass" value="${'col-12 col-md-' + (12 - parseInt(product.pdpImageColumnWidth.split('/')[0]))}" scope="page"/>
+
+    <div class="col-12 bonus-product-item ready-to-order choice-of-bonus-product" data-pid="${product.id}" data-ready-to-order="${product.readyToOrder}" data-optionID="">
+        <div class="product-quickview product-${product.productType} col product-wrapper product-detail" data-pid="${product.id}" data-swatchable-attributes="${product.attrsToUseForSwatch}">
+            <div class="row">
+                <!-- Product Images Carousel -->
+                <isinclude template="product/components/imageCarousel" />
+
+                <!-- Product Name and Number -->
+                <div class="${productDataColumnClass}">
+                    <div class="row">
+                        <div class="col">
+                            <section>
+                                <h1 class="product-name">${product.productName}</h1>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div class="detail-panel">
+                        <!-- Attributes -->
+                        <section class="attributes">
+                            <isset name="isBundle" value="${false}" scope="page" />
+                            <isset name="loopState" value="{count: 1}" scope="page" />
+                            <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                                <div data-attr="${attr.id}" class="swatch row">
+                                    <isset name="isQuickView" value="${false}" scope="page"/>
+                                    <div class="col-12">
+                                        <isinclude template="product/components/choiceOfBonusProducts/variationAttributeBonusProducts" />
+                                    </div>
+                                    <isset name="isQuickView" value="${true}" scope="page"/>
+                                </div>
+                            </isloop>
+                        </section>
+
+                        <isif condition="${product.productType !== 'bundle'}">
+                            <!-- Options -->
+                            <isif condition="${product.options && product.options.length > 0}">
+                                <isset name="isQuickView" value="${false}" scope="page"/>
+                                    <isloop items="${product.options}" var="option" status="loopStatus">
+                                        <div class="row product-option" data-option-id="${option.id}">
+                                            <div class="bonus-option ${loopStatus.last && !isQuickView || isProductSet ? 'col-8' : 'col-12' }">
+                                                <isinclude template="product/components/option" />
+                                            </div>
+
+                                            <!-- Quantity Drop Down Menu -->
+                                            <isif condition="${loopStatus.last && (!isQuickView || isProductSet)}">
+                                                <div class="col-4 quantity">
+                                                    <isinclude template="product/components/choiceOfBonusProducts/bonusProductsQuantity" />
+                                                    <isset name="renderedQuantity" value="${true}" scope="page" />
+                                                </div>
+                                            </isif>
+                                        </div>
+                                    </isloop>
+                                <isset name="isQuickView" value="${true}" scope="page"/>
+                            </isif>
+                        </isif>
+
+                        <div class="row ${pdict.maxPids == 1 ? 'd-none' : ''}">
+                            <div class="col-12 quantity">
+                                <isinclude template="product/components/choiceOfBonusProducts/bonusProductsQuantity" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 bonus-product-price">${product.bonusUnitPrice}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-block btn-secondary select-bonus-product"
+                                        data-pid="${!empty(product.selectedVariant) ? product.selectedVariant : product.id}"
+                                        ${!product.readyToOrder || !product.available ? "disabled" : ""}>
+                                ${Resource.msg('button.choiceofbonus.select', 'product', null)}
+                                </button>
+                            </div>
+                        </div>
+                        <isif condition="${product.productType === 'bundle'}">
+                            <div class="bundled-items">
+                                <p class="mt-3">${Resource.msg('label.bundle.contains', 'product', null)}</p>
+                                <ul class="pl-5">
+                                    <isloop items="${product.bundledProducts}" var="bundledProduct" status="loopstatus">
+                                        <li>${bundledProduct.productName}</li>
+                                    </isloop>
+                                </ul>
+                            </div>
+                        </isif>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <isif condition="${pdict.moreUrl && productLoopStatus.last && pdict.showMoreButton}">
+            <div class="col-sm-12 text-center">
+                    <button class="btn btn-secondary col-12 col-sm-4 mt-3 show-more-bonus-products" data-url="${pdict.moreUrl}">
+                        ${Resource.msg('button.more', 'search', null)}
+                    </button>
+                </div>
+        </isif>
+    </div>
+</isloop>
+
+<div class="modal-footer">
+    <div class="row align-items-end no-gutters w-100">
+        <div class="col-sm-6 selected-bonus-products">
+            <div class="bonus-summary">
+                <iscomment>Get count of selected bonus products, account for multiple of same item</iscomment>
+                <isset name="selectedBonusProductQty" value="${0}" scope="page"/>
+                <isloop items="${pdict.selectedBonusProducts}" var="selectedProduct">
+                    <isset name="selectedBonusProductQty" value="${parseInt(selectedBonusProductQty) + parseInt(selectedProduct.submittedQty) || 1}" scope="page"/>
+                </isloop>
+                <span class="pre-cart-products">${selectedBonusProductQty.toFixed()}</span> ${Resource.msgf('label.choiceofbonus.selectproducts', 'product', null, pdict.maxPids)}
+            </div>
+            <div class="bonus-summary-products-container" 
+                data-no-products-msg="${Resource.msg('error.alert.choiceofbonus.no.product.selected','product',null)}">
+                <isloop items="${pdict.selectedBonusProducts}" var="selectedProduct" status="productLoopStatus">
+                    <div class="selected-pid"
+                        data-pid="${selectedProduct.pid}"
+                        data-qty='<isprint value="${selectedProduct.submittedQty}" encoding="htmlsinglequote" formatter="#"/>'
+                        data-optionid="${selectedProduct.option.optionid}"
+                        data-option-selected-value="${selectedProduct.option.selectedvalue}">
+                        <div class="bonus-product-name">${selectedProduct.name}</div>
+                        <div class="remove-bonus-product"></div>
+                    </div>
+                </isloop>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-2 mt-sm-0">
+            <button class="btn btn-primary add-bonus-products disabled">
+                ${Resource.msg('button.addtocart', 'common', null)}
+            </button>
+        </div>
+        <div class="col-sm-6 hidden-xs-down"></div>
+    </div>
+</div>

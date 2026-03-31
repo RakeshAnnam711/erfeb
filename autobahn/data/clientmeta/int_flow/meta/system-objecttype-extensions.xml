@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="flowAdjustmentPriceJson">
+                <display-name xml:lang="x-default">Flow Order Adjustment Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowAmountPaid">
+                <display-name xml:lang="x-default">Flow Amount Paid</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowCurrency">
+                <display-name xml:lang="x-default">Flow Currency Code</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowDiscountPriceJson">
+                <display-name xml:lang="x-default">Flow Order Discount Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowDutyPriceJson">
+                <display-name xml:lang="x-default">Flow Order Duty Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowExperienceId">
+                <display-name xml:lang="x-default">Flow Experience Id</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowFraudStatus">
+                <display-name xml:lang="x-default">Flow Fraud Status</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowInsurancePriceJson">
+                <display-name xml:lang="x-default">Flow Order Insurance Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowOrderNumber">
+                <display-name xml:lang="x-default">Flow Order Number</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowShippingPriceJson">
+                <display-name xml:lang="x-default">Flow Order Shipping Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowSubTotalPriceJson">
+                <display-name xml:lang="x-default">Flow Order Sub Total Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowSurchargesPriceJson">
+                <display-name xml:lang="x-default">Flow Order Surcharges Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowTotalPriceJson">
+                <display-name xml:lang="x-default">Flow Order Total Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowVatPriceJson">
+                <display-name xml:lang="x-default">Flow Order Vat Price JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowPromotionIDs">
+                <display-name xml:lang="x-default">Flow Promotion IDs</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowCouponIDs">
+                <display-name xml:lang="x-default">Flow Coupon IDs</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowGiftMessage">
+                <display-name xml:lang="x-default">Flow Gift Message</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowOrderNo">
+                <display-name xml:lang="x-default">Flow Order Number</display-name>
+                <description xml:lang="x-default">The order number provided from flow</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="flow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <attribute attribute-id="flowExperienceId"/>
+                <attribute attribute-id="flowFraudStatus"/>
+                <attribute attribute-id="flowOrderNumber"/>
+                <attribute attribute-id="flowAmountPaid"/>
+                <attribute attribute-id="flowCurrency"/>
+                <attribute attribute-id="flowPromotionIDs"/>
+                <attribute attribute-id="flowCouponIDs"/>
+                <attribute attribute-id="flowGiftMessage"/>
+                <attribute attribute-id="flowOrderNo"/>
+            </attribute-group>
+            <attribute-group group-id="flowPricesJson">
+                <display-name xml:lang="x-default">Flow Prices JSON</display-name>
+                <attribute attribute-id="flowTotalPriceJson"/>
+                <attribute attribute-id="flowSubTotalPriceJson"/>
+                <attribute attribute-id="flowDiscountPriceJson"/>
+                <attribute attribute-id="flowAdjustmentPriceJson"/>
+                <attribute attribute-id="flowDutyPriceJson"/>
+                <attribute attribute-id="flowInsurancePriceJson"/>
+                <attribute attribute-id="flowShippingPriceJson"/>
+                <attribute attribute-id="flowSurchargesPriceJson"/>
+                <attribute attribute-id="flowVatPriceJson"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Basket">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="flowOrderNo">
+                <display-name xml:lang="x-default">Flow Order Number</display-name>
+                <description xml:lang="x-default">The order number provided from flow</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+
+        <group-definitions>
+            <attribute-group group-id="flow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <attribute attribute-id="flowOrderNo"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="PriceBook">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="flowExperienceID">
+                <display-name xml:lang="x-default">Flow Experience ID</display-name>
+                <description xml:lang="x-default">Experience ID from Flow</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowOrganizationID">
+                <display-name xml:lang="x-default">Flow Organization ID</display-name>
+                <description xml:lang="x-default">Organization ID from Flow</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="flow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <attribute attribute-id="flowExperienceID"/>
+                <attribute attribute-id="flowOrganizationID"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ProductLineItem">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="flowPrice">
+                <display-name xml:lang="x-default">Flow Price</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowAllocation">
+                <display-name xml:lang="x-default">Flow Allocation</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowCalculatedNetPrice">
+                <display-name xml:lang="x-default">Flow Calculated Net Price</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowPromotionIDs">
+                <display-name xml:lang="x-default">Flow Promotion IDs</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="flow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <attribute attribute-id="flowPrice"/>
+                <attribute attribute-id="flowAllocation"/>
+                <attribute attribute-id="flowCalculatedNetPrice"/>
+                <attribute attribute-id="flowPromotionIDs"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Shipment">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="flowDeliveryId">
+                <display-name xml:lang="x-default">Flow Delivery Id</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="flow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <attribute attribute-id="flowDeliveryId"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ShippingMethod">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="isFlowShippingMethod">
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="flow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <attribute attribute-id="isFlowShippingMethod"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="flowApiTokenKey">
+                <display-name xml:lang="x-default">Flow API Key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowAutoDetectLocale">
+                <display-name xml:lang="x-default">Auto Detect Locale</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowDisableServerSessions">
+                <display-name xml:lang="x-default">Disable Flow Sessions in onSession hook</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowEnabled">
+                <display-name xml:lang="x-default">Enable Flow</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowEnableJobs">
+                <display-name xml:lang="x-default">Enable Flow Jobs if Flow is disabled</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowUseCountryPicker">
+                <display-name xml:lang="x-default">Use Flow Country Picker</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowExcludedLocalesJSON">
+                <display-name xml:lang="x-default">Excluded Locales JSON</display-name>
+                <description xml:lang="x-default">Excluded locales to currency code object map.&#13;
+These Locales will be generated into countries.json without a corresponding Flow Experience.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowHostedCheckoutURL">
+                <display-name xml:lang="x-default">Hosted Checkout Domain</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowDefaultLocale">
+                <display-name xml:lang="x-default">Default Locale Code</display-name>
+                <description xml:lang="x-default">Used if the locale code 'default' is the default locale for the site (Defaults to en_US).</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowDefaultLocaleExperiences">
+                <display-name xml:lang="x-default">Default Locale Experiences</display-name>
+                <description xml:lang="x-default">Experiences that can be set with the default site locale.</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowOrganizationId">
+                <display-name xml:lang="x-default">Flow Organization's Id</display-name>
+                <description xml:lang="x-default">unique identifier for the organization on the Flow platform</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowUseBaseCurrency">
+                <display-name xml:lang="x-default">Use Base Currency</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowRomanizeAddresses">
+                <display-name xml:lang="x-default">Romanize non-latin addresses entered in Flow</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowShowTaxIncluded">
+                <display-name xml:lang="x-default">Show Tax Included with prices</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowShowPaymentMethods">
+                <display-name xml:lang="x-default">Show Payment Methods in footer</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowShowDeliveryWindow">
+                <display-name xml:lang="x-default">Show Delivery Window on PDP</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowDefaultDeliveryOrigin">
+                <display-name xml:lang="x-default">Default Delivery Origin</display-name>
+                <description xml:lang="x-default">3 Digit ISO Country Code for the default Distribution Center (Defaults to USA)</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowImageHost">
+                <display-name xml:lang="x-default">Product Image Host name</display-name>
+                <description xml:lang="x-default">Host name to serve images</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowExperiencesJSON">
+                <display-name xml:lang="x-default">Flow Experiences JSON</display-name>
+                <description xml:lang="x-default">The experiences JSON generated by the Flow configuration job</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="flowCountriesJSON">
+                <display-name xml:lang="x-default">Flow Countries JSON</display-name>
+                <description xml:lang="x-default">The countries JSON generated by the Flow configuration job</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="flow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <attribute attribute-id="flowEnabled"/>
+                <attribute attribute-id="flowEnableJobs"/>
+                <attribute attribute-id="flowOrganizationId"/>
+                <attribute attribute-id="flowApiTokenKey"/>
+                <attribute attribute-id="flowHostedCheckoutURL"/>
+                <attribute attribute-id="flowImageHost"/>
+                <attribute attribute-id="flowUseCountryPicker"/>
+                <attribute attribute-id="flowAutoDetectLocale"/>
+                <attribute attribute-id="flowUseBaseCurrency"/>
+                <attribute attribute-id="flowRomanizeAddresses"/>
+                <attribute attribute-id="flowShowTaxIncluded"/>
+                <attribute attribute-id="flowShowPaymentMethods"/>
+                <attribute attribute-id="flowShowDeliveryWindow"/>
+                <attribute attribute-id="flowDefaultDeliveryOrigin"/>
+                <attribute attribute-id="flowDefaultLocale"/>
+                <attribute attribute-id="flowDefaultLocaleExperiences"/>
+                <attribute attribute-id="flowExcludedLocalesJSON"/>
+                <attribute attribute-id="flowExperiencesJSON"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

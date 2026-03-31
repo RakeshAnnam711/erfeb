@@ -1,0 +1,38 @@
+<div
+    id="wishlistModalDeleteList"
+    class="wishlist-modal-delete-list modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="wishlistModalDeleteListLabel"
+    data-wishlist-id
+    data-url="${pdict.urls.deleteList}"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p id="wishlistModalDeleteListLabel" class="wishlist-modal-delete-list-title modal-title">
+                    ${Resource.msg('title.modal.deletelist', 'wishlist', null)}
+                </p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="${Resource.msg('button.modal.dismiss', 'wishlist', null)}">
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class="wishlist-modal-delete-list-body modal-body">
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="wishlist-modal-delete-list-delete-button btn btn-block">
+                            ${Resource.msg('button.modal.delete', 'wishlist', null)}
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="wishlist-modal-delete-list-cancel-btn btn btn-block" data-dismiss="modal">
+                            ${Resource.msg('button.cancel', 'wishlist', null)}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

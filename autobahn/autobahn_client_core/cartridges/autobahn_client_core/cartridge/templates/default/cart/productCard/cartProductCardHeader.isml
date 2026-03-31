@@ -1,0 +1,8 @@
+<isif condition="${lineItem.isBonusProductLineItem}" />
+    <label>${Resource.msg('msg.bonus.product','cart',null)}:</label>
+</isif>
+<h2 class="line-item-name line-item-brand-name" role="columnheader">${lineItem.brand}</h2>
+<div class="line-item-footer">
+    <a class="line-item-name line-item-product-name" href="${lineItem.productType === 'giftCertificate' ? URLUtils.url('GiftCertificate-Purchase') : URLUtils.url('Product-Show', 'pid', lineItem.id)}" aria-label="${lineItem.productName}">${lineItem.productName}</a>
+    <isinclude template="cart/productCard/cartProductCardProductPrice" />
+</div>

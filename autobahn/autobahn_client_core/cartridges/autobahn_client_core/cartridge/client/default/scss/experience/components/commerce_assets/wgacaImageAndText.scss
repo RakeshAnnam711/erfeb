@@ -1,0 +1,39 @@
+.image-and-text-container {
+	margin-bottom: 20px;
+	img {
+		margin-bottom: 15px;
+		width: 100%;
+	}
+    a {
+        display: block;
+    }
+	.text-content {
+		font-family: 'didot';
+		font-weight: 600;
+		line-height: 30px;
+		margin-bottom: 12px;
+	}
+	.text-content-subTitle {
+		font-family: 'brandon-grotesque';
+		font-weight: 400;
+		line-height: 20px;
+		margin-bottom: 12px;
+
+		@media screen and (max-width: 543.98px){
+			font-size: 14px;
+		}
+	}
+	.shop-button {
+		padding: 10px 15px;
+		font-size: 14px;
+		font-family: 'brandon-grotesque';
+		font-weight: 500;
+		&.btn-tertiary {
+			display: block;
+			&:hover{
+				color: #9E6B30 !important;
+			}
+		}
+
+	}
+}

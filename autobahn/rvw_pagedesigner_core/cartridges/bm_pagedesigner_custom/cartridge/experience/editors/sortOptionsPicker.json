@@ -1,0 +1,12 @@
+{
+    "name": "Category Editor",
+    "description": "A custom editor that allows you to pick a sort option to use for displaying products.",
+    "resources": {
+        "scripts": [
+            "/experience/editors/sortOptionsPickerScript.js"
+        ],
+        "styles": [
+            "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+        ]
+    }
+}

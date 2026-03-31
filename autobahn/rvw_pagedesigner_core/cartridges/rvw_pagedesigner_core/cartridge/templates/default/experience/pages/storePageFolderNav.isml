@@ -1,0 +1,22 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<isdecorate template="/common/layout/page">
+    <div class="storepage page-designer folder-nav-layout ${pdict.customClass} container" id="${pdict.page.ID}">
+
+        <div class="row no-gutters">
+
+            <div class="col-12 col-md folder-nav-menu ${pdict.folderNavClasses.mobileNav} ${pdict.folderNavClasses.desktopNav}">
+                <isinclude template="components/content/folderBasedNavigation" />
+            </div>
+
+            <div class="col-12 col-md folder-nav-content ${pdict.folderNavClasses.mobileContent} ${pdict.folderNavClasses.desktopContent}">
+                <isprint value="${pdict.regions.main.render()}" encoding="off"/>
+
+                <isif condition="${!pdict.chromeless && pdict.belowFoldPopulated}">
+                    <div id="belowFoldRegion" class="pd-async-region" data-url="${URLUtils.url('Page-Show', 'cid', pdict.page.ID, 'ajaxRegion', pdict.regions.belowFold.region.ID)}"></div>
+                </isif>
+            </div>
+
+        </div>
+    </div>
+</isdecorate>

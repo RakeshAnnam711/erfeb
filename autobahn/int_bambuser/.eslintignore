@@ -1,0 +1,3 @@
+node_modules/
+cartridges/int_bambuser/cartridge/static/default/js
+test/integration

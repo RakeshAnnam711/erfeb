@@ -1,0 +1,7 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<isif condition="${!empty(pdict.hreflangs)}">
+    <isloop items="${pdict.hreflangs}" var="item" status="status">
+        <link rel="alternate" hreflang="${item.hreflang}" href="${item.url}" />
+    </isloop>
+</isif>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<html lang="${require('dw/util/Locale').getLocale(request.getLocale()).getLanguage() || 'en'}">
+    <isinclude template="/components/modules" sf-toolkit="off" />
+    <isinclude template="/common/htmlHead" />
+    <body>
+        <div class="blank" data-action="${pdict.action}" data-querystring="${pdict.queryString}" cypress-target="pageContainer">
+            <div role="main" id="maincontent">
+                <isreplace/>
+            </div>
+        </div>
+        <div class="error-messaging"></div>
+        <div class="modal-background"></div>
+         <!--[if lt IE 10]>
+            <isinclude sf-toolkit="off" template="/common/scripts" />
+        <![endif]-->
+        <iscomment>
+            hook for Marketing Cloud connector & other integration which need to inject
+            logic at the page end
+            IMPORTANT: Note that this hook will be called to cached as well as uncached pages
+                        which means you need to put privacy information into another remote include
+        </iscomment>
+    </body>
+</html>

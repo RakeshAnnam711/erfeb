@@ -1,0 +1,50 @@
+<div class="product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product">
+    <div class="product-grid-inner" style="opacity: 1; padding-bottom: 30px;">
+        <isinclude template="search/components/productTiles" />
+    </div>
+    <div class="grid-footer container" data-sort-options="${JSON.stringify(pdict.productSearch.productSort)}"
+        data-page-size="${pdict.productSearch.pageSize}" data-page-number="${pdict.productSearch.pageNumber}">
+        <div class="row">
+            <div class="col-12 text-center">
+                <!--- Spinner icon --->
+                <div id="loading-spinner" class="spinner-border d-none" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <!--- More button --->
+                <isif condition="${pdict.productSearch.showMoreUrl !== ''}">
+                    <div id='more-results-button' class="show-more">
+                        <div class="text-center">
+                            <button class="btn btn-outline-primary col-12 col-sm-5 col-md-4 more"
+                                data-url="${pdict.productSearch.showMoreUrl}"
+                                aria-label="More Results">
+                                ${Resource.msg('button.more', 'search', null)}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--- View All Results --->
+                    <div id='view-all-results-button' class="view-all-results">
+                        <div class="text-center">
+                            <button class="btn btn-primary col-12 col-sm-5 col-md-4 more"
+                                data-url="${pdict.productSearch.showMoreUrl}"
+                                aria-label="view all results button">
+                                ${Resource.msg('button.all.results', 'search', null)}
+                            </button>
+                        </div>
+                    </div>
+                </isif>
+
+                <input type="hidden" class="permalink" value="${pdict.productSearch.permalink}" />
+                <isif condition="${pdict.productSearch.category != null}">
+                    <input type="hidden" class="category-id" value="${pdict.productSearch.category.id}" />
+                </isif>
+
+                <iscomment>Include GTM Impressions for Ajax calls</iscomment>
+                <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
+                    <isinclude template="gtm/gtmImpressionData" />
+                </isif>
+            </div>
+        </div>
+    </div>
+</div>
+

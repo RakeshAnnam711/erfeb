@@ -1,0 +1,28 @@
+.page-header {
+    padding-top: $page-header-padding-top;
+    padding-bottom: $page-header-padding-bottom;
+    @include media-breakpoint-up(md) {
+        padding-top: $page-header-padding-top-md;
+        padding-bottom: $page-header-padding-bottom-md;
+    }
+    &.blog-detail-header {
+        .page-header-title {
+            @include header($blog-detail-title-size);
+        }
+    }
+    &.search-results-header {
+        .page-header-title {
+            @include header(2);
+            margin-top: $spacer * 2;
+        }
+    }
+}
+
+// Don't show the page title when a slot is present
+.hero-slider-container, .hero-slot {
+    + .page-header {
+        .page-header-title {
+            display: $plp-name-header-display-with-slot;
+        }
+    }
+}

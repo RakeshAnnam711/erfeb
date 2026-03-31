@@ -1,0 +1,57 @@
+<li class="${itemClass}">
+    <iscomment>Add data-toggle attribute when 'dropdown-toggle' class is present to enable JS behavior</iscomment>
+    <isset name="isDropdownToggle" value="${!empty(linkClass.match('dropdown-toggle'))}" scope="page"/>
+
+    <a class="${linkClass}" href="${category.url}" <isif condition="${isDropdownToggle}">data-toggle="dropdown"</isif>>${category.name}</a>
+
+    <isif condition="${!empty(category.subCategories) && category.subCategories.length > 0}">
+
+        <iscomment>Increment menu level and update classes</iscomment>
+        <isset name="menuLevel" value="${menuLevel + 1}" scope="page" />
+        <isif condition="${menuLevel == 4}">
+            <isset name="listClass" value="${pdict.listClass4}" scope="page" />
+            <isset name="itemClass" value="${pdict.itemClass4}" scope="page" />
+            <isset name="linkClass" value="${pdict.linkClass4}" scope="page" />
+        <iselseif condition="${menuLevel == 3}"/>
+            <isset name="listClass" value="${pdict.listClass3}" scope="page" />
+            <isset name="itemClass" value="${pdict.itemClass3}" scope="page" />
+            <isset name="linkClass" value="${pdict.linkClass3}" scope="page" />
+        <iselseif condition="${menuLevel === 2}"/>
+            <isset name="listClass" value="${pdict.listClass2}" scope="page" />
+            <isset name="itemClass" value="${pdict.itemClass2}" scope="page" />
+            <isset name="linkClass" value="${pdict.linkClass2}" scope="page" />
+        <iselse/>
+            <isset name="listClass" value="${pdict.listClass1}" scope="page" />
+            <isset name="itemClass" value="${pdict.itemClass1}" scope="page" />
+            <isset name="linkClass" value="${pdict.linkClass1}" scope="page" />
+        </isif>
+
+        <ul class="category-nav-menu menu-level-${menuLevel.toFixed()} ${listClass}">
+            <isloop items="${category.subCategories}" var="category" status="subCategoryLoopStatus">
+                <isif condition="${category.show}">
+                    <isinclude template="experience/components/commerce_assets/categoryNavItem" />
+                </isif>
+            </isloop>
+        </ul>
+
+        <iscomment>Decrement menu level and update classes</iscomment>
+        <isset name="menuLevel" value="${menuLevel - 1}" scope="page" />
+        <isif condition="${menuLevel == 4}">
+            <isset name="listClass" value="${pdict.listClass4}" scope="page" />
+            <isset name="itemClass" value="${pdict.itemClass4}" scope="page" />
+            <isset name="linkClass" value="${pdict.linkClass4}" scope="page" />
+        <iselseif condition="${menuLevel == 3}"/>
+            <isset name="listClass" value="${pdict.listClass3}" scope="page" />
+            <isset name="itemClass" value="${pdict.itemClass3}" scope="page" />
+            <isset name="linkClass" value="${pdict.linkClass3}" scope="page" />
+        <iselseif condition="${menuLevel === 2}"/>
+            <isset name="listClass" value="${pdict.listClass2}" scope="page" />
+            <isset name="itemClass" value="${pdict.itemClass2}" scope="page" />
+            <isset name="linkClass" value="${pdict.linkClass2}" scope="page" />
+        <iselse/>
+            <isset name="listClass" value="${pdict.listClass1}" scope="page" />
+            <isset name="itemClass" value="${pdict.itemClass1}" scope="page" />
+            <isset name="linkClass" value="${pdict.linkClass1}" scope="page" />
+        </isif>
+    </isif>
+</li>

@@ -1,0 +1,47 @@
+<isobject object="${pdict.apiProductSearch}" view="none">
+    <isif condition="${pdict.productSearch.isCategorySearch}">
+        <span>
+            <span class="filter-label">${Resource.msgf('label.filter', 'search', null)}</span>
+          ${Resource.msgf('label.filter.mb.count', 'search', null, pdict.productSearch.filterCount ? pdict.productSearch.filterCount : '0')}
+        </span>
+    <iselse/>
+        <span class="search-result-count">
+            <isif condition="${pdict.productSearch.productIds.length === 1}">
+                ${Resource.msgf('label.resultfor', 'search', null, pdict.productSearch.count)}
+            <iselseif condition="${pdict.productSearch.productIds.length > 0}">
+                ${Resource.msgf('label.resultsfor', 'search', null, pdict.productSearch.count)}
+            <iselseif condition="${!empty(pdict.productSearch.searchKeywords)}">
+                ${Resource.msg('label.noresultsfor', 'search', null)}
+            <iselse/>
+                ${Resource.msg('label.emptyquery', 'search', null)}
+            </isif>
+        </span>
+        <span class="search-keywords">
+            ${pdict.productSearch.searchKeywords ? pdict.productSearch.searchKeywords : ''}
+        </span>
+        <isif condition="${pdict.productSearch.isSearchSuggestionsAvailable && pdict.productSearch.productIds.length === 0}">
+            <isloop items="${pdict.productSearch.suggestionPhrases}" alias="phrase" status="loopState" >
+                <isif condition="${loopState.first}">
+                    <p>
+                        <span>${Resource.msg('label.didyoumean', 'search', null)}</span>
+                        <a class ="link" title="${phrase.value}" href="${phrase.url}">${phrase.value}</a>
+                    </p>
+                <iselseif condition="${!loopState.last}">
+                    <p>
+                        <span>${Resource.msg('label.ormaybe', 'search', null)}</span>
+                        <a class ="link" title="${phrase.value}" href="${phrase.url}">${phrase.value}</a>
+                    </p>
+                <iselse/>
+                    <p>
+                        <a class ="link" title="${phrase.value}" href="${phrase.url}">${phrase.value}</a>
+                        ,&nbsp;
+                    </p>
+                </isif>
+            </isloop>
+        </isif>
+    </isif>
+    <isif condition="${!pdict.productSearch.productIds.length}">
+        <iscontentasset aid="search-noresults-help" />
+        <iscontentasset aid="search-noresults-recommendations" />
+    </isif>
+</isobject>

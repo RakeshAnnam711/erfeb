@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dcext xmlns="http://www.demandware.com/xml/impex/dcext/2016-04-05" site-id="Autobahn">
+    <!-- Cybersource SPECIFIC -->
+    <apple-pay instance-type="development">
+        <enabled-flag>true</enabled-flag>
+        <merchant-id>merchant.benrvw</merchant-id>
+        <display-name>Autobahn</display-name>
+        <country-code>US</country-code>
+        <merchant-capabilities>
+            <capability-3ds/>
+        </merchant-capabilities>
+        <supported-networks>
+            <amex/>
+            <discover/>
+            <master-card/>
+            <visa/>
+        </supported-networks>
+        <required-shipping-address-fields>
+            <email/>
+            <name/>
+            <phone/>
+            <postal-address/>
+        </required-shipping-address-fields>
+        <required-billing-address-fields>
+            <name/>
+            <postal-address/>
+        </required-billing-address-fields>
+        <https-redirect>false</https-redirect>
+        <inject-mini-cart>false</inject-mini-cart>
+        <inject-cart>false</inject-cart>
+        <psp-api-enabled-flag>true</psp-api-enabled-flag>
+        <psp-api-version>v1</psp-api-version>
+        <psp-url>https://apitest.cybersource.com/partner/demandware/payments/v1/authorizations</psp-url>
+        <psp-basic-auth-flag>false</psp-basic-auth-flag>
+        <psp-password>OU3tU0kuaLm2fcgoH6T3QwuUxvgBs9GHW27v0OpzPbg=</psp-password>
+        <psp-merchant-id>redvanworkshopql</psp-merchant-id>
+        <psp-jws-flag>true</psp-jws-flag>
+        <psp-jws-key-alias>merchant.benrvw_redvanworkshopql</psp-jws-key-alias>
+    </apple-pay>
+</dcext>

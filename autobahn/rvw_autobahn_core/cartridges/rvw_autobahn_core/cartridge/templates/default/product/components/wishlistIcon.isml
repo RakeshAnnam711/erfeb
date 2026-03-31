@@ -1,0 +1,27 @@
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('wishlistEnable') && pdict.wishlistpid }">
+    <button
+        type="button"
+        class="wishlist-toggle-product${pdict.extraclass ? ' ' + pdict.extraclass : ''}"
+        data-nextaction="${pdict.nextaction || ''}"
+        data-wishlistpid="${pdict.wishlistpid}"
+        data-wishlistquantity="1"
+        data-productname="${pdict.productname}"
+        data-uuid="${pdict.uuid || ''}"
+        data-gtmdata='${pdict.gtmdata ? pdict.gtmdata : JSON.stringify(product.gtmData)}'
+        data-addmessage="${Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
+        data-removemessage="${Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname)}"
+        data-includeicon="${pdict.includeicon || 'false'}"
+        data-includetext="${pdict.includetext || 'false'}"
+        data-url="${URLUtils.url('Wishlist-ToggleProduct')}"
+        data-toast-trigger
+        aria-label="${pdict.isinwishlist === 'true' ? Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname) : Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
+        title="${pdict.isinwishlist === 'true' ? Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname) : Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
+    >
+        <isif condition="${pdict.includetext === 'true'}">
+            <span>${pdict.isinwishlist === 'true' ? Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname) : Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}</span>
+        </isif>
+        <isif condition="${pdict.includeicon === 'true'}">
+            <div class="wishlist-icon ${pdict.isinwishlist ? 'selected' : ''} ${pdict.includetext ? 'd-inline' : 'before'}" data-toast-trigger aria-hidden="true"></div>
+        </isif>
+    </button>
+</isif>

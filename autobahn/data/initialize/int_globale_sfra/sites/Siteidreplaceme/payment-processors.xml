@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payment-processors xmlns="http://www.demandware.com/xml/impex/paymentprocessor/2007-03-31">
+
+    <payment-processor processor-id="GLOBALE">
+        <description>Global-e Payment Processor</description>
+        <preferences>
+            <all-instances/>
+            <development>
+                <preference preference-id="geEnabled">true</preference>
+                <preference preference-id="geClientJsBaseUrl">https://www.bglobale.com</preference>
+                <preference preference-id="geApiUrl">https://connect.bglobale.com</preference>
+                <preference preference-id="geEnableCartValidationCAPIBasket">false</preference>
+                <preference preference-id="geClientJsMerchantId">1895</preference>
+                <preference preference-id="geMerchantGuid">8f6a0923-f588-4e99-b166-5b20e30deb77</preference>
+                <preference preference-id="geSearchableProductsPromotionId">DEMO-RESTRICTED-PRODUCTS</preference>
+                <preference preference-id="geReturnPortalUrl">https://www.bglobale.com/Returns/Portal/{returnPortalId}?OrderID={orderNo}&amp;Email={email}</preference>
+                <preference preference-id="geTaxJurisdictionId">globale</preference>
+                <preference preference-id="geCAPIType">OCAPI</preference>
+                <preference preference-id="globalEResttictedProducts">{
+    "Q6BAMQ1IK7165": {
+        "geRestrictedCountries": ["US", "CA", "DE"],
+        "geIsForbidden": true
+    },
+    "QFB1CS770B001": {
+        "geRestrictedCountries": ["IN", "UK"],
+        "geIsForbidden": false
+    },
+    "QBB0M7CRKB005": {
+        "geRestrictedCountries": [],
+        "geIsForbidden": false
+    }
+}</preference>
+            </development>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+
+</payment-processors>

@@ -1,0 +1,49 @@
+.store-detail-block {
+	.title {
+		margin-bottom: 30px;	
+	}
+
+	.title-button-block {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+
+	.store-description {
+		font-size: 12px;
+		letter-spacing: 2px;
+	    text-align: justify;
+	    line-height: 3;
+		@media screen and (max-width: 767.98px)  {
+	    	line-height: 2;
+	    }
+	}
+	
+	.store-bottom-section {
+		margin-bottom: 30px;
+	}
+	
+	.store-timings {
+		padding-right: 20px;
+	}
+	
+	.store-timings, .store-contact {
+		font-size: 20px;
+		@media screen and (max-width: 767.98px)  {
+			font-size: 12px;
+		}
+		b {
+			margin-bottom: 10px;
+			display: block;
+			letter-spacing: 4px;
+		}
+	}
+	
+	@media screen and (max-width: 767.98px) {
+		.title, .title-button-block {
+			text-align: center;
+		}
+		.sub-title {
+			margin-bottom: 30px;
+		}
+	}
+}

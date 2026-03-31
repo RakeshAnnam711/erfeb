@@ -1,0 +1,34 @@
+
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/orderProductSummary.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_autobahn_core
+</iscomment>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('enableZenkraftTrackingPage')}" >
+    <isloop items="${(lineItem.customTracking || '').split(',')}" var="trackingNumber">
+        <div class="mb-3">
+            <isset name="carrier" value="${dw.system.Site.current.getCustomPreferenceValue('zenkraftCarrier')}" scope="page"/>
+            <isif condition="${trackingNumber.split(':').length === 2}" >
+                <isset name="carrier" value="${trackingNumber.split(':')[1]}" scope="page"/>
+            </isif>
+            ${Resource.msg('label.trackingno', 'order', null)}
+            <a
+                href="${URLUtils.abs('Zenkraft-Track', 'order', pdict.order.orderNumber, 'tracknumber', trackingNumber, 'carrier', carrier)}"
+                title="${Resource.msg('label.trackingno', 'order', null) + ' ' + Resource.msgf('value.trackingno', 'order', null, carrier, trackingNumber)}">
+                ${' ' + Resource.msgf('value.trackingno', 'order', null, carrier, trackingNumber)}
+            </a>
+        </div>
+    </isloop>
+<iselse/>
+    <isif condition="${!empty(lineItem.customTracking)}">
+        <strong>${Resource.msg('label.trackingno', 'order', null)}</strong>
+        <isloop items="${(lineItem.customTracking || '').split(',')}" var="trackingURL">
+            <div class="my-2">
+                - <a href="${trackingURL}" target="_blank" rel="noopener">${trackingURL}</a>
+            </div>
+        </isloop>
+    </isif>
+</isif>

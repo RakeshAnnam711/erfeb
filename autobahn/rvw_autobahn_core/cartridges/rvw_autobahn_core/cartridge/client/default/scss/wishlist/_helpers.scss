@@ -1,0 +1,66 @@
+// Global Wishlist Styles
+
+// header for landing and detail pages
+.wishlist-header {
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    position: relative;
+    top: 0;
+    z-index: 1;
+    background: $wishlist-header-background-color;
+    padding: $wishlist-header-padding;
+    .wishlist-header-name {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+// heart icon on products
+.wishlist-toggle-product {
+    white-space: nowrap;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+    &:not(.move) {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        border: none;
+        z-index: $z-index-wishlist-icon;
+
+        @include media-breakpoint-up(sm) {
+            top: 10px;
+            right: 10px;
+        }
+    }
+    .wishlist-icon {
+        width: $product-tile-wishlist-link-size;
+        height: $product-tile-wishlist-link-size;
+        line-height: $product-tile-wishlist-link-size;
+        background-color: $product-tile-wishlist-link-background-color;
+        box-shadow: $product-tile-wishlist-link-box-shadow;
+        border-radius: $product-tile-wishlist-link-border-radius;
+        @include icon($product-tile-wishlist-link-icon, before, $product-tile-wishlist-link-icon-size, $product-tile-wishlist-link-color);
+
+        &.selected {
+            @include icon($product-tile-wishlist-link-icon-selected, before, $product-tile-wishlist-link-icon-size, $product-tile-wishlist-link-color);
+        }
+        &.before {
+            &::before {
+                padding-top: 1px;
+                padding-left: 1px;
+                @include absolute-center;
+            }
+        }
+    }
+}
+
+.wishlist-message-empty {
+    display: flex;
+    text-align: center;
+}
+
+.add-to-wishlist-messages {
+    @include toast-message();
+}

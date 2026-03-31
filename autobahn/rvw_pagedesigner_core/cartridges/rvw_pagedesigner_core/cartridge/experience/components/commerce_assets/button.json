@@ -1,0 +1,111 @@
+{
+    "name": "Button",
+    "description": "A standalone button component.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "buttonAttributes",
+            "name": "Button Attributes",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to the button's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "buttonText",
+                    "name": "Button Text",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "buttonAction",
+                    "name": "Button Action",
+                    "description": "To use this button to launch a video in a modal, enter the video's URL as an 'External' link type. YouTube, Vimeo and self-hosted MP4s are supported.",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "buttonOpenNewTab",
+                    "name": "Open link in new tab",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "buttonStyle",
+                    "name": "Button Style",
+                    "description": "Defaults to Primary button style",
+                    "type": "enum",
+                    "values": [
+                        "Primary",
+                        "Secondary",
+                        "Tertiary",
+                        "Text Link",
+                        "Primary Disabled"
+                    ],
+                    "default_value": "Primary",
+                    "required": false
+                },
+                {
+                    "id": "buttonClass",
+                    "name": "Button Custom Class",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "modalAttributes",
+            "name": "For Modal Use: ",
+            "description": "Add modal-body components via the Page Structure. Leave the Button Action blank.",
+            "attribute_definitions": [
+                {
+                    "id": "modalClass",
+                    "name": "Custom Modal Class",
+                    "description": "Add a class here to be applied to the modal. Useful for adding custom helper classes for one-off modal styling.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "modalTitle",
+                    "name": "Modal Title",
+                    "description": "This will show in the header of the modal.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id":"modalBody",
+            "name":"Modal Body Area",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "flexible_grid_system.flexibleGridItem" }
+            ]
+        }
+    ]
+  }

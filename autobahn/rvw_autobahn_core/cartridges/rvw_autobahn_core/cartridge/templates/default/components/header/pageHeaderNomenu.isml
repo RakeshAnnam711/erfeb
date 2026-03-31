@@ -1,0 +1,37 @@
+<isset name="headerLayout" value="${pdict.abConfigs.headerLayout || 'logo-left'}" scope="page"/>
+<isset name="headerFixedClass" value="${pdict.abConfigs.headerFixed == 'true' ? 'fixed-header' : pdict.abConfigs.headerFixed == 'enhanced' ? 'fixed-header-enhanced' : ''}" scope="page"/>
+
+<header class="${headerLayout} ${headerFixedClass} checkout-header" id="top-header">
+    <isinclude template="/components/header/skipNav" />
+    <isinclude template="/components/header/pageHeaderBanner" />
+    <nav class="header-nav">
+        <div class="header container">
+            <div class="row no-gutters">
+                <isif condition="${headerLayout === 'logo-center'}">
+                    <div class="col header-column-1">
+                        <div class="pull-left d-none d-lg-block header-locale-container"><isinclude url="${URLUtils.url('Page-Locale')}" /></div>
+                        <div class="pull-left d-none d-lg-block header-support-container"><iscontentasset aid="headerSupportDesktop"/></div>
+                    </div>
+                    <div class="col header-column-2">
+                        <isinclude template="components/header/pageHeaderLogo" />
+                    </div>
+                </isif>
+                <isif condition="${headerLayout === 'logo-left'}">
+                    <div class="col header-column-2">
+                        <isinclude template="components/header/pageHeaderLogo" />
+                    </div>
+                    <div class="col header-column-1">
+                    </div>
+                </isif>
+                <div class="col header-column-3">
+                    <div class="hidden-md-down pull-right header-account-container">
+                        <isinclude template="account/header" />
+                    </div>
+                    <div class="minicart pull-right" data-action-url="${URLUtils.url('Cart-MiniCartShow')}">
+                        <isinclude template="components/header/miniCart" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

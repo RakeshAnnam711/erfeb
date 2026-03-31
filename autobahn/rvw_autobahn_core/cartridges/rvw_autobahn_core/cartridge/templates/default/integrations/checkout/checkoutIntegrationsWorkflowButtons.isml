@@ -1,0 +1,27 @@
+<iscomment>
+    This is a blank template that gets overwritten in rvw_integrations_core
+    The overriding template in rvw_integrations_core has integrations specific to this area
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/checkout.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_integrations_core
+</iscomment>
+
+<iscomment>These are the buttons that are referenced in app_storefront_base and are defined here incase there is no credit card integration</iscomment>
+<button class="btn btn-primary btn-block submit-shipping" type="submit" name="submit" value="submit-shipping" <isif condition="${pdict.order.usingMultiShipping && !pdict.order.shippable}">disabled</isif> cypress-target="checkoutSubmitShipping">
+    ${Resource.msg('button.next.payment', 'checkout', null)}
+</button>
+
+<button class="btn btn-primary btn-block submit-payment" type="submit" name="submit" value="submit-payment">
+    <isif condition="${dw.system.Site.current.getCustomPreferenceValue('skipReviewStepInCheckout')}">
+        ${Resource.msg('button.place.order', 'checkout', null)}
+    <iselse>
+        ${Resource.msg('button.next.place.order', 'checkout', null)}
+    </isif>
+</button>
+
+<button class="btn btn-primary btn-block place-order" data-action="${URLUtils.url('CheckoutServices-PlaceOrder')}"
+        type="submit" name="submit" value="place-order" cypress-target="checkoutPlaceOrder">${Resource.msg('button.place.order', 'checkout', null)}
+</button>

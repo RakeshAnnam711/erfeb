@@ -1,0 +1,44 @@
+{
+    "name": "Search Results Title",
+    "description": "Component to display the title of a category search.",
+    "group": "dynamic_components",
+    "attribute_definition_groups": [
+        {
+            "id": "searchTitle",
+            "name": "Search Title",
+            "attribute_definitions": [
+                {
+                    "id": "category",
+                    "name": "Category",
+                    "type": "category",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "category"
+                    }
+                },
+                {
+                    "id": "customTitle",
+                    "name": "Custom Title",
+                    "description": "Enter a custom title to use instead of the selected category's name.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "customClass",
+                    "name": "Custom Class",
+                    "description": "Add a custom class to be applied to the title. For example, use Bootstrap classes for spacing, color classes from the Style Guide, or a header class to resize, e.g. 'h3'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "hideTitle",
+                    "name": "Hide Title",
+                    "description": "Enable this to prevent the title from displaying.",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

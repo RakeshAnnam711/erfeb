@@ -1,0 +1,13 @@
+<isif condition="${pdict.productSearch.productIds.length > 0}">
+    <iscomment> Add autocomplete="off" in order to prevent sort from being blank after back button page load </iscomment>
+    <select name="sort-order" class="custom-select" aria-label="${Resource.msg('label.sort.by', 'search', null)}" autocomplete="off" data-error-msg="${Resource.msg('sort.error', 'search', null)}">
+        <isloop items="${pdict.productSearch.productSort.options}" var="option">
+            <option class="${option.id}" value="${option.url}"
+                data-id="${option.id}"
+                ${pdict.productSearch.productSort.ruleId === option.id ? 'selected' : '' }
+            >
+                ${option.displayName}
+            </option>
+        </isloop>
+    </select>
+</isif>

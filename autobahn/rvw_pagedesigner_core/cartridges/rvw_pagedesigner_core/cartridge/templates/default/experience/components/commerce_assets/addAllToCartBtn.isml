@@ -1,0 +1,41 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/addAllToCartBtn.js');
+</isscript>
+<hr>
+<div class="product-detail product-set-detail page-designer-add-all-to-cart" data-pid="${pdict.productID}">
+    <div class="row">
+        <div class="col-12 col-sm-6 offset-sm-6 product-data ${pdict.containerClass} ${pdict.buttonType === "Bundle" ? 'product-bundle' : ''} set-items">
+            <!-- Quantity -->
+            <div class="col-12 bundle-footer">
+                <!-- Cart and [Optionally] Apple Pay -->
+                <div class="row cart-and-ipay">
+                    <div class="col-12">
+                        <span class="d-none product-id">${pdict.productID}</span>
+                        <input type="hidden" class="add-to-cart-url" value="${URLUtils.url('Cart-AddProduct')}"/>
+                        <button class="add-to-cart-global btn ${!empty(pdict.buttonClass) ? pdict.buttonClass : pdict.buttonStyle}"
+                            data-url="${URLUtils.url('Cart-AddProduct')}"
+                            data-pid="${pdict.productID}"
+                        >
+                            <i class="fa fa-shopping-bag"></i>
+                            ${!empty(pdict.buttonText) ? pdict.buttonText : Resource.msg('button.addalltocart', 'common', null)}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.page-designer .addtocart-sticky-bar,
+.page-designer .page-header,
+.page-designer .product-detail .social-container {
+    display: none;
+}
+.page-designer.pdp .experience-commerce_layouts-productDetails:first-of-type .addtocart-sticky-bar,
+.page-designer.pdp .experience-commerce_layouts-productDetails:first-of-type .page-header,
+.page-designer.pdp .experience-commerce_layouts-productDetails:first-of-type .product-detail .social-container {
+    display: block;
+}
+</style>

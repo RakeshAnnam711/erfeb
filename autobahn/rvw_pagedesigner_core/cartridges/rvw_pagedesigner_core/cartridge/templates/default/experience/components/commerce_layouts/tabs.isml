@@ -1,0 +1,62 @@
+<isif condition="${pdict.tabHeaderStyle.includes('nav')}">
+    <div class="nav-tabs-container ${pdict.containerCustomClass}" data-component-id="${pdict.componentID}">
+        <ul class="nav ${pdict.tabHeaderStyle} ${pdict.tabHeaderCustomClass} ${pdict.scrollbarClass}" role="tablist" data-tab-toggle>
+            <isloop items="${pdict.tabs}" var="tabHeader" status="tabHeaderStatus">
+                <li class="nav-item">
+                    <a class="${tabHeaderStatus.count === pdict.activeTab ? 'nav-link active' : 'nav-link'} ${tabHeader.tabHeaderCustomClass}"
+                    id="${'tab-' + pdict.componentID + '-' + tabHeaderStatus.count}"
+                    data-toggle="tab"
+                    role="tab"
+                    href="${'#pane-' + pdict.componentID + '-' + tabHeaderStatus.count}"
+                    aria-controls="${'pane-' + pdict.componentID + '-' + tabHeaderStatus.count}"
+                    aria-selected="${tabHeaderStatus.count === pdict.activeTab}">${tabHeader.value}</a>
+                </li>
+            </isloop>
+        </ul>
+
+        <div class="tab-content ${pdict.tabContentCustomClass}">
+            <isloop items="${pdict.tabs}" var="tabContent" status="tabContentStatus">
+                <isset name="regionName" value="${'tabContent' + tabContentStatus.count}" scope="page"/>
+                <isset name="regionID" value="${'pane-' + pdict.componentID + '-' + tabContentStatus.count}" scope="page"/>
+                <isset name="navID" value="${'tab-' + pdict.componentID + '-' + tabContentStatus.count}" scope="page"/>
+                <isset name="regionClass" value="${tabContentStatus.count === pdict.activeTab ? 'tab-pane active' : 'tab-pane'}" scope="page"/>
+
+                <isprint value="${pdict.regions[regionName]
+                                    .setAttribute('id', regionID)
+                                    .setAttribute('role', 'tabpanel')
+                                    .setAttribute('aria-labelledby', navID)
+                                    .setClassName(regionClass)
+                                    .render()}" encoding="off" />
+            </isloop>
+        </div>
+    </div>
+<iselse/>
+    <div class="${pdict.tabHeaderStyle} ${pdict.containerCustomClass}" id="${'accordion-'+pdict.componentID}">
+        <isloop items="${pdict.tabs}" var="collapsibleItem" status="loopState">
+            <div class="card component">
+                <isif condition="${!empty(collapsibleItem.value)}">
+                    <div class="card-header " id="collapsible-title-${pdict.componentID}-${loopState && loopState.count ? loopState.count : '1'}">
+                        <button
+                            type="button"
+                            class="card-title ${pdict.tabHeaderCustomClass} ${collapsibleItem.tabHeaderCustomClass} title ${loopState.count === pdict.activeTab || pdict.expandDrawers ? '' : 'collapsed'}"
+                            aria-expanded="${loopState.count === pdict.activeTab || pdict.expandDrawers ? 'true' : 'false'}"
+                            data-toggle="collapse"
+                            aria-controls="collapsible-description-${pdict.componentID}-${loopState && loopState.count ? loopState.count : '1'}"
+                            data-target="${'#collapsible-description-'}${pdict.componentID}-${loopState && loopState.count ? loopState.count : '1'}"
+                        >
+                            ${collapsibleItem.value}
+                        </button>
+                    </div>
+                </isif>
+                <div
+                    id="collapsible-description-${pdict.componentID}-${loopState && loopState.count ? loopState.count : '1'}"
+                    class="card-body ${pdict.tabContentCustomClass} collapse ${loopState.count === pdict.activeTab || pdict.expandDrawers ? 'show' : ''}"
+                    aria-labelledby="collapsible-title-${pdict.componentID}-${loopState && loopState.count ? loopState.count : '1'}"
+                    <isif condition="${!pdict.preventAutoClose}">data-parent="${'#accordion-'+pdict.componentID}"</isif>
+                >
+                    <isprint value="${pdict.regions['tabContent' + loopState.count].render()}" encoding="off" />
+                </div>
+            </div>
+        </isloop>
+    </div>
+</isif>

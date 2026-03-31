@@ -1,0 +1,23 @@
+<isif condition="${pdict.localeModel.locale.localeLinks.length > 0}">
+    <div class="custom-dropdown country-selector" data-url="${URLUtils.url('Page-SetLocale')}" tabindex="0">
+        <button type="button" class="dropdown-toggle header-link" id="dropdownCountrySelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fi fi-${(pdict.localeModel.locale.countryCode || pdict.localeModel.locale.language || '').toLowerCase()}"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-country-selector" role="menu" aria-labelledby="dropdownCountrySelector">
+            <li class="dropdown-item disabled">
+                <div class="dropdown-link header-link">
+                    <i class="fi fi-${(pdict.localeModel.locale.countryCode || pdict.localeModel.locale.language || '').toLowerCase()} mr-2"></i>
+                    ${pdict.localeModel.locale.displayName}
+                </div>
+            </li>
+            <isloop items="${pdict.localeModel.locale.localeLinks}" var="localeLink">
+                <li class="dropdown-item" role="menuitem">
+                    <a class="dropdown-link header-link" href="${'#'}" data-locale="${localeLink.localeID}" data-currencyCode="${localeLink.currencyCode || ''}" >
+                        <i class="fi fi-${(localeLink.countryCode || localeLink.language).toLowerCase()} mr-2"></i>
+                        ${localeLink.displayName}
+                    </a>
+                </li>
+            </isloop>
+        </ul>
+    </div>
+</isif>

@@ -1,0 +1,53 @@
+<isset name="isCouponApplied" value="${pdict.totals.discounts.length>0 && pdict.totals.discounts[0].type == 'coupon' && pdict.totals.discounts[0].applied}" scope="page" />
+<isset name="hasCoupons" value="${cartSummary.cart.hasCoupons}" scope="page" />
+        <form action="${pdict.actionUrls.submitCouponCodeUrl}" class="promo-code-form" method="GET" name="promo-code-form">
+            <div class="form-group">
+                <label for="couponCode" class="promo-code-title">${Resource.msg('label.promo.code','cart',null)}</label>
+                <div class="form-group-input">
+                    <div class="row coupon-form-body">
+                        <iscomment> <div class="coupons-and-promos">
+                            <isinclude template="cart/cartCouponDisplay" />
+                        </div> </iscomment>
+                        <div class="flex-fill d-flex align-items-center">
+                            <input type="text" class="form-control coupon-code-field" id="couponCode" name="couponCode" placeholder="${Resource.msg('placholder.text.promo.code.input','cart',null)}" />
+                            <button type="button" class="clear-coupon-input-icon" aria-label="Clear promo input"></button>
+                        </div>
+
+                        <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+                    </div>
+                    <div class="promo-code-submit">
+                        <button type="submit" class="btn btn-secondary btn-block promo-code-btn px-0" aria-label="${Resource.msg('button.submit.promo.code','cart',null)}">
+                            ${Resource.msg('button.submit.promo.code','cart',null)}
+                        </button>
+                    </div>
+                </div>
+                <div class="form-text coupon-missing-error invalid-feedback" id="missingCouponCode" role="alert">${Resource.msg('error.missing.coupon.code', 'cart', null)}</div>
+                <div class="form-text coupon-error-message invalid-feedback" id="invalidCouponCode" role="alert">${Resource.msg('error.promo.code.applied', 'cart', null)}</div>
+                <iscomment> <div class="form-text coupon-success-message" role="alert">${Resource.msg('success.promo.code.applied', 'cart', null)}</div> </iscomment>
+                <iscomment> List of promo codes added to the cart </iscomment>
+                <ul class="added-promo-list ${hasCoupons ? "" : "d-none"}">
+                    <isloop items="${pdict.totals.discounts}" var="discount">
+                        <isif condition="${discount.type === 'coupon'}">
+                            <li class="added-promo-list-item">
+                                ${Resource.msg('label.promo.code','cart',null)} ${discount.couponCode} -
+                                <isif condition="${discount.applied}">
+                                    <span class="coupon-status-applied">${Resource.msg('msg.coupon.applied','cart',null)}</span>
+                                <iselse>
+                                    <span class="coupon-status-not-applied">${Resource.msg('msg.coupon.not.applied','cart',null)}</span>
+                                </isif>
+
+                                <button type="button" class="float-right remove-coupon"
+                                    data-code="${discount.couponCode}"
+                                    aria-label="${discount.applied ? Resource.msg('msg.coupon.applied','cart',null) : Resource.msg('msg.coupon.not.applied','cart',null)}"
+                                    data-toggle="modal"
+                                    data-target="#removeCouponModal"
+                                    data-uuid="${discount.UUID}">
+                                    <iscomment> <span aria-hidden="true">&times;</span> </iscomment>
+                                    <span aria-hidden="true" class="icon-close"></span>
+                                </button>
+                            </li>
+                        </isif>
+                    </isloop>
+                </ul>
+            </div>
+        </form>

@@ -1,0 +1,8 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript> var siteContext = pdict.siteContext || {}; </isscript>
+<isinclude url="${URLUtils.url.apply(URLUtils, ['Page-IncludeStylesheet'].concat(siteContext.urlParametersArray || []))}" />
+
+<isloop items="${ require('*/cartridge/scripts/assets.js').styles }" var="style">
+    <isset name="integrity" value="${'integrity=\"' + style.integrity + '\" crossorigin=\"anonymous\"'}" scope="page" />
+    <link rel="stylesheet" href="${style.src}" ${style.integrity != null ? integrity : ''} />
+</isloop>

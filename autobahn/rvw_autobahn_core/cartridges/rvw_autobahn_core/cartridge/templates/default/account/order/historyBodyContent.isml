@@ -1,0 +1,33 @@
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/orderHistory.js');
+</isscript>
+<div class="row justify-content-center mb-3">
+    <div class="col-12 col-sm-6 col-md-9 col-xl-10">
+        <h2 class="mb-1 mb-sm-0">${Resource.msg('label.orderhistory','account',null)}</h2>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3 col-xl-2">
+        <div class="form-group">
+            <label class="sr-only" for="order-history-select">
+                ${Resource.msg('label.filter.order.history','account',null)}
+            </label>
+            <select class="form-control custom-select order-history-select" id="order-history-select" name="order-history-select">
+                <isloop items="${pdict.filterValues}" var="filterValue">
+                    <option
+                        value="${filterValue.optionValue}"
+                        <isif condition="${pdict.orderFilter === filterValue.displayValue
+                            || pdict.filterValues === Resource.msg('orderhistory.sixmonths.option','order',null)
+                            || pdict.filterValues === Resource.msg('orderhistory.twelvemonths.option','order',null)}"> selected</isif>>
+                            ${filterValue.displayValue}
+                    </option>
+                </isloop>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="container order-list-container">
+        <isinclude template="account/order/orderList"/>
+    </div>
+</div>

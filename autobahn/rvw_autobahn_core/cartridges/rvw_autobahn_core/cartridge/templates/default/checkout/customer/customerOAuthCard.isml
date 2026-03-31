@@ -1,0 +1,3 @@
+<div class="card-body">
+    <isinclude template="account/components/oauth" />
+</div>

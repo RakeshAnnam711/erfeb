@@ -1,0 +1,10 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <iscontentasset aid="error-page-content" />
+
+    <div class="container mt-5 text-center">
+        <p class="p--large font-weight-bold text--danger">${Resource.msg('error.recaptcha.fail', 'common', null)}</p>
+    </div>
+</isdecorate>

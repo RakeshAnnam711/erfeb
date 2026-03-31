@@ -1,0 +1,16 @@
+// Import all integration styles
+// @import "~integrations/integrations";
+
+
+// Optionally select integrations styles from rvw_integrations_core
+// @import "~integrations/commercepayments/commercepayments";
+// @import "~integrations/bopis/checkout/pickupInstore";
+// @import "~integrations/yotpo/yotpo";
+// @import "~integrations/cybersource/cybersource";
+// @import "~integrations/zenkraft/zenkraft";
+ @import "~integrations/somorderhistory/somorderhistory";
+
+.paymentmethodwarning {
+    font-weight: $paymentmethod-error-font-weight;
+    color: $red;
+}

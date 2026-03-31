@@ -1,0 +1,11 @@
+<isloop items="${pdict.order.billing.payment.selectedPaymentInstruments}" var="payment">
+    <isif condition="${dw.order.PaymentInstrument.METHOD_CREDIT_CARD.equals(payment.paymentMethod)}">
+        <div class="payment-details">
+            <isinclude template="checkout/billing/paymentOptions/creditCardSummary" />
+        </div>
+    <iselseif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
+        <div class="payment-details mb-3">
+            <isinclude template="checkout/billing/paymentOptions/giftCertificateSummary" />
+        </div>
+    </isif>
+</isloop>

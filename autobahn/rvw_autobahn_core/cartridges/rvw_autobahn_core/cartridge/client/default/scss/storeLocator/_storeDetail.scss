@@ -1,0 +1,24 @@
+.store-detail-page {
+    .store-name {
+        @include header($store-detail-name-header-value);
+        color: $store-detail-name-header-color;
+    }
+    .store-attribute {
+        &+.store-attribute {
+            margin-top: $store-detail-attribute-vertical-spacing;
+            &.store-additional {
+                margin-top: $store-detail-additional-margin-top;
+            }
+            &.store-image {
+                margin-top: $store-detail-image-margin-top;
+            }
+        }
+        label {
+            font-weight: $store-detail-attribute-label-font-weight;
+        }
+    }
+    .store-map-link {
+        display: block;
+        margin-top: $store-detail-map-link-margin-top;
+    }
+}

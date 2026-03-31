@@ -1,0 +1,29 @@
+
+<isset name="enableSOMOrderHistory" value="${'SOM_Order_History_Enabled' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.SOM_Order_History_Enabled === true}" scope="page"/>
+<isif condition="${enableSOMOrderHistory}">
+    <isset name="SOMLOUrl" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('SOM_OrderHistory_LightningOut_URL')}" scope="page"/>
+    <isset name="SOMNamespace" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('SOM_OrderHistory_Namespace')}" scope="page"/>
+    <isset name="SOMEndpoint" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('SOM_OrderHistory_Endpoint')}" scope="page"/>
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs(SOMLOUrl);
+        assets.addJs('/js/integrations/somOrderHistory/somOrderHistoryCard.js');
+    </isscript>
+
+    <script>
+        const ordervariables = {
+            customerID : '${pdict.customerID}',
+            customerEmail : '${pdict.customerEmail}',
+            customerNo : '${pdict.customerProfile.customerNo}',
+            namespace : '${SOMNamespace}',
+            endpoint : '${SOMEndpoint}'
+        }
+        window.somorderinfoval = ordervariables;
+    </script>
+    <div id="som-orderHistoryCard" class="card-body card-info-group">
+        <div data-history-card="true"></div>
+    </div>
+<iselse/>
+    <isinclude template="account/order/orderHistoryCardBody" />
+    <isinclude template="account/order/orderHistoryCardFooter" />
+</isif>

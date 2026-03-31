@@ -1,0 +1,82 @@
+<div class="set-items">
+    <isloop items="${productCopy.individualProducts}" var="product" status="setProductsStatus">
+
+        <isif condition="${setProductsStatus.first}">
+            <div class="product-set-contains">${Resource.msg('label.set.contains', 'product', null)} ${setItemCount}</div>
+        </isif>
+
+        <div class="row no-gutters">
+            <div class="col-12 align-items-stretch product-detail product-set-item-detail ${setProductsStatus.first ? 'border-top-0 mt-0' : ''}" data-pid="${product.id}" data-swatchable-attributes="${product.attrsToUseForSwatch}">
+
+                <div class="row">
+                    <div class="col-12 col-sm-3 d-flex justify-content-center align-items-start">
+                        <img src="${product.images['large'][0].url}" class="product-set-item-main-image d-block img-fluid" alt="${product.images['large'][0].alt} image" itemprop="image" />
+                    </div>
+
+                    <div class="col-12 col-sm-9 set-item-list-product pl-sm-1">
+                        <div class="row">
+                            <div class="col-6 product-number">
+                                <span class="product-id">${product.id}</span>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <isset name="price" value="${product.price}" scope="page" />
+                                <isinclude template="product/components/pricing/main" />
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-1" data-pid="${product.id}">
+                            <div class="col-md-12">
+                                <h3 class="set-item-product-name mb-0">
+                                    <a href="${URLUtils.url('Product-Show', 'pid', product.id)}" target="_blank" rel="noopener">
+                                        ${product.productName}
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="attributes product-detail-attributes mini-attributes">
+                            <isinclude template="product/components/mainAttributes" />
+                            <isset name="loopState" value="${{count: 1}}" scope="page" />
+                            <isset name="sizeChartHasBeenShown" value="${false}" scope="page"/>
+                            <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                                <div class="row" data-attr="${attr.id}">
+                                    <div class="col-12">
+                                        <iscomment>used for sticky add to cart </iscomment>
+                                        <isset name="noSwatchOverride" value="${false}" scope="page" />
+                                        <isinclude template="product/components/variationAttribute" />
+                                    </div>
+                                </div>
+                            </isloop>
+
+                            <div class="product-options">
+                                <isif condition="${product.options && product.options.length > 0}">
+                                    <isinclude template="product/components/options" />
+                                </isif>
+                            </div>
+
+                            <!-- Product Availability -->
+                            <isinclude template="product/components/productAvailability" />
+
+                            <isinclude template="integrations/product/components/beforeAddToCart"/>
+
+                            <!-- Add To Cart and Quantity -->
+                            <div class="row qty-cart-container no-gutters" id="qty-cart-container">
+                                <!-- Quantity Drop Down Menu -->
+                                <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 ${product.hideQty ? 'd-none' : ''}">
+                                    <isinclude template="product/components/quantity" />
+                                </div>
+
+                                <div class="prices-add-to-cart-actions col-12 ${product.hideQty ? '' : 'col-sm-6 col-md-7 col-lg-9'}">
+
+                                    <!-- Add To Cart -->
+                                    <isinclude template="product/components/addToCartSetItem" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </isloop>
+</div>

@@ -1,0 +1,36 @@
+<div class="order-card">
+
+     <div class="card-header clearfix">
+        <h2 class="pull-left">${Resource.msg('label.wishlists','account',null)}</h2>
+        <isif condition="${pdict.account.wishlist && pdict.account.wishlist.length > 0}">
+            <a class="pull-right" href="${URLUtils.url('Wishlist-Show')}">${Resource.msg('link.wishlist.alllists.viewall','account',null)}</a>
+        </isif>
+    </div>
+
+     <div class="d-flex align-items-center card-body">
+        <isif condition="${pdict.allLists && pdict.allLists.length > 0}">
+            <div class="list-group w-100">
+                <isloop items="${pdict.allLists}" var="item" end="7" status="loopStatus">
+                    <isif condition="${loopStatus.last && !loopStatus.first}">
+                        <a class="list-group-item list-group-item-action d-flex justify-content-between text-decoration-none" href="${URLUtils.url('Wishlist-Show')}">${Resource.msg('link.wishlist.alllists.viewall','account',null)}</a>
+                    <iselse/>
+                        <a href="${URLUtils.url('Wishlist-ShowDetail', 'id', item.ID)}" class="list-group-item list-group-item-action d-flex justify-content-between text-decoration-none">
+                            ${item.name ? item.name : 'Wishlist'}
+                            <div class="pull-right">
+                                <span class="badge badge-dark badge-pill background--brand-primary ${item.public ? '': 'd-none'}">Public</span>
+                                <span class="badge badge-dark badge-pill background--gray ml-2">${item.items.length}</span>
+                            </div>
+                        </a>
+                    </isif>
+                </isloop>
+            </div>
+        <iselse/>
+            <isif condition="${!empty(pdict.defaultList)}">
+                <span class="wishlist-info">${Resource.msg(pdict.defaultList.name + ' (' + pdict.defaultList.items.length + ')')}</span>
+            <iselse/>
+                <span class="empty-wishlist-msg">${Resource.msg('wishlist.empty.text','wishlist',null)}</span>
+            </isif>
+        </isif>
+    </div>
+
+</div>

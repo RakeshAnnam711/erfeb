@@ -1,0 +1,65 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isif condition="${pdict.bisnEnabled}">
+    <form
+        id="backInStockForm"
+        class="email-signup-form pdp-bisn-form mt-0"
+
+        method="POST"
+        action="${URLUtils.url('EmailSubscribe-BackInStockSubscribeJSON')}"
+
+        role="form"
+    >
+        <input type="hidden" name="pid" value="${pdict.pid}"/>
+        <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+
+        <isif condition="${!empty(pdict.email)}">
+            <div class="email-input pb-4">
+                <input type="hidden" name="email" value="${pdict.email}" />
+                <button
+                    class="notify-back-in-stock btn-secondary btn-block"
+                    type="submit" name="submit" value="submit"
+                    aria-label="Subscribe"
+                >
+                    ${Resource.msg('btn.backinstock','product', null)}
+                </button>
+            </div>
+        <iselse/>
+            <div class="email-description text-left">
+                ${Resource.msg('header.backinstock','product', null)}
+            </div>
+            <div class="email-input pb-4">
+                <div class="input-group inline-btn">
+                    <input
+                        type="email"
+                        required
+                        class="form-control"
+                        placeholder="${Resource.msg('form.email.placeholder.backinstock','product', null)}"
+                        aria-label="Email"
+                        name="email"
+                        value="${pdict.email || ''}"
+                    />
+                    <button
+                        class="notify-back-in-stock btn w-auto"
+                        aria-label="Subscribe"
+                        type="submit"
+                        name="submit"
+                        value="submit"
+                    ></button>
+                    <input type="hidden" id="fallback-fail-msg" value="${Resource.msg('form.email.error.fallback','product', null)}"/>
+                </div>
+            </div>
+        </isif>
+        <div class="email-success text-left">
+            ${Resource.msg('success.backinstock','product', null)}
+        </div>
+        <div class="email-error text-left text-danger">
+            <span class="small">${Resource.msg('form.email.error.fallback','product', null)}</span>
+        </div>
+
+        <span class="small">
+            <iscontentasset aid="back-in-stock-footer" />
+        </span>
+    </form>
+</isif>

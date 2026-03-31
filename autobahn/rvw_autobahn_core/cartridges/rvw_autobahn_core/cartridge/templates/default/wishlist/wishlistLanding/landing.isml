@@ -1,0 +1,66 @@
+<isdecorate template="common/layout/page">
+
+    <isset name="counter" value="${0}" scope="page"/>
+
+    <section id="wishlistLanding" class="wishlist-landing">
+        <header class="wishlist-header wishlist-landing-header container-fluid}">
+            <div class="wishlist-landing-header-container container">
+                <h1 class="wishlist-landing-header-title">
+                    ${Resource.msg('title.landing.mylistlist', 'wishlist', null)}
+                </h1>
+                <div class="wishlist-landing-header-row">
+                    <isif condition="${customer.authenticated}">
+                        <button class="wishlist-landing-create-list-btn" type="button" data-toggle="modal" data-target="#wishlistModalCreateList">
+                            ${Resource.msg('button.landing.createnewlist', 'wishlist', null)}
+                        </button>
+                        <isloop items="${pdict.lists}" var="productList">
+                            <isif condition="${productList.description}">
+                                <isset name="counter" value="${counter + 1}" scope="page"/>
+                            </isif>
+                        </isloop>
+                    </isif>
+                    <div class="wishlist-search-area">
+                        <button
+                            class="wishlist-search-list-btn interactive js-show-search-form btn icon-search"
+                            type="button"
+                            data-toggle="popover"
+                            data-content='<isinclude template="wishlist/forms/searchForm"/>'
+                            data-container="body"
+                            data-placement="bottom"
+                            aria-title="${Resource.msg('button.landing.search.lists', 'wishlist', null)}"
+                        >
+                            ${Resource.msg('button.landing.search.lists', 'wishlist', null)}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <iscomment>Only show notes toggle if any lists have notes</iscomment>
+        <isif condition="${counter > 0}">
+            <div class="wishlist-landing-notes container">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="wishlist-landing-notes-toggle">
+                            <span class="wishlist-landing-notes-text-show">
+                                ${Resource.msg('button.detail.notes.show', 'wishlist', null)}
+                            </span>
+                            <span class="wishlist-landing-notes-text-hide d-none">
+                                ${Resource.msg('button.detail.notes.hide', 'wishlist', null)}
+                            </span>
+                            ${Resource.msg('button.detail.notes', 'wishlist', null)}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </isif>
+
+        <isinclude template="wishlist/wishlistLanding/components/listContainer"/>
+
+    </section>
+    <isif condition="${customer.authenticated}">
+        <isinclude template="wishlist/components/modalCreateList"/>
+        <isinclude template="wishlist/wishlistLanding/components/modalDeleteList"/>
+        <isinclude template="wishlist/wishlistLanding/components/modalEditList"/>
+    </isif>
+</isdecorate>

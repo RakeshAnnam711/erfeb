@@ -1,0 +1,14 @@
+<iscomment>
+    This slot template renders a Page Designer component in a chromeless template
+    Select 'Chromeless' in Page settings > Attributes within Page Designer
+</iscomment>
+<iscache type="relative" hour="1" varyby="price_promotion" />
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="contentIDs" value="${JSON.parse(pdict.contentIDs)}" scope="page"/>
+
+<isif condition="${contentIDs}">
+    <isloop items="${contentIDs}" var="contentID" status="status">
+        <iscontentasset aid="${contentID}"/>
+    </isloop>
+</isif>

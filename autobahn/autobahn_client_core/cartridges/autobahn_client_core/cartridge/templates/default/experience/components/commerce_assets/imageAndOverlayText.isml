@@ -1,0 +1,19 @@
+<div class="image-text-overlay">
+	<picture>
+        <source srcset="${pdict.image.src.tablet}" media="(min-width: 768px)"/>
+        <source srcset="${pdict.image.src.desktop}" media="(min-width: 1024px)"/>
+        <img
+            class="mainbanner-image image-fluid common-image-component common-image-filter"
+            src="${pdict.image.src.mobile}"
+            style="--focal-point-x:${pdict.image.focalPointX}; --focal-point-y:${pdict.image.focalPointY}"
+            alt="${pdict.imageAlt ? pdict.imageAlt : "Image of the product or service"}" title="${pdict.imageAlt}"
+            loading="lazy"
+        />
+    </picture>
+    <div class="content-block">
+    <div class="container overlay-text ${pdict.overlayAlignment}" style="background-color:${pdict.backgroundColor};">
+    	<span class="overlay-heading"><isprint value="${pdict.overlayHeading}" encoding="off"/></span>
+    	<isprint value="${pdict.description}" encoding="off"/>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+    var UUIDUtils = require('dw/util/UUIDUtils');
+    var Constants = require('*/cartridge/scripts/constants/SiteConstants');
+    var title = !empty(title) ? title : null;
+    var id = id || '';
+    var tileAction = tileAction || 'Tile-PlaceHolder';
+    var recommenderID = recommenderID || '';
+    var uuid = uuid || UUIDUtils.createUUID();
+</isscript>
+<div id="${id}" class="product-slider py-3">
+    <isif condition="${title}">
+        <div class="slider-title">
+            <isprint value="${title}" encoding="off" />
+        </div>
+    </isif>
+
+    <div class="slider-container slider-buttons-hidden slider-bullets-hidden-md slider-bullets-hidden-lg next-slide-20"
+        data-slider-autoplay="false"
+        data-slider-gutter="${Constants.Spacer}"
+        data-slider-gutter-md="${Constants.Spacer}"
+        data-slider-gutter-lg="${Constants.Spacer}"
+        data-slider-items="1"
+        data-slider-items-md="3"
+        data-slider-items-lg="3"
+        data-slider-loop="true"
+    >
+        <div id="slider-${uuid}" class="slider ${!empty(recommenderID) ? 'einstein-data' : ''}">
+            <isloop items="${recommendations}" var="recommendation" status="itemStatus">
+                <div class='slide'>
+                    <isinclude url="${URLUtils.url(tileAction, 'pid', recommendation.ID, 'pview', 'tile', 'ratings', true, 'swatches', true, 'recommendation', true, 'recommender', recommenderID || '')}"/>
+                </div>
+            </isloop>
+        </div>
+        <!--- Ensure character encoding issues are avoided via JS application --->
+        <isscript>
+            var sliderdataset = {
+                recommender: recommenderID,
+                anchors : JSON.stringify((recommendations || []).toArray().map(function (rec) { return rec.ID; }))
+            };
+        </isscript>
+        <script>
+            (function () {
+                var el = document.getElementById('slider-${uuid}'),
+                    dataset = <isprint value="${JSON.stringify(sliderdataset)}" encoding="off"/>;
+
+                if (el) {
+                    for (var opt in dataset) {
+                        el.dataset[opt] = dataset[opt];
+                    }
+                }
+            } ());
+        </script>
+    </div>
+</div>

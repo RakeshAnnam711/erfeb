@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+
+    <!-- form providing fields for gift certificate purchase -->
+    <group formid="purchase">
+        <field formid="from" label="giftcertificate.purchase.from.label" type="string" mandatory="true"
+            description=""
+            missing-error="giftcertificate.purchase.from.missing-error"
+            binding="from"/>
+        <field formid="recipient" label="giftcertificate.purchase.recipient.label" type="string" mandatory="true"
+            description=""
+            missing-error="giftcertificate.purchase.recipient.missing-error"
+            binding="recipient"/>
+        <field formid="recipientEmail" label="giftcertificate.purchase.recipientemail.label" type="string" mandatory="true"
+            description=""
+            regexp="^[\w\.%\+\-]+@[\w\.\-]+\.\w{2,}$"
+            binding="recipientEmail"
+            parse-error="giftcertificate.purchase.recipientemail.parse-error"
+            missing-error="giftcertificate.purchase.recipientemail.missing-error"
+            value-error="giftcertificate.purchase.recipientemail.value-error"
+            max-length="50"
+            range-error="error.message.50orless"/>
+        <field formid="confirmRecipientEmail" label="giftcertificate.purchase.confirmrecipientemail.label" type="string" mandatory="true"
+            description=""
+            regexp="^[\w\.%\+\-]+@[\w\.\-]+\.\w{2,}$"
+            binding="confirmRecipientEmail"
+            parse-error="giftcertificate.confirmrecipientemailparseerror"
+            missing-error="giftcertificate.confirmrecipientemailmissingerror"
+            value-error="giftcertificate.confirmrecipientemailvalueerror"
+            max-length="50"
+            range-error="error.message.50orless"/>
+        <field formid="message" label="giftcertificate.messagelabel" type="string" mandatory="false"
+            description="giftcertificate.purchasemessagedescription"
+            binding="message"
+            max-length="500"
+            range-error="error.message.500orless"/>
+        <field formid="amount" label="giftcertificate.amountlabel" type="number" mandatory="true"
+            description="giftcertificate.amountdescription"
+            binding="amount"
+            missing-error="giftcertificate.amountmissingerror"
+            parse-error="giftcertificate.amountparseerror"
+            steps="1.0"/>
+    </group>
+
+    <!-- form providing field for balance check -->
+    <group formid="balance">
+        <field formid="giftcertificateid" label="giftcertificate.balance.giftcertificateid.label" type="string" mandatory="true"
+            description=""
+            missing-error="giftcertificate.balance.giftcertificateid.missing-error"/>
+    </group>
+
+    <!-- form providing field for checkout apply, non-mandatory to avoid interfering with payment form submission -->
+    <group formid="apply">
+        <field formid="giftcertificateid" label="giftcertificate.balance.giftcertificateid.label" type="string" mandatory="false"/>
+    </group>
+
+    <!-- form providing fields for balance check and redemption (used by checkout billing page) -->
+    <group formid="redemption">
+        <field formid="amount" label="forms.giftcertificate.019" type="number"
+            mandatory="false"
+            description="forms.giftcertificate.020"
+            binding="amount"
+            missing-error="forms.giftcertificate.021"
+            value-error="forms.giftcertificate.022"/>
+        <field formid="number" label="forms.giftcertificate.023" type="string"
+            mandatory="true"
+            binding="number"
+            description="forms.giftcertificate.024"
+            missing-error="forms.giftcertificate.025"
+            value-error="forms.giftcertificate.026"/>
+    </group>
+
+    <action formid="redeem" valid-form="true"/>
+</form>
