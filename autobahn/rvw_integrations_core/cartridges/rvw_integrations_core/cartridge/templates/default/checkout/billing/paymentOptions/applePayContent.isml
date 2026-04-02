@@ -1,0 +1,28 @@
+<div class="tab-pane applepay-content" id="applepay-content" role="tabpanel">
+    <isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page" />
+    <div class="js-paymentmethod-mutationobserver">
+        <div class="paymentmethodwarning js-paymentmethodwarning-msgcontainer d-none mb-3"
+            data-iframepresent="false"
+            <isif condition="${currentSite.getCustomPreferenceValue('bopisCartridgeEnabled')}">
+                data-bopis_msg="${dw.web.Resource.msg('bopis.buynow.compat.warn.applepay', 'instorePickup', null)}"
+                data-bopis_show="${pdict.order.hasPickupInstoreItem ? true : false}"
+                data-bopis_disable="true"
+            </isif>
+            <isif condition="${currentSite.getCustomPreferenceValue('giftCertificateEnabled')}">
+                data-giftcertificate_msg="${dw.util.StringUtils.format(dw.web.Resource.msg('giftcertificatepaymentinstrument.buynow.compat.warn', 'checkout', null))}"
+                data-giftcertificate_show="${((pdict.totals && !pdict.totals.giftCertificatePaymentInstrumentsTotalValue) || (pdict.order && pdict.order.totals && !pdict.order.totals.giftCertificatePaymentInstrumentsTotalValue)) ? 'false' : 'true'}"
+                data-giftcertificate_disable="false"
+            </isif>
+            <isif condition="${currentSite.getCustomPreferenceValue('multishippingWithoutBopisEnabled')}">
+                data-multiship_msg="${dw.web.Resource.msg('multiship.buynow.compat.warn', 'checkout', null)}"
+                data-multiship_show="${pdict.order.usingMultiShipping && !pdict.order.hasPickupInstoreItem}"
+                data-multiship_disable="true"
+            </isif>
+        ></div>
+
+        <div class="js-paymentmethodwarning-affectedcontainer"
+            <isif condition="${(currentSite.getCustomPreferenceValue('bopisCartridgeEnabled') && pdict.hasPickupInstoreItem)}">disabled</isif>>
+            <isapplepay class="dw-apple-pay-logo-black applePaySpecificityOverride"></isapplepay>
+        </div>
+    </div>
+</div>

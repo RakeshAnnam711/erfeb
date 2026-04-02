@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <!-- Define Custom Attributes Before Grouping -->
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="marketingCloudWJClientId">
+                <display-name xml:lang="x-default">Marketing Cloud Client ID</display-name>
+                <description xml:lang="x-default">Stores the SFMC Client ID for authentication</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="marketingCloudWJClientSecret">
+                <display-name xml:lang="x-default">Marketing Cloud Client Secret</display-name>
+                <description xml:lang="x-default">Stores the SFMC Client Secret for authentication</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="marketingCloudAuthUrl">
+                <display-name xml:lang="x-default">Marketing Cloud Auth URL</display-name>
+                <description xml:lang="x-default">Authentication URL for SFMC</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="marketingEventDefinitionKey">
+                <display-name xml:lang="x-default">Marketing Event Definition Key</display-name>
+                <description xml:lang="x-default">Event definition key for SFMC Integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="marketingCloudInteractionUrl">
+                <display-name xml:lang="x-default">Marketing Cloud Interaction URL</display-name>
+                <description xml:lang="x-default">Interaction URL for SFMC Integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="marketingOrderEventDefinitionKey">
+                <display-name xml:lang="x-default">Marketing Order Event Definition Key</display-name>
+                <description xml:lang="x-default">Order Event definition key for SFMC Integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="marketingOrderEventBrandList">
+                <display-name xml:lang="x-default">Marketing Brand Listing</display-name>
+                <description xml:lang="x-default">Marketing Brand Listing</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <!-- Assign Attributes to the Group -->
+        <group-definitions>
+            <attribute-group group-id="SFMCIntegrationPreferences">
+                <display-name xml:lang="x-default">SFMC Integration Preferences</display-name>
+                <attribute attribute-id="marketingCloudWJClientId" />
+                <attribute attribute-id="marketingCloudWJClientSecret" />
+                <attribute attribute-id="marketingCloudAuthUrl" />
+                <attribute attribute-id="marketingEventDefinitionKey" />
+                <attribute attribute-id="marketingCloudInteractionUrl" />
+                <attribute attribute-id="marketingOrderEventDefinitionKey" />
+                <attribute attribute-id="marketingOrderEventBrandList" />
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <custom-type type-id="ZetaNewsletterSubscriber">
+            <display-name xml:lang="x-default">Zeta Newsletter Subscriber</display-name>
+            <description xml:lang="x-default">Zeta Newsletter Subscriber List</description>
+            <staging-mode>no-staging</staging-mode>
+            <storage-scope>organization</storage-scope>
+            <retention-days>90</retention-days>
+            <key-definition attribute-id="subscriberUUID">
+                <type>string</type>
+                <min-length>0</min-length>
+            </key-definition>
+            <attribute-definitions>
+                <attribute-definition attribute-id="Email">
+                    <display-name xml:lang="x-default">Email</display-name>
+                    <description xml:lang="x-default">Customer Input Email</description>
+                    <type>email</type>
+                    <localizable-flag>false</localizable-flag>
+                    <mandatory-flag>false</mandatory-flag>
+                    <externally-managed-flag>false</externally-managed-flag>
+                </attribute-definition>
+                <attribute-definition attribute-id="source">
+                    <display-name xml:lang="x-default">Source</display-name>
+                    <description xml:lang="x-default">Source</description>
+                    <type>string</type>
+                    <localizable-flag>false</localizable-flag>
+                    <mandatory-flag>false</mandatory-flag>
+                    <externally-managed-flag>false</externally-managed-flag>
+                    <min-length>0</min-length>
+                </attribute-definition>
+            </attribute-definitions>
+            <group-definitions>
+                <attribute-group group-id="ZetaCustomer">
+                    <display-name xml:lang="x-default">ZetaCustomer</display-name>
+                    <attribute attribute-id="source"/>
+                    <attribute attribute-id="lastModified" system="true"/>
+                    <attribute attribute-id="creationDate" system="true"/>
+                    <attribute attribute-id="Email"/>
+                    <attribute attribute-id="subscriberUUID"/>
+                </attribute-group>
+            </group-definitions>
+        </custom-type>
+</metadata>

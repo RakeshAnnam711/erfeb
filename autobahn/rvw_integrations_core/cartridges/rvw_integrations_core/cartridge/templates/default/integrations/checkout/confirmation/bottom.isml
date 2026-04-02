@@ -1,0 +1,13 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/confirmation/confirmation.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_autobahn_core
+</iscomment>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('yotpoCartridgeEnabled')}">
+    <isinclude template="tracking/yotpoConversionTracking" />
+</isif>

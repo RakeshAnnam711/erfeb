@@ -1,0 +1,28 @@
+<ul>
+    <isloop items="${pdict.productSearch.selectedFilters}" var="refinement">
+        <isscript>
+            var displayValue = refinement.displayValue;
+            if (refinement.id === 'plp_category_refinement') {
+                var nameArray = displayValue.split('-');
+                if (nameArray.length === 2) {
+                    displayValue = nameArray[1].trim();
+                }
+            }
+        </isscript>
+
+        <li class="filter-value">
+            <button data-href="${refinement.url}" class="btn text-left">
+                <span aria-hidden="true">${displayValue}</span>
+                <span class="sr-only">
+                    ${Resource.msgf('assistive.text.remove.filter.button', 'search', null, refinement.title)}
+                </span>
+            </button>
+        </li>
+    </isloop>
+    
+    <li class="filter-value">
+        <button class="reset btn text-left" data-href="${pdict.productSearch.resetLink}">
+        	<span aria-hidden="true">${Resource.msg('link.reset', 'search', null)}</span>
+        </button>
+    </li>
+</ul>

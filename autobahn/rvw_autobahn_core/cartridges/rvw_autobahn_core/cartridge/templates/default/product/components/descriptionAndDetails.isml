@@ -1,0 +1,41 @@
+<isset name="numberSlides" value="${(product.images['large'].length + ('pdpGalleryAssets' in product ? product.pdpGalleryAssets.length : 0)).toFixed()}" scope="page" />
+<isset name="hasSingleImage" value="${numberSlides > 1 ? false : true}" scope="page"/>
+
+<div class="description-and-detail ${hasSingleImage ? '' : 'product-has-thumbnails'}">
+
+    <iscomment>Placeholder For rvw_integrations_core</iscomment>
+    <isinclude template="integrations/product/components/descDetailsIntegrationsBeforeMainAttributes" />
+
+    <isinclude template="product/components/mainAttributes" />
+
+    <isinclude template="product/components/attributes" />
+
+    <isif condition="${!empty(product.collapsibleTitleOne) && !empty(product.collapsibleContentOne)}">
+        <div class="description card no-borders ${product.pdpCollapseContentOneDesktop ? 'collapsible-xl' : 'collapsible-sm'}" data-expand="${product.pdpAutoExpandContentOne}">
+            <div class="card-header">
+                <div class="card-title title" aria-expanded="false" aria-controls="collapsible-description-${loopState && loopState.count ? loopState.count : '1' }">
+                    ${product.collapsibleTitleOne}
+                </div>
+            </div>
+            <div class="card-body">
+                <isinclude template="product/components/description" />
+            </div>
+        </div>
+    </isif>
+
+    <isif condition="${!empty(product.collapsibleTitleTwo) && !empty(product.collapsibleContentTwo)}">
+        <div class="details card no-borders ${product.pdpCollapseContentTwoDesktop ? 'collapsible-xl' : 'collapsible-sm'}" data-expand="${product.pdpAutoExpandContentTwo}">
+            <div class="card-header">
+                <div class="card-title title" aria-expanded="false" aria-controls="collapsible-details-${loopState && loopState.count ? loopState.count : '1' }">
+                    ${product.collapsibleTitleTwo}
+                </div>
+            </div>
+            <div class="card-body">
+                <isinclude template="product/components/details" />
+            </div>
+        </div>
+    </isif>
+
+    <iscomment>Placeholder For rvw_integrations_core</iscomment>
+    <isinclude template="integrations/product/components/descDetailsIntegrationsAfterLongDescription" />
+</div>

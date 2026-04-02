@@ -1,0 +1,25 @@
+// Locally stored fonts (must be placed in static/fonts folder)
+$local-fonts: (
+    barlow-black,
+    barlow-bold,
+    nexa_light,
+    nexa_bold,
+    didot
+);
+
+@mixin font-face($font) {
+    @font-face {
+        font-family: $font;
+        font-style: normal;
+        font-weight: normal;
+        font-display: swap;
+        src: url("../fonts/#{$font}.eot"),
+            url("../fonts/#{$font}.eot?#iefix") format("embedded-opentype"),
+            url("../fonts/#{$font}.woff2") format("woff2"), url("../fonts/#{$font}.woff") format("woff"),
+            url("../fonts/#{$font}.ttf") format("truetype"), url("../fonts/#{$font}.svg##{$font}") format("svg");
+    }
+}
+
+@each $font in $local-fonts {
+	@include font-face($font);
+}

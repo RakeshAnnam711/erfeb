@@ -1,0 +1,138 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="numberSlides" value="${(product.images['large'].length + ('pdpGalleryAssets' in product ? product.pdpGalleryAssets.length : 0)).toFixed()}" scope="page" />
+<isset name="hasSingleImage" value="${numberSlides > 1 ? false : true}" scope="page"/>
+<isset name="imageColumnClass" value="${'col-12 col-md-' + parseInt(product.pdpImageColumnWidth.split('/')[0])}" scope="page"/>
+
+<isset name="imageColumnCount" value="${parseInt(product.pdpImageColumnWidth.split('/')[0])}" scope="page"/>
+<isset name="imageColumnXLCount" value="${imageColumnCount + (imageColumnCount < 5 ? 1 : 0)}" scope="page"/>
+<isset name="imageColumnClass" value="${'col-12 col-md-' + imageColumnCount + ' col-xl-' + imageColumnXLCount}" scope="page"/>
+<iscomment>Override column settings for Page Designer component if applicable</iscomment>
+<isif condition="${'pdpImageColumnWidth' in pdict}">
+    <isset name="imageColumnCount" value="${parseInt(product.pdpImageColumnWidth.split('/')[0])}" scope="page"/>
+    <isset name="imageColumnXLCount" value="${imageColumnCount + (imageColumnCount < 5 ? 1 : 0)}" scope="page"/>
+    <isset name="imageColumnClass" value="${'col-12 col-md-' + imageColumnCount + ' col-xl-' + imageColumnXLCount}" scope="page"/>
+</isif>
+
+<div class="primary-images ${isQuickView ? productDataColumnClass : imageColumnClass}"><iscomment>Adding productDataColumnClass so it overrides classes in quickview</iscomment>
+    <div class="row">
+        <div class='primary-images-main col-12 ${hasSingleImage ? "col-12" : "col-lg-9 product-has-thumbnails pl-md-5"} order-lg-2'>
+            <div class="slider-container slider-buttons-hidden slider-buttons-hidden-md slider-buttons-hidden-lg slider-bullets-hidden slider-bullets-hidden-md slider-bullets-hidden-lg"
+                data-slider-thumbnail-container="${'#'}slider-pdp-${product.id}"
+                data-slider-loop="false"
+                data-slider-gutter="1"
+                data-slider-gutter-md="1"
+                data-slider-gutter-lg="1"
+            >
+                <div class="slider">
+                    <isloop items="${product.images['large']}" var="image" status="loopStatus">
+                        <div class="slide" role="group" tabindex="0" data-zoom-image="${product.images['hi-res'][loopStatus.index].url}">
+                            <img src="${image.url}" class="d-block img-fluid" alt="${image.alt} image number ${(parseInt(image.index)).toFixed(0)}" itemprop="image" />
+                            <isif condition="${pdict.isWishlistModal !== true}">
+                                <iswishlisticon
+                                    wishlistpid="${product.wishlistpid}"
+                                    productname="${product.productName}"
+                                    addmessage="${'wishlist.addto.wishlist.icon'}"
+                                    removemessage="${'wishlist.removefrom.wishlist.icon'}"
+                                    includeicon="true"
+                                />
+                            </isif>
+                        </div>
+
+                        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableTangiblee')}">
+                            <isif condition="${pdict.tangibleeResponse}">
+                                <isif condition="${loopStatus.count == 1 && pdict.tangibleeResponse.ThumbInfos[0] != null}">
+                                    <div class="slide" data-zoom-image="${pdict.tangibleeResponse.ThumbInfos[0].Full}">
+                                        <img width="600" height="800" src="${pdict.tangibleeResponse.ThumbInfos[0].Main}" class="d-block img-fluid" alt="${image.alt} image number ${(parseInt(image.index)).toFixed(0)}" itemprop="image" />
+                                        <isif condition="${pdict.isWishlistModal !== true}">
+                                            <iswishlisticon
+                                                wishlistpid="${product.wishlistpid}"
+                                                productname="${product.productName}"
+                                                addmessage="${'wishlist.addto.wishlist.icon'}"
+                                                removemessage="${'wishlist.removefrom.wishlist.icon'}"
+                                                includeicon="true"
+                                            />
+                                        </isif>
+                                    </div>
+                                </isif>
+                            </isif>
+	                   	</isif>
+
+                    </isloop>
+
+                    <iscomment>Add any assets found in pdpGalleryAssets</iscomment>
+                    <isif condition="${!empty(product.pdpGalleryAssets)}">
+                        <isloop items="${product.pdpGalleryAssets}" var="asset">
+                            <div class="pdp-gallery-asset slide no-zoom">
+                                <iscontentasset aid="${asset.id}"/>
+                            </div>
+                        </isloop>
+                    </isif>
+                </div>
+            </div>
+            <isinclude template="/product/components/badges" />
+        </div>
+        <isif condition="${!hasSingleImage}">
+            <isset name="numberSlides" value="${(product.images['large'].length + ('pdpGalleryAssets' in product ? product.pdpGalleryAssets.length : 0)).toFixed()}" scope="page" />
+            <isset name="thumbnailCount" value="${0}" scope="page" />
+            <div class="primary-images-thumbnails col-12 col-lg-3 order-lg-1">
+                <div id="slider-pdp-${product.id}" class="slider-container slider-thumbnails slider-thumbnails-vertical-lg slider-buttons-inside slider-buttons-inside-md slider-buttons-inside-lg"
+                    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableTangiblee')}">
+	                    data-slider-items="${numberSlides + 1}"
+	                    data-slider-items-md="${numberSlides + 1}"
+	                    data-slider-items-lg="${numberSlides + 1}"
+                    <iselse>
+	                    data-slider-items="${numberSlides}"
+	                    data-slider-items-md="${numberSlides}"
+	                    data-slider-items-lg="${numberSlides}"
+                    </isif>
+                    data-slider-gutter="1"
+                    data-slider-gutter-md="1"
+                    data-slider-gutter-lg="1"
+                    data-slider-loop="false"
+                    cypress-target="pdpCarouselSliderThumbnails"
+                >
+                    <div class="slider">
+                        <isloop items="${product.images['large']}" var="image" status="loopState">
+                            <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                            <div class="slide" role="group">
+                                <img src="${image.url}" tabindex="0" class="d-block img-fluid" alt="${image.alt} image number ${thumbnailCount.toFixed()}" itemprop="image" />
+                            </div>
+
+                            <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableTangiblee')}">
+                                <isif condition="${pdict.tangibleeResponse}">
+                                    <isif condition="${loopState.count == 1 && pdict.tangibleeResponse.ThumbInfos[0] != null}">
+                                        <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                                        <div class="slide" role="group">
+                                            <img src="${pdict.tangibleeResponse.ThumbInfos[0].Thumb}" class="d-block img-fluid" alt="${image.alt} image number ${thumbnailCount.toFixed()}" itemprop="image" />
+                                        </div>
+                                    </isif>
+                                </isif>
+                            </isif>
+
+
+
+                        </isloop>
+
+                        <iscomment>Add thumbnail images found in pdpGalleryAssets</iscomment>
+                        <isif condition="${!empty(product.pdpGalleryAssets)}">
+                            <isloop items="${product.pdpGalleryAssets}" var="asset">
+                                <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                                <div class="pdp-gallery-asset slide video-container" role="group">
+                                    <img src="${asset.thumbnail}" class="d-block img-fluid" alt="image number ${thumbnailCount.toFixed()}" itemprop="image" />
+                                    <isif condition="${asset.isVideo}">
+                                        <span class="video-thumbnail-button"></span>
+                                    </isif>
+                                </div>
+                            </isloop>
+                        </isif>
+                    </div>
+                    <div class="slider-thumbnail-controls d-none">
+                        <button class="prev icon-arrow-left-thin" aria-label="prev"></button>
+                        <button class="next icon-arrow-right-thin" aria-label="next"></button>
+                    </div>
+                </div>
+            </div>
+        </isif>
+    </div>
+</div>

@@ -1,0 +1,635 @@
+name: Continuous Build - Code
+
+run-name: Code Build ${{ github.event_name }} from ${{ github.ref_name }} to ${{ inputs.environment }}${{ inputs.sandbox }} by @${{ github.actor }}
+
+on:
+    push:
+        branches:
+            - develop
+            - master
+            - hotfix/**
+            - release/**
+        tags:
+            - 'trigger-build-code'
+        paths-ignore:
+            - '.github/workflows/**.yml'
+            - 'data/**'
+            - 'autobahn/data/**'
+
+    workflow_dispatch:
+        inputs:
+            environment:
+                type: choice
+                required: true
+                default: 'development'
+                description: Where to deploy to
+                options:
+                    - development
+                    - staging
+                    - sandbox
+            sandbox:
+                description: 'If sandbox environment number: ex. "001" or "001, 002"'
+                required: false
+            validateConnection:
+                description: 'Test Connection & Debug'
+                type: boolean
+                required: true
+                default: false
+            killcache:
+                description: 'Invalidate npm build cache: true/false'
+                type: boolean
+                required: false
+                default: false
+
+env:
+    PROD_QUALITY_CODE: ${{ (contains(github.ref, '/master') || contains(github.ref, '/release/') || contains(github.ref, '/hotfix/')) }}
+    REPLACE_PASSPHRASE_KEY: '--HIDDEN-PASSPHRASE--'
+    GIT_SHA_LENGTH: '-7'
+
+concurrency:
+    group: code-${{ github.ref }}-${{ inputs.environment }}${{ inputs.sandbox }}
+
+jobs:
+    build_code:
+        name: Build and Import Code
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        env:
+            AVATAR_URL: '${{ github.event.sender.avatar_url }}'
+            BRANCH: '${{ github.head_ref || github.ref_name }}'
+            CARTRIDGE_LIST: 'TEMP_CARTRIDGE_LIST_FILE'
+            REPO_NAME: '${{ github.event.repository.full_name }}'
+        steps:
+            -   name: GitHub Generic Variables & Configs
+                env:
+                    DW_JSON: './project.dw.json'
+                    PACKAGE_JSON: './package.json'
+                run: |
+                    if [ -z "$AVATAR_URL" ]; then
+                        AVATAR_URL='${{ github.event.repository.owner.avatar_url }}'
+                    fi
+                    if [ -z "$AVATAR_URL" ]; then
+                        AVATAR_URL='${{ github.event.organization.avatar_url }}'
+                    fi
+
+                    echo "AVATAR_URL=$AVATAR_URL" >> $GITHUB_ENV
+
+                    BRANCH="${BRANCH/#refs\/heads\//}"
+
+                    echo "DW_JSON: $DW_JSON"
+                    echo "PACKAGE_JSON: $PACKAGE_JSON"
+                    echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+                    echo "BUILD_BRANCH=$(echo ${BRANCH////_})" >> $GITHUB_ENV
+                    echo "BUILD_DATE=$(date +'%y%m%d-%H%M')" >> $GITHUB_ENV
+                    echo "BUILD_SHA_SHORT=$(echo ${GITHUB_SHA} | cut -c $GIT_SHA_LENGTH)" >> $GITHUB_ENV
+                    echo "DW_JSON=$DW_JSON" >> $GITHUB_ENV
+                    echo "PACKAGE_JSON=$PACKAGE_JSON" >> $GITHUB_ENV
+                    echo "RUN_SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK != '' }}" >> $GITHUB_ENV
+
+            -   name: GitHub Message Variables
+                id: github-message-variable
+                continue-on-error: true
+                run: |
+                    COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+                    COMMIT_MESSAGE="${COMMIT_MESSAGE//[$'\t\r\n']/, }"
+                    COMMIT_MESSAGE="${COMMIT_MESSAGE//[\'\"]/}"
+
+                    echo "HEAD_COMMIT_MESSAGE=${COMMIT_MESSAGE[*]}" >> $GITHUB_ENV
+
+            -   name: GitHub Message Error
+                if: steps.github-message-variable.outcome != 'success'
+                run: |
+                    echo "HEAD_COMMIT_MESSAGE=Commit contains double quotes, cannot parse. Run against ${{ env.BRANCH }} branch." >> $GITHUB_ENV
+
+            -   name: GitHub PUSH Variables
+                if: (always() && github.event_name == 'push')
+                env:
+                    ACTOR: '${{ github.event.triggering_actor }}'
+                    COMPARE_URL: '${{ github.event.compare }}'
+                run: |
+                    if [ -z "$ACTOR" ]; then
+                        ACTOR='${{ github.event.sender.login }}'
+                    fi
+
+                    if [ -z "$HEAD_COMMIT_MESSAGE" ]; then
+                        echo "HEAD_COMMIT_MESSAGE=Job run against ${{ env.BRANCH }} branch." >> $GITHUB_ENV
+                    fi
+
+                    echo "ACTOR=$ACTOR" >> $GITHUB_ENV
+                    echo "COMPARE_URL=$COMPARE_URL" >> $GITHUB_ENV
+
+            -   name: GitHub WORKFLOW_DISPATCH Variables
+                if: (always() && github.event_name == 'workflow_dispatch')
+                env:
+                    ACTOR: '${{ github.event.sender.login }}'
+                    COMPARE_URL: 'N/A'
+                run: |
+                    if [ -z "$ACTOR" ]; then
+                        ACTOR='${{ github.event.organization.login }}'
+                    fi
+
+                    if [ -z "$HEAD_COMMIT_MESSAGE" ]; then
+                        echo "HEAD_COMMIT_MESSAGE=Manual run against ${{ env.BRANCH }} branch." >> $GITHUB_ENV
+                    fi
+
+                    echo "ACTOR=$ACTOR" >> $GITHUB_ENV
+                    echo "COMPARE_URL=$COMPARE_URL" >> $GITHUB_ENV
+
+            #   Minimal checkout via sparse checkout limited files
+            -   name: Sparse checkout config files, set git and autobahn working directory
+                env:
+                    AUTOBAHN_WORKING_DIRECTORY: './'
+                run: |
+                    REPO=https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}
+                    git clone --branch "$BRANCH" --single-branch --filter=blob:none --no-checkout --depth 1 --sparse "$REPO" .
+                    git sparse-checkout set '!**/*' '/*' 'autobahn/*' --no-cone
+                    git checkout
+
+                    : #* Reset directory focus for AB Projects (Subtree)
+                    if [[ -d "autobahn" ]]; then
+                        AUTOBAHN_WORKING_DIRECTORY="./autobahn/"
+                    fi
+
+                    : #* Set base job variables
+                    echo "AUTOBAHN_WORKING_DIRECTORY=$AUTOBAHN_WORKING_DIRECTORY" >> $GITHUB_ENV
+
+            #   Setup environment based variables
+            -   name: Check if build should proceed & Setup Build Variables
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                env:
+                    CACHE_KILLER: '${{ github.event.inputs.killcache }}'
+                    ENVIRONMENT: '${{ github.event.inputs.environment }}'
+                    VALIDATE_CONNECTION: '${{ github.event.inputs.validateConnection }}'
+                run: |
+                    if [[ -f $DW_JSON ]]; then
+                        echo "$(jq '.' $DW_JSON)"
+
+                        if [ -z $VALIDATE_CONNECTION ]; then
+                            VALIDATE_CONNECTION="$(jq -r .validateConnection $DW_JSON)"
+                        fi
+                    else
+                        echo "File ($DW_JSON) not found."
+                        exit 1
+                    fi
+
+                    if [[ -f $PACKAGE_JSON ]]; then
+                        echo "$(jq '.' $PACKAGE_JSON)"
+
+                        AB_VERSION="$(jq -r .version $PACKAGE_JSON)"
+                    else
+                        echo "File ($PACKAGE_JSON) not found."
+                        exit 1
+                    fi
+
+                    if ${{ github.event_name != 'workflow_dispatch' }}; then
+                        CACHE_KILLER="$(jq -r .killcache $DW_JSON)"
+
+                        if ${{ env.PROD_QUALITY_CODE == 'true' }}; then
+                            ENVIRONMENT="staging"
+                        else
+                            ENVIRONMENT="$(jq -r .defaultDeployEnvironment $DW_JSON)"
+                        fi
+                    fi
+
+                    if $VALIDATE_CONNECTION == "true"; then
+                        DEBUG="--debug"
+                    fi
+
+                    RELEASE_TAG="$BUILD_DATE-${BUILD_BRANCH//[^[:alnum:]]/_}-$BUILD_SHA_SHORT"
+                    if [ ${#RELEASE_TAG} -gt 50 ]; then
+                        RELEASE_TAG="${RELEASE_TAG:-50}"
+                    fi
+
+                    echo "AB_VERSION=$AB_VERSION" >> $GITHUB_ENV
+                    echo "ALLOW_SUCCESS_NOTIFICATIONS=$(jq -r .allowSlackSuccessNotifications $DW_JSON)" >> $GITHUB_ENV
+                    echo "AUTOBAHN_NVMRC_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
+                    echo "CACHE_KILLER=$CACHE_KILLER" >> $GITHUB_ENV
+                    echo "CLIENT_ID=$(jq -r .clientId $DW_JSON)" >> $GITHUB_ENV
+                    echo "DEBUG=$DEBUG" >> $GITHUB_ENV
+                    echo "ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
+                    echo "RELEASE_TAG=$RELEASE_TAG" >> $GITHUB_ENV
+                    echo "VALIDATE_CONNECTION=$VALIDATE_CONNECTION" >> $GITHUB_ENV
+                    echo "SFRA_ONLY_COMPILE=$(jq -r .npmOnlyForSFRAWebpack $DW_JSON)" >> $GITHUB_ENV
+
+            #   Set deployment environment, e.g. staging, development or sandbox
+            -   name: Setup Deployment Targets
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                run: |
+                    SECURE_DOMAINS=()
+                    DOMAINS=()
+                    IFS=','
+                    CERT_PATH=''
+
+                    : #* Enable complex string replace patterns
+                    shopt -s extglob
+
+                    if ${{ env.ENVIRONMENT == 'sandbox' }}; then
+                        SANDBOX_NUMBERS_ARRAY=()
+
+                        if ${{ github.event_name == 'workflow_dispatch' }}; then
+                            SANDBOX_NUMBERS_STRING="${{ github.event.inputs.sandbox }}"
+                        fi
+
+                        if [[ -z $SANDBOX_NUMBERS_STRING ]]; then
+                            if jq -e '.sandboxNumber | if (type == "array") then true else false end' $DW_JSON; then
+                                SANDBOX_NUMBERS_ARRAY=("$(jq -r '.sandboxNumber | join(",")' $DW_JSON)")
+                            else
+                                SANDBOX_NUMBERS_STRING="$(jq -r .sandboxNumber $DW_JSON)"
+                            fi
+                        fi
+
+                        if [[ -z $SANDBOX_NUMBERS_ARRAY ]]; then
+                            SANDBOX_NUMBERS_STRING="${SANDBOX_NUMBERS_STRING//+( )/ }"
+                            SANDBOX_NUMBERS_STRING="${SANDBOX_NUMBERS_STRING//, /,}"
+                            SANDBOX_NUMBERS_STRING="${SANDBOX_NUMBERS_STRING// /,}"
+                            SANDBOX_NUMBERS_ARRAY=("${SANDBOX_NUMBERS_STRING}")
+                        fi
+
+                        for SANDBOX_NUMBER_VALUE in ${SANDBOX_NUMBERS_ARRAY[*]}; do
+                            SECURE_DOMAINS+=("$(jq -r .sandboxDomainPrefix $DW_JSON)$SANDBOX_NUMBER_VALUE$(jq -r .sandboxDomainPostfix $DW_JSON)")
+                            DOMAINS+=("$(jq -r .sandboxDomainPrefix $DW_JSON)$SANDBOX_NUMBER_VALUE$(jq -r .sandboxDomainPostfix $DW_JSON)")
+                        done
+                    elif ${{ env.ENVIRONMENT == 'staging' || env.ENVIRONMENT == 'development' }}; then
+                        if ${{ env.ENVIRONMENT == 'development' }}; then
+                            if jq -e '.developmentDomain | if (type == "array") then true else false end' $DW_JSON; then
+                                SECURE_DOMAIN_ARRAY=("$(jq -r '.developmentDomain | join(",")' $DW_JSON)")
+                                DOMAIN_ARRAY=("$(jq -r '.developmentDomain | join(",")' $DW_JSON)")
+                            else
+                                SECURE_DOMAIN_STRING="$(jq -r '.developmentDomain' $DW_JSON)"
+                                DOMAIN_STRING="$(jq -r '.developmentDomain' $DW_JSON)"
+                            fi
+                        fi
+
+                        if ${{ env.ENVIRONMENT == 'staging' }}; then
+                            if ${{ secrets.CERT_CONTENTS != '' }}; then
+                                if jq -e '.stagingSecureDomain | if (type == "array") then true else false end' $DW_JSON; then
+                                    SECURE_DOMAIN_ARRAY=("$(jq -r '.stagingSecureDomain | join(",")' $DW_JSON)")
+                                else
+                                    SECURE_DOMAIN_STRING="$(jq -r '.stagingSecureDomain' $DW_JSON)"
+                                fi
+                            else
+                                if jq -e '.stagingDomain | if (type == "array") then true else false end' $DW_JSON; then
+                                    SECURE_DOMAIN_ARRAY=("$(jq -r '.stagingDomain | join(",")' $DW_JSON)")
+                                else
+                                    SECURE_DOMAIN_STRING="$(jq -r '.stagingDomain' $DW_JSON)"
+                                fi
+                            fi
+
+                            if jq -e '.stagingDomain | if (type == "array") then true else false end' $DW_JSON; then
+                                DOMAIN_ARRAY=("$(jq -r '.stagingDomain | join(",")' $DW_JSON)")
+                            else
+                                DOMAIN_STRING="$(jq -r '.stagingDomain' $DW_JSON)"
+                            fi
+
+                            if ${{ secrets.CERT_CONTENTS != '' }}; then
+                                FILE_PATH=".github/certificate"
+                                FILE="$FILE_PATH/githubaction.p12"
+                                mkdir -p $FILE_PATH
+                                echo "${{ secrets.CERT_CONTENTS }}" | base64 --decode > $FILE
+
+                                CERT_PATH=" -c $FILE -p $REPLACE_PASSPHRASE_KEY"
+                            fi
+                        fi
+
+                        if [[ -z $SECURE_DOMAIN_ARRAY ]]; then
+                            SECURE_DOMAIN_STRING="${SECURE_DOMAIN_STRING//+( )/ }"
+                            SECURE_DOMAIN_STRING="${SECURE_DOMAIN_STRING//, /,}"
+                            SECURE_DOMAIN_STRING="${SECURE_DOMAIN_STRING// /,}"
+                            SECURE_DOMAIN_ARRAY=("${SECURE_DOMAIN_STRING}")
+                        fi
+
+                        for SECURE_DOMAIN_VALUE in ${SECURE_DOMAIN_ARRAY[*]}; do
+                            SECURE_DOMAINS+=("$SECURE_DOMAIN_VALUE$CERT_PATH")
+                        done
+
+                        if [[ -z $DOMAIN_ARRAY ]]; then
+                            DOMAIN_STRING="${DOMAIN_STRING//+( )/ }"
+                            DOMAIN_STRING="${DOMAIN_STRING//, /,}"
+                            DOMAIN_STRING="${DOMAIN_STRING// /,}"
+                            DOMAIN_ARRAY=("${DOMAIN_STRING}")
+                        fi
+
+                        for DOMAIN_VALUE in ${DOMAIN_ARRAY[*]}; do
+                            DOMAINS+=("$DOMAIN_VALUE")
+                        done
+
+                        : #* If the Secure Staging connection is required, only one target is allowed
+                        if ${{ env.ENVIRONMENT == 'staging' && secrets.CERT_CONTENTS != '' }}; then
+                            SECURE_DOMAINS=("${SECURE_DOMAINS[0]}")
+                            DOMAINS=("${DOMAINS[0]}")
+                        fi
+                    else
+                        echo "Deployment instance could not be determined."
+                        exit 1;
+                    fi
+
+                    IFS=':'
+                    echo "SECURE_DOMAINS=${SECURE_DOMAINS[*]}" >> $GITHUB_ENV
+                    echo "DOMAINS=${DOMAINS[*]}" >> $GITHUB_ENV
+
+            #   Setup node version based on repo file, apply AB root node cache based on AB package-lock
+            -   name: Setting up Node.js
+                uses: actions/setup-node@v4
+                with:
+                    node-version-file: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}.nvmrc
+                    cache: npm
+                    cache-dependency-path: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}**/package-lock.json
+
+            #   Install top level CI Dependencies, does not modify package-lock
+            -   name: NodePM CI
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                # https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes to fix github action crash
+                run: |
+                    npm ci --ignore-scripts
+
+            #   Conditional Validate Connection (Does not activate test code)
+            -   name: Validate Instance Connection & Upload & Code Permissions
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                timeout-minutes: 2
+                if: env.VALIDATE_CONNECTION == 'true'
+                run: |
+                    mkdir -p test-upload-delete-empty
+                    zip -r test-upload-delete-empty.zip test-upload-delete-empty
+
+                    npx sfcc-ci client:auth --selfsigned $CLIENT_ID "${{ secrets.API_CLIENT_SECRET }}"
+
+                    OIFS=$IFS
+                    IFS=':'
+                    SECURE_DOMAINS_ARRAY=(${SECURE_DOMAINS[*]})
+                    DOMAINS_ARRAY=(${DOMAINS[*]})
+                    IFS=$OIFS
+
+                    for INDEX in ${!SECURE_DOMAINS_ARRAY[@]}; do
+                        npx sfcc-ci code:deploy test-upload-delete-empty.zip -i $(echo "${SECURE_DOMAINS_ARRAY[$INDEX]//$REPLACE_PASSPHRASE_KEY/${{ secrets.CERT_PASS }}}") $DEBUG
+                        npx sfcc-ci code:delete -c test-upload-delete-empty -i $(echo "${DOMAINS_ARRAY[$INDEX]}") -N $DEBUG
+                    done
+
+                    npx sfcc-ci auth:logout
+
+            #   Checkout Remainder of applicable repository code
+            -   name: Checkout Repo Cartridges
+                run: |
+                    git sparse-checkout set '**/*' '!**/data/**/*' '!**/documentation/**/*' '!**/metadata/**/*' '**/cartridges/**/*' --no-cone
+
+            #   Limit release output to Project Cartridges
+            -   name: Build Cartridge List & Trim Release Tag
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                run: |
+                    if jq -e 'if (.cartridge == null) then true else false end' $DW_JSON; then
+                        find . -mindepth 3 -maxdepth 3 -type d -path '*cartridges/*' -prune | while read CNAME; do
+                            echo "$CNAME" >> "$CARTRIDGE_LIST"
+                        done
+                    else
+                        for K in $(jq -r '.cartridge[]?' $DW_JSON); do
+                            find . -mindepth 3 -maxdepth 3 -type d -path "*/cartridges/$K" -prune | while read CNAME; do
+                                echo "$CNAME" >> "$CARTRIDGE_LIST"
+                            done
+                        done
+                    fi
+
+                    while read CNAME; do
+                        echo $CNAME
+                    done < $CARTRIDGE_LIST
+
+            #   Find cache for unchanged css dist files
+            -   name: Cache AB CSS
+                id: css-cache
+                uses: actions/cache@v4
+                env:
+                    CACHE_NAME: ${{ (env.PROD_QUALITY_CODE == 'true' && 'prd') || 'dev' }}-css-${{ env.AB_VERSION }}
+                    CACHE_KILLER_TAG: ${{ (env.CACHE_KILLER == 'true' && env.BUILD_DATE) || '' }}
+                # Hash watches for client & static file changes
+                with:
+                    path: |
+                        **/cartridge/static/**/*.css
+                        **/cartridge/static/**/*.css.map
+                        **/cartridge/static/**/flags/*.svg
+                    key: ${{ runner.os }}-${{ env.AUTOBAHN_NVMRC_VERSION }}-${{ env.CACHE_NAME }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/client/**/*.scss','**/static/**/*.css','**/static/**/*.css.map','**/static/**/flags/*.svg') }}-${{ env.CACHE_KILLER_TAG }}
+
+            #   Find cache for unchanged js dist files
+            -   name: Cache AB JS
+                id: js-cache
+                uses: actions/cache@v4
+                env:
+                    CACHE_NAME: ${{ (env.PROD_QUALITY_CODE == 'true' && 'prd') || 'dev' }}-js-${{ env.AB_VERSION }}
+                    CACHE_KILLER_TAG: ${{ (env.CACHE_KILLER == 'true' && env.BUILD_DATE) || '' }}
+                # Hash watches for client & static file changes
+                with:
+                    path: |
+                        **/cartridge/static/**/*.js
+                        **/cartridge/static/**/*.js.map
+                    key: ${{ runner.os }}-${{ env.AUTOBAHN_NVMRC_VERSION }}-${{ env.CACHE_NAME }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/client/**/*.js','**/static/**/*.js','**/static/**/*.js.map') }}-${{ env.CACHE_KILLER_TAG }}
+
+            #   Find cache for unchanged node packages
+            -   name: Cache AB node modules
+                id: node-cache
+                uses: actions/cache@v4
+                # if NPM is used for more than SFRA WEBPACK JS & CSS compilation set project.dw.json 'npmOnlyForSFRAWebpack' to false
+                if: steps.css-cache.outputs.cache-hit != 'true' || steps.js-cache.outputs.cache-hit != 'true' || env.SFRA_ONLY_COMPILE == 'false'
+                env:
+                    CACHE_NAME: code-node-modules
+                    CACHE_KILLER_TAG: ${{ (env.CACHE_KILLER == 'true' && env.BUILD_DATE) || '' }}
+                with:
+                    # Always pull node cache so node dependencies outside static/**/js and static/**/css are included with builds
+                    path: |
+                        ~/.npm
+                        **/node_modules
+                    key: ${{ runner.os }}-${{ env.AUTOBAHN_NVMRC_VERSION }}-${{ env.CACHE_NAME }}-${{ hashFiles('**/package-lock.json') }}-${{ env.CACHE_KILLER_TAG }}
+
+            -   name: Cache Steps Status
+                run: |
+                    echo "steps.css-cache.outputs.cache-hit"
+                    echo ${{ steps.css-cache.outputs.cache-hit }}
+                    echo "steps.js-cache.outputs.cache-hit"
+                    echo ${{ steps.js-cache.outputs.cache-hit }}
+                    echo "steps.node-cache.outputs.cache-hit"
+                    echo ${{ steps.node-cache.outputs.cache-hit }}
+
+            #   Install node dependencies
+            -   name: Install Node Modules
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                # Cache killer variable will ensure new compile command and results will be cached
+                if: env.CACHE_KILLER == 'true' || env.SFRA_ONLY_COMPILE == 'false' || steps.css-cache.outputs.cache-hit != 'true' || steps.js-cache.outputs.cache-hit != 'true'
+                run: npm run npmCI
+
+            #   Compile CSS-JS if build requires css-js changes
+            -   name: Compile JS & CSS Code
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                timeout-minutes: 15
+                # Cache killer variable will ensure new compile command and results will be cached
+                if: env.CACHE_KILLER == 'true' || (steps.css-cache.outputs.cache-hit != 'true' && steps.js-cache.outputs.cache-hit != 'true')
+                # https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes to fix github action crash
+                run: |
+                    export NODE_OPTIONS="--max_old_space_size=4096"
+                    if ${{ env.PROD_QUALITY_CODE == 'true' }}; then
+                        npm run prod:compile
+                    else
+                        npm run dev:compile
+                    fi
+
+            #   Compile JS if build requires js changes
+            -   name: Compile only JS
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                timeout-minutes: 10
+                # Cache killer variable will ensure new compile command and results will be cached
+                if: env.CACHE_KILLER != 'true' && steps.js-cache.outputs.cache-hit != 'true' && steps.css-cache.outputs.cache-hit == 'true'
+                # https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes to fix github action crash
+                run: |
+                    export NODE_OPTIONS="--max_old_space_size=4096"
+                    if ${{ env.PROD_QUALITY_CODE == 'true' }}; then
+                        npm run prod:compile:js
+                    else
+                        npm run dev:compile:js
+                    fi
+
+            #   Compile CSS if build requires js changes
+            -   name: Compile only CSS
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                timeout-minutes: 10
+                # Cache killer variable will ensure new compile command and results will be cached
+                if: env.CACHE_KILLER != 'true' && steps.css-cache.outputs.cache-hit != 'true' && steps.js-cache.outputs.cache-hit == 'true'
+                # https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes to fix github action crash
+                run: |
+                    export NODE_OPTIONS="--max_old_space_size=4096"
+                    if ${{ env.PROD_QUALITY_CODE == 'true' }}; then
+                        npm run prod:compile:scss
+                    else
+                        npm run dev:compile:scss
+                    fi
+
+            #   Build Properties file for Autobahn Response Headers hook (autobahnHeaders.js)
+            -   name: Set build properties file
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                run: |
+                    TARGETCARTRIDGEPATH="rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/"
+                    TARGETFILEPATH="templates/resources/"
+                    TARGETFILE="packagejson.properties"
+                    TARGET="$(echo $TARGETCARTRIDGEPATH)$(echo $TARGETFILEPATH)$(echo $TARGETFILE)"
+
+                    cat /dev/null > $TARGET
+                    echo "BUILD Project File $TARGET"
+                    echo "json.name=$(jq -r .name $PACKAGE_JSON)" >> "$TARGET"
+                    echo "json.version=$(jq -r .version $PACKAGE_JSON)" >> "$TARGET"
+                    echo "releasetag=$RELEASE_TAG" >> "$TARGET"
+
+            #   Deploy cartridge ZIP file(s)
+            -   name: Package, Zip, and Upload Cartridges within zip size limit
+                id: pack-zip-upload
+                working-directory: ${{ env.AUTOBAHN_WORKING_DIRECTORY }}
+                # Zip files are partitioned against zip block size limit
+                run: |
+                    declare -i ZIP_BLOCKSIZE_MB_LIMIT=$(jq -r .zipUploadBlocksizeMBs $DW_JSON)
+                    declare -i BUILD_FILESIZE
+
+                    if [[ -z "$ZIP_BLOCKSIZE_MB_LIMIT" ]] || [ $ZIP_BLOCKSIZE_MB_LIMIT -le 10 ]; then
+                        ZIP_BLOCKSIZE_MB_LIMIT=80
+                    fi
+
+                    : #* Remove cartridge/client source files since they are compiled
+                    find . -type d -path "*/cartridge/client/*/*" -maxdepth 7 -mindepth 5 -not -name "fonts" -exec rm -rf '{}' +
+
+                    npx sfcc-ci client:auth --selfsigned $CLIENT_ID "${{ secrets.API_CLIENT_SECRET }}"
+
+                    mkdir -p "$RELEASE_TAG"
+                    zip -rq -0 "${RELEASE_TAG}.zip" "$RELEASE_TAG"
+
+                    OIFS=$IFS
+                    IFS=':'
+                    SECURE_DOMAINS_ARRAY=(${SECURE_DOMAINS[*]})
+                    DOMAINS_ARRAY=(${DOMAINS[*]})
+                    IFS=$OIFS
+
+                    while read CNAME; do
+                        cp -rf "$CNAME" "$RELEASE_TAG"
+                        zip -urq "${RELEASE_TAG}.zip" "$RELEASE_TAG"
+
+                        BUILD_FILESIZE=$(du -sm "$RELEASE_TAG.zip" | cut -f1)
+                        echo "Current build folder partition: $BUILD_FILESIZE MBs"
+
+                        if [ $BUILD_FILESIZE -ge $ZIP_BLOCKSIZE_MB_LIMIT ]; then
+                            : #* Move last cartridge to cause zip size limit flag and deply
+                            FOLDER_NAME=$(basename $CNAME)
+                            zip -d "${RELEASE_TAG}.zip" "$RELEASE_TAG/$FOLDER_NAME"
+
+                            BUILD_FILESIZE=$(du -sm "$RELEASE_TAG.zip" | cut -f1)
+                            echo "Deploy build folder partition: $BUILD_FILESIZE MBs"
+
+                            for INDEX in ${!SECURE_DOMAINS_ARRAY[@]}; do
+                                npx sfcc-ci code:deploy "${RELEASE_TAG}.zip" -i $(echo "${SECURE_DOMAINS_ARRAY[$INDEX]//$REPLACE_PASSPHRASE_KEY/${{ secrets.CERT_PASS }}}") $DEBUG
+                            done
+                            rm -rf "$RELEASE_TAG"
+                            rm -rf "$RELEASE_TAG.zip"
+
+                            : #* Rebuild release zip with last cartridge
+                            mkdir -p "$RELEASE_TAG"
+                            cp -rf "$CNAME" "$RELEASE_TAG"
+                            zip -rq -0 "${RELEASE_TAG}.zip" "$RELEASE_TAG"
+
+                            BUILD_FILESIZE=$(du -sm "$RELEASE_TAG.zip" | cut -f1)
+                            if [ $BUILD_FILESIZE -ge $ZIP_BLOCKSIZE_MB_LIMIT ]; then
+                                echo "$CNAME ($BUILD_FILESIZE MB) surpasses zip file upload limit. Limit $ZIP_BLOCKSIZE_MB_LIMIT MB. "
+                                exit 1
+                            fi
+                        fi
+
+                        if ${{ env.DEBUG == '--debug' }}; then
+                            echo "Append $CNAME"
+                        fi
+                    done < $CARTRIDGE_LIST
+
+                    BUILD_FILESIZE=$(du -sm "$RELEASE_TAG.zip" | cut -f1)
+                    echo "Deploy final build folder partition: $BUILD_FILESIZE MBs"
+
+                    for INDEX in ${!SECURE_DOMAINS_ARRAY[@]}; do
+                        if ${{ env.ENVIRONMENT == 'staging' && secrets.CERT_CONTENTS != '' }}; then
+                            npx sfcc-ci code:deploy "${RELEASE_TAG}.zip" -i $(echo "${SECURE_DOMAINS_ARRAY[$INDEX]//$REPLACE_PASSPHRASE_KEY/${{ secrets.CERT_PASS }}}") $DEBUG
+                            npx sfcc-ci code:activate "${RELEASE_TAG}" -i $(echo "${DOMAINS_ARRAY[$INDEX]}") $DEBUG
+                        else
+                            npx sfcc-ci code:deploy "${RELEASE_TAG}.zip" -i $(echo "${SECURE_DOMAINS_ARRAY[$INDEX]}") -a $DEBUG
+                        fi
+                    done
+
+            -   name: Slack Success Data
+                if: env.RUN_SLACK_WEBHOOK == 'true' && success() && env.ALLOW_SUCCESS_NOTIFICATIONS == 'true'
+                env:
+                    SLACK_COLOR: ${{ (steps.pack-zip-upload.outcome == 'success' && 'good') || 'danger' }}
+                    SLACK_TITLE: CI Code Deployment${{ (steps.pack-zip-upload.outcome != 'success' && ' FAILED') || '' }}
+                run: |
+                    echo "SLACK_COLOR=$SLACK_COLOR" >> $GITHUB_ENV
+                    echo "SLACK_TITLE=$SLACK_TITLE" >> $GITHUB_ENV
+
+            -   name: Slack Error Data
+                if: env.RUN_SLACK_WEBHOOK == 'true' && failure()
+                env:
+                    SLACK_COLOR: 'danger'
+                    SLACK_TITLE: CI Code Deployment FAILED
+                run: |
+                    echo "SLACK_COLOR=$SLACK_COLOR" >> $GITHUB_ENV
+                    echo "SLACK_TITLE=$SLACK_TITLE" >> $GITHUB_ENV
+
+            -   name: Slack Cancelled Data
+                if: env.RUN_SLACK_WEBHOOK == 'true' && cancelled() && env.ALLOW_SUCCESS_NOTIFICATIONS == 'true'
+                env:
+                    SLACK_COLOR: '#cccccc'
+                    SLACK_TITLE: CI Code Deployment CANCELLED
+                run: |
+                    echo "SLACK_COLOR=$SLACK_COLOR" >> $GITHUB_ENV
+                    echo "SLACK_TITLE=$SLACK_TITLE" >> $GITHUB_ENV
+
+            #   Integrated slack notification
+            -   name: Slack Notification
+                # Run 'notifications' job only when (failure() || ((success() || cancelled()) && !!allow_success_notifications)), will not to run step if Slack Success MSGs are not allowed
+                if: env.RUN_SLACK_WEBHOOK == 'true' && (((success() || cancelled()) && env.ALLOW_SUCCESS_NOTIFICATIONS == 'true') || failure())
+                env:
+                    SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+                    SLACK_AUTHOR: ${{ env.ACTOR }}
+                    SLACK_ICON_URL: ${{ env.AVATAR_URL }}
+                    SLACK_MESSAGE: Commit ${{ env.HEAD_COMMIT_MESSAGE }}
+                    SLACK_USERNAME: BuildBot - ${{ env.ACTOR || 'Manual' }}
+                    SLACK_FOOTER: ${{ env.REPO_NAME }} - ${{ github.job }}
+                run: |
+                    JSON_STRING='{"username":"${{ env.SLACK_USERNAME }}","icon_url":"${{ env.SLACK_ICON_URL }}","attachments":[{"fallback":"${{ env.SLACK_MESSAGE }}","color":"${{ env.SLACK_COLOR }}","author_name":"${{ env.SLACK_AUTHOR }}","title":"${{ env.SLACK_TITLE }}","text":"${{ env.SLACK_MESSAGE }}","footer":"${{ env.SLACK_FOOTER }}","fields":[{"title":"Target environment(s)","value":"${{ env.DOMAINS }}"},{"title":"Code Version","value":"${{ env.RELEASE_TAG }}"},{"title":"Changes","value":"${{ env.COMPARE_URL }}"},{"title":"Ref","value":"${{ github.ref }}","short":true},{"title":"Event","value":"${{ github.event_name }}","short":true}]}]}'
+                    JSON_STRING=$JSON_STRING | jq @json
+                    echo -E "$JSON_STRING"
+
+                    curl -X POST -H "Content-Type: application/json" -d "$JSON_STRING" ${{ secrets.SLACK_WEBHOOK }}

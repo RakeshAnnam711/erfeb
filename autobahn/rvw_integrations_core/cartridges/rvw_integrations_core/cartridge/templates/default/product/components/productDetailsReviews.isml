@@ -1,0 +1,6 @@
+<iscomment>
+    This is an overriding template. Generic changes made here may need to be reincorporated back to rvw_autobahn_core
+</iscomment>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('yotpoCartridgeEnabled')}">
+    <isinclude template="widget/yotpoReviewsWidget" />
+</isif>

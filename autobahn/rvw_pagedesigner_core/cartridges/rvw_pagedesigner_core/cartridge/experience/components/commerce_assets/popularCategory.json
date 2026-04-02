@@ -1,0 +1,124 @@
+{
+    "name": "Category Tile with Caption",
+    "description": "Category Tile displayed with an image and text.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "popularCategory",
+            "name": "Popular Category",
+            "description": "Specify the category to be displayed.",
+            "attribute_definitions": [
+                {
+                    "id": "category",
+                    "name": "Category",
+                    "description": "Select Category to be displayed.",
+                    "type": "category",
+                    "required": true
+                },
+                {
+                    "id": "catDisplayName",
+                    "name": "Custom display name",
+                    "description": "Overwrite the category name if needed.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "catDisplayNameClass",
+                    "name": "Display name class",
+                    "description": "Additional class(es) to add to the display name for styling purposes, e.g. 'h2 text--black mb-2'. Add 'custom' to remove other styles directly applied to this element.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "catSecondaryText",
+                    "name": "Secondary text",
+                    "description": "Optional dditional text placed below the display name.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "catSecondaryTextClass",
+                    "name": "Secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'. Add 'custom' to remove other styles directly applied to this element.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "textPlacement",
+                    "name": "Text placement",
+                    "type": "enum",
+                    "values": ["inside image", "below image"],
+                    "default_value": "below image",
+                    "required": false
+                },
+                {
+                    "id": "textAlignment",
+                    "name": "Text alignment",
+                    "description": "Only applicable if Text Placement is set to 'below image'.",
+                    "type": "enum",
+                    "values": ["left", "center", "right"],
+                    "default_value": "center",
+                    "required": false
+                },
+                {
+                   "id": "image",
+                   "name": "Custom image",
+                   "description": "If used, this will replace the default category image. For faster load time, please use images under 500 KB.",
+                   "type": "image",
+                   "required": false
+                },
+                {
+                    "id": "backgroundImageAlt",
+                    "name": "Background Image Alt Text",
+                    "type": "string",
+                    "description": "Add alternative text for image, default is an empty string. See following to better understand what to write: https://html.spec.whatwg.org/multipage/images.html#alt",
+                    "required": false
+                },
+                {
+                    "id": "backgroundClass",
+                    "name": "Background Class",
+                    "type": "string",
+                    "description": "Add a class to set a background color for the component if there is no image selected. e.g. 'background--brand-secondary' See the Style Guide for more color options.",
+                    "required": false
+                },
+                {
+                    "id": "backgroundVideoURL",
+                    "name": "Background Video URL",
+                    "type": "string",
+                    "description": "Add a URL for a video to play as the background image. YouTube, Vimeo, and self-hosted MP4s are supported.",
+                    "required": false
+                },
+                {
+                    "id": "zoom",
+                    "name": "Zoom image on hover",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "imagesize",
+                    "name": "image size",
+                    "description": "Style used in this field if the image needs to be sized up or down. example '80%', 'cover', or 'contain'. Default is 'cover', which will scale the image up to fill the container.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "offset",
+                    "name": "offset",
+                    "description": "How the image should be offset. example '0 10px'. If a custom image is set, use the focus point instead.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "aspectRatio",
+                    "name": "Aspect ratio",
+                    "description": "Choose a shape for the Category Tile. Default is square.",
+                    "type": "enum",
+                    "values": ["square", "landscape", "portrait"],
+                    "default_value": "square",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

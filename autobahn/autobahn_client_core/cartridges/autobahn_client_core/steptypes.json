@@ -1,0 +1,288 @@
+{
+    "step-types": {
+        "script-module-step": [
+            {
+                "@type-id": "custom.sendQueuedGiftCertificateEmails",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Emails gift certificates in GiftCertificateEmailQueue custom objects.",
+                "module": "autobahn_client_core/cartridge/scripts/jobs/sendQueuedGiftCertificateEmails.js",
+                "function": "run",
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when an error occurred."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when everything went well."
+                        },
+                        {
+                            "@code": "WARN",
+                            "description": "Used when small, but acceptable problems occurred."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.globale.updateGlobalERestrictedProducts",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Updates the attributes of Products for GloablE restricted product",
+                "module": "autobahn_client_core/cartridge/scripts/jobs/geRestrictedProducts.js",
+                "function": "updateProductRestrictions",
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when an error occurred."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when everything went well."
+                        },
+                        {
+                            "@code": "WARN",
+                            "description": "Used when small, but acceptable problems occurred."
+                        }
+                    ]
+                }
+            },
+            {
+				"@type-id": "custom.amazon.exportproductsup",
+				"@supports-site-context": "true",
+                "@supports-organization-context": "false",
+				"description": "Exports product to Amazon API productsup",
+				"module": "autobahn_client_core/cartridge/scripts/jobs/exportProductsupMasterFeed.js",
+				"function": "exportProductsUp",
+				"parameters": {
+					"parameter": [
+					]
+				},
+				"status-codes": {
+					"status": [{
+						"@code": "ERROR",
+						"description": "Used when an error occurred."
+					},
+					{
+						"@code": "OK",
+						"description": "Used when everything went well."
+					}]
+				}
+			},
+            {
+                "@type-id": "custom.linkOrderToCustomerAccount",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Link orders to given customer account",
+                "module": "autobahn_client_core/cartridge/scripts/jobs/linkOrderToCustomerAccount.js",
+                "function": "run",
+                "transactional": "true",
+                "timeout-in-seconds": "900",
+                "parameters": {
+                    "parameters": [
+                        {
+                            "@name":"CustomerEmail",
+                            "description":"Customer's email address",
+                            "@type":"string",
+                            "@required":"true",
+                            "@trim":"true"
+                        },
+                        {
+                            "@name":"OrderIds",
+                            "description":"Order Ids in comma separated string",
+                            "@type":"string",
+                            "@required":"true",
+                            "@trim":"true"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when an error occurred."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when everything went well."
+                        },
+                        {
+                            "@code": "WARN",
+                            "description": "Used when small, but acceptable problems occurred."
+                        }
+                    ]
+                }
+            },
+            {
+				"@type-id": "custom.exportRegionSpecificSitemaps",
+				"@supports-site-context": "true",
+                "@supports-organization-context": "false",
+				"description": "Exports sitemap categories by locale",
+				"module": "autobahn_client_core/cartridge/scripts/jobs/exportRegionSpecificSitemaps.js",
+				"function": "execute",
+				"parameters": {
+					"parameter": [
+                        {
+                            "@name":"MAX_URLS_PER_FILE",
+                            "description":"Maximum URLs per sitemap file",
+                            "@type":"string",
+                            "@required":"true",
+                            "@trim":"true",
+                            "@default": "50000"
+                        },
+                        {
+                            "@name":"MAX_FILE_SIZE_IN_MB",
+                            "description":"Maximum file size in MB per sitemap file",
+                            "@type":"string",
+                            "@required":"true",
+                            "@trim":"true",
+                            "@default": "9"
+                        },
+                        {
+                            "@name":"DEFAULT_CHANGE_FREQ",
+                            "description":"Default change frequency for sitemap URLs",
+                            "@type":"string",
+                            "@required":"true",
+                            "@trim":"true",
+                            "@default": "daily"
+                        },
+                        {
+                            "@name":"DEFAULT_PRIORITY",
+                            "description":"Default priority for sitemap URLs",
+                            "@type":"string",
+                            "@required":"true",
+                            "@trim":"true",
+                            "@default": "0.5"
+                        },
+                        {
+                            "@name":"fileExclusionKeywords",
+                            "description":"Comma separated keywords to exclude files containing any of these keywords",
+                            "@type":"string",
+                            "@required":"false",
+                            "@trim":"true",
+                            "@default": "en_US,default,index,images"
+                        },
+                        {
+                            "@name":"hostname",
+                            "description":"Hostname to use for sitemap URLs",
+                            "@type":"string",
+                            "@required":"true",
+                            "@trim":"true",
+                            "@default": "www.whatgoesaroundnyc.com"
+                        },
+                        {
+                            "@name":"excludeProductImages",
+                            "description":"Flag to exclude product images from sitemap",
+                            "@type":"boolean",
+                            "@required":"true",
+                            "@trim":"true",
+                            "@default": "false"
+                        }
+                    ]
+				},
+				"status-codes": {
+					"status": [{
+						"@code": "ERROR",
+						"description": "Used when an error occurred."
+					},
+					{
+						"@code": "OK",
+						"description": "Used when everything went well."
+					}]
+				}
+			},
+            {
+				"@type-id": "custom.eBay.exportDeltaEbayProducts",
+				"@supports-site-context": "true",
+                "@supports-organization-context": "false",
+				"description": "Exports product to eBay API",
+				"module": "autobahn_client_core/cartridge/scripts/jobs/exportEbayProducts.js",
+				"function": "exportProductToEbayDelta",
+				"parameters": {
+					"parameter": [
+					]
+				},
+				"status-codes": {
+					"status": [{
+						"@code": "ERROR",
+						"description": "Used when an error occurred."
+					},
+					{
+						"@code": "OK",
+						"description": "Used when everything went well."
+					}]
+				}
+			},
+            {
+                "@type-id": "custom.amazon.exportEbayProductsMasterFeed",
+				"@supports-site-context": "true",
+                "@supports-organization-context": "false",
+				"description": "Exports product to eBay API productsup",
+				"module": "autobahn_client_core/cartridge/scripts/jobs/exportEbayProductsMasterFeed.js",
+				"function": "exportEbayProductsMasterFeed",
+				"parameters": {
+					"parameter": [
+					]
+				},
+				"status-codes": {
+					"status": [{
+						"@code": "ERROR",
+						"description": "Used when an error occurred."
+					},
+					{
+						"@code": "OK",
+						"description": "Used when everything went well."
+					}]
+				}
+            },
+            {
+                "@type-id": "custom.exportZetaDeltaCatalog",
+				"@supports-site-context": "true",
+                "@supports-organization-context": "false",
+				"description": "Exports product to Zeta Delta Catalog",
+				"module": "autobahn_client_core/cartridge/scripts/jobs/exportZetaDeltaCatalog.js",
+				"function": "exportZetaDeltaCatalog",
+				"parameters": {
+					"parameter": [
+					]
+				},
+				"status-codes": {
+					"status": [{
+						"@code": "ERROR",
+						"description": "Used when an error occurred."
+					},
+					{
+						"@code": "OK",
+						"description": "Used when everything went well."
+					}]
+				}
+            },
+            {
+                "@type-id": "custom.exportZetaDeltaCustomers",
+				"@supports-site-context": "true",
+                "@supports-organization-context": "false",
+				"description": "Exports product to Zeta Delta Customers",
+				"module": "autobahn_client_core/cartridge/scripts/jobs/exportZetaDeltaCustomers.js",
+				"function": "exportZetaDeltaCustomers",
+				"parameters": {
+					"parameter": [
+					]
+				},
+				"status-codes": {
+					"status": [{
+						"@code": "ERROR",
+						"description": "Used when an error occurred."
+					},
+					{
+						"@code": "OK",
+						"description": "Used when everything went well."
+					}]
+				}
+            }
+
+        ]
+    }
+}

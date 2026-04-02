@@ -1,0 +1,88 @@
+{
+    "name": "Breadcrumbs",
+    "description": "Component that creates breadcrumbs based on the category or links entered.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "breadcrumbAttributes",
+            "name": "Breadcrumbs Attributes",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "breadcrumbForCategory",
+            "name": "Breadcrumbs Based on Category",
+            "description": "Category to automatically generate the breadcrumbs for",
+            "attribute_definitions": [
+                {
+                    "id": "pd_breadcrumbCategory",
+                    "name": "Breadcrumb Category",
+                    "type": "category",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "category"
+                    }
+                },
+                {
+                    "id": "customTitle",
+                    "name": "Custom Category Title",
+                    "description": "Enter a custom title to use instead of the selected category's name.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "breadcrumbForLinks",
+            "name": "Breadcrumbs Based on Links",
+            "description": "Create breadcrumbs from the links, going from left to right",
+            "attribute_definitions": [
+                {
+                    "id": "pd_breadcrumb1",
+                    "name": "Breadcrumb URL 1",
+                    "description": "Breadcrumb that is furthest left, by Home",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "pd_breadcrumbDisplay1",
+                    "name": "Breadcrumb Display Name 1",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "pd_breadcrumb2",
+                    "name": "Breadcrumb URL 2",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "pd_breadcrumbDisplay2",
+                    "name": "Breadcrumb Display Name 2",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "pd_breadcrumb3",
+                    "name": "Breadcrumb URL 3",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "pd_breadcrumbDisplay3",
+                    "name": "Breadcrumb Display Name 3",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

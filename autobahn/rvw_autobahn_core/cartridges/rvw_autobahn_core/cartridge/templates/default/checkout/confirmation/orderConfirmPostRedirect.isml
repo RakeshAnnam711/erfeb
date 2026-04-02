@@ -1,0 +1,7 @@
+<form style="display: none" action="${dw.web.URLUtils.url('Order-Confirm')}" method="POST" id="redirectPostOrderForm">
+    <input type="hidden" id="var1" name="orderID" value="${pdict.orderID}"/>
+    <input type="hidden" id="var2" name="orderToken" value="${pdict.orderToken}"/>
+</form>
+<script type="text/javascript">
+    document.getElementById('redirectPostOrderForm').submit();
+</script>

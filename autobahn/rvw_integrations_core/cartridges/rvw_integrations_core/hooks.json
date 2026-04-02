@@ -1,0 +1,40 @@
+{
+    "hooks": [
+        {
+            "name": "forter.api.request.payment.basic_gift_certificate",
+            "script": "~/cartridge/scripts/hooks/buildForterRequest"
+        },
+        {
+            "name": "signifyd.api.request.payment.basic_gift_certificate",
+            "script": "~/cartridge/scripts/hooks/buildSignifydRequest"
+        },
+        {
+            "name": "dw.extensions.applepay.getRequest",
+            "script": "./cartridge/scripts/hooks/applepay"
+        },
+        {
+            "name": "dw.extensions.applepay.shippingContactSelected",
+            "script": "./cartridge/scripts/hooks/applepay"
+        },
+        {
+            "name": "dw.extensions.applepay.shippingMethodSelected",
+            "script": "./cartridge/scripts/hooks/applepay"
+        },
+        {
+            "name": "dw.extensions.applepay.paymentMethodSelected",
+            "script": "./cartridge/scripts/hooks/applepay"
+        },
+        {
+            "name": "dw.extensions.applepay.paymentAuthorized.createOrder",
+            "script": "./cartridge/scripts/hooks/applepay"
+        },
+        {
+            "name": "dw.order.payment.authorizeCreditCard",
+            "script": "./cartridge/scripts/hooks/authorizeCreditCard"
+        },
+        {
+            "name": "dw.order.createOrderNo",
+            "script": "./cartridge/scripts/hooks/checkoutHooks.js"
+        }
+    ]
+}

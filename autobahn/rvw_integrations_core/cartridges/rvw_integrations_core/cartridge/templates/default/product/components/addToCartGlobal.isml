@@ -1,0 +1,30 @@
+<iscomment>
+    This overwrites what is in rvw_autobahn_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page" />
+<div class="row cart-and-ipay">
+    <div class="col-sm-12">
+        <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}"/>
+        <button class="add-to-cart-global btn btn-primary ${pdict.extraclass ? pdict.extraclass : ''}"
+            <isif condition="${currentSite.getCustomPreferenceValue('GTMEnable')}">
+                data-gtmdata="${JSON.stringify(product.gtmData)}" <iscomment> formatted as 'product.gtmGA4Data' </iscomment>
+            </isif>
+            data-pid="${product.id}"
+            ${!product.readyToOrder || !product.available ? "disabled" : ""}
+            cypress-target="addToCartButton"
+        >
+            <i class="fa fa-shopping-bag"></i>
+            ${Resource.msg(product.productType === 'set' || product.productType === 'bundle' ? 'button.addalltocart' : 'button.addtocart', 'common', null)}
+        </button>
+
+        <isif condition="${currentSite.getCustomPreferenceValue('sfcommercepaymentsCartridgeEnabled') && product.productType !== 'set'}">
+            <isset name="buynowproduct" value="${product}" scope="page" />
+            <isinclude template="_commercepayments/components/product/buyNowButtons" sf-toolkit="off"/>
+        </isif>
+    </div>
+</div>

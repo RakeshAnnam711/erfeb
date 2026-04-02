@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="Vertex_EndpointLookup">
+                <display-name xml:lang="x-default">API Lookup Tax Area Endpoint URL</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="Vertex_EndpointTax">
+                <display-name xml:lang="x-default">API Tax Calculate Endpoint URL</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="Vertex_DashboardURL">
+                <display-name xml:lang="x-default">User dashboard URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_Address">
+                <display-name xml:lang="x-default">Address (Physical Origin)</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_City">
+                <display-name xml:lang="x-default">City (Physical Origin)</display-name>
+                <description xml:lang="x-default">The proper name of the city used to determine the Tax Area ID (if none is supplied). Optional (0..1) but recommended for greatest accuracy if no Tax Area ID is supplied.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_Company">
+                <display-name xml:lang="x-default">Company name (Physical Origin)</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_Country">
+                <display-name xml:lang="x-default">Country (Physical Origin)</display-name>
+                <description xml:lang="x-default">The country used to determine the Tax Area ID (if none is supplied). You can use a Data Extract report to see the valid country values. (Refer to the Vertex Central online help for information on running Data Extract reports.) Defaults to the value of the taxgis.jurisdictionfinder.DefaultCountryCodeForAddress parameter. The default value for this parameter is USA. (For details on this configuration parameter, refer to the Configuration File Parameters Reference Guide.)</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_Address_Admin">
+                <display-name xml:lang="x-default">Address (Administrative Origin)</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_City_Admin">
+                <display-name xml:lang="x-default">City (Administrative Origin)</display-name>
+                <description xml:lang="x-default">The proper name of the city used to determine the Tax Area ID (if none is supplied). Optional (0..1) but recommended for greatest accuracy if no Tax Area ID is supplied.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_Country_Admin">
+                <display-name xml:lang="x-default">Country (Administrative Origin)</display-name>
+                <description xml:lang="x-default">The country used to determine the Tax Area ID (if none is supplied). You can use a Data Extract report to see the valid country values. (Refer to the Vertex Central online help for information on running Data Extract reports.) Defaults to the value of the taxgis.jurisdictionfinder.DefaultCountryCodeForAddress parameter. The default value for this parameter is USA. (For details on this configuration parameter, refer to the Configuration File Parameters Reference Guide.)</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_DeliveryTerms">
+                <display-name xml:lang="x-default">Delivery Terms</display-name>
+                <description xml:lang="x-default">Helps Vertex determine the correct taxing jurisdictions in cross-border transactions</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Carriage Insurance Paid To (CIP)</display>
+                        <value>CIP</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Carriage Paid To (CPT)</display>
+                        <value>CPT</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Cost and Freight (CFR)</display>
+                        <value>CFR</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Cost, Insurance, and Freigh (CIF)</display>
+                        <value>CIF</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Customer Ships (CUS)</display>
+                        <value>CUS</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivered at Frontier (DAF)</display>
+                        <value>DAF</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivered at Place (DAP)</display>
+                        <value>DAP</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivered at Terminal (DAT)</display>
+                        <value>DAT</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivered Duty Paid (DDP)</display>
+                        <value>DDP</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivered Duty Unpaid (DDU)</display>
+                        <value>DDU</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivered Ex Quay Duty Unpaid (DEQ)</display>
+                        <value>DEQ</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delivered Ex Ship (DES)</display>
+                        <value>DES</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Ex Works (EXW)</display>
+                        <value>EXW</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Free Along Ship (FAS)</display>
+                        <value>FAS</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Free Carrier (FCA)</display>
+                        <value>FCA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Free Onboard Vessel (FOB)</display>
+                        <value>FOB</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Supplier (SUP)</display>
+                        <value>SUP</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_ISOCountryCode">
+                <display-name xml:lang="x-default">ISO Country Code</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_PostalCode_Admin">
+                <display-name xml:lang="x-default">Postal Code (Administrative Origin)</display-name>
+                <description xml:lang="x-default">The postal code used to determine the Tax Area ID (if none is supplied). For valid formats, see the Supporting Information section in the XML Integration Guide. Optional (0..1) but recommended for greatest accuracy if no Tax Area ID is supplied.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_MainDivision_Admin">
+                <display-name xml:lang="x-default">Division (Administrative Origin)</display-name>
+                <description xml:lang="x-default">The proper name or the postal abbreviation of the state, province, or territory used to determine the Tax Area ID if none is supplied. Optional (0..1) but is recommended for greatest accuracy if no Tax Area ID is supplied.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_MainDivision">
+                <display-name xml:lang="x-default">Division (Physical Origin)</display-name>
+                <description xml:lang="x-default">The proper name or the postal abbreviation of the state, province, or territory used to determine the Tax Area ID if none is supplied. Optional (0..1) but is recommended for greatest accuracy if no Tax Area ID is supplied.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_Password">
+                <display-name xml:lang="x-default">Password</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_PostalCode">
+                <display-name xml:lang="x-default">Postal Code (Physical Origin)</display-name>
+                <description xml:lang="x-default">The postal code used to determine the Tax Area ID (if none is supplied). For valid formats, see the Supporting Information section in the XML Integration Guide. Optional (0..1) but recommended for greatest accuracy if no Tax Area ID is supplied.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_TrustedId">
+                <display-name xml:lang="x-default">Trusted Id</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_UserName">
+                <display-name xml:lang="x-default">Username</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_ProductClassDepth">
+                <display-name xml:lang="x-default">Product Class (category depth)</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_RemoteRequestToken">
+                <display-name xml:lang="x-default">Remote Request Token</display-name>
+                <description xml:lang="x-default">Token for Remote request MAC verification</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="Vertex_TaxRegistrationNumber">
+                <display-name xml:lang="x-default">Tax Registration Number</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_isAddressCleansingEnabled">
+                <display-name xml:lang="x-default">Enable Address Cleansing</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_isEnabled">
+                <display-name xml:lang="x-default">Enabled</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_isInvoiceEnabled">
+                <display-name xml:lang="x-default">Enable Invoice Request</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+			<attribute-definition attribute-id="Vertex_isSFRA">
+                <display-name xml:lang="x-default">Enable SFRA</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+			<attribute-definition attribute-id="Vertex_isVATEnabled">
+                <display-name xml:lang="x-default">Enable VAT</display-name>
+                <description xml:lang="x-default">VAT is included in the cost of the goods sold, and added to the sales price to the customer</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_GeneralLogLevel">
+                <display-name xml:lang="x-default">General Log Level</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">NONE</display>
+                        <value>NONE</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">ERROR</display>
+                        <value>ERROR</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">TRACE</display>
+                        <value>TRACE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">DEBUG</display>
+                        <value>DEBUG</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="Vertex_DetailedLogLevel">
+                <display-name xml:lang="x-default">Request Detailed Log Level</display-name>
+                <description xml:lang="x-default">Include detailed debug information in XML request/response</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">NONE</display>
+                        <value>NONE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">FATAL</display>
+                        <value>FATAL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">ERROR</display>
+                        <value>ERROR</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">WARNING</display>
+                        <value>WARNING</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">OPS</display>
+                        <value>OPS</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">TRACE</display>
+                        <value>TRACE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">DEBUG</display>
+                        <value>DEBUG</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">SUPPORT</display>
+                        <value>SUPPORT</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Vertex">
+                <display-name xml:lang="x-default">Vertex</display-name>
+                <attribute attribute-id="Vertex_isEnabled"/>
+				<attribute attribute-id="Vertex_isSFRA"/>
+                <attribute attribute-id="Vertex_isInvoiceEnabled"/>
+				<attribute attribute-id="Vertex_isVATEnabled"/>
+                <attribute attribute-id="Vertex_isAddressCleansingEnabled"/>
+                <attribute attribute-id="Vertex_ProductClassDepth"/>
+                <attribute attribute-id="Vertex_UserName"/>
+                <attribute attribute-id="Vertex_Password"/>
+                <attribute attribute-id="Vertex_TrustedId"/>
+				<attribute attribute-id="Vertex_DashboardURL"/>
+                <attribute attribute-id="Vertex_EndpointLookup"/>
+				<attribute attribute-id="Vertex_EndpointTax"/>
+                <attribute attribute-id="Vertex_Address"/>
+                <attribute attribute-id="Vertex_City"/>
+                <attribute attribute-id="Vertex_MainDivision"/>
+                <attribute attribute-id="Vertex_Country"/>
+                <attribute attribute-id="Vertex_PostalCode"/>
+                <attribute attribute-id="Vertex_Company"/>
+                <attribute attribute-id="Vertex_Address_Admin"/>
+                <attribute attribute-id="Vertex_City_Admin"/>
+                <attribute attribute-id="Vertex_MainDivision_Admin"/>
+                <attribute attribute-id="Vertex_Country_Admin"/>
+                <attribute attribute-id="Vertex_PostalCode_Admin"/>
+				<attribute attribute-id="Vertex_ISOCountryCode"/>
+				<attribute attribute-id="Vertex_TaxRegistrationNumber"/>
+                <attribute attribute-id="Vertex_DeliveryTerms"/>
+                <attribute attribute-id="Vertex_GeneralLogLevel"/>
+                <attribute attribute-id="Vertex_DetailedLogLevel"/>
+                <attribute attribute-id="Vertex_RemoteRequestToken"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <type-extension type-id="Basket">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="vertex_taxation_details">
+                <display-name xml:lang="x-default">Vertex Taxation Details</display-name>
+                <description xml:lang="x-default">Taxation details for each item in the cart.</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="VertexInc">
+                <display-name xml:lang="x-default">VertexInc</display-name>
+                <attribute attribute-id="vertex_taxation_details"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+	<type-extension type-id="CustomerAddress">
+		<custom-attribute-definitions>
+			<attribute-definition attribute-id="taxnumber">
+                <display-name xml:lang="x-default">Tax Registration Number</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+		<group-definitions>
+            <attribute-group group-id="Standard">
+                <attribute attribute-id="taxnumber"/>
+            </attribute-group>
+        </group-definitions>
+	</type-extension>
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="vertex_taxation_details">
+                <display-name xml:lang="x-default">Taxation Details</display-name>
+                <description xml:lang="x-default">Taxation details for each item in the cart.</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="VertexInc">
+                <display-name xml:lang="x-default">VertexInc</display-name>
+                <attribute attribute-id="vertex_taxation_details"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+	<type-extension type-id="OrderAddress">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="taxnumber">
+                <display-name xml:lang="x-default">Tax Registration Number</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Standard">
+                <display-name xml:lang="x-default">Standard Address</display-name>
+                <attribute attribute-id="taxnumber"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

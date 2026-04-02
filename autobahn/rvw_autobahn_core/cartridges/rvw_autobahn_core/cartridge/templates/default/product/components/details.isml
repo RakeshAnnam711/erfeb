@@ -1,0 +1,5 @@
+<isif condition="${product.collapsibleContentTwo}">
+    <div class="value content" id="collapsible-details-${loopState && loopState.count ? loopState.count : '1'}">
+        <isprint value="${product.collapsibleContentTwo}" encoding="off" />
+    </div>
+</isif>

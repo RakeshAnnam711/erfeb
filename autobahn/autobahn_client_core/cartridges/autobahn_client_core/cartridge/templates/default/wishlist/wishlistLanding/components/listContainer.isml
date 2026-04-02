@@ -1,0 +1,45 @@
+<isset name="isListsVisible" value="${pdict.lists.length > 0}" scope="page"/>
+
+<div class="container list-container">
+                
+    <!---Breadcrumbs--->
+    <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+    <div class="lists row${!isListsVisible ? ' d-none' : ''}" data-list-names="${pdict.listNames}">
+        <isloop items="${pdict.lists}" end="${pdict.landingPageSize - 1}" var="productList" status="loopSate">
+            <div class="wishlist-grid-item col-sm-6 col-md-4">
+                <isinclude template="wishlist/wishlistLanding/components/cardList"/>
+            </div>
+        </isloop>
+    </div>
+
+    <iscomment> More button </iscomment>
+    <isif condition="${pdict.lists.length > pdict.landingPageSize}">
+        <div class="show-more-wishlists">
+            <div class="text-center">
+                <button class="btn btn-secondary col-12 col-sm-4 more"
+                        data-url="${pdict.urls.showMoreLanding}"
+                >
+                    ${Resource.msg('button.more', 'search', null)}
+                </button>
+            </div>
+        </div>
+    </isif>
+
+    <div class="wishlist-message-empty row${isListsVisible ? ' d-none' : ''}">
+        <div class="col-12">
+            <p>
+                ${Resource.msg('text.landing.nolistscreated', 'wishlist', null)}
+            </p>
+        </div>
+    </div>
+    <isif condition="${!customer.authenticated}">
+        <div class="wishlist-landing-message message row no-gutters">
+            <p>
+                <a class="wishlist-landing-login" href="${URLUtils.https('Login-Show')}" aria-label="${Resource.msg('link.header.login', 'account', null)}">${Resource.msg('link.header.login', 'account', null)}</a>
+                ${Resource.msg('text.landing.login1', 'wishlist', null)}
+                <a class="wishlist-landing-create-account" href="${URLUtils.https('Login-Show', 'action', 'register')}" aria-label="${Resource.msg('link.header.create', 'account', null)}">${Resource.msg('link.header.create', 'account', null)}</a>
+                ${Resource.msg('text.landing.login2', 'wishlist', null)}
+            </p>
+        </div>
+    </isif>
+</div>

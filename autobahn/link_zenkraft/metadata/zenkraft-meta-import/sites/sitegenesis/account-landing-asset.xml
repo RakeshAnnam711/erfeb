@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31">
+  <content content-id="account-landing">
+    <display-name xml:lang="x-default">Account Landing Page</display-name>
+    <description xml:lang="x-default">Account Landing Page Content, content located in accountoverview.isml.</description>
+    <online-flag>true</online-flag>
+    <searchable-flag>false</searchable-flag>
+    <page-attributes>
+      <page-title xml:lang="x-default">My SiteGenesis Account</page-title>
+      <page-description xml:lang="x-default">Salesforce Commerce Cloud Reference Application Account Landing Page</page-description>
+      <page-keywords xml:lang="x-default">account, shop</page-keywords>
+    </page-attributes>
+    <custom-attributes>
+      <custom-attribute attribute-id="body" xml:lang="x-default">&lt;ul class=&quot;account-options&quot;&gt;
+        &lt;li&gt;
+        &lt;a title=&quot;Show or update your personal information&quot; href=&quot;$httpsUrl(Account-EditProfile)$&quot;&gt;
+        &lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt;
+        &lt;h2&gt;Personal Data&lt;/h2&gt;
+        &lt;p&gt;Show or update your personal information&lt;/p&gt;
+        &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;a title=&quot;Check the status of your orders or see past orders&quot; href=&quot;$httpsUrl(Order-History)$&quot;&gt;
+        &lt;i class=&quot;fa fa-cube&quot;&gt;&lt;/i&gt;
+        &lt;h2&gt;Orders&lt;/h2&gt;
+        &lt;p&gt;Check the status of your orders or see past orders&lt;/p&gt;
+        &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;a title=&quot;Check the status of your returns or see past returns&quot; href=&quot;$httpsUrl(Zenkraft-ShowReturns)$&quot;&gt;
+        &lt;i class=&quot;fa fa-caret-square-o-left&quot;&gt;&lt;/i&gt;
+        &lt;h2&gt;Returns&lt;/h2&gt;
+        &lt;p&gt;Check the status of your returns or see past returns&lt;/p&gt;
+        &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;a title=&quot;Manage your billing and shipping addresses&quot; href=&quot;$httpsUrl(Address-List)$&quot;&gt;
+        &lt;i class=&quot;fa fa-home&quot;&gt;&lt;/i&gt;
+        &lt;h2&gt;Addresses&lt;/h2&gt;
+        &lt;p&gt;Manage your billing and shipping addresses&lt;/p&gt;
+        &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;a title=&quot;View and modify items on your list or invite friends&quot; href=&quot;$httpsUrl(Wishlist-Show)$&quot;&gt;
+        &lt;i class=&quot;fa fa-bookmark&quot;&gt;&lt;/i&gt;
+        &lt;h2&gt;Wish List&lt;/h2&gt;
+        &lt;p&gt;View and modify items on your list or invite friends&lt;/p&gt;
+        &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;a title=&quot;Manage credit cards&quot; href=&quot;$httpsUrl(PaymentInstruments-List)$&quot;&gt;
+        &lt;i class=&quot;fa fa-money&quot;&gt;&lt;/i&gt;
+        &lt;h2&gt;Payment Settings&lt;/h2&gt;
+        &lt;p&gt;Manage credit cards&lt;/p&gt;
+        &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;a title=&quot;View and modify your gift registries&quot; href=&quot;$httpsUrl(GiftRegistry-Start)$&quot;&gt;
+        &lt;i class=&quot;fa fa-archive&quot;&gt;&lt;/i&gt;
+        &lt;h2&gt;Gift Registries&lt;/h2&gt;
+        &lt;p&gt;View and modify your gift registries&lt;/p&gt;
+        &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;/ul&gt;</custom-attribute>
+      </custom-attributes>
+    </content>
+  </library>

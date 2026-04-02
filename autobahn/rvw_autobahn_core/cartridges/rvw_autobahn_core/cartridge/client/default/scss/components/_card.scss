@@ -1,0 +1,250 @@
+.card {
+    border: 1px solid $card-body-border-color;
+    border-radius: $card-border-radius;
+    margin-bottom: $card-margin-bottom;
+    font-size: $card-body-font-size;
+    letter-spacing: $card-body-letter-spacing;
+    line-height: $card-body-line-height;
+    background-color: transparent;
+    .card-header {
+        background-color: $card-header-background;
+        color: $card-header-color;
+        border-bottom: none;
+        padding: 0;
+        flex-basis: auto; // IE11 fix
+        // links, etc. in the top right corner of card header
+        .pull-right {
+            color: $card-header-color;
+            font-size: $card-body-font-size;
+            letter-spacing: $card-body-letter-spacing;
+            line-height: $card-body-line-height;
+            padding-top: $card-header-padding-top;
+            padding-right: $card-header-padding-right;
+        }
+    }
+
+    // SFRA markup is all over the place for card headers, so this attempts to account for those variations
+    .card-title,
+    .card-header h2,
+    .card-header h3,
+    .card-header h4,
+    .card-header .checkout-card-header,
+    h2.card-header {
+        text-decoration: none;
+        position: relative;
+        margin-bottom: 0;
+        padding-top: $card-header-padding-top;
+        padding-left: $card-header-padding-left;
+        padding-right: $card-header-padding-right;
+        padding-bottom: $card-header-padding-bottom;
+    }
+
+    &:not(.aside) {
+        // Using :not() here to allow for overriding card titles from Page Designer
+        .card-title:not([class*='p--']):not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6):not(.b1):not(.b2):not(.b3):not(.b4):not(.custom),
+        .card-header h2,
+        .card-header h3,
+        .card-header h4,
+        .card-header .checkout-card-header,
+        h2.card-header {
+            font-family: $card-header-font-family;
+            font-size: $card-header-font-size;
+            font-weight: $card-header-font-weight;
+            letter-spacing: $card-header-letter-spacing;
+            line-height: $card-header-line-height;
+            text-transform: $card-header-text-transform;
+        }
+    }
+
+    .card-body {
+        background-color: $card-body-background;
+        color: $card-body-color;
+        padding: $card-no-header-body-padding-top;
+    }
+
+    .card-header ~ .card-body {
+        padding: $card-body-padding-top $card-body-padding-right $card-body-padding-bottom $card-body-padding-left;
+    }
+
+    .card-footer {
+        background-color: $card-footer-background;
+        color: $card-footer-color;
+        padding: $card-footer-padding;
+        a {
+            color: $card-footer-color;
+        }
+    }
+
+    .card-header,
+    .card-body,
+    .card-footer {
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-radius: 0;
+    }
+
+    &:first-child {
+        border-radius: calc(#{$card-border-radius} - 1px) calc(#{$card-border-radius} - 1px) 0 0;
+        .card-header {
+            border-top: 0;
+            border-radius: calc(#{$card-border-radius} - 1px) calc(#{$card-border-radius} - 1px) 0 0;
+        }
+    }
+    + .card {
+        border-top: 0;
+        border-radius: 0;
+        &:last-child {
+            border-radius: 0 0 calc(#{$card-border-radius} - 1px) calc(#{$card-border-radius} - 1px);
+        }
+    }
+    .card {
+        // when a card is in a card, overlap the borders
+        margin: -1px;
+    }
+    &:last-child {
+        border-top: 0;
+        border-radius: 0 0 calc(#{$card-border-radius} - 1px) calc(#{$card-border-radius} - 1px);
+        .card-header,
+        .card-body,
+        .card-footer {
+            &:last-child {
+                border-radius: 0 0 calc(#{$card-border-radius} - 1px) calc(#{$card-border-radius} - 1px);
+            }
+        }
+    }
+
+    &:only-child {
+        border-top: 1px solid $card-body-border-color;
+        border-bottom: 1px solid $card-body-border-color;
+        border-radius: calc(#{$card-border-radius} - 1px);
+        .card-header {
+            border-top: 0;
+        }
+        .card-header,
+        .card-body,
+        .card-footer {
+            &:only-child {
+                border-radius: calc(#{$card-border-radius} - 1px);
+            }
+        }
+    }
+
+    .accordion & {
+        margin-bottom: 0;
+        .card-header {
+            [type="button"] {
+                text-align: $accordion-header-text-align;
+                width: 100%;
+                @include icon($accordion-header-icon-close, after, $accordion-header-icon-size, $accordion-header-icon-color);
+
+                &.collapsed {
+                    @include icon($accordion-header-icon-expand, after, $accordion-header-icon-size, $accordion-header-icon-color);
+                }
+
+                &:after {
+                    position: absolute;
+                    top: $card-header-padding-top;
+                    right: $card-header-padding-right;
+                }
+            }
+
+            & .no-icon {
+                [type="button"] {
+                    &:after {
+                        content: '';
+                    }
+
+                    &.collapsed {
+                        &:after {
+                            content: '';
+                        }
+                    }
+                }
+            }
+        }
+        .card-header,
+        .card-body {
+            border-top: 1px solid $card-body-border-color;
+        }
+        .card-body {
+            // padding and margins at this level cause the collapse animations to be janky
+            padding: 0;
+            margin: 0;
+        }
+        &:first-child {
+            .card-header,
+            .card-body {
+                &:first-child {
+                    border-top: 0;
+                }
+            }
+        }
+        //sfra fix
+        &:only-child:last-of-type {
+            border-top: 1px solid $card-body-border-color;
+            border-bottom: 1px solid $card-body-border-color;
+            border-radius: calc(#{$card-border-radius} - 1px);
+        }
+    }
+
+    .accordion.no-icon & {
+        .card-header {
+            [type="button"] {
+                &:after {
+                    content: '';
+                }
+
+                &.collapsed {
+                    &:after {
+                        content: '';
+                    }
+                }
+            }
+        }
+    }
+
+    &.ghost {
+        opacity: $card-ghost-opacity;
+    }
+
+    &.aside {
+        border: 1px solid $card-aside-border-color;
+        border-width: $card-aside-border-width;
+        .card-header {
+            border: none;
+            .card-title {
+                font-size: $card-aside-header-font-size;
+                font-weight: $card-aside-header-font-weight;
+                line-height: $card-aside-header-line-height;
+                padding-top: $card-aside-header-padding-top;
+                padding-left: $card-aside-header-padding-left;
+                padding-right: $card-aside-header-padding-right;
+                padding-bottom: $card-aside-header-padding-bottom;
+            }
+        }
+
+        .card-body {
+            padding: $card-aside-body-padding;
+            border: $card-aside-body-border;
+            z-index: 1; //needs to be on top of .card-header for hover states to show
+        }
+
+        .card-footer {
+            border:  $card-aside-footer-border;
+        }
+    }
+
+    &.no-borders {
+        border: none;
+        .card-header,
+        .card-title,
+        .card-body,
+        .card-footer {
+            border: none;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}

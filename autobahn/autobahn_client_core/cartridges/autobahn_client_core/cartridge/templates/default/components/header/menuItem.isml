@@ -1,0 +1,21 @@
+<isset name="megamenuNavLayout" value="${dw.system.Site.current.preferences.custom.megamenuNavLayout.value || 'mega-standard'}" scope="page"/>
+<ul class="dropdown-menu menu-level-${menuLevel.toFixed()}" role="menu" aria-label="${category.id}">
+    <isif condition="${menuItem.showViewAllLink}">
+        <li class="dropdown-item view-all-link d-none d-lg-block" role="menuitem">
+            <a href="${menuItem.url}" id="view-all-${menuItem.id}" role="menuitem" class="dropdown-link" tabindex="-1">${Resource.msg('link.viewall', 'account', null)} ${menuItem.name}</a>
+        </li>
+    </isif>
+    <isloop items="${menuItem.subCategories}" var="category" status="subCatLoopStatus">
+        <isif condition="${category.subCategories}">
+            <li class="dropdown-item custom-dropdown" role="menuitem">
+                <a href="${category.url}" id="${category.id}" class="dropdown-link dropdown-toggle mega-left-title" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}">${category.name}</a>
+                <isset name="menuItem" value="${category}" scope="page" />
+                <isinclude template="components/header/menuItem" />
+            </li>
+        <iselse/>
+            <li class="dropdown-item" role="menuitem">
+                <a href="${category.url}" id="${category.id}" role="menuitem" class="dropdown-link" tabindex="-1" style="${category.navigationTextColor ? 'color:' + category.navigationTextColor + ';' : ''}">${category.name}</a>
+            </li>
+        </isif>
+    </isloop>
+</ul>

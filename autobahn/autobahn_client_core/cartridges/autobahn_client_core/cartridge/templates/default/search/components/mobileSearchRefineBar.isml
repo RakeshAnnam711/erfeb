@@ -1,0 +1,44 @@
+<isset name="collapseRefinementsMobile" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('plpCollapseRefinementsMobile') == true ? true : false}" scope="page"/>
+
+<div class="refinements" data-collapse-mobile="${collapseRefinementsMobile}" data-refinement-style-mobile="vertical">
+    <isloop items="${pdict.productSearch.refinements}" var="refinement">
+        <div class="card aside collapsible-xl refinement refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+            <div class="card-header col-sm-12">
+                <button class="card-title title btn text-left btn-block"
+                    aria-controls="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}"
+                    aria-expanded="false"
+                >
+                    <span>${refinement.displayName}</span>
+                </button>
+            </div>
+            <div class="card-body content value" id="refinement-group-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                <!--- CATEGORY REFINEMENTS --->
+                <isif condition="${refinement.isCategoryRefinement}">
+                    <isset name="categories" value="${refinement.values}" scope="page" />
+                    <isinclude template="search/refinements/categories" />
+                </isif>
+
+                <!--- ATTRIBUTE REFINEMENTS --->
+                <isif condition="${refinement.attributeID == 'plp_category_refinement' && refinement.isAttributeRefinement}">
+                    <isinclude template="search/refinements/customCategory" />
+                <iselseif condition="${refinement.isAttributeRefinement}" />
+                    <isinclude template="search/refinements/attributes" />
+                </isif>
+
+                <!--- PRICE REFINEMENTS --->
+                <isif condition="${refinement.isPriceRefinement}">
+                    <isinclude template="search/refinements/prices" />
+                </isif>
+            </div>
+        </div>
+    </isloop>
+     <!--- Filter Apply and Reset Button For Mobile --->
+     <div class="btn-container">
+     <div class="btn-wrapper">
+        <button class="text-link secondary-bar-links reset" data-href="${pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)}</button>
+     </div>
+     <div class="btn-wrapper apply-btn-wrapper">
+        <button class="filter-apply-btn" data-href="">${Resource.msg('label.apply', 'search', null)}</button>
+     </div>
+     </div>
+</div>

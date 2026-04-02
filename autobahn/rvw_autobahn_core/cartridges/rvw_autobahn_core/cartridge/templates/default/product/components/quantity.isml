@@ -1,0 +1,34 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+<label class="sr-only" for="quantity-${loopState && loopState.count ? loopState.count : '1' }">
+    ${Resource.msg('quantity.label','product',null)}
+</label>
+<select
+    class="${product.individualProducts && product.individualProducts.length ? 'product-set-' : ''}quantity-select custom-select form-control ${product.enableQuantityStepper ? 'd-none' : ''}"
+    id="quantity-${loopState && loopState.count ? loopState.count : '1' }"
+    name="quantity-select"
+    tabindex="0"
+    cypress-target="productQuantitySelect"
+    autocomplete="off"
+>
+    <isloop items="${product.quantities}" var="quantity">
+        <isif condition="${quantity.selected}">
+            <isset name="currentQuantity" value="${quantity.value}" scope="page"/>
+        </isif>
+        <option value="${quantity.value}"
+            <isif condition="${product.productType !== 'bundle'}">data-url="${quantity.url}"</isif>
+                ${quantity.selected ? 'selected' : ''}
+        >
+            ${quantity.value}
+        </option>
+    </isloop>
+</select>
+
+<isif condition="${product.enableQuantityStepper}">
+    <isquantitystepper
+        qty="${currentQuantity}"
+        min="${product.minOrderQuantity.toFixed()}"
+        max="${product.maxOrderQuantity.toFixed()}"
+        size="${'large'}"
+        cypresstarget="productQuantityStepper"
+    />
+</isif>

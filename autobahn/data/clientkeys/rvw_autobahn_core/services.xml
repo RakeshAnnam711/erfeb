@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="google.cred.recaptcha.api.siteverify">
+        <url>https://www.google.com/recaptcha/api/siteverify</url>
+        <user-id>6LfLo1EbAAAAAH-B5c8ReGvy0MsYm2l8-8Av0acq</user-id>
+        <password>6LfLo1EbAAAAABKm8rcqITUgqVK9DGD8prtMHC5Z</password>
+    </service-credential>
+</services>

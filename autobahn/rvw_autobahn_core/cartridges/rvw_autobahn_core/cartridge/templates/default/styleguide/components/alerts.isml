@@ -1,0 +1,94 @@
+<div id="alerts" class="sg__header3">Alerts  <a
+    role="button"
+    tabindex="0"
+    class="icon-search tooltip-icon"
+    data-toggle="popover"
+    data-placement="bottom"
+    title="Find it in the Storefront"
+    data-content="
+        <ul>
+            <li>Adding a product to cart <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Search-Show', 'cgid', 'mens')}' target='_blank' rel='noopener'></a></li>
+        </ul>
+    "></a></div>
+<p>Alerts can be displayed either <strong>inline</strong> or in <strong>toast messages</strong> that appear at the top of the screen.</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-success" role="alert">Success Alert</div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="alert alert-success" role="alert">Success Alert</div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-warning" role="alert">Warning Alert with a <a href="">link</a>.</div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="alert alert-warning" role="alert">Warning Alert with a <a href="">link</a>.</div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-danger" role="alert">Danger Alert with <strong>strong wording</strong>.</div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="alert alert-danger" role="alert">Danger Alert with <strong>strong wording</strong>.</div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-info alert-dismissible" role="alert">Info Alert with a close button.<button type="button" class="btn close icon-close" data-dismiss="alert" aria-label="Close"></button></div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="alert alert-info alert-dismissible" role="alert">Info Alert with a close button.<button type="button" class="btn close icon-close" data-dismiss="alert" aria-label="Close"></button></div></script></code></pre>
+    </div>
+</div>
+<p>Toast message alerts can be displayed using either <strong>JavaScript</strong> or <strong>data attributes</strong>. They will disappear automatically after five seconds unless they're set to be dismissible.</p>
+<p>To show a toast message using <strong>JavaScript</strong>, call the <span class="pre">show</span> method in the toast.js file and pass the <span class="pre">type</span>, <span class="pre">message</span>, and <span class="pre">dismissible</span> parameters.</p>
+<div class="row">
+    <div class="col-md-6">
+        <p><a href="" id="sgToastJsExample">Click here</a> to view the toast message from this example.</p>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><a href="" id="sgToastJsExample">Click here</a></script></code></pre>
+        <pre><code class='language-javascript'><script type="text/plain" class="language-javascript">var toastHelpers = require('./components/toast');
+$('#sgToastJsExample').click(function(event) {
+    event.preventDefault();
+    toastHelpers.methods.show('success', '<strong>Hooray!</strong> You did it!', false);
+});</script></code></pre>
+    </div>
+</div>
+<p>The buttons below are using <strong>data attributes</strong> to show toast messages. Note the use of the <span class="pre">data-dismissible</span> attribute which, if set to true, prevents the message from disappearing and adds a close icon.<p>
+<p>Click the buttons to trigger the toast messages.</p>
+<div class="row">
+    <div class="col-md-6 text-center">
+        <button data-toast="success" data-content="You successfully clicked that button!" class="btn btn-custom background--success border--success text--white">Success</button>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button data-toast="success" data-content="You successfully clicked that button!" class="btn btn-custom background--success border--success text--white">Success</button></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 text-center">
+        <button data-toast="warning" data-content="Consider yourself warned." class="btn btn-custom background--warning border--warning text--black">Warning</button>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button data-toast="warning" data-content="Consider yourself warned." class="btn btn-custom background--warning border--warning text--black">Warning</button></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 text-center">
+        <button data-toast="danger" data-dismissible="true" data-content="Be sure to read this message in its entirety before closing it." class="btn btn-custom background--danger border--danger text--white">Danger (dismissible)</button>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button data-toast="danger" data-dismissible="true" data-content="Be sure to read this message in its entirety before closing it." class="btn btn-custom background--danger border--danger text--white">Danger (dismissible)</button></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 text-center">
+        <button data-toast="info" data-content="You can get a rough estimate of the temperature by counting the number of times a cricket chirps in 15 seconds, then adding 37." class="btn btn-custom background--info border--info text--white">Info</button>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button data-toast="info" data-content="You can get a rough estimate of the temperature by counting the number of times a cricket chirps in 15 seconds, then adding 37." class="btn btn-custom background--info border--info text--white">Info</button></script></code></pre>
+    </div>
+</div>

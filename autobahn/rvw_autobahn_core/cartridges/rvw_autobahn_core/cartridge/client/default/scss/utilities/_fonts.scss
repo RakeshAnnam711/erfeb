@@ -1,0 +1,25 @@
+// Google fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap');
+
+// Locally stored fonts (must be placed in static/fonts folder)
+$local-fonts: (
+    barlow-black,
+    barlow-bold,
+    nexa_light,
+    nexa_bold
+);
+
+@mixin font-face($font) {
+    @font-face {
+        font-family: $font;
+        font-style: normal;
+        font-weight: normal;
+        src: url("../fonts/#{$font}.eot"),
+        url("../fonts/#{$font}.eot?#iefix") format("embedded-opentype"), url("../fonts/#{$font}.woff") format("woff"),
+        url("../fonts/#{$font}.ttf") format("truetype"), url("../fonts/#{$font}.svg##{$font}") format("svg");
+    }
+}
+
+@each $font in $local-fonts {
+	@include font-face($font);
+}

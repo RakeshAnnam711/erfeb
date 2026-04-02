@@ -1,0 +1,42 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/checkout.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_integrations_core
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+    <iscomment>Secure Acceptance Error Display </iscomment>
+    <isif condition="${pdict.CurrentHttpParameterMap.SecureAcceptanceError != null && (pdict.CurrentHttpParameterMap.SecureAcceptanceError.stringValue == '476')}">
+        <div class="alert alert-danger PlaceOrderError">${Resource.msg('error.payment.not.valid', 'checkout', null)}</div>
+    <iselseif condition="${pdict.CurrentHttpParameterMap.SecureAcceptanceError != null && !empty(pdict.CurrentHttpParameterMap.SecureAcceptanceError.stringValue)}">
+        <div class="alert alert-danger PlaceOrderError">${Resource.msg('error.technical','checkout',null)}</div>
+    <iselseif condition="${pdict.PlaceOrderError != null}">
+        <div class="alert alert-danger PlaceOrderError">${Resource.msg(pdict.PlaceOrderError.code,'checkout',null)}</div>
+    </isif>
+
+    <iscomment>Place Order Error Display </iscomment>
+    <isif condition="${'PlaceOrderError' in pdict.CurrentHttpParameterMap && pdict.CurrentHttpParameterMap.PlaceOrderError.stringValue !== null}">
+        <div class="alert alert-danger PlaceOrderError">
+            <isprint value="${pdict.CurrentHttpParameterMap.PlaceOrderError}" />
+        </div>
+    </isif>
+
+    <iscomment>Payer Auth Error Display </iscomment>
+    <isif condition="${'payerAuthError' in pdict.CurrentHttpParameterMap && pdict.CurrentHttpParameterMap.payerAuthError.stringValue !== null}">
+        <div class="alert alert-danger payerAuth">
+            <isprint value="${pdict.CurrentHttpParameterMap.payerAuthError}" />
+        </div>
+    </isif>
+
+    <iscomment>Order Error Display </iscomment>
+    <isif condition="${'placeOrderError' in pdict.CurrentHttpParameterMap && pdict.CurrentHttpParameterMap.placeOrderError.stringValue !== null}">
+        <div class="alert alert-danger payerAuth">
+            <isprint value="${pdict.CurrentHttpParameterMap.placeOrderError}" />
+        </div>
+    </isif>
+</isif>

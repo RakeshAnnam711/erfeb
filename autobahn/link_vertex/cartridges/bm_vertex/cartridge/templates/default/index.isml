@@ -1,0 +1,474 @@
+<!--- TEMPLATENAME: index.isml --->
+
+<isdecorate template="application/MenuFrame">
+    <iscontent type="text/html" charset="UTF-8" />
+    <isinclude template="inc/Modules"/>
+    <isset name="instanceType" value="${require('dw/system/System').instanceType === 2 ? 'live' : 'test'}" scope="page"/>
+    <isset name="prefs"  value="${URLUtils.url('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'site-prefs')}" scope="PAGE" />
+    <ISBreadcrumb name1="Site Preferences" url1="${prefs}" name2="VertexInc" />
+	<link rel="stylesheet" href="${URLUtils.staticURL('/css/style.css')}" />
+    <script src="${URLUtils.staticURL('/js/handler.js')}"></script>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+        <tr>
+            <td class="table_title aldi" width="83%" nowrap="nowrap">
+                ${Resource.msg('service.title', 'vertex', null)}
+                <a href="javascript:;" onclick="openOnlineHelpPopup('https://www.vertexinc.com/')" class="onlinehelp"></a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="table_title_description n"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <isif condition="${!empty(pdict.healthCheckResult)}">
+    	<isif condition="${request.httpParameterMap.job == 'lookupService'}">
+		    <isif condition="${pdict.healthCheckResult.areaResponse && pdict.healthCheckResult.areaResponse.status}">
+		        <div class="success-bar">
+		            <isprint value="${Resource.msg('service.taxArea.healthcheck.ok', 'vertex', null)} "/>
+		        </div>
+		    <iselse>
+		    	<div class="error-bar">
+			    <isif condition="${pdict.healthCheckResult.areaResponse.error.indexOf('User login failed') != -1}" >
+			    	<isprint value="${Resource.msg('service.taxArea.healthcheck.loginerror', 'vertex', null)}" />
+	            <iselseif condition="${pdict.healthCheckResult.areaResponse.error.indexOf('(404)Not Found') != -1}" >
+	                <isprint value="${Resource.msg('service.taxArea.healthcheck.error404', 'vertex', null)}" />
+	            <iselseif condition="${pdict.healthCheckResult.areaResponse.error.indexOf('CalcEnvelopeData') != -1}" >
+	                <isprint value="${Resource.msg('service.taxArea.healthcheck.CalcEnvelopeData', 'vertex', null)}" />
+			    <iselse>
+		            <isprint value="${pdict.healthCheckResult.areaResponse.error}" />
+	            </isif>
+		        </div>
+		    </isif>
+		 </isif>
+		 <isif condition="${request.httpParameterMap.job == 'taxService'}">
+		    <isif condition="${pdict.healthCheckResult.taxResponse && pdict.healthCheckResult.taxResponse.status}">
+		        <div class="success-bar">
+		            <isprint value="${Resource.msg('service.taxCalculate.healthcheck.ok', 'vertex', null)} "/>
+		        </div>
+		    <iselse>
+		    	<div class="error-bar">
+		    	<isif condition="${pdict.healthCheckResult.taxResponse.error.indexOf('User login failed') != -1}" >
+	            	<isprint value="${Resource.msg('service.taxCalculate.healthcheck.loginerror', 'vertex', null)}" />
+	            	<iselseif condition="${pdict.healthCheckResult.taxResponse.error.indexOf('(404)Not Found') != -1}">
+		            <isprint value="${Resource.msg('service.taxCalculate.healthcheck.error404', 'vertex', null)}" />
+	                <iselseif condition="${pdict.healthCheckResult.taxResponse.error.indexOf('TaxAreaSpecificEnvelopeData') != -1}" >
+	                <isprint value="${Resource.msg('service.taxCalculate.healthcheck.CalcEnvelopeData', 'vertex', null)}" />
+	                <iselse>
+	                <isprint value="${pdict.healthCheckResult.taxResponse.error}" />
+	            </isif>
+		        </div>
+		    </isif>
+		</isif>
+    </isif>
+
+    <isif condition="${!empty(request.httpParameterMap.error.stringValue)}">
+        <div class="error-bar">
+            <isprint value="${request.httpParameterMap.error.stringValue} " />
+        </div>
+    </isif>
+
+    <form action="${pdict.configurationContinueUrl}" id="form" name="configuration" method="post">
+        <table border="0" cellspacing="0" cellpadding="5" class="form">
+            <tr>
+                 <td class="l">
+                    <p class="subheader">
+                    	<isprint value="${Resource.msg('form.titles.connectivity', 'vertex', null)} "/>
+                        <div class="note">${Resource.msg('service.note', 'vertex', null)}</div>
+                    </p>
+                </td>
+                <td class="r" nowrap="nowrap">
+                    <h1><isprint value="${Resource.msg('form.titles.connect', 'vertex', null)}"/></h1>
+                      <p class="hint">
+                     	${Resource.msg('service.linkto', 'vertex', null)}<a href="${pdict.form.Vertex_DashboardURL}" target="_blank" rel="noopener"><isprint value="${Resource.msg('Vertex Dashboard', 'vertex', null)} "/></a>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="l">
+                    <a class="button" href="${pdict.healthCheckUrl + '?job=lookupService'}"><isprint value="${Resource.msg('form.buttons.healthcheckLookup', 'vertex', null)} "/></a>
+                </td>
+                <td class="r">
+                    <label class="label" for="Vertex_isEnabled"><isprint value="${Resource.msg('form.labels.enableVertex', 'vertex', null)}"/></label>
+                    <input
+                            type="checkbox"
+                            id="Vertex_isEnabled"
+                            name="Vertex_isEnabled"
+                            value="pdict.form.Vertex_isEnabled"
+                            ${pdict.form.Vertex_isEnabled ? "checked" : ''}
+                            class="inputfield_en" / >
+                    <p class="hint">${Resource.msg('form.labels.enableVertex.hint', 'vertex', null)}</p>
+                </td>
+             </tr>
+             <tr>
+             	<td class="l">
+             		<a class="button" href="${pdict.healthCheckUrl + '?job=taxService'}"><isprint value="${Resource.msg('form.buttons.healthcheckTax', 'vertex', null)} "/></a>
+             	</td>
+                <td class="r">
+                    <label class="label" for="Vertex_isInvoiceEnabled"><isprint value="${Resource.msg('form.labels.enableInvoiceRequest', 'vertex', null)}"/></label>
+                    <input
+                            type="checkbox"
+                            id="Vertex_isInvoiceEnabled"
+                            name="Vertex_isInvoiceEnabled"
+                            value="${pdict.form.Vertex_isInvoiceEnabled}"
+                            ${pdict.form.Vertex_isInvoiceEnabled ? "checked" : ''}
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.enableInvoiceRequest.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+             	<td class="l"></td>
+                <td class="r">
+                    <label class="label" for="Vertex_isVATEnabled"><isprint value="${Resource.msg('form.labels.enableVAT', 'vertex', null)}"/></label>
+                    <input
+                            type="checkbox"
+                            id="Vertex_isVATEnabled"
+                            name="Vertex_isVATEnabled"
+                            value="${pdict.form.Vertex_isVATEnabled}"
+                            ${pdict.form.Vertex_isVATEnabled ? "checked" : ''}
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.enableVAT.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+             	<td class="l"></td>
+                <td class="r">
+                    <label class="label" for="Vertex_DeliveryTerms"><isprint value="${Resource.msg('form.labels.deliveryterms', 'vertex', null)}"/></label>
+                    <isif condition="${pdict.form.Vertex_DeliveryTerms.value}">
+                    	<span>${pdict.form.Vertex_DeliveryTerms}</span>
+                   	<iselse>
+                   		<span>${Resource.msg('form.labels.deliveryterms.notprovided', 'vertex', null)}</span>
+                    </isif>
+                    <p class="hint">${Resource.msg('form.labels.deliveryterms.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+            	<td class="l"></td>
+            	<td class="r">
+                        <label class="label" for="Vertex_isAddressCleansingEnabled"><isprint value="${Resource.msg('form.labels.enableAddressCleansing', 'vertex', null)}"/></label>
+                    <input
+                            type="checkbox"
+                            id="Vertex_isAddressCleansingEnabled"
+                            name="Vertex_isAddressCleansingEnabled"
+                            value="${pdict.form.Vertex_isAddressCleansingEnabled}"
+                            ${pdict.form.Vertex_isAddressCleansingEnabled ? "checked" : ''}
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.enableAddressCleansing.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+             <tr>
+               <td class="l"></td>
+                <td class="r">
+                    <label class="label" for="Vertex_ProductClassDepth"><isprint value="${Resource.msg('form.labels.categoryDepth', 'vertex', null)}"/></label>
+                    <input
+                            type="checkbox"
+                            id="Vertex_ProductClassDepth"
+                            name="Vertex_ProductClassDepth"
+                            value="pdict.form.Vertex_ProductClassDepth"
+                            ${pdict.form.Vertex_ProductClassDepth ? "checked" : ''}
+                            class="inputfield_en" / >
+                    <p class="hint">${Resource.msg('form.labels.categoryDepth.hint', 'vertex', null)}</p>
+                </td>
+             </tr>
+            <tr class="required1">
+                <td class="r" colspan="2">
+                   	 <div style="margin-top:15px;">
+                     <label class="label" for="Vertex_EndpointLookup"><isprint value="${Resource.msg('form.labels.apiEndpointLookup', 'vertex', null)} "/><sup class="required">*</sup></label>
+                    <input
+                            type="text"
+                            id="Vertex_EndpointLookup"
+                            name="Vertex_EndpointLookup"
+                            value="${pdict.form.Vertex_EndpointLookup || ''}"
+                            required
+                            size="50"
+                            placeholder="Example: https://calccsconnect.vertexsmb.com/vertex-ws/services/LookupTaxAreas70"
+                            class="inputfield_en" />
+                   </div>
+                    </td>
+            </tr>
+                        <tr class="required1">
+                <td class="r" colspan="2">
+                		<div style="margin-top:15px;">
+	                    <label class="label" for="Vertex_EndpointTax"><isprint value="${Resource.msg('form.labels.apiEndpointTax', 'vertex', null)} "/><sup class="required">*</sup></label>
+                    <input
+                            type="text"
+                            id="Vertex_EndpointTax"
+                            name="Vertex_EndpointTax"
+                            value="${pdict.form.Vertex_EndpointTax || ''}"
+                            required
+                            size="50"
+                            placeholder="https://calccsconnect.vertexsmb.com/vertex-ws/services/CalculateTax70"
+                            class="inputfield_en" />
+                	</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="r" style="background: #ffd8d3;" colspan="2">
+                    <div class="divider" style="background: #ffd8d3;"><isprint value="${Resource.msg('form.labels.credentials', 'vertex', null)} "/></div>
+                    <hr />
+                    <div>
+                        <label class="label" for="Vertex_TrustedId"><isprint value="${Resource.msg('form.labels.trustedID', 'vertex', null)} "/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_TrustedId"
+                            name="Vertex_TrustedId"
+                            value="${pdict.form.Vertex_TrustedId || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                </td>
+            </tr>
+            <tr>
+                <td class="r" style="background: #ffd8d3" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_UserName"><isprint value="${Resource.msg('form.labels.username', 'vertex', null)} "/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_UserName"
+                            name="Vertex_UserName"
+                            value="${pdict.form.Vertex_UserName || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                </td>
+            </tr>
+            <tr>
+                <td class="r" style="background: #ffd8d3" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_Password"><isprint value="${Resource.msg('form.labels.password', 'vertex', null)} "/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_Password"
+                            name="Vertex_Password"
+                            value="${pdict.form.Vertex_Password || ''}"
+                            size="50"
+                            placeholder="*******"
+                            class="inputfield_en" />
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                <div class="divider"><isprint value="${Resource.msg('form.labels.origin', 'vertex', null)} "/></div>
+                <hr />
+                    <div>
+                        <label class="label" for="Vertex_City"><isprint value="${Resource.msg('form.labels.city', 'vertex', null)} "/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_City"
+                            name="Vertex_City"
+                            value="${pdict.form.Vertex_City || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_Address"><isprint value="${Resource.msg('form.labels.address', 'vertex', null)} "/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_Address"
+                            name="Vertex_Address"
+                            value="${pdict.form.Vertex_Address || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_MainDivision"><isprint value="${Resource.msg('form.labels.mainDivision', 'vertex', null)}"/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_MainDivision"
+                            name="Vertex_MainDivision"
+                            value="${pdict.form.Vertex_MainDivision || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.mainDivision.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_Country"><isprint value="${Resource.msg('form.labels.country', 'vertex', null)}"/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_Country"
+                            name="Vertex_Country"
+                            value="${pdict.form.Vertex_Country || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.country.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_PostalCode"><isprint value="${Resource.msg('form.labels.postal', 'vertex', null)}"/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_PostalCode"
+                            name="Vertex_PostalCode"
+                            value="${pdict.form.Vertex_PostalCode || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.postal.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_Company">
+                        	<isprint value="${Resource.msg('form.labels.company', 'vertex', null)} "/>
+                        	<sup class="required">*</sup>
+                       	</label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_Company"
+                            name="Vertex_Company"
+                            value="${pdict.form.Vertex_Company || ''}"
+                            required
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                <div class="divider"><isprint value="${Resource.msg('form.labels.administrative', 'vertex', null)} "/></div>
+                <hr />
+                    <div>
+                        <label class="label" for="Vertex_City_Admin"><isprint value="${Resource.msg('form.labels.city', 'vertex', null)} "/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_City_Admin"
+                            name="Vertex_City_Admin"
+                            value="${pdict.form.Vertex_City_Admin || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_Address_Admin"><isprint value="${Resource.msg('form.labels.address', 'vertex', null)} "/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_Address_Admin"
+                            name="Vertex_Address_Admin"
+                            value="${pdict.form.Vertex_Address_Admin || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_MainDivision_Admin"><isprint value="${Resource.msg('form.labels.mainDivision', 'vertex', null)}"/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_MainDivision_Admin"
+                            name="Vertex_MainDivision_Admin"
+                            value="${pdict.form.Vertex_MainDivision_Admin || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.mainDivision.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_Country_Admin"><isprint value="${Resource.msg('form.labels.country', 'vertex', null)}"/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_Country_Admin"
+                            name="Vertex_Country_Admin"
+                            value="${pdict.form.Vertex_Country_Admin || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.country.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_PostalCode_Admin"><isprint value="${Resource.msg('form.labels.postal', 'vertex', null)}"/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_PostalCode_Admin"
+                            name="Vertex_PostalCode_Admin"
+                            value="${pdict.form.Vertex_PostalCode_Admin || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.postal.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="r" colspan="2">
+                    <div class="divider">${Resource.msg('form.labels.taxsettings', 'vertex', null)}</div>
+                    <hr>
+                    <div>
+                        <label class="label" for="Vertex_TaxRegistrationNumber"><isprint value="${Resource.msg('form.labels.tax_number', 'vertex', null)}"/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_TaxRegistrationNumber"
+                            name="Vertex_TaxRegistrationNumber"
+                            value="${pdict.form.Vertex_TaxRegistrationNumber || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.tax_number.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="r" colspan="2">
+                    <div>
+                        <label class="label" for="Vertex_ISOCountryCode"><isprint value="${Resource.msg('form.labels.iso_code', 'vertex', null)}"/></label>
+                    </div>
+                    <input
+                            type="text"
+                            id="Vertex_ISOCountryCode"
+                            name="Vertex_ISOCountryCode"
+                            value="${pdict.form.Vertex_ISOCountryCode || ''}"
+                            size="50"
+                            placeholder=""
+                            class="inputfield_en" />
+                    <p class="hint">${Resource.msg('form.labels.iso_code.hint', 'vertex', null)}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="r"  colspan="2" style="padding-bottom: 35px;">
+                    <button class="button" style="float:right" type="submit"><isprint value="${Resource.msg('form.buttons.save', 'vertex', null)} "/></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</isdecorate>

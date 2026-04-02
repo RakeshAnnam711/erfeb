@@ -1,0 +1,9 @@
+<iscomment>
+    Consent Tracking browserside include
+    Render script to inject ConsentTracking-Check drawer content (ASYNC) to remove serverside uncached impact
+</iscomment>
+<script>(async (url, el) => { (await window.fetch?.(url))?.text()?.then( html => el.insertAdjacentHTML('afterend', html) ) })('${URLUtils.url("ConsentTracking-Check")}', document.currentScript)</script>
+<iscomment>
+    Consent Tracking Serverside include (EXAMPLE)
+    <isinclude url="${URLUtils.url('ConsentTracking-Check')}"/>
+</iscomment>

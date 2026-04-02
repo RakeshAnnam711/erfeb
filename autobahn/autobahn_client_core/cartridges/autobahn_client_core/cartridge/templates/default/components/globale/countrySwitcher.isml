@@ -1,0 +1,26 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}" scope="page"/>
+<isif condition="${globaleSession.get('geEnabled')}">
+   <span class="btn"
+         role="button"
+         tabindex="0"
+         aria-haspopup="true"
+         aria-expanded="false"
+         aria-label="Selected shipping country: ${globaleSession.get('geCountryName')}"
+         id="ge-country-selector">
+       <i class="flag-icon flag-icon-${globaleSession.get('geCountry').toLowerCase()}"></i>
+   </span>
+</isif>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btn = document.getElementById('ge-country-selector');
+        if (!btn) return;
+        btn.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                btn.click();
+            }
+        });
+    });
+</script>

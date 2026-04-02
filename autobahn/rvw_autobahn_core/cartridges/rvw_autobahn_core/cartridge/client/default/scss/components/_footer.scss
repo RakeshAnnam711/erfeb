@@ -1,0 +1,198 @@
+footer {
+    background-color: $footer-background;
+    border-top: $footer-border-top-width solid $footer-border-top-color;
+    padding-bottom: $footer-padding-bottom;
+    padding-top: $footer-padding-top;
+    margin-top: $footer-margin-top;
+    ul {
+        list-style: none;
+        padding-left: 0;
+        padding-top: 12px;
+    }
+    .title,
+    .email-description {
+        position: relative;
+        color: $footer-title-font-color;
+        font-size: $footer-title-font-size;
+        line-height: $footer-title-line-height;
+        font-weight: $footer-title-font-weight;
+        font-family: $footer-title-font-family;
+        text-transform: $footer-title-text-transform;
+    }
+    .content {
+        font-size: $footer-link-font-size;
+        li {
+            height: $footer-link-height;
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+    .store {
+        // border-bottom: 1px solid $dark-gray;
+        .btn {
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        .content {
+            display: none;
+        }
+        @include media-breakpoint-up(md) {
+            border: none;
+            .btn {
+                margin-top: 5px;
+            }
+            .content {
+                display: block;
+            }
+        }
+        .social {
+            @include clearfix;
+        }
+    }
+    .back-to-top {
+        margin: 5px;
+        padding: 10px 0 0 0;
+        background-color: transparent;
+        border: 0;
+        -webkit-appearance: none;
+
+        .fa-stack {
+            width: $footer-icon-size;
+            height: $footer-icon-size;
+            line-height: $footer-icon-size;
+        }
+
+        .fa-arrow-up {
+            @include icon($icon-arrow-top, before, 20px, $white);
+            width: 100%;
+            height: 100%;
+        }
+
+        .fa-circle {
+            background-color: $footer-backtotop-color;
+            box-shadow: 0 2px 10px rgba($black, 0.2);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
+    .copyright,
+    .postscript {
+        color: $footer-copyright-color;
+        font-size: $footer-copyright-font-size;
+        mix-blend-mode: $footer-copyright-mix-blend-mode;
+        a {
+            color: $footer-copyright-color;
+            text-decoration: none;
+        }
+    }
+    hr {
+        border-color: $footer-hr-color;
+        margin: $footer-hr-margin;
+    }
+    a, .text-link {
+        color: $footer-link-color;
+        &:hover {
+            color: $footer-link-color-hover;
+        }
+    }
+}
+
+.footer-item {
+    &.collapsible-sm {
+        padding-left: 0;
+        padding-right: 0;
+        ~ .collapsible-sm {
+            margin-top: 0;
+        }
+        .content {
+            margin-bottom: 0;
+        }
+        .title {
+            border-bottom: 1px solid $footer-title-border-color;
+            padding: 20px 40px 20px 0;
+
+            &::after {
+                color: $footer-title-font-color;
+                font-size: $footer-title-font-size;
+                right: 0;
+            }
+        }
+        button {
+            text-align: left;
+            display: block;
+            width: 100%;
+            &:focus {
+                z-index: 1; // keep focus outline visible
+            }
+        }
+        @include media-breakpoint-up(md) {
+            .title {
+                border-bottom: 0;
+                padding: 0;
+            }
+            button {
+                cursor: text;
+            }
+        }
+    }
+    @include media-breakpoint-up(md) {
+        &.collapsible-sm {
+            border: none;
+            padding-left: $spacer;
+            padding-right: $spacer;
+
+            .content {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+.email-signup-form {
+    margin-top: 5px;
+
+    .email-success,
+    .email-description {
+        font-weight: bold;
+        font-size: $footer-signup-font-size;
+        line-height: $footer-signup-line-height;
+        letter-spacing: $footer-signup-letter-spacing;
+    }
+
+    .email-input {
+        input {
+            color: $footer-link-color;
+        }
+    }
+
+    .btn {
+        @include icon($icon-arrow-top, after, 16px, $brand-primary);
+        &::after {
+            transform: rotate(90deg);
+        }
+    }
+
+    .email-success,
+    .email-error {
+        display: none;
+    }
+
+    &.submit-success {
+        .email-success {
+            display: block;
+        }
+        .email-description,
+        .email-input {
+            display: none;
+        }
+    }
+
+    &.submit-error {
+        .email-error {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<ul>
+    <isloop items="${pdict.productSearch.selectedFilters}" var="refinement">
+            <li class="filter-value">
+                <button data-href="${refinement.url}" data-seo-href="${refinement.seoRefineUrl || refinement.url}" class="btn text-left">
+                    <span aria-hidden="true">${refinement.displayValue}</span>
+                    <span class="sr-only">
+                        ${Resource.msgf('assistive.text.remove.filter.button', 'search', null, refinement.title)}
+                    </span>
+                </button>
+            </li>
+    </isloop>
+</ul>

@@ -1,0 +1,65 @@
+<form method="post" class="GiftCertificateForm" action="${URLUtils.url((isEdit ? 'Cart-EditGiftCertificateLineItem' : 'GiftCertificate-AddToBasket'))}">
+    <div class='form-group required'>
+        <label class="form-control-label" for="from">
+            <isprint value="${pdict.giftCertificateForm.purchase.from.label}" encoding="htmlcontent" />
+        </label>
+        <input type="text" class="form-control" id="from" value="${pdict.giftCertificateForm.purchase.from.htmlValue}"
+        <isprint value="${pdict.giftCertificateForm.purchase.from.attributes}" encoding="off" />>
+        <div class="invalid-feedback"></div>
+    </div>
+    <div class='form-group required'>
+        <label class="form-control-label" for="recipient">
+            <isprint value="${pdict.giftCertificateForm.purchase.recipient.label}" encoding="htmlcontent" />
+        </label>
+        <input type="text" class="form-control" id="recipient" value="${pdict.giftCertificateForm.purchase.recipient.htmlValue}"
+            <isprint value="${pdict.giftCertificateForm.purchase.recipient.attributes}" encoding="off" />>
+        <div class="invalid-feedback"></div>
+    </div>
+    <div class='form-group required'>
+        <label class="form-control-label" for="recipientEmail">
+            <isprint value="${pdict.giftCertificateForm.purchase.recipientEmail.label}" encoding="htmlcontent" />
+        </label>
+        <input type="email" class="form-control" id="recipientEmail" value="${pdict.giftCertificateForm.purchase.recipientEmail.htmlValue}"
+            <isprint value="${pdict.giftCertificateForm.purchase.recipientEmail.attributesNoPattern}" encoding="off" />>
+        <div class="invalid-feedback"></div>
+    </div>
+    <div class='form-group required'>
+        <label class="form-control-label" for="confirmRecipientEmail">
+            <isprint value="${pdict.giftCertificateForm.purchase.confirmRecipientEmail.label}" encoding="htmlcontent" />
+        </label>
+        <input type="email" class="form-control" id="confirmRecipientEmail" value="${pdict.giftCertificateForm.purchase.recipientEmail.htmlValue}"
+            <isprint value="${pdict.giftCertificateForm.purchase.confirmRecipientEmail.attributesNoPattern}" encoding="off" />>
+        <div class="invalid-feedback"></div>
+    </div>
+    <div class='form-group'>
+        <label class="form-control-label" for="message">
+            <isprint value="${pdict.giftCertificateForm.purchase.message.label}" encoding="htmlcontent" />
+        </label>
+        <textarea class="form-control" id="message" rows="5" cols="50"
+            <isprint value="${pdict.giftCertificateForm.purchase.message.attributes}" encoding="off" >>${pdict.giftCertificateForm.purchase.message.htmlValue}</textarea>
+        <div class="invalid-feedback"></div>
+    </div>
+    <div class='form-group required'>
+        <label class="form-control-label" for="amount">
+            <isprint value="${pdict.giftCertificateForm.purchase.amount.label}" encoding="htmlcontent" />
+        </label>
+        <input type="number" class="form-control" id="amount" value="${pdict.giftCertificateForm.purchase.amount.htmlValue}"
+            <isprint value="${pdict.giftCertificateForm.purchase.amount.attributes}" encoding="off" />
+            min="${dw.system.Site.current.getCustomPreferenceValue('giftCertificateMin')}"
+            max="${dw.system.Site.current.getCustomPreferenceValue('giftCertificateMax')}"
+        >
+        <div class="invalid-feedback"></div>
+    </div>
+    <div class="form-group">
+        <isif condition="${pdict.maximumGiftCertificateReached}">
+            <div class="max-quantity-msg">
+                ${dw.util.StringUtils.format(Resource.msg('giftcertificate.max.quantity.error', 'checkout', null), pdict.maximumGiftCertificateQuantity)}
+            </div>
+        </isif>
+        <button data-uuid="" type="submit"
+            class="btn btn-block btn-primary ${isEdit ? 'btn-update-giftcertificate-incart' : 'btn-add-giftcertificate-tocart'} ${pdict.maximumGiftCertificateReached ? 'disabled' : ''}"
+            name="submit" value="submit">
+            ${Resource.msg('button.' + (isEdit ? 'update' : 'addtocart'), 'common', null)}
+        </button>
+    </div>
+</form>

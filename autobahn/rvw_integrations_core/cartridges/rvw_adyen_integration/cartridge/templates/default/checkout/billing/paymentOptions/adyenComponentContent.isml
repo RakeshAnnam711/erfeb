@@ -1,0 +1,13 @@
+<!--- Generic Component--->
+<iscomment>CUSTOM Autobahn change to fix hard coded url</iscomment>
+<div class="tab-pane active adyen-component-content <isif condition="${pdict.selectedPaymentMethod === 'AdyenComponent'}">active</isif>" id="adyen-component-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control"
+               name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+               value="AdyenComponent"
+        >
+        <fieldset class="">
+            <isinclude template="checkout/billing/adyenComponentForm" />
+        </fieldset>
+    </fieldset>
+</div>

@@ -1,0 +1,102 @@
+<!--- Subtotal --->
+<div class="row leading-lines subtotal-item">
+    <div class="col-6 start-lines">
+        <p class="order-receipt-label"><span>${Resource.msg('label.order.subtotal','confirmation', null)}</span></p>
+    </div>
+    <div class="col-6 end-lines">
+        <p class="text-right"><span class="sub-total">${pdict.order.totals.subTotal}</span></p>
+    </div>
+</div>
+
+<!--- Order Discount --->
+<div class="row leading-lines order-discount <isif condition="${pdict.order.totals.orderLevelDiscountTotal.value === 0}">hide-order-discount</isif>">
+    <div class="col-6 start-lines">
+        <p class="order-receipt-label"><span>${Resource.msg('label.order.discount', 'common', null)}</span></p>
+    </div>
+    <div class="col-6 end-lines">
+        <p class="text-right"><span class="order-discount-total">- ${pdict.order.totals.orderLevelDiscountTotal.formatted}</span></p>
+    </div>
+</div>
+
+<!--- Shipping Cost --->
+<div class="row leading-lines shipping-item">
+    <div class="col-6 start-lines">
+        <p class="order-receipt-label"><span>${Resource.msg('label.order.shipping.cost','confirmation', null)}</span></p>
+    </div>
+    <div class="col-6 end-lines">
+        <p class="text-right"><span class="shipping-total-cost">${pdict.order.totals.totalShippingCost}</span></p>
+    </div>
+</div>
+
+<!--- Shipping Discount --->
+<div class="row leading-lines shipping-discount <isif condition="${pdict.order.totals.shippingLevelDiscountTotal.value === 0}">hide-shipping-discount</isif>">
+    <div class="col-6 start-lines">
+        <p class="order-receipt-label"><span>${Resource.msg('label.shipping.discount', 'common', null)}</span></p>
+    </div>
+    <div class="col-6 end-lines">
+        <p class="text-right"><span class="shipping-discount-total">- ${pdict.order.totals.shippingLevelDiscountTotal.formatted}</span></p>
+    </div>
+</div>
+
+<!--- Sales Tax --->
+<isif condition="${('totalTax' in pdict.order.totals) && pdict.order.totals.totalTax !== null}">
+    <div class="row leading-lines sales-tax-item">
+        <div class="col-6 start-lines">
+            <p class="order-receipt-label"><span>${Resource.msg('label.order.sales.tax','confirmation', null)}</span></p>
+        </div>
+        <div class="col-6 end-lines">
+            <p class="text-right"><span class="tax-total">${pdict.order.totals.totalTax}</span></p>
+        </div>
+    </div>
+</isif>
+
+<!--- Total Duties --->
+<isif condition="${('totalDuties' in pdict.order.totals) && pdict.order.totals.totalDuties !== null}">
+    <div class="row leading-lines sales-tax-item">
+        <div class="col-6 start-lines">
+            <p class="order-receipt-label"><span>${Resource.msg('order.dutiesandtaxes.label', 'globale', null)}</span></p>
+        </div>
+        <div class="col-6 end-lines">
+            <p class="text-right"><span class="tax-total">${pdict.order.totals.totalDuties}</span></p>
+        </div>
+    </div>
+</isif>
+
+<!--- All Gift Cards --->
+<!--- Gift Cards --->
+<isif condition="${('giftCardsAmounts' in pdict.order.totals)}">
+    <isloop items="${pdict.order.totals.giftCardsAmounts}" var="giftCardAmount">
+        <div class="row leading-lines gift-card-item">
+            <div class="col-6 start-lines">
+                <p class="order-receipt-label"><span><isprint value="${Resource.msg('order.paymentMethod.giftCard', 'globale', null)}"/></span></p>
+            </div>
+            <div class="col-6 end-lines">
+                <p class="text-right"><span class="tax-total"><isprint value="${'- ' + giftCardAmount}"/></span></p>
+            </div>
+        </div>
+    </isloop>
+</isif>
+<!--- Loyalty Cards --->
+<isif condition="${('loyaltyCardsAmounts' in pdict.order.totals)}">
+    <isloop items="${pdict.order.totals.loyaltyCardsAmounts}" var="loyaltyCardAmount">
+        <div class="row leading-lines gift-card-item">
+            <div class="col-6 start-lines">
+                <p class="order-receipt-label"><span><isprint value="${Resource.msg('order.paymentMethod.loyaltyCard', 'globale', null)}"/></span></p>
+            </div>
+            <div class="col-6 end-lines">
+                <p class="text-right"><span class="tax-total"><isprint value="${'- ' + loyaltyCardAmount}"/></span></p>
+            </div>
+        </div>
+    </isloop>
+</isif>
+
+<!--- Grand Total --->
+<div class="row grand-total leading-lines">
+    <div class="col-6 start-lines">
+        <p class="order-receipt-label"><span>${Resource.msg('label.order.grand.total','confirmation', null)}</span></p>
+    </div>
+    <div class="col-6 end-lines">
+        <p class="text-right"><span class="grand-total-sum">${pdict.order.totals.grandTotal}</span></p>
+    </div>
+</div>
+

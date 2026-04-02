@@ -1,0 +1,34 @@
+<isdecorate template="common/layout/checkout">
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+    <div id="checkout-main" class="container data-checkout-stage">
+        <isif condition="${!pdict.checkoutData.success}">
+            <div class="alert alert-danger error-message" role="alert">
+                <p class="error-message-text">
+                    ${pdict.checkoutData.errorCode.toString()}: ${pdict.checkoutData.errorMessage}
+                </p>
+
+                <isif condition="${pdict.checkoutData.cartToken}">
+                    <p class="error-message-text">
+                        ${pdict.checkoutData.cartToken} <br/>
+                    </p>
+                </isif>
+
+                <isif condition="${pdict.checkoutData.sendCartData}">
+                    <p class="error-message-text">
+                        <code>
+                            ${JSON.stringify(pdict.checkoutData.sendCartData)}
+                        </code>
+                    </p>
+                </isif>
+            </div>
+        <iselse/>
+            <div id="gle_iframe"
+                data-cart-token="<isprint value="${pdict.checkoutData.cartToken}" encoding="htmldoublequote" />"
+                data-analytics-url="${URLUtils.https('Globale-Analytics').toString()}"
+                data-keepalive-url="${URLUtils.https('Globale-KeepAlive').toString()}"
+                data-registration-url="${URLUtils.https('Globale-CustomerRegistartion').toString()}"></div>
+        </isif>
+    </div>
+</isdecorate>

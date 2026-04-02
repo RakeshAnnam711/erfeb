@@ -1,0 +1,146 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<head>
+    <isif condition="${dw.system.Site.current.preferences.custom.grafanaScriptEnabled 
+        && dw.system.Site.current.preferences.custom.grafanaScript != ''}">
+        <isprint value="${dw.system.Site.current.preferences.custom.grafanaScript}" encoding="off"/>
+    </isif>
+
+    <isinclude template="/common/oneTrustScript" />
+
+    <iscomment>All uncached data can be injected here</iscomment>
+    <script>
+        window.UncachedData = <isinclude url="${URLUtils.url('Data-UncachedData')}" />;
+        window.CachedData = <isinclude url="${URLUtils.url('Data-CachedData')}" />;
+    </script>
+
+    <!--[if gt IE 9]><!-->
+        <isinclude sf-toolkit="off" template="/common/scripts" />
+    <!--<![endif]-->
+
+    <iscomment>
+    The file overwrittes app_storefront_base\cartridge\templates\default\common\htmlHead.isml
+    </iscomment>
+
+    <meta charset=UTF-8>
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <iscomment>Performance: Preload critical JavaScript files early to reduce execution time</iscomment>
+    <isif condition="${request.httpPath && request.httpPath.toString().indexOf('Search-Show') !== -1 || request.httpQueryString && (request.httpQueryString.indexOf('cgid=') !== -1 || request.httpQueryString.indexOf('q=') !== -1)}">
+        <link rel="preload" href="${URLUtils.staticURL('/js/PLP.js')}" async as="script" />
+    <iselse/>
+        <link rel="preload" href="${URLUtils.staticURL('/js/main.js')}" as="script" />
+    </isif>
+    <link rel="preload" href="${URLUtils.staticURL('/lib/lazysizes.min.js')}" as="script" />
+    <link rel="preload" href="${URLUtils.staticURL('/lib/slick.min.js')}" as="script" />
+    <link rel="preload" href="${URLUtils.staticURL('/lib/lazysizes.min.js')}" as="script" />
+    <link rel="preload" href="${URLUtils.staticURL('/lib/slick.min.js')}" as="script" />
+    
+    <iscomment>Performance: Resource hints for faster DNS and connection</iscomment>
+    <isif condition="${request.httpPath && (request.httpPath.toString().indexOf('Search-Show') !== -1 || request.httpParameterMap.cgid || request.httpParameterMap.q)}">
+        <iscomment> <link rel="dns-prefetch" href="https://unpkg.com" /> </iscomment>
+        <iscomment> <link rel="dns-prefetch" href="https://use.typekit.net" /> </iscomment>
+        <iscomment> <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://unpkg.com" crossorigin /> </iscomment>
+        <iscomment> <link rel="preconnect" href="https://use.typekit.net" crossorigin /> </iscomment>
+        <iscomment> <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> </iscomment>
+    </isif>
+    
+    <iscomment>Performance: Preload PLP hero banner image for LCP optimization</iscomment>
+    <isif condition="${(pdict.category && pdict.category.custom && pdict.category.custom.heroBanner && pdict.category.custom.h1ContentTracker != null) || (pdict.fullCategory && pdict.fullCategory.custom && pdict.fullCategory.custom.heroBanner && pdict.fullCategory.custom.h1ContentTracker != null)}">
+        <link rel="preload" as="image" href="${pdict.fullCategory && pdict.fullCategory.custom && pdict.fullCategory.custom.heroBanner ? pdict.fullCategory.custom.heroBanner.absURL : pdict.category.custom.heroBanner.absURL}" fetchpriority="high" />
+    </isif>
+
+    <meta http-equiv="Cache-control" content="public">
+    <meta http-equiv="Expires" content="31536000">
+    <meta name="format-detection" content="telephone=no">
+
+    <iscomment>The page meta data will be replaced by rule based content if it's available</iscomment>
+
+    <title><isprint value="${pdict.CurrentPageMetaData.title}" encoding="htmlcontent" />
+        <isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">| <isprint value="${Resource.msg('global.site.name', 'version', null)}" encoding="htmlcontent" /> | <isprint value="${Resource.msg('global.version.number', 'version', null)}" encoding="htmlcontent" /></isif>
+    </title>
+
+    <meta name="description" content="${pdict.CurrentPageMetaData.description ? pdict.CurrentPageMetaData.description : Resource.msg('global.storename','common',null)}"/>
+    <meta name="keywords" content="${pdict.CurrentPageMetaData.keywords ? pdict.CurrentPageMetaData.keywords : Resource.msg('global.storename','common',null)}"/>
+
+    <iscomment>WGACA Custom Robots TAG - Not recommended by RVW</iscomment>
+    <isif condition="${'robots' in pdict.CurrentPageMetaData && !empty(pdict.CurrentPageMetaData.robots)}">
+        <meta name="robots" content="${pdict.CurrentPageMetaData.robots}"/>
+    </isif>
+
+    <iscomment>Additional Rule based page meta tags</iscomment>
+    <isloop items="${pdict.CurrentPageMetaData.pageMetaTags}" var="pageMetaTag">
+        <isif condition="${pageMetaTag.name}">
+            <meta name="<isprint value="${pageMetaTag.ID}">" content="<isprint value="${pageMetaTag.content}">">
+        <iselseif condition="${pageMetaTag.property}"/>
+            <meta property="<isprint value="${pageMetaTag.ID}">" content="<isprint value="${pageMetaTag.content}">">
+        </isif>
+    </isloop>
+
+    <iscomment>WGACA Open Graph Meta Tags</iscomment>
+    <isif condition="${!empty(pdict.CurrentPageMetaData.title)}">
+        <meta property="og:title" content="${pdict.CurrentPageMetaData.title}" />
+    </isif>
+    <isif condition="${!empty(pdict.CurrentPageMetaData.description)}">
+        <meta property="og:description" content="${pdict.CurrentPageMetaData.description}" />
+    </isif>
+
+    <isinclude template="common/head/favicon" />
+
+    <iscomment>Performance: Preload global.css early to reduce render blocking - actual theme path will be resolved in global_theme.isml</iscomment>
+    <link rel="preload" href="${URLUtils.staticURL('/css/global.css')}" as="style" />
+
+    <isinclude template="common/head/stylesheets" />
+    <link rel="preload" as="image" href="${URLUtils.staticURL('/images/logo.png')}" fetchpriority="high" />
+
+    <iscomment>Adyen scripts and styles for product detail pages</iscomment>
+    <isif condition="${pdict.product && pdict.product.id}">
+        <isset name="AdyenHelper" value="${require('*/cartridge/adyen/utils/adyenHelper')}" scope="page"/>
+        <isset name="AdyenConfigs" value="${require('*/cartridge/adyen/utils/adyenConfigs')}" scope="page" />
+        <script src="${AdyenHelper.getCheckoutUrl()}" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="${AdyenHelper.getCheckoutCSS()}"/>
+    </isif>
+
+    <isif condition="${!empty(dw.system.Site.current.getCustomPreferenceValue('GoogleVerificationTag'))}">
+        <meta name="google-site-verification" content="<isprint value="${dw.system.Site.current.getCustomPreferenceValue('GoogleVerificationTag')}"/>" />
+    </isif>
+
+    <isinclude template="common/head/hooks" />
+
+    <isif condition="${'CustomHeaderScripts' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.CustomHeaderScripts!=''}">
+        <isprint value="${dw.system.Site.current.preferences.custom.CustomHeaderScripts}" encoding="off"/>
+    </isif>
+
+    <isif condition="${pdict.canonicalUrl}" >
+        <link rel="canonical" href="${pdict.canonicalUrl}"/>
+    </isif>
+
+    <isactivedatahead/>
+
+    <isinclude template="/components/schema" />
+
+    <iscomment> AudioEyeScript </iscomment>
+    <iscomment> <script
+        <isif condition="${isOneTrustEnable}">
+            type='text/plain' class='optanon-category-C0003'
+        </isif>
+    defer>!function(){var b=function(){window.__AudioEyeSiteHash = "${dw.system.Site.getCurrent().getCustomPreferenceValue('AudioEye')}"; var a=document.createElement("script");a.src="https://wsmcdn.audioeye.com/aem.js";a.type="text/javascript";a.setAttribute("async","");document.getElementsByTagName("body")[0].appendChild(a)};"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",b):window.attachEvent&&window.attachEvent("onload",b):b()}();</script> </iscomment>
+    <iscomment> AudioEyeScript script injection ends </iscomment>
+    <script
+        <isif condition="${isOneTrustEnable}">
+            type='text/plain' class='optanon-category-C0004'
+        </isif>
+     src="https://go.launchingdeals.com/util/hit" defer></script>
+
+    <isinclude template="common/head/frenzyCookieInit" />
+    <script>
+        window.Customer = {
+            isLoggedIn: ${pdict.CurrentCustomer.authenticated ? 'true' : 'false'},
+            customerNo: '${pdict.CurrentCustomer.authenticated ? pdict.CurrentCustomer.profile.customerNo : ''}'
+        };
+    </script>
+</head>

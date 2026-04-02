@@ -1,0 +1,16 @@
+{
+    "hooks": [
+        {
+            "name": "app.cybersource.modifyrequest",
+            "script": "~/cartridge/scripts/hooks/cybersourceModify"
+        },
+        {
+            "name": "forter.api.request.payment.default",
+            "script": "~/cartridge/scripts/hooks/buildForterRequest"
+        },
+        {
+            "name": "signifyd.api.request.payment.default",
+            "script": "~/cartridge/scripts/hooks/buildSignifydRequest"
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+.content-tile {
+    @include zoom-image('.content-tile-image', $content-tile-image-zoom-amount);
+    display: block;
+    text-decoration: none;
+
+    .search-results &,
+    .blog-results &,
+    .content-grid & {
+        margin-bottom: $content-tile-grid-margin-bottom;
+    }
+
+    .content-tile-image-wrapper {
+        display: block;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: $content-tile-image-margin-bottom;
+    }
+    .content-tile-image {
+        @include aspect-ratio($content-tile-image-aspect-ratio);
+        display: block;
+    }
+    .content-tile-body {
+        display: block;
+    }
+    .content-tile-category {
+        display: block;
+        font-family: $content-tile-category-font;
+        font-size: $content-tile-category-font-size;
+        font-weight: $content-tile-category-font-weight;
+        text-decoration: $content-tile-category-text-decoration;
+        color: $content-tile-category-color;
+        margin-bottom: $content-tile-category-margin-bottom;
+    }
+    .content-tile-name {
+        font-family: $content-tile-name-font;
+        font-size: $content-tile-name-font-size;
+        font-weight: $content-tile-name-font-weight;
+        text-decoration: $content-tile-name-text-decoration;
+        color: $content-tile-name-color;
+        margin-bottom: $content-tile-name-margin-bottom;
+    }
+    .content-tile-date {
+        display: block;
+        font-family: $content-tile-date-font;
+        font-size: $content-tile-date-font-size;
+        font-weight: $content-tile-date-font-weight;
+        text-decoration: $content-tile-date-text-decoration;
+        color: $content-tile-date-color;
+        margin-bottom: $content-tile-date-margin-bottom;
+        text-transform: $content-tile-date-text-transform;
+    }
+    .content-tile-description {
+        font-family: $content-tile-description-font;
+        font-size: $content-tile-description-font-size;
+        font-weight: $content-tile-description-font-weight;
+        text-decoration: $content-tile-description-text-decoration;
+        color: $content-tile-description-color;
+    }
+    &:hover {
+        text-decoration: none;
+        .content-tile-image-wrapper::after {
+            content: '';
+            @include absolute-cover;
+            pointer-events: none;
+            box-shadow: $content-tile-image-hover-shadow;
+        }
+        .content-tile-name {
+            text-decoration: $content-tile-name-text-decoration-hover;
+            color: $content-tile-name-color-hover;
+        }
+        .content-tile-description {
+            text-decoration: $content-tile-description-text-decoration-hover;
+            color: $content-tile-description-color-hover;
+        }
+    }
+}

@@ -1,0 +1,644 @@
+.hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    .hero-container {
+        display: flex;
+        padding: $hero-textblock-outer-padding;
+        height: 100%;
+        width: 100%;
+        @include media-breakpoint-up(md) {
+            padding: $hero-textblock-outer-padding-md;
+        }
+        @include media-breakpoint-up(lg) {
+            padding: $hero-textblock-outer-padding-lg;
+        }
+        @include media-breakpoint-up(xl) {
+            .full-bleed & {
+                max-width: map-get($container-max-widths, xl);
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        .hero-background-link {
+            @include absolute-cover;
+            z-index: 0;
+            .video-container {
+                @include absolute-cover;
+                .video-player {
+                    display: none;
+                }
+            }
+        }
+        &.has-background-link {
+            .embedded-component .btn {
+                z-index: 1;
+            }
+        }
+    }
+    .embedded-component {
+        width: 100%;
+        &:empty {
+            display: none;
+        }
+        .experience-region {
+            &:empty {
+                display:none;
+            }
+        }
+    }
+
+    // Height settings
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        height: 0; // fix for IE11 flexbox align-items bug
+        &.no-image {
+            height: auto;
+        }
+    }
+    &.short {
+        min-height: $hero-min-height-short;
+        @include media-breakpoint-up(md) {
+            min-height: $hero-min-height-short-md;
+        }
+        @include media-breakpoint-up(lg) {
+            min-height: $hero-min-height-short-lg;
+        }
+    }
+    &.medium {
+        min-height: $hero-min-height-medium;
+        @include media-breakpoint-up(md) {
+            min-height: $hero-min-height-medium-md;
+        }
+        @include media-breakpoint-up(lg) {
+            min-height: $hero-min-height-medium-lg;
+        }
+    }
+    &.tall {
+        min-height: $hero-min-height-tall;
+        @include media-breakpoint-up(md) {
+            min-height: $hero-min-height-tall-md;
+        }
+        @include media-breakpoint-up(lg) {
+            min-height: $hero-min-height-tall-lg;
+        }
+    }
+    &.screen-height {
+        // when header is either not fixed or enhanced fixed
+        min-height: 100vh;
+
+        // when header is fixed
+        .fixed-header~div & {
+            min-height: calc(100vh - #{$header-height});
+            @include media-breakpoint-up(md) {
+                min-height: calc(100vh - #{$header-height-md});
+            }
+            @include media-breakpoint-up(lg) {
+                min-height: calc(100vh - #{$header-height-lg});
+            }
+        }
+
+        // first hero on page
+        .experience-main > .experience-component:first-child & {
+            min-height: calc(100vh - #{$header-height} - #{$header-navbar-border-bottom-width} - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom});
+            .multi-brand & {
+                min-height: calc(100vh - #{$header-height} - #{$header-navbar-border-bottom-width} - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom} - #{$pre-nav-height});
+            }
+            @include media-breakpoint-up(md) {
+                min-height: calc(100vh - #{$header-height-md} - #{$header-navbar-border-bottom-width} - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom});
+                .multi-brand & {
+                    min-height: calc(100vh - #{$header-height-md} - #{$header-navbar-border-bottom-width} - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom}- #{$pre-nav-height-md});
+                }
+            }
+            @include media-breakpoint-up(lg) {
+                min-height: calc(100vh - #{$header-height-lg} - #{$header-navbar-border-bottom-width} - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom});
+                .multi-brand & {
+                    min-height: calc(100vh - #{$header-height-lg} - #{$header-navbar-border-bottom-width} - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom} - #{$pre-nav-height-md});
+                }
+            }
+        }
+
+        // first hero when transparent header setting is on
+        .transparent-header~div .experience-main > .experience-component:first-child & {
+            min-height: calc(100vh - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom});
+            .multi-brand & {
+                min-height: calc(100vh - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom} - #{$pre-nav-height});
+            }
+            @include media-breakpoint-up(md) {
+                min-height: calc(100vh - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom});
+                .multi-brand & {
+                    min-height: calc(100vh - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom} - #{$pre-nav-height-md});
+                }
+            }
+            @include media-breakpoint-up(lg) {
+                min-height: calc(100vh - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom});
+                .multi-brand & {
+                    min-height: calc(100vh - #{$header-promo-bar-line-height} - #{$header-promo-bar-padding-top} - #{$header-promo-bar-padding-bottom} - #{$pre-nav-height-md});
+                }
+            }
+        }
+    }
+
+    // new Auto-sizing For image option for hero
+    &.auto-size-for-image {
+        container-type: inline-size;
+
+        .hero-container {
+            container-type: inline-size;
+            height: auto;
+            max-width: 100cqw;
+            @include reset-padding();
+            .hero-text {
+                @include hero-text-padding();
+            }
+        }
+
+        &.half-and-half {
+            picture img.hero-media {
+                @include half-half-hero-width();
+                position: relative;
+                margin: 0;
+            }
+
+            .video-container { min-width: unset; }
+            .flex-column,
+            .flex-md-column {
+                &[class*="justify-content-md"] .hero-text {
+                    @include hero-text-padding();
+                }
+            }
+
+            &[class*="justify-content-md"] .hero-container .hero-text {
+                justify-content: center;
+                margin-right: auto;
+                margin-left: 0px;
+            }
+
+            &[class*="-md-end"] .hero-container .hero-text {
+                justify-content: end;
+                margin-left: auto;
+                margin-right: 0px;
+            }
+
+            .hero-container {
+                max-width: 100cqw;
+
+                @include media-breakpoint-down(sm) {
+                    picture img.hero-media {
+                        @include half-half-hero-width(2); //half-half heros stack on small screens so double the default width
+                    }
+                }
+
+                &.has-video {
+                    @include auto-size-generate-video-aspect-ratios(half-half);
+                    &.align-items-start {
+                        .hero-media.video-container { //keep video alignment with image alignment
+                            margin-top: 0px;
+                            margin-bottom: auto;
+                        }
+                    }
+                    &.align-items-end {
+                        .hero-media.video-container { //keep video alignment with image alignment
+                            margin-top: auto;
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+
+                &.flex-md-column {
+                    @include media-breakpoint-only(md) {
+                        .hero-text,
+                        .hero-media {
+                            @include half-half-hero-width(2);
+                        }
+                    }
+                }
+
+                &[class*="justify-content-md"] {
+                    @include media-breakpoint-up(md) {
+                        &.flex-lg-row {
+                            &:not(.flex-md-column) { // if hero half and half is set to text below on tablet: don't use these values
+                                @include media-breakpoint-only(md) {
+                                    flex-direction: row-reverse !important; //put the image on the correct side, not using absolute positioning anymore
+                                    @include auto-size-hero-image-n-text-widths(1);
+                                }
+                            }
+                            @include media-breakpoint-up(lg) {
+                                flex-direction: row-reverse !important; //put the image on the correct side, not using absolute positioning anymore
+                                @include auto-size-hero-image-n-text-widths(1);
+                            }
+                        }
+                    }
+                }
+
+                &.justify-content-md-end {
+                    @include media-breakpoint-up(md) {
+                        &.flex-lg-row {
+                            &:not(.flex-md-column) { // if hero half and half is set to text below on tablet: don't use these values
+                                flex-direction: row !important;
+                                @include media-breakpoint-only(md) {
+                                    @include auto-size-hero-image-n-text-widths(-1);
+                                }
+                            }
+                            flex-direction: row !important;
+                            @include media-breakpoint-up(lg) {
+                                @include auto-size-hero-image-n-text-widths(-1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &:not(.half-and-half) {
+            .hero-container {
+                width: calc(min(100cqw, 100vw));
+
+                &.has-video {
+                    @include auto-size-generate-video-aspect-ratios();
+                }
+
+                &.flex-column {
+                    @include media-breakpoint-down(sm) {
+                        .hero-text {
+                            position: relative;
+                        }
+                    }
+                }
+
+                &.flex-md-column {
+                    @include media-breakpoint-only(md) {
+                        .hero-text {
+                            position: relative;
+                        }
+                    }
+                }
+            }
+
+            .hero-media:not(.video-container) {
+                position: relative;
+                transform: none;
+                height: auto;
+                top: auto;
+                right: auto;
+                left: auto;
+                margin: 0;
+                background: unset;
+                width: calc(min(100cqw, 100vw));
+            }
+
+            .hero-text {
+                position: absolute;
+            }
+
+            &.align-item-center .hero-container { align-items: center; }
+            &.align-item-end .hero-container{ align-items: flex-end; }
+        }
+    }
+}
+
+.hero-media {
+    @include absolute-center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    .full-bleed & {
+        width: calc(100% + 2px); // 2px for Chrome bug where you can sometimes see a gap at the browser edges
+    }
+    &.hero-media-tablet,
+    &.hero-media-desktop {
+        display: none;
+    }
+    @include media-breakpoint-up(md) {
+        &.hero-media-mobile,
+        &.hero-media-desktop {
+            display: none;
+        }
+        &.hero-media-tablet {
+            display: block;
+        }
+    }
+    @include media-breakpoint-up(lg) {
+        &.hero-media-mobile,
+        &.hero-media-tablet {
+            display: none;
+        }
+        &.hero-media-desktop {
+            display: block;
+        }
+    }
+    &.video-container {
+        @include absolute-cover;
+        overflow: hidden;
+        right: auto;
+        transform: none;
+        transition: opacity $transition-speed ease-out;
+        .video-aspect-ratio {
+            @include absolute-center;
+            width: 0;
+            height: 0;
+            min-height: 100%;
+            min-width: 100%;
+            &.aspect-ratio-16-9 {
+                padding-top: $aspect-ratio-sixteen-nine;
+                padding-left: $aspect-ratio-sixteen-nine-horizontal;
+            }
+            &.aspect-ratio-9-16 {
+                padding-top: $aspect-ratio-nine-sixteen;
+                padding-left: $aspect-ratio-nine-sixteen-horizontal;
+            }
+            &.aspect-ratio-4-3 {
+                padding-top: $aspect-ratio-four-three;
+                padding-left: $aspect-ratio-four-three-horizontal;
+            }
+            &.aspect-ratio-3-4 {
+                padding-top: $aspect-ratio-three-four;
+                padding-left: $aspect-ratio-three-four-horizontal;
+            }
+            &.aspect-ratio-1-1 {
+                padding-top: $aspect-ratio-one-one;
+                padding-left: $aspect-ratio-one-one-horizontal;
+            }
+            .video-player {
+                position: static;
+                pointer-events: none;
+            }
+            iframe,
+            video {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                &.video-player {
+                    position: absolute; // override for youtube, since they use .video-player for iframe
+                }
+            }
+        }
+        &~.replay-video {
+            z-index: 1;
+            position: absolute;
+            opacity: 0;
+            transition: opacity $transition-speed ease-out;
+            .align-items-start &,
+            .align-items-center & {
+                bottom: $spacer;
+            }
+            .align-items-end & {
+                top: $spacer;
+                .transparent-header~div & {
+                    top: $header-height + $spacer;
+                    @include media-breakpoint-up(md) {
+                        top: $header-height-md + $spacer;
+                    }
+                    @include media-breakpoint-up(lg) {
+                        top: $header-height-lg + $spacer;
+                    }
+                }
+            }
+            .justify-content-md-start & {
+                right: $spacer;
+            }
+            .justify-content-md-end &,
+            .justify-content-md-center & {
+                left: $spacer;
+            }
+        }
+        &.video-stopped {
+            opacity: 0;
+            &~.replay-video {
+                transition: opacity $transition-speed ease-out $transition-speed*3;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.hero-text {
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+
+    // text in card layout styles
+    .text-in-card & {
+        padding: $hero-textblock-inner-padding;
+        border-width: $hero-textblock-border-width;
+        border-style: solid;
+        @include media-breakpoint-up(md) {
+            padding: $hero-textblock-inner-padding-md;
+        }
+        @include media-breakpoint-up(lg) {
+            padding: $hero-textblock-inner-padding-lg;
+        }
+        &:not([class*='border--']) {
+            border-color: transparent;
+        }
+        &.semitransparent:not([class*='background--']) {
+            &.dark-theme {
+                background: rgba($hero-colortheme-dark, $hero-textblock-background-opacity);
+            }
+            &.light-theme {
+                background: rgba($hero-colortheme-light, $hero-textblock-background-opacity);
+            }
+        }
+        &.opaque:not([class*='background--']) {
+            &.dark-theme {
+                background: $hero-colortheme-dark;
+            }
+            &.light-theme {
+                background: $hero-colortheme-light;
+            }
+        }
+    }
+
+    // text alignment
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        &.text-center {
+            align-items: center; // fix for IE11 not horizontally centering
+        }
+        &.text-right {
+            align-items: flex-end; // fix for IE11 not right aligning
+        }
+    }
+
+    // text widths
+    @include media-breakpoint-up(md) {
+        &.width-1-4 {
+            max-width: 25%;
+        }
+        &.width-1-3 {
+            max-width: 33.3333%;
+        }
+        &.width-1-2 {
+            max-width: 50%;
+        }
+        &.width-2-3 {
+            max-width: 66.6666%;
+        }
+        &.width-3-4 {
+            max-width: 75%;
+        }
+        &.width-1 {
+            max-width: 100%;
+        }
+    }
+
+
+    // text elements
+    .hero-subtitle,
+    .hero-title,
+    .hero-body {
+        // override styles from page designer injected tags
+        &>* {
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            text-transform: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            margin-bottom: 0;
+        }
+    }
+    .hero-subtitle {
+        &:not([class*='p--']):not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6):not(.b1):not(.b2):not(.b3):not(.b4):not(.custom) {
+            font-family: $hero-subtitle-font;
+            font-size: $hero-subtitle-font-size;
+            text-transform: $hero-subtitle-text-transform;
+        }
+    }
+    .hero-title {
+        &:not([class*='p--']):not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6):not(.b1):not(.b2):not(.b3):not(.b4):not(.custom) {
+            @include header($hero-title-size);
+        }
+    }
+    .hero-body {
+        ul {
+            list-style: disc;
+            list-style-position: outside;
+            margin-left: $spacer;
+        }
+        @include media-breakpoint-up(sm) {
+            ul {
+                columns: 2;
+            }
+        }
+    }
+    .hero-subtitle + .hero-title,
+    .hero-title + .hero-body,
+    .hero-embedded-component + .hero-body,
+    .hero-body + .hero-buttons .hero-button,
+    .hero-embedded-component .experience-region > * {
+        margin-top: $hero-textblock-items-vertical-spacing;
+    }
+
+    // buttons
+    .hero-buttons {
+        font-size: 0; // prevent extra space for inline-block elements
+    }
+    .hero-button {
+        margin-top: $spacer;
+        display: inline-block;
+        position: relative;
+        .has-background-link & {
+            z-index: 1;
+        }
+    }
+    &.text-center .hero-button:not(:only-child) {
+        margin-left: calc(#{$spacer} / 2);
+        margin-right: calc(#{$spacer} / 2);
+    }
+    &.text-left .hero-button:not(:only-child) {
+        margin-right: $spacer;
+    }
+    &.text-right .hero-button:not(:only-child) {
+        margin-left: $spacer;
+    }
+}
+
+.hero-slider-container {
+    .hero-slot.container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+// hero half and half layout
+.hero.half-and-half {
+    @include media-breakpoint-down(sm) {
+        height: auto;
+        .hero-container {
+            flex-flow: column !important; // overrides new isml classes for hero-stacking
+        }
+        .hero-media {
+            transform: translateX(50%);
+            top: 0;
+            position: relative;
+            width: calc(100% + #{$hero-textblock-outer-padding * 2});
+            margin: calc(#{$hero-textblock-outer-padding} * -1) 0 $hero-textblock-outer-padding calc(#{$hero-textblock-outer-padding} * -2);
+        }
+        &.short {
+            min-height: 0;
+            .hero-media {
+                height: $hero-min-height-short;
+            }
+        }
+        &.medium {
+            min-height: 0;
+            .hero-media {
+                height: $hero-min-height-medium;
+            }
+        }
+        &.tall,
+        &.screen-height {
+            min-height: 0;
+            .hero-media {
+                height: $hero-min-height-tall;
+            }
+        }
+        [class*="justify-content-md"] {
+            .hero-media.video-container {
+                position: absolute;
+                margin-left: -50%;
+                margin-top: 0;
+            }
+        }
+    }
+    @include media-breakpoint-only(md) {
+        // if hero half and half is set to text below on tablet: don't use these values
+        .hero-container:not(.flex-md-column) {
+            @include hero-half-and-half-non-stacking();
+        }
+    }
+    @include media-breakpoint-up(lg) {
+        @include hero-half-and-half-non-stacking();
+    }
+}
+.flex-column {
+    @include media-breakpoint-down(sm) {
+        @include hero-stack-columns();
+    }
+}
+.flex-md-column {
+    @include media-breakpoint-only(md) {
+        @include hero-stack-columns();
+    }
+}
+
+// hide video containers when inside buttons
+.experience-component {
+    .hero-button,
+    .button,
+    .image-text-block-button {
+        .video-container {
+            &::before,
+            .video-player {
+                display: none ;
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<li class="swatches-grid">
+    <button data-href="${refinementValue.url}" data-seo-href="${refinementValue.seoRefineUrl || refinementValue.url}"
+        ${!refinementValue.selectable ? 'aria-disabled="true"' : ''}
+        <isif condition="${!refinementValue.selectable}">disabled</isif>
+    >
+        <span class="size-value swatch-mark non-color-swatch-value ${refinementValue.selected ? 'selected' : ''} ${refinementValue.selectable ? 'selectable' : 'unselectable'}">
+            ${refinementValue.displayValue}
+            <span class="refinement-count">
+                (${refinementValue.hitCount.toFixed()})
+            </span>
+        </span>
+
+        <span class="sr-only selected-assistive-text" id="${refinementValue.displayValue}-assistive">
+            ${refinementValue.selected && refinementValue.selectable ? Resource.msg('msg.assistive.selected.text', 'common', null) : ''}
+            ${refinementValue.title}
+        </span>
+    </button>
+</li>

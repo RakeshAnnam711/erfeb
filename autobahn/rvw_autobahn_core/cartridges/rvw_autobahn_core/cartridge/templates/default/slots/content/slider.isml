@@ -1,0 +1,33 @@
+<iscomment>
+    Slider layout
+</iscomment>
+<iscache type="relative" hour="1" varyby="price_promotion" />
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="Constants" value="${require('*/cartridge/scripts/constants/SiteConstants')}" scope="page"/>
+<isset name="contentSlotHelper" value="${require('*/cartridge/scripts/helpers/contentSlotHelper.js')}" scope="page"/>
+<isset name="content" value="${contentSlotHelper.getContent(slotcontent, pdict.content)}" scope="page"/>
+
+<isif condition="${content}">
+    <div class="container slider-container slider-buttons-hidden slider-bullets-hidden-md slider-bullets-hidden-lg next-slide-20"
+        data-slider-autoplay="false"
+        data-slider-gutter="${Constants.Spacer}"
+        data-slider-gutter-md="${Constants.Spacer}"
+        data-slider-gutter-lg="${Constants.Spacer}"
+        data-slider-items="1"
+        data-slider-items-md="3"
+        data-slider-items-lg="3"
+        data-slider-loop="true"
+    >
+        <div class="slider">
+            <isloop items="${content}" var="contentItem" status="status">
+
+                <isset name="renderTemplate" value="${contentSlotHelper.getClassificationFolderTemplate(contentItem)}" scope="page"/>
+
+                <div class='slide'>
+                    <isinclude template="${renderTemplate}" />
+                </div>
+            </isloop>
+        </div>
+    </div>
+</isif>

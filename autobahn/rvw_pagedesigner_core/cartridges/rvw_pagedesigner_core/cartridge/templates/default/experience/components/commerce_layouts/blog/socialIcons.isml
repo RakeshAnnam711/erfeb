@@ -1,0 +1,50 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/socialIcons.js');
+</isscript>
+
+<div class="col-12 social-container ${pdict.containerClass}">
+    <ul class="social-icons">
+
+        <isif condition="${!pdict.hidePinterest}">
+            <li>
+                <a href='https://pinterest.com/pin/create/button/?url=${pdict.escapedUrl}&description=${pdict.escapedTitle}<isif condition="${!empty(pdict.tileImage)}">&media=${pdict.tileImage}</isif>' title="${Resource.msgf('label.social.pinterest', 'product', null, pdict.title)}" aria-label="${Resource.msgf('label.social.pinterest', 'product', null, pdict.title)}" rel="noopener noreferrer" class="share-icons" target="_blank" rel="noopener">
+                    <i class="fa fa-pinterest"></i>
+                </a>
+            </li>
+        </isif>
+
+        <isif condition="${!pdict.hideFacebook}">
+            <li>
+                <a href="https://www.facebook.com/share.php?u=${pdict.escapedUrl}" title="${Resource.msgf('label.social.facebook', 'product', null, pdict.title)}" data-share="facebook" aria-label="${Resource.msgf('label.social.facebook', 'product', null, pdict.title)}" rel="noopener noreferrer" class="share-icons" target="_blank" rel="noopener">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        </isif>
+
+        <isif condition="${!pdict.hideTwitter}">
+            <li>
+                <a href="https://twitter.com/share?url=${pdict.escapedUrl}&text=${pdict.escapedTitle}" data-share="twitter" title="${Resource.msgf('label.social.twitter', 'product', null, pdict.title)}" aria-label="${Resource.msgf('label.social.twitter', 'product', null, pdict.title)}" rel="noopener noreferrer" class="share-icons" target="_blank" rel="noopener">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        </isif>
+
+        <isif condition="${!pdict.hideShareLink}">
+            <li>
+            <a href="#copy-link-message" class="share-link" data-toggle="tooltip" id="fa-link" role="button" title="${Resource.msgf('label.social.link', 'product', null, pdict.title)}" aria-label="${Resource.msgf('label.social.link', 'product', null, pdict.title)}">
+                ${Resource.msg('button.share', 'product', null)}
+            </a>
+            <input type="hidden" id="shareUrl" value="${URLUtils.https('Page-Show', 'cid', pdict.parentPageId)}"/>
+            </li>
+        </isif>
+    </ul>
+</div>
+
+<isif condition="${!pdict.hideShareLink}">
+    <div class="toast-messages copy-link-message d-none">
+        <div class="alert alert-success text-center">
+            ${Resource.msgf('text.alert.social.linkcopysuccess', 'product', null, pdict.title)}
+        </div>
+    </div>
+</isif>

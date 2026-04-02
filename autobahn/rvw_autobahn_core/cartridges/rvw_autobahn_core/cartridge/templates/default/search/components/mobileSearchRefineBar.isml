@@ -1,0 +1,34 @@
+<isset name="collapseRefinementsMobile" value="${pdict.abConfigs.plpCollapseRefinementsMobile == true ? true : false}" scope="page"/>
+
+<div class="refinements" data-collapse-mobile="${collapseRefinementsMobile}" data-refinement-style-mobile="vertical">
+    <isloop items="${pdict.productSearch.refinements}" var="refinement">
+        <div class="card aside collapsible-xl refinement refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+            <div class="card-header col-sm-12">
+                <button class="card-title title btn text-left btn-block"
+                    aria-controls="refinement-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}"
+                    aria-expanded="false"
+                >
+                    <span>${refinement.displayName}</span>
+                </button>
+                <iscomment> <h2 aria-label="${refinement.displayName}" class="d-none d-md-block">${refinement.displayName}</h2> </iscomment>
+            </div>
+            <div class="card-body content value" id="refinement-group-${refinement.attributeID.toLowerCase().replace(/ /g, '-')}">
+                <!--- CATEGORY REFINEMENTS --->
+                <isif condition="${refinement.isCategoryRefinement}">
+                    <isset name="categories" value="${refinement.values}" scope="page" />
+                    <isinclude template="search/refinements/categories" />
+                </isif>
+
+                <!--- ATTRIBUTE/PROMOTION REFINEMENTS --->
+                <isif condition="${refinement.isAttributeRefinement || refinement.isPromotionRefinement}">
+                    <isinclude template="search/refinements/attributes" />
+                </isif>
+
+                <!--- PRICE REFINEMENTS --->
+                <isif condition="${refinement.isPriceRefinement}">
+                    <isinclude template="search/refinements/prices" />
+                </isif>
+            </div>
+        </div>
+    </isloop>
+</div>

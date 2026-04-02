@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+// Set variables, then add Bootstrap components and Bootstrap overrides
+@import "variables";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+
+@import "experience/components/commerce_assets/wgacaHeroBanner";
+@import "experience/components/commerce_assets/titleAndCta";
+@import "experience/components/commerce_assets/wgacaSliderCategoryProducts";
+@import "experience/components/commerce_assets/wgacaImageAndText";
+@import "experience/components/commerce_assets/wgacaTitle";
+@import "experience/components/commerce_assets/wgacaStoreDetail";
+@import "experience/components/commerce_assets/wgacaFrenzySlider";
+@import "experience/components/commerce_assets/seoTextBlock";
+@import "experience/components/commerce_assets/wgacaFrenzySlider";

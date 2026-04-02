@@ -1,0 +1,55 @@
+<section class="wishlist-modal-show-lists-toggle-lists">
+    <div class="wishlist-modal-show-lists-row justify-content-center">
+        <div
+            class="wishlist-modal-show-lists-toggle-lists-options"
+            data-list-names="${pdict.listNames}"
+        >
+            <isif condition="${pdict.wishlistAction === 'move'}">
+                <div class="custom-control custom-checkbox wishlist-modal-show-lists-keep">
+                    <input type="checkbox" class="custom-control-input keep" id="keep-in-original" />
+                    <label class="custom-control-label" for="keep-in-original">
+                        ${Resource.msg('text.modal.keeponoriginallist', 'wishlist', null)}
+                    </label>
+                </div>
+            </isif>
+            <div class="wishlist-all-lists">
+                <isset name="selectedListCount" value="${0}" scope="page" />
+                <isloop items="${pdict.lists}" var="productList">
+                    <isset name="selectedListCount" value="${selectedListCount + (productList.isSelected ? 1 : 0)}" scope="page" />
+                    <button
+                        type="button"
+                        class="wishlist-favorite-product-btn ${pdict.wishlistAction && pdict.wishlistAction === 'move' ? 'js-move' : 'js-toggle'} btn icon-favorite${productList.isSelected? '-selected selected' : ''}"
+                        data-pid="${pdict.pid}"
+                        data-wishlist-id="${productList.ID}"
+                        data-wishlist-name="${productList.name}"
+                        data-wishlist-url="${productList.url}"
+                        data-wishlist-action-type="${productList.isSelected ? 'remove' : 'add'}"
+                        data-wishlist-pid-quantity="<isprint value="${productList.pidQuantity}" style="INTEGER" encoding="off" />"
+                        data-manage-label="${Resource.msg('link.toast.managelist', 'wishlist', null)}"
+                        data-url="${pdict.wishlistAction && pdict.wishlistAction === 'move'? pdict.urls.moveProducts : pdict.urls.toggleProduct}"
+                    >
+                        <isif condition="${productList.products[0]}">
+                            <img class="wishlist-favorite-product-image" src="${productList.products[0].images.large[0].url}" alt="${productList.products[0].images.large[0].alt}" />
+                        </isif>
+                        <div class="wishlist-create-list-product-name-count">
+                            <span class="wishlist-create-list-product-name">${productList.name}</span> (${productList.count})
+                        </div>
+                    </button>
+                </isloop>
+                <button 
+                    type="button"
+                    class="wishlist-create-list-remove-from-all js-remove-from-all ${selectedListCount > 0 ? '' : 'd-none'}"
+                    data-url="${pdict.urls.removeProductAllLists}"
+                    data-pid="${pdict.pid}"
+                >
+                    ${Resource.msg('button.overlay.removefromall','wishlist', null)}
+                </button>
+            </div>
+            <isif condition="${!pdict.lists.length}">
+                <p class="wishlist-create-list-no-list-created">
+                    ${Resource.msg('text.landing.nolistscreated', 'wishlist', null)}
+                </p>
+            </isif>
+        </div>
+    </div>
+</section>

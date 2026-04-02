@@ -1,0 +1,20 @@
+<div class="category-nav ${pdict.containerClass}">
+    <isif condition="${!empty(pdict.title)}">
+        <div class="category-nav-title ${pdict.titleClass}">${pdict.title}</div>
+    </isif>
+
+    <isif condition="${!empty(pdict.categories)}">
+        <isset name="menuLevel" value="${1}" scope="page"/>
+        <isset name="listClass" value="${pdict.listClass1}" scope="page" />
+        <isset name="itemClass" value="${pdict.itemClass1}" scope="page" />
+        <isset name="linkClass" value="${pdict.linkClass1}" scope="page" />
+
+        <ul class="category-nav-menu menu-level-${menuLevel.toFixed()} ${listClass}">
+            <isloop items="${pdict.categories}" var="category" status="loopStatus">
+                <isif condition="${category.show}">
+                    <isinclude template="experience/components/commerce_assets/categoryNavItem" />
+                </isif>
+            </isloop>
+        </ul>
+    </isif>
+</div>

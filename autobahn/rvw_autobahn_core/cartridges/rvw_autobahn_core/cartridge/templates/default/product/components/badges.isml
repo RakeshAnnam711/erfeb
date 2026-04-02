@@ -1,0 +1,12 @@
+<isset name="badgeDisplayLocation" value="${pdict.abConfigs.badgeDisplayLocation || 'badge-image-over'}" scope="page"/>
+<isset name="badgeAlignment" value="${!empty(pdict.abConfigs.plpContentAlignment) && pdict.abConfigs.plpContentAlignment === 'center' ? 'justify-content-center'
+            : (pdict.abConfigs.plpContentAlignment === 'right' ? 'justify-content-end'
+            : 'justify-content-start')}" scope="page"/>
+
+<isif condition="${product.badges && product.badges.length > 0}">
+    <div class="badge-product-container ${badgeDisplayLocation} ${badgeAlignment}">
+        <isloop items="${product.badges}" var="badge">
+            <span class="badge-product ${badge.class}">${badge.name}</span>
+        </isloop>
+    </div>
+</isif>

@@ -1,0 +1,64 @@
+<isset name="isPublic" value="${customer.authenticated && productList.isPublic}" scope="page" />
+<isset name="placeholderImage" value="${URLUtils.staticURL('/images/placeholder_Thumbnails.png')}" scope="page" />
+
+<div class="wishlist-card-list card ${customer.authenticated && productList.isPublic ? 'is-public' : ''}" data-wishlist-id="${productList.ID}">
+    <div class="wishlist-card-list-header card-header">
+        <a href="${productList.url}" class="card-title wishlist-card-list-header-link pull-left">
+            ${productList.name}
+            <span class="sr-only">
+                ${Resource.msgf((productList.count === 1 ? 'text.detail.item' : 'text.detail.items'), 'wishlist', null, productList.count)}
+            </span>
+        </a>
+        <isif condition="${customer.authenticated && productList.name !== Resource.msg('title.list.default', 'wishlist', null)}">
+            <a href="" class="wishlist-card-list-header-edit js-wishlist-card-list-edit-modal text-link pull-right" data-wishlist-id="${productList.ID}" data-wishlist-name="${productList.name}">
+                ${Resource.msg('button.cardlist.edit', 'wishlist', null)}
+            </a>
+        </isif>
+    </div>
+
+    <div class="wishlist-card-list-body card-body">
+        <isif condition="${productList.description}">
+            <div class="notes">
+                <div class="wishlist-card-notes" aria-hidden="false">
+                    ${productList.description}
+                </div>
+            </div>
+        </isif>
+        <isif condition="${productList.products[0]}">
+            <a href="${productList.url}" class="wishlist-card-list-link">
+                <isloop items="${productList.products}" var="product" end="7" status="loopStatus">
+                    <isset name="imageUrl" value="${product.images.small[0].url}" scope="page"/>
+                    <isset name="imageAlt" value="${product.images.small[0].alt}" scope="page"/>
+                    <isif condition="${product.productType === 'set' && imageUrl.includes('noimage')}">
+                        <isset name="imageUrl" value="${product.individualProducts[0].images.small[0].url}" scope="page"/>
+                        <isset name="imageAlt" value="${product.individualProducts[0].images.small[0].alt}" scope="page"/>
+                    </isif>
+                    <isif condition="${productList.products.length > 8 && loopStatus.last}">
+                        <div class="extra-items-block">
+                            + ${JSON.stringify(productList.products.length - 7)}
+                        </div>
+                    <iselse/>
+                        <img class="wishlist-card-list-body-image" src="${imageUrl}" alt="${imageAlt}" onerror="this.onerror=null;this.src='${placeholderImage}'"/>
+                    </isif>
+                </isloop>
+            </a>
+        <iselse/>
+            <div class="wishlist-card-list-body-empty-message">
+                ${Resource.msg('text.detail.noitems', 'wishlist', null)}
+            </div>
+        </isif>
+    </div>
+
+    <div class="wishlist-card-list-footer card-footer">
+        <isif condition="${customer.authenticated && productList.isPublic}">
+            <p class="public-list-text">
+                ${Resource.msg('text.public.list', 'wishlist', null)}
+            </p>
+        <iselse>
+            <p class="private-list-text">
+                ${Resource.msg('text.private.list', 'wishlist', null)}
+            </p>
+        </isif>
+    </div>
+
+</div>

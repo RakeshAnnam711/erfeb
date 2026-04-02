@@ -1,0 +1,89 @@
+<div id="radiochecks" class="sg__header3">Radio Buttons and Checkboxes <a
+    role="button"
+    tabindex="0"
+    class="icon-search tooltip-icon"
+    data-toggle="popover"
+    data-placement="bottom"
+    title="Find it in the Storefront"
+    data-content="
+        <ul>
+            <li>PLP Refinement filters <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Search-Show', 'cgid', 'womens-clothing-tops')}' target='_blank' rel='noopener'></a></li>
+        </ul>
+    "></a></div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="custom-control custom-radio mb-2">
+            <input type="radio" class="custom-control-input" name="radio" id="radio1">
+            <label class="custom-control-label" for="radio1">Radio</label>
+        </div>
+        <div class="custom-control custom-radio mb-2">
+            <input type="radio" class="custom-control-input" name="radio" id="radio2" checked>
+            <label class="custom-control-label" for="radio2">Radio selected</label>
+        </div>
+        <div class="custom-control custom-radio mb-2">
+            <input type="radio" class="custom-control-input" name="radio" id="radio3" disabled>
+            <label class="custom-control-label" for="radio">Radio disabled</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input is-invalid" name="radio" id="radio4"
+                invalid>
+            <label class="custom-control-label" for="radio4">Radio invalid</label>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" name="radio" id="radio1">
+    <label class="custom-control-label" for="radio1">Radio</label>
+</div>
+<div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" name="radio" id="radio2" checked>
+    <label class="custom-control-label" for="radio2">Radio selected</label>
+</div>
+<div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" name="radio" id="radio3" disabled>
+    <label class="custom-control-label" for="radio">Radio disabled</label>
+</div>
+<div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input is-invalid" name="radio" id="radio4" invalid>
+    <label class="custom-control-label" for="radio4">Radio invalid</label>
+</div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="custom-control custom-checkbox mb-2">
+            <input type="checkbox" class="custom-control-input" id="checkBox1">
+            <label class="custom-control-label" for="checkBox1">Checkbox</label>
+        </div>
+        <div class="custom-control custom-checkbox mb-2">
+            <input type="checkbox" class="custom-control-input" id="checkBox2" checked>
+            <label class="custom-control-label" for="checkBox2">Checkbox selected</label>
+        </div>
+        <div class="custom-control custom-checkbox mb-2">
+            <input type="checkbox" class="custom-control-input" id="checkBox3" disabled>
+            <label class="custom-control-label" for="checkBox3">Checkbox disabled</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input is-invalid" id="checkBox4" invalid>
+            <label class="custom-control-label" for="checkBox4">Checkbox invalid</label>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="checkBox1">
+    <label class="custom-control-label" for="checkBox1">Checkbox</label>
+</div>
+<div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="checkBox2" checked>
+    <label class="custom-control-label" for="checkBox2">Checkbox selected</label>
+</div>
+<div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="checkBox3" disabled>
+    <label class="custom-control-label" for="checkBox3">Checkbox disabled</label>
+</div>
+<div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input is-invalid" id="checkBox4" invalid>
+    <label class="custom-control-label" for="checkBox4">Checkbox invalid</label>
+</div></script></code></pre>
+    </div>
+</div>

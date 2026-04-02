@@ -1,0 +1,22 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/checkout.isml
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+    <div class="DAVModalResourceStrings"
+        data-modalheader="${Resource.msg('dav.modalheader','cybersource',null)}"
+        data-originaladdress="${Resource.msg('dav.originaladdress','cybersource',null)}"
+        data-useoriginaladdress="${Resource.msg('dav.useoriginaladdress','cybersource',null)}"
+        data-standardaddress="${Resource.msg('dav.standardaddress','cybersource',null)}"
+        data-usestandardaddress="${Resource.msg('dav.usestandardaddress','cybersource',null)}"
+        data-addressnotverified="${Resource.msg('dav.addressnotverified','cybersource',null)}"
+        data-continuewithaddress="${Resource.msg('dav.continuewithaddress','cybersource',null)}">
+    </div>
+</isif>

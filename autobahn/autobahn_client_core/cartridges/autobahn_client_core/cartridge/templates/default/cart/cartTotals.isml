@@ -1,0 +1,85 @@
+<iscomment> Promo code discount </iscomment>
+<div class="row leading-lines promo-code-section ${pdict.cartSummary.cart.hasAppliedCoupons && pdict.cartSummary.cart.productCouponDiscount.value ? '' : 'd-none'}">
+    <div class="start-lines">
+        <span>${Resource.msg('label.promocodetotal','cart',null)}</span>
+    </div>
+    <div class="end-lines">
+        <p class="text-right promo-code-total"><span>${pdict.cartSummary.cart.productCouponDiscount.formatted}</span></p>
+    </div>
+</div>
+<!--- Order Discount --->
+<div class="row order-discount <isif condition="${pdict.totals.orderLevelDiscountTotal.value === 0}">hide-order-discount</isif>">
+    <div class="col-6">
+        <p>${Resource.msg('label.order.discount', 'common', null)}</p>
+    </div>
+    <div class="col-6">
+        <p class="text-right order-discount-total"> - ${pdict.totals.orderLevelDiscountTotal.formatted}</p>
+    </div>
+</div>
+<!--- Shipping Discount --->
+<iscomment> <isif condition="${('shippingLevelDiscountTotal' in pdict.totals) && pdict.totals.shippingLevelDiscountTotal !== null}">
+    <div class="row shipping-discount <isif condition="${pdict.totals.shippingLevelDiscountTotal.value === 0}">hide-shipping-discount</isif>">
+        <div class="col-8">
+            <p>${Resource.msg('label.shipping.discount', 'common', null)}</p>
+        </div>
+        <div class="col-4">
+            <p class="text-right shipping-discount-total">- ${pdict.totals.shippingLevelDiscountTotal.formatted}</p>
+        </div>
+    </div>
+</isif> </iscomment>
+<iscomment> Estimated total </iscomment>
+<div class="row leading-lines estimated-total">
+    <div class="start-lines">
+        <p><span>${Resource.msg('label.estimatedtotal','cart',null)}</span></p>
+    </div>
+    <div class="end-lines">
+        <iscomment> <p class="text-right sub-total"><span>${pdict.totals.subTotal}</span></p> </iscomment>
+        <p class="text-right estimated-total-value"><span>${pdict.cartSummary.cart.estimatedTotal.formatted || pdict.totals.subTotal}</span></p>
+    </div>
+</div>
+<iscomment> Affirm amount </iscomment>
+<isif condition="${!pdict.affirmData.affirmOnlineStatus}">
+    <div class="cart-affirm-status">
+        <span class="affirm-as-low-as" data-page-type="cart-page" data-amount="${pdict.affirmData.affirmAmount}"></span>
+    </div>
+</isif>
+<iscomment> <isif condition="${('totalShippingCost' in pdict.totals) && pdict.totals.totalShippingCost !== null}">
+    <div class="row">
+        <div class="col-8">
+            <p>${Resource.msg('label.shipping.cost','cart',null)}</p>
+        </div>
+        <div class="col-4">
+            <p class="text-right shipping-cost">${pdict.totals.totalShippingCost}</p>
+        </div>
+    </div>
+</isif> </iscomment>
+
+<!-- Sales Tax -->
+<iscomment> <isif condition="${('totalTax' in pdict.totals) && pdict.totals.totalTax !== null}">
+    <div class="row">
+        <div class="col-8">
+            <p>${Resource.msg('label.sales.tax','cart',null)}</p>
+        </div>
+        <div class="col-4">
+            <p class="text-right tax-total">${pdict.totals.totalTax}</p>
+        </div>
+    </div>
+</isif> </iscomment>
+
+
+
+<iscomment> <div class="row leading-lines estimated-total">
+    <div class="col-8 start-lines">
+        <p><span>${Resource.msg('label.estimatedtotal', 'cart', null)}</span></p>
+    </div>
+    <div class="col-4 end-lines">
+        <isif
+            condition="${pdict.totals.grandTotalLessGiftCertificatePaymentInstrumentsFormatted || pdict.totals.grandTotal}">
+            <p class="text-right grand-total">
+                <span>${pdict.totals.grandTotalLessGiftCertificatePaymentInstrumentsFormatted || pdict.totals.grandTotal}</span>
+            </p>
+        </isif>
+
+    </div>
+</div> </iscomment>
+

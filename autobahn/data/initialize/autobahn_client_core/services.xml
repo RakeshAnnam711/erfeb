@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+
+    <service-credential service-credential-id="FrenzyAICredentials">
+        <url>https://wgaca.search.frenzy.ai/popular-searches</url>
+        <user-id></user-id>
+        <password>b423c0ba-a5f5-4c32-b369-ad7bdc94a1b5</password>
+    </service-credential>
+
+    <service-profile service-profile-id="FrenzyAIProfile">
+        <timeout-millis>60000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="FrenzyAIService">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>FrenzyAIProfile</profile-id>
+        <credential-id>FrenzyAICredentials</credential-id>
+    </service>
+    
+    <service-credential service-credential-id="ADPX-feed">
+        <url>https://wgacanp-itpf-apim-cnp01.azure-api.net/dev/events/v1/sfcc/adpx-feed-update</url>
+        <user-id/>
+        <password encrypted="true" encryption-type="common.export"></password>
+    </service-credential>
+
+    <service-profile service-profile-id="ADPX-feed">
+        <timeout-millis>30000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="ADPX-feed">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ADPX-feed</profile-id>
+        <credential-id>ADPX-feed</credential-id>
+    </service>
+    
+    <services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+        <service-credential service-credential-id="orderEventITPF">
+            <url>https://wgacanp-itpf-apim-cnp01.azure-api.net/dev/events/v1/sfcc/order-update</url>
+            <user-id/>
+            <password encrypted="true" encryption-type="common.export">HXGALm1JxNNDcaAg0Yt/AfT7Bsx8A/nZ0D0ddkFaDGk=</password>
+        </service-credential>
+
+        <service-profile service-profile-id="orderEventITPF">
+            <timeout-millis>60000</timeout-millis>
+            <rate-limit-enabled>false</rate-limit-enabled>
+            <rate-limit-calls>3</rate-limit-calls>
+            <rate-limit-millis>1000</rate-limit-millis>
+            <cb-enabled>false</cb-enabled>
+            <cb-calls>0</cb-calls>
+            <cb-millis>0</cb-millis>
+        </service-profile>
+
+        <service service-id="orderEventITPF">
+            <service-type>HTTP</service-type>
+            <enabled>true</enabled>
+            <log-prefix>OrderEventITPFLogs</log-prefix>
+            <comm-log-enabled>true</comm-log-enabled>
+            <force-prd-enabled>true</force-prd-enabled>
+            <mock-mode-enabled>false</mock-mode-enabled>
+            <profile-id>orderEventITPF</profile-id>
+            <credential-id>orderEventITPF</credential-id>
+    </service>
+    <service-credential service-credential-id="zeta.sftp.credential">
+        <url>sftp.app.zetaglobal.net</url>
+        <user-id>what-goes-around-dev-child</user-id>
+        <password encrypted="true" encryption-type="common.export"></password>
+    </service-credential>
+    <service-profile service-profile-id="zeta.sftp.profile">
+        <timeout-millis>3000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+    <service service-id="zeta.sftp.service">
+        <service-type>SFTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ZetaLogs</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>zeta.sftp.profile</profile-id>
+        <credential-id>zeta.sftp.credential</credential-id>
+    </service>
+</services>

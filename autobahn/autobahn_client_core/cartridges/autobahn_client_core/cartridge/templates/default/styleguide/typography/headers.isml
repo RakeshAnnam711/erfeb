@@ -1,0 +1,168 @@
+<div id="headers" class="sg__header3">Headers</div>
+    <p>Header styles are automatically applied to all <span class="pre">&lt;h1&gt;</span> through <span class="pre">&lt;h6&gt;</span> tags. Additionally, you can add header styles using either a helper class or a mixin that passes the tag number as a parameter, e.g. <span class="pre">@include header(1)</span>.</p>
+    <div class="row pb-0">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4">
+                    <div class="sg__header4 bp--mobile"></div>
+                </div>
+                <div class="col-4">
+                    <div class="sg__header4 bp--tablet"></div>
+                </div>
+                <div class="col-4">
+                    <div class="sg__header4 bp--desktop"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4 h1--mobile">
+                    <span class="h1">H1</span>
+                </div>
+                <div class="col-4 h1--tablet">
+                    <span class="h1">H1</span>
+                </div>
+                <div class="col-4 h1--desktop">
+                    <span class="h1">H1</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="h1">H1</span></script></code></pre>
+            <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include header(1)}</script></code></pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4 h2--mobile">
+                    <span class="h2">H2</span>
+                </div>
+                <div class="col-4 h2--tablet">
+                    <span class="h2">H2</span>
+                </div>
+                <div class="col-4 h2--desktop">
+                    <span class="h2">H2</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="h2">H2 Header</span></script></code></pre>
+            <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include header(2)}</script></code></pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4 h3--mobile">
+                    <span class="h3">H3</span>
+                </div>
+                <div class="col-4 h3--tablet">
+                    <span class="h3">H3</span>
+                </div>
+                <div class="col-4 h3--desktop">
+                    <span class="h3">H3</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="h3">H3 Header</span></script></code></pre>
+            <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include header(3)}</script></code></pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4 h4--mobile">
+                    <span class="h4">H4</span>
+                </div>
+                <div class="col-4 h4--tablet">
+                    <span class="h4">H4</span>
+                </div>
+                <div class="col-4 h4--desktop">
+                    <span class="h4">H4</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="h4">H4 Header</span></script></code></pre>
+            <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include header(4)}</script></code></pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4 h5--mobile">
+                    <span class="h5">H5</span>
+                </div>
+                <div class="col-4 h5--tablet">
+                    <span class="h5">H5</span>
+                </div>
+                <div class="col-4 h5--desktop">
+                    <span class="h5">H5</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="h5">H5 Header</span></script></code></pre>
+            <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include header(5)}</script></code></pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4 h6--mobile">
+                    <span class="h6">H6</span>
+                </div>
+                <div class="col-4 h6--tablet">
+                    <span class="h6">H6</span>
+                </div>
+                <div class="col-4 h6--desktop">
+                    <span class="h6">H6</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="h6">H6 Header</span></script></code></pre>
+            <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include header(6)}</script></code></pre>
+        </div>
+    </div>
+    <div class="row pb-0">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4">
+                    <div class="sg__header4 text-capitalize">Mobile Alt</div>
+                </div>
+                <div class="col-4">
+                    <div class="sg__header4 text-capitalize">Tablet Alt</div>
+                </div>
+                <div class="col-4">
+                    <div class="sg__header4 text-capitalize">Desktop Alt</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+           <p class="mb-1">Adding <span class="pre">-alt</span>to the end of a header tag will render the tertiary font being used above.</p> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-4 h2--mobile">
+                    <span class="h2 h2-alt">H2-alt</span>
+                </div>
+                <div class="col-4 h2--tablet">
+                    <span class="h2 h2-alt">H2-alt</span>
+                </div>
+                <div class="col-4 h2--desktop">
+                    <span class="h2 h2-alt">H2-alt</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="h2 h2-alt">H2-alt Header</span></script></code></pre>
+        </div>
+    </div>

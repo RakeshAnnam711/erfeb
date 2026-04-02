@@ -1,0 +1,352 @@
+{
+    "_v": "18.1",
+    "clients": [
+        {
+            "client_id": "97aeab94-09dd-45bf-aa8e-3f41682b4c77",
+            "resources": [
+                {
+                    "resource_id": "/code_versions",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "cache_time": 0
+                },
+                {
+                    "resource_id": "/code_versions/*",
+                    "methods": [
+                        "get",
+                        "put",
+                        "patch",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "cache_time": 0
+                },
+                {
+                    "resource_id": "/jobs/sfcc-site-archive-import/executions",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "cache_time": 0
+                },
+                {
+                    "resource_id": "/jobs/sfcc-site-archive-import/executions/*",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "cache_time": 0
+                },
+                {
+                    "resource_id": "/jobs/Reindex/*",
+                    "methods": [
+                        "get",
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "cache_time": 0
+                },
+                {
+                    "resource_id": "/jobs/RebuildURLs/*",
+                    "methods": [
+                        "get",
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "cache_time": 0
+                }
+            ]
+        },
+        {
+            "client_id": "d2f282da-c8df-460a-b505-4a462c9360b2",
+            "resources": [
+                {
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/code_versions"
+                },
+                {
+                    "methods": [
+                        "patch",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/code_versions/*"
+                },
+                {
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/jobs/*/executions"
+                },
+                {
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/jobs/*/executions/*"
+                },
+                {
+                    "resource_id": "/products/**",
+                    "methods": [
+                        "get",
+                        "patch",
+                        "put",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/customer_lists/**",
+                    "methods": [
+                        "get",
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/product_search",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/inventory_lists",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/catalogs/**",
+                    "methods": [
+                        "get",
+                        "patch",
+                        "put",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/inventory_lists/**",
+                    "methods": [
+                        "patch",
+                        "put",
+                        "get",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/sites/WGACA/custom_objects/**",
+                    "methods": [
+                        "patch",
+                        "put",
+                        "get",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/inventory_list_search",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/sites/WGACA/gift_certificates",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/sites/WGACA/gift_certificates/**",
+                    "methods": [
+                        "patch"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                }
+            ]
+        },
+        {
+            "client_id": "9a2d1a8c-163c-4e18-adbd-841a5626f34f",
+            "resources": [
+                {
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/code_versions"
+                },
+                {
+                    "methods": [
+                        "patch",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/code_versions/*"
+                },
+                {
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/jobs/*/executions"
+                },
+                {
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/jobs/*/executions/*"
+                },
+                {
+                    "resource_id": "/products/**",
+                    "methods": [
+                        "get",
+                        "patch",
+                        "put",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/product_search",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/inventory_lists",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/catalogs/**",
+                    "methods": [
+                        "get",
+                        "patch",
+                        "put",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/inventory_lists/**",
+                    "methods": [
+                        "patch",
+                        "put",
+                        "get",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/sites/WGACA/custom_objects/**",
+                    "methods": [
+                        "patch",
+                        "put",
+                        "get",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/inventory_list_search",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/sites/WGACA/gift_certificates",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/sites/WGACA/gift_certificates/**",
+                    "methods": [
+                        "patch"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                }
+            ]
+        },
+        {
+            "client_id": "86ec3b32-475c-495f-a9a5-570f84959d9c",
+            "resources": [
+                {
+                    "resource_id": "/user_search",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                }
+            ]
+        },
+        {
+            "client_id": "115e2356-bb71-44b2-8b0a-9c06ec26f4a7",
+            "resources": [
+                {
+                    "methods": [
+                        "get",
+                        "post",
+                        "put",
+                        "patch",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/**"
+                }
+            ]
+        }
+    ]
+}

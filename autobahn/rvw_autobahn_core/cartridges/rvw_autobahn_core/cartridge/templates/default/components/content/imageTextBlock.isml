@@ -1,0 +1,23 @@
+<isset name="textAlignment" value="${'textAlignment' in contentItem.custom && !empty(contentItem.custom.textAlignment) ? 'text-' + contentItem.custom.textAlignment : 'text-center'}" scope="page"/>
+<isset name="textPlacement" value="${'textPlacement' in contentItem.custom && !empty(contentItem.custom.textPlacement) ? 'text-placement-' + contentItem.custom.textPlacement : 'text-placement-below'}" scope="page"/>
+<isset name="aspectRatio" value="${'aspectRatio' in contentItem.custom && !empty(contentItem.custom.aspectRatio) ? 'aspect-ratio-' + contentItem.custom.aspectRatio : 'aspect-ratio-square'}" scope="page"/>
+<isset name="zoomImage" value="${'zoomImage' in contentItem.custom && contentItem.custom.zoomImage == true ? 'zoom' : ''}" scope="page"/>
+<isset name="url" value="${'button1Action' in contentItem.custom && contentItem.custom.button1Action ? contentItem.custom.button1Action : ''}" scope="page"/>
+
+<a class="image-text-block ${textPlacement} ${aspectRatio} ${zoomImage}" href="${url}">
+
+    <div class="image-cropper">
+        <isif condition="${contentItem.custom.imageUrl}">
+            <div class="image-wrapper">
+                <span class="background-image" role="img" aria-label="${contentItem.custom.imageUrl.absURL}" style="background-image: url(${contentItem.custom.imageUrl.absURL});"></span>
+            </div>
+        </isif>
+    </div>
+
+    <div class="image-text-block-text ${textAlignment}">
+        <div class="primary-text">${contentItem.custom.title}</div>
+        <isif condition="${!empty(contentItem.custom.subtitle)}">
+            <div class="secondary-text">${contentItem.custom.subtitle}</div>
+        </isif>
+    </div>
+</a>

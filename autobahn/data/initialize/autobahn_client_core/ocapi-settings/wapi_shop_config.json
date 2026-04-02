@@ -1,0 +1,210 @@
+{
+    "_v": "21.3",
+    "clients": [
+        {
+            "client_id": "d2f282da-c8df-460a-b505-4a462c9360b2",
+            "resources": [
+                {
+                    "resource_id": "/products/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "config": {
+                        "product.prices.price_book_ids": "wgaca-web-pricebook,wgaca-discount-pricebook,flow-wgaca-discount-pricebook-aed-united-arab-emirates,flow-wgaca-discount-pricebook-aud-australia,flow-wgaca-discount-pricebook-cad-canada,flow-wgaca-discount-pricebook-chf-switzerland,flow-wgaca-discount-pricebook-cny-china,flow-wgaca-discount-pricebook-dkk-denmark,flow-wgaca-discount-pricebook-eur-austria,flow-wgaca-discount-pricebook-eur-belgium,flow-wgaca-discount-pricebook-eur-finland,flow-wgaca-discount-pricebook-eur-france,flow-wgaca-discount-pricebook-eur-germany,flow-wgaca-discount-pricebook-eur-ireland,flow-wgaca-discount-pricebook-eur-italy,flow-wgaca-discount-pricebook-eur-netherlands,flow-wgaca-discount-pricebook-eur-portugal,flow-wgaca-discount-pricebook-eur-spain,flow-wgaca-discount-pricebook-gbp-united-kingdom,flow-wgaca-discount-pricebook-hkd-hong-kong,flow-wgaca-discount-pricebook-ils-israel,flow-wgaca-discount-pricebook-jpy-japan,flow-wgaca-discount-pricebook-krw-republic-of-korea,flow-wgaca-discount-pricebook-mxn-mexico,flow-wgaca-discount-pricebook-nok-norway,flow-wgaca-discount-pricebook-nzd-new-zealand,flow-wgaca-discount-pricebook-pln-poland,flow-wgaca-discount-pricebook-rub-russian-federation,flow-wgaca-discount-pricebook-sar-saudi-arabia,flow-wgaca-discount-pricebook-sek-sweden,flow-wgaca-discount-pricebook-sgd-singapore,flow-wgaca-discount-pricebook-thb-thailand,flow-wgaca-discount-pricebook-twd-taiwan,flow-wgaca-web-pricebook-aed-united-arab-emirates,flow-wgaca-web-pricebook-aud-australia,flow-wgaca-web-pricebook-cad-canada,flow-wgaca-web-pricebook-chf-switzerland,flow-wgaca-web-pricebook-cny-china,flow-wgaca-web-pricebook-dkk-denmark,flow-wgaca-web-pricebook-eur-austria,flow-wgaca-web-pricebook-eur-belgium,flow-wgaca-web-pricebook-eur-finland,flow-wgaca-web-pricebook-eur-france,flow-wgaca-web-pricebook-eur-germany,flow-wgaca-web-pricebook-eur-ireland,flow-wgaca-web-pricebook-eur-italy,flow-wgaca-web-pricebook-eur-netherlands,flow-wgaca-web-pricebook-eur-portugal,flow-wgaca-web-pricebook-eur-spain,flow-wgaca-web-pricebook-gbp-united-kingdom,flow-wgaca-web-pricebook-hkd-hong-kong,flow-wgaca-web-pricebook-ils-israel,flow-wgaca-web-pricebook-jpy-japan,flow-wgaca-web-pricebook-krw-republic-of-korea,flow-wgaca-web-pricebook-mxn-mexico,flow-wgaca-web-pricebook-nok-norway,flow-wgaca-web-pricebook-nzd-new-zealand,flow-wgaca-web-pricebook-pln-poland,flow-wgaca-web-pricebook-rub-russian-federation,flow-wgaca-web-pricebook-sar-saudi-arabia,flow-wgaca-web-pricebook-sek-sweden,flow-wgaca-web-pricebook-sgd-singapore,flow-wgaca-web-pricebook-thb-thailand,flow-wgaca-web-pricebook-twd-taiwan"
+                    },
+                    "cache_time": 60
+                },
+                {
+                    "resource_id": "/product_search",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "config": {
+                        "product.prices.price_book_ids": "wgaca-web-pricebook,wgaca-discount-pricebook,flow-wgaca-discount-pricebook-aed-united-arab-emirates,flow-wgaca-discount-pricebook-aud-australia,flow-wgaca-discount-pricebook-cad-canada,flow-wgaca-discount-pricebook-chf-switzerland,flow-wgaca-discount-pricebook-cny-china,flow-wgaca-discount-pricebook-dkk-denmark,flow-wgaca-discount-pricebook-eur-austria,flow-wgaca-discount-pricebook-eur-belgium,flow-wgaca-discount-pricebook-eur-finland,flow-wgaca-discount-pricebook-eur-france,flow-wgaca-discount-pricebook-eur-germany,flow-wgaca-discount-pricebook-eur-ireland,flow-wgaca-discount-pricebook-eur-italy,flow-wgaca-discount-pricebook-eur-netherlands,flow-wgaca-discount-pricebook-eur-portugal,flow-wgaca-discount-pricebook-eur-spain,flow-wgaca-discount-pricebook-gbp-united-kingdom,flow-wgaca-discount-pricebook-hkd-hong-kong,flow-wgaca-discount-pricebook-ils-israel,flow-wgaca-discount-pricebook-jpy-japan,flow-wgaca-discount-pricebook-krw-republic-of-korea,flow-wgaca-discount-pricebook-mxn-mexico,flow-wgaca-discount-pricebook-nok-norway,flow-wgaca-discount-pricebook-nzd-new-zealand,flow-wgaca-discount-pricebook-pln-poland,flow-wgaca-discount-pricebook-rub-russian-federation,flow-wgaca-discount-pricebook-sar-saudi-arabia,flow-wgaca-discount-pricebook-sek-sweden,flow-wgaca-discount-pricebook-sgd-singapore,flow-wgaca-discount-pricebook-thb-thailand,flow-wgaca-discount-pricebook-twd-taiwan,flow-wgaca-web-pricebook-aed-united-arab-emirates,flow-wgaca-web-pricebook-aud-australia,flow-wgaca-web-pricebook-cad-canada,flow-wgaca-web-pricebook-chf-switzerland,flow-wgaca-web-pricebook-cny-china,flow-wgaca-web-pricebook-dkk-denmark,flow-wgaca-web-pricebook-eur-austria,flow-wgaca-web-pricebook-eur-belgium,flow-wgaca-web-pricebook-eur-finland,flow-wgaca-web-pricebook-eur-france,flow-wgaca-web-pricebook-eur-germany,flow-wgaca-web-pricebook-eur-ireland,flow-wgaca-web-pricebook-eur-italy,flow-wgaca-web-pricebook-eur-netherlands,flow-wgaca-web-pricebook-eur-portugal,flow-wgaca-web-pricebook-eur-spain,flow-wgaca-web-pricebook-gbp-united-kingdom,flow-wgaca-web-pricebook-hkd-hong-kong,flow-wgaca-web-pricebook-ils-israel,flow-wgaca-web-pricebook-jpy-japan,flow-wgaca-web-pricebook-krw-republic-of-korea,flow-wgaca-web-pricebook-mxn-mexico,flow-wgaca-web-pricebook-nok-norway,flow-wgaca-web-pricebook-nzd-new-zealand,flow-wgaca-web-pricebook-pln-poland,flow-wgaca-web-pricebook-rub-russian-federation,flow-wgaca-web-pricebook-sar-saudi-arabia,flow-wgaca-web-pricebook-sek-sweden,flow-wgaca-web-pricebook-sgd-singapore,flow-wgaca-web-pricebook-thb-thailand,flow-wgaca-web-pricebook-twd-taiwan"
+                    },
+                    "cache_time": 60
+                },
+                {
+                    "resource_id": "/order_search",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/customers/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/customers/**",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/product_lists/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "cache_time": 60
+                },
+                {
+                    "resource_id": "/products/*/prices",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "config": {
+                        "product.prices.price_book_ids": "wgaca-web-pricebook,wgaca-discount-pricebook,flow-wgaca-discount-pricebook-aed-united-arab-emirates,flow-wgaca-discount-pricebook-aud-australia,flow-wgaca-discount-pricebook-cad-canada,flow-wgaca-discount-pricebook-chf-switzerland,flow-wgaca-discount-pricebook-cny-china,flow-wgaca-discount-pricebook-dkk-denmark,flow-wgaca-discount-pricebook-eur-austria,flow-wgaca-discount-pricebook-eur-belgium,flow-wgaca-discount-pricebook-eur-finland,flow-wgaca-discount-pricebook-eur-france,flow-wgaca-discount-pricebook-eur-germany,flow-wgaca-discount-pricebook-eur-ireland,flow-wgaca-discount-pricebook-eur-italy,flow-wgaca-discount-pricebook-eur-netherlands,flow-wgaca-discount-pricebook-eur-portugal,flow-wgaca-discount-pricebook-eur-spain,flow-wgaca-discount-pricebook-gbp-united-kingdom,flow-wgaca-discount-pricebook-hkd-hong-kong,flow-wgaca-discount-pricebook-ils-israel,flow-wgaca-discount-pricebook-jpy-japan,flow-wgaca-discount-pricebook-krw-republic-of-korea,flow-wgaca-discount-pricebook-mxn-mexico,flow-wgaca-discount-pricebook-nok-norway,flow-wgaca-discount-pricebook-nzd-new-zealand,flow-wgaca-discount-pricebook-pln-poland,flow-wgaca-discount-pricebook-rub-russian-federation,flow-wgaca-discount-pricebook-sar-saudi-arabia,flow-wgaca-discount-pricebook-sek-sweden,flow-wgaca-discount-pricebook-sgd-singapore,flow-wgaca-discount-pricebook-thb-thailand,flow-wgaca-discount-pricebook-twd-taiwan,flow-wgaca-web-pricebook-aed-united-arab-emirates,flow-wgaca-web-pricebook-aud-australia,flow-wgaca-web-pricebook-cad-canada,flow-wgaca-web-pricebook-chf-switzerland,flow-wgaca-web-pricebook-cny-china,flow-wgaca-web-pricebook-dkk-denmark,flow-wgaca-web-pricebook-eur-austria,flow-wgaca-web-pricebook-eur-belgium,flow-wgaca-web-pricebook-eur-finland,flow-wgaca-web-pricebook-eur-france,flow-wgaca-web-pricebook-eur-germany,flow-wgaca-web-pricebook-eur-ireland,flow-wgaca-web-pricebook-eur-italy,flow-wgaca-web-pricebook-eur-netherlands,flow-wgaca-web-pricebook-eur-portugal,flow-wgaca-web-pricebook-eur-spain,flow-wgaca-web-pricebook-gbp-united-kingdom,flow-wgaca-web-pricebook-hkd-hong-kong,flow-wgaca-web-pricebook-ils-israel,flow-wgaca-web-pricebook-jpy-japan,flow-wgaca-web-pricebook-krw-republic-of-korea,flow-wgaca-web-pricebook-mxn-mexico,flow-wgaca-web-pricebook-nok-norway,flow-wgaca-web-pricebook-nzd-new-zealand,flow-wgaca-web-pricebook-pln-poland,flow-wgaca-web-pricebook-rub-russian-federation,flow-wgaca-web-pricebook-sar-saudi-arabia,flow-wgaca-web-pricebook-sek-sweden,flow-wgaca-web-pricebook-sgd-singapore,flow-wgaca-web-pricebook-thb-thailand,flow-wgaca-web-pricebook-twd-taiwan"
+                    },
+                    "cache_time": 60
+                },
+                {
+                    "resource_id": "/categories/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/gift_certificate",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/orders/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                }
+            ]
+        },
+        {
+            "client_id": "9a2d1a8c-163c-4e18-adbd-841a5626f34f",
+            "resources": [
+                {
+                    "resource_id": "/products/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "config": {
+                        "product.prices.price_book_ids": "wgaca-web-pricebook,wgaca-discount-pricebook,flow-wgaca-discount-pricebook-aed-united-arab-emirates,flow-wgaca-discount-pricebook-aud-australia,flow-wgaca-discount-pricebook-cad-canada,flow-wgaca-discount-pricebook-chf-switzerland,flow-wgaca-discount-pricebook-cny-china,flow-wgaca-discount-pricebook-dkk-denmark,flow-wgaca-discount-pricebook-eur-austria,flow-wgaca-discount-pricebook-eur-belgium,flow-wgaca-discount-pricebook-eur-finland,flow-wgaca-discount-pricebook-eur-france,flow-wgaca-discount-pricebook-eur-germany,flow-wgaca-discount-pricebook-eur-ireland,flow-wgaca-discount-pricebook-eur-italy,flow-wgaca-discount-pricebook-eur-netherlands,flow-wgaca-discount-pricebook-eur-portugal,flow-wgaca-discount-pricebook-eur-spain,flow-wgaca-discount-pricebook-gbp-united-kingdom,flow-wgaca-discount-pricebook-hkd-hong-kong,flow-wgaca-discount-pricebook-ils-israel,flow-wgaca-discount-pricebook-jpy-japan,flow-wgaca-discount-pricebook-krw-republic-of-korea,flow-wgaca-discount-pricebook-mxn-mexico,flow-wgaca-discount-pricebook-nok-norway,flow-wgaca-discount-pricebook-nzd-new-zealand,flow-wgaca-discount-pricebook-pln-poland,flow-wgaca-discount-pricebook-rub-russian-federation,flow-wgaca-discount-pricebook-sar-saudi-arabia,flow-wgaca-discount-pricebook-sek-sweden,flow-wgaca-discount-pricebook-sgd-singapore,flow-wgaca-discount-pricebook-thb-thailand,flow-wgaca-discount-pricebook-twd-taiwan,flow-wgaca-web-pricebook-aed-united-arab-emirates,flow-wgaca-web-pricebook-aud-australia,flow-wgaca-web-pricebook-cad-canada,flow-wgaca-web-pricebook-chf-switzerland,flow-wgaca-web-pricebook-cny-china,flow-wgaca-web-pricebook-dkk-denmark,flow-wgaca-web-pricebook-eur-austria,flow-wgaca-web-pricebook-eur-belgium,flow-wgaca-web-pricebook-eur-finland,flow-wgaca-web-pricebook-eur-france,flow-wgaca-web-pricebook-eur-germany,flow-wgaca-web-pricebook-eur-ireland,flow-wgaca-web-pricebook-eur-italy,flow-wgaca-web-pricebook-eur-netherlands,flow-wgaca-web-pricebook-eur-portugal,flow-wgaca-web-pricebook-eur-spain,flow-wgaca-web-pricebook-gbp-united-kingdom,flow-wgaca-web-pricebook-hkd-hong-kong,flow-wgaca-web-pricebook-ils-israel,flow-wgaca-web-pricebook-jpy-japan,flow-wgaca-web-pricebook-krw-republic-of-korea,flow-wgaca-web-pricebook-mxn-mexico,flow-wgaca-web-pricebook-nok-norway,flow-wgaca-web-pricebook-nzd-new-zealand,flow-wgaca-web-pricebook-pln-poland,flow-wgaca-web-pricebook-rub-russian-federation,flow-wgaca-web-pricebook-sar-saudi-arabia,flow-wgaca-web-pricebook-sek-sweden,flow-wgaca-web-pricebook-sgd-singapore,flow-wgaca-web-pricebook-thb-thailand,flow-wgaca-web-pricebook-twd-taiwan"
+                    },
+                    "cache_time": 60
+                },
+                {
+                    "resource_id": "/product_search",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "config": {
+                        "product.prices.price_book_ids": "wgaca-web-pricebook,wgaca-discount-pricebook,flow-wgaca-discount-pricebook-aed-united-arab-emirates,flow-wgaca-discount-pricebook-aud-australia,flow-wgaca-discount-pricebook-cad-canada,flow-wgaca-discount-pricebook-chf-switzerland,flow-wgaca-discount-pricebook-cny-china,flow-wgaca-discount-pricebook-dkk-denmark,flow-wgaca-discount-pricebook-eur-austria,flow-wgaca-discount-pricebook-eur-belgium,flow-wgaca-discount-pricebook-eur-finland,flow-wgaca-discount-pricebook-eur-france,flow-wgaca-discount-pricebook-eur-germany,flow-wgaca-discount-pricebook-eur-ireland,flow-wgaca-discount-pricebook-eur-italy,flow-wgaca-discount-pricebook-eur-netherlands,flow-wgaca-discount-pricebook-eur-portugal,flow-wgaca-discount-pricebook-eur-spain,flow-wgaca-discount-pricebook-gbp-united-kingdom,flow-wgaca-discount-pricebook-hkd-hong-kong,flow-wgaca-discount-pricebook-ils-israel,flow-wgaca-discount-pricebook-jpy-japan,flow-wgaca-discount-pricebook-krw-republic-of-korea,flow-wgaca-discount-pricebook-mxn-mexico,flow-wgaca-discount-pricebook-nok-norway,flow-wgaca-discount-pricebook-nzd-new-zealand,flow-wgaca-discount-pricebook-pln-poland,flow-wgaca-discount-pricebook-rub-russian-federation,flow-wgaca-discount-pricebook-sar-saudi-arabia,flow-wgaca-discount-pricebook-sek-sweden,flow-wgaca-discount-pricebook-sgd-singapore,flow-wgaca-discount-pricebook-thb-thailand,flow-wgaca-discount-pricebook-twd-taiwan,flow-wgaca-web-pricebook-aed-united-arab-emirates,flow-wgaca-web-pricebook-aud-australia,flow-wgaca-web-pricebook-cad-canada,flow-wgaca-web-pricebook-chf-switzerland,flow-wgaca-web-pricebook-cny-china,flow-wgaca-web-pricebook-dkk-denmark,flow-wgaca-web-pricebook-eur-austria,flow-wgaca-web-pricebook-eur-belgium,flow-wgaca-web-pricebook-eur-finland,flow-wgaca-web-pricebook-eur-france,flow-wgaca-web-pricebook-eur-germany,flow-wgaca-web-pricebook-eur-ireland,flow-wgaca-web-pricebook-eur-italy,flow-wgaca-web-pricebook-eur-netherlands,flow-wgaca-web-pricebook-eur-portugal,flow-wgaca-web-pricebook-eur-spain,flow-wgaca-web-pricebook-gbp-united-kingdom,flow-wgaca-web-pricebook-hkd-hong-kong,flow-wgaca-web-pricebook-ils-israel,flow-wgaca-web-pricebook-jpy-japan,flow-wgaca-web-pricebook-krw-republic-of-korea,flow-wgaca-web-pricebook-mxn-mexico,flow-wgaca-web-pricebook-nok-norway,flow-wgaca-web-pricebook-nzd-new-zealand,flow-wgaca-web-pricebook-pln-poland,flow-wgaca-web-pricebook-rub-russian-federation,flow-wgaca-web-pricebook-sar-saudi-arabia,flow-wgaca-web-pricebook-sek-sweden,flow-wgaca-web-pricebook-sgd-singapore,flow-wgaca-web-pricebook-thb-thailand,flow-wgaca-web-pricebook-twd-taiwan"
+                    },
+                    "cache_time": 60
+                },
+                {
+                    "resource_id": "/order_search",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/product_lists/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "cache_time": 60
+                },
+                {
+                    "resource_id": "/products/*/prices",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "config": {
+                        "product.prices.price_book_ids": "wgaca-web-pricebook,wgaca-discount-pricebook,flow-wgaca-discount-pricebook-aed-united-arab-emirates,flow-wgaca-discount-pricebook-aud-australia,flow-wgaca-discount-pricebook-cad-canada,flow-wgaca-discount-pricebook-chf-switzerland,flow-wgaca-discount-pricebook-cny-china,flow-wgaca-discount-pricebook-dkk-denmark,flow-wgaca-discount-pricebook-eur-austria,flow-wgaca-discount-pricebook-eur-belgium,flow-wgaca-discount-pricebook-eur-finland,flow-wgaca-discount-pricebook-eur-france,flow-wgaca-discount-pricebook-eur-germany,flow-wgaca-discount-pricebook-eur-ireland,flow-wgaca-discount-pricebook-eur-italy,flow-wgaca-discount-pricebook-eur-netherlands,flow-wgaca-discount-pricebook-eur-portugal,flow-wgaca-discount-pricebook-eur-spain,flow-wgaca-discount-pricebook-gbp-united-kingdom,flow-wgaca-discount-pricebook-hkd-hong-kong,flow-wgaca-discount-pricebook-ils-israel,flow-wgaca-discount-pricebook-jpy-japan,flow-wgaca-discount-pricebook-krw-republic-of-korea,flow-wgaca-discount-pricebook-mxn-mexico,flow-wgaca-discount-pricebook-nok-norway,flow-wgaca-discount-pricebook-nzd-new-zealand,flow-wgaca-discount-pricebook-pln-poland,flow-wgaca-discount-pricebook-rub-russian-federation,flow-wgaca-discount-pricebook-sar-saudi-arabia,flow-wgaca-discount-pricebook-sek-sweden,flow-wgaca-discount-pricebook-sgd-singapore,flow-wgaca-discount-pricebook-thb-thailand,flow-wgaca-discount-pricebook-twd-taiwan,flow-wgaca-web-pricebook-aed-united-arab-emirates,flow-wgaca-web-pricebook-aud-australia,flow-wgaca-web-pricebook-cad-canada,flow-wgaca-web-pricebook-chf-switzerland,flow-wgaca-web-pricebook-cny-china,flow-wgaca-web-pricebook-dkk-denmark,flow-wgaca-web-pricebook-eur-austria,flow-wgaca-web-pricebook-eur-belgium,flow-wgaca-web-pricebook-eur-finland,flow-wgaca-web-pricebook-eur-france,flow-wgaca-web-pricebook-eur-germany,flow-wgaca-web-pricebook-eur-ireland,flow-wgaca-web-pricebook-eur-italy,flow-wgaca-web-pricebook-eur-netherlands,flow-wgaca-web-pricebook-eur-portugal,flow-wgaca-web-pricebook-eur-spain,flow-wgaca-web-pricebook-gbp-united-kingdom,flow-wgaca-web-pricebook-hkd-hong-kong,flow-wgaca-web-pricebook-ils-israel,flow-wgaca-web-pricebook-jpy-japan,flow-wgaca-web-pricebook-krw-republic-of-korea,flow-wgaca-web-pricebook-mxn-mexico,flow-wgaca-web-pricebook-nok-norway,flow-wgaca-web-pricebook-nzd-new-zealand,flow-wgaca-web-pricebook-pln-poland,flow-wgaca-web-pricebook-rub-russian-federation,flow-wgaca-web-pricebook-sar-saudi-arabia,flow-wgaca-web-pricebook-sek-sweden,flow-wgaca-web-pricebook-sgd-singapore,flow-wgaca-web-pricebook-thb-thailand,flow-wgaca-web-pricebook-twd-taiwan"
+                    },
+                    "cache_time": 60
+                },
+                {
+                    "resource_id": "/categories/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/gift_certificate",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/orders/**",
+                    "methods": [
+                        "get"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                },
+                {
+                    "resource_id": "/customers/**",
+                    "methods": [
+                        "post"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)"
+                }
+            ]
+        },
+        {
+            "client_id": "115e2356-bb71-44b2-8b0a-9c06ec26f4a7",
+            "resources": [
+                {
+                    "methods": [
+                        "get",
+                        "post",
+                        "put",
+                        "patch",
+                        "delete"
+                    ],
+                    "read_attributes": "(**)",
+                    "write_attributes": "(**)",
+                    "resource_id": "/**"
+                }
+            ]
+        }
+    ]
+}
