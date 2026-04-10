@@ -3,6 +3,9 @@
 <isdecorate template="/common/layout/page">
         <isscript>
             var assets = require('*/cartridge/scripts/assets.js');
+            var homepageRecommendationHelpers = require('*/cartridge/scripts/helpers/homepageRecommendationHelpers');
+            var recommendationProducts = homepageRecommendationHelpers.getDefaultProducts(10);
+            var hasRecommendationProducts = homepageRecommendationHelpers.hasProducts(recommendationProducts);
             assets.addCss('/css/consolidated-components.css');
         </isscript>
     <div class="storepage page-designer ${pdict.customClass}" id="${pdict.page.ID}">
@@ -14,10 +17,76 @@
         <iscomment> einsten recomenedations home page start </iscomment>
         <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnHome')}">
             <div class="einstein_section overflow-hidden px-5 w-100" style="background-color:#f7f7f7;">
-                <div class="einstein-scroll">
+                <div class="einstein-scroll" data-einstein-home-slot>
                     <isslot id="einstein-home-recommendations" description="Einstein HOME Recommendations" context="global" />
                 </div>
+                <isif condition="${hasRecommendationProducts}">
+                    <div class="homepage-einstein-fallback d-none">
+                        <div class="recommendations recommendations-homepage">
+                            <h2 class="col-12 title text-center pt-4 mb-4 recommendations-heading">${Resource.msg('label.einstein.recommendationsHome', 'product', null)}</h2>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-8 col-lg-12 value content">
+                                    <isset name="end" value="${10}" scope="page" />
+                                    <isset name="recommendationProducts" value="${recommendationProducts}" scope="page" />
+                                    <isinclude template="components/productsNew" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </isif>
             </div>
+            <script>
+                (function () {
+                    function hasRenderedEinsteinRecommendations(container) {
+                        if (!container) {
+                            return false;
+                        }
+
+                        return !!container.querySelector(
+                            '.recommendation-card,' +
+                            '.product-grid-new,' +
+                            '.product-tile,' +
+                            '.experience-component'
+                        );
+                    }
+
+                    function toggleHomepageRecommendationFallback() {
+                        var einsteinContainer = document.querySelector('[data-einstein-home-slot]');
+                        var fallbackContainer = document.querySelector('.homepage-einstein-fallback');
+
+                        if (!einsteinContainer || !fallbackContainer) {
+                            return;
+                        }
+
+                        if (hasRenderedEinsteinRecommendations(einsteinContainer)) {
+                            fallbackContainer.classList.add('d-none');
+                        } else {
+                            fallbackContainer.classList.remove('d-none');
+                        }
+                    }
+
+                    function initHomepageRecommendationFallback() {
+                        toggleHomepageRecommendationFallback();
+
+                        window.setTimeout(toggleHomepageRecommendationFallback, 300);
+                        window.setTimeout(toggleHomepageRecommendationFallback, 1000);
+
+                        var einsteinContainer = document.querySelector('[data-einstein-home-slot]');
+                        if (einsteinContainer && window.MutationObserver) {
+                            new MutationObserver(toggleHomepageRecommendationFallback).observe(einsteinContainer, {
+                                childList: true,
+                                subtree: true
+                            });
+                        }
+                    }
+
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', initHomepageRecommendationFallback);
+                    } else {
+                        initHomepageRecommendationFallback();
+                    }
+                }());
+            </script>
         </isif>
         <iscomment> einsten recomenedations home page end </iscomment>
     </div>
