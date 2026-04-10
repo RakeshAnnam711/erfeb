@@ -1,14 +1,4 @@
 
-(function () {
-    const previousPageType = sessionStorage.getItem('previousPageType') || '';
-    const currentPageType = sessionStorage.getItem('currentPageType') || '';
-
-    if (previousPageType === 'SKU Search') {
-        if (currentPageType === 'PLP Page' || currentPageType === 'frenzysearch') {
-            sessionStorage.setItem('previousPageType', 'frenzysearch');
-        }
-    }
-})();
 // capture clicks on legal links
 $(document).on('click', '.register-privacy-policy-link', function () {
     sessionStorage.setItem('checkoutLegalNav', 'true');
@@ -82,7 +72,7 @@ function handleGlobalClick(event) {
                 'Popular Products': 'search_popularProducts_carousel'
             };
 
-            const pageType = sectionToPageType[sectionLabel] || 'frenzysearch';
+            const pageType = sectionToPageType[sectionLabel] || 'SKU Search';
             sessionStorage.setItem('currentPageType', pageType);
 
             fireSearchEvent(clickedText, 'search');
@@ -99,31 +89,12 @@ function handleGlobalClick(event) {
         event.preventDefault();
         try {
             const clickedText = suggestionLink.textContent.trim();
-            setCurrentPageType('frenzysearch');
+            setCurrentPageType('SKU Search');
             fireSearchEvent(clickedText, 'search');
             navigateWithDelay(suggestionLink.href);
         } catch (err) {
             console.error('Error processing text suggestion click:', err);
         }
-        return;
-    }
-
-    // Recently viewed / you may also like
-    const frenzyAnchor = target.closest('.frenzy_product_item a');
-    if (frenzyAnchor) {
-        event.preventDefault();
-        try {
-            const parent = frenzyAnchor.closest('.frenzy_product_item');
-            const gtmDataAttr = parent?.querySelector('[data-gtmdata]');
-            const gtmDataRaw = gtmDataAttr?.getAttribute('data-gtmdata');
-            const gtmData = gtmDataRaw ? JSON.parse(gtmDataRaw.replace(/&quot;/g, '"')) : null;
-            if (gtmData?.item_list_name) {
-                setCurrentPageType(gtmData.item_list_name);
-            }
-        } catch (err) {
-            console.error('Error parsing GTM Data for Frenzy product:', err);
-        }
-        navigateWithDelay(frenzyAnchor.href);
         return;
     }
 
@@ -133,7 +104,7 @@ function handleGlobalClick(event) {
         event.preventDefault();
         try {
             const clickedCategory = popularSearchLink.textContent.trim();
-            setCurrentPageType('frenzysearch');
+            setCurrentPageType('SKU Search');
             fireSearchEvent(clickedCategory, 'search');
             navigateWithDelay(popularSearchLink.href);
         } catch (err) {

@@ -122,7 +122,7 @@ base.addToCart = function () {
         });
     });
 
-    $('body').on('search:showMore--success, frenzy:dataLoadComplete', function(){
+    $('body').on('search:showMore--success', function(){
         checkLoadedProductsForCartData();
     });
 

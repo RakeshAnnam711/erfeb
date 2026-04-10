@@ -294,13 +294,6 @@ coreCart.init = function () {
         couponsEl.style.display = 'flex';
     }
 
-    // cartFernzySlider.isml
-    $('body').on('cart:update', function (e, data, uuid) {
-        if (data.basket.items.length === 0) {
-            window.getHomepageProductsApi?.();
-        }
-    });
-
     $('#checkout-select-country').on('click', ()=>{
         document.getElementById('ge-country-selector').click();
     });
