@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <group-definitions>
+            <attribute-group group-id="Autobahn Integrations">
+                <display-name xml:lang="x-default">Autobahn Integration Toggles</display-name>
+                <attribute attribute-id="AffirmOnline"/>
+                <attribute attribute-id="adyenCartridgeEnabled"/>
+                <attribute attribute-id="avataxCartridgeEnabled"/>
+                <attribute attribute-id="bopisCartridgeEnabled"/>
+                <attribute attribute-id="cybersourceCartridgeEnabled"/>
+                <attribute attribute-id="forterEnabled"/>
+                <attribute attribute-id="paypalCartridgeEnabled"/>
+                <attribute attribute-id="giftCertificateEnabled"/>
+                <attribute attribute-id="googlePlacesEnabled"/>
+                <attribute attribute-id="GTMEnable"/>
+                <attribute attribute-id="klaviyo_enabled"/>
+                <attribute attribute-id="MarketingCloudForNewsletterEnabled"/>
+                <attribute attribute-id="multishippingWithoutBopisEnabled"/>
+                <attribute attribute-id="sfcommercepaymentsCartridgeEnabled"/>
+                <attribute attribute-id="showFacebookLogin"/>
+                <attribute attribute-id="showGoogleLogin"/>
+                <attribute attribute-id="SignifydEnableCartridge"/>
+                <attribute attribute-id="TaxJarEnable"/>
+                <attribute attribute-id="Vertex_isEnabled"/>
+                <attribute attribute-id="viewOutOfStockItems"/>
+                <attribute attribute-id="viewBackInStockNotificationForm"/>
+                <attribute attribute-id="wishlistEnable"/>
+                <attribute attribute-id="yotpoCartridgeEnabled"/>
+                <attribute attribute-id="enablePasswordlessLogin"/>
+                <attribute attribute-id="enableShipStationsShippingRates"/>
+                <attribute attribute-id="enablePackingItemsIntoBoxes"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

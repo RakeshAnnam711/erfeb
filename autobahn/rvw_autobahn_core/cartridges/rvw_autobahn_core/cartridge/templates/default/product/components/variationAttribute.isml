@@ -1,0 +1,91 @@
+<iscomment>
+
+Template Notes:
+
+- This template is intended to be referenced from an <isinclude> tag within an <isloop> in another
+  source template.  The <isloop> is expected to have a "status" attribute, named "attributeStatus".
+- ${attributeStatus.last} is checked to see whether a particular attribute row should include the
+  Quantity drop-down menu
+
+</iscomment>
+
+<isset name="hideVariant" value="${product.pdpHideSingleVariants && attr.isOnlyVariant}" scope="page"/>
+<isset name="outOfStockEnabled" value="${pdict.abConfigs.viewOutOfStockItems}" scope="page"/>
+
+<isif condition="${!hideVariant}">
+    <div class="attribute">
+        <isif condition="${attr.swatchable && attr.id == 'color' && noSwatchOverride !== true}">
+
+            <iscomment>Select <Attribute> Label</iscomment>
+            <span class="${attr.id} non-input-label color-label">
+                ${attr.displayName}: <span class="color-display-value">${empty(product.selectedColorName)  ? Resource.msgf('select.variant.value','product',null, attr.displayName) : product.selectedColorName}</span>
+            </span>
+
+            <iscomment>Circular Swatch Image Attribute Values</iscomment>
+            <isloop items="${attr.values}" var="attrValue">
+                <isif condition="${!(isBundle && product.productType === 'variant' && !attrValue.selected) }">
+                    <isset name="image" value="${attrValue.images[attrValue.images.type]}" scope="page"/>
+                    <button class="color-attribute"
+                            aria-label="${Resource.msg('label.select', 'common', null)} ${attr.displayName} ${attrValue.displayValue}"
+                            aria-describedby="${attrValue.id}"
+                            data-url="${attrValue.url}" ${ product.productType === "variant" && isBundle ? "disabled" : "" }
+                            cypress-target="productColorSwatch"
+                    >
+                        <span data-attr-value="${attrValue.value}"
+                            data-displayvalue="${attrValue.displayValue}"
+                            class="swatch
+                                ${attr.id}-value
+                                ${attrValue.images.type === 'thumbnail' ? 'swatch-thumbnail' : 'swatch-circle'}
+                                swatch-value
+                                ${attrValue.selected ? 'selected' : ''}
+                                ${attrValue.selectable ? 'selectable' : 'unselectable'}
+                                ${attrValue.available ? 'available' : (outOfStockEnabled ? 'out-of-stock' : 'unavailable')}"
+                            style="background-image: url('${image.length > 0 ? image[0].url : ''}'), url('${URLUtils.staticURL('/images/noimage-swatch.png')}')"
+                        ></span>
+                        <span id="${attrValue.id}" class="sr-only selected-assistive-text">
+                            ${attrValue.selected ? Resource.msg('msg.assistive.selected.text', 'common', null) : ''}
+                        </span>
+                    </button>
+                </isif>
+            </isloop>
+        <iselseif condition="${attr.swatchable && noSwatchOverride !== true}"/>
+            <iscomment>Size Chart</iscomment>
+            <isif condition="${product.variationAttributes && product.sizeChartId && !sizeChartHasBeenShown && attributeStatus.last}">
+                <isset name="sizeChartHasBeenShown" value="${true}" scope="page"/>
+                <div class="size-chart">
+                    <isinclude template="product/components/sizeChart" />
+                </div>
+            </isif>
+            <isinclude template="product/components/nonColorSwatches"/>
+        <iselse/>
+            <iscomment>Size Chart</iscomment>
+            <isif condition="${product.variationAttributes && product.sizeChartId && !sizeChartHasBeenShown && attributeStatus.last}">
+                <isset name="sizeChartHasBeenShown" value="${true}" scope="page"/>
+                <div class="size-chart">
+                    <isinclude template="product/components/sizeChart" />
+                </div>
+            </isif>
+            <iscomment>Select <Attribute> Label</iscomment>
+            <label class="${attr.id}" for="${attr.id}-${loopState && loopState.count ? loopState.count : '1' }">
+                ${Resource.msg('label.select', 'common', null)} ${attr.displayName}
+            </label>
+            <iscomment>Attribute Values Drop Down Menu</iscomment>
+            <select class="custom-select form-control select-${attr.id} selectpicker <isif condition="${attr.values.length == 1}"> single-select</isif>" data-attr="${attr.id}" id="${attr.id}-${loopState !== 'undefined' && loopState && loopState.count ? loopState.count : '1' }" name="select-${attr.id}" ${ product.productType === "variant" && isBundle ? "disabled" : "" }>
+                <option value="${attr.resetUrl}" ${attr.variantSelected ? 'disabled': '' }>
+                    ${Resource.msg('label.select', 'common', null)} ${attr.displayName}
+                </option>
+                <isloop items="${attr.values}" var="attrValue">
+                <iscomment>${JSON.stringify(attrValue.selected)}</iscomment>
+                    <option value="${attrValue.url}" data-attr-value="${attrValue.value}" class="${!attrValue.available ? 'unavailable' : ''}"
+                        ${!attrValue.selectable ? 'disabled' : ''}
+                        ${attrValue.selected ? 'selected' : ''}
+                    >
+                        ${attrValue.displayValue}
+                        ${!attrValue.available ? ' ' + Resource.msg('product.option.unavailable', 'product', null) : ''}
+                    </option>
+                </isloop>
+            </select>
+        </isif>
+    </div>
+
+</isif>

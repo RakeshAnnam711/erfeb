@@ -1,0 +1,158 @@
+.photo-hotspots {
+    position: relative;
+    .hotspot {
+        position: absolute;
+        width: $photo-hotspot-size;
+        height: $photo-hotspot-size;
+        background: $photo-hotspot-background;
+        border-radius: $photo-hotspot-border-radius;
+        margin-top: calc(#{$photo-hotspot-size} / -2);
+        margin-left: calc(#{$photo-hotspot-size} / -2);
+        box-shadow: $photo-hotspot-shadow;
+        transition: all $transition-speed ease-out;
+        text-decoration: none;
+        @include icon($photo-hotspot-icon, before, $photo-hotspot-icon-size, $photo-hotspot-icon-color);
+        &::before {
+            @include absolute-center;
+            width: $photo-hotspot-icon-size;
+        }
+        .hotspot-border-inner,
+        .hotspot-border-outer {
+            @include absolute-center;
+            border-radius: $photo-hotspot-border-radius;
+            transition: all $transition-speed ease-out;
+        }
+
+        // inner border
+        .hotspot-border-inner {
+            font-size: $photo-hotspot-icon-size;
+            line-height: $photo-hotspot-size;
+            width: $photo-hotspot-size + $photo-hotspot-border-size-inner*2;
+            height: $photo-hotspot-size + $photo-hotspot-border-size-inner*2;
+            border: $photo-hotspot-border-size-inner solid $photo-hotspot-border-color-inner;
+            z-index: 1; // moving to top to allow tooltip hover to work
+        }
+
+        //outer border
+        .hotspot-border-outer {
+            content: '';
+            width: $photo-hotspot-size + $photo-hotspot-border-size-inner*2 + $photo-hotspot-border-size-outer*2;
+            height: $photo-hotspot-size + $photo-hotspot-border-size-inner*2 + $photo-hotspot-border-size-outer*2;
+            border: $photo-hotspot-border-size-outer solid $photo-hotspot-border-color-outer;
+        }
+        &:hover {
+            width: $photo-hotspot-size-hover;
+            height: $photo-hotspot-size-hover;
+            margin-top: calc(#{$photo-hotspot-size-hover} / -2);
+            margin-left: calc(#{$photo-hotspot-size-hover} / -2);
+            .hotspot-border-inner {
+                line-height: $photo-hotspot-size-hover;
+                width: $photo-hotspot-size-hover + $photo-hotspot-border-size-inner-hover*2;
+                height: $photo-hotspot-size-hover + $photo-hotspot-border-size-inner-hover*2;
+                border: $photo-hotspot-border-size-inner-hover solid $photo-hotspot-border-color-inner-hover;
+            }
+            .hotspot-border-outer {
+                width: $photo-hotspot-size-hover + $photo-hotspot-border-size-inner-hover*2 + $photo-hotspot-border-size-outer-hover*2;
+                height: $photo-hotspot-size-hover + $photo-hotspot-border-size-inner-hover*2 + $photo-hotspot-border-size-outer-hover*2;
+                border: $photo-hotspot-border-size-outer-hover solid $photo-hotspot-border-color-outer-hover;
+            }
+        }
+
+        // Dark theme
+        &.dark {
+            background: $photo-hotspot-background-dark;
+            &::before {
+                color: $photo-hotspot-icon-color-dark;
+            }
+            .hotspot-border-inner {
+                border-color: $photo-hotspot-border-color-inner-dark;
+            }
+            .hotspot-border-outer {
+                border-color: $photo-hotspot-border-color-outer-dark;
+            }
+            &:hover {
+                .hotspot-border-inner {
+                    border-color: $photo-hotspot-border-color-inner-hover-dark;
+                }
+                .hotspot-border-outer {
+                    border-color: $photo-hotspot-border-color-outer-hover-dark;
+                }
+            }
+        }
+    }
+}
+
+// tooltip contents
+.photo-hotspots-tooltip.tooltip {
+    z-index: $z-index-modal-backdrop - 1;
+    .tooltip-inner {
+        padding: 0;
+        max-width: $photo-hotspot-tooltip-max-width;
+    }
+}
+.modal.show ~ .photo-hotspots-tooltip.tooltip {
+    z-index: $z-index-modal + 1; // if tooltip is triggered from modal, update z-index
+}
+.photo-hotspots-tooltip-text {
+    text-align: left;
+    padding: $photo-hotspot-text-spacing;
+    &>* {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        text-transform: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        margin-bottom: 0;
+    }
+    &+.secondary-text {
+        padding-top: 0;
+    }
+    &+.photo-hotspots-tooltip-product {
+        border-top: $photo-hotspot-text-product-divider;
+    }
+}
+.photo-hotspots-tooltip-product {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+    .product-image {
+        width: $photo-hotspot-tooltip-image-size;
+        height: $photo-hotspot-tooltip-image-size;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .product-attributes {
+        max-width: calc(#{$photo-hotspot-tooltip-max-width} - #{$photo-hotspot-tooltip-image-size} - #{$spacer-sm});
+        padding: $photo-hotspot-attribute-spacing;
+        text-align: left;
+    }
+    .product-name {
+        font-size: $photo-hotspot-tooltip-product-name-font-size;
+        color: $photo-hotspot-tooltip-product-name-color;
+        text-overflow: $photo-hotspot-tooltip-product-name-text-overflow;
+        white-space: $photo-hotspot-tooltip-product-name-whitespace;
+        overflow: hidden;
+    }
+    .product-price {
+        font-size: $photo-hotspot-tooltip-price-font-size;
+        color: $photo-hotspot-tooltip-price-color;
+        margin-top: calc(#{$photo-hotspot-attribute-spacing} / 2);
+        .strike-through {
+            margin-right: $spacer-sm;
+        }
+        .sales {
+            color: $photo-hotspot-tooltip-sale-price-color;
+        }
+    }
+    .product-message {
+        display: $photo-hotspot-tooltip-message-display;
+        font-size: $photo-hotspot-tooltip-message-font-size;
+        text-transform: $photo-hotspot-tooltip-message-text-transform;
+        color: $photo-hotspot-tooltip-message-color;
+        margin-top: calc(#{$photo-hotspot-attribute-spacing} / 2);
+    }
+}
+

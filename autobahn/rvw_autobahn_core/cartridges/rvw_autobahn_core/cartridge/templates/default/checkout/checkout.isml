@@ -1,0 +1,115 @@
+<isdecorate template="common/layout/checkout">
+
+    <iscomment>Load Static Assets</iscomment>
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/checkout.js');
+    </isscript>
+
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+
+    <div id="checkout-main" class="container data-checkout-stage py-3 ${pdict.order.usingMultiShipping && pdict.order.shipping.length > 1 ? 'multi-ship' : ''} ${pdict.order.hideShipping ? 'hide-shipping' : ''}" data-customer-type="${pdict.customer.registeredUser ? 'registered' : 'guest'}" data-checkout-stage="${pdict.currentStage}" data-hide-shipping="${pdict.order.hideShipping}" data-checkout-get-url="${URLUtils.https('CheckoutServices-Get')}">
+
+        <iscomment>
+            WGACA MODIFICATION - appended style changes
+            <h1 class="page-title">
+        </iscomment>
+        <h1 class="page-title" style="line-height: 1.6; overflow: auto;">${Resource.msg('title.checkout', 'checkout', null)}</h1>
+
+        <iscomment>Help and Phone</iscomment>
+        <div class="row">
+            <div class="col-12 col-md-5 offset-md-7 mb-2">
+                <div class="text-center">
+                    <span>${Resource.msg('info.need.help', 'cart', null)}</span>
+                    <span><a class="help-phone-number" href="tel:${pdict.customerServiceNumber}">${pdict.customerServiceNumber}</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7">
+
+                <iscomment>Checkout Forms: Shipping, Payment, Coupons, Billing, etc</iscomment>
+
+                <div class="alert alert-danger error-message" <isif condition="${!empty(pdict.errormessagetext)}">style="display: block;"</isif> role="alert">
+                    <p class="error-message-text">${pdict.errormessagetext || ''}</p>
+                </div>
+                <isinclude template="integrations/checkout/checkoutIntegrationsErrorMessages"/>
+
+                <!-- Step 1: Customer -->
+                <isinclude template="checkout/customer/customer" />
+                <div class="card customer-summary">
+                    <div class="card-header clearfix">
+                        <h2 class="pull-left card-header-custom">${Resource.msg('heading.checkout.customer', 'checkout', null)}</h2>
+                        <isif condition="${!pdict.customer.registeredUser}">
+                            <button class="edit-button pull-right" aria-label="${Resource.msg('action.edit.step.msg.customer', 'checkout', null)}">${Resource.msg('action.edit.step', 'checkout', null)}</button>
+                        </isif>
+                    </div>
+                    <div class="card-body">
+                        <isinclude template="checkout/customer/customerSummary" />
+                    </div>
+                </div>
+
+                <!-- Step 2: Shipping -->
+                <isinclude template="checkout/shipping/shipping" />
+                <div class="card shipping-summary">
+                    <div class="card-header clearfix">
+                        <h2 class="pull-left card-header-custom">${Resource.msg('heading.checkout.shipping', 'checkout', null)}</h2>
+                        <button class="edit-button pull-right" aria-label="${Resource.msg('action.edit.step.msg.shipping', 'checkout', null)}">${Resource.msg('action.edit.step', 'checkout', null)}</button>
+                    </div>
+                    <div class="card-body">
+                        <isinclude template="checkout/shipping/shippingSummary" />
+                    </div>
+                </div>
+
+                <!-- Step 3: Payment and Billing-->
+                <isinclude template="checkout/billing/billing" />
+                <isinclude template="integrations/checkout/checkoutIntegrationsBeforePayments"/>
+
+                <div class="card payment-summary">
+                    <div class="card-header clearfix">
+                        <h2 class="pull-left card-header-custom">${Resource.msg('heading.payment', 'checkout', null)}</h2>
+                        <button class="edit-button pull-right" aria-label="${Resource.msg('action.edit.step.msg.payment', 'checkout', null)}">${Resource.msg('action.edit.step', 'checkout', null)}</button>
+                    </div>
+
+                    <div class="card-body">
+                        <isinclude template="checkout/billing/billingSummary" />
+                    </div>
+                </div>
+
+                <iscomment>Checkout Workflow Buttons</iscomment>
+                <div class="row">
+                    <div class="col-12 next-step-button">
+                        <div class="mb-1 mb-sm-3">
+                            <isinclude template="integrations/checkout/checkoutIntegrationsWorkflowButtons"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <iscomment>Order Totals, Details and Summary</iscomment>
+            <div class="col-md-5">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-header-custom">${Resource.msg('heading.order.summary', 'checkout', null)}</h2>
+                    </div>
+                    <div class="card-body order-total-summary">
+                        <isinclude template="checkout/orderTotalSummary" />
+                    </div>
+                </div>
+
+                <isinclude template="checkout/orderProductSummary" />
+
+                <isinclude template="integrations/checkout/checkoutIntegrationsSummaryButtons"/>
+            </div>
+        </div>
+    </div>
+
+    <isinclude template="checkout/shipping/shippingAddressTemplate" />
+
+    <isinclude template="integrations/checkout/checkout/bottom" />
+
+</isdecorate>

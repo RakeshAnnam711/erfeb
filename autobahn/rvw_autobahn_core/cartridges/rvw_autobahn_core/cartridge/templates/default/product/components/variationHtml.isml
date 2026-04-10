@@ -1,0 +1,4 @@
+<div>
+    <isinclude template="product/components/collapsibleContent"/>
+    <isinclude template="product/components/tabs"/>
+</div>

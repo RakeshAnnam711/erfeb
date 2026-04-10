@@ -1,0 +1,16 @@
+<isif condition="${!pdict.hideTitle}">
+    <header class="container page-header blog-detail-header ${pdict.containerClass}">
+        <div class="page-header-subtitle">
+            <isif condition="${!empty(pdict.categoryName)}">
+                <span class="blog-category">${pdict.categoryName}</span>
+            </isif>
+            <isif condition="${!empty(pdict.creationDate)}">
+                <span class="blog-creation-date">${pdict.creationDate}</span>
+            </isif>
+        </div>
+        <h1 class="page-header-title ${pdict.customClass}">${pdict.title}</h1>
+        <isif condition="${pdict.author}">
+            <div class="page-header-author"><label>${Resource.msg('label.blog.author', 'components', null)}</label> ${pdict.author}</div>
+        </isif>
+    </header>
+</isif>

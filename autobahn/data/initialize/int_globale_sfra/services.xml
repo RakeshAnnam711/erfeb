@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="Globale-ActiveHubDetails">
+        <url>/Browsing/ActiveHubDetails</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-AppSettings">
+        <url>/Browsing/AppSettings</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-AppVersion">
+        <url>/Browsing/AppVersion</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-Countries">
+        <url>/Browsing/Countries</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-CountryCoefficients">
+        <url>/Browsing/CountryCoefficients</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-CreateOrderRefund">
+        <url>/Order/CreateOrderRefund</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-Currencies">
+        <url>/Browsing/Currencies</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-CurrencyRates">
+        <url>/Browsing/CurrencyRates</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-JWT">
+        <url>/Authentication/GetAuthenticationToken</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-LocationsDefaultCulturesList">
+        <url>/Browsing/LocationsDefaultCulturesList</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-OCAPI">
+        <url/>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-SCAPI">
+        <url/>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-OrderDetails">
+        <url>/Order/GetOrdersDetails</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-RecentProductCountryS">
+        <url>/Browsing/RecentProductCountryS</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-RoundingRules">
+        <url>/Browsing/RoundingRules</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-SFTPCatalogFeedUpload">
+        <url/>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-SFTPRestrictionsFeedUpload">
+        <url/>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-SendCartV2">
+        <url>/Checkout/SendCartV2</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-ShippingDetails">
+        <url>/ShippingDetails/GetShippingDetails</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-UpdateOrderDispatchV2">
+        <url>/Order/UpdateOrderDispatchV2</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-UpdateOrderStatus">
+        <url>/Order/UpdateOrderStatus</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Globale-UpdateRMA">
+        <url>/Return/UpdateRMA</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-profile service-profile-id="GLOBALE-JOB.HCT">
+        <timeout-millis>120000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>10</cb-calls>
+        <cb-millis>120000</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="GLOBALE-JOB.LCT">
+        <timeout-millis>30000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>10</cb-calls>
+        <cb-millis>30000</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="GLOBALE-SENDCART">
+        <timeout-millis>30000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="GLOBALE-SFTPUpload">
+        <timeout-millis>30000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="Globale-ActiveHubDetails">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ActiveHubDetailsService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-ActiveHubDetails</credential-id>
+    </service>
+
+    <service service-id="Globale-AppSettings">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>AppSettingsService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-AppSettings</credential-id>
+    </service>
+
+    <service service-id="Globale-AppVersion">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>AppVersionService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-AppVersion</credential-id>
+    </service>
+
+    <service service-id="Globale-Countries">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>CountriesService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-Countries</credential-id>
+    </service>
+
+    <service service-id="Globale-CountryCoefficients">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>CountryCoefficientService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-CountryCoefficients</credential-id>
+    </service>
+
+    <service service-id="Globale-CreateOrderRefund">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>OrderRefundService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-CreateOrderRefund</credential-id>
+    </service>
+
+    <service service-id="Globale-Currencies">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>CurrenciesService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-Currencies</credential-id>
+    </service>
+
+    <service service-id="Globale-CurrencyRates">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>CurrencyRatesService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-CurrencyRates</credential-id>
+    </service>
+
+    <service service-id="Globale-JWT">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>JWT</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-JWT</credential-id>
+    </service>
+
+    <service service-id="Globale-LocationsDefaultCulturesList">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>CulturesService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-LocationsDefaultCulturesList</credential-id>
+    </service>
+
+    <service service-id="Globale-OCAPI">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>OCAPI</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-OCAPI</credential-id>
+    </service>
+
+    <service service-id="Globale-SCAPI">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>SCAPI</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-SCAPI</credential-id>
+    </service>
+
+    <service service-id="Globale-OrderDetails">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>OrderDetails</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-OrderDetails</credential-id>
+    </service>
+
+    <service service-id="Globale-RecentProductCountryS">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>RecentProductCountService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.HCT</profile-id>
+        <credential-id>Globale-RecentProductCountryS</credential-id>
+    </service>
+
+    <service service-id="Globale-RoundingRules">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>RoundingRulesService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-RoundingRules</credential-id>
+    </service>
+
+    <service service-id="Globale-SFTPUpload">
+        <service-type>SFTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>SFTP</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-SFTPUpload</profile-id>
+        <credential-id/>
+    </service>
+
+    <service service-id="Globale-SendCartV2">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>SendCartV2Service</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-SENDCART</profile-id>
+        <credential-id>Globale-SendCartV2</credential-id>
+    </service>
+
+    <service service-id="Globale-ShippingDetails">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ShippingDetails</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-ShippingDetails</credential-id>
+    </service>
+
+    <service service-id="Globale-UpdateOrderDispatchV2">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>UpdateOrderDispatchV2</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-UpdateOrderDispatchV2</credential-id>
+    </service>
+
+    <service service-id="Globale-UpdateOrderStatus">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>UpdateOrderStatusService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-UpdateOrderStatus</credential-id>
+    </service>
+
+    <service service-id="Globale-UpdateRMA">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>UpdateRmaService</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>GLOBALE-JOB.LCT</profile-id>
+        <credential-id>Globale-UpdateRMA</credential-id>
+    </service>
+
+</services>

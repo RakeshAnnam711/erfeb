@@ -1,0 +1,50 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isdecorate template="common/layout/page">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+        assets.addJs('/js/blog.js');
+    </isscript>
+
+    <isif condition="${!empty(pdict.blogCategories)}">
+        <div class="blog-nav">
+            <isset name="blogCategories" value="${pdict.blogCategories}" scope="page"/>
+            <isset name="topLevel" value="${true}" scope="page"/>
+            <isinclude template="blog/components/navigation" />
+        </div>
+    </isif>
+
+    <iscontentasset aid="${pdict.blogTopAssetId}"/>
+
+    <div class="container blog-results" itemscope itemtype="https://schema.org/Blog">
+        <div class="row">
+            <div class="col-12">
+                <isif condition="${pdict.contentSearch.hasMessage}">
+                    <div class="result-count text-center">
+                        <isif condition="${pdict.contentSearch.contentCount === 0}">
+                            <isif condition="${!empty(pdict.categoryName)}">
+                                ${Resource.msg('label.noresultsfor', 'search', null)}
+                                <span class="search-keywords">
+                                    ${pdict.categoryName}
+                                </span>
+                            <iselse/>
+                                ${Resource.msgf('label.articlesfound', 'search', null, pdict.contentSearch.contentCount)}
+                            </isif>
+                        <iselse/>
+                            <meta itemprop="numberOfItems" content="${pdict.contentSearch.contentCount}" />
+                            <isif condition="${pdict.contentSearch.contentCount === 1}">
+                                ${Resource.msgf('label.articlefound', 'search', null, pdict.contentSearch.contentCount)}
+                            <iselse/>
+                                ${Resource.msgf('label.articlesfound', 'search', null, pdict.contentSearch.contentCount)}
+                            </isif>
+                        </isif>
+                    </div>
+                </isif>
+            </div>
+        </div>
+        <isinclude template="blog/landingNoDecorator" />
+    </div>
+
+    <iscontentasset aid="${pdict.blogBottomAssetId}"/>
+
+</isdecorate>

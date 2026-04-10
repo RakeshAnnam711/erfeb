@@ -1,0 +1,10 @@
+<div class="tab-pane giftcertificate-content <isif condition="${pdict.selectedPaymentMethod == dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE}">active</isif>" id="giftcertificate-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+
+        <input type="hidden" class="form-control"
+            name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+            value="GIFT_CERTIFICATE"
+        >
+
+    </fieldset>
+</div>

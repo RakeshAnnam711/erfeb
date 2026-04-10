@@ -1,0 +1,49 @@
+<div
+    id="wishlistModalEditList"
+    class="wishlist-modal-edit-list modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="wishlistModalEditListLabel"
+    data-url="${pdict.urls.editList}"
+>
+    <div class="modal-dialog" role="document">
+        <form class="wishlist-edit-list-form modal-content" novalidate data-url="${pdict.urls.addList}">
+            <div class="modal-header">
+                <p id="wishlistModalEditListLabel" class="modal-title wishlist-edit-list-title">
+                    ${Resource.msg('title.modal.editlist', 'wishlist', null)}
+                </p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="${Resource.msg('button.modal.dismiss', 'wishlist', null)}">
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body wishlist-edit-list-body">
+                <div class="form-group">
+                    <label for="editProductListName">
+                        ${Resource.msg('text.modal.listname', 'wishlist', null)}
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="editProductListName"
+                        aria-describedby="editProductListNameHelp"
+                        required
+                        value="&nbsp;"
+                        data-error-duplicate-name="${Resource.msg('text.modal.duplicatelistnameerror', 'wishlist', null)}"
+                        title="${Resource.msg('text.modal.invalidcharactersmessage', 'wishlist', null)}"
+                    />
+                    <div id="editProductListNameHelp" class="edit-product-list-name-help invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="wishlist-edit-list-footer modal-footer">
+                <button type="submit" class="save wishlist-edit-list-save-btn btn">
+                    ${Resource.msg('button.modal.save', 'wishlist', null)}
+                </button>
+                <button type="button" class="wishlist-edit-list-delete-btn btn delete">
+                    ${Resource.msg('button.modal.deletelist', 'wishlist', null)}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

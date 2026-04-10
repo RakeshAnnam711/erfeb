@@ -1,0 +1,215 @@
+.image-text-block {
+    display: block;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+    &.zoom {
+        @include zoom-image('.image-wrapper', $image-text-block-hover-zoom-amount);
+    }
+    .image-cropper {
+        border-radius: $image-text-block-border-radius;
+        overflow: hidden;
+        margin: auto;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .image-wrapper {
+        width: 100%;
+        position: relative;
+        .background-image {
+            @include absolute-cover;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: block;
+        }
+        .background-image-tablet,
+        .background-image-desktop {
+            display: none;
+        }
+        @include media-breakpoint-up(md) {
+            .background-image-mobile,
+            .background-image-desktop {
+                display: none;
+            }
+            .background-image-tablet {
+                display: block;
+            }
+        }
+        @include media-breakpoint-up(lg) {
+            .background-image-mobile,
+            .background-image-tablet {
+                display: none;
+            }
+            .background-image-desktop {
+                display: block;
+            }
+        }
+        .video-container {
+            .video-aspect-ratio {
+                @include absolute-center;
+                padding-top: $image-text-block-video-aspect-ratio;
+                padding-left: $image-text-block-video-horizontal-aspect-ratio;
+                width: 0;
+                height: 0;
+                min-height: 100%;
+                min-width: 100%;
+                .video-player {
+                    position: static;
+                    pointer-events: none;
+                }
+                iframe {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    &.video-player {
+                        position: absolute; // override for youtube, since they use .video-player for iframe
+                    }
+                }
+            }
+        }
+    }
+
+    .image-text-block-text {
+        .image-text-block-button .btn {
+            font-family: 'brandon-grotesque';
+            font-weight: normal;
+        }
+
+        .primary-text,
+        .secondary-text,
+        .image-text-block-subtitle {
+            // override styles from page designer injected tags
+            &>* {
+                font-family: inherit;
+                font-size: inherit;
+                font-weight: inherit;
+                line-height: inherit;
+                text-transform: inherit;
+                letter-spacing: inherit;
+                color: inherit;
+                margin-bottom: 0;
+            }
+        }
+        .image-text-block-subtitle {
+            &:not([class*='p--']):not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
+                //font-size: $image-text-block-subtitle-font-size;
+            }
+        }
+        .primary-text {
+            &:not([class*='p--']):not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
+                //font-size: $image-text-block-primary-font-size;
+            }
+        }
+        .secondary-text {
+            &:not([class*='p--']):not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
+                //font-size: $image-text-block-secondary-font-size;
+            }
+        }
+        .image-text-block-subtitle + .primary-text {
+            margin-top: $spacer-sm;
+        }
+        .secondary-text + .image-text-block-button {
+            margin-top: $spacer;
+        }
+    }
+    &.text-placement-below {
+        .image-text-block-text {
+            margin-top: $spacer;
+        }
+    }
+    &.text-placement-inside {
+        &::after {
+            content: '';
+            @include absolute-cover;
+            background-color: $image-text-block-text-background;
+            border-radius: $image-text-block-border-radius;
+        }
+        .image-text-block-text {
+            @include absolute-center;
+            color: $image-text-block-text-inside-color;
+            z-index: 1;
+            text-shadow: $image-text-block-text-shadow;
+            width: calc(100% - #{$spacer});
+            @include media-breakpoint-up(lg) {
+                width: calc(100% - #{$spacer*2});
+            }
+        }
+    }
+    &.aspect-ratio-square .image-wrapper {
+        @include aspect-ratio($image-text-block-aspect-ratio-square);
+    }
+    &.aspect-ratio-landscape .image-wrapper {
+        @include aspect-ratio($image-text-block-aspect-ratio-landscape);
+    }
+    &.aspect-ratio-portrait .image-wrapper {
+        @include aspect-ratio($image-text-block-aspect-ratio-portrait);
+    }
+    &.original-ratio {
+        .image-cropper {
+            .image-wrapper {
+                &::before {
+                    padding-top: 0;
+                }
+            }
+            .background-image {
+                position: relative;
+                background-position: 0 0;
+
+                img {
+                    display: block !important;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    &.throw-text {
+        .image-text-block-text {
+            top: auto;
+            right: auto;
+            bottom: auto;
+            left: auto;
+            transform: none;
+            width: auto;
+            text-shadow: none;
+        }
+        &--top {
+            @extend .throw-text;
+            .image-text-block-text {
+                top: $spacer;
+            }
+        }
+        &--right {
+            @extend .throw-text;
+            .image-text-block-text {
+                right: $spacer;
+            }
+        }
+        &--bottom {
+            @extend .throw-text;
+            .image-text-block-text {
+                bottom: $spacer;
+            }
+        }
+        &--left {
+            @extend .throw-text;
+            .image-text-block-text {
+                left: $spacer;
+            }
+        }
+    }
+    &.clean-bg {
+        &::after {
+            content: none;
+            width: 0;
+            height: 0;
+            background-color: transparent;
+        }
+    }
+}

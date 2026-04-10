@@ -1,0 +1,3 @@
+<isif condition="${ !empty(require('*/cartridge/scripts/flow/helpers/experienceHelper').taxIncluded) }">
+    <span class='flow-tax-included small'><em>${ require('*/cartridge/scripts/flow/helpers/experienceHelper').taxIncluded }</em></span>
+</isif>

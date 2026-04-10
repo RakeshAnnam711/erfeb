@@ -1,0 +1,38 @@
+<isset name="filterType" value="${pdict.abConfigs.filterType}" scope="page" />
+
+<!--- Close button --->
+<div class="filter-header">
+    <div class="header-bar d-lg-none clearfix">
+        <div class="pull-left result-count">
+            <isinclude template="search/resultsCount" />
+        </div>
+        <button class="pull-right close" aria-label="${Resource.msg('label.refinement.toggle.menu', 'search', null)}">
+            <span>${Resource.msg('button.close', 'search', null)}</span>
+            <i class="fa fa-close"></i>
+        </button>
+    </div>
+</div>
+
+<!--- Results count and Reset button --->
+<isif condition="${pdict.productSearch.productIds.length > 0}">
+    <div class="${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown' ? 'd-lg-none' : ''}"> <!-- Show on Desktop for Vertical Filter ONLY -->
+        <ul class="secondary-bar row px-0 pt-lg-0 no-gutters">
+            <li class="col-8">
+                <a href="${'#'}" class="secondary-bar-links js-toggle-filters">${Resource.msg('link.showhide', 'search', null)}</a>
+            </li>
+            <li class="col-4">
+                <button class="text-link secondary-bar-links reset" data-href="${pdict.productSearch.resetAJAXLink}" data-seo-href="${pdict.productSearch.resetLinkSeo || pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)}</button>
+            </li>
+        </ul>
+    </div>
+</isif>
+
+<div class="d-block d-lg-none mobile-search-refinements" cypress-target="mobileSearchRefinements">
+    <isinclude template="search/components/mobileSearchRefineBar" />
+</div>
+
+<div class="d-none d-lg-block" id="${filterType == 'horizontal-multiple-dropdowns' || filterType == 'horizontal-one-dropdown' ? 'desktop-horizontal-search-refinements' : 'desktop-vertical-search-refinements'}">
+    <div class="desktop-search-refinements">
+        <isinclude template="search/components/desktopSearchRefineBar" />
+    </div>
+</div>

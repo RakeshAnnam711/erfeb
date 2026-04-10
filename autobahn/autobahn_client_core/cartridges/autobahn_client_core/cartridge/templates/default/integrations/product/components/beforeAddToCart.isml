@@ -1,0 +1,15 @@
+<iscomment>
+    This overwrites what is in rvw_autobahn_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('subproEnabled')}">
+    <!-- Subscription Widget -->
+    <div class="col-md-10 col-12">
+        <isinclude url="${URLUtils.url('SubPro-PDP', 'sku', product.id)}" />
+    </div>
+</isif>
+

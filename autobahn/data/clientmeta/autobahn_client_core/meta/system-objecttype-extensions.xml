@@ -1,0 +1,1825 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="Category">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="faqOnPlp">
+                <display-name xml:lang="x-default">FAQ</display-name>
+                <type>html</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="h1ContentTracker">
+                <display-name xml:lang="x-default">H1 Content Tracker</display-name>
+                <type>html</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="h2ContentTracker">
+                <display-name xml:lang="x-default">H2 Content Tracker</display-name>
+                <type>html</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="navigationTextColor">
+                <display-name xml:lang="x-default">Navigation Text Color</display-name>
+                <description xml:lang="x-default">Enter a hex color value to change the text color of this category in the navigation.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="popularSearchKeywords">
+                <display-name xml:lang="x-default">Popular Search Keywords</display-name>
+                <description xml:lang="x-default">Popular Search Keywords</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="shopnowtext">
+                <display-name xml:lang="x-default">Shop Now Text</display-name>
+                <description xml:lang="x-default">This represent shop now text for main category.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sizeChartID">
+                <display-name xml:lang="x-default">Size Chart</display-name>
+                <description xml:lang="x-default">Used to define the content asset ID of the Size Chart that is appropriate for products whose PRIMARY category is the associated category (and its children). Whenever a product detail page (or quick view) is rendered, the Size Chart link is populated based on the value of this attribute for the products primary categorization. If not defined, NO size chart link is displayed.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="slotBannerImage">
+                <display-name xml:lang="x-default">Category Landing Slot Image</display-name>
+                <description xml:lang="x-default">Image used on either the top or bottom slot on the category landing pages.</description>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="heroBanner">
+                <display-name xml:lang="x-default">Hero Banner</display-name>
+                <description xml:lang="x-default">Hero Banner image for PLP</description>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="heroBannerMobile">
+                <display-name xml:lang="x-default">Hero Banner Mobile</display-name>
+                <description xml:lang="x-default">Hero Banner image for PLP - mobile view</description>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="VariationGroups">
+                <display-name xml:lang="x-default">Variation Groups</display-name>
+                <attribute attribute-id="displayMode" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="WGACACustomAttributes">
+                <display-name xml:lang="x-default">WGACA Custom Attributes</display-name>
+                <attribute attribute-id="navigationTextColor"/>
+                <attribute attribute-id="shopnowtext"/>
+                <attribute attribute-id="popularSearchKeywords"/>
+                <attribute attribute-id="h1ContentTracker"/>
+                <attribute attribute-id="h2ContentTracker"/>
+                <attribute attribute-id="faqOnPlp"/>
+                <attribute attribute-id="heroBanner"/>
+                <attribute attribute-id="heroBannerMobile"/>
+            </attribute-group>
+            <attribute-group group-id="zenkraft">
+                <display-name xml:lang="x-default">Zenkraft</display-name>
+                <attribute attribute-id="leadTime"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="CustomerActiveData">
+        <group-definitions>
+            <attribute-group group-id="Traffic">
+                <display-name xml:lang="x-default">Traffic</display-name>
+                <attribute attribute-id="visitsWeek" system="true"/>
+                <attribute attribute-id="visitsMonth" system="true"/>
+                <attribute attribute-id="visitsYear" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="Conversion">
+                <display-name xml:lang="x-default">Conversion</display-name>
+                <attribute attribute-id="orders" system="true"/>
+                <attribute attribute-id="orderValueMonth" system="true"/>
+                <attribute attribute-id="orderValue" system="true"/>
+                <attribute attribute-id="avgOrderValue" system="true"/>
+                <attribute attribute-id="discountValueWithoutCoupon" system="true"/>
+                <attribute attribute-id="discountValueWithCoupon" system="true"/>
+                <attribute attribute-id="sourceCodeOrders" system="true"/>
+                <attribute attribute-id="lastOrderDate" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="Returns">
+                <display-name xml:lang="x-default">Returns</display-name>
+                <attribute attribute-id="returns" system="true"/>
+                <attribute attribute-id="returnValue" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="Gifts">
+                <display-name xml:lang="x-default">Gifts</display-name>
+                <attribute attribute-id="giftOrders" system="true"/>
+                <attribute attribute-id="giftUnits" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="Products">
+                <display-name xml:lang="x-default">Products</display-name>
+                <attribute attribute-id="topCategoriesOrdered" system="true"/>
+                <attribute attribute-id="productsOrdered" system="true"/>
+                <attribute attribute-id="productMastersOrdered" system="true"/>
+                <attribute attribute-id="productsViewedMonth" system="true"/>
+                <attribute attribute-id="productsAbandonedMonth" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="CustomerAddress">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="isTiktokOrder">
+                <display-name xml:lang="x-default">is Tiktok Order</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Standard">
+                <display-name xml:lang="x-default">Standard Address</display-name>
+                <attribute attribute-id="ID" system="true"/>
+                <attribute attribute-id="title" system="true"/>
+                <attribute attribute-id="companyName" system="true"/>
+                <attribute attribute-id="salutation" system="true"/>
+                <attribute attribute-id="firstName" system="true"/>
+                <attribute attribute-id="secondName" system="true"/>
+                <attribute attribute-id="lastName" system="true"/>
+                <attribute attribute-id="suffix" system="true"/>
+                <attribute attribute-id="address1" system="true"/>
+                <attribute attribute-id="address2" system="true"/>
+                <attribute attribute-id="suite" system="true"/>
+                <attribute attribute-id="postBox" system="true"/>
+                <attribute attribute-id="city" system="true"/>
+                <attribute attribute-id="postalCode" system="true"/>
+                <attribute attribute-id="countryCode" system="true"/>
+                <attribute attribute-id="stateCode" system="true"/>
+                <attribute attribute-id="phone" system="true"/>
+                <attribute attribute-id="isTiktokOrder"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Folder">
+        <group-definitions>
+            <attribute-group group-id="SiteMap">
+                <display-name xml:lang="x-default">Sitemap Attributes</display-name>
+                <attribute attribute-id="siteMapIncluded" system="true"/>
+                <attribute attribute-id="siteMapChangeFrequency" system="true"/>
+                <attribute attribute-id="siteMapPriority" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="isRTWOrder">
+                <display-name xml:lang="x-default">RTW Order</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="isbambuserorder">
+                <display-name xml:lang="x-default">Is Bambuser Order</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="orderSource">
+                <display-name xml:lang="x-default">order Source</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="RTWOrder">
+                <display-name xml:lang="x-default">RTW Order</display-name>
+                <attribute attribute-id="isRTWOrder"/>
+                <attribute attribute-id="isbambuserorder"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="OrderAddress">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="isTiktokOrder">
+                <display-name xml:lang="x-default">Is Tiktok Order</display-name>
+                <description xml:lang="x-default">used for mapping the order of Tiktok</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Standard">
+                <display-name xml:lang="x-default">Standard Address</display-name>
+                <attribute attribute-id="taxnumber"/>
+                <attribute attribute-id="title" system="true"/>
+                <attribute attribute-id="companyName" system="true"/>
+                <attribute attribute-id="salutation" system="true"/>
+                <attribute attribute-id="firstName" system="true"/>
+                <attribute attribute-id="secondName" system="true"/>
+                <attribute attribute-id="lastName" system="true"/>
+                <attribute attribute-id="suffix" system="true"/>
+                <attribute attribute-id="address1" system="true"/>
+                <attribute attribute-id="address2" system="true"/>
+                <attribute attribute-id="suite" system="true"/>
+                <attribute attribute-id="postBox" system="true"/>
+                <attribute attribute-id="city" system="true"/>
+                <attribute attribute-id="postalCode" system="true"/>
+                <attribute attribute-id="countryCode" system="true"/>
+                <attribute attribute-id="stateCode" system="true"/>
+                <attribute attribute-id="phone" system="true"/>
+                <attribute attribute-id="isTiktokOrder"/>
+            </attribute-group>
+
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Product">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="relatedProduct">
+                <display-name xml:lang="x-default">Related Product</display-name>
+                <description xml:lang="x-default">Related Product SKU for redirecting</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="about_the_bag">
+                <display-name xml:lang="x-default">About the Bag</display-name>
+                <description xml:lang="x-default">WGACA About the Bag</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amazonEarring_Design">
+                <display-name xml:lang="x-default">Amazon Earring Design</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">ball</display>
+                        <value>ball</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">climber</display>
+                        <value>climber</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">cluster</display>
+                        <value>cluster</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">cuff</display>
+                        <value>cuff</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">dangle</display>
+                        <value>dangle</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">drop</display>
+                        <value>drop</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">fake gauge</display>
+                        <value>fake_gauge</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">fake plug</display>
+                        <value>fake_plug</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">front and back</display>
+                        <value>front_and_back</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">hoop</display>
+                        <value>hoop</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">jacket</display>
+                        <value>jacket</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">non pierced</display>
+                        <value>non_pierced</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">stud</display>
+                        <value>stud</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">threader</display>
+                        <value>threader</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">wrap</display>
+                        <value>wrap</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amazonProductExport">
+                <display-name xml:lang="x-default">Export Product To Amazon</display-name>
+                <description xml:lang="x-default">Export Product To Amazon</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="amazonProduct_Type">
+                <display-name xml:lang="x-default">Amazon Product Type</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amazonTodayProductExport">
+                <display-name xml:lang="x-default">Export Product To Amazon Today</display-name>
+                <description xml:lang="x-default">Export Product To Amazon Today</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="authenticity_card">
+                <display-name xml:lang="x-default">Authenticity Card</display-name>
+                <description xml:lang="x-default">WGACA Authenticity Card</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="badgeBackgroundColors">
+                <display-name xml:lang="x-default">Badge Background Colors</display-name>
+                <description xml:lang="x-default">Set the color to be used for the badge background. Use css appropriate values.</description>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="badgeBorderColors">
+                <display-name xml:lang="x-default">Badge Border Colors</display-name>
+                <description xml:lang="x-default">Set the color to be used for the badge border. Use css appropriate values.</description>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="badgeFontSizes">
+                <display-name xml:lang="x-default">Badge Font Sizes</display-name>
+                <description xml:lang="x-default">Set the font size to be used for the badge text. Use css appropriate values.</description>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="badgeTextColors">
+                <display-name xml:lang="x-default">Badge Text Colors</display-name>
+                <description xml:lang="x-default">Set the color to be used for the badge text. Use css appropriate values.</description>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="bagSilhouette">
+                <display-name xml:lang="x-default">Bag Silhouette</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="closure">
+                <display-name xml:lang="x-default">Closure</display-name>
+                <description xml:lang="x-default">WGACA Closure</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="condition_name">
+                <display-name xml:lang="x-default">Condition Name</display-name>
+                <description xml:lang="x-default">WGACA Condition Name</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="condition_notes">
+                <display-name xml:lang="x-default">Condition Notes</display-name>
+                <description xml:lang="x-default">WGACA Condition Notes</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="country_of_origin">
+                <display-name xml:lang="x-default">Country of Origin</display-name>
+                <description xml:lang="x-default">WGACA Country of Origin</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="depth">
+                <display-name xml:lang="x-default">Depth</display-name>
+                <description xml:lang="x-default">WGACA Depth</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="dimDepth">
+                <display-name xml:lang="x-default">Depth</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="dimHeight">
+                <display-name xml:lang="x-default">Height</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="dimWeight">
+                <display-name xml:lang="x-default">Weight</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="dimWidth">
+                <display-name xml:lang="x-default">Width</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableRTWProduct">
+                <display-name xml:lang="x-default">Enable RTW Product</display-name>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxCartons">
+                <display-name xml:lang="x-default">Cartons</display-name>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxComposition">
+                <display-name xml:lang="x-default">Components or materials used in the product</display-name>
+                <description xml:lang="x-default">Example: Cotton</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxCountryOfOrigin">
+                <display-name xml:lang="x-default">Country of Origin</display-name>
+                <description xml:lang="x-default">Country of Origin (CoO) of the product. Two-letter ISO code of the product Country of Origin.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxEccn">
+                <display-name xml:lang="x-default">Export Control Classification Number</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxGender">
+                <display-name xml:lang="x-default">Gender</display-name>
+                <description xml:lang="x-default">Defines whether or not the product, typically with textiles, is a men, women, boy, girl, or unisex.&#13; Example: Women's blouse</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxHazFlag">
+                <display-name xml:lang="x-default">Hazardous Flag</display-name>
+                <description xml:lang="x-default">Defines whether a product is hazardous or not:</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxHsCode">
+                <display-name xml:lang="x-default">Hs Code</display-name>
+                <description xml:lang="x-default">Code that allows the calculation of tax payable in the destination country or territory of the shipment.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxImportFlag">
+                <display-name xml:lang="x-default">List of countries to which the product cannot enter</display-name>
+                <description xml:lang="x-default">Example: importFlag = "AR,PE,BO,BR". Twoletter ISO code of the product country or territory.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxIsFixedPricing">
+                <display-name xml:lang="x-default">Is fixed pricing allowed for current product</display-name>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxLicenseFlag">
+                <display-name xml:lang="x-default">List of countries that require a license for the product.</display-name>
+                <description xml:lang="x-default">Example: licenseFlag = "AR,PE,BO,BR". Twoletter ISO code of the product country or territory.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxMultiCountryOfOrigin">
+                <display-name xml:lang="x-default">Multi Country of Origin</display-name>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxUnitDimension">
+                <display-name xml:lang="x-default">Unit Dimentions</display-name>
+                <description xml:lang="x-default">This field defines the unit of measurement used to express the product dimensions. Possible values&#13; are: inches (in), centimeters (cm)</description>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">inches</display>
+                        <value>in</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">centimeters</display>
+                        <value>cm</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="fdxUnitWeight">
+                <display-name xml:lang="x-default">Unit Weight</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">pounds</display>
+                        <value>lb</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">kilogram</display>
+                        <value>kg</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">ounce</display>
+                        <value>oz</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">gram</display>
+                        <value>g</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="final_sale">
+                <display-name xml:lang="x-default">Final Sale</display-name>
+                <description xml:lang="x-default">WGACA Final Sale</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="gameGenre">
+                <display-name xml:lang="x-default">Genre</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <select-multiple-flag>true</select-multiple-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Action</display>
+                        <value>Action</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Educational</display>
+                        <value>Educational</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Kids</display>
+                        <value>Kids</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Racing</display>
+                        <value>Racing</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Role-Playing</display>
+                        <value>Role-Playing</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Sports</display>
+                        <value>Sports</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Strategy</display>
+                        <value>Strategy</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="handle">
+                <display-name xml:lang="x-default">Handle</display-name>
+                <description xml:lang="x-default">WGACA Handle</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="handle_drop">
+                <display-name xml:lang="x-default">Handle Drop</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="hardware">
+                <display-name xml:lang="x-default">Hardware</display-name>
+                <description xml:lang="x-default">WGACA Hardware</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="height">
+                <display-name xml:lang="x-default">Height</display-name>
+                <description xml:lang="x-default">WGACA Height</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="imageAspectRatio">
+                <display-name xml:lang="x-default">Image Aspect Ratio</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="imagepathLOA">
+                <display-name xml:lang="x-default">Image path LOA</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="includes">
+                <display-name xml:lang="x-default">Includes</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="interior">
+                <display-name xml:lang="x-default">Interior</display-name>
+                <description xml:lang="x-default">WGACA Interior</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="interior_pockets">
+                <display-name xml:lang="x-default">Interior Pockets</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="isTiktokEnabled">
+                <display-name xml:lang="x-default">Is Tiktok Enabled</display-name>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="length">
+                <display-name xml:lang="x-default">length</display-name>
+                <description xml:lang="x-default">WGACA length</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="lining">
+                <display-name xml:lang="x-default">Lining</display-name>
+                <description xml:lang="x-default">WGACA Lining</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="location">
+                <display-name xml:lang="x-default">Location</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <select-multiple-flag>true</select-multiple-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Online Only</display>
+                        <value>Online Only</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Beverly Hills</display>
+                        <value>Beverly Hills</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Soho</display>
+                        <value>Soho</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Wooster</display>
+                        <value>Wooster</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="make_offer_enabled">
+                <display-name xml:lang="x-default">Make Offer Enabled</display-name>
+                <description xml:lang="x-default">WGACA Make Offer Enabled</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="material">
+                <display-name xml:lang="x-default">Material</display-name>
+                <description xml:lang="x-default">WGACA Material</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="page_url">
+                <display-name xml:lang="x-default">Page URL PIM Slug</display-name>
+                <description xml:lang="x-default">WGACA Page URL PIM Slug</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="plp_category_refinement">
+                <display-name xml:lang="x-default">PLP Custom Refinement Category</display-name>
+                <description xml:lang="x-default">Parent and child category separated by a " - " i.e. "Bags - Backpacks". This is used for custom filtering on certain PLP's.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="plp_category_refinement_multi">
+                <display-name xml:lang="x-default">PLP Custom Refinement Category  (Multi)</display-name>
+                <type>set-of-string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="refinementColor">
+                <display-name xml:lang="x-default">Refinement Color</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Beige</display>
+                        <value>beige</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Black</display>
+                        <value>black</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Blue</display>
+                        <value>blue</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Bronze</display>
+                        <value>bronze</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Brown</display>
+                        <value>brown</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Burgundy</display>
+                        <value>burgundy</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Clear</display>
+                        <value>clear</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Colorless</display>
+                        <value>colorless</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Cream</display>
+                        <value>cream</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Gold</display>
+                        <value>gold</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Green</display>
+                        <value>green</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Grey</display>
+                        <value>grey</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Gunmetal</display>
+                        <value>gunmetal</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Leather</display>
+                        <value>leather</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Multi</display>
+                        <value>miscellaneous</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Natural</display>
+                        <value>natural</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Navy</display>
+                        <value>navy</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Orange</display>
+                        <value>orange</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Palladium</display>
+                        <value>palladium</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Pink</display>
+                        <value>pink</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Purple</display>
+                        <value>purple</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Red</display>
+                        <value>red</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Silver</display>
+                        <value>silver</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Tan</display>
+                        <value>tan</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">White</display>
+                        <value>white</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Yellow</display>
+                        <value>yellow</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="resolution">
+                <display-name xml:lang="x-default">Resolution</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="season">
+                <display-name xml:lang="x-default">Season</display-name>
+                <description xml:lang="x-default">WGACA Season</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="serial">
+                <display-name xml:lang="x-default">Serial</display-name>
+                <description xml:lang="x-default">WGACA Serial</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="shipping_restrictions">
+                <display-name xml:lang="x-default">Shipping Restrictions</display-name>
+                <description xml:lang="x-default">WGACA Shipping Restrictions</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="shipping_returns">
+                <display-name xml:lang="x-default">Shipping Returns</display-name>
+                <description xml:lang="x-default">WGACA Shipping Returns</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sizing">
+                <display-name xml:lang="x-default">Sizing</display-name>
+                <description xml:lang="x-default">WGACA Sizing</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="skip_sync">
+                <display-name xml:lang="x-default">Skip Sync</display-name>
+                <description xml:lang="x-default">WGACA Skip Sync</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="slug">
+                <display-name xml:lang="x-default">Slug</display-name>
+                <description xml:lang="x-default">WGACA Slug</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="strap_drop_1">
+                <display-name xml:lang="x-default">Strap Drop 1</display-name>
+                <description xml:lang="x-default">WGACA Strap Drop 1</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="strap_drop_2">
+                <display-name xml:lang="x-default">Strap Drop 2</display-name>
+                <description xml:lang="x-default">WGACA Strap Drop 2</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="uid">
+                <display-name xml:lang="x-default">Product Notes</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="url_key">
+                <display-name xml:lang="x-default">URL Key</display-name>
+                <description xml:lang="x-default">WGACA URL Key</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="weight">
+                <display-name xml:lang="x-default">Weight</display-name>
+                <description xml:lang="x-default">WGACA Weight</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="width">
+                <display-name xml:lang="x-default">Width</display-name>
+                <description xml:lang="x-default">WGACA Width</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="year">
+                <display-name xml:lang="x-default">Year</display-name>
+                <description xml:lang="x-default">WGACA Year</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="pCategory">
+                <display-name xml:lang="x-default">Product Category</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="pSubCategory">
+                <display-name xml:lang="x-default">Product Sub Category</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="WGACA-Custom-Attributes">
+                <display-name xml:lang="x-default">WGACA Custom Attributes</display-name>
+                <attribute attribute-id="relatedProduct"/>
+                <attribute attribute-id="about_the_bag"/>
+                <attribute attribute-id="authenticity_card"/>
+                <attribute attribute-id="closure"/>
+                <attribute attribute-id="clothing_size"/>
+                <attribute attribute-id="condition_name"/>
+                <attribute attribute-id="condition_notes"/>
+                <attribute attribute-id="country_of_origin"/>
+                <attribute attribute-id="depth"/>
+                <attribute attribute-id="final_sale"/>
+                <attribute attribute-id="handle"/>
+                <attribute attribute-id="handle_drop"/>
+                <attribute attribute-id="hardware"/>
+                <attribute attribute-id="height"/>
+                <attribute attribute-id="includes"/>
+                <attribute attribute-id="interior"/>
+                <attribute attribute-id="interior_pockets"/>
+                <attribute attribute-id="length"/>
+                <attribute attribute-id="lining"/>
+                <attribute attribute-id="make_offer_enabled"/>
+                <attribute attribute-id="material"/>
+                <attribute attribute-id="page_url"/>
+                <attribute attribute-id="plp_category_refinement"/>
+                <attribute attribute-id="season"/>
+                <attribute attribute-id="serial"/>
+                <attribute attribute-id="shipping_restrictions"/>
+                <attribute attribute-id="shipping_returns"/>
+                <attribute attribute-id="shoe_size"/>
+                <attribute attribute-id="sizing"/>
+                <attribute attribute-id="skip_new_arrivals"/>
+                <attribute attribute-id="skip_sync"/>
+                <attribute attribute-id="sleeve_length"/>
+                <attribute attribute-id="slug"/>
+                <attribute attribute-id="strap_drop_1"/>
+                <attribute attribute-id="strap_drop_2"/>
+                <attribute attribute-id="uid"/>
+                <attribute attribute-id="url_key"/>
+                <attribute attribute-id="weight"/>
+                <attribute attribute-id="width"/>
+                <attribute attribute-id="year"/>
+                <attribute attribute-id="kidsAge"/>
+                <attribute attribute-id="fdxComposition"/>
+                <attribute attribute-id="color"/>
+                <attribute attribute-id="sizeChartOverride"/>
+                <attribute attribute-id="location"/>
+                <attribute attribute-id="styleNumber"/>
+                <attribute attribute-id="enableRTWProduct"/>
+                <attribute attribute-id="pCategory"/>
+                <attribute attribute-id="pSubCategory"/>
+            </attribute-group>
+            <attribute-group group-id="ExternalSearch">
+                <display-name xml:lang="x-default">Search Engine Optimization Support</display-name>
+                <attribute attribute-id="pageTitle" system="true"/>
+                <attribute attribute-id="pageDescription" system="true"/>
+                <attribute attribute-id="pageKeywords" system="true"/>
+                <attribute attribute-id="pageURL" system="true"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="lastModified" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="Order">
+                <display-name xml:lang="x-default">Order Attributes</display-name>
+                <attribute attribute-id="unit" system="true"/>
+                <attribute attribute-id="minOrderQuantity" system="true"/>
+                <attribute attribute-id="stepQuantity" system="true"/>
+                <attribute attribute-id="taxClassID" system="true"/>
+                <attribute attribute-id="EAN" system="true"/>
+                <attribute attribute-id="UPC" system="true"/>
+                <attribute attribute-id="localizedTaxClassID" system="true"/>
+                <attribute attribute-id="unitQuantity" system="true"/>
+                <attribute attribute-id="unitMeasure" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="badges">
+                <display-name xml:lang="x-default">Badges</display-name>
+                <attribute attribute-id="badgeNames"/>
+                <attribute attribute-id="badgeClasses"/>
+                <attribute attribute-id="badgeFontSizes"/>
+                <attribute attribute-id="badgeTextColors"/>
+                <attribute attribute-id="badgeBackgroundColors"/>
+                <attribute attribute-id="badgeBorderColors"/>
+            </attribute-group>
+            <attribute-group group-id="FedEx Attributes">
+                <display-name xml:lang="x-default">FedEx Attributes</display-name>
+                <attribute attribute-id="fdxComposition"/>
+                <attribute attribute-id="fdxCountryOfOrigin"/>
+                <attribute attribute-id="fdxHazFlag"/>
+                <attribute attribute-id="fdxCartons"/>
+                <attribute attribute-id="fdxHsCode"/>
+                <attribute attribute-id="fdxEccn"/>
+                <attribute attribute-id="fdxUnitWeight"/>
+                <attribute attribute-id="fdxMultiCountryOfOrigin"/>
+                <attribute attribute-id="fdxImportFlag"/>
+                <attribute attribute-id="fdxLicenseFlag"/>
+                <attribute attribute-id="fdxUnitDimension"/>
+                <attribute attribute-id="fdxGender"/>
+                <attribute attribute-id="fdxIsFixedPricing"/>
+            </attribute-group>
+            <attribute-group group-id="AmazonProductFeed">
+                <display-name xml:lang="x-default">Amazon Product Feed</display-name>
+                <attribute attribute-id="amazonProductExport"/>
+                <attribute attribute-id="amazonTodayProductExport"/>
+                <attribute attribute-id="amazonEarring_Design"/>
+                <attribute attribute-id="amazonProduct_Type"/>
+            </attribute-group>
+            <attribute-group group-id="TikTok">
+                <display-name xml:lang="x-default">TikTok</display-name>
+                <attribute attribute-id="isTiktokEnabled"/>
+                <attribute attribute-id="bagSilhouette"/>
+                <attribute attribute-id="imagepathLOA"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ProductActiveData">
+        <group-definitions>
+            <attribute-group group-id="Traffic">
+                <display-name xml:lang="x-default">Traffic</display-name>
+                <attribute attribute-id="impressionsDay" system="true"/>
+                <attribute attribute-id="impressionsWeek" system="true"/>
+                <attribute attribute-id="impressionsMonth" system="true"/>
+                <attribute attribute-id="impressionsYear" system="true"/>
+                <attribute attribute-id="viewsDay" system="true"/>
+                <attribute attribute-id="viewsWeek" system="true"/>
+                <attribute attribute-id="viewsMonth" system="true"/>
+                <attribute attribute-id="viewsYear" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="Conversion">
+                <display-name xml:lang="x-default">Conversion</display-name>
+                <attribute attribute-id="conversionDay" system="true"/>
+                <attribute attribute-id="conversionWeek" system="true"/>
+                <attribute attribute-id="conversionMonth" system="true"/>
+                <attribute attribute-id="conversionYear" system="true"/>
+                <attribute attribute-id="ordersDay" system="true"/>
+                <attribute attribute-id="ordersWeek" system="true"/>
+                <attribute attribute-id="ordersMonth" system="true"/>
+                <attribute attribute-id="ordersYear" system="true"/>
+                <attribute attribute-id="unitsDay" system="true"/>
+                <attribute attribute-id="unitsWeek" system="true"/>
+                <attribute attribute-id="unitsMonth" system="true"/>
+                <attribute attribute-id="unitsYear" system="true"/>
+                <attribute attribute-id="revenueDay" system="true"/>
+                <attribute attribute-id="revenueWeek" system="true"/>
+                <attribute attribute-id="revenueMonth" system="true"/>
+                <attribute attribute-id="revenueYear" system="true"/>
+                <attribute attribute-id="lookToBookRatioDay" system="true"/>
+                <attribute attribute-id="lookToBookRatioWeek" system="true"/>
+                <attribute attribute-id="lookToBookRatioMonth" system="true"/>
+                <attribute attribute-id="lookToBookRatioYear" system="true"/>
+                <attribute attribute-id="salesVelocityDay" system="true"/>
+                <attribute attribute-id="salesVelocityWeek" system="true"/>
+                <attribute attribute-id="salesVelocityMonth" system="true"/>
+                <attribute attribute-id="salesVelocityYear" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="PricesAndRates">
+                <display-name xml:lang="x-default">Prices &amp; Rates</display-name>
+                <attribute attribute-id="costPrice" system="true"/>
+                <attribute attribute-id="avgSalesPriceDay" system="true"/>
+                <attribute attribute-id="avgSalesPriceWeek" system="true"/>
+                <attribute attribute-id="avgSalesPriceMonth" system="true"/>
+                <attribute attribute-id="avgSalesPriceYear" system="true"/>
+                <attribute attribute-id="avgGrossMarginValueDay" system="true"/>
+                <attribute attribute-id="avgGrossMarginValueWeek" system="true"/>
+                <attribute attribute-id="avgGrossMarginValueMonth" system="true"/>
+                <attribute attribute-id="avgGrossMarginValueYear" system="true"/>
+                <attribute attribute-id="avgGrossMarginPercentDay" system="true"/>
+                <attribute attribute-id="avgGrossMarginPercentWeek" system="true"/>
+                <attribute attribute-id="avgGrossMarginPercentMonth" system="true"/>
+                <attribute attribute-id="avgGrossMarginPercentYear" system="true"/>
+                <attribute attribute-id="returnRate" system="true"/>
+            </attribute-group>
+            <attribute-group group-id="Freshness">
+                <display-name xml:lang="x-default">Freshness</display-name>
+                <attribute attribute-id="availableDate" system="true"/>
+                <attribute attribute-id="daysAvailable" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Profile">
+        <group-definitions>
+            <attribute-group group-id="Phone">
+                <display-name xml:lang="x-default">Phone Numbers</display-name>
+                <attribute attribute-id="phoneHome" system="true"/>
+                <attribute attribute-id="phoneBusiness" system="true"/>
+                <attribute attribute-id="phoneMobile" system="true"/>
+                <attribute attribute-id="fax" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Promotion">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="enableSpecialPromotionCalloutMsg">
+                <display-name xml:lang="x-default">Enable Special Promotion Callout Msg</display-name>
+                <description xml:lang="x-default">Enable Special Promotion Callout Msg to display when discount is 0</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="enableSpecialPromotionCalloutMsg">
+                <display-name xml:lang="x-default">Enable Special Promotion Callout Msg</display-name>
+                <attribute attribute-id="enableSpecialPromotionCalloutMsg"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="CustomHeaderScripts">
+                <display-name xml:lang="x-default">Custom Header scripts</display-name>
+                <description xml:lang="x-default">it will include JS in head tag for all pages.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="blogCategories">
+                <display-name xml:lang="x-default">Blog Categories in JSON format</display-name>
+                <description xml:lang="x-default">Enter the category structure here for categorizing blog articles.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="disableAccountRegistrationEmailSend">
+                <display-name xml:lang="x-default">Disable Account Registration Email Send</display-name>
+                <description xml:lang="x-default">Disable Account Registration Email Send</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="disableMakeAnOfferDisplay">
+                <display-name xml:lang="x-default">Disable Make An Offer</display-name>
+                <description xml:lang="x-default">Disable Make An Offer</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="disableOrderConfirmation">
+                <display-name xml:lang="x-default">Disable Order Confirmation</display-name>
+                <description xml:lang="x-default">Disable Order Confirmation</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="disableRequestNextDisplay">
+                <display-name xml:lang="x-default">Disable Request Next</display-name>
+                <description xml:lang="x-default">Disable Request Next</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableFrenzyRecommendationOnHome">
+                <display-name xml:lang="x-default">Enable Frenzy Recommendation on Home page</display-name>
+                <description xml:lang="x-default">Enable Frenzy Recommendation on Home page</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableFrenzyRecommendationOnPDP">
+                <display-name xml:lang="x-default">Enable Frenzy Recommendation on PDP page</display-name>
+                <description xml:lang="x-default">Enable Frenzy Recommendation on PDP page</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableFrenzyRecommendationOnSearch">
+                <display-name xml:lang="x-default">Enable Frenzy Recommendation On Search</display-name>
+                <description xml:lang="x-default">Enable Frenzy Recommendation On Search</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableFrenzyRecommendationOnSearchBar">
+                <display-name xml:lang="x-default">Enable Frenzy Recommendation On Search Bar</display-name>
+                <description xml:lang="x-default">Enable Frenzy Recommendation On Search Bar</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableTangiblee">
+                <display-name xml:lang="x-default">Enable Tangiblee</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="isNorthBeamEnabled">
+                <display-name xml:lang="x-default">North Beam Enabled</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="smartyAPIKey">
+                <display-name xml:lang="x-default">Smart API Key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="smartyAPIUrl">
+                <display-name xml:lang="x-default">Smarty API URL</display-name>
+                <description xml:lang="x-default">Smarty API URL</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="smartyAddressURL">
+                <display-name xml:lang="x-default">Smarty Address URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="smartyEnabled">
+                <display-name xml:lang="x-default">Smarty address enabled</display-name>
+                <description xml:lang="x-default">Smarty address enabled</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+              <attribute-definition attribute-id="storefrontBaseUrl">
+                <display-name xml:lang="x-default">Storefront Base URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="OneTrustConsentScript">
+                <display-name xml:lang="x-default">OneTrust Consent Script</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="OneTrustEnable">
+                <display-name xml:lang="x-default">Enable OneTrust</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+             <attribute-definition attribute-id="NonAuthorizedBrands">
+                <display-name xml:lang="x-default">List Of Non-Authorized Brands</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+                <attribute-group group-id="Storefront Configs">
+                <display-name xml:lang="x-default">Storefront Configurations</display-name>
+                <attribute attribute-id="contactUsFormTopics"/>
+                <attribute attribute-id="customerServiceEmail"/>
+                <attribute attribute-id="customerServiceNumber"/>
+                <attribute attribute-id="googleApiKey"/>
+                <attribute attribute-id="googlePlacesEnabled"/>
+                <attribute attribute-id="GoogleVerificationTag"/>
+                <attribute attribute-id="googleMerchantProductFeedFileLocation"/>
+                <attribute attribute-id="storefrontBaseUrl"/>
+            </attribute-group>
+            <attribute-group group-id="WGACA Configs">
+                <display-name xml:lang="x-default">WGACA Custom Configurations</display-name>
+                <attribute attribute-id="disableMakeAnOfferDisplay"/>
+                <attribute attribute-id="disableOrderConfirmation"/>
+                <attribute attribute-id="loaRedirectDomainPath"/>
+                <attribute attribute-id="loaRedirectStatus"/>
+                <attribute attribute-id="disableAccountRegistrationEmailSend"/>
+                <attribute attribute-id="enableTangiblee"/>
+                <attribute attribute-id="CustomHeaderScripts"/>
+                <attribute attribute-id="NonAuthorizedBrands"/>
+            </attribute-group>
+            <attribute-group group-id="northBeamConfig">
+                <display-name xml:lang="x-default">North Beam Config</display-name>
+                <attribute attribute-id="isNorthBeamEnabled"/>
+            </attribute-group>
+            <attribute-group group-id="Frenzy recommendation">
+                <display-name xml:lang="x-default">Frenzy recommendation</display-name>
+                <attribute attribute-id="enableFrenzyRecommendationOnHome"/>
+                <attribute attribute-id="enableFrenzyRecommendationOnPDP"/>
+                <attribute attribute-id="enableFrenzyRecommendationOnSearch"/>
+                <attribute attribute-id="enableFrenzyRecommendationOnSearchBar"/>
+            </attribute-group>
+            <attribute-group group-id="smartyAddressAutocomplete">
+                <display-name xml:lang="x-default">Smarty Address Autocomplete</display-name>
+                <attribute attribute-id="smartyEnabled"/>
+                <attribute attribute-id="smartyAPIUrl"/>
+                <attribute attribute-id="smartyAPIKey"/>
+                <attribute attribute-id="smartyAddressURL"/>
+            </attribute-group>
+            <attribute-group group-id="OneTrust Configs">
+                <display-name xml:lang="x-default">OneTrust Cookie Configurations</display-name>
+                <attribute attribute-id="OneTrustEnable"/>
+                <attribute attribute-id="OneTrustConsentScript"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Store">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="storeType">
+                <!-- This Attribute extends StoreType from meta/rvw_autobahn_core, but can be updated to client specific values  -->
+                <type>enum-of-string</type>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Retail</display>
+                        <value>retail</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Outlet</display>
+                        <value>outlet</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Coming Soon</display>
+                        <value>comingSoon</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Other</display>
+                        <value>other</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    </type-extension>
+</metadata>

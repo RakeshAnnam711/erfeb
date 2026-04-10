@@ -1,0 +1,106 @@
+{
+    "getOrder": {
+        "key": "getOrder",
+        "uri": "/{0}/orders/{1}",
+        "method": "GET",
+        "paramKeys": [
+            "organization",
+            "number"
+        ]
+    },
+    "createCheckout": {
+        "key": "createCheckout",
+        "uri": "/checkouts",
+        "method": "POST",
+        "auth": "session"
+    },
+    "checkFraudStatus": {
+        "key": "checkFraudStatus",
+        "uri": "/{0}/orders/{1}/status/fraud",
+        "method": "GET",
+        "paramKeys": [
+            "organization",
+            "number"
+        ]
+    },
+    "getShippingConfiguration": {
+        "key": "getShippingConfiguration",
+        "uri": "/{0}/shipping/configuration/{1}",
+        "method": "GET",
+        "paramKeys": [
+            "organization",
+            "key"
+        ]
+    },
+    "getExperiences": {
+        "key": "getExperiences",
+        "uri": "/{0}/experiences?limit=250",
+        "method": "GET",
+        "paramKeys": [
+            "organization"
+        ]
+    },
+    "getExperiencePricing": {
+        "key": "getExperiencePricing",
+        "uri": "/{0}/experiences/{1}/pricing",
+        "method": "GET",
+        "paramKeys": [
+            "organization",
+            "experience"
+        ]
+    },
+    "getRegion": {
+        "key": "getRegion",
+        "uri": "/reference/regions/{0}",
+        "method": "GET",
+        "paramKeys": [
+            "region"
+        ]
+    },
+    "getDeliveryWindow": {
+        "key": "getDeliveryWindow",
+        "uri": "/{0}/delivery-windows/summary?origin={1}&destination={2}",
+        "method": "GET",
+        "paramKeys": [
+            "organization",
+            "origin",
+            "destination"
+        ],
+        "cacheable": true
+    },
+    "getPaymentMethods": {
+        "key": "getPaymentMethods",
+        "uri": "/{0}/experiences/{1}/payment/method/rules?tags=display",
+        "method": "GET",
+        "paramKeys": [
+            "organization",
+            "experience"
+        ],
+        "cacheable": true
+    },
+    "getOrderAllocation": {
+        "key": "getOrderAllocation",
+        "uri": "/{0}/orders/allocations/{1}",
+        "method": "GET",
+        "paramKeys": [
+            "organization",
+            "number"
+        ]
+    },
+    "createSession": {
+        "key": "createSession",
+        "uri": "/sessions/organizations/{0}",
+        "method": "POST",
+        "paramKeys": [
+            "organization"
+        ]
+    },
+    "getSession": {
+        "key": "getSession",
+        "uri": "/sessions/{0}",
+        "method": "GET",
+        "paramKeys": [
+            "session"
+        ]
+    }
+}

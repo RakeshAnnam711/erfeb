@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="TaxJarEnable">
+                <display-name xml:lang="x-default">Enable TaxJar</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+             <attribute-definition attribute-id="TaxJarShipFromCountryCode">
+                <display-name xml:lang="x-default">Ship From Country Code</display-name>
+                <description xml:lang="x-default">Two-letter ISO country code of the country where orders are shipped from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+                <field-height>0</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="TaxJarShipFromState">
+                <display-name xml:lang="x-default">Ship From State Code</display-name>
+                <description xml:lang="x-default">Two-letter ISO state code where orders are shipped from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="TaxJarShipFromZip">
+                <display-name xml:lang="x-default">Ship From Postal Code</display-name>
+                <description xml:lang="x-default">Postal code where orders are shipped from (5-Digit ZIP or ZIP+4).</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+                <field-height>0</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="TaxJarShipFromCity">
+                <display-name xml:lang="x-default">Ship From City</display-name>
+                <description xml:lang="x-default">City where orders are shipped from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+                <field-height>0</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="TaxJarShipFromAddress">
+                <display-name xml:lang="x-default">Ship From Address</display-name>
+                <description xml:lang="x-default">Street address where orders are shipped from.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="TaxJarLastSyncTime">
+                <display-name xml:lang="x-default">TaxJar Last Sync Time</display-name>
+                <description xml:lang="x-default">Records the timestamp of last run of TaxJar sync job. Do not manually alter unless directed by TaxJar support.</description>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="TaxJar">
+                <display-name xml:lang="x-default">TaxJar Settings</display-name>
+                <attribute attribute-id="TaxJarEnable"/>
+                <attribute attribute-id="TaxJarShipFromCountryCode"/>
+                <attribute attribute-id="TaxJarShipFromState"/>
+                <attribute attribute-id="TaxJarShipFromZip"/>
+                <attribute attribute-id="TaxJarShipFromCity"/>
+                <attribute attribute-id="TaxJarShipFromAddress"/>
+                <attribute attribute-id="TaxJarLastSyncTime"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Shipment">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="TaxJarOrderLastSyncDateTime">
+                <display-name xml:lang="x-default">Time of last sync to TaxJar</display-name>
+                <description xml:lang="x-default">This attribute should not be manually edited unless directed by TaxJar support.</description>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="TaxJarOrderLastSyncHash">
+                <display-name xml:lang="x-default">TaxJar Last Order Sync Hash</display-name>
+                <description xml:lang="x-default">Used to prevent unnecessary requests to TaxJar API</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    </type-extension>
+
+    <type-extension type-id="Profile">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="TaxJarCustomerExemptionType">
+                <display-name xml:lang="x-default">Exemption Type</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Non Exempt</display>
+                        <value>non_exempt</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Wholesale</display>
+                        <value>wholesale</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Government</display>
+                        <value>government</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Marketplace</display>
+                        <value>marketplace</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Other</display>
+                        <value>other</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="TaxJarCustomerExemptionRegions">
+                <display-name xml:lang="x-default">Exempt States</display-name>
+                <description xml:lang="x-default">States to apply customer exemption in. If no states are selected, it will default to being either exempt or non exempt in all states. Hold CTRL to select multiple states.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <select-multiple-flag>true</select-multiple-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Alabama</display>
+                        <value>AL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Alaska</display>
+                        <value>AK</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Arizona</display>
+                        <value>AZ</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Arkansas</display>
+                        <value>AR</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">California</display>
+                        <value>CA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Colorado</display>
+                        <value>CO</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Connecticut</display>
+                        <value>CT</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Delaware</display>
+                        <value>DE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Florida</display>
+                        <value>FL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Georgia</display>
+                        <value>GA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Hawaii</display>
+                        <value>HI</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Idaho</display>
+                        <value>ID</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Illinois</display>
+                        <value>IL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Indiana</display>
+                        <value>IN</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Iowa</display>
+                        <value>IA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Kansas</display>
+                        <value>KS</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Kentucky</display>
+                        <value>KY</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Louisiana</display>
+                        <value>LA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Maine</display>
+                        <value>ME</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Maryland</display>
+                        <value>MD</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Massachusetts</display>
+                        <value>MA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Michigan</display>
+                        <value>MI</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Minnesota</display>
+                        <value>MN</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Mississippi</display>
+                        <value>MS</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Missouri</display>
+                        <value>MO</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Montana</display>
+                        <value>MT</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Nebraska</display>
+                        <value>NE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Nevada</display>
+                        <value>NV</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">New Hampshire</display>
+                        <value>NH</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">New Jersey</display>
+                        <value>NJ</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">New Mexico</display>
+                        <value>NM</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">New York</display>
+                        <value>NY</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">North Carolina</display>
+                        <value>NC</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">North Dakota</display>
+                        <value>ND</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Ohio</display>
+                        <value>OH</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Oklahoma</display>
+                        <value>OK</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Oregon</display>
+                        <value>OR</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Pennsylvania</display>
+                        <value>PA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Rhode Island</display>
+                        <value>RI</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">South Carolina</display>
+                        <value>SC</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">South Dakota</display>
+                        <value>SD</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Tennessee</display>
+                        <value>TN</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Texas</display>
+                        <value>TX</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Utah</display>
+                        <value>UT</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Vermont</display>
+                        <value>VT</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Virginia</display>
+                        <value>VA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Washington</display>
+                        <value>WA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">West Virginia</display>
+                        <value>WV</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Wisconsin</display>
+                        <value>WI</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Wyoming</display>
+                        <value>WY</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="TaxJar">
+                <display-name xml:lang="x-default">TaxJar Tax Exemptions</display-name>
+                <attribute attribute-id="TaxJarCustomerExemptionType"/>
+                <attribute attribute-id="TaxJarCustomerExemptionRegions"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>

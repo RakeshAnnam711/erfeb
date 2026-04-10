@@ -1,0 +1,49 @@
+<isset name="product" value="${pdict.product}" scope="page" />
+<isset name="productCopy" value="${pdict.product}" scope="page"/>
+<isset name="isBundle" value="${product.productType === 'bundle'}" scope="page" />
+<isset name="loopState" value="${0}" scope="page" />
+
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<div class="product-quick-add-to-cart product-quickview product-${product.productType} col product-wrapper product-detail" data-pid="${product.id}"  data-swatchable-attributes="${pdict.product.attrsToUseForSwatch}">
+    <div class="row">
+        <div class="col-12">
+            <div class="detail-panel">
+                <section class="attributes">
+
+                    <isinclude template="product/components/mainAttributes" />
+                    <isset name="noSwatchOverride" value="${false}" scope="page" />
+                    <isset name="sizeChartHasBeenShown" value="${false}" scope="page"/>
+                    <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                        <isset name="loopState" value="${loopState + 1}" scope="page" />
+                        <div data-attr="${attr.id}" class="swatch row">
+                            <div class="col-12">
+                                <isinclude template="product/quickAddToCart/variationAttributePopover" />
+                            </div>
+                        </div>
+                    </isloop>
+
+                    <div class="availability d-none" data-ready-to-order="${product.readyToOrder}" data-available="${product.available}">
+                        <isinclude template="product/components/productAvailability" />
+                    </div>
+
+                     <!-- Quantity set to 1 for quick add -->
+                    <div class='quantity col-4 d-none'>
+                        <select class="quantity-select custom-select form-control" name="quantity-select" tabindex="-1">
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+
+                        <div class="${loopState === 1 && !onlyAttributeIsDropdown ? 'd-none' : ''}">
+                            <div class="row align-items-end">
+                                <div class="col-12 mt-2">
+                                    <isaddtocartglobal />
+                                </div>
+                            </div>
+                        </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

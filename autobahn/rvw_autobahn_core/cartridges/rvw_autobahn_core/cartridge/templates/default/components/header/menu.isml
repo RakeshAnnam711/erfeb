@@ -1,0 +1,67 @@
+<iscomment> menuLevel increments up as we get deeper into nav levels. It is used to designed a 'menu-level-X' at the containing UL for each new set of links </iscomment>
+<isinclude template="/components/modules" sf-toolkit="off" />
+<isset name="menuLevel" value="${1}" scope="page" />
+
+<nav class="navbar navbar-expand-lg bg-inverse col-12">
+    <isif condition="${!pdict.secondaryNav}">
+        <div class="close-menu d-lg-none">
+            <button class="back" role="button" aria-label="${Resource.msg('label.header.menu.back', 'common', null)}">
+                <span class="icon icon-arrow-left"></span>
+                ${Resource.msg('link.header.menu.back', 'common', null)}
+            </button>
+        </div>
+        <div class="search-mobile d-lg-none w-100">
+            <isinclude template="components/header/search" />
+        </div>
+        <div class="menu-group" role="navigation">
+            <ul class="nav navbar-nav menu-level-${menuLevel.toFixed()}" role="menu" cypress-target="mobileNav">
+                <isif condition="${pdict.categories}">
+                    <isloop items="${pdict.categories}" var="category">
+                        <isscript>
+                            var menuHighlightClass = category.highlight ? 'highlight' : '';
+                            var menuParentClass = category.parentOfActive ? 'contains-inview' : '';
+                            var menuActiveClass = category.active ? 'is-inview' : '';
+                            var secondaryNavDropdownClass = category.secondaryNav ? 'has-secondary-nav' : '';
+                        </isscript>
+                        <isif condition="${category.subCategories || category.contentSubLinksOnly}">
+                            <isscript>
+                                var megamenuClass = category.megamenu ? 'megamenu' : '';
+                                var secondLevelCategory = !empty(category.fullCategory) ? category.fullCategory : null; // Referenced in megamenu.isml
+                            </isscript>
+                            <li class="nav-item custom-dropdown ${megamenuClass} ${menuHighlightClass} ${menuParentClass} ${menuActiveClass}" role="menuitem">
+                                <a href="<isprint value="${category.url}" encoding="htmldoublequote"/>" id="${category.id}" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">${category.name}</a>
+                                <isset name="menuItem" value="${category}" scope="page" />
+                                <iscomment> menuLevel is incremented up as we include another level of navigation</iscomment>
+                                <isset name="menuLevel" value="${menuLevel + 1}" scope="page" />
+                                <isif condition="${category.megamenu}">
+                                    <isinclude template="components/header/megamenu" />
+                                <iselse/>
+                                    <isinclude template="components/header/menuItem" />
+                                </isif>
+                                <iscomment> menuLevel is incremented down to maintain a proper value for the next instance of the isloop </iscomment>
+                                <isset name="menuLevel" value="${menuLevel - 1}" scope="page" />
+                            </li>
+                        <iselse/>
+                            <li class="nav-item ${menuHighlightClass} ${menuParentClass} ${menuActiveClass}" role="menuitem">
+                                <a href="<isprint value="${category.url}" encoding="htmldoublequote"/>" id="${category.id}" class="nav-link" role="link" tabindex="0">${category.name}</a>
+                            </li>
+                        </isif>
+                    </isloop>
+                </isif>
+                <li class="nav-item d-lg-none" role="menuitem" cypress-target="mobileNavSupport"><iscontentasset aid="headerSupportMobile"/></li>
+                <isinclude template="account/mobileHeader" />
+                <isinclude url="${URLUtils.url('Page-Locale', 'mobile', true)}" />
+
+                <isif condition="${pdict.abConfigs.storeHeaderSelectorEnabled}">
+                    <li class="nav-item d-lg-none store-selector js-store-picker-header">
+                        <div class="nav-link">
+                            <isinclude url="${URLUtils.url('Stores-FindStoresInHeader') + '?' + pdict.queryString}"/>
+                        </div>
+                    </li>
+                </isif>
+            </ul>
+        </div>
+    <iselse/>
+        <isinclude template="components/header/secondaryNav" />
+    </isif>
+</nav>

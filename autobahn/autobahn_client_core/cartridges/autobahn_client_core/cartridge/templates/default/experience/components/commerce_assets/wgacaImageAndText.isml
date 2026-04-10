@@ -1,0 +1,61 @@
+<iscomment>CSS is now loaded via consolidated-components.scss in global.scss</iscomment>
+
+<div class="image-and-text-container ${pdict.imageContainerClass}">
+	<isif condition="${pdict.ctaUrl != null}">
+		<a href="${pdict.ctaUrl}" tabindex="0" aria-label="${
+       !empty(pdict.ariaPrefix)
+           ? (!empty(pdict.TextContent)
+               ? pdict.ariaPrefix + ': ' + pdict.TextContent
+               : pdict.ariaPrefix)
+           : (!empty(pdict.buttonText)
+            ? pdict.buttonText
+            : 'Banner link'
+        )
+   }">
+			<div class="hero-image">
+				<picture>
+					<source media="(min-width:767px)" data-srcset="${pdict.desktopImage.src.desktop}">
+					<img class="lazyload ${pdict.imageClass}" data-src="${pdict.mobileImage.src.desktop}" alt="${pdict.alt}" title="${pdict.alt}">
+				</picture>
+			</div>
+			<isif condition="${pdict.TextContent}">
+                <p class="text-content ${pdict.titleClass}" style="font-size: ${pdict.TextFontSize}; text-align: ${pdict.linkAlignment}; color: ${pdict.titleColor};">
+                    <isprint value="${pdict.TextContent}" encoding="off" />
+                </p>
+            </isif>
+			<isif condition="${pdict.subTitle}">
+                <p class="text-content-subTitle ${pdict.subTitleClass}" style="font-size: ${pdict.subTitleFontSize}; text-align: ${pdict.linkAlignment};  color: ${pdict.subTitleColor};">
+                    <isprint value="${pdict.subTitle}" encoding="off" />
+                </p>
+            </isif>
+			<isif condition="${pdict.buttonText != null}">
+				<div class="text-center" style="display: ${pdict.shopButtonDiv};">
+					<div class="shop-button btn ${pdict.buttonStyle} ${pdict.buttonClass}" aria-label="${pdict.ctaImageAndTextAriaLabel}" style="color: ${pdict.buttonTextColor}; justify-self: ${pdict.buttonAlignment};">${pdict.buttonText}</div>
+				</div>
+			</isif>
+		</a>
+	<iselse>
+		<div class="hero-image">
+			<picture>
+				<source media="(min-width:767px)" data-srcset="${pdict.desktopImage.src.desktop}">
+				<img class="lazyload ${pdict.imageClass}" data-src="${pdict.mobileImage.src.desktop}" alt="${pdict.alt}" title="${pdict.alt}"  style="${!pdict.TextContent ? 'margin-bottom: 0;' : ''}">
+			</picture>
+
+		</div>
+		<isif condition="${pdict.TextContent}">
+            <p class="text-content ${pdict.titleClass}" style="font-size: ${pdict.TextFontSize}; text-align: ${pdict.linkAlignment}; color: ${pdict.titleColor}">
+                <isprint value="${pdict.TextContent}" encoding="off" />
+            </p>
+        </isif>
+		<isif condition="${pdict.subTitle}">
+                <p class="text-content-subTitle ${pdict.subTitleClass}" style="font-size: ${pdict.subTitleFontSize}; color: ${pdict.subTitleColor}; text-align: ${pdict.linkAlignment};">
+                    <isprint value="${pdict.subTitle}" encoding="off" />
+                </p>
+        </isif>
+		<isif condition="${pdict.buttonText != null}">
+			<div class="text-center" style="display: ${pdict.shopButtonDiv};">
+				<button class="shop-button btn ${pdict.buttonStyle} ${pdict.buttonClass}" aria-label="${pdict.ctaImageAndTextAriaLabel}" style = "color: ${pdict.buttonTextColor}; font-size: ${pdict.buttonFontSize}; justify-self: ${pdict.buttonAlignment};">${pdict.buttonText}</button>
+			</div>
+		</isif>
+	</isif>
+</div>

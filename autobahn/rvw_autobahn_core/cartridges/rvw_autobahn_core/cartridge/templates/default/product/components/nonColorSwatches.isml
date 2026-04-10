@@ -1,0 +1,53 @@
+<div class="${attr.id}-attributes non-color-attribute-swatches" data-attr="${attr.id}">
+    <div class="select-${attr.id}" id="${attr.id}-${loopState !== 'undefined' && loopState.count ? loopState.count : '1' }" ${ product.productType === "variant" && isBundle ? "disabled" : "" }>
+        <span class="${attr.id} non-input-label">
+            ${Resource.msg('label.select', 'common', null)} ${attr.displayName}: <span class="non-color-display-value"><isprint value="${attr.displayValue || ''}" /></span>
+        </span>
+
+        <isloop items="${attr.values}" var="attrValue">
+            <isif condition="${!(isBundle && product.productType === 'variant' && !attrValue.selected) }">
+                <div class="${attr.id}-tile swatch-tile-container">
+                    <button class="${attr.id}-attribute swatch"
+                        aria-label="${Resource.msg('label.select', 'common', null)} ${attr.displayName} ${attrValue.displayValue}"
+                        aria-describedby="${attrValue.id}"
+                        data-url="${attrValue.url}" ${ product.productType == "variant" && isBundle ? "disabled" : "" }
+                        data-attr="${attr.id}"
+                    >
+                        <iscomment>${JSON.stringify(attrValue.selected)}-----</iscomment>
+                        <span data-attr-value="${attrValue.value}"
+                                data-display-value="${attrValue.displayValue}"
+                                class="
+                                    ${attr.id}-value
+                                    swatch-value
+                                    non-color-swatch-value
+                                    ${attrValue.selected ? 'selected' : ''}
+                                    ${attrValue.selectable ? 'selectable' : 'unselectable'}
+                                    ${attrValue.available ? 'available' : outOfStockEnabled ? 'out-of-stock' : 'unavailable'}
+                                "
+                                outOfStock="${outOfStockEnabled}"
+                        >
+                                <iscomment>
+                                <!-- NOTE: commenting out to be completed in a later phase
+                                <isif condition="${attrValue.images.swatch[0] && attrValue.images.swatch[0].url}">
+                                    <img src="${attrValue.images.swatch[0].url}" alt=" ${attrValue.displayValue}"/>
+                                </isif>
+                                    -->
+                            </iscomment>
+                            <span class="name">
+                                <span class="name">${attrValue.displayValue}</span>
+                            </span>
+                        </span>
+
+                        <span id="${attrValue.id}" class="sr-only selected-assistive-text">
+                            ${attrValue.selected ? Resource.msg('msg.assistive.selected.text', 'common', null) : ''}
+                        </span>
+
+                        <isif condition="${!empty(attrValue.description)}">
+                            <span class="description">${attrValue.description}</span>
+                        </isif>
+                    </button>
+                </div>
+            </isif>
+        </isloop>
+    </div>
+</div>

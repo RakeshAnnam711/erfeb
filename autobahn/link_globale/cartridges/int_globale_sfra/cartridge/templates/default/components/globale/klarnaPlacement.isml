@@ -1,0 +1,9 @@
+<isif condition="${pdict.geKlarnaConfigurations && pdict.geKlarnaConfigurations.klarnaOSMConfig}">
+    <div class="pdp-klarna-container">
+        <isif condition="${product.price.sales.value}">
+            <klarna-placement data-key="${pdict.geKlarnaConfigurations.getPdpKey()}" <isif condition="${pdict.geKlarnaConfigurations.getLocale()}">data-locale="${pdict.geKlarnaConfigurations.getLocale()}"</isif> data-purchase-amount="${(product.price.sales.value * 100).toString()}"></klarna-placement>
+        <iselseif condition="${product.price.list.value}" />
+            <klarna-placement data-key="${pdict.geKlarnaConfigurations.getPdpKey()}" <isif condition="${pdict.geKlarnaConfigurations.getLocale()}">data-locale="${pdict.geKlarnaConfigurations.getLocale()}"</isif> data-purchase-amount="${(product.price.list.value * 100).toString()}"></klarna-placement>
+        </isif>
+    </div>
+</isif>

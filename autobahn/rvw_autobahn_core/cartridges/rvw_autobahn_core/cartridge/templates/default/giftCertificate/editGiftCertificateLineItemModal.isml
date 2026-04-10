@@ -1,0 +1,14 @@
+<div class="modal fade" id="editGiftCertificateLineItemModal" tabindex="-1" role="dialog" aria-labelledby="editGiftCertificateLineItemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="editGiftCertificateLineItemModalLabel" class="modal-title">${Resource.msg('giftcertificate.purchase.giftcertificate.edit', 'checkout', null)}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <isset name="isEdit" value="true" scope="page" />
+            <div class="modal-body">
+                <isinclude template="giftCertificate/components/giftCertificatePurchaseForm"/>
+            </div>
+        </div>
+    </div>
+</div>

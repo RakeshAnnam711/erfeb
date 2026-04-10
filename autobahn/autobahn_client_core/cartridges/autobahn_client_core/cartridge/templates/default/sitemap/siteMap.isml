@@ -1,0 +1,39 @@
+<isdecorate template="common/layout/page">
+    <div class="container">
+        <h1 class="text-center">Our Sitemap</h1>
+        <isset name="topLevelCategory" value="${dw.catalog.CatalogMgr.getSiteCatalog().getRoot().getOnlineSubCategories().iterator()}" scope="page" />
+        <isloop items="${topLevelCategory}" var ="topCategory" status="loopstatus">
+            <isif condition="${topCategory && topCategory.displayName != null}">
+                <a href="${URLUtils.http('Search-Show', 'cgid',topCategory.ID)}">
+                    <isprint value="${topCategory.displayName}"/>
+                </a>
+            </isif>
+            <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+                <ul>
+                    <isloop items="${topCategory.getOnlineSubCategories().iterator()}" var ="subCategory" status="loopstatus">
+                        <isif condition="${subCategory && subCategory.displayName != null}">
+                            <li>
+                                <a href="${URLUtils.http('Search-Show', 'cgid',subCategory.ID)}">
+                                    <isprint value="${subCategory.displayName}"/>
+                                </a>
+                                <isif condition="${subCategory.subCategories && !subCategory.subCategories.isEmpty()}">
+                                    <ul>
+                                        <isloop items="${subCategory.subCategories}" var ="thirdCategory" status="loopstatus">
+                                            <isif condition="${thirdCategory && thirdCategory.displayName != null}">
+                                                <li>
+                                                    <a href="${URLUtils.http('Search-Show', 'cgid',thirdCategory.ID)}">
+                                                        <isprint value="${thirdCategory.displayName}"/>
+                                                    </a>
+                                                </li>
+                                            </isif>
+                                        </isloop>
+                                    </ul>
+                                </isif>
+                            </li>
+                        </isif>
+                    </isloop>
+                </ul>
+            </isif>
+        </isloop>
+    </div>
+</isdecorate>

@@ -1,0 +1,12 @@
+<div id="customButtons" class="sg__header3">Custom Buttons</div>
+<p>You can also create custom buttons on the fly by using helper classes or mixins.</p>
+<p>Note: hover states will only work when using a mixin, in which case hovering darkens background and border color values by 5%.</p>
+<div class="row">
+    <div class="col-md-6">
+        <button class="sg__custom-button">Custom Button</button>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button class="btn btn-custom background--green text--white border--green">Custom Button</button></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include button(custom, $green, $white, $green)}</script></code></pre>
+    </div>
+</div>

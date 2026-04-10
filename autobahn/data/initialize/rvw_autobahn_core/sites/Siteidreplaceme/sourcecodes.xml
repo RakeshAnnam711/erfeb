@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sourcecodes xmlns="http://www.demandware.com/xml/impex/sourcecode/2007-03-31">
+    <sourcecode-group group-id="default-theme">
+        <description>Sets the styles to the default theme for use in Style Guide.</description>
+        <enabled-flag>true</enabled-flag>
+        <active-redirect>
+            <default-redirect/>
+        </active-redirect>
+        <inactive-redirect>
+            <default-redirect/>
+        </inactive-redirect>
+        <code-specs>
+            <code-spec>default</code-spec>
+        </code-specs>
+        <pricebooks/>
+        <custom-attributes>
+            <custom-attribute attribute-id="theme">global</custom-attribute>
+        </custom-attributes>
+    </sourcecode-group>
+
+    <sourcecode-group group-id="dark-theme">
+        <description>A sample dark theme for demo purposes.</description>
+        <enabled-flag>true</enabled-flag>
+        <active-redirect>
+            <default-redirect/>
+        </active-redirect>
+        <inactive-redirect>
+            <default-redirect/>
+        </inactive-redirect>
+        <code-specs>
+            <code-spec>dark</code-spec>
+        </code-specs>
+        <pricebooks/>
+        <custom-attributes>
+            <custom-attribute attribute-id="theme">global-dark</custom-attribute>
+        </custom-attributes>
+    </sourcecode-group>
+</sourcecodes>

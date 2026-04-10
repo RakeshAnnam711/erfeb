@@ -1,0 +1,25 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/billing/creditCardForm.isml
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+    <iscomment>Bank Transfer </iscomment>
+    <div class="bankTransfer" id="bankTransfer">
+        <isscript>
+            var CybersourceConstants = require('*/cartridge/scripts/utils/CybersourceConstants');
+            var idlEnabled = dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.IDEAL_PAYMENT_TYPE) && dw.order.PaymentMgr.getPaymentMethod(CybersourceConstants.IDEAL_PAYMENT_TYPE).active;
+        </isscript>
+        <isif condition="${idlEnabled}">
+            <div id="idl">
+                <isinclude template="checkout/billing/paymentOptions/iDealContent" />
+            </div>
+        </isif>
+    </div>
+</isif>

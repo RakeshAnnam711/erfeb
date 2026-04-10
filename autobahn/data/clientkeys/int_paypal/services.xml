@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="PayPal_Sandbox_Signature_Credentials">
+        <url>https://api-3t.sandbox.paypal.com/nvp</url>
+        <user-id>sb-voudl5077339_api1.business.example.com</user-id>
+        <password>GVLS4H6XWPU9MS34</password>
+        <custom-attributes>
+            <custom-attribute attribute-id="PP_API_IsProduction">false</custom-attribute>
+            <custom-attribute attribute-id="PP_API_Signature">AsxueOOaAwMTdXilksCtqiQx.MbsAG2ZIEXUenfjci.W2WpUs43peYV7</custom-attribute>
+            <custom-attribute attribute-id="PP_API_UseCertificate">false</custom-attribute>
+        </custom-attributes>
+    </service-credential>
+
+    <service-credential service-credential-id="Paypal_Sandbox_Credentials">
+        <url>https://api.sandbox.paypal.com/</url>
+        <user-id>AXM1Wmdmg27dJlATN93NM2-DIgJ17F0G6jhG9akxFwD9xPuQqQF6l2kPZcAuCULMI5iwwPLlXZhnxXtN</user-id>
+        <password>EFxxoA_UaHpB6L1qkG3-Gzr6EGApmPzrf6CcfOQ9gnxvruWNgOSJP_ZldwTdK9yAjevkeIV1CVdyMX9N</password>
+        <custom-attributes>
+            <custom-attribute attribute-id="PP_API_IsProduction">false</custom-attribute>
+            <custom-attribute attribute-id="PP_API_UseCertificate">false</custom-attribute>
+        </custom-attributes>
+    </service-credential>
+</services>

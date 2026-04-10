@@ -1,0 +1,19 @@
+<input
+    type="checkbox"
+    class="custom-control-input" id="add-to-email-list"
+    <isprint value=${pdict.profileForm.customer.addtoemaillist.attributes} encoding="off" />
+>
+<label class="custom-control-label" for="add-to-email-list">
+    <isif condition="${dw.system.Site.current.getCustomPreferenceValue('MarketingCloudForNewsletterEnabled')}">
+        <iscomment>
+        WGACA MODIFICATION - remove reliance on SiteContext Object when it's empty
+        <isset name="brandName" value="${!empty(pdict.siteContext.name) ? pdict.siteContext.name : ''}" scope="page" />
+        </iscomment>
+        <isset name="brandName" value="${!empty(pdict.siteContext && pdict.siteContext.name) ? pdict.siteContext.name : dw.system.Site.current.name}" scope="page" />
+        ${Resource.msgf('form.newsletter.email.optin', 'forms', null, brandName)}
+    <iselseif condition="${dw.system.Site.current.getCustomPreferenceValue('klaviyo_marketing_email')}">
+        ${Resource.msg('form.marketing.email.optin', 'forms', null)}
+    <iselse/>
+        <isprint value="${pdict.profileForm.customer.addtoemaillist.label}" encoding="htmlcontent" />
+    </isif>
+</label>

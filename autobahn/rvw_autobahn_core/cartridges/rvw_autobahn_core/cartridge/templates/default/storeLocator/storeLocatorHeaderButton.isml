@@ -1,0 +1,24 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+<div class="store-locator-header-button js-storelocator-header-prompt"
+     type="submit"
+     title="${!empty(pdict.preferredStoreName) ? pdict.preferredStoreName : Resource.msg('storelocator.header.title', 'storeLocator', null)}"
+     data-prompt-text="${Resource.msg('storelocator.header.prompt', 'storeLocator', null)}"
+     ><isif condition="${!empty(pdict.preferredStoreName)}">${Resource.msg('storelocator.header.prompt', 'storeLocator', null) + ': ' + pdict.preferredStoreName}<iselse/>${Resource.msg('storelocator.header.prompt', 'storeLocator', null)}</isif>
+</div>
+<div class="modal" id="home-store-picker-container" role="dialog">
+    <div class="modal-dialog modal-lg in-store-inventory-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">${Resource.msg('storelocator.header.title', 'storeLocator', null)}</h5>
+                <div class="justify-content-end">
+                    <button type="button" class="close pull-right" data-dismiss="modal" title="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <isinclude template="storeLocator/storeLocatorNoDecorator" />
+            </div>
+        </div>
+    </div>
+</div>

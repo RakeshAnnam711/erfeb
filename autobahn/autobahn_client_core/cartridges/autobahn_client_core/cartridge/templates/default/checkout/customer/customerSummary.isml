@@ -1,0 +1,19 @@
+<div class="card-header clearfix">
+    <span class="summary-section-label customer-label pull-left">
+        ${Resource.msg('field.customer.email', 'checkout', null)}
+    </span>
+    <isif condition="${!pdict.customer.registeredUser}">
+        <button class="edit-button pull-right"
+                aria-label="${Resource.msg('action.edit.step.msg.shipping', 'checkout', null)}">${Resource.msg('action.edit.step', 'checkout', null)}
+        </button>
+    </isif>
+</div>
+<div class="summary-details customer">
+    <input type="hidden" value="${URLUtils.url('CheckoutServices-SubmitCustomer')}">
+    <span class="customer-summary-email">${(pdict.customer.profile && pdict.customer.profile.email) ? pdict.customer.profile.email : pdict.order.orderEmail}</span>
+    <div class="form-group-input">
+        <input type="email" data-checkemail="${URLUtils.url('CheckoutServices-CheckEmail')}" class="form-control customer-email-input" style="display:none;" value="${(pdict.customer.profile && pdict.customer.profile.email) ? pdict.customer.profile.email : pdict.order.orderEmail}" />
+        <button class="btn btn-secondary btn-block save-email-button" style="display:none;">Save</button>
+    </div>
+</div>
+

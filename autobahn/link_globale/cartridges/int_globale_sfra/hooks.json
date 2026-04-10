@@ -1,0 +1,36 @@
+{
+    "hooks": [
+        { "name": "globale.onInit", "script": "./cartridge/scripts/hooks/onInit.js" },
+
+        { "name": "dw.system.request.onRequest", "script": "./cartridge/scripts/hooks/request/OnRequest" },
+
+        { "name": "dw.order.calculate", "script": "./cartridge/scripts/hooks/cart/calculate.js" },
+        { "name": "dw.order.createOrderNo", "script": "./cartridge/scripts/hooks/order" },
+
+        { "name": "dw.ocapi.shop.basket.beforePATCH", "script": "./cartridge/scripts/hooks/basket" },
+
+        { "name": "dw.ocapi.shop.basket.coupon.beforePOST", "script": "./cartridge/scripts/hooks/basket/coupon" },
+        { "name": "dw.ocapi.shop.basket.coupon.modifyPOSTResponse", "script": "./cartridge/scripts/hooks/basket/coupon" },
+        { "name": "dw.ocapi.shop.basket.coupon.beforeDELETE", "script": "./cartridge/scripts/hooks/basket/coupon" },
+        { "name": "dw.ocapi.shop.basket.coupon.modifyDELETEResponse", "script": "./cartridge/scripts/hooks/basket/coupon" },
+
+
+        { "name": "dw.ocapi.shop.order.beforePOST", "script": "./cartridge/scripts/hooks/order" },
+        { "name": "dw.ocapi.shop.order.afterPOST", "script": "./cartridge/scripts/hooks/order" },
+
+        { "name": "globale.getGuestEmail", "script": "./cartridge/scripts/hooks/sendCart/onGlobaleGetGuestEmail.js" },
+        { "name": "globale.getCustomerAddresses", "script": "./cartridge/scripts/hooks/sendCart/onGlobaleGetCustomerAddresses.js" },
+        { "name": "globale.getCookieConsent", "script": "./cartridge/scripts/hooks/sendCart/onGlobaleGetCookieConsent.js" },
+        { "name": "globale.validateCart", "script": "./cartridge/scripts/hooks/checkout/onGlobaleValidateCart.js" },
+        { "name": "globale.customerVerification", "script": "./cartridge/scripts/hooks/customerRegistration/onGlobaleCustomer.js" },
+        { "name": "globale.customerRegistration", "script": "./cartridge/scripts/hooks/customerRegistration/onGlobaleCustomer.js" },
+        { "name": "globale.getAllowMailsFromMerchant", "script": "./cartridge/scripts/hooks/sendCart/onGlobaleGetAllowMailsFromMerchant.js" },
+        { "name": "globale.getAllowDirectCommunicationFromMerchant", "script": "./cartridge/scripts/hooks/sendCart/onGlobaleGetAllowDirectCommunicationFromMerchant.js" },
+        { "name": "globale.onBeforePlaceOrder", "script": "./cartridge/scripts/hooks/order/onGlobaleOnPlaceOrder.js" },
+        { "name": "globale.getProductInventoryListId", "script": "./cartridge/scripts/hooks/onGlobaleGetProductInventoryListId.js" },
+        { "name": "globale.getPliHubCode", "script": "./cartridge/scripts/hooks/sendCart/onGlobaleGetPliHubCode.js" },
+        { "name": "globale.getProductImageUrl", "script": "./cartridge/scripts/hooks/onGlobaleGetProductImageUrl.js" },
+        { "name": "globale.getHubId", "script": "./cartridge/scripts/hooks/sendCart/onGlobaleGetHubId.js" },
+        { "name": "globale.getUrlParameters", "script": "./cartridge/scripts/hooks/sendCart/onGlobaleGetUrlParameters.js" }
+    ]
+}

@@ -1,0 +1,73 @@
+{
+    "clients": [
+        {
+            "client_id": "DWJSON.REPLACEME.clientId",
+            "permissions": [
+                {
+                    "path": "/cartridges",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/impex",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/libraries/abe_themes_shared",
+                    "operations": [
+                        "read_write"
+                    ]
+                }
+            ]
+        },
+        {
+            "client_id": "WORKFLOW.PROJECTCLIENTID.REPLACEME",
+            "permissions": [
+                {
+                    "path": "/cartridges",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/impex",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/libraries/abe_themes_shared",
+                    "operations": [
+                        "read_write"
+                    ]
+                }
+            ]
+        },
+        {
+            "client_id": "CRMCLIENTIDREPLACEME",
+            "permissions": [
+                {
+                    "path": "/impex",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/cartridges",
+                    "operations": [
+                        "read_write"
+                    ]
+                },
+                {
+                    "path": "/static",
+                    "operations": [
+                        "read_write"
+                    ]
+                }
+            ]
+        }
+    ]
+}

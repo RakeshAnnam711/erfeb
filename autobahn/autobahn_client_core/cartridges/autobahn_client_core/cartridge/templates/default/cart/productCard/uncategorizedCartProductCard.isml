@@ -1,0 +1,57 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="hasEmbeddedBonusProducts" value="${lineItem.bonusProductLineItemUUID === 'bonus'}"  scope="page"/>
+<isset name="bonusproductlineitem" value="${hasEmbeddedBonusProducts ? 'bonus-product-line-item' : ''}" scope="page"/>
+<isset name="bonuslineitemrow" value="${hasEmbeddedBonusProducts ? 'bonus-line-item-row' : ''}" scope="page"/>
+
+<div class="card">
+    <div class="card-body product-info ${bonusproductlineitem} uuid-${lineItem.UUID}">
+        <div class="${bonuslineitemrow}">
+            <iscomment> product card section </iscomment>
+            <div class="d-flex flex-row card-inner-body">
+                <iscomment> product image section </iscomment>
+                <a class="item-image" href="${URLUtils.url('Product-Show', 'pid', lineItem.id)}" aria-label="Product Image">
+                    <img class="product-image" src="${lineItem.images.small[0].url}" alt="${lineItem.images.small[0].alt}" title="${lineItem.images.small[0].title}">
+                </a>
+                <iscomment> product details section </iscomment>
+                <div class="item-attributes d-flex flex-column">
+                    <iscomment> brand name, product name, price section </iscomment>
+                    <div class="item-attributes-header">
+                        <div class="line-item-footer mt-3">
+                            <a class="line-item-name line-item-product-name disabled-line-item-product-name" href="${lineItem.productType === 'giftCertificate' ? URLUtils.url('GiftCertificate-Purchase') : URLUtils.url('Product-Show', 'pid', lineItem.id)}" aria-label="${lineItem.productName}">${lineItem.productName}</a>
+                        </div>
+                    </div>
+
+                    <iscomment> promotions section </iscomment>
+                    <p class="text-product-removed">${Resource.msg('error.removed.online.catalog','cart',null)}</p>
+
+                    <iscomment> wishlist and remove buttons </iscomment>
+                    <isif condition="${!lineItem.isBonusProductLineItem}">
+                        <!--- Edit product --->
+                        <div class="product-edit">
+                            <div>
+                                <iswishlisticon
+                                    extraclass="move"
+                                    nextaction="${URLUtils.url('Cart-RemoveProductLineItem')}"
+                                    wishlistpid="${lineItem.id}"
+                                    productname="${lineItem.productName}"
+                                    uuid="${lineItem.UUID}"
+                                    addmessage="link.move.to.wishlist"
+                                    removemessage="link.remove.from.wishlist"
+                                    includeicon="true"
+                                    includetext="true"
+                                    isinwishlist="${lineItem.isInWishlist}"
+                                    isdisabled="disabled"
+                                />
+                            </div>
+                            <!--- remove button --->
+                            <isif condition="${!lineItem.isBonusProductLineItem}"/>
+                                <isinclude template="integrations/cart/productCard/cartProductCard/deleteButton" />
+                            </isif>
+                        </div>
+                    </isif>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

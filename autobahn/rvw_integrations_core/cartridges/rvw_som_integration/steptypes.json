@@ -1,0 +1,23 @@
+{
+    "step-types": {
+        "script-module-step": [{
+            "@type-id":"custom.SOM.OrderExport",
+            "description":"Order Export for SOM Order History",
+            "@supports-site-context":"true",
+            "@supports-organization-context":"false",
+            "@supports-parallel-execution":"false",
+            "module":"rvw_som_integration/cartridge/scripts/jobs/OrderExportForSOM.js",
+            "status-codes": {
+                "status": [{
+                        "@code":"ERROR",
+                        "description":"Used when an error occurred."
+                    },
+                    {
+                        "@code":"OK",
+                        "description":"Used when everything went well."
+                    }
+                ]
+            }
+        }]
+    }
+}

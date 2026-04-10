@@ -1,0 +1,179 @@
+<isdecorate template="common/layout/page">
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var miniCart = false;
+
+        var assets = require('*/cartridge/scripts/assets.js');
+        // Ensure critical cart CSS is added to the head for immediate render
+        assets.addCss('/css/cart-critical.css');
+
+        // Register small loader to asynchronously load non-critical cart CSS
+        assets.addJs('/js/cart/loadCartNonCriticalCss.js');
+    </isscript>
+
+    <input type="hidden" name="get-cart-non-critical-css-file" value="${URLUtils.staticURL('/css/cart-non-critical.css')}" />
+    <input type="hidden" name="home-show-link" value="${URLUtils.url('Home-Show')}" />
+    <input type="hidden" name="wishlist-show-link" value="${URLUtils.url('Wishlist-Show')}" />
+    <input type="hidden" name="get-cart-summary-data" value="${URLUtils.url('Cart-GetSummaryData')}" />
+    <input type="hidden" name="add-to-cart-url" value="${URLUtils.url('Cart-AddProduct')}"/>
+    <input type="hidden" name="get-cart-url" value="${URLUtils.url('Cart-Get')}"/>
+
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+
+    <isset name="cartSummary" value="${pdict.cartSummary}" scope="page" />
+    <iscomment> check if cart has non-coupon discounts </iscomment>
+    <isset name="hasNonCouponDiscount" value="${false}" scope="page" />
+    <isloop items="${pdict.totals.discounts}" var="discount">
+        <isif condition="${!hasNonCouponDiscount && discount.type !== 'coupon'}">
+            <isset name="hasNonCouponDiscount" value="${true}" scope="page" />
+        </isif>
+    </isloop>
+
+    <iscomment> to display any cart exceptions </iscomment>
+    <div class="cart-error-messaging cart-error">
+        <isif condition="${!empty(pdict.valid) && pdict.valid.hasOwnProperty('error') && pdict.valid.error && pdict.items.length !== 0}">
+            <div class="alert alert-danger alert-dismissible valid-cart-error fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                ${pdict.valid.message}
+            </div>
+        </isif>
+    </div>
+
+    <iscomment> cart page container </iscomment>
+    <div class="cart-page container pt-4 ${pdict.hideShipping ? 'hide-shipping' : ''}">
+        <iscomment> cart page header section </iscomment>
+        <div class="row cart-header">
+
+            <iscomment> continue shopping link </iscomment>
+            <isif condition="${pdict.items.length !== 0}">
+                <a class="continue-shopping-link" href="${URLUtils.url('Search-Show', 'cgid', 'new-arrivals')}" aria-label="${Resource.msg('link.continue.shopping','cart',null)}">
+                    ${Resource.msg('link.continue.shopping','cart',null)}
+                </a>
+            </isif>
+
+            <iscomment> cart page heading </iscomment>
+            <h1 class="page-title cart-page-title">${Resource.msg('title.cart','cart',null)}</h1>
+
+            <iscomment> cart products count </iscomment>
+            <isif condition="${pdict.items.length !== 0}">
+                <div class="number-of-items number-of-items-container text-center ${!empty(pdict.items) ? 'text-sm-right' : ''}">${pdict.numItems == 1 ? Resource.msgf('label.number.item.in.cart','cart', null, pdict.numItems) : Resource.msgf('label.number.items.in.cart','cart', null, pdict.numItems)}</div>
+            </isif>
+        </div>
+
+        <isif condition="${pdict.items.length === 0}">
+            <iscomment> cart page empty state </iscomment>
+            <div class="cart-empty">
+                    <p class="cart-emtpy-text m-0">${Resource.msg('info.cart.empty.msg','cart',null)}</p>
+                    <div class="col-12 cart-empty-ctas">
+                        <a href="${URLUtils.url('Search-Show', 'cgid', 'new-arrivals')}"
+                            class="btn btn-primary"
+                            aria-label="${Resource.msg('link.continue.shopping','cart',null)}"
+                            role="button">
+                            ${Resource.msg('link.continue.shopping','cart',null)}
+                        </a>
+                        <a href="${URLUtils.https('Wishlist-Show')}"
+                            class="btn btn-secondary"
+                            aria-label="${Resource.msg('link.view.wishlist','cart',null)}"
+                            role="button">
+                            ${Resource.msg('link.view.wishlist','cart',null)}
+                        </a>
+                    </div>
+            </div>
+
+            <iscomment> einstein empty cart recommendation </iscomment>
+            <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnCart')}">
+                <div class="einstein_section overflow-hidden px-5 w-100 einstein_section-cart">
+                    <div class="einstein-scroll">
+                        <isslot id="einstein-emptycart-recommendations" description="Einstein Empty Cart Recommendations" context="global" />
+                    </div>
+                </div>
+            </isif>
+
+        <iselse/>
+            <iscomment> cart page non empty state </iscomment>
+            <div class="cart row">
+                    <iscomment> product cards section </iscomment>
+                    <div class="col-sm-7 product-cards-section" role="table" aria-label="Cart Items">
+                        <isloop items="${pdict.items}" var="lineItem" status="productLoop">
+                            <isif condition="${lineItem.productType === 'bundle'}">
+                                <isinclude template="cart/productCard/cartBundleCard" />
+                            <iselse/>
+                                <isif condition="${lineItem.noProduct === true}">
+                                    <isif condition="${lineItem.productType === 'giftCertificate'}">
+                                        <isinclude template="cart/productCard/giftCertificateCartProductCard" />
+                                    <iselse/>
+                                        <isinclude template="cart/productCard/uncategorizedCartProductCard" />
+                                    </isif>
+                                <iselse/>
+                                    <iscomment> product cart </iscomment>
+                                    <isinclude template="cart/productCard/cartProductCard" />
+                                </isif>
+                            </isif>
+                            <isset name="productSKU" value="${lineItem.id}" scope="page"/>
+                        </isloop>
+                        <isinclude template="cart/cartApproachingDiscount" />
+
+                        <isinclude template="integrations/cart/cartIntegrationsBottomProductCards"/>
+
+                    </div>
+                    <iscomment> totals, and checkout actions </iscomment>
+                    <div class="col-sm-5 card totals">
+                        <div class="card-body promocode_section px-3">
+                            <isinclude template="cart/cartPromoCode" />
+                        </div>
+                        <isif condition="${hasNonCouponDiscount}">
+                            <div class="card-body campaigns-section">
+                                <isinclude template="cart/cartCampaignCode" />
+                            </div>
+                        </isif>
+                        <div class="card-body pt-3">
+                            <div class="cart-total-header">
+                                <h2 class="cart-total-header-title m-0">${Resource.msg('label.cart.total','cart',null)}</h2>
+                                <p class="cart-total-header-subtitle">${Resource.msg('label.shipping.details.checkout','cart',null)}</p>
+                            </div>
+                            <isinclude template="cart/cartTotals" />
+                            <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('AffirmOnline')}">
+                                <isset name="Basket" value="${require('dw/order/BasketMgr').getCurrentBasket()}" scope="page" />
+                                <isinclude template="util/affirmModule"/>
+                                <isaffirmpromo context="cart" fpname="${require('int_affirm/cartridge/scripts/utils/affirmUtils').getFPNameByBasket(Basket)}" />
+                             </isif>
+                        </div>
+
+                        <iscomment> Checkout CTA </iscomment>
+                        <div class="card-body checkout-continue p-0">
+                                <div class="col-12 px-3 p-sm-0">
+                                    <isinclude template="cart/checkoutButtons" />
+                                    <isinclude template="integrations/cart/cartIntegrationsCheckoutButtons"/>
+                                </div>
+                            <div class="checkout-non-us-shipping">
+                                <p>${Resource.msg('text.shipping.outside.usa','cart',null)}</p>
+                                <button id="checkout-select-country" class="text-link" aria-label="Select country if shipping outside the USA">${Resource.msg('text.select.country','cart',null)}</button>
+                            </div>
+                        </div>
+
+                        <isinclude template="integrations/cart/cartIntegrationsTotals"/>
+                    </div>
+            </div>
+            <isinclude template="cart/cartRemoveCouponModal"/>
+        </isif>
+
+        <iscomment> YOU MAY ALSO LIKE SECTION </iscomment>
+        <isif condition="${pdict.items.length === 0}">
+        <iselse/>
+        <iscomment> einstein full cart recommendation </iscomment>
+        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnCart')}">
+            <div class="einstein_section overflow-hidden px-5 w-100 einstein_section-cart">
+                <div class="einstein-scroll">
+                    <isslot id="einstein-fullcart-recommendations" description="Einstein Full Cart Recommendations" context="global" />
+                </div>
+            </div>
+        </isif>
+        </isif>
+        <iscomment> <iscontentasset aid="cart-recommendations" /> </iscomment>
+    </div>
+</isdecorate>

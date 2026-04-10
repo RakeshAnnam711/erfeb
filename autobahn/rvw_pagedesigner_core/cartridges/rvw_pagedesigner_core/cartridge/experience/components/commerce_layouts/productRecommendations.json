@@ -1,0 +1,38 @@
+{
+    "name": "Product Recommendations",
+    "description": "Component to display the recommendations section of the Product Detail Page.",
+    "group": "dynamic_components",
+    "attribute_definition_groups": [
+        {
+            "id": "productInfo",
+            "name": "Product Info",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product",
+                    "name": "Product",
+                    "type": "product",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "product"
+                    }
+                },
+                {
+                    "id": "testProductID",
+                    "name": "Test Product ID",
+                    "description": "This product will be rendered within Page Designer for testing purposes. The default product is 25519349M.",
+                    "type": "string",
+                    "default_value": "25519349M",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

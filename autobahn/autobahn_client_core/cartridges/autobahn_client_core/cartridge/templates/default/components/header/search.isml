@@ -1,0 +1,127 @@
+<div class="site-search">
+    <form role="search"
+        action="${URLUtils.url('Search-Show')}" method="get"
+        name="simpleSearch" data-searchfallbackurl="${URLUtils.url('Search-Show')}">
+        <input type="hidden" name="stripeMidValue" value="">
+        <div id="input-suggestions-wrapper" class="input-suggestions-wrapper">
+            <div id="suggestions-search-field">
+                <input class="form-control search-field suggestions-search-input" type="text" name="q" value=""
+                    placeholder="${Resource.msg('label.header.searchwatermark', 'common', null)}" role="combobox" maxlength="100"
+                    aria-describedby="search-assistive-text" aria-haspopup="listbox" aria-owns="search-results"
+                    aria-expanded="false" aria-autocomplete="list" aria-activedescendant="" aria-controls="search-results"
+                    aria-label="${Resource.msg('simplesearch.searchtext', 'common', null)}" autocomplete="off" />
+                <span class="clear_input icon icon-close" role="button" tabindex="0" aria-label="Clear input"></span>
+                <button id="close-search-btn" class="sr-only"  aria-label="Close Search" type="button" tabindex="0">Close Search</button>
+            </div>
+            <div class="suggestions-wrapper" data-url="${URLUtils.url('SearchServices-GetSuggestions', 'q')}"></div>
+            <iscomment> Mobile sumbit button </iscomment>
+            <button type="submit" name="search-results" id="mobile-submit-btn" class="btn btn-secondary d-none d-lg-none mt-4" aria-label="${Resource.msg('label.suggestions.search.go', 'common', null)}">${Resource.msg('label.suggestions.search.go', 'common', null)}</button>
+        </div>
+        <button type="reset" name="reset-button" class="fa fa-times reset-button d-none"
+            aria-label="${Resource.msg('label.header.search.clear', 'common', null)}"></button>
+        <button type="button" id="search-icon-btn" name="search-button" class="fa fa-search search-icon-btn d-none d-lg-block"
+            aria-label="${Resource.msg('label.header.search.go', 'common', null)}"></button>
+        <input type="hidden" value="${pdict.locale}" name="lang">
+    </form>
+</div>
+
+<script>
+    //script to render initial state of suggestion wrapper onClicking on search icon
+    document.getElementById('search-icon-btn').addEventListener('click', () => {
+    const q = '';
+    const url = `${URLUtils.abs('SearchServices-GetSuggestions')}?q=`+q;
+
+    const xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+
+    // Set up the `onreadystatechange` event handler
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Parse and log the response JSON
+                const response = xhr.responseText;
+                const suggestionsWrapper = document.querySelector('.suggestions-wrapper');
+                suggestionsWrapper.innerHTML = xhr.responseText;
+            } else {
+                console.error('Error:', xhr.status, xhr.statusText);
+            }
+        }
+    };
+
+    try {
+        xhr.open('GET', url, true); // Open the request
+        xhr.setRequestHeader('Content-Type', 'application/json'); // Set headers if needed
+        xhr.send(); // Send the request
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const headerSection = document.querySelector('#header-nav .header');    // logo header section
+    const inputSuggestionsWrapper = document.querySelectorAll('.input-suggestions-wrapper');
+
+    // adding dynamic top value to suggestion-wrapper
+    function updateTopPosition() {
+        if (headerSection && inputSuggestionsWrapper.length > 0) {
+            const headerRect = headerSection.getBoundingClientRect(); // Get the position and size of the headerSection
+            const topPosition = headerRect.top;
+            const height = headerRect.height;
+
+            // Update the top position of suggestion wrapper
+            inputSuggestionsWrapper.forEach(element => {
+                element.style.top = topPosition+height + 'px';
+            });
+        }
+    }
+
+    // Initial calculation
+    updateTopPosition();
+
+    // Recalculate on window resize
+    window.addEventListener('resize', updateTopPosition);
+
+    // Remove suggestion modal if window is scrolled
+    window.addEventListener('scroll', ()=>{
+        $('.header-column-3 .site-search').removeClass('expanded');
+        updateTopPosition();
+    })
+
+    // Remove suggestion modal if clicked outside of it
+    $(document).on('click', function(event) {
+        // Check if the click occurred inside the .input-suggestions-wrapper
+        if ($(event.target).closest('.input-suggestions-wrapper').length) {
+            $('.header-column-3 .suggestions').css('display', 'block'); // Retain the visibility
+        } else if (!$(event.target).is('#search-icon-btn')) {
+            $('.header-column-3 .site-search').removeClass('expanded'); // If clicked outside and not on #search-icon-btn, close the search
+        }
+    });
+
+    //To clear input field whenever the arrow span is clicked
+    $('.clear_input')?.on('click', () => {
+        $('.suggestions-search-input')?.val('');
+    });
+
+    // Clear input field when clear button is hit by tab focus
+    $('.clear_input')?.on('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault(); // Prevent default scroll or other behavior
+            $('.suggestions-search-input')?.val('');
+        }
+    });
+
+    // Show mobile search submit button only when search input is not empty
+    $('.suggestions-search-input')?.on('input', () => {
+        if ($('.suggestions-search-input').val().trim() !== '') {
+            $('#mobile-submit-btn')?.removeClass('d-none');
+        }
+    });
+
+    document.addEventListener('click', function (e) {
+        if (e.target && e.target.id === 'close-search-btn') {
+            document.querySelector('.header-column-3 .site-search')?.classList.remove('expanded');
+            document.getElementById('search-icon-btn')?.focus();
+        }
+    });
+});
+
+</script>

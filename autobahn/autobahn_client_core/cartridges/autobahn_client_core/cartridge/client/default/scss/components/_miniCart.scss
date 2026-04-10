@@ -1,0 +1,160 @@
+@import "~core/components/miniCart";
+
+// minicart popup section
+.minicart {
+    .popover{
+        .product-summary{
+            .line-item-name{
+                margin: 4px 0 0;
+                line-height: 20px;
+                width: 100%;
+                &.line-item-brand-name{
+                    font-weight: 500;
+                    line-height: 1.2;
+                    text-transform: uppercase;
+                    color: #000000;
+                }
+            }
+            .sales{
+                font-weight: 500;
+                color: #000000;
+            }
+            .line-item-promo {
+                position: static;
+                margin: 0;
+                min-height: unset;
+                font-weight: 100;
+                .custom-promo {
+                    .content-asset .new-sale-message {
+                        span {
+                            font-weight: 400;
+                            color: $black !important;
+                        }
+                    }
+                }
+                p{
+                    font-size: 0.875rem;
+                    line-height: 1.5;
+                    font-weight: 400;
+                }
+            }
+            .product-line-item-details{
+                align-items: center !important;
+                .item-image{
+                    width: 77px;
+                    height: 116px;
+                }
+            }
+        }
+        .line-item-brand-section{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .remove-btn{
+                position: static;
+                &:before{
+                    content: "\E920";
+                    font-size: 14px;
+                }
+                &:hover:before {
+                    color: #9E6B30;
+                }
+            }
+        }
+
+        .line-item-price-section{
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            .strike-through{
+                font-weight: 100;
+                font-size: 14px;
+                text-decoration: unset;
+                &.strike-through-black{
+                    color: $black;
+                }
+            }
+        }
+
+        .minicart-footer{
+            padding: 16px 0;
+            .estimated-total{
+                .sub-total-label{
+                    font-weight: 400;
+                }
+                .sub-total, .estimated-total-value{
+                    font-weight: 500;
+                }
+            }
+            .checkout-continue{
+                .checkout-btn[class*="btn-"]:not(.title){
+                    font-size: 18px;
+                    font-weight: 300;
+                    &:before{
+                        font-size: 16px;
+                        font-family: "icomoon";
+                        content: "\E926";
+                        display: inline-block;
+                        color: inherit;
+                        font-weight: normal;
+                        position: absolute;
+                        transform: translateX(-30px);
+                    }
+                }
+            }
+            .minicart-footer-cta{
+                font-size: 18px;
+                font-weight: 400;
+            }
+        }
+
+    }
+
+    .minicart-footer {
+        border: none;
+    }
+
+    .new-sale-message{
+        font-size: 14px !important;
+    }
+}
+
+.delete-confirmation-body {
+    .product-to-remove {
+        margin: $spacer 0 0;
+        font-weight: bold;
+    }
+}
+
+// remove product modal section
+#removeProductModal{
+    &.show{
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px !important;
+    }
+    .delete-confirmation-header{
+        .modal-title{
+            font-weight: 400;
+            font-size: 18px;
+        }
+    }
+    .delete-confirmation-body{
+        .remove-cart-text{
+            line-height: 1.5;
+            margin: 0;
+        }
+        .product-to-remove{
+            margin-top: 20px;
+        }
+    }
+    .delete-confirmation-footer{
+        justify-content: center;
+        gap: 12px;
+        button{
+            margin: 0;
+            flex: 1;
+        }
+    }
+}

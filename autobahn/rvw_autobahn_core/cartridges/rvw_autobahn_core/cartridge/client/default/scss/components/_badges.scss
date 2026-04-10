@@ -1,0 +1,59 @@
+.badge-product-container {
+    position: relative;
+    z-index: 1;
+    margin: $product-tile-badges-margin;
+    display: flex;
+    align-items: flex-start;
+    pointer-events: none;
+    top: 0;
+
+    @include media-breakpoint-up(md) {
+        &.badge-image-over {
+            position: absolute;
+            flex-direction: column;
+        }
+    }
+}
+
+.product-detail .badge-product-container {
+    position: relative;
+    @include media-breakpoint-up(md) {
+        &.badge-image-over {
+            position: absolute;
+            flex-direction: column;
+        }
+    }
+}
+
+.badge-product {
+    text-align: $product-tile-badge-text-align;
+    padding: $product-tile-badge-padding;
+    margin-bottom: $product-tile-badge-margin-bottom;
+    font-weight: $product-tile-badge-font-weight;
+    line-height: $product-tile-badge-line-height;
+    border-radius: $product-tile-badge-border-radius;
+    border-width: $product-tile-badge-border-width;
+    border-style: $product-tile-badge-border-style;
+
+    // these be overwritten with built in classes
+    &:not([class*='text--']) {
+        color: $product-tile-badge-color;
+    }
+    &:not([class*='background--']) {
+        background-color: $product-tile-badge-background;
+    }
+    &:not([class*='border--']) {
+        border-color: $product-tile-badge-border-color;
+    }
+    &:not([class*='font-size--']) {
+        font-size: $product-tile-badge-font-size;
+    }
+    &:not([class*='font--']) {
+        font-family: $product-tile-badge-font-family;
+    }
+
+    @include media-breakpoint-up(lg) {
+        padding: $product-tile-badge-padding-lg;
+        font-size: $product-tile-badge-font-size-lg
+    }
+}

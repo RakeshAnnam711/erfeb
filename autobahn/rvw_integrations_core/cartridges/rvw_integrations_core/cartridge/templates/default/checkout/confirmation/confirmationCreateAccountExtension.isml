@@ -1,0 +1,24 @@
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('sfcommercepaymentsCartridgeEnabled')}">
+    <isif condition="${pdict.allowSavePaymentMethod}">
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input
+                    type="checkbox"
+                    class="custom-control-input save-payment-method"
+                    id="savePaymentMethod"
+                    <isif condition="${pdict.passwordForm.savepaymentmethod.value}">checked="checked"</isif>
+                    <isprint value="${pdict.passwordForm.savepaymentmethod.attributes}" encoding="off" />
+                >
+                <label class="custom-control-label checkout-checkbox" for="savePaymentMethod">
+                    ${Resource.msg('field.savepaymentmethod','confirmation',null)}
+                </label>
+            </div>
+        </div>
+    </isif>
+</isif>
+
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('MarketingCloudForNewsletterEnabled')}">
+    <div class="form-group custom-control custom-checkbox">
+        <isinclude template="account/components/newsletterOptIn" />
+    </div>
+</isif>

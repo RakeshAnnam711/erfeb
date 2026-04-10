@@ -1,0 +1,17 @@
+<isif condition="${price.type === 'tiered'}">
+    <div class="price">
+        <isinclude template="/product/components/pricing/tiered" />
+        <isinclude template="flow/taxincluded" />
+    </div>
+<iselseif condition="${price.type === 'range'}">
+    <div class="price">
+        <isinclude template="/product/components/pricing/range" />
+        <isinclude template="flow/taxincluded" />
+    </div>
+<iselse>
+    <div class="price">
+        <isset name="isLowPrice" value="${}" scope="page" />
+        <isinclude template="/product/components/pricing/default" />
+        <isinclude template="flow/taxincluded" />
+    </div>
+</isif>

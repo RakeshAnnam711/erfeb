@@ -1,0 +1,37 @@
+<strong>${Resource.msg('label.order.totals', 'confirmation', null)}:</strong> <br/>
+<!--- Subtotal --->
+${Resource.msg('label.order.subtotal','confirmation', null)}:
+${pdict.order.isFlowOrder ? pdict.order.flowTotals.subTotal : pdict.order.totals.subTotal}
+<br/>
+
+<isif condition="${(pdict.order.isFlowOrder && pdict.order.flowTotals.orderLevelDiscountTotal.value !== 0) || pdict.order.totals.orderLevelDiscountTotal.value !== 0}">
+    ${Resource.msg('label.order.discount', 'common', null)}:
+    - ${pdict.order.isFlowOrder ? pdict.order.flowTotals.orderLevelDiscountTotal.formatted : pdict.order.totals.orderLevelDiscountTotal.formatted}
+   <br/>
+</isif>
+
+<!--- Shipping Cost --->
+${Resource.msg('label.order.shipping.cost','confirmation', null)}:
+${pdict.order.isFlowOrder ? pdict.order.flowTotals.totalShippingCost : pdict.order.totals.totalShippingCost}
+<br/>
+
+<isif condition="${!pdict.order.isFlowOrder && pdict.order.totals.shippingLevelDiscountTotal.value !== 0}">
+    ${Resource.msg('label.shipping.discount', 'common', null)}:
+    - ${pdict.order.totals.shippingLevelDiscountTotal.formatted}
+    <br/>
+</isif>
+
+<!--- Sales Tax --->
+${Resource.msg('label.order.sales.tax','confirmation', null)}:
+${pdict.order.isFlowOrder ? pdict.order.flowTotals.totalTax : pdict.order.totals.totalTax}
+<br/>
+
+<!--- Duties --->
+<isif condition="${pdict.order.isFlowOrder && pdict.order.flowTotals.totalDuty !== '-'}">
+Duties: ${pdict.order.flowTotals.totalDuty}
+<br/>
+</isif>
+
+<!--- Grand Total --->
+${Resource.msg('label.order.grand.total','confirmation', null)}:
+${pdict.order.isFlowOrder ? pdict.order.flowTotals.grandTotal : pdict.order.totals.grandTotal}

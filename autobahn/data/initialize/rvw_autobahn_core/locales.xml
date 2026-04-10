@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales xmlns="http://www.demandware.com/xml/impex/locales/2015-04-30">
+    <locale locale-id="default">
+        <fallback-locale/>
+        <regional-settings>
+            <decimal-negative-pattern>-#,##0.00</decimal-negative-pattern>
+            <decimal-positive-pattern>#,##0.00</decimal-positive-pattern>
+            <decimal-grouping-character>,</decimal-grouping-character>
+            <decimal-decimal-separator>.</decimal-decimal-separator>
+            <short-currency-negative-pattern>-#,##0.00</short-currency-negative-pattern>
+            <short-currency-positive-pattern>#,##0.00</short-currency-positive-pattern>
+            <long-currency-negative-pattern>-*#,##0.00</long-currency-negative-pattern>
+            <long-currency-positive-pattern>*#,##0.00</long-currency-positive-pattern>
+            <currency-grouping-character>,</currency-grouping-character>
+            <currency-decimal-separator>.</currency-decimal-separator>
+            <long-date-pattern>MMM d, yyyy</long-date-pattern>
+            <short-date-pattern>M/d/yy</short-date-pattern>
+            <time-pattern>h:mm:ss a</time-pattern>
+            <date-time-am-string>am</date-time-am-string>
+            <date-time-pm-string>pm</date-time-pm-string>
+            <integer-negative-pattern>-#,##0</integer-negative-pattern>
+            <integer-positive-pattern>#,##0</integer-positive-pattern>
+            <integer-grouping-character>,</integer-grouping-character>
+            <integer-decimal-character>.</integer-decimal-character>
+            <short-quantity-negative-pattern>-#,##0.###</short-quantity-negative-pattern>
+            <short-quantity-positive-pattern>#,##0.###</short-quantity-positive-pattern>
+            <long-quantity-negative-pattern>-#,##0.### *</long-quantity-negative-pattern>
+            <long-quantity-positive-pattern>#,##0.### *</long-quantity-positive-pattern>
+            <quantity-grouping-character>,</quantity-grouping-character>
+            <quantity-decimal-character>.</quantity-decimal-character>
+            <input-decimal-negative-pattern>-#,##0.00</input-decimal-negative-pattern>
+            <input-decimal-positive-pattern>#,##0.00</input-decimal-positive-pattern>
+            <input-currency-negative-pattern>-#,##0.00</input-currency-negative-pattern>
+            <input-currency-positive-pattern>#,##0.00</input-currency-positive-pattern>
+            <input-date-pattern>MM/dd/yyyy</input-date-pattern>
+            <input-time-pattern>h:mm a</input-time-pattern>
+            <input-date-time-pattern>MM/dd/yyyy h:mm a</input-date-time-pattern>
+            <input-integer-negative-pattern>-#,##0</input-integer-negative-pattern>
+            <input-integer-positive-pattern>#,##0</input-integer-positive-pattern>
+            <input-quantity-negative-pattern>-#,##0.###</input-quantity-negative-pattern>
+            <input-quantity-positive-pattern>#,##0.###</input-quantity-positive-pattern>
+            <date-symbol-am-string>AM</date-symbol-am-string>
+            <date-symbol-pm-string>PM</date-symbol-pm-string>
+            <date-symbol-calendar-type>gregory</date-symbol-calendar-type>
+            <date-symbol-eras-bce>BC</date-symbol-eras-bce>
+            <date-symbol-eras-ce>AD</date-symbol-eras-ce>
+            <date-symbol-month-jan>January</date-symbol-month-jan>
+            <date-symbol-month-feb>February</date-symbol-month-feb>
+            <date-symbol-month-mar>March</date-symbol-month-mar>
+            <date-symbol-month-apr>April</date-symbol-month-apr>
+            <date-symbol-month-may>May</date-symbol-month-may>
+            <date-symbol-month-jun>June</date-symbol-month-jun>
+            <date-symbol-month-jul>July</date-symbol-month-jul>
+            <date-symbol-month-aug>August</date-symbol-month-aug>
+            <date-symbol-month-sep>September</date-symbol-month-sep>
+            <date-symbol-month-oct>October</date-symbol-month-oct>
+            <date-symbol-month-nov>November</date-symbol-month-nov>
+            <date-symbol-month-dec>December</date-symbol-month-dec>
+            <date-symbol-short-month-jan>Jan</date-symbol-short-month-jan>
+            <date-symbol-short-month-feb>Feb</date-symbol-short-month-feb>
+            <date-symbol-short-month-mar>Mar</date-symbol-short-month-mar>
+            <date-symbol-short-month-apr>Apr</date-symbol-short-month-apr>
+            <date-symbol-short-month-may>May</date-symbol-short-month-may>
+            <date-symbol-short-month-jun>Jun</date-symbol-short-month-jun>
+            <date-symbol-short-month-jul>Jul</date-symbol-short-month-jul>
+            <date-symbol-short-month-aug>Aug</date-symbol-short-month-aug>
+            <date-symbol-short-month-sep>Sep</date-symbol-short-month-sep>
+            <date-symbol-short-month-oct>Oct</date-symbol-short-month-oct>
+            <date-symbol-short-month-nov>Nov</date-symbol-short-month-nov>
+            <date-symbol-short-month-dec>Dec</date-symbol-short-month-dec>
+            <date-symbol-weekday-sun>Sunday</date-symbol-weekday-sun>
+            <date-symbol-weekday-mon>Monday</date-symbol-weekday-mon>
+            <date-symbol-weekday-tue>Tuesday</date-symbol-weekday-tue>
+            <date-symbol-weekday-wed>Wednesday</date-symbol-weekday-wed>
+            <date-symbol-weekday-thu>Thursday</date-symbol-weekday-thu>
+            <date-symbol-weekday-fri>Friday</date-symbol-weekday-fri>
+            <date-symbol-weekday-sat>Saturday</date-symbol-weekday-sat>
+            <date-symbol-short-weekday-sun>Sun</date-symbol-short-weekday-sun>
+            <date-symbol-short-weekday-mon>Mon</date-symbol-short-weekday-mon>
+            <date-symbol-short-weekday-tue>Tue</date-symbol-short-weekday-tue>
+            <date-symbol-short-weekday-wed>Wed</date-symbol-short-weekday-wed>
+            <date-symbol-short-weekday-thu>Thu</date-symbol-short-weekday-thu>
+            <date-symbol-short-weekday-fri>Fri</date-symbol-short-weekday-fri>
+            <date-symbol-short-weekday-sat>Sat</date-symbol-short-weekday-sat>
+            <number-symbol-decimal-separator>.</number-symbol-decimal-separator>
+            <number-symbol-grouping-character>,</number-symbol-grouping-character>
+            <number-symbol-zero-digit>0</number-symbol-zero-digit>
+            <number-symbol-exponent-separator>E</number-symbol-exponent-separator>
+            <number-symbol-infinity>∞</number-symbol-infinity>
+            <number-symbol-minus-sign>-</number-symbol-minus-sign>
+            <number-symbol-not-a-number>NaN</number-symbol-not-a-number>
+            <number-symbol-percent-sign>%</number-symbol-percent-sign>
+            <number-symbol-per-mill>‰</number-symbol-per-mill>
+            <message-format-pattern-decimal-negative>#,##0.###</message-format-pattern-decimal-negative>
+            <message-format-pattern-decimal-positive>#,##0.###</message-format-pattern-decimal-positive>
+            <message-format-pattern-integer-negative>#,##0</message-format-pattern-integer-negative>
+            <message-format-pattern-integer-positive>#,##0</message-format-pattern-integer-positive>
+            <message-format-pattern-currency-negative>¤ #,##0.00</message-format-pattern-currency-negative>
+            <message-format-pattern-currency-positive>¤ #,##0.00</message-format-pattern-currency-positive>
+            <message-format-pattern-percentage-negative>#,##0%</message-format-pattern-percentage-negative>
+            <message-format-pattern-percentage-positive>#,##0%</message-format-pattern-percentage-positive>
+            <message-format-pattern-date-time-short>yyyy-MM-dd HH:mm</message-format-pattern-date-time-short>
+            <message-format-pattern-date-short>yyyy-MM-dd</message-format-pattern-date-short>
+            <message-format-pattern-time-short>HH:mm</message-format-pattern-time-short>
+            <message-format-pattern-date-medium>y MMM d</message-format-pattern-date-medium>
+            <message-format-pattern-time-medium>HH:mm:ss</message-format-pattern-time-medium>
+            <message-format-pattern-date-long>y MMMM d</message-format-pattern-date-long>
+            <message-format-pattern-time-long>HH:mm:ss z</message-format-pattern-time-long>
+            <message-format-pattern-date-full>EEEE, y MMMM dd</message-format-pattern-date-full>
+            <message-format-pattern-time-full>HH:mm:ss zzzz</message-format-pattern-time-full>
+        </regional-settings>
+    </locale>
+</locales>
+

@@ -1,0 +1,6 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+<isif condition="${!empty(pdict.params.cid)}">
+    <div class="${pdict.containerClass}">
+        <iscontentasset aid="${pdict.params.cid}" params="${pdict.params.params}" />
+    </div>
+</isif>

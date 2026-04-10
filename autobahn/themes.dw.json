@@ -1,0 +1,8 @@
+{
+  "globalPrefGroupName": "Autobahn_Express",
+  "globalPrefFieldNames": "themesJSON",
+  "stdin": true,
+  "themesAll": true,
+  "themesDirs": [ "data/themes/" ],
+  "themeUploadPath": "/libraries/abe_themes_shared/default/themes"
+}

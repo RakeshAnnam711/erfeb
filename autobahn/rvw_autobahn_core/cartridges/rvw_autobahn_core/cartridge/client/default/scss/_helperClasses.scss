@@ -1,0 +1,347 @@
+// Generate color classes for setting text color, background color, and border color
+// Usage: .text--red, .text--md--red, background--light-gray, background--lg--info, border--dark-gray, border--md--brand-tertiary
+$color-class-prefixes: text, background, border;
+@each $style in $color-class-prefixes {
+    $color: if($style == text, color, #{$style + '-color'}); // color or background-color, border-color
+    .#{$style} {
+        @include color-classes($color);
+    }
+}
+
+// Generate font weight classes. Usage: .font-weight--100
+@each $weight, $value in $font-weights {
+    .font-weight--#{$weight} {
+        @include font-weight($weight, !important);
+    }
+}
+
+// Generate utility font classes, e.g. font-size--20, font-size--lg--40
+.font-size {
+    @include size-classes(font-size, 0, 60);
+}
+
+// Generate utility font classes, e.g. line-height--20, line-height--xl-60
+.line-height {
+    @include size-classes(line-height, 0, 60);
+}
+
+// Generate font classes, e.g. font--roboto
+@each $name, $font-stack in $fonts {
+    .font--#{$name} {
+        font-family: $font-stack;
+    }
+}
+
+// Generate header classes, e.g. h1, .h1
+@each $value in $headers {
+    $headerIndex: index($headers, $value);
+    #{nth($value, 1)},
+    .#{nth($value, 1)} {
+        @include header($headerIndex);
+    }
+}
+
+// Generate banner classes, e.g. b1, .b1
+@each $value in $banners {
+    $bannerIndex: index($banners, $value);
+    .#{nth($value, 1)} {
+        @include banner($bannerIndex);
+    }
+}
+
+// Create paragraph classes, e.g. p, .p
+p,
+.p {
+    @include paragraph-font-size;
+    margin-bottom: $paragraph-bottom-margin;
+    line-height: $paragraph-line-height;
+    @include media-breakpoint-up(lg) {
+        line-height: $paragraph-lg-line-height;
+    }
+    &--small {
+        @include paragraph-font-size(small);
+        line-height: $paragraph-line-height-small;
+        @include media-breakpoint-up(lg) {
+            line-height: $paragraph-lg-line-height-small;
+        }
+    }
+    &--large {
+        @include paragraph-font-size(large);
+    }
+}
+small {
+    @include paragraph-font-size(small);
+}
+.lead {
+    @include paragraph-font-size(large);
+}
+
+// allow PD WYSIWYG component to inherit font helper classes
+.experience-commerce_assets-wysiwyg {
+    > [class*=p--] {
+        > * {
+            font-size: inherit;
+            letter-spacing: inherit;
+        }
+    }
+    > [class*=h] {
+        > * {
+            font-size: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            font-weight: inherit;
+            letter-spacing: inherit;
+            text-transform: inherit;
+            font-style: inherit;
+            margin-bottom: inherit;
+        }
+    }
+    > [class*=font-size--] {
+        > * {
+            font-size: inherit;
+        }
+    }
+    > [class*=line-height--] {
+        > * {
+            line-height: inherit;
+        }
+    }
+    > [class*=font--] {
+        > * {
+            font-family: inherit;
+        }
+    }
+}
+
+// Create button classes, e.g. .btn-primary
+.btn {
+    @include button;
+    &-primary {
+        @include button(primary);
+    }
+    &-secondary,
+    &-outline-primary {
+        @include button(secondary);
+    }
+    &-tertiary {
+        @include button(tertiary);
+    }
+    &-sm {
+        @include button(null, null, null, null, small);
+        &.btn-primary {
+            @include button(primary, null, null, null, small);
+        }
+        &.btn-secondary,
+        &.btn-outline-primary {
+            @include button(secondary, null, null, null, small);
+        }
+        &.btn-tertiary {
+            @include button(tertiary, null, null, null, small);
+        }
+    }
+    &-block {
+        @include full-width;
+    }
+}
+
+a,
+.text-link {
+    @include text-link;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.header-link {
+    @include header-link;
+}
+
+.navigation-link {
+    @include navigation-link;
+}
+
+.visually-hidden {
+    @include visually-hidden;
+}
+
+.lock-scroll {
+    @include lock-scroll;
+}
+
+.custom-scrollbar {
+    @include custom-scrollbar;
+}
+
+.hide-scrollbar {
+    @include hide-scrollbar;
+}
+
+.leading-lines {
+    @include leading-lines;
+}
+
+.email-signup-message {
+    @include toast-message();
+}
+
+.email-signup-alert {
+    @include toast-alert();
+}
+
+.swatch-mark {
+    @include swatch-select();
+}
+
+.disabled,
+:disabled,
+[disabled] {
+    @include disabled;
+}
+
+.vertical-center {
+    @include vertical-center();
+}
+
+.horizontal-center {
+    @include horizontal-center();
+}
+
+.absolute-center {
+    @include absolute-center();
+}
+
+.navbar-nav .megamenu .megamenu-link-list ul {
+    @include remove-list-styling();
+    columns: 1;
+    li a {
+        @include navigation-link;
+        display: block;
+        padding: $megamenu-asset-link-list-padding;
+    }
+}
+
+// general-use animations
+.fade-in {
+    animation-name: fadeIn;
+    animation-timing-function: ease-out;
+}
+.fade-out {
+    animation-name: fadeOut;
+    animation-timing-function: ease-out;
+}
+.zoom-in {
+    animation-name: scale-in-center-long;
+    animation-timing-function: ease-out;
+}
+
+// to add new animations add a 'class' and 'transition' here and keyframes in animations.scss
+$componentAnimations: (
+    scale-in-center:    cubic-bezier(0.250, 0.460, 0.450, 0.940) both,
+    hinge-drop:         cubic-bezier(0.2, 1, 0.2, 1) both,
+    flip-in-hor-top:    cubic-bezier(0.65, 0, 0.35, 1) both,
+    flip-in-hor-bottom: cubic-bezier(0.65, 0, 0.35, 1) both,
+    slide-in-top:       cubic-bezier(0.250, 0.460, 0.450, 0.940) both,
+    slide-in-left:      cubic-bezier(0.250, 0.460, 0.450, 0.940) both,
+    slide-in-right:     cubic-bezier(0.250, 0.460, 0.450, 0.940) both,
+    slide-in-bottom:    cubic-bezier(0.250, 0.460, 0.450, 0.940) both,
+    fade-in:            cubic-bezier(0.390, 0.575, 0.565, 1.000) both
+);
+// animations (duration will be overwritten by values set in page designer)
+[data-animation] {
+    &:not(.disable-mobile-animation) {
+        will-change: transform, opacity;
+        > [style*="animation-delay"],
+        > .container > .row > [style*="animation-delay"] {
+            will-change: transform, opacity;
+        }
+    }
+    &.disable-mobile-animation {
+        @include media-breakpoint-up(lg) {
+            will-change: transform, opacity;
+            > [style*="animation-delay"],
+            > .container > .row > [style*="animation-delay"] {
+                will-change: transform, opacity;
+            }
+        }
+    }
+}
+.animation-initial-state {
+    &:not(.disable-mobile-animation) {
+        opacity: 0;
+    }
+    &.disable-mobile-animation {
+        @include media-breakpoint-up(lg) {
+            opacity: 0;
+        }
+    }
+}
+// building out the animation classes from the $componentAnimations map
+@each $class, $easing in $componentAnimations {
+    .#{$class} {
+        &--short {
+            &:not(.disable-mobile-animation) {
+                @include shortComponentAnimations($class, $easing);
+            }
+            &.disable-mobile-animation {
+                @include media-breakpoint-up(lg) {
+                    @include shortComponentAnimations($class, $easing);
+                }
+            }
+        }
+        &--medium {
+            &:not(.disable-mobile-animation) {
+                @include mediumComponentAnimations($class, $easing);
+            }
+            &.disable-mobile-animation {
+                @include media-breakpoint-up(lg) {
+                    @include mediumComponentAnimations($class, $easing);
+                }
+            }
+        }
+        &--long {
+            &:not(.disable-mobile-animation) {
+                @include longComponentAnimations($class, $easing);
+            }
+            &.disable-mobile-animation {
+                @include media-breakpoint-up(lg) {
+                    @include longComponentAnimations($class, $easing);
+                }
+            }
+        }
+    }
+}
+// targeting sliders containing component animations changing their css to change with the `-active` slide
+@each $class, $easing in $componentAnimations {
+    .hero-has-animation {
+        .tns-item {
+            [data-animation^="#{$class}"] {
+                &:not(.disable-mobile-animation) {
+                    @include unsetComponentAnimations($class, $easing);
+                }
+                &.disable-mobile-animation {
+                    @include media-breakpoint-up(lg) {
+                        @include unsetComponentAnimations($class, $easing);
+                    }
+                }
+            }
+            &.tns-slide-active {
+                [data-animation^="#{$class}"] {
+                    &:not(.disable-mobile-animation) {
+                        @include resetComponentAnimations($class, $easing);
+                    }
+                    &.disable-mobile-animation {
+                        @include media-breakpoint-up(lg) {
+                            @include resetComponentAnimations($class, $easing);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

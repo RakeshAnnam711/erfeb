@@ -1,0 +1,22 @@
+<iscomment>
+This is the script that is needed by SFMC to collect info from the customer for features such as
+Abandoned Browse, Abandoned Cart, etc.
+The Marketing-BeforeHeader controller - route is passed the AccountId (MID) and puts it in the viewData
+This template is loaded via (velocity) remote include so that it can be cached separately.
+</iscomment>
+<isif condition="${!empty(pdict.AccountId)}">
+    <!-- Begin Salesforce Marketing Cloud collect.js script -->
+    <script
+        <isif condition="${isOneTrustEnable}">
+            type='text/plain' class='optanon-category-C0004'
+        </isif>
+     defer src="https://${pdict.AccountId}.collect.igodigital.com/collect.js"></script>
+    <!-- End Salesforce Marketing Cloud collect.js script -->
+
+    <div id="marketing-cloud" class="hidden" data-account-id=${pdict.AccountId} data-metadata="${pdict.Metadata}" data-cart-info-url="${pdict.CartInfoUrl}"></div>
+    <script
+        <isif condition="${isOneTrustEnable}">
+            type='text/plain' class='optanon-category-C0004'
+        </isif>
+    defer src="${URLUtils.staticURL('/js/marketingClient.js')}"></script>
+</isif>

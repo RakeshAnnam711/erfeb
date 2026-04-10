@@ -1,0 +1,58 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<head>
+    <!--[if gt IE 9]><!-->
+        <isinclude sf-toolkit="off" template="/common/scripts" />
+    <!--<![endif]-->
+
+    <iscomment>
+    The file overwrittes app_storefront_base\cartridge\templates\default\common\htmlHead.isml
+    </iscomment>
+
+    <meta charset=UTF-8>
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <iscomment>The page meta data will be replaced by rule based content if it's available</iscomment>
+
+    <title><isprint value="${pdict.CurrentPageMetaData.title}" encoding="htmlcontent" />
+        <isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">| <isprint value="${Resource.msg('global.site.name', 'version', null)}" encoding="htmlcontent" /> | <isprint value="${Resource.msg('global.version.number', 'version', null)}" encoding="htmlcontent" /></isif>
+    </title>
+
+    <meta name="description" content="${pdict.CurrentPageMetaData.description ? pdict.CurrentPageMetaData.description : Resource.msg('global.storename','common',null)}"/>
+    <meta name="keywords" content="${pdict.CurrentPageMetaData.keywords ? pdict.CurrentPageMetaData.keywords : Resource.msg('global.storename','common',null)}"/>
+
+    <iscomment>Additional Rule based page meta tags</iscomment>
+    <isloop items="${pdict.CurrentPageMetaData.pageMetaTags}" var="pageMetaTag">
+        <isif condition="${pageMetaTag.name}">
+            <meta name="<isprint value="${pageMetaTag.ID}">" content="<isprint value="${pageMetaTag.content}">">
+        <iselseif condition="${pageMetaTag.property}"/>
+            <meta property="<isprint value="${pageMetaTag.ID}">" content="<isprint value="${pageMetaTag.content}">">
+        </isif>
+    </isloop>
+
+    <isinclude template="common/head/favicon" />
+
+    <isinclude template="common/head/stylesheets" />
+
+    <isif condition="${!empty(dw.system.Site.current.getCustomPreferenceValue('GoogleVerificationTag'))}">
+        <meta name="google-site-verification" content="<isprint value="${dw.system.Site.current.getCustomPreferenceValue('GoogleVerificationTag')}"/>" />
+    </isif>
+
+    <isinclude template="common/head/hooks" />
+
+    <iscomment>All uncached data can be injected here</iscomment>
+    <script>
+        window.UncachedData = <isinclude url="${URLUtils.url('Data-UncachedData')}" />;
+        window.CachedData = <isinclude url="${URLUtils.url('Data-CachedData')}" />;
+    </script>
+
+    <isif condition="${pdict.canonicalUrl}" >
+        <link rel="canonical" href="${pdict.canonicalUrl}"/>
+    </isif>
+
+    <isactivedatahead/>
+
+    <isinclude template="/components/schema" />
+</head>

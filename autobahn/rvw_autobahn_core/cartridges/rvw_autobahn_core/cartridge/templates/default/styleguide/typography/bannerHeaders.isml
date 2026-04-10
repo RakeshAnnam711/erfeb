@@ -1,0 +1,114 @@
+<div id="banners" class="sg__header3">Banners</div>
+<p>Banner styles can be added using either a helper class (b1-b4) or a mixin that passes the tag number as a parameter, e.g. <span class="pre">@include banner(1)</span>.</p>
+<div class="row pb-0">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-4">
+                <div class="sg__header4 bp--mobile"></div>
+            </div>
+            <div class="col-4">
+                <div class="sg__header4 bp--tablet"></div>
+            </div>
+            <div class="col-4">
+                <div class="sg__header4 bp--desktop"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6"></div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-4 b1--mobile">
+                <span class="b1">B1</span>
+            </div>
+            <div class="col-4 b1--tablet">
+                <span class="b1">B1</span>
+            </div>
+            <div class="col-4 b1--desktop">
+                <span class="b1">B1</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="row">
+            <div class="col-12">
+                <p class="p--small mb-0">Code Use Examples:</p>
+                <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="b1">B1</span></script></code></pre>
+                <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include banner(1)}</script></code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-4 b2--mobile">
+                <span class="b2">B2</span>
+            </div>
+            <div class="col-4 b2--tablet">
+                <span class="b2">B2</span>
+            </div>
+            <div class="col-4 b2--desktop">
+                <span class="b2">B2</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="row">
+            <div class="col-12">
+                <p class="p--small mb-0">Code Use Examples:</p>
+                <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="b2">B2 Header</span></script></code></pre>
+                <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include banner(2)}</script></code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-4 b3--mobile">
+                <span class="b3">B3</span>
+            </div>
+            <div class="col-4 b3--tablet">
+                <span class="b3">B3</span>
+            </div>
+            <div class="col-4 b3--desktop">
+                <span class="b3">B3</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="row">
+            <div class="col-12">
+                <p class="p--small mb-0">Code Use Examples:</p>
+                <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="b3">B3 Header</span></script></code></pre>
+                <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include banner(3)}</script></code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-4 b4--mobile">
+                <span class="b4">B4</span>
+            </div>
+            <div class="col-4 b4--tablet">
+                <span class="b4">B4</span>
+            </div>
+            <div class="col-4 b4--desktop">
+                <span class="b4">B4</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="row">
+            <div class="col-12">
+                <p class="p--small mb-0">Code Use Examples:</p>
+                <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="b4">B4 Header</span></script></code></pre>
+                <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include banner(4)}</script></code></pre>
+            </div>
+        </div>
+    </div>
+</div>

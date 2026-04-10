@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="Marketing-Cloud.Authentication">
+        <url>https://mcz7rh6w0pl2bf9gj8k6493r-5h4.auth.marketingcloudapis.com</url>
+        <user-id/>
+        <password encrypted="true" encryption-type="common.export">8mMpPvxNO6p64jZZ4lEfjj1B2VNkf/2SllmLpW5p35E=</password>
+    </service-credential>
+
+    <service-credential service-credential-id="Marketing-Cloud.Rest-Base">
+        <url>https://mcz7rh6w0pl2bf9gj8k6493r-5h4.rest.marketingcloudapis.com</url>
+        <user-id/>
+        <password encrypted="true" encryption-type="common.export">3FH35bZpQ8lrdOB/SLCxaVVhbc4y11FtN1U5K6sUB6k=</password>
+    </service-credential>
+
+    <service-credential service-credential-id="Service-Cloud.Rest-Base">
+        <url>https://test.salesforce.com</url>
+        <user-id/>
+        <password encrypted="true" encryption-type="common.export">27NhqJgv0p4WqEQzy6WaW3OBQm7L7i59jPQr4tRoONQ=</password>
+    </service-credential>
+
+    <service-profile service-profile-id="MarketingCloud">
+        <timeout-millis>3000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="ServiceCloud">
+        <timeout-millis>3000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="MarketingCloud.HTTP.Authentication">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>MarketingCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>MarketingCloud</profile-id>
+        <credential-id>Marketing-Cloud.Authentication</credential-id>
+    </service>
+
+    <service service-id="MarketingCloud.HTTP.Rest">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>MarketingCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>MarketingCloud</profile-id>
+        <credential-id>Marketing-Cloud.Rest-Base</credential-id>
+    </service>
+
+    <service service-id="ServiceCloud.HTTP.Rest">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>ServiceCloud</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>ServiceCloud</profile-id>
+        <credential-id>Service-Cloud.Rest-Base</credential-id>
+    </service>
+
+</services>

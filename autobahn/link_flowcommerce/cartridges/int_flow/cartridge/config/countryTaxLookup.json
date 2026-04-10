@@ -1,0 +1,20 @@
+{
+    "ABW": "ST",
+    "AFG": "ST",
+    "AUS": "GST",
+    "BLZ": "GST",
+    "CAN": "HST",
+    "CCK": "GST",
+    "IND": "GST",
+    "JAM": "GCT",
+    "JEY": "GST",
+    "JPN": "CT",
+    "KGZ": "Tax",
+    "MSR": "CT",
+    "MYS": "SST",
+    "NZL": "GST",
+    "PAK": "GST",
+    "SGP": "GST",
+    "USA": "Tax",
+    "ZMB": "GST"
+}

@@ -1,0 +1,30 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/billing/billingAddress.isml
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('Vertex_isEnabled') && dw.system.Site.current.getCustomPreferenceValue('Vertex_isVATEnabled')}">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group
+                ${billingFields.taxnumber.mandatory === true ? 'required' : ''}
+                ${billingFields.taxnumber.htmlName}">
+                <label class="form-control-label" for="billingCustomerTax">
+                    ${Resource.msg('field.shipping.address.customertax','address',null)}
+                </label>
+                <input type="text" class="form-control billingCustomerTax" id="billingCustomerTax"
+                    value="${pdict.order.billing.billingAddress.address
+                        && pdict.order.billing.billingAddress.address.taxnumber
+                        ? pdict.order.billing.billingAddress.address.taxnumber
+                        : ''}"<isprint value=${billingFields.taxnumber.attributes} encoding="htmlsinglequote"/>>
+                <div class="invalid-feedback"><isprint value="${billingFields.taxnumber.error}" encoding="htmlcontent"/></div>
+                <span>${Resource.msg('example.customertax','forms',null)}</span>
+            </div>
+        </div>
+    </div>
+</isif>

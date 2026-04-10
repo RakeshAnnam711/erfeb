@@ -1,0 +1,11 @@
+<div id="links" class="sg__header3">Links</div>
+<p>Text link styles are applied by default to any <span class="pre">&lt;a&gt;</span> tag that isn&rsquo;t a button. You can also apply them to any other element by using a helper class (<span class="pre">.text-link</span>) or a mixin.</p>
+<div class="row">
+    <div class="col-md-6">
+        <span class="p">Lorem ipsum <span class="text-link">dolor</span> sit amet, <span class="text-link">consectetur</span> adipiscing elit, <a href="">sed do eiusmod tempor</a> incididunt ut labore et dolore magna aliqua.</span>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="p">Lorem ipsum <span class="text-link">dolor</span> sit amet, <span class="text-link">consectetur</span> adipiscing elit, <a href="">sed do eiusmod tempor</a> incididunt ut labore et dolore magna aliqua.</span></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include text-link}</script></code></pre>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="payment-method">
+    <span>${payment.name}</span>
+</div>
+<div class="payment-credential">
+    ${payment.credential}
+</div>
+<div>
+    ${payment.formattedAmount}
+</div>
