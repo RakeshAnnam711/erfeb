@@ -23,6 +23,11 @@
 <isset name="placeholder_PLPBanner" value="${URLUtils.staticURL('/images/placeholder_Category_Navigation_banner.png')}" scope="page" />
 <isset name="displaySearchQuery" value="${pdict.noResultsQuery || pdict.productSearch.originalSearchQuery || pdict.productSearch.searchKeywords || ''}" scope="page" />
 <isset name="isNoResultsFallback" value="${pdict.noResultsFallback || pdict.productSearch.noResultsFallback}" scope="page" />
+<isscript>
+    var homepageRecommendationHelpers = require('*/cartridge/scripts/helpers/homepageRecommendationHelpers');
+    var recommendationProducts = homepageRecommendationHelpers.getDefaultProducts(10);
+    var hasRecommendationProducts = homepageRecommendationHelpers.hasProducts(recommendationProducts);
+</isscript>
 <div class="plp_wrapper">
     <iscomment> PLP Hero Banner </iscomment>
     <isif condition = "${!isNoResultsFallback}">
@@ -181,15 +186,85 @@
                                         </a>
                                     </div>
                                     <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnNoResults')}">
-                                        <div class="einstein_section overflow-hidden px-5 w-100 text-left">
-                                            <div class="einstein-scroll">
+                                        <div class="einstein_section overflow-hidden px-5 w-100 text-left" data-einstein-fallback-wrapper>
+                                            <div class="einstein-scroll" data-einstein-slot>
                                                 <isslot id="einstein-emptycart-recommendations" description="Einstein No Results Recommendations" context="global" />
                                             </div>
+                                            <isif condition="${hasRecommendationProducts}">
+                                                <div class="homepage-einstein-fallback d-none" data-einstein-fallback>
+                                                    <div class="recommendations recommendations-homepage">
+                                                        <h2 class="col-12 title text-center pt-4 mb-4 recommendations-heading">${Resource.msg('label.einstein.recommendationsHome', 'product', null)}</h2>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-8 col-lg-12 value content">
+                                                                <isset name="end" value="${10}" scope="page" />
+                                                                <isset name="recommendationProducts" value="${recommendationProducts}" scope="page" />
+                                                                <isinclude template="components/productsNew" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </isif>
                                         </div>
                                     </isif>
                                 </div>
                             </isif>
                         </div>
+                        <script>
+                            (function () {
+                                function hasRenderedEinsteinRecommendations(container) {
+                                    if (!container) {
+                                        return false;
+                                    }
+
+                                    return !!container.querySelector(
+                                        '.recommendation-card,' +
+                                        '.product-tile,' +
+                                        '.tile-body,' +
+                                        '[data-pid]'
+                                    );
+                                }
+
+                                function toggleEinsteinFallbacks() {
+                                    document.querySelectorAll('[data-einstein-fallback-wrapper]').forEach(function (wrapper) {
+                                        var einsteinContainer = wrapper.querySelector('[data-einstein-slot]');
+                                        var fallbackContainer = wrapper.querySelector('[data-einstein-fallback]');
+
+                                        if (!einsteinContainer || !fallbackContainer) {
+                                            return;
+                                        }
+
+                                        if (hasRenderedEinsteinRecommendations(einsteinContainer)) {
+                                            einsteinContainer.classList.remove('d-none');
+                                            fallbackContainer.classList.add('d-none');
+                                        } else {
+                                            einsteinContainer.classList.add('d-none');
+                                            fallbackContainer.classList.remove('d-none');
+                                        }
+                                    });
+                                }
+
+                                function initEinsteinFallbacks() {
+                                    toggleEinsteinFallbacks();
+                                    window.setTimeout(toggleEinsteinFallbacks, 300);
+                                    window.setTimeout(toggleEinsteinFallbacks, 1000);
+
+                                    if (window.MutationObserver) {
+                                        document.querySelectorAll('[data-einstein-slot]').forEach(function (einsteinContainer) {
+                                            new MutationObserver(toggleEinsteinFallbacks).observe(einsteinContainer, {
+                                                childList: true,
+                                                subtree: true
+                                            });
+                                        });
+                                    }
+                                }
+
+                                if (document.readyState === 'loading') {
+                                    document.addEventListener('DOMContentLoaded', initEinsteinFallbacks);
+                                } else {
+                                    initEinsteinFallbacks();
+                                }
+                            }());
+                        </script>
 
                         <div class="row refinement-wrapper">
                             <isif condition="${pdict.productSearch.productIds.length > 0}">

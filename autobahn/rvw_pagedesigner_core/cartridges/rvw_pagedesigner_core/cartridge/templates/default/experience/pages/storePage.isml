@@ -3,6 +3,9 @@
 <isdecorate template="/common/layout/page">
         <isscript>
             var assets = require('*/cartridge/scripts/assets.js');
+            var homepageRecommendationHelpers = require('*/cartridge/scripts/helpers/homepageRecommendationHelpers');
+            var recommendationProducts = homepageRecommendationHelpers.getDefaultProducts(10);
+            var hasRecommendationProducts = homepageRecommendationHelpers.hasProducts(recommendationProducts);
             assets.addCss('/css/consolidated-components.css');
         </isscript>
     <div class="storepage page-designer ${pdict.customClass}" id="${pdict.page.ID}">
@@ -13,11 +16,83 @@
         </isif>
         <iscomment> einsten recomenedations home page start </iscomment>
         <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnHome')}">
-            <div class="einstein_section overflow-hidden px-5 w-100" style="background-color:#f7f7f7;">
-                <div class="einstein-scroll">
-                    <isslot id="einstein-home-recommendations" description="Einstein HOME Recommendations" context="global" />
+            <div class="einstein_section overflow-hidden px-5 w-100" style="background-color:#f7f7f7;" data-einstein-fallback-wrapper>
+                <div class="einstein-scroll" data-einstein-slot>
+                    <iscomment> <isslot id="einstein-home-recommendations" description="Einstein HOME Recommendations" context="global" /> </iscomment>
                 </div>
+                    <div class="homepage-einstein-fallback d-none" data-einstein-fallback>
+                        <isif condition="${hasRecommendationProducts}">
+                            <hr />
+                            <div class="recommendations recommendations-homepage">
+                                <h2 class="col-12 title text-center pt-4 mb-4 recommendations-heading">${Resource.msg('label.einstein.recommendationsHome', 'product', null)}</h2>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-8 col-lg-12 value content">
+                                        <isset name="end" value="${10}" scope="page" />
+                                        <isset name="recommendationProducts" value="${recommendationProducts}" scope="page" />
+                                        <isinclude template="components/productsNew" />
+                                    </div>
+                                </div>
+                            </div>
+                        </isif>
+                    </div>
             </div>
+            <script>
+                (function () {
+                    function hasRenderedEinsteinRecommendations(container) {
+                        if (!container) {
+                            return false;
+                        }
+
+                        return !!container.querySelector(
+                            '.recommendation-card,' +
+                            '.product-tile,' +
+                            '.tile-body,' +
+                            '[data-pid]'
+                        );
+                    }
+
+                    function toggleHomepageRecommendationFallback() {
+                        document.querySelectorAll('[data-einstein-fallback-wrapper]').forEach(function (wrapper) {
+                            var einsteinContainer = wrapper.querySelector('[data-einstein-slot]');
+                            var fallbackContainer = wrapper.querySelector('[data-einstein-fallback]');
+
+                            if (!einsteinContainer || !fallbackContainer) {
+                                return;
+                            }
+
+                            if (hasRenderedEinsteinRecommendations(einsteinContainer)) {
+                                einsteinContainer.classList.remove('d-none');
+                                fallbackContainer.classList.add('d-none');
+                            } else {
+                                einsteinContainer.classList.add('d-none');
+                                fallbackContainer.classList.remove('d-none');
+                            }
+                        });
+                    }
+
+                    function initHomepageRecommendationFallback() {
+                        toggleHomepageRecommendationFallback();
+
+                        window.setTimeout(toggleHomepageRecommendationFallback, 300);
+                        window.setTimeout(toggleHomepageRecommendationFallback, 1000);
+
+                        if (window.MutationObserver) {
+                            document.querySelectorAll('[data-einstein-slot]').forEach(function (einsteinContainer) {
+                                new MutationObserver(toggleHomepageRecommendationFallback).observe(einsteinContainer, {
+                                    childList: true,
+                                    subtree: true
+                                });
+                            });
+                        }
+                    }
+
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', initHomepageRecommendationFallback);
+                    } else {
+                        initHomepageRecommendationFallback();
+                    }
+                }());
+            </script>
         </isif>
         <iscomment> einsten recomenedations home page end </iscomment>
     </div>

@@ -483,54 +483,6 @@ var events = {
                 }
             });
 
-            document.body.addEventListener('frenzysearch:productitem', (event) => {
-                let gtmData = JSON.parse(event.detail.response);
-                if (gtmData && gtmData.length > 0) {
-                    const { search_term = '', search_results_count = 0 } = gtmData[0];
-                    let previousPageType = sessionStorage.getItem('previousPageType') || '';
-                    let currentPageType = sessionStorage.getItem('currentPageType') || '';
-
-                    if (previousPageType === 'SKU Search') {
-                        if (currentPageType === 'PLP Page' || currentPageType === 'frenzysearch') {
-                            previousPageType = 'frenzysearch';
-                        }
-                    }
-
-                    const listId = previousPageType.toLowerCase().replace(/\s+/g, '_') || '';
-                    const listName = previousPageType || '';
-
-                    const productItems = gtmData.map(({ search_term, search_results_count, ...item }) => {
-                        return {
-                            ...item,
-                            item_list_id: listId,
-                            item_list_name: listName
-                        };
-                    });
-                    dataLayer.push({
-                        event: 'view_search_result',
-                        ecommerce: {
-                            search_term,
-                            search_results_count,
-                            items: productItems
-                        }
-                    });
-                }
-            });
-
-            document.body.addEventListener('frenzyRecommadtion:productitem', (event) => {
-                let gtmData = JSON.parse(event.detail.response);
-                if (gtmData && gtmData.length > 0) {
-                    const { item_list_id, item_list_name } = gtmData[0];
-                    dataLayer.push({
-                        event: 'view_item_list',
-                        ecommerce: {
-                            item_list_id,
-                            item_list_name,
-                            items: gtmData
-                        }
-                    });
-                }
-            });
         });
     }
 }

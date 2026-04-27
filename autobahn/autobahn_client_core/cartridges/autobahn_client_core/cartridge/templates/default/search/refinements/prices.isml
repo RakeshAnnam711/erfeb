@@ -16,7 +16,7 @@
                 <input type="number" class="input-max" name="max" aria-label="Maximum price filter input" />
             </div>
         </div>
-        <p class="error d-none"> Price filter value should be in range  ${refinement.values[0].displayValue}</p>
+        <p class="error d-none"> Price filter value should be in range  ${refinement.values[0].displayValue.replace(/\.\d+$/, '')}</p>
         <div class="slider">
             <div class="progress"></div>
         </div>

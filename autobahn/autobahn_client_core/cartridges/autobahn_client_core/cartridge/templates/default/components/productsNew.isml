@@ -1,6 +1,6 @@
 <div class="reco-scroll-wrapper">
 <div class="row product-grid product-grid-new">
-    <isloop items="${slotcontent.content}" var="product" begin="0" end="${end}">
+    <isloop items="${recommendationProducts || slotcontent.content}" var="product" begin="0" end="${end}">
         <isif condition="${product.availabilityModel.inStock}">
             <isobject object="${product}" view="recommendation">
                 <div class="col-6 col-sm-4 bg-white mb-2 recommendation-card">
