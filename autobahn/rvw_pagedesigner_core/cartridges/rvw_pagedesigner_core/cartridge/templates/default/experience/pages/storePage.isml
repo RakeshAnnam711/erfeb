@@ -18,7 +18,7 @@
         <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnHome')}">
             <div class="einstein_section overflow-hidden px-5 w-100" style="background-color:#f7f7f7;" data-einstein-fallback-wrapper>
                 <div class="einstein-scroll" data-einstein-slot>
-                    <iscomment> <isslot id="einstein-home-recommendations" description="Einstein HOME Recommendations" context="global" /> </iscomment>
+                    <isslot id="einstein-home-recommendations" description="Einstein HOME Recommendations" context="global" />
                 </div>
                     <div class="homepage-einstein-fallback d-none" data-einstein-fallback>
                         <isif condition="${hasRecommendationProducts}">
