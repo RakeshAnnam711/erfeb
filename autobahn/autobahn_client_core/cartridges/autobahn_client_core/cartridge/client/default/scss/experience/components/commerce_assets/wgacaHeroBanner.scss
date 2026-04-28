@@ -48,6 +48,24 @@
 		&.middle.center {
 			transform: translate(-50%, -50%);
 		}
+		&.top.center.content-center-mobile, &.top.center.content-center-tablet{
+			@media screen and (max-width: 543.98px) {
+				transform: translate(0%, 0%);
+			}
+
+		}
+		&.bottom.center.content-center-mobile, &.bottom.center.content-center-tablet{
+			@media screen and (max-width: 543.98px) {
+				transform: translate(0%, 0%);
+			}
+
+		}
+		&.middle.center.content-center-mobile, &.middle.center.content-center-tablet {
+			
+			@media screen and (max-width: 543.98px) {
+				transform: translate(0%, -50%);
+			}
+		}
 		.title {
 			font-family: 'didot';
 			font-weight: 600;

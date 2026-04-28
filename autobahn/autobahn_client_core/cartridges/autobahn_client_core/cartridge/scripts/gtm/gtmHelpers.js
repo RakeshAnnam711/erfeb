@@ -337,6 +337,39 @@ base.getOrderProductObject = function (productLineItem) {
  * @return {Object} obj containing confirmation page transaction details
  */
 
+function getRoundedPriceValue(price) {
+    if (!price) {
+        return 0;
+    }
+
+    var value = typeof price.value !== 'undefined' ? price.value : null;
+    if (value === null && typeof price.getValue === 'function') {
+        value = price.getValue();
+    }
+    value = parseFloat(value);
+
+    if (isNaN(value)) {
+        return 0;
+    }
+
+    return parseFloat(value.toFixed(2));
+}
+
+function getPurchaseValue(order) {
+    var orderTotal = order.totalGrossPrice || (typeof order.getTotalGrossPrice === 'function' ? order.getTotalGrossPrice() : null);
+    var value = getRoundedPriceValue(orderTotal);
+
+    if (value > 0) {
+        return value;
+    }
+
+    return getRoundedPriceValue(order.getAdjustedMerchandizeTotalPrice(true));
+}
+
+function getPurchaseEventId(order) {
+    return 'purchase-' + order.orderNo;
+}
+
 base.getConfirmationData = function (viewData) {
     var order = null;
     var obj = null;
@@ -366,10 +399,13 @@ base.getConfirmationData = function (viewData) {
         }
         obj = {
             event: 'purchase',
+            event_id: getPurchaseEventId(order),
             ecommerce: {
                 currency: order.currencyCode,
+                currencyCode: order.currencyCode,
                 transaction_id: order.orderNo,
-                value: parseFloat(order.getAdjustedMerchandizeTotalPrice(true).getValue().toFixed(2)),
+                event_id: getPurchaseEventId(order),
+                value: getPurchaseValue(order),
                 shipping: parseFloat(order.getAdjustedShippingTotalPrice().getValue().toFixed(2)),
                 tax: parseFloat(order.getTotalTax().getValue().toFixed(2)),
                 items: module.exports.getProductArrayFromList(order.getProductLineItems().iterator(), module.exports.getOrderProductObject),
