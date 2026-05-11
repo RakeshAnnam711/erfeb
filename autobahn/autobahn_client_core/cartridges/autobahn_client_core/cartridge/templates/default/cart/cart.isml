@@ -123,9 +123,11 @@
                     </div>
                     <iscomment> totals, and checkout actions </iscomment>
                     <div class="col-sm-5 card totals">
-                        <div class="card-body promocode_section px-3">
-                            <isinclude template="cart/cartPromoCode" />
-                        </div>
+                        <isif condition="${!pdict.isAgentBasket}">
+                            <div class="card-body promocode_section px-3">
+                                <isinclude template="cart/cartPromoCode" />
+                            </div>
+                        </isif>
                         <isif condition="${hasNonCouponDiscount}">
                             <div class="card-body campaigns-section">
                                 <isinclude template="cart/cartCampaignCode" />
@@ -159,7 +161,9 @@
                         <isinclude template="integrations/cart/cartIntegrationsTotals"/>
                     </div>
             </div>
-            <isinclude template="cart/cartRemoveCouponModal"/>
+            <isif condition="${!pdict.isAgentBasket}">
+                <isinclude template="cart/cartRemoveCouponModal"/>
+            </isif>
         </isif>
 
         <iscomment> YOU MAY ALSO LIKE SECTION </iscomment>

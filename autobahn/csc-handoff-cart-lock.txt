@@ -1,0 +1,106 @@
+CSC Handoff Cart Lock
+=====================
+
+Requirement
+-----------
+
+When Customer Service Center creates or edits a basket and hands it back to a shopper, the shopper can continue checkout but must not be able to:
+
+- Apply a new coupon code.
+- Remove an existing coupon from the cart UI.
+- Remove products from the cart or mini-cart.
+- Modify product quantity where the mini-cart exposes an editable quantity selector.
+
+The shopper can still add additional products from the storefront.
+
+Normal storefront-created baskets should keep the existing cart behavior.
+
+Detection
+---------
+
+The lock is based on SFCC basket metadata in this file, relative to the autobahn repo root:
+
+autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/Cart.js
+
+The helper checks:
+
+- basket.isAgentBasket() when available.
+- basket.agentBasket.
+- basket.channelType / basket.getChannelType() equal to 11, the SFCC Customer Service Center channel type.
+
+The method/property reads are wrapped defensively because SFCC Script API objects can throw when a property or method is unavailable on the runtime class.
+
+Server-Side Protection
+----------------------
+
+Cart.js prepends a guard to cart mutation routes:
+
+- Cart-RemoveProductLineItem
+- Cart-UpdateQuantity
+- Cart-AddCoupon
+- Cart-RemoveCouponLineItem
+- Cart-AddBonusProducts
+
+If the current basket is detected as CSC/agent-created, the route returns HTTP 403 with:
+
+{
+  "error": true,
+  "errorMessage": "This cart was created by customer service and cannot be modified."
+}
+
+The message key is error.agent.basket.locked in this file, relative to the autobahn repo root:
+
+autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/resources/cart.properties
+
+Cart Page UI
+------------
+
+Cart-Show sets pdict.isAgentBasket.
+
+Cart templates use that flag to hide:
+
+- Promo code box in autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/cart.isml.
+- Remove coupon modal in autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/cart.isml.
+- Product wishlist/remove edit controls in autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/productCard/cartProductCard.isml.
+- Product edit/remove controls for uncategorized/removed products in autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/productCard/uncategorizedCartProductCard.isml.
+
+Mini-Cart UI
+------------
+
+Cart-MiniCartShow also sets pdict.isAgentBasket.
+
+Mini-cart templates use that flag to hide or disable:
+
+- Remove button in autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/productCard/productCardProductNameAndRemove.isml.
+- Editable mini-cart quantity selector for bonus product cards in autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/productCard/bonusProductCard.isml.
+
+Test Checklist
+--------------
+
+1. In Business Manager Customer Service Center, create or edit a basket for a registered customer.
+2. Add products and any required discounts/coupons.
+3. Hand off the basket back to the customer.
+4. Log in as that customer on storefront.
+5. On cart page, confirm:
+   - Promo code box is hidden.
+   - Coupon remove controls are hidden.
+   - Product remove/edit controls are hidden.
+6. Open mini-cart and confirm:
+   - Product remove controls are hidden.
+   - Quantity controls are display-only when applicable.
+7. Try direct AJAX calls to cart mutation endpoints and confirm they return 403.
+8. Add another product from the storefront and confirm it is added successfully.
+9. Create a normal storefront basket and confirm cart/mini-cart editing still works.
+
+Files Changed
+-------------
+
+All paths below are relative to the autobahn repo root:
+
+- autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/Cart.js
+- autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/cart.isml
+- autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/productCard/cartProductCard.isml
+- autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/productCard/uncategorizedCartProductCard.isml
+- autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/productCard/bonusProductCard.isml
+- autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/productCard/productCardProductNameAndRemove.isml
+- autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/resources/cart.properties

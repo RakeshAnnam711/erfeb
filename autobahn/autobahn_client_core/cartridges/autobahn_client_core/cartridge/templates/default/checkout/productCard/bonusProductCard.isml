@@ -69,7 +69,7 @@
             </isif>
             <!--- quantity --->
             <div class="col line-item-quantity justify-content-center flex">
-                <isif condition="${miniCart && lineItem.hideQty == false}">
+                <isif condition="${miniCart && lineItem.hideQty == false && !pdict.isAgentBasket}">
                     <isinclude template="checkout/productCard/productCardQuantitySelector" />
                 <iselse/>
                     <isinclude template="checkout/productCard/productCardQuantityDisplay" />

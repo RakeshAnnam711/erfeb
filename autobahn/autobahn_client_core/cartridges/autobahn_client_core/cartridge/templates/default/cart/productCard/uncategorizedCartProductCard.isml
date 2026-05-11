@@ -26,7 +26,7 @@
                     <p class="text-product-removed">${Resource.msg('error.removed.online.catalog','cart',null)}</p>
 
                     <iscomment> wishlist and remove buttons </iscomment>
-                    <isif condition="${!lineItem.isBonusProductLineItem}">
+                    <isif condition="${!lineItem.isBonusProductLineItem && !pdict.isAgentBasket}">
                         <!--- Edit product --->
                         <div class="product-edit">
                             <div>

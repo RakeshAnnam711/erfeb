@@ -7,6 +7,97 @@ var BasketMgr = require('dw/order/BasketMgr');
 var Transaction = require('dw/system/Transaction');
 var affirmData = require('*/cartridge/scripts/data/affirmData');
 var cartSummaryBuilder = require('*/cartridge/scripts/cart/cartSummaryBuilder');
+var CHANNEL_TYPE_CUSTOMERSERVICECENTER = 11;
+
+function getEnumValue(enumValue) {
+    if (!enumValue) {
+        return null;
+    }
+
+    try {
+        if (typeof enumValue.value !== 'undefined') {
+            return enumValue.value;
+        }
+    } catch (e) {
+        // Fall back to the getter below.
+    }
+
+    try {
+        if (typeof enumValue.getValue === 'function') {
+            return enumValue.getValue();
+        }
+    } catch (e) {
+        return null;
+    }
+
+    return null;
+}
+
+function isCustomerServiceCenterBasket(basket) {
+    var channelType = null;
+
+    try {
+        channelType = basket.channelType;
+    } catch (e) {
+        // Fall back to the getter below.
+    }
+
+    try {
+        channelType = channelType || (typeof basket.getChannelType === 'function' && basket.getChannelType());
+    } catch (e) {
+        return false;
+    }
+
+    return getEnumValue(channelType) === CHANNEL_TYPE_CUSTOMERSERVICECENTER;
+}
+
+function isAgentBasket(basket) {
+    if (!basket) {
+        return false;
+    }
+
+    try {
+        if (typeof basket.isAgentBasket === 'function' && basket.isAgentBasket()) {
+            return true;
+        }
+    } catch (e) {
+        // Fall back to the Script API property below.
+    }
+
+    try {
+        if (basket.agentBasket === true) {
+            return true;
+        }
+    } catch (e) {
+        return isCustomerServiceCenterBasket(basket);
+    }
+
+    return isCustomerServiceCenterBasket(basket);
+}
+
+function blockAgentBasketMutation(req, res, next) {
+    var currentBasket = BasketMgr.getCurrentBasket();
+
+    if (isAgentBasket(currentBasket)) {
+        var Resource = require('dw/web/Resource');
+
+        res.setStatusCode(403);
+        res.json({
+            error: true,
+            errorMessage: Resource.msg('error.agent.basket.locked', 'cart', null)
+        });
+
+        return this.done(req, res);
+    }
+
+    return next();
+}
+
+server.prepend('RemoveProductLineItem', blockAgentBasketMutation);
+server.prepend('UpdateQuantity', blockAgentBasketMutation);
+server.prepend('AddCoupon', blockAgentBasketMutation);
+server.prepend('RemoveCouponLineItem', blockAgentBasketMutation);
+server.prepend('AddBonusProducts', blockAgentBasketMutation);
 
 server.append('AddProduct', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
@@ -30,11 +121,12 @@ server.append('AddProduct', function (req, res, next) {
 server.append('Show', function (req, res, next) {
     var Site = require('dw/system/Site');
     var currentBasket = BasketMgr.getCurrentBasket();
+    var viewData = res.getViewData();
+
+    viewData.isAgentBasket = isAgentBasket(currentBasket);
+    res.setViewData(viewData);
 
     if (Site.getCurrent().getCustomPreferenceValue('enableZenkraftEstimatedDeliveryDates')) {
-        var viewData = res.getViewData();
-        var currentBasket = BasketMgr.getCurrentBasket();
-
         if ('shipments' in viewData && viewData.shipments.length > 0 && 'shippingMethods' in viewData.shipments[0]) {
             var shippingMethods = viewData.shipments[0].shippingMethods;
 
@@ -92,6 +184,7 @@ server.append('MiniCartShow', function (req, res, next) {
     var viewData = res.getViewData();
     var cartSummary = cartSummaryBuilder.getCartSummary(currentBasket);
     viewData.cartSummary = cartSummary;
+    viewData.isAgentBasket = isAgentBasket(currentBasket);
     res.setViewData(viewData);
     next();
 })

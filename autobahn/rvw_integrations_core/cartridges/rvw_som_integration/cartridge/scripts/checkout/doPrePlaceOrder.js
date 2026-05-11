@@ -1,10 +1,28 @@
 
 var base = module.superModule || {};
 
+var Site = require('dw/system/Site');
 var URLUtils = require('dw/web/URLUtils');
 
 var dwLogger = require('dw/system/Logger').getLogger('RVW_SOM_Integration', 'SOM');
 var images = require('*/cartridge/models/product/decorators/images');
+
+function buildStorefrontUrl(path, fallbackUrl) {
+    var storefrontBaseUrl = Site.getCurrent().getCustomPreferenceValue('storefrontBaseUrl');
+
+    if (empty(storefrontBaseUrl) || empty(path)) {
+        return fallbackUrl || '';
+    }
+
+    var baseUrl = storefrontBaseUrl.toString().replace(/\/$/, '');
+    var relativePath = path.toString().replace(/^https?:\/\/[^/]+/i, '');
+
+    if (relativePath.indexOf('/') !== 0) {
+        relativePath = '/' + relativePath;
+    }
+
+    return baseUrl + relativePath;
+}
 
 /**
  * Allows an override for integrations to implement logic after an order is placed.
@@ -42,7 +60,10 @@ function doPrePlaceOrder(order) {
                             images(imageObject, product, { types: ['small','large'], quantity: 'single' });
 
                             var smallimageUrl = imageObject.images['small'][0].absURL;
-                            var largeimageUrl = imageObject.images['large'][0].absURL;
+                            var largeimageUrl = buildStorefrontUrl(
+                                imageObject.images['large'][0].absURL,
+                                imageObject.images['large'][0].absURL
+                            );
 
                             if (!empty(smallimageUrl)) {
                                 lineItem.custom.Narvar_LOM__image_url = smallimageUrl;
@@ -64,8 +85,11 @@ function doPrePlaceOrder(order) {
                                 lineItem.custom.rvw_autobahn__somCC_primaryCategory = lineItem.custom.somCC_primaryCategory;
                             }
 
-                            lineItem.custom.somCC_PDP_URL = URLUtils.https('Product-Show', 'pid', product.ID).toString();
-                            lineItem.custom.rvw_autobahn__somCC_PDP_URL = lineItem.custom.somCC_PDP_URL.custom.somCC_PDP_URL;
+                            lineItem.custom.somCC_PDP_URL = buildStorefrontUrl(
+                                URLUtils.url('Product-Show', 'pid', product.ID).toString(),
+                                URLUtils.https('Product-Show', 'pid', product.ID).toString()
+                            );
+                            lineItem.custom.rvw_autobahn__somCC_PDP_URL = lineItem.custom.somCC_PDP_URL;
                             lineItem.custom.somCC_brandId = somOrderHelper.GetProductLineItemBrandId(lineItem);
                             lineItem.custom.rvw_autobahn__somCC_brandId = lineItem.custom.somCC_brandId;
                         }

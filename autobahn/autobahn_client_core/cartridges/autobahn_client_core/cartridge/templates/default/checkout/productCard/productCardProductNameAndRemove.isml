@@ -5,7 +5,7 @@
 
 <div class="line-item-brand-section">
     <h1 class="line-item-name line-item-brand-name">${empty(lineItem.brand) ? '' : lineItem.brand}</h1>
-    <isif condition="${!lineItem.isBonusProductLineItem}">
+    <isif condition="${!lineItem.isBonusProductLineItem && !pdict.isAgentBasket}">
         <div class="remove-line-item">
             <button type="button" class="remove-btn remove-product icon-close" data-toggle="modal"
                     data-target="#removeProductModal" data-pid="${lineItem.id}"
