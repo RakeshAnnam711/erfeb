@@ -63,7 +63,7 @@
 		&.middle.center.content-center-mobile, &.middle.center.content-center-tablet {
 			
 			@media screen and (max-width: 543.98px) {
-				transform: translate(0%, -50%);
+				transform: translate(0%, 0%);
 			}
 		}
 		.title {
