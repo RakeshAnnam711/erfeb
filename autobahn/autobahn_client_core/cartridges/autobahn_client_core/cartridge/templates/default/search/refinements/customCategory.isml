@@ -1,0 +1,101 @@
+<isset name="customCategory" value="" scope="page" />
+
+<ul class="values content">
+    <iscomment> Loop through once for all categories except Accessories (accessories should appear last) </iscomment>
+    <isloop items="${refinement.values}" var="refinementValue">
+        <isscript>
+            var displayName = refinementValue.displayValue;
+            var nameArray = displayName.split('-');
+            var name;
+            var currentCategory;
+            if (nameArray.length === 2) {
+                currentCategory = nameArray[0].trim();
+                name = nameArray[1].trim();
+            } else {
+                currentCategory = '';
+                name = nameArray[0].trim();
+            }
+        </isscript>
+
+        <isif condition="${currentCategory === 'Accessories'}">
+            <iscontinue/>
+        </isif>
+
+        <isif condition="${currentCategory !== customCategory}">
+            <isset name="customCategory" value="${currentCategory}" scope="page" />
+            <li class="col-sm-4 col-md-12">
+                <div class="custom-category-label">${currentCategory}</div>
+            </li>
+        </isif>
+        <li class="col-sm-4 col-md-12 ${!refinementValue.selectable ? 'disabled' : ''}">
+            <button data-href="${refinementValue.url}" class="${!refinementValue.selectable ? 'disabled' : ''}"
+                ${!refinementValue.selectable ? 'disabled' : ''}>
+                <isif condition="${refinementValue.selected && refinementValue.selectable}">
+                    <i class="fa fa-check-square"></i>
+                <iselse/>
+                    <i class="fa fa-square-o"></i>
+                </isif>
+
+                <span class="${refinementValue.selected && refinementValue.selectable ? 'selected' : ''}"
+                    aria-hidden="true">
+                    ${name}
+                </span>
+
+                <span class="sr-only selected-assistive-text">
+                    ${refinementValue.selected && refinementValue.selectable ? Resource.msg('msg.assistive.selected.text', 'common', null) :
+                    ''}
+                    ${refinementValue.title}
+                </span>
+            </button>
+        </li>
+    </isloop>
+
+    <iscomment> Loop through again for only Accessories </iscomment>
+    <isloop items="${refinement.values}" var="refinementValue">
+        <isscript>
+            var displayName = refinementValue.displayValue;
+            var nameArray = displayName.split('-');
+            var name;
+            var currentCategory;
+            if (nameArray.length === 2) {
+                currentCategory = nameArray[0].trim();
+                name = nameArray[1].trim();
+            } else {
+                currentCategory = '';
+                name = nameArray[0].trim();
+            }
+        </isscript>
+
+        <isif condition="${currentCategory !== 'Accessories'}">
+            <iscontinue/>
+        </isif>
+
+        <isif condition="${currentCategory !== customCategory}">
+            <isset name="customCategory" value="${currentCategory}" scope="page" />
+            <li class="col-sm-4 col-md-12">
+                <div class="custom-category-label">${currentCategory}</div>
+            </li>
+        </isif>
+        <li class="col-sm-4 col-md-12 ${!refinementValue.selectable ? 'disabled' : ''}">
+            <button data-href="${refinementValue.url}" class="${!refinementValue.selectable ? 'disabled' : ''}"
+                ${!refinementValue.selectable ? 'disabled' : ''}>
+                <isif condition="${refinementValue.selected && refinementValue.selectable}">
+                    <i class="fa fa-check-square"></i>
+                <iselse/>
+                    <i class="fa fa-square-o"></i>
+                </isif>
+
+                <span class="${refinementValue.selected && refinementValue.selectable ? 'selected' : ''}"
+                    aria-hidden="true">
+                    ${name}
+                </span>
+
+                <span class="sr-only selected-assistive-text">
+                    ${refinementValue.selected && refinementValue.selectable ? Resource.msg('msg.assistive.selected.text', 'common', null) :
+                    ''}
+                    ${refinementValue.title}
+                </span>
+            </button>
+        </li>
+    </isloop>
+</ul>

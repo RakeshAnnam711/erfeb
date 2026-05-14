@@ -1,0 +1,29 @@
+<div class="mobile-4r-1c ${pdict.customClass} ${!empty(pdict.animation) ? 'animation-initial-state' : ''} ${pdict.disableMobileAnimation === true ? 'disable-mobile-animation' : ''}"
+     data-component-id="${pdict.componentID}"
+     data-component-index="${pdict.componentIndex.toString()}"
+     <isif condition="${!empty(pdict.animation)}">
+        data-animation="${pdict.animation}"
+        data-animation-play-once="${pdict.animationPlayOnce}"
+     </isif>
+      <isif condition="${!empty(pdict.marginTop) || !empty(pdict.marginBottom) || !empty(pdict.containerBackgroundColor)}">
+        style="
+            <isif condition="${!empty(pdict.marginTop)}">margin-top: ${pdict.marginTop};</isif>
+            <isif condition="${!empty(pdict.marginBottom)}">margin-bottom: ${pdict.marginBottom};</isif>
+            <isif condition="${!empty(pdict.containerBackgroundColor)}">background-color: ${pdict.containerBackgroundColor}; padding: 32px 0;</isif>
+        "
+    </isif>
+>
+    <isset name="col1StyleAttr" value="${'animation-delay: ' + pdict.col1AnimationDelay + 'ms;'}" scope="page"/>
+    <isset name="col2StyleAttr" value="${'animation-delay: ' + pdict.col2AnimationDelay + 'ms;'}" scope="page"/>
+    <isset name="col3StyleAttr" value="${'animation-delay: ' + pdict.col3AnimationDelay + 'ms;'}" scope="page"/>
+    <isset name="col4StyleAttr" value="${'animation-delay: ' + pdict.col4AnimationDelay + 'ms;'}" scope="page"/>
+    
+    <div class="container${pdict.fullBleed ? '-fluid px-0' : ''}">
+        <div class="row">
+            <isprint value="${pdict.regions.column1.setClassName(pdict.column1Class).setAttribute('style', col1StyleAttr).render()}" encoding="off"/>
+            <isprint value="${pdict.regions.column2.setClassName(pdict.column2Class).setAttribute('style', col2StyleAttr).render()}" encoding="off"/>
+            <isprint value="${pdict.regions.column3.setClassName(pdict.column3Class).setAttribute('style', col3StyleAttr).render()}" encoding="off"/>
+            <isprint value="${pdict.regions.column4.setClassName(pdict.column4Class).setAttribute('style', col4StyleAttr).render()}" encoding="off"/>
+        </div>
+    </div>
+</div>

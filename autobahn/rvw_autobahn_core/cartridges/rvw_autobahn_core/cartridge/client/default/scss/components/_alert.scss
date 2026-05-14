@@ -1,0 +1,70 @@
+.toast-messages {
+    @include toast-message;
+    .alert {
+        @include toast-alert;
+    }
+}
+
+.alert {
+    border-radius: $alert-border-radius;
+    padding: $alert-padding;
+    &-success {
+        background: $alert-success-background;
+        border-color: $alert-success-background;
+        color: $alert-success-text;
+        a, a:hover {
+            color: darken($alert-success-text, 10%);
+            text-decoration: underline;
+        }
+        .close {
+            color: $alert-success-text;
+        }
+    }
+    &-warning {
+        background: $alert-warning-background;
+        border-color: $alert-warning-background;
+        color: $alert-warning-text;
+        a, a:hover {
+            color: darken($alert-warning-text, 10%);
+        }
+        .close {
+            color: $alert-warning-text;
+        }
+    }
+    &-danger {
+        background: $alert-danger-background;
+        border-color: $alert-danger-background;
+        color: $alert-danger-text;
+        a, a:hover {
+            color: darken($alert-danger-text, 10%);
+        }
+        .close {
+            color: $alert-danger-text;
+        }
+    }
+    &-info {
+        background: $alert-info-background;
+        border-color: $alert-info-background;
+        color: $alert-info-text;
+        a, a:hover {
+            color: darken($alert-info-text, 10%);
+        }
+        .close {
+            color: $alert-info-text;
+        }
+    }
+    &-dismissible {
+        padding-right: calc(#{$spacer * 2} + 12px);
+    }
+    .close {
+        padding: $spacer;
+        line-height: $base-font-size + 10px - 4px;
+        &:before {
+            position: static;
+            transform: none;
+            margin: 0;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+    }
+}

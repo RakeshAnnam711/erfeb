@@ -1,0 +1,121 @@
+{
+    "name": "Product Detail Page",
+    "description": "Assign a category, and this page will show instead of the default PDP for that category and its subcategories. Or assign it to a product ID and it will show only for that specific product.",
+    "supported_aspect_types": [
+        "pdp"
+    ],
+    "attribute_definition_groups": [
+        {
+            "id": "pageAttributes",
+            "name": "Page Settings",
+            "attribute_definitions": [
+                {
+                    "id": "product",
+                    "name": "Product",
+                    "type": "product",
+                    "required": false,
+                    "dynamic_lookup": {
+                        "aspect_attribute_alias": "product"
+                    }
+                },
+                {
+                    "id": "transparentNavShow",
+                    "name": "Show Transparent Nav",
+                    "description": "Default false. Set to true for nav to be transparent.",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": false
+                },
+                {
+                    "id": "transparentNavDarkMode",
+                    "name": "Transparent Nav Dark Mode",
+                    "description": "Default false which shows light mode. Set to true for nav to be dark mode for pages that have light backgrounds.",
+                    "type": "boolean",
+                    "required": false,
+                    "default_value": false
+                },
+                {
+                    "id": "customClass",
+                    "name": "Custom Class",
+                    "description": "Add a custom class to be applied to this page. For example, use 'background--light-gray to set the background color to light gray.'",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id": "main",
+            "name": "Main Region",
+            "default_component_constructors": [
+                {
+                    "type_id": "commerce_layouts.productDetails",
+                    "name": "Product Detail Component"
+                },
+                {
+                    "type_id": "commerce_layouts.productReviews",
+                    "name": "Product Reviews Component"
+                },
+                {
+                    "type_id": "commerce_layouts.productRecommendations",
+                    "name": "Product Recommendations Component"
+                }
+            ],
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        },
+        {
+            "id":"belowFold",
+            "name":"Below Fold (lazy load)",
+            "component_type_exclusions": [
+                { "type_id": "commerce_assets.campaignBanner" },
+                { "type_id": "commerce_assets.category" },
+                { "type_id": "commerce_assets.editorialRichText" },
+                { "type_id": "commerce_assets.mainBanner" },
+                { "type_id": "commerce_assets.productListTile" },
+                { "type_id": "commerce_assets.shopTheLook" },
+                { "type_id": "commerce_layouts.carousel" },
+                { "type_id": "commerce_layouts.mobileGrid1r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r1c" },
+                { "type_id": "commerce_layouts.mobileGrid2r2c" },
+                { "type_id": "commerce_layouts.mobileGrid2r3c" },
+                { "type_id": "commerce_layouts.mobileGrid3r1c" },
+                { "type_id": "commerce_layouts.mobileGrid3r2c" },
+                { "type_id": "commerce_layouts.mobileGridLookBook" },
+                { "type_id": "commerce_layouts.popularCategories" },
+                { "type_id": "dynamic.dynamicCategoryBanner" },
+                { "type_id": "dynamic.productDetail" },
+                { "type_id": "dynamic.productList" },
+                { "type_id": "einstein.einsteinCarousel" },
+                { "type_id": "einstein.einsteinCarouselCategory" },
+                { "type_id": "einstein.einsteinCarouselProduct" },
+                { "type_id": "commerce_layouts.searchResults" },
+                { "type_id": "commerce_layouts.searchResultsTitle" }
+            ]
+        }
+    ]
+}

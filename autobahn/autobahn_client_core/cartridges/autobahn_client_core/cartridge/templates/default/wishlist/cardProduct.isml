@@ -1,0 +1,175 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="productSet" value="${product.productType === 'set'}" scope="page"/>
+<isset name="imageUrl" value="${product.images.large[0].url}" scope="page"/>
+<isset name="imageAlt" value="${product.images.large[0].alt}" scope="page"/>
+<isif condition="${productSet && imageUrl.includes('noimage')}">
+    <isset name="imageUrl" value="${product.individualProducts[0].images.large[0].url}" scope="page"/>
+    <isset name="imageAlt" value="${product.individualProducts[0].images.large[0].alt}" scope="page"/>
+</isif>
+<isset name="setItemCount" value="${product.numberOfProductsInSet + ' ' + Resource.msg('label.set.item', 'product', null) + (product.individualProducts && product.individualProducts.length > 1 ? Resource.msg('label.pluralize', 'product', null) : '') + ':'}" scope="page" />
+<isset name="placeholderImage" value="${URLUtils.staticURL('/images/placeholder_ProductTile.png')}" scope="page" />
+
+<div
+    class="card wishlist-card-product product-tile ${product.productType === 'master' ? 'product-type-master' : productSet ? 'product-type-set' : ''} ${!product.available ? 'unavailable': ''}"
+    data-list-id="${pdict.listSelected.ID}"
+    data-list-item-id="${product.listItemID}"
+    data-pid="${product.id}"
+    data-url="${URLUtils.url('Wishlist-EditProduct')}"
+    data-message="${Resource.msgf('wishlist.addset.failure.msg', 'wishlist', null, product.productName)}"
+>
+
+    <div class="product-tile">
+        <isif condition="${productSet}">
+            <img class="wishlist-card-product-image" src="${imageUrl}" alt="${imageAlt}" onerror="this.onerror=null;this.src='${placeholderImage}'"/>
+        <iselse/>
+            <a class="wishlist-card-product-toggle" aria-label="${Resource.msgf('text.cardProduct.togglelabel', 'wishlist', null, product.productName)}">
+            </a>
+        </isif>
+    </div>
+
+    <div class="wishlist-card-product-name">
+        <a class="text-link" href="${URLUtils.url('Product-Show', 'pid', product.id)}">
+            <img class="wishlist-card-product-image" src="${imageUrl}" alt="${imageAlt}" onerror="this.onerror=null;this.src='${placeholderImage}'"/>
+            ${product.productName}
+            <isset name="price" value="${product.price}" scope="page" />
+    <isif condition="${product.available}">
+        <isif condition="${productSet}">
+            <isinclude template="product/components/pricing/setPrice" />
+            <div class="row">
+                <div class="col-12">
+                    ${Resource.msg('label.set.contains', 'product', null)} ${setItemCount}
+                    <hr/>
+                </div>
+                <!-- Set Item List -->
+                <isloop items="${product.individualProducts}" var="productItem">
+                    <div class="col-12" data-pid="${productItem.id}">
+                        ${productItem.productName}
+                        <isset name="price" value="${productItem.price}" scope="page" />
+                        <isinclude template="product/components/pricing/main" />
+                    </div>
+                </isloop>
+            </div>
+        <iselse/>
+            <isset name="price" value="${product.price}" scope="page" />
+            <isinclude template="product/components/pricing/main" />
+        </isif>
+    </isif>
+        </a>
+    </div>
+
+    
+
+    <form class="wishlist-card-product-form">
+        <div class="item-attributes">
+            <isloop items="${product.variationAttributes}" var="attribute">
+                <isloop items="${attribute.values}" var="eachValue">
+                    <isif condition="${!!eachValue.selected}">
+                        <p class="line-item-attributes">
+                            ${attribute.displayName}: ${eachValue.displayValue}
+                        </p>
+                    </isif>
+                </isloop>
+            </isloop>
+            <isif condition="${product.productOptions}">
+                <isloop items="${product.productOptions.options}" var="option">
+                    <isif condition="${!!option}">
+                        <p class="line-item-attributes">
+                            ${option.displayName}:${option.displayValue}
+                        </p>
+                    </isif>
+                </isloop>
+            </isif>
+            <isset name="item" value="${product}" scope="page" />
+            <isinclude template="wishlist/components/wishlistProductCardAvailability" />
+        </div>
+        <div class="item-controls">
+            <div class="wishlist-card-product-form-quantity ${productSet ? 'd-none' : ''}">
+            <div class="d-none">
+                <label for="wishlist-card-product-quantity-${loopState.count}" class="label-over-select"
+                    data-label-over-select='{"name":"${Resource.msg(' select.cardProduct.quantityabbreviation', 'wishlist', null)}", "pdpName" :"${Resource.msg('select.cardProduct.quantityabbreviation', 'wishlist', null)}"}'>
+                    ${Resource.msg('select.cardProduct.quantity', 'wishlist', null)}
+                </label>
+                <select id="wishlist-card-product-quantity-${loopState.count}"
+                    class="wishlist-card-product-quantity form-control custom-select ${product.enableQuantityStepper ? 'd-none' : ''}">
+                    <isloop items="${product.listQuantity}" var="quantityOption">
+                        <isif condition="${quantityOption.selected}">
+                            <isset name="currentQuantity" value="${quantityOption.value}" scope="page" />
+                        </isif>
+                        <option value="${quantityOption.value}" ${quantityOption.selected ? ' selected' : ''}>
+                            ${quantityOption.label}</option>
+                    </isloop>
+                </select>
+            </div>
+
+
+                <isif condition="${product.enableQuantityStepper}">
+                    <isquantitystepper
+                        qty="${currentQuantity}"
+                        min="${product.minOrderQuantity.toFixed()}"
+                        max="${product.maxOrderQuantity.toFixed()}"
+                        size="${'large'}"
+                    />
+                </isif>
+            </div>
+            <isif condition="${product.selectAttributes || productSet}">
+                <iscomment>Product Sets cannot be added directly from Wishlist; they launch a standard Quickview instead</iscomment>
+                <a class="quickview wishlist-quickview"
+                    href="${product.quickViewUrl}"
+                    data-pid="${product.id}"
+                    data-toggle="modal"
+                    data-target="#quickViewModal"
+                    data-source="${productSet ? 'set-quickview-wishlist': 'quickview-wishlist'}"
+                    data-list-id="${pdict.listSelected.ID}"
+                    title="${Resource.msgf('button.quickview', 'common', null, product.productName)}"
+                    aria-label="${Resource.msgf('button.quickview', 'common', null, product.productName)}"
+                >
+                    ${Resource.msg('button.select_attributes', 'wishlist', null)}
+                </a>
+            <iselse/>
+
+                <button
+                    type="button"
+                    class="wishlist-card-product-add ${product.available && !product.inCart ? '' : 'disabled'}"
+                    data-pid="${product.id}"
+                    data-url="${pdict.urls.addToCart}"
+                    data-options="${product.productOptions ? JSON.stringify(product.productOptions.selectedOptions) : ''}"
+                    data-gtmdata="${JSON.stringify(product.gtmData)}"
+                >
+                    ${!product.available || (product.available && !product.inCart)
+                    ? Resource.msg('button.addtocart', 'wishlist', 'Add To Cart')
+                    : Resource.msg('button.addedtocart', 'wishlist', 'Added To Cart')}
+                </button>
+            </isif>
+            <div class="item-footer">
+                <isif condition="${!productSet && customer.authenticated && (pdict.listSelected.listOwner && pdict.listSelected.listOwner === customer.ID)}">
+                    <iscomment>Custom Quickview that uses Wishlist item ID</iscomment>
+                    <a class="quickview"
+                        href="${URLUtils.url('Wishlist-GetProduct', 'wishlistId', pdict.listSelected.ID, 'productListItemId', product.listItemID)}"
+                        data-pid="${product.id}"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        data-source="quickview-wishlist"
+                        data-list-id="${pdict.listSelected.ID}"
+                        title="${Resource.msgf('button.quickview', 'common', null, product.productName)}"
+                        aria-label="${Resource.msgf('button.quickview', 'common', null, product.productName)}"
+                    >
+                        ${Resource.msg('button.quickview.edit.in', 'wishlist', null)}
+                    </a>
+                </isif>
+                <isif condition="${!pdict.listSelected.isLocked}">
+                    <a
+                        href=""
+                        class="wishlist-card-product-remove"
+                        data-url="${pdict.urls.removeProduct}"
+                        data-list-id="${pdict.listSelected.ID}"
+                        data-list-item-id="${product.listItemID}"
+                    >
+                        ${Resource.msg('button.remove', 'wishlist', null)}
+                    </a>
+                </isif>
+            </div>
+        </div>
+    </form>
+</div>
+

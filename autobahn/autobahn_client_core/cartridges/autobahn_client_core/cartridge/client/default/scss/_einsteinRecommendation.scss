@@ -1,0 +1,162 @@
+// Recommendation-specific sizing
+$einstein-tile-image-height-desktop: 200px;
+$einstein-tile-image-height-mobile: 175px;
+$einstein-card-max-width: 220px;
+$einstein-ultrawide-breakpoint: 1921px;
+
+/* Parent prevents page overflow */
+.reco-scroll-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-grid-new {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 24px;
+    scroll-behavior: smooth;
+    max-width: 100%;
+    --product-tile-image-height: #{$einstein-tile-image-height-desktop};
+    --product-tile-image-height-mobile: #{$einstein-tile-image-height-mobile};
+}
+
+.product-grid-new .product-tile-image-link {
+    display: block;
+    width: 100%;
+    min-height: $einstein-tile-image-height-desktop;
+    max-height: $einstein-tile-image-height-desktop;
+
+    @include media-breakpoint-down(md) {
+        min-height: $einstein-tile-image-height-mobile;
+        max-height: $einstein-tile-image-height-mobile;
+    }
+}
+
+.product-grid-new .tile-image {
+    width: 100%;
+    min-height: $einstein-tile-image-height-desktop;
+    max-height: $einstein-tile-image-height-desktop;
+    object-fit: contain;
+
+    @include media-breakpoint-down(md) {
+        min-height: $einstein-tile-image-height-mobile;
+        max-height: $einstein-tile-image-height-mobile;
+    }
+}
+
+.product-grid-new .show-secondary-image .product-tile-image-secondary {
+    width: 100%;
+    min-height: $einstein-tile-image-height-desktop;
+    max-height: $einstein-tile-image-height-desktop;
+    object-fit: contain;
+
+    @include media-breakpoint-down(md) {
+        min-height: $einstein-tile-image-height-mobile;
+        max-height: $einstein-tile-image-height-mobile;
+    }
+}
+
+.product-grid-new.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.product-grid-new > [class*="col-"] {
+    flex: 0 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.product-grid-new .recommendation-card {
+    flex-basis: min(#{$einstein-card-max-width}, calc(50vw - 28px));
+    max-width: min(#{$einstein-card-max-width}, calc(50vw - 28px));
+
+    @include media-breakpoint-up(sm) {
+        flex-basis: min(#{$einstein-card-max-width}, calc(33.333vw - 32px));
+        max-width: min(#{$einstein-card-max-width}, calc(33.333vw - 32px));
+    }
+
+    @include media-breakpoint-up(lg) {
+        flex-basis: min(#{$einstein-card-max-width}, calc(25vw - 40px));
+        max-width: min(#{$einstein-card-max-width}, calc(25vw - 40px));
+    }
+
+    @include media-breakpoint-up(xl) {
+        flex-basis: min(#{$einstein-card-max-width}, calc(20vw - 44px));
+        max-width: min(#{$einstein-card-max-width}, calc(20vw - 44px));
+    }
+}
+@media screen and (min-width: $einstein-ultrawide-breakpoint) {
+    .recommendations-homepage .reco-scroll-wrapper {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .recommendations-homepage .product-grid-new {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        width: max-content;
+        min-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .recommendations-homepage .product-grid-new > [class*="col-"] {
+        width: auto;
+    }
+
+    .recommendations-homepage .product-grid-new .recommendation-card {
+        flex: 0 1 $einstein-card-max-width;
+        max-width: $einstein-card-max-width;
+    }
+}
+
+.product-grid-new::-webkit-scrollbar {
+    height: 4px;
+}
+
+.product-grid-new::-webkit-scrollbar-thumb {
+    background: $black;
+}
+
+.product-grid-new .product-tile {
+    margin-bottom: 0;
+}
+
+.product-grid-new .product-tile .tile-body .price {
+    min-height: 54px;
+}
+
+.product-grid-new .recommendation-card .product-tile a:hover {
+    text-decoration: none;
+}
+
+.product-grid-new .recommendation-card .product-tile .tile-body .pdp-link .brand {
+    font-size: 13.5px;
+}
+
+.product-grid-new .recommendation-card .product-tile .tile-body .pdp-link .name {
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.recommendations-heading {
+    font-size: 24px;
+    line-height: 24px;
+}
+// you may also like section
+ .einstein_section-cart .einstein-scroll {
+        .product-grid-new {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .product-grid-new > [class*="col-"] {
+            flex: 0 0 auto;
+        }
+    }

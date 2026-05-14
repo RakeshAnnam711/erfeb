@@ -1,0 +1,46 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<div
+    id="wishlistModalShowLists"
+    class="wishlist-modal-show-lists modal fullscreen fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="wishlistModalLabel"
+    aria-hidden="true"
+    data-backdrop="true"
+    data-url-remove-from-cart="${URLUtils.url('Cart-RemoveProductLineItem').toString()}"
+>
+    <div class="modal-dialog modal-scrollbody" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <header class="modal-title wishlist-modal-show-lists-header">
+                    <button type="button" class="wishlist-modal-show-lists-header-back js-header-back hide" aria-label="${Resource.msg('button.back', 'wishlist', null)}"></button>
+                    <div id="wishlistModalLabel" class="wishlist-modal-show-lists-header-title">
+                        <span class="wishlist-modal-show-lists-add">
+                            ${Resource.msg('title.modal.addto', 'wishlist', null)}
+                        </span>
+                        <span class="wishlist-modal-show-lists-move">
+                            ${Resource.msg('title.modal.move', 'wishlist', null)}
+                        </span>
+                    </div>
+                </header>
+                <button type="button" class="wishlist-modal-show-lists-header-close close" data-dismiss="modal" aria-label="${Resource.msg('button.modal.close', 'wishlist', null)}"></button>
+            </div>
+            <div class="modal-body" data-url="${URLUtils.url('Wishlist-ShowModalShowLists')}">
+                <div class="wishlist-modal-show-lists-toggle">
+                    <section class="wishlist-modal-show-lists-toggle-lists"></section>
+                    <section class="wishlist-modal-show-lists-toggle-list-form d-none">
+                        <div class="wishlist-modal-show-lists-toggle-row">
+                            <isinclude template="wishlist/components/createList"/>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="wishlist-show-new-list-form-btn btn-block">
+                    ${Resource.msg('button.modal.createnewlist', 'wishlist', null)}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

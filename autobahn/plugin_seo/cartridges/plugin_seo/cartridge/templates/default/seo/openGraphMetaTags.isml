@@ -1,0 +1,5 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<isloop items="${pdict.ogTags}" var="ogTag" status="loopstatus">
+    <meta property="${ogTag.ID}" content="${ogTag.content}" />
+</isloop>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payment-settings xmlns="http://www.demandware.com/xml/impex/paymentsettings/2009-09-15">
+
+    <payment-method method-id="Salesforce Payments">
+        <name xml:lang="x-default">Salesforce Payments</name>
+        <enabled-flag>false</enabled-flag>
+        <processor-id>SALESFORCE_PAYMENTS</processor-id>
+        <custom-attributes>
+            <custom-attribute attribute-id="isBicEnabled">false</custom-attribute>
+            <custom-attribute attribute-id="isSupportedBankListRequired">false</custom-attribute>
+        </custom-attributes>
+    </payment-method>
+
+</payment-settings>

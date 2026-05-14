@@ -1,0 +1,235 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?dyygb2');
+  src:  url('fonts/icomoon.eot?dyygb2#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?dyygb2') format('truetype'),
+    url('fonts/icomoon.woff?dyygb2') format('woff'),
+    url('fonts/icomoon.svg?dyygb2#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-address:before {
+  content: "\e954";
+}
+.icon-clock:before {
+  content: "\e953";
+}
+.icon-tiktok:before {
+  content: "\e952";
+}
+.icon-menu:before {
+  content: "\e929";
+}
+.icon-images:before {
+  content: "\e905";
+}
+.icon-alert:before {
+  content: "\e904";
+}
+.icon-account:before {
+  content: "\e900";
+}
+.icon-add-to-cart .path1:before {
+  content: "\e901";
+  color: rgb(68, 68, 68);
+}
+.icon-add-to-cart .path2:before {
+  content: "\e902";
+  margin-left: -1.03125em;
+  color: rgb(192, 192, 192);
+}
+.icon-add-to-cart .path3:before {
+  content: "\e903";
+  margin-left: -1.03125em;
+  color: rgb(255, 255, 255);
+}
+.icon-arrow-down:before {
+  content: "\e907";
+}
+.icon-arrow-left-thin:before {
+  content: "\e908";
+}
+.icon-arrow-left:before {
+  content: "\e909";
+}
+.icon-arrow-right-thin:before {
+  content: "\e90a";
+}
+.icon-arrow-right:before {
+  content: "\e90b";
+}
+.icon-arrow-top:before {
+  content: "\e90c";
+}
+.icon-arrow-up:before {
+  content: "\e90d";
+}
+.icon-call:before {
+  content: "\e90e";
+}
+.icon-cart:before {
+  content: "\e90f";
+}
+.icon-checkmark:before {
+  content: "\e910";
+}
+.icon-close-small:before {
+  content: "\e911";
+}
+.icon-close:before {
+  content: "\e912";
+}
+.icon-collapse:before {
+  content: "\e913";
+}
+.icon-edit:before {
+  content: "\e914";
+}
+.icon-email:before {
+  content: "\e915";
+}
+.icon-expand:before {
+  content: "\e916";
+}
+.icon-facebook:before {
+  content: "\e917";
+}
+.icon-favorite-selected:before {
+  content: "\e918";
+  color: #ba4257;
+}
+.icon-favorite:before {
+  content: "\e919";
+}
+.icon-film:before {
+  content: "\e91a";
+}
+.icon-google:before {
+  content: "\e91b";
+}
+.icon-guarantee:before {
+  content: "\e91c";
+}
+.icon-image:before {
+  content: "\e91d";
+}
+.icon-info:before {
+  content: "\e921";
+}
+.icon-instagram:before {
+  content: "\e922";
+}
+.icon-link:before {
+  content: "\e923";
+}
+.icon-linkedin:before {
+  content: "\e924";
+}
+.icon-livechat:before {
+  content: "\e925";
+}
+.icon-location:before {
+  content: "\e927";
+}
+.icon-lock:before {
+  content: "\e928";
+}
+.icon-minus:before {
+  content: "\e92c";
+}
+.icon-offsite:before {
+  content: "\e92d";
+}
+.icon-pause:before {
+  content: "\e92e";
+}
+.icon-pinterest:before {
+  content: "\e92f";
+}
+.icon-play-hollow:before {
+  content: "\e930";
+}
+.icon-plus:before {
+  content: "\e931";
+}
+.icon-print:before {
+  content: "\e932";
+}
+.icon-question:before {
+  content: "\e933";
+}
+.icon-remove:before {
+  content: "\e934";
+}
+.icon-search:before {
+  content: "\e935";
+}
+.icon-size:before {
+  content: "\e936";
+}
+.icon-star-empty:before {
+  content: "\e937";
+}
+.icon-star-half:before {
+  content: "\e938";
+}
+.icon-star:before {
+  content: "\e939";
+}
+.icon-twitter:before {
+  content: "\e93a";
+}
+.icon-youtube:before {
+  content: "\e93b";
+}
+.icon-zoom-out:before {
+  content: "\e93c";
+}
+.icon-zoom:before {
+  content: "\e93d";
+}
+.icon-sms-solid:before {
+  content: "\e906";
+}
+.icon-share_button:before {
+  content: "\e950";
+}
+.icon-content_copy:before {
+  content: "\e951";
+}
+.icon-filter:before {
+  content: "\e955";
+}
+.icon-sort:before {
+  content: "\e956";
+}
+.icon-Show:before {
+  content: "\e91f";
+}
+.icon-Hide:before {
+  content: "\e91e";
+}
+.icon-checkout_bin:before {
+  content: "\e920";
+}
+.icon-checkout_lock:before {
+  content: "\e926";
+  color: #fff;
+}

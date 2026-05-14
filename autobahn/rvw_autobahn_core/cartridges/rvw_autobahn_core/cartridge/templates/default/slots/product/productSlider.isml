@@ -1,0 +1,20 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscache type="relative" hour="1" varyby="price_promotion" />
+<isscript>
+    var contentSlotHelper = require('*/cartridge/scripts/helpers/contentSlotHelper.js');
+    var content = contentSlotHelper.getContent(slotcontent, pdict.content);
+    var contentId = contentSlotHelper.getContentId(slotcontent, pdict.content);
+    var dataAttribute = contentSlotHelper.getDataAttribute(slotcontent, pdict.content);
+
+    // ATTRs for Slider
+    var id = slotcontent.slotID;
+    var title = !empty(slotcontent.calloutMsg) ? slotcontent.calloutMsg.markup : null;
+    var recommendations = content;
+    var recommenderID = slotcontent.recommenderName;
+</isscript>
+
+<isif condition="${content}">
+    <div class="product-slider-slot" ${dataAttribute}>
+        <isinclude template="product/components/productSlider"/>
+    </div>
+</isif>

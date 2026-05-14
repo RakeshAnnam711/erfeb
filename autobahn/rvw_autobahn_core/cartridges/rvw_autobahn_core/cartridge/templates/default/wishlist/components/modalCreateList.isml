@@ -1,0 +1,30 @@
+<div
+    id="wishlistModalCreateList"
+    class="modal fade wishlist-modal-create-list"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="wishlistModalCreateListLabel"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="wishlistModalCreateListLabel" class="modal-title wishlist-modal-create-list-title">
+                    ${Resource.msg('title.modal.createlist', 'wishlist', null)}
+                </div>
+                <button
+                    type="button"
+                    class="close wishlist-modal-create-list-close-btn"
+                    data-dismiss="modal"
+                    aria-label="${Resource.msg('button.modal.dismiss', 'wishlist', null)}"
+                >
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <isinclude template="wishlist/components/createList"/>
+            </div>
+        </div>
+    </div>
+</div>

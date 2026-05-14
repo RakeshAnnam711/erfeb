@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+<type-extension type-id="Content">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="bambuserStreamId">
+                <display-name xml:lang="x-default">Bambuser Stream Id</display-name>
+                <description xml:lang="x-default">Id of Bambuser Stream to be opened by Asset.&#13;
+Requires content/bambuserTrigger rendering template</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="bambuser">
+                <display-name xml:lang="x-default">Bambuser</display-name>
+                <attribute attribute-id="bambuserStreamId"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ServiceCredential">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="apiKey">
+                <type>password</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="ApiKey">
+                <display-name xml:lang="x-default">ApiKey</display-name>
+                <attribute attribute-id="apiKey"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="bambuser_liveshopping_scripturl">
+                <display-name xml:lang="x-default">LiveShopping embed script URL</display-name>
+                <description>URL of bambuser liveshopping frontent embed script.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>https://lcx-embed.bambuser.com/bambuser/embed.js</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_cart_integration">
+                <display-name xml:lang="x-default">Enable the Cart Integration</display-name>
+                <description xml:lang="x-default">When disabled, the product in bambuser player will act as a link, instead of an opening list of variations</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_show_overview">
+                <display-name xml:lang="x-default">Toggles the stream overview page (Bambuser-Overview)</display-name>
+                <description>When not active, shows error when controller is called</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_enabled">
+                <display-name xml:lang="x-default">Enables / Disables the Bambuser Integration</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_image_size">
+                <display-name xml:lang="x-default">image size to pass to bambuser</display-name>
+                <description>Size of images passed to bambuser frontend</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>medium</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_fab_widget_id">
+                <display-name xml:lang="x-default">Floating Action Button ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value></default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_fab_widget_scripturl">
+                <display-name xml:lang="x-default">Floating action button Script URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>https://lcx-widgets.bambuser.com/embed.js</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_floating_action_button">
+                <display-name xml:lang="x-default">Enable Floating Action Button</display-name>
+                <description xml:lang="x-default">Enable Live Button on the storefront</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_skip_pages_fab">
+                <display-name xml:lang="x-default">Pages not displaying the floating action button</display-name>
+                <description xml:lang="x-default">Pages where the floating action button should not be displayed</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value></default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_conversion_tracker">
+                <display-name xml:lang="x-default">Enable Conversion Tracker</display-name>
+                <description>Track products added to cart from the Bambuser player.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_conversion_tracker_url">
+                <display-name xml:lang="x-default">Conversion Tracker URL</display-name>
+                <description xml:lang="x-default">Conversion Tracker URL for GLOBAL SERVERS and EUROPEAN SERVERS</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">GLOBAL SERVERS</display>
+                        <value>https://cdn.liveshopping.bambuser.com/metrics/bambuser.min.js</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">EUROPEAN SERVERS</display>
+                        <value>https://cdn.liveshopping.bambuser.com/metrics/bambuser-eu.min.js</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_dismiss_miniplayer">
+                <display-name xml:lang="x-default">Bambuser Miniplayer Dismiss Button Configuration</display-name>
+                <description xml:lang="x-default">List of available behaviors to configure the dismiss button</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Player Button Close</display>
+                        <value>player.BUTTON.CLOSE</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Player Button Minimize</display>
+                        <value>player.BUTTON.MINIMIZE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Player Button None</display>
+                        <value>player.BUTTON.NONE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">No Display</display>
+                        <value>no_display</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_product_miniplayer">
+                <display-name xml:lang="x-default">Bambuser Miniplayer Product Button Configuration</display-name>
+                <description xml:lang="x-default">List of available behaviors to configure the product button</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Player Button Auto</display>
+                        <value>player.BUTTON.AUTO</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Player Button Link</display>
+                        <value>player.BUTTON.LINK</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Player Button Minimize</display>
+                        <value>player.BUTTON.MINIMIZE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Player Button None</display>
+                        <value>player.BUTTON.NONE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">No Display</display>
+                        <value>no_display</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_checkout_miniplayer">
+                <display-name xml:lang="x-default">Bambuser Miniplayer Checkout Button Configuration</display-name>
+                <description xml:lang="x-default">List of available behaviors to configure the checkout button</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Player Button Link</display>
+                        <value>player.BUTTON.LINK</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Player Button Minimize</display>
+                        <value>player.BUTTON.MINIMIZE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">No Display</display>
+                        <value>no_display</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="bambuser_skip_pages_miniplayer">
+                <display-name xml:lang="x-default">Pages where the Miniplayer is not displayed</display-name>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="bambuser">
+                <display-name xml:lang="x-default">bambuser</display-name>
+                <attribute attribute-id="bambuser_enabled"/>
+                <attribute attribute-id="bambuser_cart_integration"/>
+                <attribute attribute-id="bambuser_liveshopping_scripturl"/>
+                <attribute attribute-id="bambuser_show_overview"/>
+                <attribute attribute-id="bambuser_image_size"/>
+                <attribute attribute-id="bambuser_floating_action_button"/>
+                <attribute attribute-id="bambuser_skip_pages_fab"/>
+                <attribute attribute-id="bambuser_fab_widget_scripturl"/>
+                <attribute attribute-id="bambuser_fab_widget_id"/>
+                <attribute attribute-id="bambuser_conversion_tracker"/>
+                <attribute attribute-id="bambuser_conversion_tracker_url"/>
+                <attribute attribute-id="bambuser_dismiss_miniplayer"/>
+                <attribute attribute-id="bambuser_product_miniplayer"/>
+                <attribute attribute-id="bambuser_checkout_miniplayer"/>
+                <attribute attribute-id="bambuser_skip_pages_miniplayer"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>

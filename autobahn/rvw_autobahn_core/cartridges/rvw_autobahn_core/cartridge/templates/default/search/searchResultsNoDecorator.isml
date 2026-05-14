@@ -1,0 +1,13 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+    <isinclude template="reporting/reportingUrls" />
+</isif>
+
+<!--- Search Results Banner --->
+<isif condition="${!pdict.productSearch.isCategorySearch}">
+    <iscontentasset aid="search-results-banner" />
+</isif>
+
+<isinclude template="search/components/searchResultsHeader" />
+<isinclude template="search/components/searchResultsContent" />

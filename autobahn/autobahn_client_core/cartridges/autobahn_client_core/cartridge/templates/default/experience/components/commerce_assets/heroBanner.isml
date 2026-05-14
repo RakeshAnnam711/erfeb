@@ -1,0 +1,214 @@
+<div class="hero ${pdict.bannerType} ${pdict.bannerHeight} ${pdict.backgroundClass} ${pdict.textPlacement}">
+
+    <div class="hero-container ${pdict.textPlacement} ${pdict.containerClass} ${pdict.contentStack} flex-lg-row">
+
+        <iscomment>Image</iscomment>
+        <isif condition="${!empty(pdict.backgroundImage)}">
+            <div class="hero-media hero-media-mobile ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImageAlt || pdict.backgroundImage.alt}"
+                 style="background-image: url('${pdict.backgroundImage.src.mobile}');
+                        background-image: -webkit-image-set(url(${pdict.backgroundImage.src.mobile}) 1x, url(${pdict.backgroundImage.src.mobile2x}) 2x);
+                        background-image: image-set(url(${pdict.backgroundImage.src.mobile}) 1x, url(${pdict.backgroundImage.src.mobile2x}) 2x);
+                        background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+            </div>
+            <div class="hero-media hero-media-tablet ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImageAlt || pdict.backgroundImage.alt}"
+                 style="background-image: url('${pdict.backgroundImage.src.tablet}');
+                        background-image: -webkit-image-set(url(${pdict.backgroundImage.src.tablet}) 1x, url(${pdict.backgroundImage.src.tablet2x}) 2x);
+                        background-image: image-set(url(${pdict.backgroundImage.src.tablet}) 1x, url(${pdict.backgroundImage.src.tablet2x}) 2x);
+                        background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+            </div>
+            <div class="hero-media hero-media-desktop ${pdict.textWidth}" role="img" aria-label="${pdict.backgroundImageAlt || pdict.backgroundImage.alt}"
+                 style="background-image: url('${pdict.backgroundImage.src.desktop}');
+                        background-image: -webkit-image-set(url(${pdict.backgroundImage.src.desktop}) 1x, url(${pdict.backgroundImage.src.desktop2x}) 2x);
+                        background-image: image-set(url(${pdict.backgroundImage.src.desktop}) 1x, url(${pdict.backgroundImage.src.desktop2x}) 2x);
+                        background-position: ${pdict.backgroundImage.focalPointX} ${pdict.backgroundImage.focalPointY}">
+            </div>
+        </isif>
+
+        <iscomment>Video</iscomment>
+        <isif condition="${!empty(pdict.backgroundVideo)}">
+            <div class="hero-media video-container ${pdict.textWidth}"
+                 data-play-once="${pdict.backgroundVideoPlayOnce}"
+                 data-play-when-fully-in-view="${pdict.backgroundVideoPlayWhenFullyInView}">
+                <div class="video-aspect-ratio ${pdict.backgroundVideoAspectRatioClass}">
+                    <isif condition="${pdict.backgroundVideo.type === 'hosted'}">
+                        <video id="player-${pdict.componentID}-background" class="video-player video-js"
+                            data-video="${pdict.backgroundVideo.type}"
+                            data-player-attr="${pdict.backgroundVideo.params}"
+                            data-video-id="${pdict.backgroundVideo.id}">
+                            <source src="${pdict.backgroundVideo.id}" type="video/${pdict.backgroundVideo.fileType}"/>
+                        </video>
+                    <iselse/>
+                        <div id="player-${pdict.componentID}-background" class="video-player"
+                            data-video="${pdict.backgroundVideo.type}"
+                            data-video-id="${pdict.backgroundVideo.id}"
+                            data-player-attr="${pdict.backgroundVideo.params}">
+                        </div>
+                    </isif>
+                </div>
+            </div>
+
+            <isif condition="${pdict.backgroundVideoPlayOnce}">
+                <button class="replay-video btn btn-primary icon-play-hollow">${Resource.msg('video.replay', 'components', null)}</button>
+            </isif>
+        </isif>
+
+        <iscomment>Text block</iscomment>
+        <div class='hero-text ${pdict.textWidth} ${pdict.textAlignment} ${pdict.textMobilePlacement} ${pdict.colorTheme} ${pdict.textblockBackground} ${pdict.textblockClass} ${pdict.textClass} ${!empty(pdict.textAnimation) ? "animation-initial-state" : ""} ${pdict.disableMobileAnimation === true ? "disable-mobile-animation" : ""}'
+            <isif condition="${!empty(pdict.textAnimation)}">
+                data-animation="${pdict.textAnimation}"
+                data-animation-play-once="${pdict.textAnimationPlayOnce}"
+            </isif>
+        >
+
+            <isif condition="${!empty(pdict.subtitle)}">
+                <div class="hero-subtitle ${pdict.subtitleClass}" style="animation-delay: ${pdict.subtitleAnimationDelay}ms;${pdict.subtitleColor}${pdict.subtitleBackgroundColor}}">
+                    <isprint value="${pdict.subtitle}" encoding="off" />
+                </div>
+            </isif>
+
+            <isif condition="${!empty(pdict.title)}">
+                <div class="hero-title ${pdict.titleClass}" style="animation-delay: ${pdict.titleAnimationDelay}ms;${pdict.titleColor}${pdict.titleBackgroundColor}">
+                    <isprint value="${pdict.title}" encoding="off" />
+                </div>
+            </isif>
+
+            <div class="hero-embedded-component embedded-component" style="animation-delay: ${pdict.embeddedAnimationDelay}ms;">
+                <isprint value="${pdict.regions.embeddedComponent.render()}"  encoding="off"/>
+            </div>
+
+            <isif condition="${!empty(pdict.body)}">
+                <div class="hero-body ${pdict.bodyClass}" style="animation-delay: ${pdict.bodyAnimationDelay}ms;">
+                    <isprint value="${pdict.body}" encoding="off" />
+                </div>
+            </isif>
+
+            <isif condition="${!empty(pdict.button1Action) || !empty(pdict.button2Action)}">
+                <div class="hero-buttons ${pdict.buttonsClass}" style="animation-delay: ${pdict.buttonsAnimationDelay}ms;">
+
+                    <iscomment>Button 1</iscomment>
+                    <isif condition="${!empty(pdict.button1Action)}">
+                        <div class='hero-button'>
+                            <isif condition="${!empty(pdict.button1Video)}">
+                                <div class="video-container aspect-ratio-16-9">
+                                    <isif condition="${pdict.button1Video.type === 'hosted'}">
+                                        <video id="player-${pdict.componentID}-button1" class="video-player video-js"
+                                            data-video="${pdict.button1Video.type}"
+                                            data-player-attr="${pdict.button1Video.params}"
+                                            data-video-id="${pdict.button1Video.id}">
+                                            <source src="${pdict.button1Video.id}" type="video/${pdict.button1Video.fileType}"/>
+                                        </video>
+                                    <iselse/>
+                                        <div id="player-${pdict.componentID}-button1" class="video-player"
+                                            data-video="${pdict.button1Video.type}"
+                                            data-video-id="${pdict.button1Video.id}"
+                                            data-player-attr="${pdict.button1Video.params}">
+                                        </div>
+                                    </isif>
+                                    <a class="video-thumbnail btn ${!empty(pdict.button1Class) ? pdict.button1Class : pdict.button1Style}" href="${pdict.button1Action}">
+                                        <isprint value="${pdict.button1Text}" />
+                                    </a>
+                                </div>
+                            <iselse/>
+                                <a class="btn ${!empty(pdict.button1Class) ? pdict.button1Class : pdict.button1Style}" href="${pdict.button1Action}" ${pdict.button1IsExternalLink ? "rel='noopener noreferrer'" : ""} ${pdict.button1OpenNewTab ? "target='_blank' rel='noopener'" : ""} style="${pdict.button1Color} ${pdict.button1BackgroundColor}">
+                                    <isprint value="${pdict.button1Text}" />
+                                </a>
+                            </isif>
+                        </div>
+                    </isif>
+
+                    <iscomment>Button 2</iscomment>
+                    <isif condition="${!empty(pdict.button2Action)}">
+                        <div class='hero-button'>
+                            <isif condition="${!empty(pdict.button2Video)}">
+                                <div class="video-container aspect-ratio-16-9">
+                                    <isif condition="${pdict.button2Video.type === 'hosted'}">
+                                        <video id="player-${pdict.componentID}-button2" class="video-player video-js"
+                                            data-video="${pdict.button2Video.type}"
+                                            data-player-attr="${pdict.button2Video.params}"
+                                            data-video-id="${pdict.button2Video.id}">
+                                            <source src="${pdict.button2Video.id}" type="video/${pdict.button2Video.fileType}"/>
+                                        </video>
+                                    <iselse/>
+                                        <div id="player-${pdict.componentID}-button2" class="video-player"
+                                            data-video="${pdict.button2Video.type}"
+                                            data-video-id="${pdict.button2Video.id}"
+                                            data-player-attr="${pdict.button2Video.params}">
+                                        </div>
+                                    </isif>
+                                    <a class="video-thumbnail btn ${!empty(pdict.button2Class) ? pdict.button1Class : pdict.button2Style}"
+                                       href="${pdict.button2Action}">
+                                        <isprint value="${pdict.button2Text}" />
+                                    </a>
+                                </div>
+                            <iselse/>
+                                <a class="btn ${!empty(pdict.button2Class) ? pdict.button2Class : pdict.button2Style}" href="${pdict.button2Action}" ${pdict.button2IsExternalLink ? "rel='noopener noreferrer'" : ""} ${pdict.button2OpenNewTab ? "target='_blank' rel='noopener'" : ""}>
+                                    <isprint value="${pdict.button2Text}" />
+                                </a>
+                            </isif>
+                        </div>
+                    </isif>
+
+                    <iscomment>Button 3</iscomment>
+                    <isif condition="${!empty(pdict.button3Action)}">
+                        <div class='hero-button'>
+                            <isif condition="${!empty(pdict.button3Video)}">
+                                <div class="video-container aspect-ratio-16-9">
+                                    <isif condition="${pdict.button3Video.type === 'hosted'}">
+                                        <video id="player-${pdict.componentID}-button3" class="video-player video-js"
+                                            data-video="${pdict.button3Video.type}"
+                                            data-player-attr="${pdict.button3Video.params}"
+                                            data-video-id="${pdict.button3Video.id}">
+                                            <source src="${pdict.button3Video.id}" type="video/${pdict.button3Video.fileType}"/>
+                                        </video>
+                                    <iselse/>
+                                        <div id="player-${pdict.componentID}-button3" class="video-player"
+                                            data-video="${pdict.button3Video.type}"
+                                            data-video-id="${pdict.button3Video.id}"
+                                            data-player-attr="${pdict.button3Video.params}">
+                                        </div>
+                                    </isif>
+                                    <a class="video-thumbnail btn ${!empty(pdict.button3Class) ? pdict.button3Class : pdict.button3Style}"
+                                       href="${pdict.button3Action}">
+                                        <isprint value="${pdict.button3Text}" />
+                                    </a>
+                                </div>
+                            <iselse/>
+                                <a class="btn ${!empty(pdict.button3Class) ? pdict.button3Class : pdict.button3Style}" href="${pdict.button3Action}" ${pdict.button3IsExternalLink ? "rel='noopener noreferrer'" : ""} ${pdict.button3OpenNewTab ? "target='_blank' rel='noopener'" : ""}>
+                                    <isprint value="${pdict.button3Text}" />
+                                </a>
+                            </isif>
+                        </div>
+                    </isif>
+                </div>
+            </isif>
+        </div>
+
+        <iscomment>If entire background is clickable, also supports video modals</iscomment>
+        <isif condition="${!empty(pdict.backgroundLink)}">
+            <isif condition="${!empty(pdict.backgroundLinkVideo)}">
+                <div class="hero-background-link">
+                    <div class="video-container aspect-ratio-16-9">
+                        <isif condition="${pdict.backgroundLinkVideo.type === 'hosted'}">
+                            <video id="player-${pdict.componentID}-background-link" class="video-player video-js"
+                                data-video="${pdict.backgroundLinkVideo.type}"
+                                data-player-attr="${pdict.backgroundLinkVideo.params}"
+                                data-video-id="${pdict.backgroundLinkVideo.id}">
+                                <source src="${pdict.backgroundLinkVideo.id}" type="video/${pdict.backgroundLinkVideo.fileType}"/>
+                            </video>
+                        <iselse/>
+                            <div id="player-${pdict.componentID}-background-link" class="video-player"
+                                data-video="${pdict.backgroundLinkVideo.type}"
+                                data-video-id="${pdict.backgroundLinkVideo.id}"
+                                data-player-attr="${pdict.backgroundLinkVideo.params}">
+                            </div>
+                        </isif>
+                        <a class="video-thumbnail" href="${pdict.backgroundLink}"></a>
+                    </div>
+                </div>
+            <iselse/>
+                <a class="hero-background-link" href="${pdict.backgroundLink}" aria-label="${!empty(pdict.backgroundImageAlt) ? pdict.backgroundImageAlt : (!empty(pdict.backgroundImage.alt) ? pdict.backgroundImage.alt : 'Banner Link')}" ${pdict.backgroundLinkIsExternalLink ? "rel='noopener noreferrer'" : ""} ${pdict.backgroundLinkOpenNewTab ? "target='_blank' rel='noopener'" : ""}></a>
+            </isif>
+        </isif>
+
+    </div>
+</div>

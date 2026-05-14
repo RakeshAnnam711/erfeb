@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <standard-preferences>
+        <all-instances>
+            <preference preference-id="CustomCartridges">
+                bm_autobahn_core:
+                bm_pagedesigner_custom:
+                rvw_yotpo_integration:
+                bm_yotpo:
+                int_yotpo_sfra:
+                rvw_feedonomics_integration:
+                int_feedonomics:
+                bc_job_components:
+                bm_app_storefront_base:
+                app_storefront_base
+            </preference>
+            <preference preference-id="InstanceTimezone">INSTANCETIMEZONEREPLACEME</preference>
+        </all-instances>
+        <development/>
+        <staging/>
+        <production/>
+    </standard-preferences>
+    <custom-preferences>
+        <all-instances/>
+        <development/>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+

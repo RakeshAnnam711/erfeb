@@ -1,0 +1,42 @@
+<isset name="shippingAddress" value="${pdict.forms.shippingForm.shippingAddress}" scope="page"/>
+<div class="row leading-lines shipping-method-list" data-select-shipping-method-url="${URLUtils.https('CheckoutShippingServices-SelectShippingMethod')}" data-action-url="${URLUtils.https('CheckoutShippingServices-UpdateShippingMethodsList')}">
+    <input name="shipmentUUID" type="hidden" value="${shippingModel.UUID}" />
+    <isloop items="${shippingModel.applicableShippingMethods}" var="shippingMethod">
+        <div class="col-9 start-lines">
+            <div class="custom-control custom-radio">
+                <isinclude template="checkout/shipping/selectedShippingMethod"/>
+                <label class="custom-control-label shipping-method-option" for="shippingMethod-${shippingMethod.ID}-${shippingModel.UUID}${lineItem ? '-' + lineItem.UUID : ''}">
+                    <span class="display-name">${shippingMethod.displayName}</span>
+                    <isif condition="${shippingMethod.estimatedArrivalTime}">
+                        <span class="text-muted arrival-time">(${shippingMethod.estimatedArrivalTime})</span>
+                    </isif>
+                </label>
+                <isif condition="${'description' in shippingMethod && !empty(shippingMethod.description)}">
+                    <button data-toggle="tooltip" aria-label="tooltip" title="${shippingMethod.description}" class="tooltip-icon"></button>
+                </isif>
+            </div>
+        </div>
+        <div class="col-3 text-right shipping-method-pricing end-lines">
+            <span class="shipping-cost">${shippingMethod.shippingCost}</span>
+        </div>
+    </isloop>
+</div>
+
+<iscomment>Template used by client to redraw shipping methods</iscomment>
+<div id="shipping-method-template" style="display:none;" >
+    <div class="col-9 start-lines">
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="shippingMethodRadioButton-${shippingModel.UUID}${lineItem ? '-' + lineItem.UUID : ''}">
+            <label class="custom-control-label shipping-method-option" for="shippingMethodRadioButton-${shippingModel.UUID}${lineItem ? '-' + lineItem.UUID : ''}">
+                <span class="display-name"></span>
+                <span class="text-muted arrival-time" style="display:none"></span>
+            </label>
+            <span class="tooltip-icon" data-toggle="tooltip" style="display:none"></span>
+        </div>
+    </div>
+    <div class="col-3 text-right shipping-method-pricing end-lines">
+        <span class="shipping-cost"></span>
+    </div>
+</div>
+
+<isinclude template="integrations/checkout/shipping/shippingMethod/bottom"/>

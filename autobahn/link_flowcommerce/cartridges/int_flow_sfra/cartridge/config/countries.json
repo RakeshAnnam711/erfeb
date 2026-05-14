@@ -1,0 +1,354 @@
+[
+  {
+    "id": "en_US",
+    "currencyCode": "USD"
+  },
+  {
+    "id": "en_DZ",
+    "currencyCode": "DZD"
+  },
+  {
+    "id": "en_AD",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_AI",
+    "currencyCode": "XCD"
+  },
+  {
+    "id": "en_AG",
+    "currencyCode": "XCD"
+  },
+  {
+    "id": "en_AR",
+    "currencyCode": "ARS"
+  },
+  {
+    "id": "en_AM",
+    "currencyCode": "AMD"
+  },
+  {
+    "id": "en_AW",
+    "currencyCode": "AWG"
+  },
+  {
+    "id": "en_AU",
+    "currencyCode": "AUD"
+  },
+  {
+    "id": "en_AT",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_BS",
+    "currencyCode": "BSD"
+  },
+  {
+    "id": "en_BH",
+    "currencyCode": "BHD"
+  },
+  {
+    "id": "en_BB",
+    "currencyCode": "BBD"
+  },
+  {
+    "id": "en_BE",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_BZ",
+    "currencyCode": "BZD"
+  },
+  {
+    "id": "en_BM",
+    "currencyCode": "BMD"
+  },
+  {
+    "id": "en_BO",
+    "currencyCode": "BOB"
+  },
+  {
+    "id": "en_BA",
+    "currencyCode": "BAM"
+  },
+  {
+    "id": "en_VG",
+    "currencyCode": "USD"
+  },
+  {
+    "id": "en_BG",
+    "currencyCode": "BGN"
+  },
+  {
+    "id": "en_CV",
+    "currencyCode": "CVE"
+  },
+  {
+    "id": "en_CA",
+    "currencyCode": "CAD"
+  },
+  {
+    "id": "en_KY",
+    "currencyCode": "KYD"
+  },
+  {
+    "id": "en_CL",
+    "currencyCode": "CLP"
+  },
+  {
+    "id": "en_CN",
+    "currencyCode": "CNY"
+  },
+  {
+    "id": "en_CO",
+    "currencyCode": "COP"
+  },
+  {
+    "id": "en_CK",
+    "currencyCode": "NZD"
+  },
+  {
+    "id": "en_CR",
+    "currencyCode": "CRC"
+  },
+  {
+    "id": "en_HR",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_CW",
+    "currencyCode": "ANG"
+  },
+  {
+    "id": "en_CY",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_DK",
+    "currencyCode": "DKK"
+  },
+  {
+    "id": "en_DO",
+    "currencyCode": "DOP"
+  },
+  {
+    "id": "en_EC",
+    "currencyCode": "USD"
+  },
+  {
+    "id": "en_EG",
+    "currencyCode": "EGP"
+  },
+  {
+    "id": "en_SV",
+    "currencyCode": "USD"
+  },
+  {
+    "id": "en_FJ",
+    "currencyCode": "FJD"
+  },
+  {
+    "id": "en_FI",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_FR",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_PF",
+    "currencyCode": "XPF"
+  },
+  {
+    "id": "en_GE",
+    "currencyCode": "GEL"
+  },
+  {
+    "id": "en_DE",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_GI",
+    "currencyCode": "GIP"
+  },
+  {
+    "id": "en_GD",
+    "currencyCode": "XCD"
+  },
+  {
+    "id": "en_HN",
+    "currencyCode": "HNL"
+  },
+  {
+    "id": "en_HK",
+    "currencyCode": "HKD"
+  },
+  {
+    "id": "en_HU",
+    "currencyCode": "HUF"
+  },
+  {
+    "id": "en_IS",
+    "currencyCode": "ISK"
+  },
+  {
+    "id": "en_IE",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_IL",
+    "currencyCode": "ILS"
+  },
+  {
+    "id": "en_IT",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_JM",
+    "currencyCode": "JMD"
+  },
+  {
+    "id": "en_JP",
+    "currencyCode": "JPY"
+  },
+  {
+    "id": "en_JO",
+    "currencyCode": "JOD"
+  },
+  {
+    "id": "en_KW",
+    "currencyCode": "KWD"
+  },
+  {
+    "id": "en_LI",
+    "currencyCode": "CHF"
+  },
+  {
+    "id": "en_LU",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_MV",
+    "currencyCode": "MVR"
+  },
+  {
+    "id": "en_MQ",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_MX",
+    "currencyCode": "MXN"
+  },
+  {
+    "id": "en_MC",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_ME",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_MA",
+    "currencyCode": "MAD"
+  },
+  {
+    "id": "en_NL",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_NZ",
+    "currencyCode": "NZD"
+  },
+  {
+    "id": "en_NO",
+    "currencyCode": "NOK"
+  },
+  {
+    "id": "en_PK",
+    "currencyCode": "PKR"
+  },
+  {
+    "id": "en_PL",
+    "currencyCode": "PLN"
+  },
+  {
+    "id": "en_PT",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_QA",
+    "currencyCode": "QAR"
+  },
+  {
+    "id": "en_KR",
+    "currencyCode": "KRW"
+  },
+  {
+    "id": "en_SA",
+    "currencyCode": "SAR"
+  },
+  {
+    "id": "en_SC",
+    "currencyCode": "SCR"
+  },
+  {
+    "id": "en_SG",
+    "currencyCode": "SGD"
+  },
+  {
+    "id": "en_SI",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_ES",
+    "currencyCode": "EUR"
+  },
+  {
+    "id": "en_LK",
+    "currencyCode": "LKR"
+  },
+  {
+    "id": "en_SE",
+    "currencyCode": "SEK"
+  },
+  {
+    "id": "en_CH",
+    "currencyCode": "CHF"
+  },
+  {
+    "id": "en_TW",
+    "currencyCode": "TWD"
+  },
+  {
+    "id": "en_TH",
+    "currencyCode": "THB"
+  },
+  {
+    "id": "en_TT",
+    "currencyCode": "TTD"
+  },
+  {
+    "id": "en_TR",
+    "currencyCode": "TRY"
+  },
+  {
+    "id": "en_TC",
+    "currencyCode": "USD"
+  },
+  {
+    "id": "en_AE",
+    "currencyCode": "AED"
+  },
+  {
+    "id": "en_GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "id": "en_VE",
+    "currencyCode": "VEF"
+  },
+  {
+    "id": "en_VN",
+    "currencyCode": "VND"
+  }
+]

@@ -1,0 +1,34 @@
+<isif condition="${pdict.order.shipping.length > 1 && (shippingModel.shippingAddress || (shippingModel.productLineItems && shippingModel.productLineItems.items && shippingModel.productLineItems.items[0] && shippingModel.productLineItems.items[0].fromStoreId))}">
+    <isif condition="${shippingModel.selectedShippingMethod.storePickupEnabled === true}">
+        <h5 class="shipping-card-title">${Resource.msg('label.instore.pickup.from', 'instorePickup', null)}</h5>
+    <iselse>
+        <h5 class="shipping-card-title">${Resource.msg('heading.shipping.to', 'checkout', null)}</h5>
+    </isif>
+    <isinclude template="checkout/shipping/shippingCardShippingAddress" />
+</isif>
+<isif condition="${shippingModel.selectedShippingMethod}">
+    <h5 class="shipping-card-title">${pdict.order.resources.shippingMethod}
+        <span>
+            <isif condition="${shippingModel.productLineItems.physicalItemsCount > 1}">
+                - ${shippingModel.productLineItems.physicalItemsCount.toFixed(0)} ${pdict.order.resources.items}
+            </isif>
+        </span>
+    </h5>
+    <isloop items="${shippingModel.shippingLineItems}" var="shippingLineItem" status="sloopstatus">
+        <div class="leading-lines m-0 d-flex justify-content-between shipping-items">
+                <p class="order-receipt-label"><span>
+                        <isif condition="${sloopstatus.index === 0}">
+                            <span class="display-name">${shippingModel.selectedShippingMethod.displayName}</span>
+                            <isif condition="${shippingModel.selectedShippingMethod.estimatedArrivalTime}">
+                                <span class="text-muted arrival-time">(${shippingModel.selectedShippingMethod.estimatedArrivalTime})</span>
+                            </isif>
+                        <iselse>
+                            ${shippingLineItem.lineItemText}
+                        </isif>
+                </span></p>
+                <span class="shipping-lineitem-cost">${shippingLineItem.adjustedPrice.formatted}</span>
+        </div>
+    </isloop>
+</isif>
+
+<isinclude template="checkout/shipping/giftMessageSummary" />

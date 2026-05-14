@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="OrderExportForSOM">
+        <description>Export Orders with Order Number + Customer Number for SOM Order History</description>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="template_32">
+                <all-storefront-sites/>
+            </contexts>
+            <flow-template template-id="template_32">
+                <step step-id="orderexport" type="custom.SOM.OrderExport" enforce-restart="false">
+                    <description/>
+                    <parameters/>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2024-07-01Z</date>
+                <time>14:55:00.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+</jobs>

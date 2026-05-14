@@ -1,0 +1,52 @@
+<isif condition="${!pdict.hideShipping}">
+    <div class="row leading-lines shipping-cost-group">
+        <div class="col-8 start-lines">
+            <p><span>${Resource.msg('label.shipping.cost','cart',null)}</span></p>
+        </div>
+        <div class="col-4 end-lines">
+            <p class="text-right shipping-cost"><span>${pdict.totals.totalShippingCost}</span></p>
+        </div>
+    </div>
+</isif>
+
+<!--- Shipping Discount --->
+<div class="row leading-lines shipping-discount <isif condition="${pdict.totals.shippingLevelDiscountTotal.value === 0}">hide-shipping-discount</isif>">
+    <div class="col-8 start-lines">
+        <p><span>${Resource.msg('label.shipping.discount', 'common', null)}</span></p>
+    </div>
+    <div class="col-4 end-lines">
+        <p class="text-right shipping-discount-total"><span>- ${pdict.totals.shippingLevelDiscountTotal.formatted}</span></p>
+    </div>
+</div>
+
+<!-- Sales Tax -->
+<div class="row leading-lines sales-tax-group">
+    <div class="col-8 start-lines">
+        <p><span>${Resource.msg('label.sales.tax','cart',null)}</span></p>
+    </div>
+    <div class="col-4 end-lines">
+        <p class="text-right tax-total"><span>${pdict.totals.totalTax}</span></p>
+    </div>
+</div>
+
+<!--- Order Discount --->
+<div class="row leading-lines order-discount <isif condition="${pdict.totals.orderLevelDiscountTotal.value === 0}">hide-order-discount</isif>">
+    <div class="col-7 start-lines">
+        <p><span>${Resource.msg('label.order.discount', 'common', null)}</span></p>
+    </div>
+    <div class="col-5 end-lines">
+        <p class="text-right order-discount-total"><span> - ${pdict.totals.orderLevelDiscountTotal.formatted}</span></p>
+    </div>
+</div>
+
+<!--- Gift Certificates --->
+<isinclude template="cart/cartTotalGiftCertificateSummary" />
+
+<div class="row leading-lines estimated-total">
+    <div class="col-8 start-lines">
+        <p><span>${Resource.msg('label.estimatedtotal','cart',null)}</span></p>
+    </div>
+    <div class="col-4 end-lines">
+        <p class="text-right grand-total"><span>${pdict.totals.grandTotalLessGiftCertificatePaymentInstrumentsFormatted}</span></p>
+    </div>
+</div>

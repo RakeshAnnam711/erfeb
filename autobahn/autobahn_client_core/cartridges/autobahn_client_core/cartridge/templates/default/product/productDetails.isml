@@ -1,0 +1,32 @@
+<isdecorate template="common/layout/page">
+    <isinclude template="product/components/productDetailsContent" />
+    <isinclude template="product/components/productDetailsReviews" />
+    <isinclude template="product/components/productDetailsRecommendations" />
+
+    <script async src="https://cdn.tangiblee.com/integration/3.1/managed/www.whatgoesaroundnyc.com/revision_1/variation_original/tangiblee-bundle.min.js"></script>
+    <script>
+    window.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function(){
+            var cta = document.getElementsByClassName('tangiblee-cta')[0];
+            if (cta) {
+                    cta.ariaLabel = 'TRY ME ON'
+            }
+        }, 1000);
+    });
+    </script>
+    <script>
+        if (window.location.search.indexOf('&lang=en_US') > -1) {
+            var hrefURL = window.location.href;
+            hrefURL = hrefURL.replace('&lang=en_US', '');
+            window.location.href = hrefURL;
+        } else if (window.location.search.indexOf('?lang=en_US&') > -1) {
+            var hrefURL = window.location.href;
+            hrefURL = hrefURL.replace('lang=en_US&', '');
+            window.location.href = hrefURL;
+        } else if (window.location.search.indexOf('?lang=en_US') > -1) {
+            var hrefURL = window.location.href;
+            hrefURL = hrefURL.replace('?lang=en_US', '');
+            window.location.href = hrefURL;
+        }
+    </script>
+</isdecorate>

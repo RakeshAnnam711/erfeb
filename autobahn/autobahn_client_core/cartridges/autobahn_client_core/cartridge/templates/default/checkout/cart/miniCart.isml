@@ -1,0 +1,61 @@
+<isset name="miniCart" value="${true}" scope="page" />
+<isset name="cartSummary" value="${pdict.cartSummary}" scope="page" />
+<div class="container cart">
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+    <iscomment> cart error section </iscomment>
+    <div class="minicart-error cart-error">
+        <isif condition="${pdict.valid.error && pdict.items.length !== 0}">
+            <div class="alert alert-danger alert-dismissible valid-cart-error fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                ${pdict.valid.message}
+            </div>
+        </isif>
+    </div>
+    <iscomment> product summary section </iscomment>
+    <div class="product-summary">
+        <isloop items="${pdict.items}" var="lineItem" status="productLoop">
+            <isif condition="${lineItem.bonusProductLineItemUUID === 'bonus'}">
+                <div class="minicart-item bonus-product-line-item uuid-${lineItem.UUID}">
+                    <isinclude template="checkout/productCard/bonusProductCard" />
+                </div>
+            <iselse/>
+                <div class="minicart-item uuid-${lineItem.UUID}">
+                    <isif condition="${lineItem.noProduct === true}">
+                        <isif condition="${lineItem.productType === 'giftCertificate'}">
+                            <isinclude template="checkout/productCard/productCard" />
+                        <iselse/>
+                            <isinclude template="checkout/productCard/uncategorizedProductCard" />
+                        </isif>
+                    <iselse/>
+                        <isinclude template="checkout/productCard/productCard" />
+                    </isif>
+                </div>
+            </isif>
+        </isloop>
+    </div>
+
+    <iscomment> minicart footer section </iscomment>
+    <div class="minicart-footer container">
+        <div class="row estimated-total leading-lines no-gutters">
+            <div class="col-7 start-lines">
+                <p class="sub-total-label"><span>${Resource.msg('label.estimatedtotal','cart',null)}</span></p>
+            </div>
+            <div class="col-5 end-lines">
+                <iscomment> <p class="text-right sub-total"><span>${pdict.totals.subTotal}</span></p> </iscomment>
+                <p class="text-right estimated-total-value"><span>${pdict.cartSummary.cart.estimatedTotal.formatted || pdict.totals.subTotal}</span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <isinclude template="cart/goToCartButton" />
+            </div>
+            <div class="col-12 checkout-continue">
+                <isinclude template="cart/checkoutButtons" />
+            </div>
+        </div>
+    </div>
+</div>

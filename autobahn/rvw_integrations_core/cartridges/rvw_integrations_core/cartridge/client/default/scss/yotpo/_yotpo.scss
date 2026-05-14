@@ -1,0 +1,664 @@
+$yotpo-logo-horizontal-alignment: right;
+$yotpo-spacer: $spacer-sm;
+$yotpo-border-color: $border-color;
+
+$yotpo-link-color: $link-color;
+$yotpo-link-color-hover: $link-color-hover;
+$yotpo-link-color-decoration: $link-text-decoration;
+$yotpo-link-color-decoration-hover: $link-text-decoration-hover;
+
+$yotpo-rating-stars-icon-font: $product-rating-star-icon-font;
+$yotpo-rating-stars-color: $product-rating-star-color;
+$yotpo-rating-stars-size: $pdp-rating-star-size;
+$yotpo-rating-stars-size-large: $pdp-rating-star-size-large;
+$yotpo-rating-stars-size-large-md: $pdp-rating-star-size-large-md;
+$yotpo-rating-star-icon: $icon-star;
+$yotpo-rating-star-icon-half: $icon-star-half;
+$yotpo-rating-star-icon-empty: $icon-star-empty;
+
+$yotpo-rating-stars-main-widget-horizontal-alignment: center;
+
+$yotpo-pdp-reviews-link-display: $pdp-reviews-link-display;
+$yotpo-pdp-reviews-link-font-size: $pdp-reviews-link-font-size;
+$yotpo-pdp-reviews-link-color: $pdp-reviews-link-color;
+$yotpo-pdp-reviews-link-color-hover: $pdp-reviews-link-color-hover;
+$yotpo-product-tile-rating-star-size: $product-tile-rating-star-size;
+$yotpo-product-tile-reviews-link-display: $product-tile-reviews-link-display;
+$yotpo-product-tile-reviews-link-font-size: $product-tile-reviews-link-font-size;
+$yotpo-product-tile-reviews-link-color: $product-tile-reviews-link-color;
+$yotpo-product-tile-reviews-link-color-hover: $product-tile-reviews-link-color-hover;
+
+$yotpo-tabs-background-color: $page-background-color;
+$yotpo-user-avatar-background-color: $brand-secondary;
+$yotpo-user-name-color: $brand-primary;
+$yotpo-thankyou-header-color: $brand-primary;
+$yotpo-selected-item-color: $brand-primary;
+$yotpo-user-verified-color: $success;
+$yotpo-owner-verified-color: $info;
+
+$yotpo-form-validation-color: $form-validation-color;
+$yotpo-form-validation-font-size: $form-validation-font-size;
+
+/*
+ * Based off of Yotpo CSS Widget Version: 2020-04-26_10-52-32
+ */
+
+.yotpo {
+    .main-widget {
+        a {
+            @include text-link;
+            color: $yotpo-link-color !important;
+
+            &:hover {
+                color: $yotpo-link-color-hover !important;
+                text-decoration: $yotpo-link-color-decoration-hover !important;
+            }
+        }
+
+        div, span, p, a, img, i, strong, sup, ul, li, form, label {
+            @include paragraph-font-size;
+            font-family: map-get($fonts, 'primary');
+            line-height: $base-line-height;
+            color: $base-font-color;
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .yotpo-drop-down-layout {
+            .yotpo-dropdown-button {
+                .selected {
+                    display: inline;
+                }
+                .yotpo-icon {
+                    padding-top: 0;
+                }
+            }
+            .yotpo-dropdown .selected-item {
+                color: $yotpo-selected-item-color !important;
+            }
+        }
+    }
+
+    .yotpo-display-wrapper {
+
+    }
+
+    // Common styles between the small and main widgets that display the ratings stars.
+    .yotpo-icon {
+        font-family: $yotpo-rating-stars-icon-font !important;
+
+        &:before {
+            font-family: $yotpo-rating-stars-icon-font !important;
+        }
+    }
+
+    .rating-star, .review-star {
+        height: auto;
+        line-height: normal;
+        vertical-align: middle;
+        font-size: $yotpo-rating-stars-size !important;
+        &:before {
+            font-family: $yotpo-rating-stars-icon-font !important;
+        }
+        .product-tile & {
+            font-size: $yotpo-product-tile-rating-star-size !important;
+        }
+    }
+
+    .review-star {
+        cursor: pointer;
+    }
+
+    .yotpo-icon-star {
+        @include icon($yotpo-rating-star-icon, before, inherit, $yotpo-rating-stars-color);
+    }
+
+    .yotpo-icon-half-star {
+        @include icon($yotpo-rating-star-icon-half, before, inherit, $yotpo-rating-stars-color);
+    }
+
+    .yotpo-icon-empty-star {
+        @include icon($yotpo-rating-star-icon-empty, before, inherit, $yotpo-rating-stars-color);
+    }
+
+    &.yotpo-main-widget .main-widget .yotpo-default-button,
+    input.yotpo-default-button.primary-color-btn {
+        @include button(primary);
+        background-color: $button-primary-background !important;
+        border: $button-border-width solid $button-primary-border-color !important;
+        height: auto;
+        &:hover {
+            background-color: $button-primary-background-hover !important;
+            background: $button-primary-background-hover !important;
+            border: $button-border-width solid $button-primary-border-color-hover !important;
+        }
+        .yotpo-icon::before, .write-question-review-button-text {
+            color: $button-primary-color !important;
+        }
+        .write-question-review-button-text {
+            width: auto;
+            height: auto;
+            font-family: inherit;
+            font-size: inherit;
+            font-style: inherit !important;
+            font-weight: inherit;
+            font-stretch: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            text-align: inherit;
+        }
+    }
+
+    .yotpo-icon-btn-small {
+        > span:before {
+            color: $yotpo-link-color;
+        }
+
+        &:hover {
+            > span:before {
+                color: $yotpo-link-color-hover;
+            }
+        }
+    }
+
+    // Styles unique to the small widget that displays the ratings stars.
+    &.yotpo-small {
+        .yotpo-bottomline {
+            .yotpo-stars {
+                display: flex;
+                align-items: center;
+                .rating-star {
+
+                }
+            }
+            .write-review-btn-hidden {
+                display: none;
+            }
+            .text-m {
+                display: $yotpo-pdp-reviews-link-display;
+                font-size: $yotpo-pdp-reviews-link-font-size;
+                margin-left: $yotpo-spacer;
+                color: $yotpo-pdp-reviews-link-color !important;
+                &:hover {
+                    color: $yotpo-pdp-reviews-link-color-hover !important;
+                }
+            }
+            .product-tile & {
+                .text-m {
+                    display: $yotpo-product-tile-reviews-link-display;
+                    font-size: $yotpo-product-tile-reviews-link-font-size;
+                    color: $yotpo-product-tile-reviews-link-color !important;
+                    &:hover {
+                        color: $product-tile-reviews-link-color-hover !important;
+                    }
+                }
+            }
+        }
+    }
+
+    // Styles unique to the main widget that displays the ratings stars and reviews.
+    &.yotpo-main-widget {
+        // Styles for the "Powered by Yotpo" component.
+        .yotpo-label-container {
+            text-align: $yotpo-logo-horizontal-alignment;
+            border-top: 1px solid $yotpo-border-color;
+            .yotpo-logo-link-new {
+                display: inline-block;
+            }
+            .yotpo-logo-title,
+            .yotpo-logo-btn {
+                vertical-align: middle;
+                color: $yotpo-link-color;
+            }
+            .yotpo-logo-title {
+                @include paragraph-font-size;
+                &:hover {
+                    color: $yotpo-link-color-hover;
+                }
+            }
+            .yotpo-logo-btn {
+                font-size: 24px;
+            }
+        }
+
+        // Styles for the ratings stars within the main widget.
+        .yotpo-bottomline {
+            text-align: $yotpo-rating-stars-main-widget-horizontal-alignment;
+
+            .bottom-line-items {
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 0;
+            }
+
+            .avg-score {
+                @include header(2);
+                width: 100%;
+                display: block;
+                padding-top: 0;
+                float: none;
+                height: auto;
+                color: $base-font-color;
+            }
+
+            .rating-stars-container {
+                float: none;
+                height: auto;
+                width: auto;
+                line-height: normal;
+                vertical-align: top;
+                margin-left: 0;
+                padding-left: $yotpo-spacer;
+                white-space: nowrap;
+
+                @include media-breakpoint-up(md) {
+                    padding-right: $yotpo-spacer;
+                }
+
+                .rating-star {
+                    height: auto;
+                    float: none;
+                    &::before {
+                        font-size: $yotpo-rating-stars-size-large;
+                        @include media-breakpoint-up(md) {
+                            font-size: $yotpo-rating-stars-size-large-md;
+                        }
+                    }
+                }
+            }
+
+            .reviews-qa-labels-container {
+                float: none;
+                display: inline-block;
+                padding-top: 0;
+                margin-left: 0;
+                position: static;
+                height: 28px;
+                line-height: 28px;
+                vertical-align: middle;
+                .reviews-qa-label  {
+                    vertical-align: middle;
+                }
+            }
+
+            .write-question-review-buttons-container {
+
+            }
+
+            // The following media query pulls/overrides the yotpo 961px breakpoint styles
+            // so that layout change lines up with the Autobahn 'md' breakpoint.
+            @include media-breakpoint-up(md) {
+                .bottom-line-items {
+                    text-align: center;
+                    margin-bottom: 10px;
+
+                    .reviews-qa-labels-container {
+
+
+                    }
+                }
+            }
+        }
+
+        // Styles for the forms to post reviews and questions.
+        .main-widget form {
+            // Styles common to the question and review forms.
+            .write-form {
+                .yotpo-regular-box {
+                    border-top: 0;
+                }
+
+                .yotpo-header-title {
+                    margin: 0;
+                    @include header(5);
+                }
+
+                .yotpo-mandatory-explain {
+                    display: none;
+                    font-size: $yotpo-form-validation-font-size;
+                    color: $yotpo-form-validation-color;
+                }
+
+                .yotpo-mandatory-mark {
+                    display: none;
+                }
+
+                br {
+                    display: none;
+                }
+
+                label.y-label, span.y-label {
+                    padding: 0;
+                    @include form-label;
+
+                    .form-input-error {
+                        color: $yotpo-form-validation-color;
+                        font-size: $yotpo-form-validation-font-size;
+                    }
+                }
+
+                .y-input {
+                    margin-top: 0;
+                    margin-bottom: $yotpo-spacer;
+                    display: block;
+                    @include form-input;
+
+                    &.error {
+                        border-color: $yotpo-form-validation-color;
+                    }
+                }
+
+                .connect-wrapper {
+                    padding-left: 0;
+                }
+
+                .submit-button {
+                    .form-input-error {
+                        color: $yotpo-form-validation-color;
+                        font-size: $yotpo-form-validation-font-size;
+                    }
+                }
+            }
+
+            // Styles unique to the review form.
+            .write-review-wrapper {
+
+            }
+
+            // Styles unique to the question form.
+            .write-question-wrapper {
+
+            }
+
+            .socialize-wrapper {
+                position: static;
+                .socialize {
+                    display: block;
+                    float: none;
+                    .yotpo-icon-btn {
+                        padding: 6px 11px !important;
+                        &[data-network="linkedin"] {
+                            display: none; // hiding linkedin button, since this throws a yotpo error
+                        }
+                    }
+                }
+            }
+            .yotpo-or {
+                display: block;
+                margin-top: 0;
+                width: auto;
+                margin-bottom: $yotpo-spacer;
+                text-align: left;
+            }
+        }
+
+        // Styles for flash messages.
+        .yotpo-messages {
+            .yotpo-thank-you .yotpo-thankyou-header span {
+                color: $yotpo-thankyou-header-color;
+            }
+        }
+
+        // Styles for the tabs that toggle between reviews and questions content.
+        .new-yotpo-small-box {
+            border: none;
+
+            .yotpo-nav {
+                border-bottom: none;
+
+                ul {
+                    @include tab-container('.yotpo-nav-tab', '.yotpo-active', true);
+                    width: 100% !important;
+
+                    @include media-breakpoint-up(md) {
+                        @include tab-container('.yotpo-nav-tab', '.yotpo-active', false);
+                    }
+
+                    .yotpo-nav-tab {
+                        &.yotpo-active {
+                            background-color: $yotpo-tabs-background-color !important;
+                        }
+
+                        .yotpo-nav-wrapper {
+                            border: none;
+                            padding: 0;
+                            color: unset;
+                            max-width: none;
+                            text-align: center;
+
+                            span {
+                                color: unset;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Styles for main content container that displays reviews and questions content.
+        .main-widget .yotpo-nav-content {
+            .yotpo-reviews-header {
+
+            }
+
+            .free-text-search {
+                .free-text-search-input {
+                    @include form-input;
+                    padding-left: 35px;
+                    margin: 0;
+                }
+                .clear-text-icon,
+                .magnifying-glass-icon {
+                    @include vertical-center;
+                    color: $yotpo-link-color !important;
+                }
+            }
+
+            .filters-dropdown {
+                &[data-analytic-label="images"] {
+                    display: none; // hiding this, since the free plan doesn't allow images or videos
+                }
+            }
+
+
+            // Common styles for review and question content.
+            .yotpo-regular-box {
+                .yotpo-header {
+                    .yotpo-icon-profile {
+                        background: $yotpo-user-avatar-background-color;
+
+                        .yotpo-user-letter {
+                            @include vertical-center;
+                        }
+                    }
+
+                    .yotpo-user-name {
+                        color: $yotpo-user-name-color;
+                    }
+
+                    .yotpo-review-stars {
+
+                    }
+
+                    &.yotpo-verified-user {
+                        .yotpo-icon-circle-checkmark {
+                            color: $yotpo-user-verified-color;
+                        }
+                    }
+
+                    &.yotpo-store-owner {
+                        .yotpo-icon-circle-checkmark {
+                            color: $yotpo-owner-verified-color;
+                        }
+                    }
+                }
+
+                .yotpo-main {
+                    .content-review, .content-title {
+
+                    }
+                    .yotpo-review-wrapper {
+                        .yotpo-read-more {
+                            color: $yotpo-link-color;
+                            &:hover {
+                                color: $yotpo-link-color-hover;
+                            }
+                        }
+                    }
+                }
+
+                .yotpo-footer {
+                    .yotpo-action {
+                        > span {
+                            color: $yotpo-link-color;
+                        }
+
+                        &:hover {
+                            > span {
+                                color: $yotpo-link-color-hover;
+                            }
+                        }
+                    }
+
+                    .yotpo-icon-seperator {
+                        &:before {
+                            color: transparent;
+                        }
+                    }
+                }
+
+                .yotpo-comments-box {
+                    border-left: none;
+                }
+            }
+
+            // Styles for review content.
+            .yotpo-reviews {
+                .yotpo-review {
+
+                }
+            }
+
+            // Styles for question content.
+            .yotpo-questions {
+                padding-top: 20px;
+                .yotpo-question {
+
+                }
+            }
+        }
+    }
+
+    // The following overrides the base yotpo color classes to map them to the colors in _variables.
+    .color-blue {
+        background: $blue;
+    }
+
+    .color-red {
+        background: $red;
+    }
+
+    .color-yellow {
+        background: $yellow;
+    }
+
+    .color-green {
+        background: $green;
+    }
+
+    .color-gray {
+        background: $gray;
+    }
+
+    .color-gray-light {
+        background: $light-gray;
+    }
+
+    .color-gray-dark {
+        background: $dark-gray;
+    }
+
+    .color-primary {
+        background: $brand-primary;
+    }
+
+    .color-primary-d1 {
+        //background: darken($brand-primary, 40%);
+        background: $brand-primary;
+    }
+
+    .color-primary-d2 {
+        //background: darken($brand-primary, 80%);
+        background: $brand-primary;
+    }
+
+    .color-primary-l1 {
+        //background: lighten($brand-primary, 20%);
+        background: $brand-primary;
+    }
+
+    .color-primary-l2 {
+        //background: lighten($brand-primary, 40%);
+        background: $brand-primary;
+    }
+
+    .color-primary-l3 {
+        //background: lighten($brand-primary, 60%);
+        background: $brand-primary;
+    }
+
+    .color-primary-l4 {
+        //background: lighten($brand-primary, 80%);
+        background: $brand-primary;
+    }
+
+    .font-color-blue {
+        color: $blue;
+    }
+
+    .font-color-yellow {
+        color: $yellow;
+    }
+
+    .font-color-green {
+        color: $green;
+    }
+
+    .font-color-gray {
+        color: $gray;
+    }
+
+    .font-color-gray-light {
+        color: $light-gray;
+    }
+
+    .font-color-gray-dark {
+        color: $dark-gray;
+    }
+
+    .font-color-primary-d1 {
+        color: $brand-primary;
+    }
+
+    .font-color-primary-d2 {
+        color: $brand-primary;
+    }
+
+    .font-color-primary-l1 {
+        color: $brand-primary;
+    }
+
+    .font-color-primary-l2 {
+        color: $brand-primary;
+    }
+
+    .font-color-primary-l3 {
+        color: $brand-primary;
+    }
+
+    .font-color-primary-l4 {
+        color: $brand-primary;
+    }
+}

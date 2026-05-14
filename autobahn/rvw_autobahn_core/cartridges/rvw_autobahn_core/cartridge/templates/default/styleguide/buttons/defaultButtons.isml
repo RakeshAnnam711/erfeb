@@ -1,0 +1,29 @@
+<div id="defaultButtons" class="sg__header3">Default Buttons</div>
+<p>Button styles can be applied to any element by using either helper classes or mixins. There are three built-in button styles (primary, secondary, and tertiary) which can be modified by editing the button variable values in <span class="pre">scss/_variables.scss</span>.</p>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-primary">Primary Button</button>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button class="btn btn-primary">Primary Button</button></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include button(primary)}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6  pt-3">
+        <a href="" class="btn btn-secondary">Secondary Button</a>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><a href="" class="btn btn-secondary">Secondary Button</a></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include button(secondary)}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn btn-tertiary">Tertiary Button</div>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="btn btn-tertiary">Button Tertiary</div></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include button(tertiary)}</script></code></pre>
+    </div>
+</div>

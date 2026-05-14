@@ -1,0 +1,21 @@
+<iscomment>
+    isinclude's cannot be used before the assets are written out as it breaks the IE conditional tag in the footer
+    This file is included both in the head and the footer, to ensure js is loaded after the html has been parsed
+    It's added twice because IE doesn't respect the defer attribute for scripts
+</iscomment>
+<script src="${URLUtils.staticURL('/js/main.js')}" defer></script>
+
+<isloop items="${ require('*/cartridge/scripts/assets.js').scripts }" var="script">
+    <isif condition="${script.src.indexOf('paypal.com/sdk') !== -1}">
+        <script src="${script.src}" data-partner-attribution-id="${pdict.paypal.partnerAttributionId}" <isif condition="${script.integrity != null}">integrity="${script.integrity}" crossorigin="anonymous"</isif> <isif condition="${!empty(script.sequence)}">${script.sequence}</isif>></script>
+    <iselse/>
+        <script src="${script.src}" <isif condition="${script.integrity != null}">integrity="${script.integrity}" crossorigin="anonymous"</isif> <isif condition="${!empty(script.sequence)}">${script.sequence}</isif>></script>
+    </isif>
+</isloop>
+
+<isinclude template="/common/recaptchaInclude" />
+
+<iscomment>
+    No is includes can add script tags as they will break the IE conditional causing the script to be added twice,
+    in the header and in the footer.
+</iscomment>

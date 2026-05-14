@@ -1,0 +1,17 @@
+<iscomment>
+ A simple decorator template for tile's that are recommendations (adding the isobject element wrapper)
+</iscomment>
+<isset name="apiProduct" value="${pdict.product.apiProduct || dw.catalog.ProductMgr.getProduct(pdict.product.id)}" scope="page"/>
+<isif condition="${!empty(apiProduct)}">
+    <isif condition="${!empty(pdict.product.recommender)}">
+        <isobject object="${apiProduct}" context-object="${pdict.product.recommender}" view="recommendation">
+            <isreplace/>
+        </isobject>
+    <iselse/>
+        <isobject object="${apiProduct}" view="recommendation">
+            <isreplace/>
+        </isobject>
+    </isif>
+<iselse/>
+    <isreplace/>
+</isif>

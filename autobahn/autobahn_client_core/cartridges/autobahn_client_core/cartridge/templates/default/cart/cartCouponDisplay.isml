@@ -1,0 +1,34 @@
+<isset name="hasCallOut" value="${false}" scope="page"/>
+
+<isloop items="${pdict.totals.discounts}" var="discount">
+    <isloop items="${discount.relationship}" var="relatedPromotion">
+        <isif condition="${!empty(relatedPromotion.callOutMsg)}">
+            <isset name="hasCallOut" value="${true}" scope="page"/>
+            <isbreak/>
+        </isif>
+    </isloop>
+    <isif condition="${discount.type === 'coupon'}">
+        <div class="coupon-price-adjustment ${discount.applied ? 'coupon-applied' : 'coupon-not-applied'} coupon-uuid-${discount.UUID}"
+            data-uuid="${discount.UUID}">
+            <div class="coupon-code">${discount.couponCode}
+                <iscomment> <button type="button" class="float-right remove-coupon"
+                        data-code="${discount.couponCode}"
+                        aria-label="${Resource.msgf('text.remove.coupon','cart', null, discount.couponCode)}"
+                        data-toggle="modal"
+                        data-target="#removeCouponModal"
+                        data-uuid="${discount.UUID}">
+                    <span aria-hidden="true">&times;</span>
+                </button> </iscomment>
+            </div>
+            <isif condition="${hasCallOut}">
+                <ul class="coupon-promotion-relationship">
+                    <isloop items="${discount.relationship}" var="relatedPromotion">
+                        <isif condition="${relatedPromotion.callOutMsg}">
+                            <li><isprint value="${relatedPromotion.callOutMsg}" encoding="off"/></li>
+                        </isif>
+                    </isloop>
+                </ul>
+            </isif>
+        </div>
+    </isif>
+</isloop>

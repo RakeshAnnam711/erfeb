@@ -1,0 +1,64 @@
+<div id="paragraphs" class="sg__header3">Paragraphs</div>
+
+<p>Paragraph styles are automatically applied to all <span class="pre">&lt;p&gt;</span> tags. Small paragraph styles are applied to <span class="pre">&lt;small&gt;</span> tags, and large styles are applied to the <span class="pre">.lead</span> class. You can also use helper classes or mixins as shown below.</p>
+<div class="row pb-0">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-6">
+                <div class="sg__header4 bp--mobile-tablet"></div>
+            </div>
+            <div class="col-6">
+                <div class="sg__header4 bp--desktop"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6"></div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-6 p--mobile">
+                <span class="p--small">Small paragraph</span>
+            </div>
+            <div class="col-6 p--desktop">
+                <span class="p--small">Small paragraph</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="p--small">Small paragraph</span></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include paragraph-font-size(small)}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-6 p--mobile">
+                <span class="p">Normal paragraph</span>
+            </div>
+            <div class="col-6 p--desktop">
+                <span class="p">Normal paragraph</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="p">Normal paragraph</span></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include paragraph-font-size}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-6 p--mobile">
+                <span class="p--large">Large paragraph</span>
+            </div>
+            <div class="col-6 p--desktop">
+                <span class="p--large">Large paragraph</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><span class="p--large">Large paragraph</span>></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include paragraph-font-size(large)}</script></code></pre>
+    </div>
+</div>

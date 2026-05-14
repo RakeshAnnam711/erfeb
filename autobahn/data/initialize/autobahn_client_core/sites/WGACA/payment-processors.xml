@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payment-processors xmlns="http://www.demandware.com/xml/impex/paymentprocessor/2007-03-31">
+    <payment-processor processor-id="AFFIRM_PAYMENT">
+        <description>Affirm payment processor.</description>
+        <preferences>
+            <all-instances/>
+            <development>
+                <preference preference-id="AffirmOnline">true</preference>
+                <preference preference-id="AffirmMode">sandbox</preference>
+                <preference preference-id="AffirmPublicKey">KRIYW4XA1PQDXIUY</preference>
+                <preference preference-id="AffirmPrivateKey">dc9eBKhwGP1ov2kVY6H1BYIvUjpC89MV</preference>
+                <preference preference-id="AffirmProductMessage">true</preference>
+                <preference preference-id="AffirmPaymentMaxTotal">17500</preference>
+            </development>
+            <staging>
+                <preference preference-id="AffirmOnline">true</preference>
+                <preference preference-id="AffirmMode">sandbox</preference>
+                <preference preference-id="AffirmPublicKey">KRIYW4XA1PQDXIUY</preference>
+                <preference preference-id="AffirmPrivateKey">dc9eBKhwGP1ov2kVY6H1BYIvUjpC89MV</preference>
+                <preference preference-id="AffirmProductMessage">true</preference>
+                <preference preference-id="AffirmPaymentMaxTotal">17500</preference>
+                <preference preference-id="AffirmAnalytics">true</preference>
+            </staging>
+            <production>
+                <preference preference-id="AffirmOnline">true</preference>
+                <preference preference-id="AffirmMode">production</preference>
+                <preference preference-id="AffirmPublicKey">WQCXDZWF3F6VFTO3</preference>
+                <preference preference-id="AffirmPrivateKey">g8K7Xjp0KDqDXfuNZnuDE9bS2VNHADPd</preference>
+                <preference preference-id="AffirmProductMessage">true</preference>
+                <preference preference-id="AffirmPaymentMaxTotal">17500</preference>
+            </production>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="BASIC_GIFT_CERTIFICATE">
+        <description>Internal gift certificate handling.</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="FLOW">
+        <description>Flow commerce payment processor</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="PAYPAL">
+        <description>PayPal Payment Processor</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="SALESFORCE_PAYMENTS">
+        <description>Salesforce Payments online authorization (test and production systems).</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="Adyen">
+        <description>redirect to Adyen payment page</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="ADYEN_CREDIT">
+        <description>Adyen credit card payment processor</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="Adyen_POS">
+        <description>Adyen pos payment processor</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="Adyen_Component">
+        <description>Adyen Component payment processor</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+</payment-processors>

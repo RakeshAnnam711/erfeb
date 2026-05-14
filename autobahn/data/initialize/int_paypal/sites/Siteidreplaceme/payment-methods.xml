@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payment-settings xmlns="http://www.demandware.com/xml/impex/paymentsettings/2009-09-15">
+    <payment-method method-id="PAYPAL">
+        <name xml:lang="x-default">PayPal</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>PAYPAL_EXPRESS</processor-id>
+    </payment-method>
+
+    <payment-method method-id="PAYPAL_CREDIT">
+        <name xml:lang="x-default">PayPal Credit</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>PAYPAL_CREDIT</processor-id>
+    </payment-method>
+
+    <payment-method method-id="PayPal">
+        <name xml:lang="x-default">PayPal</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>PAYPAL</processor-id>
+    </payment-method>
+
+</payment-settings>

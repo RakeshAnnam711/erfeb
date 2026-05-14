@@ -1,0 +1,30 @@
+.commercepayments.cart-and-ipay {
+    .add-to-cart {
+        width: 100%;
+        display: block;
+    }
+
+    @include media-breakpoint-only(xs) {
+        .add-to-cart {
+            width: 100%;
+            margin: 0;
+        }
+    }
+}
+
+.salesforce-buynow-element {
+    width: 100%;
+}
+
+.salesforce-buynow-element:not(:empty) {
+    margin-top: 1em;
+}
+
+.salesforce-buynow-element-errors {
+    margin-top: 0.75rem;
+    text-align: left;
+}
+
+.salesforce-buynow-element[disabled] {
+    display: none;
+}

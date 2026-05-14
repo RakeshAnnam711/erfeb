@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<url-rules xmlns="http://www.demandware.com/xml/impex/urlrules/2012-12-01">
+    <general-settings>
+        <lower-case-urls>true</lower-case-urls>
+        <blank-substitute>-</blank-substitute>
+        <character-replacements-enabled>true</character-replacements-enabled>
+        <character-replacements-for-page-url-enabled>true</character-replacements-for-page-url-enabled>
+    </general-settings>
+    <locale-settings>
+        <type>path</type>
+        <locale-mappings>
+            <locale-mapping xml:lang="en-ME">en-me</locale-mapping>
+            <locale-mapping xml:lang="en-SI">en-si</locale-mapping>
+            <locale-mapping xml:lang="en-PK">en-pk</locale-mapping>
+            <locale-mapping xml:lang="en-MA">en-ma</locale-mapping>
+            <locale-mapping xml:lang="en-QA">en-qa</locale-mapping>
+            <locale-mapping xml:lang="en-TC">en-tc</locale-mapping>
+            <locale-mapping xml:lang="en-AR">en-ar</locale-mapping>
+            <locale-mapping xml:lang="en-CV">en-cv</locale-mapping>
+            <locale-mapping xml:lang="en-VG">en-vg</locale-mapping>
+            <locale-mapping xml:lang="en-CR">en-cr</locale-mapping>
+            <locale-mapping xml:lang="en-AI">en-ai</locale-mapping>
+            <locale-mapping xml:lang="en-DO">en-do</locale-mapping>
+            <locale-mapping xml:lang="en-MQ">en-mq</locale-mapping>
+            <locale-mapping xml:lang="en-BG">en-bg</locale-mapping>
+            <locale-mapping xml:lang="en-JO">en-jo</locale-mapping>
+            <locale-mapping xml:lang="en-GI">en-gi</locale-mapping>
+            <locale-mapping xml:lang="en-GE">en-ge</locale-mapping>
+            <locale-mapping xml:lang="en-LK">en-lk</locale-mapping>
+            <locale-mapping xml:lang="en-CW">en-cw</locale-mapping>
+            <locale-mapping xml:lang="en-AW">en-aw</locale-mapping>
+            <locale-mapping xml:lang="en-CO">en-co</locale-mapping>
+            <locale-mapping xml:lang="en-KW">en-kw</locale-mapping>
+            <locale-mapping xml:lang="en-HU">en-hu</locale-mapping>
+            <locale-mapping xml:lang="en-MV">en-mv</locale-mapping>
+            <locale-mapping xml:lang="en-BH">en-bh</locale-mapping>
+            <locale-mapping xml:lang="en-SV">en-sv</locale-mapping>
+            <locale-mapping xml:lang="en-TT">en-tt</locale-mapping>
+            <locale-mapping xml:lang="en-BZ">en-bz</locale-mapping>
+            <locale-mapping xml:lang="en-DZ">en-dz</locale-mapping>
+            <locale-mapping xml:lang="en-MC">en-mc</locale-mapping>
+            <locale-mapping xml:lang="en-BR">en-br</locale-mapping>
+            <locale-mapping xml:lang="en-VE">en-ve</locale-mapping>
+            <locale-mapping xml:lang="en-VI">en-vi</locale-mapping>
+            <locale-mapping xml:lang="en-SC">en-sc</locale-mapping>
+            <locale-mapping xml:lang="en-CK">en-ck</locale-mapping>
+            <locale-mapping xml:lang="en-LU">en-lu</locale-mapping>
+            <locale-mapping xml:lang="en-IS">en-is</locale-mapping>
+            <locale-mapping xml:lang="en-BM">en-bm</locale-mapping>
+            <locale-mapping xml:lang="en-AG">en-ag</locale-mapping>
+            <locale-mapping xml:lang="en-EG">en-eg</locale-mapping>
+            <locale-mapping xml:lang="en-JM">en-jm</locale-mapping>
+            <locale-mapping xml:lang="en-LI">en-li</locale-mapping>
+            <locale-mapping xml:lang="en-EC">en-ec</locale-mapping>
+            <locale-mapping xml:lang="en-BA">en-ba</locale-mapping>
+            <locale-mapping xml:lang="en-CY">en-cy</locale-mapping>
+            <locale-mapping xml:lang="en-PF">en-pf</locale-mapping>
+            <locale-mapping xml:lang="en-VN">en-vn</locale-mapping>
+            <locale-mapping xml:lang="en-BS">en-bs</locale-mapping>
+            <locale-mapping xml:lang="en-AM">en-am</locale-mapping>
+            <locale-mapping xml:lang="en-BO">en-bo</locale-mapping>
+            <locale-mapping xml:lang="en-KY">en-ky</locale-mapping>
+            <locale-mapping xml:lang="en-CL">en-cl</locale-mapping>
+            <locale-mapping xml:lang="en-HR">en-hr</locale-mapping>
+            <locale-mapping xml:lang="en-FJ">en-fj</locale-mapping>
+            <locale-mapping xml:lang="en-HN">en-hn</locale-mapping>
+            <locale-mapping xml:lang="en-BB">en-bb</locale-mapping>
+            <locale-mapping xml:lang="en-TR">en-tr</locale-mapping>
+            <locale-mapping xml:lang="en-AD">en-ad</locale-mapping>
+            <locale-mapping xml:lang="en-GD">en-gd</locale-mapping>
+            <locale-mapping xml:lang="en-SG">en-sg</locale-mapping>
+            <locale-mapping xml:lang="en-SA">en-sa</locale-mapping>
+            <locale-mapping xml:lang="en-AT">en-at</locale-mapping>
+            <locale-mapping xml:lang="en-FR">en-fr</locale-mapping>
+            <locale-mapping xml:lang="en-NZ">en-nz</locale-mapping>
+            <locale-mapping xml:lang="en-SE">en-se</locale-mapping>
+            <locale-mapping xml:lang="en-AE">en-ae</locale-mapping>
+            <locale-mapping xml:lang="en-DK">en-dk</locale-mapping>
+            <locale-mapping xml:lang="en-DE">en-de</locale-mapping>
+            <locale-mapping xml:lang="en-NO">en-no</locale-mapping>
+            <locale-mapping xml:lang="en-US">en-us</locale-mapping>
+            <locale-mapping xml:lang="en-BE">en-be</locale-mapping>
+            <locale-mapping xml:lang="en-FI">en-fi</locale-mapping>
+            <locale-mapping xml:lang="en-HK">en-hk</locale-mapping>
+            <locale-mapping xml:lang="en-IE">en-ie</locale-mapping>
+            <locale-mapping xml:lang="en-TW">en-tw</locale-mapping>
+            <locale-mapping xml:lang="en-CA">en-ca</locale-mapping>
+            <locale-mapping xml:lang="en-TH">en-th</locale-mapping>
+            <locale-mapping xml:lang="en-GB">en-gb</locale-mapping>
+            <locale-mapping xml:lang="en-AU">en-au</locale-mapping>
+            <locale-mapping xml:lang="en-ES">en-es</locale-mapping>
+            <locale-mapping xml:lang="en-CN">en-cn</locale-mapping>
+            <locale-mapping xml:lang="en-IT">en-it</locale-mapping>
+            <locale-mapping xml:lang="en-MX">en-mx</locale-mapping>
+            <locale-mapping xml:lang="en-PT">en-pt</locale-mapping>
+            <locale-mapping xml:lang="en-CH">en-ch</locale-mapping>
+            <locale-mapping xml:lang="en-JP">en-jp</locale-mapping>
+            <locale-mapping xml:lang="en-KR">en-kr</locale-mapping>
+            <locale-mapping xml:lang="en-IL">en-il</locale-mapping>
+            <locale-mapping xml:lang="en-PL">en-pl</locale-mapping>
+            <locale-mapping xml:lang="en-NL">en-nl</locale-mapping>
+        </locale-mappings>
+    </locale-settings>
+    <category-rule>[ category-path, [ attribute, ID ], / ]</category-rule>
+    <category-page-url-override>true</category-page-url-override>
+    <category-trailing-slash>false</category-trailing-slash>
+    <category-offline-url-generation>false</category-offline-url-generation>
+    <category-search-refinement-url-enabled>true</category-search-refinement-url-enabled>
+    <category-search-refinements xml:lang="x-default">
+        <url-search-refinements>
+            <search-refinement-name>constant</search-refinement-name>
+            <constant>true</constant>
+        </url-search-refinements>
+    </category-search-refinements>
+    <product-rule>[ [ constant, buy ], - , [ attribute, name ] ]</product-rule>
+    <product-page-url-override>true</product-page-url-override>
+    <product-id-separator>/</product-id-separator>
+    <folder-rule>[ attribute, ID ]</folder-rule>
+    <folder-page-url-override>true</folder-page-url-override>
+    <folder-trailing-slash>false</folder-trailing-slash>
+    <folder-offline-url-generation>true</folder-offline-url-generation>
+    <folder-search-refinement-url-enabled>false</folder-search-refinement-url-enabled>
+    <content-rule/>
+    <content-page-url-override>true</content-page-url-override>
+    <content-id-separator>/</content-id-separator>
+    <pipeline-aliases xml:lang="x-default">
+        <pipeline-alias pipeline="Account-PasswordReset">passwordreset</pipeline-alias>
+        <pipeline-alias pipeline="Default-Offline">offline</pipeline-alias>
+        <pipeline-alias pipeline="Home-Show">home</pipeline-alias>
+        <pipeline-alias pipeline="COSummary-Start">revieworder</pipeline-alias>
+        <pipeline-alias pipeline="Signifyd-Callback">signifydcallback</pipeline-alias>
+        <pipeline-alias pipeline="Search-UpdateGrid">searchupdategrid</pipeline-alias>
+        <pipeline-alias pipeline="TrackOrder-Show">orderstatus</pipeline-alias>
+        <pipeline-alias pipeline="Order-Confirm">orderconfirmation</pipeline-alias>
+        <pipeline-alias pipeline="Error-Start">error</pipeline-alias>
+        <pipeline-alias pipeline="SiteMap-Show">sitemap</pipeline-alias>
+        <pipeline-alias pipeline="Blog-Show">blog</pipeline-alias>
+        <pipeline-alias pipeline="Account-Show">account</pipeline-alias>
+        <pipeline-alias pipeline="Compare-Show">compare</pipeline-alias>
+        <pipeline-alias pipeline="GiftRegistry-Search">giftregistrysearch</pipeline-alias>
+        <pipeline-alias pipeline="Login-Logout">logout</pipeline-alias>
+        <pipeline-alias pipeline="Address-AddAddress">addaddress</pipeline-alias>
+        <pipeline-alias pipeline="Default-Start">start</pipeline-alias>
+        <pipeline-alias pipeline="Account-SetNewPasswordConfirm">confirmednewpassword</pipeline-alias>
+        <pipeline-alias pipeline="Account-StartRegister">register</pipeline-alias>
+        <pipeline-alias pipeline="Search-ShowContent">contentsearch</pipeline-alias>
+        <pipeline-alias pipeline="Cart-Show">cart</pipeline-alias>
+        <pipeline-alias pipeline="Account-EditProfile">profile</pipeline-alias>
+        <pipeline-alias pipeline="Wishlist-ToggleProduct">wishlisttoggle</pipeline-alias>
+        <pipeline-alias pipeline="CustomerService-Show">help</pipeline-alias>
+        <pipeline-alias pipeline="Account-SetNewPassword">setpassword</pipeline-alias>
+        <pipeline-alias pipeline="GiftRegistryCustomer-Show">giftregistryshow</pipeline-alias>
+        <pipeline-alias pipeline="COBilling-Start">billing</pipeline-alias>
+        <pipeline-alias pipeline="Wishlist-ShowOther">showotherwishlist</pipeline-alias>
+        <pipeline-alias pipeline="Account-EditPassword">editpassword</pipeline-alias>
+        <pipeline-alias pipeline="Checkout-Begin">checkout</pipeline-alias>
+        <pipeline-alias pipeline="Address-List">addressbook</pipeline-alias>
+        <pipeline-alias pipeline="COSummary-Submit">summary</pipeline-alias>
+        <pipeline-alias pipeline="CustomerService-ContactUs">contact</pipeline-alias>
+        <pipeline-alias pipeline="PaymentInstruments-List">wallet</pipeline-alias>
+        <pipeline-alias pipeline="Home-ErrorNotFound">404</pipeline-alias>
+        <pipeline-alias pipeline="Order-History">orders</pipeline-alias>
+        <pipeline-alias pipeline="Wishlist-Show">wishlist</pipeline-alias>
+        <pipeline-alias pipeline="COCustomer-Start">customer</pipeline-alias>
+        <pipeline-alias pipeline="Login-Show">login</pipeline-alias>
+        <pipeline-alias pipeline="Checkout-Login">checkout/login</pipeline-alias>
+        <pipeline-alias pipeline="Search-Show">search</pipeline-alias>
+        <pipeline-alias pipeline="COShipping-Start">shipping</pipeline-alias>
+        <pipeline-alias pipeline="Wishlist-Search">searchwishlists</pipeline-alias>
+        <pipeline-alias pipeline="Stores-Find">stores</pipeline-alias>
+        <pipeline-alias pipeline="GiftRegistry-ShowRegistryByID">showgiftregistrybyid</pipeline-alias>
+        <pipeline-alias pipeline="Frenzy-Search">search-results</pipeline-alias>
+        <pipeline-alias pipeline="GiftRegistry-Start">giftregistry</pipeline-alias>
+        <pipeline-alias pipeline="GiftCertificate-Purchase">giftcertpurchase</pipeline-alias>
+        <pipeline-alias pipeline="Adyen-Sessions">Adyen-Sessions</pipeline-alias>
+    </pipeline-aliases>
+    <pipeline-trailing-slash>false</pipeline-trailing-slash>
+    <pipeline-perform-redirect>false</pipeline-perform-redirect>
+    <character-replacements xml:lang="x-default">
+        <character-replacement>
+            <character>&amp;</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>'</character>
+            <replacement>-</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>&lt;</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>#</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>%</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>|</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>\</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>^</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>:</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>@</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>=</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>(</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>)</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>"</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>*</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>,</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>/</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>`</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>ō</character>
+            <replacement>o</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>&gt;</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>è</character>
+            <replacement>e</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>ê</character>
+            <replacement>e</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>â</character>
+            <replacement>a</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>ç</character>
+            <replacement>c</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>á</character>
+            <replacement>a</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>+</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>{</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>}</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>[</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>]</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>‘</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>;</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>?</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>“</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>—</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>à</character>
+            <replacement>a</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>’</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>ˆ</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>!</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>„</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>”</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>˜</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>é</character>
+            <replacement>e</replacement>
+        </character-replacement>
+    </character-replacements>
+    <search-refinement-url-settings>
+        <position>after</position>
+        <segment-delimiter>slash</segment-delimiter>
+        <refinements-delimiter>minus</refinements-delimiter>
+        <value-delimiter>underscore</value-delimiter>
+        <conflicting-value-delimiter>blank</conflicting-value-delimiter>
+        <exclude-pipeline-alias-type>none</exclude-pipeline-alias-type>
+        <product-name-identifier>prefn</product-name-identifier>
+        <product-value-identifier>prefv</product-value-identifier>
+        <content-name-identifier>crefn</content-name-identifier>
+        <content-value-identifier>crefv</content-value-identifier>
+    </search-refinement-url-settings>
+</url-rules>
+

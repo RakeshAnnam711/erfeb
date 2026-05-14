@@ -1,0 +1,6 @@
+<div>
+    <span>${pdict.order.billing.payment.paymentMethod.name}</span>
+</div>
+<div>
+    ${pdict.order.billing.payment.paymentMethod.credential}
+</div>

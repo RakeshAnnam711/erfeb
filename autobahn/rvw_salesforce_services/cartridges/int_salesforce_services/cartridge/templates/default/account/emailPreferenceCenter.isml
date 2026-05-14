@@ -1,0 +1,23 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
+        <isinclude template="reporting/reportingUrls" />
+    </isif>
+
+    <div class="container account-page">
+
+        <iscontentasset aid="accountHeaderEmailPreferenceCenter"/>
+
+        <!---Breadcrumbs--->
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+
+        <!---Email Preference Center Components--->
+        <isinclude template="account/components/emailPreferenceAddress"/>
+        <isif condition="${pdict.MarketingEmail}">
+            <isinclude template="account/components/emailPreferenceLists"/>
+            <isinclude template="account/components/emailPreferenceOptOutAll"/>       
+        </isif>
+    </div>
+</isdecorate>

@@ -1,0 +1,47 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<iscomment>Need to add JS for Social Icons here, since they're being added as a content asset</iscomment>
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/socialIcons.js');
+</isscript>
+
+<isdecorate template="/common/layout/page">
+    <div class="blog page-designer ${pdict.customClass}" id="${pdict.page.ID}">
+
+        <isif condition="${!empty(pdict.blogCategories)}">
+            <div class="blog-nav">
+                <isset name="blogCategories" value="${pdict.blogCategories}" scope="page"/>
+                <isset name="topLevel" value="${true}" scope="page"/>
+                <isinclude template="blog/components/navigation" />
+            </div>
+        </isif>
+
+        <isprint value="${pdict.regions.pageheader.render()}" encoding="off"/>
+
+        <isprint value="${pdict.regions.main.render()}" encoding="off"/>
+
+        <isif condition="${!pdict.chromeless && pdict.belowFoldPopulated}">
+            <div id="belowFoldRegion" class="pd-async-region" data-url="${URLUtils.url('Page-Show', 'cid', pdict.page.ID, 'ajaxRegion', pdict.regions.belowFold.region.ID)}"></div>
+        </isif>
+
+        <div class="container blog-footer">
+
+            <iscontentasset aid="blog-social-icons" pageid="${pdict.page.ID}"/>
+
+            <isif condition="${!empty(pdict.searchWords)}">
+                <div class="search-words-container">
+                    <label>${Resource.msg('label.blog.keywords', 'components', null)}</label>
+                    <ul class="search-words">
+                        <isloop iterator="${pdict.searchWords}" var="searchWord" status="loopStatus">
+                            <li>
+                                <a href="${URLUtils.url('Search-Show', 'q', searchWord)}">${searchWord}</a>
+                            </li>
+                        </isloop>
+                    </ul>
+                </div>
+            </isif>
+        </div>
+    </div>
+</isdecorate>

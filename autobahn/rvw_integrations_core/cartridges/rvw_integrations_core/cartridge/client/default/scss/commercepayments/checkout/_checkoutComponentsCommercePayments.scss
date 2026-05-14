@@ -1,0 +1,275 @@
+.commercepayments .card.payment-method {
+    .card-header {
+        border-bottom: 0;
+    }
+
+    .card-body {
+        padding: 0;
+    }
+}
+
+.salesforce-payments-element .sfpp-payment-method-choice,
+.salesforce-payments-element .sfpp-payment-method-choice .sfpp-payment-method-body,
+.sfpp-payment-method-ideal-bank-element,
+.sfpp-payment-method-eps-bank-element,
+.sfpp-payment-method-iban-element {
+    border-color: $card-border-color;
+}
+
+.sfpp-payment-method-card-number-label::before,
+.sfpp-payment-method-card-expiry-label::before,
+.sfpp-payment-method-card-cvc-label::before,
+.sfpp-payment-method-iban-label::before {
+    content: "* ";
+    color: $danger;
+}
+
+.sfpp-payment-method-body-card .sfpp-payment-method-card-number-element,
+.sfpp-payment-method-body-card .sfpp-payment-method-card-expiry-element,
+.sfpp-payment-method-body-card .sfpp-payment-method-card-cvc-element,
+.sfpp-payment-method-body-eps .sfpp-payment-method-eps-bank-element,
+.sfpp-payment-method-body-ideal .sfpp-payment-method-ideal-bank-element,
+.sfpp-payment-method-body-sepa_debit .sfpp-payment-method-iban-element {
+    border-color: $card-border-color;
+    border-radius: $border-radius;
+}
+
+.sfpp-payment-method-body .sfpp-payment-method-element--invalid {
+    border-color: $danger;
+}
+
+.salesforce-payments-element .sfpp-payment-instrument {
+    border-color: $card-border-color;
+}
+
+.salesforce-payments-element .sfpp-payment-instrument .sfpp-payment-instrument-description {
+    font-size: 0.938em;
+}
+
+.data-checkout-stage {
+    // Default Stage Setting
+    &[data-checkout-stage] {
+        button.submit-billing {
+            display: none;
+        }
+
+        button.hidden {
+            display: none !important;
+        }
+    }
+
+    // Payment -------------------------------
+    &[data-checkout-stage=payment] {
+        button.submit-billing {
+            display: block;
+        }
+    }
+}
+
+.salesforce-payments-element {
+    .sfpp-payment-method-choice {
+        margin-top: $card-body-padding-bottom;
+        &:first-child {
+            margin-top: 0;
+            border-top: none;
+        }
+        .sfpp-payment-method-body {
+            background: $page-background-color;
+            padding: 0;
+            border: none;
+            .sfpp-redirect-icon {
+                margin-top: $spacer;
+            }
+        }
+    }
+    label {
+        @include label-styles;
+
+        // input fields
+        + [class*='element'] {
+            @include form-input;
+            padding-top: $spacer-sm;
+            transition: border-color $transition-speed ease-out, box-shadow $transition-speed ease-out;
+            &[class*='--invalid'] {
+                border-color: $danger;
+            }
+        }
+    }
+    .sfpp-payment-method-element-error {
+        font-size: $form-help-text-font-size;
+        line-height: $form-help-text-line-height;
+        letter-spacing: $form-help-text-letter-spacing;
+        margin-top: $form-help-text-margin-top;
+    }
+
+    // radio buttons
+    .sfpp-payment-method-header {
+        position: relative;
+        padding-left: calc(#{$radiocheck-button-size} + #{$radiocheck-button-margin});
+        height: auto;
+        margin: $spacer-xl 0;
+        div.sfpp-payment-method-description {
+            @include radio-check-label;
+            padding: 0;
+            &:before,
+            &:after {
+                position: absolute;
+                top: 0;
+                left: calc(#{-$radiocheck-button-size} - #{$radiocheck-button-margin});
+            }
+            &::before {
+                @include radio-icon-background;
+            }
+        }
+        .sfpp-payment-method-radio {
+            margin: 0;
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            &:checked ~ .sfpp-payment-method-descriptionl:before,
+            &:checked:disabled ~ .sfpp-payment-method-description:before {
+                background-color: $radiocheck-background-color-selected;
+                border-color: $radiocheck-border-color-selected;
+            }
+            &:disabled ~ .sfpp-payment-method-description {
+                color: inherit;
+                opacity: 0.5;
+                &:before {
+                    box-shadow: none;
+                }
+            }
+            &.is-invalid ~ .sfpp-payment-method-description:before {
+                background-color: $radiocheck-background-color-error;
+                border-color: $radiocheck-border-color-error;
+            }
+            &:focus ~ .sfpp-payment-method-description:before {
+                box-shadow: none;
+                border-color: $radiocheck-border-color-selected;
+            }
+            &:checked ~ .sfpp-payment-method-description {
+                &:before {
+                    @include radio-icon-checked-background;
+                }
+                &:after {
+                    @include radio-icon-checked;
+                }
+            }
+        }
+    }
+
+    // checkboxes
+    .sfpp-save-payment-method {
+        padding-left: calc(#{$radiocheck-button-size} + #{$radiocheck-button-margin});
+        .sfpp-save-payment-method-label {
+            @include radio-check-label;
+            position: relative;
+            padding: 0;
+            transition: box-shadow $transition-speed ease-out;
+            &::before,
+            &::after {
+                top: 0;
+                left: calc(#{-$radiocheck-button-size} - #{$radiocheck-button-margin});
+                content: '';
+                position: absolute;
+                display: block;
+                transition: border-color $transition-speed ease-out, box-shadow $transition-speed ease-out;
+            }
+            &::before {
+                @include checkbox-icon-background;
+            }
+        }
+        .sfpp-payment-method-radio {
+            margin: 0;
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            &:checked ~ .sfpp-save-payment-method-label,
+            &:checked:disabled ~ .sfpp-save-payment-method-label {
+                &::before {
+                    background-color: $radiocheck-background-color-selected;
+                    border-color: $radiocheck-border-color-selected;
+                }
+            }
+            &:disabled ~ .sfpp-save-payment-method-label {
+                color: inherit;
+                opacity: 0.5;
+                &::before {
+                    box-shadow: none;
+                }
+            }
+            &.is-invalid ~ .sfpp-save-payment-method-label:before {
+                background-color: $radiocheck-background-color-error;
+                border-color: $radiocheck-border-color-error;
+            }
+            &:focus ~ .sfpp-save-payment-method-label:before {
+                box-shadow: none;
+                border-color: $radiocheck-border-color-selected;
+            }
+            &:checked ~ .sfpp-save-payment-method-label {
+                &::before {
+                    @include checkbox-icon-checked-background;
+                }
+                &::after {
+                    @include checkbox-icon-checked;
+                }
+            }
+        }
+    }
+
+    .sfpp-payment-method-description {
+        .sfpp-payment-method-name {
+            margin-top: 0;
+        }
+        .sfpp-payment-method-icon {
+            @include vertical-center;
+            right: 0;
+            background-position: center;
+            margin-top: 0;
+        }
+    }
+    .sfpp-payment-method-card-expiry,
+    .sfpp-payment-method-card-cvc,
+    .sfpp-save-payment-method {
+        margin-top: $spacer;
+    }
+    .sfpp-payment-method-card-expiry,
+    .sfpp-payment-method-card-cvc {
+            display: block;
+            width: 100%;
+        @include media-breakpoint-up(sm) {
+            display: inline-block;
+            width: calc(50% - 9px);
+        }
+    }
+    .sfpp-payment-method-card-cvc {
+        margin-left: 0;
+        @include media-breakpoint-up(sm) {
+            margin-left: $spacer;
+        }
+    }
+    .sfpp-save-payment-method {
+        .sfpp-save-payment-method-label {
+            vertical-align: top;
+        }
+    }
+    .sfpp-payment-method-header-card,
+    .sfpp-payment-method-paypal {
+        .sfpp-payment-method-description {
+            padding-left: 0;
+            padding-top: 0;
+        }
+    }
+    .sfpp-payment-method-header-card {
+        .sfpp-payment-method-description {
+            padding-right: 48px;
+        }
+    }
+    .sfpp-payment-method-paypal {
+        .sfpp-payment-method-description {
+            padding-right: 85px;
+        }
+    }
+    .sfpp-payment-method-paypal-express {
+        padding-top: $spacer;
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="sandbox.taxjar.api.token">
+        <url>https://api.taxjar.com</url>
+        <user-id>TaxJar User ID</user-id>
+        <password></password>
+    </service-credential>
+
+    <service-credential service-credential-id="taxjar.api.token">
+        <url>https://api.taxjar.com</url>
+        <user-id>marcos@wgacany.com</user-id>
+        <password>38655d21ad0f29c5ba1f63774da85645</password>
+    </service-credential>
+</services>

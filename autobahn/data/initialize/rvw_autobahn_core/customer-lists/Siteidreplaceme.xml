@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customer-list xmlns="http://www.demandware.com/xml/impex/customer/2006-10-31" list-id="Siteidreplaceme">
+    <header>
+        <min-password-length>8</min-password-length>
+        <min-password-special-chars>1</min-password-special-chars>
+        <force-password-contains-alpha>true</force-password-contains-alpha>
+        <force-password-contains-numeric>true</force-password-contains-numeric>
+        <force-password-mixed-case>true</force-password-mixed-case>
+    </header>
+
+</customer-list>

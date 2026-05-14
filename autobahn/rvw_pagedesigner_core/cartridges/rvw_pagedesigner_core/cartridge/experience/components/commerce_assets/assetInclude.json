@@ -1,0 +1,52 @@
+{
+    "name": "Asset Include",
+    "description": "This component allows you to embed an external content asset or a chromeless Page Designer page.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "asset",
+            "name": "Asset",
+            "attribute_definitions": [
+                {
+                    "id": "assetId",
+                    "name": "Asset ID",
+                    "type": "text",
+                    "description": "Enter an ID for either a content asset or a Page Designer page that has been set to 'chromeless' in the page attributes tab of Page Settings.",
+                    "required": true
+                },
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "queryFilter",
+                    "name": "Filter by Querystring",
+                    "description": "Enable this to show assets depending on the current URL parameters. For example, if this is on a PLP refined by the color pink, it will check for your Asset ID plus '-pink' (or '-Pink') and show that. If none is found, it will fall back to the Asset ID you entered above.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "params",
+                    "name": "Additional Params",
+                    "type": "text",
+                    "description": "(Standard content assets only) If you need to pass additional params besides the Asset ID, enter them here in JSON format as follows: {\"key1\": \"value1\", \"key2\": \"value2\"}.",
+                    "required": false
+                },
+                {
+                    "id": "linkToAsset",
+                    "name": "Link to Asset",
+                    "description": "Copy the link below to view the included asset in a new tab. This will work for Page Designer pages, but not for content assets.",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "assetIncludeLink"
+                    }
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

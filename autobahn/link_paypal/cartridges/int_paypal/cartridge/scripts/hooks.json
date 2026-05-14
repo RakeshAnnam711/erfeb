@@ -1,0 +1,24 @@
+{
+    "hooks": [
+        {
+            "name": "app.payment.form.processor.paypal",
+            "script": "./hooks/payment/processor/paypal"
+        },
+        {
+            "name": "app.payment.processor.paypal",
+            "script": "./hooks/payment/processor/paypal"
+        },
+        {
+            "name": "dw.order.createOrderNo",
+            "script": "./hooks/payment/processor/paypal"
+        },
+        {
+            "name": "forter.api.request.payment.paypal",
+            "script": "./hooks/buildForterRequest.js"
+        },
+        {
+            "name": "signifyd.api.request.payment.paypal",
+            "script": "./hooks/buildSignifydRequest.js"
+        }
+    ]
+}

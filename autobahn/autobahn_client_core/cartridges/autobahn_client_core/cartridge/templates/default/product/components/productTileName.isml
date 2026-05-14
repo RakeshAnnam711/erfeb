@@ -1,0 +1,6 @@
+<div class="pdp-link">
+    <div class="link product-click-track" href="${pdict.urls.product}" data-gtm-data="${pdict.gtmProductData}">
+        <span class="brand">${product.brand}</span>
+        <span class="name">${product.productName}</span>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+@import "~core/components/social";
+
+.social-links {
+    margin-bottom: 10px;
+    a {
+        &:hover {
+            color: $brand-tertiary;
+            border-bottom: none;
+        }
+    }
+    li {
+        margin: 0 10px;
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+    li i {
+        font-size: $footer-icon-size;
+        line-height: $footer-icon-size;
+        cursor: pointer;
+    }
+    .fa-sms-square {
+        @include icon($icon-sms-solid);
+    }
+    .fa-email-square {
+        @include icon($icon-email);
+    }
+    .fa-tiktok-square {
+        @include icon($icon-tiktok);
+    }
+}

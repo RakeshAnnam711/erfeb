@@ -1,0 +1,9 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addCss('/css/experience/components/commerce_assets/seoTextBlock.css');
+</isscript>
+
+<div class=" seoTextBlockWrapper ${pdict.textContainerClass}">
+    <div style="text-align: ${pdict.titleAlignment}"><${pdict.titleHeadingTag}><isprint value="${pdict.title}" encoding="off" /></${pdict.titleHeadingTag}></div>
+    <div class="seo-body ${pdict.bodyTextAlignment}"><isprint value="${pdict.bodyText}" encoding="off" /></div>
+</div>

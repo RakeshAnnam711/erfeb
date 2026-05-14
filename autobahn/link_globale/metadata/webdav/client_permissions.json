@@ -1,0 +1,23 @@
+{
+      "clients":
+      [
+        {
+          "client_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "permissions":
+          [
+            {
+              "path": "/impex",
+              "operations": [
+                "read_write"
+              ]
+            },
+            {
+              "path": "/cartridges",
+              "operations": [
+                "read_write"
+              ]
+            }
+          ]
+        }
+      ]
+    }

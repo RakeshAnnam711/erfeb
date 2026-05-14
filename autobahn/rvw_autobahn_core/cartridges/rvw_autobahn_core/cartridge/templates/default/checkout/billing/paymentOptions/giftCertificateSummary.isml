@@ -1,0 +1,12 @@
+<div>
+    ${Resource.msg('giftcertificate.purchase.giftcertificate', 'checkout', null)}
+</div>
+<div>
+    ${payment.maskedGiftCertificateCode}
+</div>
+<div>
+    ${Resource.msg('giftcertificate.purchase.amount', 'checkout', null) + ' ' + payment.formattedAmount}
+</div>
+<div>
+    ${Resource.msg('giftcertificate.checkout.remainingbalance', 'checkout', null) + ' ' + payment.formattedRemainingBalance}
+</div>

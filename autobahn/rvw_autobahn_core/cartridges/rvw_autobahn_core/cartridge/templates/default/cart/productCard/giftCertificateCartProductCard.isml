@@ -1,0 +1,61 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="hasEmbeddedBonusProducts" value="${lineItem.bonusProductLineItemUUID === 'bonus'}"  scope="page"/>
+<isset name="bonusproductlineitem" value="${hasEmbeddedBonusProducts ? 'bonus-product-line-item' : ''}" scope="page"/>
+<isset name="bonuslineitemrow" value="${hasEmbeddedBonusProducts ? 'bonus-line-item-row' : ''}" scope="page"/>
+
+<div class="card">
+    <div class="card-body product-info ${bonusproductlineitem} uuid-${lineItem.UUID}">
+        <!--- name and remove buttons --->
+        <isif condition="${!lineItem.isBonusProductLineItem}">
+            <isinclude template="components/deleteButton" />
+        </isif>
+
+        <div class="row ${bonuslineitemrow}">
+            <div class="col col-lg-10">
+                <div class="row">
+                    <div class="col-lg-12 d-flex flex-row">
+                        <a class="item-image" href="${URLUtils.url('Product-Show', 'pid', lineItem.id)}">
+                            <img class="product-image" src="${lineItem.images.small[0].url}" alt="${lineItem.images.small[0].alt}" title="${lineItem.images.small[0].title}">
+                        </a>
+                        <div class="item-attributes d-flex flex-column">
+                            <isinclude template="cart/productCard/cartProductCardHeader" />
+
+                            <p title="${lineItem.senderName}" data-value="${lineItem.senderName}" class="line-item-attributes ${pdict.giftCertificateForm.purchase.from.htmlName}-${lineItem.UUID}">${pdict.giftCertificateForm.purchase.from.label}: <span>${lineItem.senderName}</span></p>
+                            <p title="${lineItem.recipientName}" data-value="${lineItem.recipientName}" class="line-item-attributes ${pdict.giftCertificateForm.purchase.recipient.htmlName}-${lineItem.UUID}">${pdict.giftCertificateForm.purchase.recipient.label}: <span>${lineItem.recipientName}</span></p>
+                            <p title="${lineItem.recipientEmail}" data-value="${lineItem.recipientEmail}" class="line-item-attributes ${pdict.giftCertificateForm.purchase.recipientEmail.htmlName}-${lineItem.UUID}">${pdict.giftCertificateForm.purchase.recipientEmail.label}: <span>${lineItem.recipientEmail}</span></p>
+                            <p title="${lineItem.message || ''}" class="line-item-attributes ${pdict.giftCertificateForm.purchase.message.htmlName}-${lineItem.UUID}">${pdict.giftCertificateForm.purchase.message.label}: <span>${lineItem.message || ''}</span></p>
+
+                            <isinclude template="cart/productCard/cartProductCardAvailability" />
+                            <isif condition="${!lineItem.isBonusProductLineItem}">
+                                <isinclude template="cart/productCard/cartProductCardEdit" />
+                            </isif>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <isif condition="${!lineItem.isBonusProductLineItem}">
+                <div class="col-12 d-lg-none"><hr class="line-item-divider"></div>
+            </isif>
+
+            <!--- line item total price --->
+            <div class="col col-lg-2 product-card-footer">
+                <div class="row">
+                    <div class="col line-item-total-price">
+                        <label class="line-item-price-info">
+                            ${Resource.msg('label.total.price','cart',null)}
+                        </label>
+                        <div class="item-total-${lineItem.UUID} price">
+                            <isinclude template="checkout/productCard/productCardProductTotalPrice" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <isif condition="${lineItem.bonusProductLineItemUUID === 'bonus'}">
+            <isinclude template="cart/productCard/cartEmbeddedBonusProducts" />
+        </isif>
+    </div>
+</div>

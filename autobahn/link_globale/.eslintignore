@@ -1,0 +1,11 @@
+cartridges/int_globale_sfra/cartridge/static/
+cartridges/int_globale/cartridge/static/
+cartridges/int_globale_sitegenesis/cartridge/static/
+cartridges/int_globale_sitegenesis/cartridge/scripts/checkout/globale/Cart.js
+cartridges/int_globale_sitegenesis/cartridge/scripts/checkout/globale/COShipping.js
+cartridges/int_globale_sitegenesis/cartridge/scripts/cart/ValidateCartForCheckout.js
+cartridges/int_globale_sfra_popups/cartridge/static/
+cartridges/int_globale_sitegenesis_popups/cartridge/static/
+coverage/
+doc/
+bin/

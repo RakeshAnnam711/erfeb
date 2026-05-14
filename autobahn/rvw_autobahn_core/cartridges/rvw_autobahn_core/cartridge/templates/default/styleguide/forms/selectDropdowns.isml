@@ -1,0 +1,28 @@
+<div id="selectDropdowns" class="sg__header3">Select Dropdowns</div>
+<div class="row">
+    <div class="col-md-6">
+        <label for="custom-select-id">
+            Select an option:
+        </label>
+        <select class="form-control custom-select" id="custom-select-id" name="custom-select">
+            <option>Dropdown</option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+        </select>
+
+        <p class="mt-4 mb-1">Add the class below for a smaller version:</p>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="customSelectSizeOptions" id="customSelectSmall">
+            <label class="custom-control-label" for="customSelectSmall"><span class="pre">form-control-sm</span></label>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><select class="form-control custom-select">
+    <option>Dropdown</option>
+    <option>Option 1</option>
+    <option>Option 2</option>
+    <option>Option 3</option>
+</select></script></code></pre>
+    </div>
+</div>

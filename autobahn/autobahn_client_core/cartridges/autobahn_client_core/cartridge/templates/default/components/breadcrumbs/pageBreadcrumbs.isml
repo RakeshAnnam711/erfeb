@@ -1,0 +1,23 @@
+<div class="row hidden-xs-down breadcrumb-wrapper">
+    <div class="col" role="navigation" aria-label="Breadcrumb">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <isloop items="${pdict.breadcrumbs}" var="breadcrumbValue" status="loopState">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <isif condition="${breadcrumbValue.url && breadcrumbValue.url != ''}">
+                        <a href="${breadcrumbValue.url}" itemprop="item" aria-label="${breadcrumbValue.htmlValue}"  ${loopState.last ? 'aria-current="page"' : ''}>
+                            <span itemprop="name" title="${breadcrumbValue.htmlValue}">
+                                <isprint value="${breadcrumbValue.htmlValue}" encoding="off" />
+                            </span>
+                            <meta itemprop="position" content="${loopState.count}" />
+                        </a>
+                    <iselse/>
+                        <span class="no-link-breadcrumb" itemprop="name" ${loopState.last ? 'aria-current="page"' : ''}>
+                            <isprint value="${breadcrumbValue.htmlValue}" encoding="off"/>
+                        </span>
+                        <meta itemprop="position" content="${loopState.count}" />
+                    </isif>
+                </li>
+            </isloop>
+        </ol>
+    </div>
+</div>

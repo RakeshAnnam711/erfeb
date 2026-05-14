@@ -1,0 +1,5 @@
+<isif condition="${pdict.geKlarnaConfigurations && pdict.geKlarnaConfigurations.klarnaOSMConfig}">
+	<script type="text/javascript" async src="${pdict.geKlarnaConfigurations.getLibUrl()}"
+		<isif condition="${pdict.geKlarnaConfigurations.getDataClientId()}"> data-client-id="${pdict.geKlarnaConfigurations.getDataClientId()}"</isif>>
+	</script>
+</isif>

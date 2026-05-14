@@ -1,0 +1,146 @@
+<isset name="headerLayout" value="${dw.system.Site.current.preferences.custom.headerLayout.value || 'logo-left'}"
+    scope="page" />
+<isset name="headerFixedClass" value="${dw.system.Site.current.preferences.custom.headerFixed ? 'fixed-header' : ''}"
+    scope="page" />
+<isset name="headerNavLayout" value="${dw.system.Site.current.preferences.custom.headerNavLayout.value || 'nav-left'}"
+    scope="page" />
+<isset name="headerSearch" value="${dw.system.Site.current.preferences.custom.headerSearch.value || 'search-expanded'}"
+    scope="page" />
+
+
+<isset name="transparentHeaderShowClass" value="${pdict.transparentNavShow == true ? 'transparent-header' : ''}"
+    scope="page" />
+<isset name="transparentNavShowClass" value="${pdict.transparentNavShow == true ? 'transparent-nav' : ''}"
+    scope="page" />
+<isset name="transparentNavDarkMode"
+    value="${pdict.transparentNavShow == true && pdict.transparentNavDarkMode == true ? 'transparent-nav-dark' :
+           'transparent-nav-light'}"
+    scope="page" />
+
+<header class="${headerLayout} ${headerFixedClass} ${transparentHeaderShowClass}" id="top-header">
+    <isinclude template="/components/header/skipNav" />
+    <div>
+    	<iscontentasset aid="header-banner-promotion" />
+        <div id="GlobaleFreeShippingBannerContainer"> </div>
+    </div>
+    <nav class="header-nav ${headerNavLayout} ${transparentNavShowClass} ${transparentNavDarkMode}" id="header-nav" aria-label="Primary Navigation">
+        <div class="header container">
+
+            <div class="row no-gutters">
+                <isif condition="${headerLayout === 'logo-center'}">
+                    <div class="col header-column-1">
+                        <iscomment>Mobile toggle button</iscomment>
+                        <button class="navbar-toggler d-lg-none icon-menu" type="button" data-toggle="collapse" aria-controls="sg-navbar-collapse" title="collapsible menu" aria-expanded="false" aria-label="Toggle navigation"></button>
+                        <iscomment> <div class="pull-left d-none d-lg-block header-locale-container">
+                        <isinclude url="${URLUtils.url('Page-Locale')}" />
+                        </div> </iscomment>
+                        <button type="submit" id="search-icon-btn-mobile" name="search-button" class="fa fa-search d-lg-none" aria-label="${Resource.msg('label.header.search.go', 'common', null)}"></button>
+                        <iscomment> Display search modal here for mobile </iscomment>
+                        <div class="search-mobile d-lg-none w-100">
+                            <isinclude template="components/header/search" />
+                        </div>
+                    </div>
+                    <!-- Preload small logo (mobile) -->
+                    <link rel="preload" as="image"
+                        src="${URLUtils.staticURL('/images/logo-mobile.webp')}"
+                        fetchpriority="high"
+                        media="(max-width: 767px)">
+
+                    <!-- Preload medium logo (tablet / md devices) -->
+                    <link rel="preload" as="image"
+                        src="${URLUtils.staticURL('/images/logo.webp')}"
+                        fetchpriority="high"
+                        media="(min-width: 768px) and (max-width: 1199px)">
+
+                    <!-- Preload large logo (desktop) -->
+                    <link rel="preload" as="image"
+                        src="${URLUtils.staticURL('/images/logo.webp')}"
+                        fetchpriority="high"
+                        media="(min-width: 1200px)">
+
+                    <div class="col header-column-2">
+                        <div class="brand">
+                            <a class="logo-home d-flex justify-content-center align-items-center" style="background:none" href="${URLUtils.url('Home-Show')}" title="${ Resource.msgf('global.homepage.tooltip', 'common', null, Resource.msg('global.storename', 'common', null), Resource.msg('global.home', 'common', null)) }" aria-label="${ Resource.msgf('global.homepage.tooltip', 'common', null, Resource.msg('global.storename', 'common', null), Resource.msg('global.home', 'common', null)) }">
+                                <picture>
+                                    <!-- Mobile logo -->
+                                    <source
+                                        srcset="${URLUtils.staticURL('/images/logo-mobile.webp')}"
+                                        media="(max-width: 768px)"
+                                        type="image/webp" />
+
+                                    <!-- Tablet logo -->
+                                    <source
+                                        srcset="${URLUtils.staticURL('/images/logo.webp')}"
+                                        media="(min-width: 768px) and (max-width: 1199px)"
+                                        type="image/webp" />
+
+                                    <!-- Desktop logo -->
+                                    <source
+                                        srcset="${URLUtils.staticURL('/images/logo.webp')}"
+                                        media="(min-width: 1200px)"
+                                        type="image/webp" />
+
+                                    <!-- Fallback img -->
+                                    <img
+                                        class="logo-home-img"
+                                        src="${URLUtils.staticURL('/images/logo.webp')}"
+                                        alt="WGACA logo"
+                                        width="500"
+                                        height="32"
+                                        fetchpriority="high" />
+                                </picture>
+                            </a>
+                            <iscontentasset aid="logoTagline"/>
+                        </div>
+                    </div>
+                </isif>
+                <isif condition="${headerLayout === 'logo-left'}">
+                    <div class="col header-column-2">
+                        <div class="brand">
+                            <a class="logo-home d-block" href="${URLUtils.url('Home-Show')}" title="${ Resource.msgf('global.homepage.tooltip', 'common', null, Resource.msg('global.storename', 'common', null), Resource.msg('global.home', 'common', null)) }"></a>
+                        </div>
+                    </div>
+                    <div class="col header-column-1">
+                        <iscomment>Mobile toggle button</iscomment>
+                        <button class="navbar-toggler d-lg-none icon-menu" type="button" data-toggle="collapse" aria-controls="sg-navbar-collapse" title="collapsible menu" aria-expanded="false" aria-label="Toggle navigation"></button>
+
+                        <div class="main-menu navbar-toggleable-md menu-toggleable-left multilevel-dropdown" id="sg-navbar-collapse">
+                            <isinclude url="${URLUtils.url('Page-IncludeHeaderMenu')}"/>
+                        </div>
+                    </div>
+                </isif>
+                <div class="col header-column-3">
+                    <div class="search hidden-md-down pull-right ${headerSearch}">
+                        <isinclude template="components/header/search" />
+                    </div>
+                    <div class="pull-right header-account-container">
+                        <isinclude template="account/header" />
+                    </div>
+                    <div class="pull-right header-wishlist-container">
+                        <a class="wishlist-link pr-1 icon-favorite" href="${URLUtils.https('Wishlist-Show')}" title="${Resource.msg('link.wishlist.myaccount', 'account', null)}"  tabindex="0" aria-label="${Resource.msg('link.wishlist.myaccount', 'account', null)}">
+                        </a>
+                    </div>
+                    <div class="minicart pull-right" data-action-url="${URLUtils.url('Cart-MiniCartShow')}">
+                        <isinclude url="${URLUtils.url('Cart-MiniCart')}" />
+                    </div>
+                     <div class="pull-left d-none d-lg-block header-locale-container">
+                        <isinclude url="${URLUtils.url('Page-Locale')}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <isif condition="${headerLayout === 'logo-center'}">
+            <div class="main-menu navbar-toggleable-md menu-toggleable-left multilevel-dropdown" id="sg-navbar-collapse">
+                <div class="container">
+                    <div class="row">
+                        <isinclude url="${URLUtils.url('Page-IncludeHeaderMenu')}"/>
+                        <iscomment> test </iscomment>
+                    </div>
+                </div>
+            </div>
+        </isif>
+    </nav>
+</header>
+<script>
+    window.SearchSuggestionsURL = "${URLUtils.abs('SearchServices-GetSuggestions')}?q=";
+</script>

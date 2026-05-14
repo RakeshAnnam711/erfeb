@@ -1,0 +1,10 @@
+<iscomment>
+    This is a blank template that gets overwritten in rvw_integrations_core
+    The overriding template in rvw_integrations_core has integrations specific to this area 
+
+    Page Type: Cart
+    
+    It gets called by rvw_autobahn_core:templates/default/cart/cart.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_integrations_core
+</iscomment>

@@ -1,0 +1,96 @@
+<isset name="headerLayout" value="${pdict.abConfigs.headerLayout || 'logo-left'}" scope="page" />
+<isset name="headerFixedClass" value="${pdict.abConfigs.headerFixed == 'true' ? 'fixed-header' : pdict.abConfigs.headerFixed == 'enhanced' ? 'fixed-header-enhanced' : ''}" scope="page" />
+<isset name="headerNavLayout" value="${pdict.abConfigs.headerNavLayout || 'nav-left'}" scope="page" />
+<isset name="headerSearch" value="${pdict.abConfigs.headerSearch || 'search-expanded'}" scope="page" />
+
+<isset name="transparentHeaderShowClass" value="${pdict.transparentNavShow == true ? 'transparent-header' : ''}" scope="page" />
+<isset name="transparentNavShowClass" value="${pdict.transparentNavShow == true ? 'transparent-nav' : ''}" scope="page" />
+<isset name="transparentNavDarkMode" value="${pdict.transparentNavShow == true && pdict.transparentNavDarkMode == true ? 'transparent-nav-dark' : 'transparent-nav-light'}" scope="page" />
+
+<header class="${headerLayout} ${headerFixedClass} ${transparentHeaderShowClass}" id="top-header" cypress-target="topHeader">
+    <isinclude template="components/header/skipNav" />
+    <isinclude template="components/header/pageHeaderBanner" />
+    <isinclude template="components/header/siteSwitchHeader" />
+    <nav class="header-nav ${headerNavLayout} ${transparentNavShowClass} ${transparentNavDarkMode}" id="header-nav" cypress-target="topNav">
+        <div class="header container">
+            <div class="row no-gutters">
+                <isif condition="${headerLayout === 'logo-center'}">
+                    <div class="col header-column-1">
+                        <iscomment>Mobile toggle button</iscomment>
+                        <button class="navbar-toggler d-lg-none icon-menu" type="button" data-toggle="collapse" aria-controls="sg-navbar-collapse" title="collapsible menu" aria-expanded="false" aria-label="Toggle navigation" cypress-target="mobileNavToggle"></button>
+
+                        <div class="pull-left d-none d-lg-block header-locale-container"><isinclude url="${URLUtils.url('Page-Locale')}" /></div>
+                        <div class="pull-left d-none d-lg-block header-support-container"><iscontentasset aid="headerSupportDesktop" /></div>
+                        <isif condition="${pdict.abConfigs.storeHeaderSelectorEnabled}">
+                            <div class="pull-left store-selector d-none d-lg-block js-store-picker-header">
+                                <isinclude url="${URLUtils.url('Stores-FindStoresInHeader') + '?' + pdict.queryString}" />
+                            </div>
+                        </isif>
+                    </div>
+                    <div class="col header-column-2">
+                        <isinclude template="components/header/pageHeaderLogo" />
+                    </div>
+                </isif>
+                <isif condition="${headerLayout === 'logo-left'}">
+                    <div class="col header-column-2">
+                        <isinclude template="components/header/pageHeaderLogo" />
+                    </div>
+                    <div class="col header-column-1">
+                        <iscomment>Mobile toggle button</iscomment>
+                        <button class="navbar-toggler d-lg-none icon-menu" type="button" data-toggle="collapse" aria-controls="sg-navbar-collapse" title="collapsible menu" aria-expanded="false" aria-label="Toggle navigation" cypress-target="mobileNavToggle"></button>
+
+                        <div class="main-menu navbar-toggleable-md menu-toggleable-left multilevel-dropdown" id="sg-navbar-collapse" cypress-target="mainMenuLeft">
+                            <isinclude template="components/header/pageIncludeHeaderMenu" />
+                        </div>
+
+                    </div>
+                </isif>
+                <div class="col header-column-3">
+                    <div class="search hidden-md-down pull-right ${headerSearch}" cypress-target="headerSearch">
+                        <isinclude template="components/header/search" />
+                    </div>
+                    <div class="pull-right header-account-container">
+                        <isinclude template="account/header" />
+                    </div>
+                    <div class="minicart pull-right" data-action-url="${URLUtils.url('Cart-MiniCartShow')}" cypress-target="minicartToggle">
+                        <isinclude template="components/header/miniCart" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <isif condition="${headerLayout === 'logo-center'}">
+            <div class="main-menu navbar-toggleable-md menu-toggleable-left multilevel-dropdown" id="sg-navbar-collapse" cypress-target="mainMenuCenter">
+                <div class="container">
+                    <div class="row no-gutters">
+                        <isinclude template="components/header/pageIncludeHeaderMenu" />
+                    </div>
+                </div>
+                <nav class="header-nav secondary-nav ${headerNavLayout} ${transparentNavShowClass} ${transparentNavDarkMode} fade show">
+                    <div class="secondary-header container">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <div class="main-menu secondary-menu multilevel-dropdown d-none d-lg-block">
+                                    <isinclude template="components/header/pageIncludeHeaderSecondaryMenu" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </isif>
+    </nav>
+    <iscomment> for any categories that have secondary navs, those secondary navs will show up here</iscomment>
+    <isif condition="${headerLayout === 'logo-left'}">
+        <nav class="header-nav secondary-nav ${headerNavLayout} ${transparentNavShowClass} ${transparentNavDarkMode} fade show">
+            <div class="secondary-header container">
+                <div class="row no-gutters">
+                    <div class="col">
+                        <div class="main-menu secondary-menu multilevel-dropdown d-none d-lg-block">
+                            <isinclude template="components/header/pageIncludeHeaderSecondaryMenu" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </isif>
+</header>

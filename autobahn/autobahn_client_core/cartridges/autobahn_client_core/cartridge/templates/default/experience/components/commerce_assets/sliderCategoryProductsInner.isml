@@ -1,0 +1,10 @@
+<iscomment> Slider Category - Only render if products exist to prevent "No slides found" error </iscomment>
+<isif condition="${!empty(pdict.products)}">
+    <div class="slider d-none">
+        <isloop iterator="${pdict.products}" alias="product" status="loopStatus">
+            <div class="slide" data-position="${loopStatus.count}">
+                <isinclude url="${URLUtils.url('SliderProducts-Show', 'pid', product.ID, 'pview', 'tile', 'ratings', pdict.display.ratings, 'swatches', pdict.display.swatches, 'showQuickView', pdict.display.showQuickView, 'isSliderProduct', pdict.display.isSliderProduct, 'tileBackground', pdict.display.tileBackground, 'section', pdict.section)}" />
+            </div>
+        </isloop>
+    </div>
+</isif>

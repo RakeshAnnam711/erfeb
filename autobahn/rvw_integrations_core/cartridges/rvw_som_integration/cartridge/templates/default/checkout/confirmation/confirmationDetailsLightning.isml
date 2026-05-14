@@ -1,0 +1,22 @@
+<isset name="SOMLOUrl" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('SOM_OrderHistory_LightningOut_URL')}" scope="page"/>
+<isset name="SOMNamespace" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('SOM_OrderHistory_Namespace')}" scope="page"/>
+<isset name="SOMEndpoint" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('SOM_OrderHistory_Endpoint')}" scope="page"/>
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs(SOMLOUrl);
+    assets.addJs('/js/integrations/somOrderHistory/somOrderHistoryDetail.js');
+</isscript>
+
+<script>
+    const ordervariables = {
+        orderno: "${pdict.order.orderNumber}",
+        firstname: "${pdict.customerProfile.firstName}",
+        lastname: "${pdict.customerProfile.lastname}",
+        email : "${pdict.customerProfile.email}",
+        namespace : '${SOMNamespace}',
+        endpoint : '${SOMEndpoint}'
+    }
+    window.somorderinfoval = ordervariables;
+</script>
+<div id="som-orderDetail" data-order-detail-info="true"></div>

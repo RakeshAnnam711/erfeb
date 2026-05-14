@@ -1,0 +1,40 @@
+'use strict';
+
+var genericDecorators = require('*/cartridge/models/globale/generic/decorators/index');
+
+module.exports = {
+    orderNotes: require('*/cartridge/models/globale/order/actions/decorators/orderNotes'),
+    generateBasketFromPayload: require('*/cartridge/models/globale/order/actions/decorators/generateBasketFromPayload'),
+    createOrder: require('*/cartridge/models/globale/order/actions/decorators/createOrder'),
+    createRMA: require('*/cartridge/models/globale/order/actions/decorators/createRMA'),
+    findOrder: require('*/cartridge/models/globale/order/actions/decorators/findOrder'),
+    placeOrder: require('*/cartridge/models/globale/order/actions/decorators/placeOrder'),
+    confirmOrder: require('*/cartridge/models/globale/order/actions/decorators/confirmOrder'),
+    addressAttributes: require('*/cartridge/models/globale/order/actions/decorators/addressAttributes'),
+    orderAddresses: require('*/cartridge/models/globale/order/actions/decorators/orderAddresses'),
+    setCustomerName: require('*/cartridge/models/globale/order/actions/decorators/setCustomerName'),
+    setCustomerId: require('*/cartridge/models/globale/order/actions/decorators/setCustomerId'),
+    setCustomerEmail: require('*/cartridge/models/globale/order/actions/decorators/setCustomerEmail'),
+    setCustomerComments: require('*/cartridge/models/globale/order/actions/decorators/setCustomerComments'),
+    setDeliveryStore: require('*/cartridge/models/globale/order/actions/decorators/setDeliveryStore'),
+    setBasicAttributes: require('*/cartridge/models/globale/order/actions/decorators/setBasicAttributes'),
+    setReplacementOrderAttributes: require('*/cartridge/models/globale/order/actions/decorators/setReplacementOrderAttributes'),
+    setInternationalAttributes: require('*/cartridge/models/globale/order/actions/decorators/setInternationalAttributes'),
+    setLoyalty: require('*/cartridge/models/globale/order/actions/decorators/setLoyalty'),
+    setCustomAttributesData: require('*/cartridge/models/globale/order/actions/decorators/setCustomAttributesData'),
+    updateShippingMethod: require('*/cartridge/models/globale/order/actions/decorators/updateShippingMethod'),
+    updateCustomerAddresses: require('*/cartridge/models/globale/order/actions/decorators/updateCustomerAddresses'),
+    updateProductLineItems: require('*/cartridge/models/globale/order/actions/decorators/updateProductLineItems'),
+    updatePriceAdjustments: require('*/cartridge/models/globale/order/actions/decorators/updatePriceAdjustments'),
+    setPaymentAttributes: require('*/cartridge/models/globale/order/actions/decorators/setPaymentAttributes'),
+    setPaymentInstruments: require('*/cartridge/models/globale/order/actions/decorators/setPaymentInstruments'),
+    setPaymentStatus: require('*/cartridge/models/globale/order/actions/decorators/setPaymentStatus'),
+    setExportStatus: require('*/cartridge/models/globale/order/actions/decorators/setExportStatus'),
+    updateOrderStatus: require('*/cartridge/models/globale/order/actions/decorators/updateOrderStatus'),
+    updateOrderShippingInfo: require('*/cartridge/models/globale/order/actions/decorators/updateOrderShippingInfo'),
+    updateOrderRefundInfo: require('*/cartridge/models/globale/order/actions/decorators/updateOrderRefundInfo'),
+    processDecoratorStatus: genericDecorators.processDecoratorStatus,
+    setMixedOrdersAttributes: require('*/cartridge/models/globale/order/actions/decorators/setMixedOrdersAttributes'),
+    setOrderType: require('*/cartridge/models/globale/order/actions/decorators/setOrderType'),
+    createGiftCertificate: require('*/cartridge/models/globale/order/actions/decorators/createGiftCertificate')
+};

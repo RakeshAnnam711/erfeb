@@ -1,0 +1,26 @@
+<isif condition="${pdict.title}">
+    <div class="slider-title text-${pdict.titleAlign} ${pdict.titleClass}" style="font-size: ${pdict.titleFontSize}; color: ${pdict.titleColor}">
+        <isprint value="${pdict.title}" encoding="off" />
+    </div>
+</isif>
+
+<div
+    id="${pdict.id}"
+    class="slider-container ${pdict.containerClass} pagination-style-${pdict.paginationStyle} ${pdict.displayIndicators.sm} ${pdict.displayIndicators.md} ${pdict.displayIndicators.lg} ${pdict.displayControls.sm} ${pdict.displayControls.md} ${pdict.displayControls.lg} ${pdict.insideIndicators.sm} ${pdict.insideIndicators.md} ${pdict.insideIndicators.lg} ${pdict.insideControls.sm} ${pdict.insideControls.md} ${pdict.insideControls.lg} ${pdict.percentageOfNextSlide.sm} ${pdict.percentageOfNextSlide.md} ${pdict.percentageOfNextSlide.lg} ${pdict.percentageOfPrevSlide.sm} ${pdict.percentageOfPrevSlide.md} ${pdict.percentageOfPrevSlide.lg} ${pdict.controlsTheme}"
+    data-slider-autoplay="${pdict.autoplay}"
+    data-slider-gutter="${pdict.gutters.sm}"
+    data-slider-gutter-md="${pdict.gutters.md}"
+    data-slider-gutter-lg="${pdict.gutters.lg}"
+    data-slider-items="${pdict.slidesToDisplay.sm}"
+    data-slider-items-md="${pdict.slidesToDisplay.md}"
+    data-slider-items-lg="${pdict.slidesToDisplay.lg}"
+    data-slider-loop="${!pdict.disableLoop}"
+    data-slider-speed="${pdict.speed}"
+    data-slider-mode="${pdict.mode}"
+    data-slider-animatein="${pdict.animateIn}"
+    data-slider-animateout="${pdict.animateOut}"
+    data-slider-pause-button-placement ="${pdict.pauseButtonPlacement}"
+>
+    <isprint value="${pdict.regions.slides.render()}" encoding="off"/>
+
+</div>

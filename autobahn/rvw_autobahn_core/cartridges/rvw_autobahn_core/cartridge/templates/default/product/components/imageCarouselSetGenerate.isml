@@ -1,0 +1,71 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isset name="hasSingleImage" value="${product.numberOfProductsInSet > 1 ? false : true}" scope="page"/>
+<isset name="imageColumnClass" value="${setImageColumnClass ? setImageColumnClass : 'col-12 col-md-' + parseInt(product.pdpImageColumnWidth.split('/')[0])}" scope="page"/>
+<isset name="pdpThumbnailType" value="${pdict.abConfigs.pdpThumbnailType}" scope="page"/>
+<iscomment>Override column settings for Page Designer component if applicable</iscomment>
+<isif condition="${'pdpImageColumnWidth' in pdict}">
+    <isset name="imageColumnClass" value="${'col-12 col-md-' + parseInt(pdict.pdpImageColumnWidth.split('/')[0])}" scope="page"/>
+</isif>
+<div class="primary-images ${imageColumnClass}">
+    <div class="row">
+        <div class='primary-images-main col-12 ${hasSingleImage ? "col-12" : "col-lg-9 product-has-thumbnails"}${pdpThumbnailType == 'dots' ? '-dots col-lg-12' : ' order-lg-2'}'>
+            <div class="slider-container slider-buttons-hidden slider-buttons-hidden-md slider-buttons-hidden-lg slider-bullets-hidden slider-bullets-hidden-md slider-bullets-hidden-lg"
+                data-slider-thumbnail-container="${'#'}slider-pdp-${product.id}"
+                data-slider-loop="false"
+                data-slider-gutter="1"
+                data-slider-gutter-md="1"
+                data-slider-gutter-lg="1"
+            >
+                <div class="slider">
+                    <isset name="imageCounter" value="${0}" scope="page"/>
+                    <isloop items="${product.individualProducts}" var="product" status="loopStatusProducts">
+                        <isif condition="${product.images['large'].length > 0}">
+                            <isset name="imageCounter" value="${imageCounter + 1}" scope="page"/>
+                            <div class="slide" data-zoom-image="${product.images['hi-res'][0].url}">
+                                <img src="${product.images['large'][0].url}" class="d-block img-fluid" alt="${product.images['large'][0].alt} image number ${(parseInt(imageCounter)).toFixed(0)}" itemprop="image" />
+                                <isif condition="${pdict.isWishlistModal !== true}">
+                                    <iswishlisticon
+                                        wishlistpid="${productCopy.wishlistpid}"
+                                        productname="${productCopy.productName}"
+                                        addmessage="${'wishlist.addto.wishlist.icon'}"
+                                        removemessage="${'wishlist.removefrom.wishlist.icon'}"
+                                        includeicon="true"
+                                    />
+                                </isif>
+                            </div>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+            <isset name="product" value="${productCopy}" scope="page" />
+            <isinclude template="/product/components/badges" />
+        </div>
+
+        <isset name="thumbnailCount" value="${0}" scope="page" />
+        <div class="col-12 primary-images-thumbnails${pdpThumbnailType == 'dots' ? '-dots' : ' col-lg-3 order-lg-1'} ${hasSingleImage ? 'd-none' : ''}">
+            <div id="slider-pdp-${product.id}" class="${pdpThumbnailType != 'images' ? 'slider-thumbnail-dots' : ''} slider-container slider-thumbnails slider-buttons-inside slider-buttons-inside-md slider-buttons-inside-lg ${pdpThumbnailType == 'dots' ? '' : 'slider-thumbnails-vertical-lg'}"
+                data-slider-items="${imageCounter}"
+                data-slider-items-md="${imageCounter}"
+                data-slider-items-lg="${imageCounter}"
+                data-slider-gutter="1"
+                data-slider-gutter-md="1"
+                data-slider-gutter-lg="1"
+                data-slider-loop="false"
+            >
+                <div class="slider">
+                    <isloop items="${productCopy.individualProducts}" var="product">
+                        <isset name="thumbnailCount" value="${thumbnailCount + 1}" scope="page" />
+                        <div class="slide">
+                            <img src="${product.images['large'][0].url}" class="d-block img-fluid" alt="${product.images['large'][0].alt} image number ${thumbnailCount.toFixed()}" itemprop="image" />
+                        </div>
+                    </isloop>
+                </div>
+                <div class="slider-thumbnail-controls d-none">
+                    <div class='prev icon-arrow-left-thin'></div>
+                    <div class='next icon-arrow-right-thin'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

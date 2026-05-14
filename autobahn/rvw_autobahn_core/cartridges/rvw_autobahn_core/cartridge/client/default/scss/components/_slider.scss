@@ -1,0 +1,516 @@
+@use 'sass:math'; // added to give support for math.div()
+
+.slider-title {
+    text-align: $slider-heading-text-align;
+    padding-top: $spacer;
+    padding-bottom: $spacer;
+    // allow custom page designer classes to override variable
+    &:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6):not(.b1):not(.b2):not(.b3):not(.b4):not(.custom) {
+        @include header($slider-heading-size);
+    }
+}
+.slider-container {
+    position: relative;
+    padding-left: $slider-button-width;
+    padding-right: $slider-button-width;
+    letter-spacing: 0; // this prevents sizing issues caused by inherited letter-spacing
+    @include media-breakpoint-down(sm) {
+        &:not(.slider-bullets-inside):not(.slider-bullets-hidden) {
+            margin-bottom: $bullets-outside-size;
+        }
+    }
+    @include media-breakpoint-only(md) {
+        &:not(.slider-bullets-inside-md):not(.slider-bullets-hidden-md) {
+            margin-bottom: $bullets-outside-size;
+        }
+    }
+    @include media-breakpoint-up(lg) {
+        &:not(.slider-bullets-inside-lg):not(.slider-bullets-hidden-lg) {
+            margin-bottom: $bullets-outside-size;
+        }
+    }
+    .slider {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        &.tns-slider {
+            opacity: 1;
+            height: unset;
+            overflow: unset;
+        }
+        &.tns-gallery .tns-slide-active {
+            z-index: 1;
+        }
+    }
+    .slide {
+        transform: translateZ(0); // fix for text flicker bug in chrome
+    }
+
+    // slider nav buttons
+    .tns-controls button {
+        @include vertical-center;
+        cursor: pointer;
+        user-select: none;
+        z-index: 2;
+        width: $slider-button-width;
+        height: 100%;
+        background-color: $slider-button-background;
+        border: none;
+        display: flex;
+        text-align: center;
+        transition: background-color $transition-speed ease-out;
+        font-size: 0;
+        padding: 0;
+        &:before {
+            width: 100%;
+            align-self: center;
+            transition: color $transition-speed ease-out;
+        }
+        &:hover {
+            background-color: $slider-button-background-hover;
+            &:before {
+                color: $slider-button-color-hover;
+            }
+        }
+    }
+    [data-controls='prev'] {
+        @include icon($slider-button-prev-icon, before, $slider-button-icon-size, $slider-button-color);
+        left: 0;
+    }
+    [data-controls='next'] {
+        @include icon($slider-button-next-icon, before, $slider-button-icon-size, $slider-button-color);
+        right: 0;
+    }
+
+    // slider bullets
+    .tns-nav {
+        @include horizontal-center;
+        display: flex;
+        bottom: 0;
+        z-index: 2;
+        bottom: -#{$bullets-outside-size};
+
+        button {
+            display: block;
+            background: $slider-bullet-background;
+            border: $slider-bullet-border;
+            width: $slider-bullet-size;
+            height: $slider-bullet-size;
+            margin: $slider-bullet-margin-top $slider-bullet-margin-right $slider-bullet-margin-bottom $slider-bullet-margin-left;
+            padding: 0;
+            cursor: pointer;
+            transition: transform $transition-speed ease-out;
+            &.tns-nav-active {
+                background: $slider-bullet-background-active;
+                border: $slider-bullet-border-active;
+                transform: scale(#{math.div($slider-bullet-size-active, $slider-bullet-size)});
+            }
+        }
+
+        &.with-pagination-btn {
+            button {
+                order: 1;
+            }
+
+            .with-pagination {
+                order: 0;
+            }
+        }
+
+    }
+
+    &.pagination-style-dots {
+        .tns-nav {
+            align-items: center;
+
+            button {
+                border-radius: 50%;
+            }
+        }
+    }
+
+    &.pagination-style-shortLines {
+        .tns-nav {
+            align-items: flex-end;
+
+            button {
+                background-color: $slider-short-lines-bullet-background-color;
+                border: none;
+                width: $slider-short-lines-bullet-size-width;
+                height: $slider-short-lines-bullet-size-height;
+
+                &.tns-nav-active,
+                &:hover:not(.tns-nav-active) {
+                    background-color: $slider-short-lines-bullet-active-background-color;
+                    height: $slider-short-lines-bullet-active-size-height;
+                    transition: background-color $transition-speed ease-in-out, height $transition-speed ease-in-out;
+                }
+            }
+        }
+    }
+
+    // themes
+    &.light {
+        .tns-controls button {
+            background-color: $slider-light-button-background;
+            &::before {
+                color: $slider-light-button-color;
+            }
+            &:hover {
+                background-color: $slider-light-button-background-hover;
+                &::before {
+                    color: $slider-light-button-color-hover;
+                }
+            }
+        }
+        .tns-nav {
+            button {
+                background: $slider-light-bullet-background;
+                border: $slider-light-bullet-border;
+                &.tns-nav-active  {
+                    background: $slider-light-bullet-background-active;
+                    border: $slider-light-bullet-border-active;
+                }
+            }
+        }
+        .tns-nav-controller {
+            &::before {
+                color: $slider-light-bullet-play-icon-color;
+            }
+            &.pause::before {
+                color: $slider-light-bullet-pause-icon-color;
+            }
+        }
+        &.pagination-style-shortLines {
+            .tns-nav {
+                button {
+                    background-color: $slider-light-short-lines-bullet-background-color;
+                    &.tns-nav-active,
+                    &:hover:not(.tns-nav-active) {
+                        background-color: $slider-light-short-lines-bullet-active-background-color;
+                    }
+                }
+            }
+        }
+    }
+
+    [data-action='stop'],
+    [data-action='start'] {
+        display: none;
+    }
+
+    // style helper classes
+    @include media-breakpoint-down(sm) {
+        &.slider-buttons-hidden {
+            padding-left: 0;
+            padding-right: 0;
+            .tns-controls {
+                display: none;
+            }
+        }
+        &.slider-bullets-hidden {
+            .tns-nav {
+                display: none;
+            }
+        }
+        &.slider-buttons-inside {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        &.slider-bullets-inside {
+            .tns-nav {
+                bottom: 0;
+            }
+        }
+        @for $i from 1 through 40 {
+            &.next-slide-#{$i} {
+                .tns-inner {
+                    padding-right: $i * 1%;
+                }
+                &.slider-buttons-hidden {
+                    margin-right: -#{$spacer};
+                }
+            }
+            &.prev-slide-#{$i} {
+                .tns-inner {
+                    padding-left: $i * 1%;
+                }
+                &.slider-buttons-hidden {
+                    margin-left: -#{$spacer};
+                }
+            }
+        }
+    }
+    @include media-breakpoint-only(md) {
+        &.slider-buttons-hidden-md {
+            padding-left: 0;
+            padding-right: 0;
+            .tns-controls {
+                display: none;
+            }
+        }
+        &.slider-bullets-hidden-md {
+            margin-bottom: 0;
+            .tns-nav {
+                display: none;
+            }
+        }
+        &.slider-buttons-inside-md {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        &.slider-bullets-inside-md {
+            margin-bottom: 0;
+            .tns-nav {
+                bottom: 0;
+            }
+        }
+        @for $i from 1 through 40 {
+            &.next-slide-md-#{$i} {
+                .tns-inner {
+                    padding-right: $i * 1%;
+                }
+            }
+            &.prev-slide-md-#{$i} {
+                .tns-inner {
+                    padding-left: $i * 1%;
+                }
+            }
+        }
+    }
+    @include media-breakpoint-up(lg) {
+        &.slider-buttons-hidden-lg {
+            padding-left: 0;
+            padding-right: 0;
+            .tns-controls {
+                display: none;
+            }
+        }
+        &.slider-bullets-hidden-lg {
+            margin-bottom: 0;
+            .tns-nav {
+                display: none;
+            }
+        }
+        &.slider-buttons-inside-lg {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        &.slider-bullets-inside-lg {
+            margin-bottom: 0;
+            .tns-nav {
+                bottom: 0;
+            }
+        }
+        @for $i from 1 through 40 {
+            &.next-slide-lg-#{$i} {
+                .tns-inner {
+                    padding-right: $i * 1%;
+                }
+            }
+            &.prev-slide-lg-#{$i} {
+                .tns-inner {
+                    padding-left: $i * 1%;
+                }
+            }
+        }
+    }
+}
+
+// Slider Pause/Play Button
+.tns-nav-controller {
+    cursor: pointer;
+    @include icon($video-pause-icon, before, $slider-bullet-controller-size, $slider-bullet-play-icon-color);
+    &.pause {
+        @include icon($video-play-icon, before, $slider-bullet-controller-size, $slider-bullet-pause-icon-color);
+    }
+    &:not(.with-pagination) {
+        position: absolute;
+        padding: $slider-bullet-controller-padding;
+        z-index: 2;
+    }
+    &.top-right {
+        top: $slider-bullet-controller-inset-amount;
+        right: $slider-bullet-controller-inset-amount;
+    }
+    &.top-left {
+        top: $slider-bullet-controller-inset-amount;
+        left: $slider-bullet-controller-inset-amount;
+    }
+    &.bottom-right {
+        bottom: $slider-bullet-controller-inset-amount;
+        right: $slider-bullet-controller-inset-amount;
+    }
+    &.bottom-left {
+        bottom: $slider-bullet-controller-inset-amount;
+        left: $slider-bullet-controller-inset-amount;
+    }
+
+    &.with-pagination {
+        padding-right: $slider-bullet-with-pagination-padding-right;
+    }
+}
+
+// Thumbnails
+.slider-thumbnails {
+    padding-left: $slider-thumbnail-button-icon-size + $spacer;
+    padding-right: $slider-thumbnail-button-icon-size + $spacer;
+    user-select: none;
+    .slider {
+        overflow: auto;
+        text-align: center;
+        padding-bottom: 50px;
+        margin-bottom: -50px;
+    }
+    .slide {
+        min-width: $slider-thumbnail-width;
+        max-width: $slider-thumbnail-width;
+        flex-basis: $slider-thumbnail-width;
+        @include media-breakpoint-up(md) {
+            min-width: $slider-thumbnail-width-md;
+            max-width: $slider-thumbnail-width-md;
+            flex-basis: $slider-thumbnail-width-md;
+        }
+        @include media-breakpoint-up(lg) {
+            min-width: $slider-thumbnail-width-lg;
+            max-width: $slider-thumbnail-width-lg;
+            flex-basis: $slider-thumbnail-width-lg;
+        }
+        &>* {
+            width: 100%;
+        }
+        &::after {
+            content: '';
+            pointer-events: none;
+            @include absolute-cover;
+            border-style: solid;
+            border-width: $slider-thumbnail-border-width;
+            border-color: $slider-thumbnail-border-color;
+            transition: border $transition-speed ease-out;
+        }
+        &.tns-nav-active::after {
+            border-width: $slider-thumbnail-border-active-width;
+            border-color: $slider-thumbnail-border-active-color;
+        }
+    }
+    &.slider-thumbnail-dots {
+        .slide {
+            @include media-breakpoint-down(sm) {
+                min-width: $slider-bullet-size;
+                max-width: $slider-bullet-size;
+                height: $slider-bullet-size;
+                margin: $slider-bullet-margin-top $slider-bullet-margin-right $slider-bullet-margin-bottom $slider-bullet-margin-left;
+                &:after {
+                    background: $slider-bullet-background;
+                    border: $slider-bullet-border;
+                    border-radius: $slider-thumbnail-dots-border-radius;
+                }
+                &.tns-nav-active::after {
+                    background: $slider-bullet-background-active;
+                    border: $slider-bullet-border-active;
+                    transform: scale(#{math.div($slider-bullet-size-active, $slider-bullet-size)});
+                }
+                img {
+                    display: none !important; // hides images after js reloads them from a new variant
+                }
+            }
+            .primary-images-thumbnails-dots & {
+                min-width: $slider-bullet-size;
+                max-width: $slider-bullet-size;
+                height: $slider-bullet-size;
+                margin: $slider-bullet-margin-top $slider-bullet-margin-right $slider-bullet-margin-bottom $slider-bullet-margin-left;
+                &:after {
+                    background: $slider-bullet-background;
+                    border: $slider-bullet-border;
+                    border-radius: $slider-thumbnail-dots-border-radius;
+                }
+                &.tns-nav-active::after {
+                    background: $slider-bullet-background-active;
+                    border: $slider-bullet-border-active;
+                    transform: scale(#{math.div($slider-bullet-size-active, $slider-bullet-size)});
+                }
+                img {
+                    display: none !important; // hides images after js reloads them from a new variant
+                }
+            }
+        }
+        .slider-thumbnail-controls {
+            display: none;
+            .primary-images-thumbnails & {
+                display: block; // allow controls to show on PDP gallery thumbnail slider
+            }
+        }
+    }
+    .tns-horizontal {
+        &>.tns-item {
+            vertical-align: middle;
+        }
+    }
+    .slider-thumbnail-controls {
+        .prev,
+        .next {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: $slider-thumbnail-button-size;
+            cursor: pointer;
+            user-select: none;
+            background-color: $slider-thumbnail-button-background-color;
+            transition: opacity $transition-speed ease-out;
+            &::before {
+                @include vertical-center;
+            }
+            &:hover {
+                background-color: $slider-thumbnail-button-background-color-hover;
+                &::before {
+                    color: $slider-thumbnail-button-color-hover;
+                }
+            }
+            &[aria-disabled=true] {
+                opacity: 0;
+            }
+        }
+        .prev {
+            @include icon($slider-thumbnail-prev-icon, before, $slider-thumbnail-button-icon-size, $slider-thumbnail-button-color);
+            left: 0;
+        }
+        .next {
+            @include icon($slider-thumbnail-next-icon, before, $slider-thumbnail-button-icon-size, $slider-thumbnail-button-color);
+            right: 0;
+        }
+    }
+    // IE11 overrides: tiny-slider serves IE-specific styles that don't work very well
+    .tns-horizontal.tns-no-subpixel {
+        white-space: nowrap;
+        &>.tns-item {
+            float: none;
+            display: inline-block;
+            margin: 0;
+            margin-left: 0 !important;
+        }
+    }
+
+    // video assets in pdp image gallery
+    .video-container {
+        .video-thumbnail-button::before {
+            font-size: $slider-thumbnail-play-icon-size;
+        }
+    }
+
+    // Vertical thumbnails: need to override Tiny Slider's injected styles, since they don't support axis changes at breakpoints
+    @include media-breakpoint-down(sm) {
+        &.slider-thumbnails-vertical {
+            @include vertical-slider-thumbnails;
+        }
+    }
+    @include media-breakpoint-only(md) {
+        &.slider-thumbnails-vertical-md {
+            @include vertical-slider-thumbnails;
+        }
+    }
+    @include media-breakpoint-up(lg) {
+        &.slider-thumbnails-vertical-lg {
+            @include vertical-slider-thumbnails;
+        }
+    }
+}

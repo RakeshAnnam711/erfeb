@@ -1,0 +1,97 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+    </isscript>
+
+    <isset name="store" value="${pdict.store}" scope="page"/>
+
+    <header class="container page-header">
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+    </header>
+
+    <div class="container store-detail-page" itemscope itemtype="https://schema.org/Store">
+        <div class="row d-md-none">
+            <div class="col-12">
+                <h1 class="store-name" itemprop="name">${store.name}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <iframe class="map-canvas" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" src="${pdict.embeddedGoogleMapURL}"></iframe>
+
+                <a itemprop="hasMap" class="btn btn-secondary store-map-link" target='_blank' rel='noopener' href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store.name+' '+pdict.storeAddress)}">${Resource.msg('link.viewmap', 'storeLocator', null)} <span class="icon-offsite"></span></a>
+            </div>
+            <div class="col-12 col-md-6 store-data mt-3 mt-md-0">
+                <h1 class="store-attribute store-name hidden-sm-down mb-3" itemprop="name">${store.name}</h1>
+
+                <isif condition="${!empty(pdict.store.custom.storeType)}">
+                    <div class="store-attribute store-type"><label>${Resource.msg('label.storetype', 'storeLocator', null)}:</label> ${pdict.store.custom.storeType.displayValue}</div>
+                </isif>
+
+                <div class="store-attribute" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <div class="store-attribute store-address" >
+                        <label>${Resource.msg('label.address', 'storeLocator', null)}:</label>
+                        <isif condition="${!empty(store.address1)}">
+                            <span itemprop="streetAddress">${store.address1}<isif condition="${!empty(store.address2)}"> ${store.address2}, <iselse>, </isif>
+                            </span>
+                        </isif>
+                        <isif condition="${!empty(store.city)}">
+                            <span itemprop="addressLocality">${store.city}, </span>
+                        </isif>
+                        <isif condition="${!empty(store.stateCode)}">
+                            <span itemprop="addressRegion">${store.stateCode}  </span>
+                        </isif>
+                        <isif condition="${!empty(store.postalCode)}">
+                            <span itemprop="postalCode">${store.postalCode}</span>
+                        </isif>
+                    </div>
+
+                    <isif condition="${!empty(store.email)}">
+                        <div class="store-attribute store-email" itemprop="email"><label>${Resource.msg('label.email', 'storeLocator', null)}:</label> ${store.email}</div>
+                    </isif>
+
+                    <isif condition="${!empty(store.phone)}">
+                        <div class="store-attribute store-phone" itemprop="telephone"><label>${Resource.msg('label.phone', 'storeLocator', null)}:</label> ${store.phone}</div>
+                    </isif>
+                </div>
+
+                <isif condition="${!empty(store.storeHours)}">
+                    <div class="store-attribute store-hours">
+                        <label>${Resource.msg('label.hours', 'storeLocator', null)}:</label> <isprint value="${store.storeHours}" encoding="off"/></div>
+                </isif>
+
+                <isif condition="${!empty(store.storeEvents)}">
+                    <div class="store-attribute store-events">
+                        <label>${Resource.msg('label.events', 'storeLocator', null)}:</label> <isprint value="${store.storeEvents}" encoding="off"/></div>
+                </isif>
+
+                <isif condition="${!empty(store.custom.additionalDetails)}">
+                    <div class="store-attribute store-additional">
+                        <isprint value="${store.custom.additionalDetails}" encoding="off"/></div>
+                </isif>
+
+                <isif condition="${!empty(pdict.storeImage)}">
+                    <div class="store-attribute store-image">
+                        <img src="${pdict.storeImage.src}" class="d-block img-fluid" alt="${!empty(pdict.storeImage.alt) ? pdict.storeImage.alt : ''}" itemprop="image" />
+                    </div>
+                </isif>
+
+                <div class="mt-2 mr-3 mb-3">
+                    <button data-store-name="${store.name}" data-action="${URLUtils.url('Stores-SetPreferredStore', 'preferredStoreID', store.ID)}" class="btn btn-primary btn-block store-select-map">${Resource.msgf('button.storelocator.maps.individual', 'storeLocator', null, store.name)}</button>
+                    <div>
+                        <p class="text-center store-locator-failed-to-set-preferred alert alert-danger error-message" style="display: none;">
+                            ${Resource.msg('error.storelocator.header.set', 'storeLocator', null)}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <iscontentasset aid="storeDetailBottom"/>
+
+</isdecorate>

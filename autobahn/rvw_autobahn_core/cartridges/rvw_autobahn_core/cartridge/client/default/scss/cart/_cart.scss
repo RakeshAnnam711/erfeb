@@ -1,0 +1,212 @@
+.cart-page {
+    // top section
+    .cart-error-messaging.cart-error {
+        @include toast-message;
+    }
+    .valid-cart-error {
+        @include toast-alert;
+    }
+    .card {
+        margin-bottom: $cart-card-margin-bottom;
+    }
+    .cart-header {
+        .number-of-items {
+            font-family: $default-text-font;
+            font-size: $default-text-font-size;
+            font-weight: normal;
+            line-height: $default-text-line-height;
+            letter-spacing: $default-text-letter-spacing;
+            margin: 0
+        }
+    }
+    .product-card-footer {
+        padding-top: 0;
+    }
+
+    // product lineitem cards
+    .product-info {
+        .remove-btn {
+            @include delete-card-button;
+            margin: ($card-no-header-body-padding-top + 5) ($card-body-padding-right + 5) ($card-body-padding-bottom + 5) ($card-body-padding-left + 5);
+            left: 0;
+            right: auto;
+        }
+        label {
+            @include label-styles;
+            color: $product-card-attribute-color;
+        }
+        .product-edit,
+        .line-item-promo {
+            margin-top: 5px;
+            a {
+                display: block;
+            }
+            a+a {
+                margin-top: 5px;
+            }
+        }
+        .bonus-product-button {
+            margin: $spacer 0 0;
+        }
+        .item-image {
+            width: $product-card-image-size-sm;
+            @include media-breakpoint-up(lg) {
+                width: $product-card-image-size-lg;
+            }
+        }
+    }
+    .item-attributes {
+        .wishlist-toggle-product {
+            white-space: normal;
+            text-align: left;
+        }
+    }
+    @include media-breakpoint-up(lg) {
+        .item-attributes {
+            width: calc(100% - #{$product-card-image-size-lg});
+        }
+    }
+    .line-item-name,
+    .line-item-attributes {
+        text-overflow: $cart-product-name-text-overflow;
+        white-space: $cart-product-name-white-space;
+        overflow: hidden;
+        width: 100%;
+    }
+    .single-approaching-discount {
+        background-color: $card-body-background;
+        border: 1px solid $card-body-border-color;
+        border-radius: $card-border-radius;
+        margin-bottom: $spacer;
+        padding: $card-no-header-body-padding-top $card-body-padding-right $card-body-padding-bottom $card-body-padding-left;
+        color: $checkout-approaching-discount-color;
+    }
+    .bonus-line-item-msg {
+        margin-top: $spacer;
+        margin-left: 0;
+    }
+    .bundled-line-item {
+        &:not(:empty) {
+            border-top: 1px solid $card-body-border-color;
+            padding: $spacer 0px;
+        }
+        .item-attributes {
+            margin-left: 0;
+        }
+        .line-item-total-price {
+            @include media-breakpoint-up(lg) {
+                padding-right: $spacer;
+            }
+            @include media-breakpoint-up(xl) {
+                padding-right: $spacer-xl;
+            }
+        }
+    }
+
+    // totals column
+    .coupon-price-adjustment {
+        margin-top: $spacer;
+        background-color: $card-body-background;
+        border: 1px solid $card-body-border-color;
+        border-radius: $card-border-radius;
+        padding: $input-padding-top $input-padding-right $input-padding-bottom $input-padding-left;
+        font-size: $input-font-size-md;
+        line-height: $input-font-line-height;
+        letter-spacing: $input-font-letter-spacing;
+        position: relative;
+        .coupon-applied,
+        .coupon-not-applied {
+            @include paragraph-font-size(small);
+        }
+        .coupon-applied {
+            color: $success;
+        }
+        .coupon-not-applied {
+            color: $danger;
+        }
+        .remove-coupon {
+            @include delete-card-button;
+            padding: $input-padding-top $input-padding-right $input-padding-bottom $input-padding-left;
+        }
+        .coupon-promotion-relationship {
+            @include paragraph-font-size(small);
+            margin-bottom: 0;
+        }
+    }
+    .coupon-missing-error {
+        display: none;
+    }
+    .promotion-information {
+        @include clearfix;
+        margin-bottom: calc(#{$spacer} / 2);
+        margin-top: calc(#{$spacer} / 2);
+    }
+    .applied-promotion-discount {
+        color: $checkout-promo-message-color;
+        float: right;
+    }
+    .totals {
+        .card {
+            .card-body {
+                flex: none;
+                &:not(:first-child) {
+                    border-top: 1px solid $card-body-border-color;
+                }
+            }
+        }
+        .shipping-method {
+            margin-bottom: $spacer-xl;
+        }
+        .estimated-total {
+            margin-bottom: 0;
+            p {
+                font-size: $checkout-totals-font-size;
+                font-family: $checkout-totals-font-family;
+                font-weight: $checkout-totals-font-weight;
+                text-transform: $checkout-totals-text-transform;
+            }
+        }
+    }
+
+    // mobile footer
+    .checkout-continue {
+        @include media-breakpoint-down(xs) {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            border: 0;
+            background-color: $checkout-mobile-footer-background;
+            box-shadow: $checkout-mobile-footer-box-shadow;
+            width: 100%;
+            z-index: $z-index-sticky-footer;
+            max-height: calc(100vh - #{$header-height});
+            overflow: auto;
+        }
+        // add extra payment method button classes here for consistent styling
+        .js-paymentmethod-mutationobserver {
+            .paypal-button-container-mini,
+            .paypal-button-container-cart1,
+            .v-checkout-wrapper,
+            #js-googlepay-container,
+            .applePaySpecificityOverride {
+                margin-top: $checkout-btn-spacer;
+                margin-bottom: 0;
+                width: 100%;
+                border-radius: $button-border-radius;
+                button {
+                    width: 100%;
+                    border-radius: $button-border-radius;
+                }
+            }
+            #cart-paypal-button-container {
+                margin-top: $checkout-btn-spacer;
+                margin-bottom: 0;
+            }
+        }
+    }
+    .cart ~ .cart-recommendations {
+        border-top: $cart-recommended-products-border-top;
+        margin-top: $cart-recommended-products-margin-top;
+        padding-top: $cart-recommended-products-padding-top;
+    }
+}
