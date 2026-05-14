@@ -1,0 +1,13 @@
+Files Changed
+
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/scripts/gtm/gtmHelpers.js
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/gtm/gtmScript.isml
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/product/components/wishlistIcon.isml
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/templates/default/wishlist/components/modalShowLists.isml
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/client/default/js/components/tagManager.js
+
+Summary
+
+Purchase now sends numeric value, currency, currencyCode, and matching event_id for Meta deduplication.
+Wishlist now pushes add_to_wishlist with product data, value, currency, currencyCode, and matching event_id from the registered-user modal flow.
+GTM/Meta still needs to map these dataLayer fields into Pixel and CAPI tags.

@@ -1,0 +1,283 @@
+Salesforce Payments / Stripe Migration Summary
+==============================================
+
+Purpose
+-------
+
+We are currently using Adyen as the main card payment integration. The planned move is from Adyen to Salesforce Payments, which is Salesforce's Stripe-backed payment solution.
+
+In this project, "Stripe" should be understood as "Salesforce Payments / Commerce Payments" because the SFCC cartridge and checkout code usually refer to Salesforce Payments, not directly to Stripe.
+
+Current payment setup
+---------------------
+
+From the site configuration, the current enabled payment methods include:
+
+- AdyenComponent
+- PayPal
+- Affirm
+- Gift Certificate
+- Flow Commerce
+
+Adyen is currently enabled:
+
+- adyenCartridgeEnabled = true
+- Adyen_Mode = TEST
+- AdyenComponent payment method is enabled
+
+Salesforce Payments is currently not enabled:
+
+- sfcommercepaymentsCartridgeEnabled = false
+
+
+Target payment setup
+--------------------
+
+The target state is:
+
+- Replace Adyen card payment UI/logic with Salesforce Payments.
+- Keep PayPal as a separate payment method.
+- Keep checkout flexible enough to support other payment methods in the future.
+- First phase only needs to show the UI. It does not need to process a real payment.
+
+
+Important concept
+-----------------
+
+Salesforce Payments is the SFCC integration layer.
+Stripe is the underlying payment platform.
+
+So the migration is:
+
+Adyen -> Salesforce Payments, backed by Stripe
+
+PayPal should not be routed through Stripe/Salesforce Payments. PayPal should continue to use the PayPal cartridge/payment flow.
+
+
+How the UI should work
+----------------------
+
+The checkout payment page should continue to show multiple payment methods as separate options.
+
+Example:
+
+- Credit Card / Salesforce Payments
+- PayPal
+- Affirm
+- Gift Certificate
+
+When the shopper selects Salesforce Payments, the checkout should show the Salesforce Payments card/payment fields.
+
+When the shopper selects PayPal, the checkout should show the PayPal button/approval flow.
+
+These should be sibling payment methods on the same payment page, not nested under each other.
+
+
+Does the Salesforce Payments cartridge use an iframe?
+----------------------------------------------------
+
+Based on the repo review, the Commerce Payments cartridge does not appear to take over the entire payment page as one big iframe.
+
+The template renders a Salesforce payment element inside our checkout page:
+
+- .salesforce-payments-fields
+- .salesforce-payments-element
+- <ispayment payment-request="${pdict.multiStepPaymentRequest}"></ispayment>
+
+Important detail:
+
+Secure card fields may still use small hosted iframes internally. That is normal for Stripe-style secure fields. The key point is that the entire checkout payment page is not one hosted iframe, so we should still be able to place other payment methods like PayPal beside it.
+
+
+Recommended implementation approach
+-----------------------------------
+
+Phase 1: UI-only proof of concept
+
+1. Enable or stub Salesforce Payments enough to render the checkout payment UI.
+2. Add Salesforce Payments into the existing payment option structure.
+3. Keep PayPal as its own option.
+4. Do not call real authorization or order placement.
+5. Validate how the payment page looks and whether the UI works with the existing checkout layout.
+
+Estimated effort:
+
+- 0.5 to 1 day for a UI-only spike.
+
+
+Phase 2: Functional integration
+
+1. Disable/bypass Adyen card payment as the primary card option.
+2. Enable Salesforce Payments for card payments.
+3. Update checkout JavaScript so it branches by selected payment method.
+4. If Salesforce Payments is selected, run the Salesforce Payments confirmation flow.
+5. If PayPal is selected, run the PayPal approval flow.
+6. Clean up payment instruments when users switch between payment methods.
+7. Test 3DS, async payment redirects, failed payments, order placement, and method switching.
+
+Estimated effort:
+
+- 2 to 4 days for a clean functional implementation, depending on environment setup and testing access.
+
+
+Main challenges / risks
+-----------------------
+
+1. Checkout ownership
+
+The Commerce Payments cartridge can replace parts of checkout when enabled. If we let it fully own the payment step, it may make Salesforce Payments the only visible payment UI. That would make PayPal harder to keep cleanly.
+
+Recommendation:
+
+Integrate Salesforce Payments into the existing payment tab/content structure instead of allowing the cartridge to replace the payment page wholesale.
+
+
+2. Multiple payment methods
+
+The current checkout already supports multiple payment methods. We need to preserve that structure while replacing Adyen with Salesforce Payments.
+
+Risk:
+
+Enabling Salesforce Payments without careful template control may hide or bypass PayPal/Affirm.
+
+
+3. Different payment flows
+
+Salesforce Payments and PayPal do not complete checkout the same way.
+
+Salesforce Payments:
+
+- Uses Salesforce/Stripe payment elements.
+- Requires payment confirmation.
+- May involve 3DS or async redirect handling.
+
+PayPal:
+
+- Uses PayPal button/approval flow.
+- Returns PayPal approval/order data.
+- Should not go through Stripe.
+
+Risk:
+
+The checkout "Place Order" button must run the correct logic based on the selected payment method.
+
+
+4. Payment instrument cleanup
+
+If a shopper selects Salesforce Payments, then switches to PayPal, old Salesforce Payments instruments must be removed or ignored.
+
+If a shopper selects PayPal, then switches back to Salesforce Payments, old PayPal data must not incorrectly remain active.
+
+
+5. Styling secure fields
+
+Salesforce/Stripe secure card fields may have limited styling because sensitive fields are hosted securely.
+
+Risk:
+
+The UI may not match existing Adyen fields exactly.
+
+
+6. 3DS and async payment behavior
+
+Stripe-backed card payments may require 3DS authentication or redirect handling.
+
+Risk:
+
+Even if the UI looks simple, full payment completion needs more testing than a normal form submit.
+
+
+7. Cartridge order and template overrides
+
+The project already has many payment cartridges:
+
+- Adyen
+- PayPal
+- Affirm
+- Salesforce Payments / Commerce Payments
+
+Risk:
+
+Changing cartridge enablement or cartridge order can unexpectedly change which templates/controllers are used.
+
+
+PayPal behavior after moving to Salesforce Payments / Stripe
+------------------------------------------------------------
+
+PayPal should continue to work as a separate payment method.
+
+Expected behavior:
+
+1. Shopper opens checkout payment page.
+2. Shopper sees Salesforce Payments and PayPal as separate options.
+3. If shopper selects Salesforce Payments, checkout uses Salesforce/Stripe fields.
+4. If shopper selects PayPal, checkout uses the PayPal cartridge/button flow.
+5. PayPal does not go through Stripe.
+6. Order placement logic branches based on selected payment method.
+
+So moving card payments to Salesforce Payments does not mean PayPal disappears. It only means card payments move from Adyen to Salesforce Payments/Stripe.
+
+
+Direct answers to PM questions
+------------------------------
+
+Question:
+"need an idea of how bad it will be to implement"
+
+Answer:
+For a UI-only proof of concept, it should be low to moderate effort, around 0.5 to 1 day. For a clean production integration, it is moderate effort, around 2 to 4 days. The hardest part is not rendering the UI. The harder part is making checkout run the correct payment flow for Salesforce Payments vs PayPal.
+
+
+Question:
+"want to make sure their cartridge doesn't implement an iFrame, we need to be able to add other payment methods to the payment page"
+
+Answer:
+The cartridge does not appear to implement the whole payment page as one big iframe. It renders a Salesforce Payments element inside the checkout page. Secure card fields may use small hosted iframes internally, which is normal for Stripe-style payments, but that should not prevent us from showing PayPal or other payment methods beside it.
+
+
+Question:
+"it doesn't have to call out to anything, just enable and see what it looks like"
+
+Answer:
+That is a good first step. We can do a UI-only spike by enabling/stubbing Salesforce Payments enough to render the payment element in checkout without completing authorization or order placement.
+
+
+Question:
+"e.g. Paypal isn't through Stripe, so we need to cleanly integrate that"
+
+Answer:
+Correct. PayPal should remain separate from Stripe/Salesforce Payments. The checkout should branch by selected payment method. Salesforce Payments should run the Salesforce/Stripe flow. PayPal should run the PayPal approval flow.
+
+
+Question:
+"don't need a working payment, just need to see how the UI is implemented"
+
+Answer:
+That reduces the scope significantly. We only need to render Salesforce Payments in the payment page and confirm it can coexist with PayPal. We do not need to complete payment authorization for this phase.
+
+
+Question:
+"hoping it's like SF payments, because SF payments is a white labeled version of Stripe"
+
+Answer:
+Yes, that understanding is correct for this context. Salesforce Payments is the SFCC-facing integration, and Stripe is the underlying payment platform. In code and configuration, we should expect to work mostly with Salesforce Payments / Commerce Payments names rather than direct Stripe names.
+
+
+Final recommendation
+--------------------
+
+Do not let Salesforce Payments fully replace the checkout payment page.
+
+Instead:
+
+- Keep the current payment-options structure.
+- Replace Adyen card payment with Salesforce Payments.
+- Keep PayPal as a separate payment method.
+- First do a UI-only spike to validate rendering.
+- Then implement method-specific payment flows for production.
+
+Overall risk:
+
+- UI-only spike: low to moderate.
+- Full production integration: moderate.
+- Biggest risk: checkout flow branching and payment method switching, not the visual UI.
