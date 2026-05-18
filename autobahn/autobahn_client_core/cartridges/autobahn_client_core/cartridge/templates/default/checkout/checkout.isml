@@ -19,6 +19,7 @@
     <input type="hidden" name="get-cart-summary-data" value="${URLUtils.url('Cart-GetSummaryData')}" />
     <input type="hidden" name="get-checkout-order-summary-data" value="${URLUtils.url('Checkout-RefreshOrderSummary')}" />
     <input type="hidden" name="get-cart-page-link" value="${URLUtils.url('Cart-Show')}" />
+    <input type="hidden" name="clear-cart-url" value="${URLUtils.url('Cart-ClearCart')}" />
     <isset name="cartSummary" value="${pdict.cartSummary}" scope="page" />
 
     <div id="checkout-main"
@@ -123,7 +124,12 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-header-custom">${Resource.msg('heading.order.summary', 'checkout', null)}</h2>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h2 class="card-header-custom">${Resource.msg('heading.order.summary', 'checkout', null)}</h2>
+                                <a href="${URLUtils.url('Cart-ClearCart')}" class="btn btn-secondary clear-cart-btn">
+                                    ${Resource.msg('button.clear.cart', 'cart', null)}
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body order-total-summary">
                             <isinclude template="checkout/orderTotalSummary" />
@@ -146,7 +152,9 @@
     </div>
     <isinclude template="checkout/smartyVerificationModal" />
     <isinclude template="checkout/shipping/shippingAddressTemplate" />
-    <isinclude template="cart/cartRemoveCouponModal"/>
+    <isif condition="${!pdict.order.isAgentBasket}">
+        <isinclude template="cart/cartRemoveCouponModal"/>
+    </isif>
 
     <isinclude template="integrations/checkout/checkout/bottom" />
 

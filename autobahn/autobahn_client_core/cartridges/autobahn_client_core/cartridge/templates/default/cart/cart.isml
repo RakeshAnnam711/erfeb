@@ -18,6 +18,7 @@
     <input type="hidden" name="get-cart-summary-data" value="${URLUtils.url('Cart-GetSummaryData')}" />
     <input type="hidden" name="add-to-cart-url" value="${URLUtils.url('Cart-AddProduct')}"/>
     <input type="hidden" name="get-cart-url" value="${URLUtils.url('Cart-Get')}"/>
+    <input type="hidden" name="clear-cart-url" value="${URLUtils.url('Cart-ClearCart')}"/>
 
     <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
         <isinclude template="reporting/reportingUrls" />
@@ -99,6 +100,11 @@
             <div class="cart row">
                     <iscomment> product cards section </iscomment>
                     <div class="col-sm-7 product-cards-section" role="table" aria-label="Cart Items">
+                        <div class="d-flex justify-content-end mb-3">
+                            <a href="${URLUtils.url('Cart-ClearCart')}" class="btn btn-secondary clear-cart-btn">
+                                ${Resource.msg('button.clear.cart','cart',null)}
+                            </a>
+                        </div>
                         <isloop items="${pdict.items}" var="lineItem" status="productLoop">
                             <isif condition="${lineItem.productType === 'bundle'}">
                                 <isinclude template="cart/productCard/cartBundleCard" />
@@ -123,9 +129,11 @@
                     </div>
                     <iscomment> totals, and checkout actions </iscomment>
                     <div class="col-sm-5 card totals">
-                        <div class="card-body promocode_section px-3">
-                            <isinclude template="cart/cartPromoCode" />
-                        </div>
+                        <isif condition="${!pdict.isAgentBasket}">
+                            <div class="card-body promocode_section px-3">
+                                <isinclude template="cart/cartPromoCode" />
+                            </div>
+                        </isif>
                         <isif condition="${hasNonCouponDiscount}">
                             <div class="card-body campaigns-section">
                                 <isinclude template="cart/cartCampaignCode" />
@@ -159,7 +167,9 @@
                         <isinclude template="integrations/cart/cartIntegrationsTotals"/>
                     </div>
             </div>
-            <isinclude template="cart/cartRemoveCouponModal"/>
+            <isif condition="${!pdict.isAgentBasket}">
+                <isinclude template="cart/cartRemoveCouponModal"/>
+            </isif>
         </isif>
 
         <iscomment> YOU MAY ALSO LIKE SECTION </iscomment>

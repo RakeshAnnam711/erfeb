@@ -6,6 +6,12 @@ server.extend(module.superModule);
 var BasketMgr = require('dw/order/BasketMgr');
 var CartModel = require('*/cartridge/models/cart');
 var cartSummaryBuilder = require('*/cartridge/scripts/cart/cartSummaryBuilder');
+var agentBasketLineItemLocks = require('*/cartridge/scripts/helpers/agentBasketLineItemLocks');
+
+server.prepend('Begin', function (req, res, next) {
+    agentBasketLineItemLocks.ensureLockedLineItems(BasketMgr.getCurrentBasket());
+    next();
+});
 
 server.append('Begin', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
@@ -26,6 +32,13 @@ server.append('Begin', function (req, res, next) {
     res.viewData.totals = cartModel.totals;
     res.viewData.cartSummary = cartSummaryBuilder.getCartSummary(currentBasket);
     res.viewData.actionUrls= cartModel.actionUrls
+    if (res.viewData.order) {
+        res.viewData.order.isAgentBasket = agentBasketLineItemLocks.isRestrictedBasket(currentBasket);
+        if (res.viewData.order.items) {
+            agentBasketLineItemLocks.decorateItems(res.viewData.order.items.items, currentBasket);
+        }
+        agentBasketLineItemLocks.decorateShippingModels(res.viewData.order.shipping, currentBasket);
+    }
 
     if (currentBasket) {
         var totalBasePrice = cartSummaryBuilder.getTotalBasePrice(currentBasket);
@@ -49,6 +62,11 @@ server.get('RefreshOrderSummary', function (req, res, next) {
 
     var orderModel = new OrderModel(basket, {containerView: 'basket'});
     var cartSummary = cartSummaryBuilder.getCartSummary(basket);
+    orderModel.isAgentBasket = agentBasketLineItemLocks.isRestrictedBasket(basket);
+    if (orderModel.items) {
+        agentBasketLineItemLocks.decorateItems(orderModel.items.items, basket);
+    }
+    agentBasketLineItemLocks.decorateShippingModels(orderModel.shipping, basket);
 
     res.render('checkout/orderTotalSummary', {
         order: orderModel,
