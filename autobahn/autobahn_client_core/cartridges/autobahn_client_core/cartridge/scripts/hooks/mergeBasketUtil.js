@@ -1,5 +1,6 @@
 "use strict";
 var transaction = require("dw/system/Transaction");
+var agentBasketLineItemLocks = require("*/cartridge/scripts/helpers/agentBasketLineItemLocks");
 
 /**
  * Merges a source basket into the current basket.
@@ -14,6 +15,10 @@ function mergeBasket(sourceBasket, currentBasket) {
 	}
 	var basketMergeContext = new BasketMergeContext(currentBasket);
 	transaction.wrap(() => {
+		if (agentBasketLineItemLocks.isAgentBasket(sourceBasket)) {
+			agentBasketLineItemLocks.markCurrentLineItemsAsCSCHandoff(sourceBasket);
+		}
+
 		// merge shipments
 		mergeShipments(sourceBasket, basketMergeContext);
 		// merge coupon line items

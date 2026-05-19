@@ -5,6 +5,10 @@ var collections = require('*/cartridge/scripts/util/collections');
 var CHANNEL_TYPE_CUSTOMERSERVICECENTER = 11;
 var SESSION_KEY = 'agentLockedLineItemUUIDs';
 var SESSION_BASKET_KEY = 'agentLockedBasketUUID';
+var SESSION_AWAITING_HANDOFF_KEY = 'agentBasketClearedAwaitingHandoff';
+var CSC_LINE_ITEM_ATTR = 'isCSCHandoffLineItem';
+var LIVE_SHOPPING_LINE_ITEM_ATTR = 'isLiveShoppingLineItem';
+var BAMBUSER_LINE_ITEM_ATTR = 'isbambuserproduct';
 
 function getEnumValue(enumValue) {
     if (!enumValue) {
@@ -87,7 +91,7 @@ function isAgentBasket(basket) {
 function getStoredLockedUUIDs(basket) {
     var basketUUID = getBasketUUID(basket);
 
-    if (!basketUUID || session.custom[SESSION_BASKET_KEY] !== basketUUID || !session.custom[SESSION_KEY]) {
+    if (!basketUUID || typeof session === 'undefined' || !session.custom || session.custom[SESSION_BASKET_KEY] !== basketUUID || !session.custom[SESSION_KEY]) {
         return [];
     }
 
@@ -101,7 +105,7 @@ function getStoredLockedUUIDs(basket) {
 function hasStoredLockState(basket) {
     var basketUUID = getBasketUUID(basket);
 
-    return !!basketUUID && session.custom[SESSION_BASKET_KEY] === basketUUID && !!session.custom[SESSION_KEY];
+    return !!basketUUID && typeof session !== 'undefined' && !!session.custom && session.custom[SESSION_BASKET_KEY] === basketUUID && !!session.custom[SESSION_KEY];
 }
 
 function setLockedUUIDs(basket, lockedUUIDs) {
@@ -111,37 +115,146 @@ function setLockedUUIDs(basket, lockedUUIDs) {
         return;
     }
 
-    session.custom[SESSION_BASKET_KEY] = basketUUID;
-    session.custom[SESSION_KEY] = JSON.stringify(lockedUUIDs || []);
+    if (typeof session !== 'undefined' && session.custom) {
+        session.custom[SESSION_BASKET_KEY] = basketUUID;
+        session.custom[SESSION_KEY] = JSON.stringify(lockedUUIDs || []);
+    }
 }
 
 function clearLockedUUIDs() {
-    session.custom[SESSION_BASKET_KEY] = null;
-    session.custom[SESSION_KEY] = null;
+    if (typeof session !== 'undefined' && session.custom) {
+        session.custom[SESSION_BASKET_KEY] = null;
+        session.custom[SESSION_KEY] = null;
+    }
 }
 
-function ensureLockedLineItems(basket) {
-    var lockedUUIDs = getStoredLockedUUIDs(basket);
+function isAwaitingHandoffAfterClear() {
+    return typeof session !== 'undefined' && session.custom && session.custom[SESSION_AWAITING_HANDOFF_KEY] === true;
+}
 
-    if (hasStoredLockState(basket) || !isAgentBasket(basket)) {
+function setAwaitingHandoffAfterClear() {
+    if (typeof session !== 'undefined' && session.custom) {
+        session.custom[SESSION_AWAITING_HANDOFF_KEY] = true;
+    }
+}
+
+function clearAwaitingHandoffAfterClear() {
+    if (typeof session !== 'undefined' && session.custom) {
+        session.custom[SESSION_AWAITING_HANDOFF_KEY] = null;
+    }
+}
+
+function addUnique(uuidList, uuid) {
+    if (uuid && uuidList.indexOf(uuid) === -1) {
+        uuidList.push(uuid);
+    }
+}
+
+function getCustomBoolean(lineItem, attributeID) {
+    try {
+        return !!(lineItem && lineItem.custom && lineItem.custom[attributeID]);
+    } catch (e) {
+        return false;
+    }
+}
+
+function setCustomBoolean(lineItem, attributeID, value) {
+    try {
+        if (lineItem && lineItem.custom) {
+            lineItem.custom[attributeID] = value;
+            return true;
+        }
+    } catch (e) {
+        // The metadata may not be imported yet. The session lock still protects the basket.
+    }
+
+    return false;
+}
+
+function isCSCHandoffLineItem(lineItem) {
+    return getCustomBoolean(lineItem, CSC_LINE_ITEM_ATTR);
+}
+
+function isLiveShoppingLineItem(lineItem) {
+    return getCustomBoolean(lineItem, LIVE_SHOPPING_LINE_ITEM_ATTR) || getCustomBoolean(lineItem, BAMBUSER_LINE_ITEM_ATTR);
+}
+
+function markCSCHandoffLineItem(lineItem) {
+    setCustomBoolean(lineItem, CSC_LINE_ITEM_ATTR, true);
+}
+
+function markLiveShoppingLineItem(lineItem) {
+    setCustomBoolean(lineItem, LIVE_SHOPPING_LINE_ITEM_ATTR, true);
+}
+
+function getPersistedLockedUUIDs(basket) {
+    var lockedUUIDs = [];
+
+    if (!basket || !basket.allProductLineItems) {
         return lockedUUIDs;
     }
 
-    lockedUUIDs = [];
     collections.forEach(basket.allProductLineItems, function (lineItem) {
-        lockedUUIDs.push(lineItem.UUID);
+        if (isCSCHandoffLineItem(lineItem)) {
+            addUnique(lockedUUIDs, lineItem.UUID);
+        }
     });
 
-    setLockedUUIDs(basket, lockedUUIDs);
+    return lockedUUIDs;
+}
+
+function markCurrentLineItemsAsCSCHandoff(basket) {
+    if (!basket || !basket.allProductLineItems) {
+        return;
+    }
+
+    collections.forEach(basket.allProductLineItems, function (lineItem) {
+        markCSCHandoffLineItem(lineItem);
+    });
+}
+
+function hasProductLineItems(basket) {
+    try {
+        return !!(basket && basket.allProductLineItems && !basket.allProductLineItems.empty);
+    } catch (e) {
+        return false;
+    }
+}
+
+function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
+    var lockedUUIDs = getStoredLockedUUIDs(basket);
+    var persistedLockedUUIDs = getPersistedLockedUUIDs(basket);
+
+    persistedLockedUUIDs.forEach(function (uuid) {
+        addUnique(lockedUUIDs, uuid);
+    });
+
+    if (basket && basket.allProductLineItems && hasProductLineItems(basket) && (forceCurrentItemsLocked || (isAwaitingHandoffAfterClear() && !lockedUUIDs.length) || (isAgentBasket(basket) && !hasStoredLockState(basket) && !lockedUUIDs.length))) {
+        lockedUUIDs = [];
+
+        collections.forEach(basket.allProductLineItems, function (lineItem) {
+            markCSCHandoffLineItem(lineItem);
+            addUnique(lockedUUIDs, lineItem.UUID);
+        });
+
+        setLockedUUIDs(basket, lockedUUIDs);
+        clearAwaitingHandoffAfterClear();
+        return lockedUUIDs;
+    }
+
+    if (lockedUUIDs.length) {
+        setLockedUUIDs(basket, lockedUUIDs);
+    }
+
     return lockedUUIDs;
 }
 
 function isRestrictedBasket(basket) {
-    return isAgentBasket(basket) || hasStoredLockState(basket);
+    return isAgentBasket(basket) || hasStoredLockState(basket) || getPersistedLockedUUIDs(basket).length > 0;
 }
 
 function isLockedUUID(basket, uuid) {
-    return !!uuid && getStoredLockedUUIDs(basket).indexOf(uuid) > -1;
+    return !!uuid && ensureLockedLineItems(basket).indexOf(uuid) > -1;
 }
 
 function decorateItems(items, basket) {
@@ -172,10 +285,17 @@ function decorateShippingModels(shippingModels, basket) {
 
 module.exports = {
     clearLockedUUIDs: clearLockedUUIDs,
+    clearAwaitingHandoffAfterClear: clearAwaitingHandoffAfterClear,
     decorateItems: decorateItems,
     decorateShippingModels: decorateShippingModels,
     ensureLockedLineItems: ensureLockedLineItems,
     isAgentBasket: isAgentBasket,
+    isCSCHandoffLineItem: isCSCHandoffLineItem,
+    isLiveShoppingLineItem: isLiveShoppingLineItem,
     isLockedUUID: isLockedUUID,
-    isRestrictedBasket: isRestrictedBasket
+    isRestrictedBasket: isRestrictedBasket,
+    markCSCHandoffLineItem: markCSCHandoffLineItem,
+    markCurrentLineItemsAsCSCHandoff: markCurrentLineItemsAsCSCHandoff,
+    markLiveShoppingLineItem: markLiveShoppingLineItem,
+    setAwaitingHandoffAfterClear: setAwaitingHandoffAfterClear
 };

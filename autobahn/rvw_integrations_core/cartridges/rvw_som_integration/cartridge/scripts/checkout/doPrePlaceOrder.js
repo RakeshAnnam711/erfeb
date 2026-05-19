@@ -6,6 +6,7 @@ var URLUtils = require('dw/web/URLUtils');
 
 var dwLogger = require('dw/system/Logger').getLogger('RVW_SOM_Integration', 'SOM');
 var images = require('*/cartridge/models/product/decorators/images');
+var agentBasketLineItemLocks = require('*/cartridge/scripts/helpers/agentBasketLineItemLocks');
 
 function buildStorefrontUrl(path, fallbackUrl) {
     var storefrontBaseUrl = Site.getCurrent().getCustomPreferenceValue('storefrontBaseUrl');
@@ -24,6 +25,16 @@ function buildStorefrontUrl(path, fallbackUrl) {
     return baseUrl + relativePath;
 }
 
+function setCustomBoolean(customObject, attributeID, value) {
+    try {
+        if (customObject && customObject.custom) {
+            customObject.custom[attributeID] = value;
+        }
+    } catch (err) {
+        dwLogger.warn('Missing custom attribute definition {0}: {1}', attributeID, err);
+    }
+}
+
 /**
  * Allows an override for integrations to implement logic after an order is placed.
  * @param {dw.order.Order} order - The order object to be placed
@@ -38,6 +49,9 @@ function doPrePlaceOrder(order) {
         var billingAddress = order.getBillingAddress();
         if (shipments.length > 0) {
             dwTransaction.begin();
+            var isCSCHandoffOrder = false;
+            var isLiveShoppingOrder = false;
+
             order.custom.somCC_checkoutStorefront = somOrderHelper.GetOrderCheckoutStorefront(order);
             order.custom.rvw_autobahn__somCC_checkoutStorefront = order.custom.somCC_checkoutStorefront;
 
@@ -53,6 +67,19 @@ function doPrePlaceOrder(order) {
                 (productLineItems.length > 0 ? productLineItems.toArray() : [])
                 .forEach(function(lineItem) {
                     try {
+                        var isCSCHandoffLineItem = agentBasketLineItemLocks.isCSCHandoffLineItem(lineItem);
+                        var isLiveShoppingLineItem = agentBasketLineItemLocks.isLiveShoppingLineItem(lineItem);
+
+                        if (isCSCHandoffLineItem) {
+                            isCSCHandoffOrder = true;
+                            setCustomBoolean(lineItem, 'isCSCHandoffLineItem', true);
+                        }
+
+                        if (isLiveShoppingLineItem) {
+                            isLiveShoppingOrder = true;
+                            setCustomBoolean(lineItem, 'isLiveShoppingLineItem', true);
+                        }
+
                         var product = lineItem && lineItem.product;
 
                         if (!empty(product)) {
@@ -111,6 +138,14 @@ function doPrePlaceOrder(order) {
                     }
                 });
             });
+
+            if (isCSCHandoffOrder) {
+                setCustomBoolean(order, 'isCSCHandoffOrder', true);
+            }
+
+            if (isLiveShoppingOrder || isCSCHandoffOrder) {
+                setCustomBoolean(order, 'isLiveShoppingOrder', true);
+            }
 
             try {
                 if (!empty(billingAddress.firstName)) {

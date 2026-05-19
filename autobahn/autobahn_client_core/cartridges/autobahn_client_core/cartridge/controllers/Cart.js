@@ -53,6 +53,7 @@ server.prepend('MiniCartShow', function (req, res, next) {
 });
 
 server.prepend('AddProduct', function (req, res, next) {
+    agentBasketLineItemLocks.clearAwaitingHandoffAfterClear();
     agentBasketLineItemLocks.ensureLockedLineItems(BasketMgr.getCurrentBasket());
     next();
 });
@@ -74,6 +75,7 @@ server.append('AddProduct', function (req, res, next) {
             for (var q = 0; q < currentBasket.productLineItems.length; q++) {
                 if (productListItems[q].productID === pid) {
                     productListItems[q].custom.isbambuserproduct = true;
+                    agentBasketLineItemLocks.markLiveShoppingLineItem(productListItems[q]);
                     break;
                 }
             }
@@ -150,6 +152,8 @@ server.get('ClearCart', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
 
     if (currentBasket) {
+        var wasRestrictedBasket = agentBasketLineItemLocks.isRestrictedBasket(currentBasket);
+
         Transaction.wrap(function () {
             var productLineItems = currentBasket.getAllProductLineItems().toArray();
             var giftCertificateLineItems = currentBasket.getGiftCertificateLineItems().toArray();
@@ -174,6 +178,9 @@ server.get('ClearCart', function (req, res, next) {
 
             basketCalculationHelpers.calculateTotals(currentBasket);
             agentBasketLineItemLocks.clearLockedUUIDs();
+            if (wasRestrictedBasket) {
+                agentBasketLineItemLocks.setAwaitingHandoffAfterClear();
+            }
         });
     }
 

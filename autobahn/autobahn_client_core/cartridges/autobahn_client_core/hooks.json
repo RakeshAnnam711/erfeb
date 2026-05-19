@@ -1,6 +1,14 @@
 {
     "hooks": [
         {"name": "dw.order.mergeBasket", "script": "./cartridge/scripts/hooks/mergeBasketUtil.js"},
-        {"name": "globale.getPLICustomMetadata", "script": "./cartridge/scripts/hooks/globaleCustomMetadata.js"}
+        {"name": "globale.getPLICustomMetadata", "script": "./cartridge/scripts/hooks/globaleCustomMetadata.js"},
+        {"name": "dw.ocapi.shop.basket.storefront.afterPUT", "script": "./cartridge/scripts/hooks/cscBasketHandoff.js"},
+        {"name": "dw.ocapi.shop.basket.storefront.afterPOST", "script": "./cartridge/scripts/hooks/cscBasketHandoff.js"},
+        {"name": "dw.ocapi.shop.basket.storefront.modifyPUTResponse", "script": "./cartridge/scripts/hooks/cscBasketHandoff.js"},
+        {"name": "dw.ocapi.shop.basket.storefront.modifyPOSTResponse", "script": "./cartridge/scripts/hooks/cscBasketHandoff.js"},
+        {"name": "dw.ocapi.shop.basket.agent.afterPUT", "script": "./cartridge/scripts/hooks/cscBasketHandoff.js"},
+        {"name": "dw.ocapi.shop.basket.agent.afterPOST", "script": "./cartridge/scripts/hooks/cscBasketHandoff.js"},
+        {"name": "dw.ocapi.shop.basket.agent.modifyPUTResponse", "script": "./cartridge/scripts/hooks/cscBasketHandoff.js"},
+        {"name": "dw.ocapi.shop.basket.agent.modifyPOSTResponse", "script": "./cartridge/scripts/hooks/cscBasketHandoff.js"}
     ]
 }
