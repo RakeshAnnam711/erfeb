@@ -35,6 +35,13 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value>false</default-value>
             </attribute-definition>
+            <attribute-definition attribute-id="isStorefrontLineItem">
+                <display-name xml:lang="x-default">Storefront Line Item</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
             <attribute-definition attribute-id="isLiveShoppingLineItem">
                 <display-name xml:lang="x-default">Live Shopping Line Item</display-name>
                 <type>boolean</type>
@@ -47,6 +54,7 @@
             <attribute-group group-id="cscHandoff">
                 <display-name xml:lang="x-default">CSC Handoff</display-name>
                 <attribute attribute-id="isCSCHandoffLineItem"/>
+                <attribute attribute-id="isStorefrontLineItem"/>
                 <attribute attribute-id="isLiveShoppingLineItem"/>
             </attribute-group>
         </group-definitions>

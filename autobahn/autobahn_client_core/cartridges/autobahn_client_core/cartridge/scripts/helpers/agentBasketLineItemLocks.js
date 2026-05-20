@@ -6,7 +6,11 @@ var CHANNEL_TYPE_CUSTOMERSERVICECENTER = 11;
 var SESSION_KEY = 'agentLockedLineItemUUIDs';
 var SESSION_BASKET_KEY = 'agentLockedBasketUUID';
 var SESSION_AWAITING_HANDOFF_KEY = 'agentBasketClearedAwaitingHandoff';
+var SESSION_CUSTOMER_EDITING_KEY = 'agentBasketCustomerEditingAfterClear';
+var SESSION_STOREFRONT_KEY = 'storefrontLineItemUUIDs';
+var SESSION_STOREFRONT_BASKET_KEY = 'storefrontLineItemBasketUUID';
 var CSC_LINE_ITEM_ATTR = 'isCSCHandoffLineItem';
+var STOREFRONT_LINE_ITEM_ATTR = 'isStorefrontLineItem';
 var LIVE_SHOPPING_LINE_ITEM_ATTR = 'isLiveShoppingLineItem';
 var BAMBUSER_LINE_ITEM_ATTR = 'isbambuserproduct';
 
@@ -144,6 +148,60 @@ function clearAwaitingHandoffAfterClear() {
     }
 }
 
+function isCustomerEditingAfterClear() {
+    return typeof session !== 'undefined' && session.custom && session.custom[SESSION_CUSTOMER_EDITING_KEY] === true;
+}
+
+function setCustomerEditingAfterClear() {
+    if (typeof session !== 'undefined' && session.custom) {
+        session.custom[SESSION_CUSTOMER_EDITING_KEY] = true;
+    }
+}
+
+function clearCustomerEditingAfterClear() {
+    if (typeof session !== 'undefined' && session.custom) {
+        session.custom[SESSION_CUSTOMER_EDITING_KEY] = null;
+    }
+}
+
+function getStoredStorefrontUUIDs(basket) {
+    var basketUUID = getBasketUUID(basket);
+
+    if (!basketUUID || typeof session === 'undefined' || !session.custom || session.custom[SESSION_STOREFRONT_BASKET_KEY] !== basketUUID || !session.custom[SESSION_STOREFRONT_KEY]) {
+        return [];
+    }
+
+    try {
+        return session.custom[SESSION_STOREFRONT_KEY] ? JSON.parse(session.custom[SESSION_STOREFRONT_KEY]) : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function setStoredStorefrontUUIDs(basket, storefrontUUIDs) {
+    var basketUUID = getBasketUUID(basket);
+
+    if (basketUUID && typeof session !== 'undefined' && session.custom) {
+        session.custom[SESSION_STOREFRONT_BASKET_KEY] = basketUUID;
+        session.custom[SESSION_STOREFRONT_KEY] = JSON.stringify(storefrontUUIDs || []);
+    }
+}
+
+function getLineItemContainer(lineItem) {
+    try {
+        return lineItem.lineItemCtnr || (typeof lineItem.getLineItemCtnr === 'function' && lineItem.getLineItemCtnr());
+    } catch (e) {
+        return null;
+    }
+}
+
+function recordStorefrontProductAdd() {
+    if (isAwaitingHandoffAfterClear()) {
+        clearAwaitingHandoffAfterClear();
+        setCustomerEditingAfterClear();
+    }
+}
+
 function addUnique(uuidList, uuid) {
     if (uuid && uuidList.indexOf(uuid) === -1) {
         uuidList.push(uuid);
@@ -175,6 +233,10 @@ function isCSCHandoffLineItem(lineItem) {
     return getCustomBoolean(lineItem, CSC_LINE_ITEM_ATTR);
 }
 
+function isStorefrontLineItem(lineItem) {
+    return getCustomBoolean(lineItem, STOREFRONT_LINE_ITEM_ATTR);
+}
+
 function isLiveShoppingLineItem(lineItem) {
     return getCustomBoolean(lineItem, LIVE_SHOPPING_LINE_ITEM_ATTR) || getCustomBoolean(lineItem, BAMBUSER_LINE_ITEM_ATTR);
 }
@@ -185,6 +247,21 @@ function markCSCHandoffLineItem(lineItem) {
 
 function markLiveShoppingLineItem(lineItem) {
     setCustomBoolean(lineItem, LIVE_SHOPPING_LINE_ITEM_ATTR, true);
+}
+
+function markStorefrontLineItem(lineItem) {
+    var storefrontUUIDs;
+
+    if (!isCSCHandoffLineItem(lineItem)) {
+        setCustomBoolean(lineItem, STOREFRONT_LINE_ITEM_ATTR, true);
+        try {
+            storefrontUUIDs = getStoredStorefrontUUIDs(getLineItemContainer(lineItem));
+            addUnique(storefrontUUIDs, lineItem.UUID);
+            setStoredStorefrontUUIDs(getLineItemContainer(lineItem), storefrontUUIDs);
+        } catch (e) {
+            // The custom attribute marker above is the durable source of truth.
+        }
+    }
 }
 
 function getPersistedLockedUUIDs(basket) {
@@ -201,6 +278,23 @@ function getPersistedLockedUUIDs(basket) {
     });
 
     return lockedUUIDs;
+}
+
+function hasStorefrontLineItems(basket) {
+    var foundStorefrontItem = false;
+    var storedStorefrontUUIDs = getStoredStorefrontUUIDs(basket);
+
+    if (!basket || !basket.allProductLineItems) {
+        return false;
+    }
+
+    collections.forEach(basket.allProductLineItems, function (lineItem) {
+        if (isStorefrontLineItem(lineItem) || storedStorefrontUUIDs.indexOf(lineItem.UUID) > -1) {
+            foundStorefrontItem = true;
+        }
+    });
+
+    return foundStorefrontItem;
 }
 
 function markCurrentLineItemsAsCSCHandoff(basket) {
@@ -224,12 +318,16 @@ function hasProductLineItems(basket) {
 function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     var lockedUUIDs = getStoredLockedUUIDs(basket);
     var persistedLockedUUIDs = getPersistedLockedUUIDs(basket);
+    var hasStorefrontItems = hasStorefrontLineItems(basket);
+    var shouldAutoLockAgentBasket;
 
     persistedLockedUUIDs.forEach(function (uuid) {
         addUnique(lockedUUIDs, uuid);
     });
 
-    if (basket && basket.allProductLineItems && hasProductLineItems(basket) && (forceCurrentItemsLocked || (isAwaitingHandoffAfterClear() && !lockedUUIDs.length) || (isAgentBasket(basket) && !hasStoredLockState(basket) && !lockedUUIDs.length))) {
+    shouldAutoLockAgentBasket = isAgentBasket(basket) && !hasStoredLockState(basket) && !lockedUUIDs.length && !hasStorefrontItems;
+
+    if (basket && basket.allProductLineItems && hasProductLineItems(basket) && (forceCurrentItemsLocked || (isAwaitingHandoffAfterClear() && !lockedUUIDs.length && !hasStorefrontItems) || shouldAutoLockAgentBasket)) {
         lockedUUIDs = [];
 
         collections.forEach(basket.allProductLineItems, function (lineItem) {
@@ -239,6 +337,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
 
         setLockedUUIDs(basket, lockedUUIDs);
         clearAwaitingHandoffAfterClear();
+        clearCustomerEditingAfterClear();
         return lockedUUIDs;
     }
 
@@ -250,7 +349,17 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
 }
 
 function isRestrictedBasket(basket) {
-    return isAgentBasket(basket) || hasStoredLockState(basket) || getPersistedLockedUUIDs(basket).length > 0;
+    var hasLockedItems = hasStoredLockState(basket) || getPersistedLockedUUIDs(basket).length > 0;
+
+    if (hasLockedItems) {
+        return true;
+    }
+
+    if (hasStorefrontLineItems(basket)) {
+        return false;
+    }
+
+    return isAgentBasket(basket);
 }
 
 function isLockedUUID(basket, uuid) {
@@ -286,6 +395,7 @@ function decorateShippingModels(shippingModels, basket) {
 module.exports = {
     clearLockedUUIDs: clearLockedUUIDs,
     clearAwaitingHandoffAfterClear: clearAwaitingHandoffAfterClear,
+    clearCustomerEditingAfterClear: clearCustomerEditingAfterClear,
     decorateItems: decorateItems,
     decorateShippingModels: decorateShippingModels,
     ensureLockedLineItems: ensureLockedLineItems,
@@ -297,5 +407,7 @@ module.exports = {
     markCSCHandoffLineItem: markCSCHandoffLineItem,
     markCurrentLineItemsAsCSCHandoff: markCurrentLineItemsAsCSCHandoff,
     markLiveShoppingLineItem: markLiveShoppingLineItem,
+    markStorefrontLineItem: markStorefrontLineItem,
+    recordStorefrontProductAdd: recordStorefrontProductAdd,
     setAwaitingHandoffAfterClear: setAwaitingHandoffAfterClear
 };

@@ -53,7 +53,7 @@ server.prepend('MiniCartShow', function (req, res, next) {
 });
 
 server.prepend('AddProduct', function (req, res, next) {
-    agentBasketLineItemLocks.clearAwaitingHandoffAfterClear();
+    agentBasketLineItemLocks.recordStorefrontProductAdd();
     agentBasketLineItemLocks.ensureLockedLineItems(BasketMgr.getCurrentBasket());
     next();
 });
@@ -69,14 +69,16 @@ server.append('AddProduct', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
     var pid = req.form.pid;
 
-    if (req.form.isbambuser && req.form.pid) {
+    if (currentBasket && req.form.pid) {
         Transaction.wrap(function () {
             var productListItems = currentBasket.productLineItems;
             for (var q = 0; q < currentBasket.productLineItems.length; q++) {
                 if (productListItems[q].productID === pid) {
-                    productListItems[q].custom.isbambuserproduct = true;
-                    agentBasketLineItemLocks.markLiveShoppingLineItem(productListItems[q]);
-                    break;
+                    if (req.form.isbambuser) {
+                        productListItems[q].custom.isbambuserproduct = true;
+                        agentBasketLineItemLocks.markLiveShoppingLineItem(productListItems[q]);
+                    }
+                    agentBasketLineItemLocks.markStorefrontLineItem(productListItems[q]);
                 }
             }
         });
