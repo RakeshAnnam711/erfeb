@@ -102,7 +102,7 @@
                     <div class="col-sm-7 product-cards-section" role="table" aria-label="Cart Items">
                         <div class="d-flex justify-content-end mb-3">
                             <a href="${URLUtils.url('Cart-ClearCart')}" class="btn btn-secondary clear-cart-btn">
-                                ${Resource.msg('button.clear.cart','cart',null)}
+                                ${Resource.msg('button.remove.cart','cart',null)}
                             </a>
                         </div>
                         <isloop items="${pdict.items}" var="lineItem" status="productLoop">

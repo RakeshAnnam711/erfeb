@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-12">
                 <a href="${URLUtils.url('Cart-ClearCart')}" class="btn btn-secondary btn-block clear-cart-btn">
-                    ${Resource.msg('button.clear.cart', 'cart', null)}
+                    ${Resource.msg('button.remove.cart', 'cart', null)}
                 </a>
             </div>
             <div class="col-12">
