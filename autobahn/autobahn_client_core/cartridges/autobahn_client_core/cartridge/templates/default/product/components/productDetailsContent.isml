@@ -1,5 +1,9 @@
 <isinclude template="/components/modules" sf-toolkit="off" />
-
+<isscript>
+    var homepageRecommendationHelpers = require('*/cartridge/scripts/helpers/homepageRecommendationHelpers');
+    var recommendationProducts = homepageRecommendationHelpers.getDefaultProducts(10);
+    var hasRecommendationProducts = homepageRecommendationHelpers.hasProducts(recommendationProducts);
+</isscript>
 <isscript>
     var assets = require('*/cartridge/scripts/assets');
     assets.addJs('/js/productDetail.js');
@@ -740,10 +744,24 @@
 
     <iscomment> einsten recomenedations pdp start </iscomment>
     <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableEinsteinRecommendationOnPDP')}">
-    <div class="einstein_section overflow-hidden px-5 w-100">
-        <div class="einstein-scroll">
+    <div class="einstein_section overflow-hidden px-5 w-100" data-einstein-fallback-wrapper>
+        <div class="einstein-scroll" data-einstein-slot>
             <isslot id="einstein-pdp-recommendations" description="Einstein PDP Recommendations" context="global" />
         </div>
+        <isif condition="${hasRecommendationProducts}">
+            <div class="homepage-einstein-fallback d-none" data-einstein-fallback>
+                <div class="recommendations recommendations-homepage">
+                    <h2 class="col-12 title text-center pt-4 mb-4 recommendations-heading">${Resource.msg('label.einstein.recommendations', 'product', null)}</h2>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8 col-lg-12 value content">
+                            <isset name="end" value="${9}" scope="page" />
+                            <isset name="recommendationProducts" value="${recommendationProducts}" scope="page" />
+                            <isinclude template="components/productsNew" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </isif>
     </div>
     </isif>
     <iscomment> einsten recomenedations pdp end </iscomment>
@@ -757,6 +775,62 @@
     </div>
     </isif>
     <iscomment> einsten recomenedations RecentlyViewed </iscomment>
+    <script>
+        (function () {
+            function hasRenderedEinsteinRecommendations(container) {
+                if (!container) {
+                    return false;
+                }
+
+                return !!container.querySelector(
+                    '.recommendation-card,' +
+                    '.product-tile,' +
+                    '.tile-body,' +
+                    '[data-pid]'
+                );
+            }
+
+            function toggleEinsteinFallbacks() {
+                document.querySelectorAll('[data-einstein-fallback-wrapper]').forEach(function (wrapper) {
+                    var einsteinContainer = wrapper.querySelector('[data-einstein-slot]');
+                    var fallbackContainer = wrapper.querySelector('[data-einstein-fallback]');
+
+                    if (!einsteinContainer || !fallbackContainer) {
+                        return;
+                    }
+
+                    if (hasRenderedEinsteinRecommendations(einsteinContainer)) {
+                        einsteinContainer.classList.remove('d-none');
+                        fallbackContainer.classList.add('d-none');
+                    } else {
+                        einsteinContainer.classList.add('d-none');
+                        fallbackContainer.classList.remove('d-none');
+                    }
+                });
+            }
+
+            function initEinsteinFallbacks() {
+                toggleEinsteinFallbacks();
+                window.setTimeout(toggleEinsteinFallbacks, 300);
+                window.setTimeout(toggleEinsteinFallbacks, 1000);
+
+                if (window.MutationObserver) {
+                    document.querySelectorAll('[data-einstein-slot]').forEach(function (einsteinContainer) {
+                        new MutationObserver(toggleEinsteinFallbacks).observe(einsteinContainer, {
+                            childList: true,
+                            subtree: true
+                        });
+                    });
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initEinsteinFallbacks);
+            } else {
+                initEinsteinFallbacks();
+            }
+        }());
+    </script>
 
 
     <!-- Main Content Including Attributes and Collapsible Content -->

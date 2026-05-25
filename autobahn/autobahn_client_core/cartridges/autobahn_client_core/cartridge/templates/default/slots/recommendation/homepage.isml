@@ -1,11 +1,20 @@
-<isif condition="${slotcontent}">
+<isscript>
+    var homepageRecommendationHelpers = require('*/cartridge/scripts/helpers/homepageRecommendationHelpers');
+    var recommendationProducts = homepageRecommendationHelpers.hasProducts(slotcontent && slotcontent.content)
+        ? slotcontent.content
+        : homepageRecommendationHelpers.getDefaultProducts(10);
+    var hasRecommendationProducts = homepageRecommendationHelpers.hasProducts(recommendationProducts);
+</isscript>
+
+<isif condition="${hasRecommendationProducts}">
     <hr />
 
     <div class="recommendations recommendations-homepage">
             <h2 class="col-12 title text-center pt-4 mb-4 recommendations-heading">${Resource.msg('label.einstein.recommendationsHome', 'product', null)}</h2>
         <div class="row">
             <div class="col-sm-12 col-md-8 col-lg-12 value content">
-                <isset name="end" value="${10}" scope="page" />
+                <isset name="end" value="${9}" scope="page" />
+                <isset name="recommendationProducts" value="${recommendationProducts}" scope="page" />
                 <isinclude template="components/productsNew" />
             </div>
         </div>
