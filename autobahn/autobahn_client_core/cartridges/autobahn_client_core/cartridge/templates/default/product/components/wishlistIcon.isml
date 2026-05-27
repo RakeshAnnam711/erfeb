@@ -10,6 +10,7 @@
        data-removemessage="${Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname)}"
        data-includeicon="${pdict.includeicon}"
        data-includetext="${pdict.includetext}"
+       onclick="window.wgacaPendingWishlistGtmData=this.getAttribute('data-gtmdata')"
        title="${pdict.isinwishlist === 'true' ? Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname) : Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
        aria-label="${pdict.isinwishlist === 'true' ? Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname) : Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
        ${pdict.isdisabled || ''}

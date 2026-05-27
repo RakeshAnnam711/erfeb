@@ -196,6 +196,64 @@ if (!email || email === 'null' || email === 'undefined') {
     var orderId = -1;
     var dataLayerEvent = {};
 
+    window.wgacaTrackWishlistFromModal = function (button) {
+        if (!button) {
+            return;
+        }
+
+        if (button.getAttribute('data-wishlist-action-type') !== 'add') {
+            return;
+        }
+
+        if (!window.wgacaPendingWishlistGtmData) {
+            return;
+        }
+
+        var productObject;
+        try {
+            productObject = JSON.parse(window.wgacaPendingWishlistGtmData);
+        } catch (error) {
+            console.error('[GTM Wishlist] Invalid wishlist product data:', error);
+            return;
+        }
+
+        var item = Object.assign({}, productObject);
+        var currency = productObject.currency || productObject.currencyCode || 'USD';
+        var value = Number(productObject.price) || 0;
+        var itemId = productObject.item_id || productObject.id || productObject.pid || button.getAttribute('data-pid') || 'unknown';
+        var eventId = 'add_to_wishlist-' + itemId + '-' + Date.now();
+
+        delete item.currency;
+        delete item.currencyCode;
+        delete item.search_results_count;
+        delete item.search_term;
+
+        item.quantity = Number(document.querySelector('select[name="quantity"]')?.value) || 1;
+        item.affiliation = item.affiliation || 'WGACA';
+        item.item_list_id = item.item_list_id || (sessionStorage.getItem('currentPageType') || '').toLowerCase().replace(/\s+/g, '_');
+        item.item_list_name = item.item_list_name || sessionStorage.getItem('currentPageType') || '';
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ ecommerce: null });
+        window.dataLayer.push({
+            event: 'add_to_wishlist',
+            event_id: eventId,
+            ecommerce: {
+                currency: currency,
+                currencyCode: currency,
+                event_id: eventId,
+                value: value,
+                items: [item]
+            }
+        });
+
+        window.wgacaLastWishlistEvent = {
+            key: itemId,
+            time: Date.now()
+        };
+        window.wgacaPendingWishlistGtmData = null;
+    };
+
     try {
         dataLayerEvent = <isprint value="${JSON.stringify(gtmDataLayer)}" encoding="off" />;
     } catch (error) {

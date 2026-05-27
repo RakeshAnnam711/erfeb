@@ -167,8 +167,51 @@ function removeFromCart (productObject, quantity) {
  * @function addToWishlist
  * @description Click event for adding product to wishlist
  */
+function getWishlistEventId(productObject) {
+    const itemId = productObject.item_id || productObject.id || productObject.pid || 'unknown';
+    return `add_to_wishlist-${itemId}-${Date.now()}`;
+}
+
+let lastWishlistEvent = {
+    key: '',
+    time: 0
+};
+
+function getWishlistProductKey(productObject) {
+    return productObject.item_id || productObject.id || productObject.pid || '';
+}
+
+function shouldSuppressWishlistEvent(productObject) {
+    const key = getWishlistProductKey(productObject);
+    const now = Date.now();
+    const globalLastWishlistEvent = window.wgacaLastWishlistEvent || {};
+
+    if (
+        key &&
+        (
+            (lastWishlistEvent.key === key && now - lastWishlistEvent.time < 1500) ||
+            (globalLastWishlistEvent.key === key && now - globalLastWishlistEvent.time < 1500)
+        )
+    ) {
+        return true;
+    }
+
+    lastWishlistEvent = {
+        key: key,
+        time: now
+    };
+    window.wgacaLastWishlistEvent = lastWishlistEvent;
+
+    return false;
+}
+
 function addToWishlist(productObject) {
+    if (shouldSuppressWishlistEvent(productObject)) {
+        return;
+    }
+
     const item = { ...productObject };
+    const eventId = getWishlistEventId(productObject);
 
     if (item.item_list_name) {
         const currency = productObject.currency || productObject.currencyCode || 'USD';
@@ -178,8 +221,11 @@ function addToWishlist(productObject) {
         delete item.search_term;
         const obj = {
             event: 'add_to_wishlist',
+            event_id: eventId,
             ecommerce: {
                 currency: currency,
+                currencyCode: currency,
+                event_id: eventId,
                 value: Number(productObject.price) || 0,
                 items: [item]
             }
@@ -237,9 +283,13 @@ function addToWishlist(productObject) {
     delete item.currency;
     const obj = {
         event: 'add_to_wishlist',
+        event_id: eventId,
         ecommerce: {
             currency:
                 productObject.currency || productObject.currencyCode || 'USD',
+            currencyCode:
+                productObject.currency || productObject.currencyCode || 'USD',
+            event_id: eventId,
             value: item.price,
             items: [item]
         }
