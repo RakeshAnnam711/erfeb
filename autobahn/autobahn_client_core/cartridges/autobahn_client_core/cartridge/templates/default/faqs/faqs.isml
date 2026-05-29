@@ -44,7 +44,7 @@
                         Authenticators are trained on exactly what details to look for that indicate an item may be
                         counterfeit. We are constantly improving our methods and using technology to advance our
                         processes.
-                        Learn more about our <a href="$url('Page-Show', 'cid', 'authenticity-guarantee')$"
+                        Learn more about our <a href="${URLUtils.url('Page-Show', 'cid', 'wgaca-authenticity-page')}"
                             style="color: #005711; text-decoration: underline;">authentication process</a>.</p>
 
                     <div class="question">02. Where do you get your products?</div>
@@ -52,7 +52,7 @@
                     <p>Our expert buyers have sourcing partners worldwide that look for the most pristine and rare
                         vintage
                         finds. In addition, we buy from auction houses globally and directly from our vintage-loving
-                        clients. <a href="$url('Page-Show', 'cid', 'sell-to-us')$"
+                        clients. <a href="${URLUtils.url('Page-Show', 'cid', 'sell-to-us')}"
                             style="color: #005711; text-decoration: underline;">Sell to us now.</a></p>
 
                     <div class="question">03. Will I be charged tax?</div>
@@ -79,7 +79,7 @@
 
                     <p>We accept Visa, MasterCard, American Express, Discover, Affirm and PayPal as <strong>payment
                             methods</strong>.<br />
-                        Check for information on our partnership with <a href="$url('Page-Show', 'cid', 'affirm-info')$"
+                        Check for information on our partnership with <a href="${URLUtils.url('Page-Show', 'cid', 'shop-now-pay-later-affirm-klarna-info')}"
                             style="color: #005711; text-decoration: underline;">Affirm</a>.<br />
                         Check more general information on <a href="https://www.affirm.com/how-it-works"
                             style="color: #005711; text-decoration: underline;">how Affirm works</a>.<br />

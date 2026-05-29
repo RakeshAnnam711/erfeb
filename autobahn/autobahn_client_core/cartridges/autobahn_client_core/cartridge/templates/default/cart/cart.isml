@@ -98,7 +98,7 @@
                     </div>
                     <isif condition="${hasRecommendationProducts}">
                         <div class="homepage-einstein-fallback einstein-scroll d-none" data-einstein-fallback>
-                            <div class="recommendations recommendations-homepage">
+                            <div class="recommendations">
                                 <h2 class="col-12 title text-center pt-4 mb-4 recommendations-heading">${Resource.msg('label.einstein.recommendationsHome', 'product', null)}</h2>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-8 col-lg-12 value content">
@@ -192,7 +192,7 @@
                 </div>
                 <isif condition="${hasRecommendationProducts}">
                     <div class="homepage-einstein-fallback einstein-scroll d-none" data-einstein-fallback>
-                        <div class="recommendations recommendations-homepage">
+                        <div class="recommendations">
                             <h2 class="col-12 title text-center pt-4 mb-4 recommendations-heading">${Resource.msg('label.einstein.recommendations', 'product', null)}</h2>
                             <div class="row">
                                 <div class="col-sm-12 col-md-8 col-lg-12 value content">
