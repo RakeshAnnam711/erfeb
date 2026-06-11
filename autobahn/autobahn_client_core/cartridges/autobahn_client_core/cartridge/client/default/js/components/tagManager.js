@@ -1,4 +1,6 @@
 'use strict';
+const constants = require('../constants');
+const WISHLIST_EVENT_SUPPRESSION_TIMEOUT = constants.WISHLIST_EVENT_SUPPRESSION_TIMEOUT;
 window.dataLayer = window.dataLayer || [];
 
 /*
@@ -189,8 +191,8 @@ function shouldSuppressWishlistEvent(productObject) {
     if (
         key &&
         (
-            (lastWishlistEvent.key === key && now - lastWishlistEvent.time < 1500) ||
-            (globalLastWishlistEvent.key === key && now - globalLastWishlistEvent.time < 1500)
+            (lastWishlistEvent.key === key && now - lastWishlistEvent.time < WISHLIST_EVENT_SUPPRESSION_TIMEOUT) ||
+            (globalLastWishlistEvent.key === key && now - globalLastWishlistEvent.time < WISHLIST_EVENT_SUPPRESSION_TIMEOUT)
         )
     ) {
         return true;
@@ -224,7 +226,6 @@ function addToWishlist(productObject) {
             event_id: eventId,
             ecommerce: {
                 currency: currency,
-                currencyCode: currency,
                 event_id: eventId,
                 value: Number(productObject.price) || 0,
                 items: [item]
@@ -274,8 +275,18 @@ function addToWishlist(productObject) {
         item.item_category4 = '';
     }
     var currentPageType = sessionStorage.getItem('currentPageType') || '';
-    var listId = currentPageType.toLowerCase().replace(/\s+/g, '_');  
-    var listName = currentPageType;
+    var previousPageType = sessionStorage.getItem('previousPageType') || '';
+    if (!currentPageType) {
+        try {
+            var _dlArr = window.dataLayer || [];
+            for (var _dlIdx = 0; _dlIdx < _dlArr.length; _dlIdx++) {
+                if (_dlArr[_dlIdx] && _dlArr[_dlIdx].pageType) { currentPageType = _dlArr[_dlIdx].pageType; break; }
+            }
+        } catch (_dlErr) {}
+    }
+    var listPageType = currentPageType === 'PDP Page' ? previousPageType : currentPageType;
+    var listId = listPageType.toLowerCase().replace(/\s+/g, '_');
+    var listName = listPageType;
     item.item_list_id = listId;
     item.item_list_name = listName;
     const qty = Number(document.querySelector('select[name="quantity"]')?.value) || 1;
@@ -285,10 +296,7 @@ function addToWishlist(productObject) {
         event: 'add_to_wishlist',
         event_id: eventId,
         ecommerce: {
-            currency:
-                productObject.currency || productObject.currencyCode || 'USD',
-            currencyCode:
-                productObject.currency || productObject.currencyCode || 'USD',
+            currency: productObject.currency || productObject.currencyCode || 'USD',
             event_id: eventId,
             value: item.price,
             items: [item]
@@ -298,6 +306,8 @@ function addToWishlist(productObject) {
     dataLayer.push({ ecommerce: null }); // Clear previous ecommerce data
     dataLayer.push(obj);
 }
+
+window.wgacaPushAddToWishlist = addToWishlist;
 
 var events = {
     all: function () {
@@ -326,57 +336,6 @@ var events = {
                 }
             });
 
-            // Replace jQuery DOM ready logic for wishlist toggle
-            const wishlistIcons = document.querySelectorAll('.wishlist-icon');
-            wishlistIcons.forEach(icon => {
-                const observer = new MutationObserver(mutationsList => {
-                    mutationsList.forEach(mutation => {
-                        if (
-                            mutation.type === 'attributes' &&
-                            mutation.attributeName === 'class' &&
-                            icon.classList.contains('selected')
-                        ) {
-                            const btn = icon.closest('.wishlist-toggle-product');
-                            if (btn) {
-                                const gtmData = JSON.parse(btn.getAttribute('data-gtmdata') || '{}');
-                                if (gtmData && gtmData.item_id) {
-                                    addToWishlist(gtmData);
-                                }
-                            }
-                        }
-                    });
-                });
-                observer.observe(icon, { attributes: true, attributeFilter: ['class'] });
-            });
-
-            // Replace jQuery dynamic DOM observer
-            const domObserver = new MutationObserver(mutationList => {
-                mutationList.forEach(mutation => {
-                    mutation.addedNodes.forEach(node => {
-                        if (node.nodeType === 1 && node.matches('.wishlist-icon')) {
-                            const observer = new MutationObserver(mutationsList => {
-                                mutationsList.forEach(mutation => {
-                                    if (
-                                        mutation.type === 'attributes' &&
-                                        mutation.attributeName === 'class' &&
-                                        node.classList.contains('selected')
-                                    ) {
-                                        const btn = node.closest('.wishlist-toggle-product');
-                                        if (btn) {
-                                            const gtmData = JSON.parse(btn.getAttribute('data-gtmdata') || '{}');
-                                            if (gtmData && gtmData.item_id) {
-                                                addToWishlist(gtmData);
-                                            }
-                                        }
-                                    }
-                                });
-                            });
-                            observer.observe(node, { attributes: true, attributeFilter: ['class'] });
-                        }
-                    });
-                });
-            });
-            domObserver.observe(document.body, { childList: true, subtree: true });
 
             // Replace jQuery click events for product tracking
             document.body.addEventListener('click', (event) => {

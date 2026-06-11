@@ -70,6 +70,40 @@ var updateLinkData = function(specificLinks, data) {
 
 var openToast = (data) => {
     if (data.pid) {
+        if (data.wishlistActionType === 'add') {
+            var _pid = String(data.pid);
+            var _now = Date.now();
+            var _btn = document.querySelector('[data-wishlistpid="' + _pid + '"][data-gtmdata],[data-pid="' + _pid + '"][data-gtmdata]');
+            var _raw = _btn ? _btn.getAttribute('data-gtmdata') : '';
+            var _item = { item_id: _pid, quantity: 1, affiliation: 'WGACA' };
+            if (_raw) { try { Object.assign(_item, JSON.parse(_raw)); } catch (e) {} }
+            _item.item_id = _item.item_id || _pid;
+            var _last = window.wgacaLastWishlistEvent || {};
+            if (!(_last.key === _item.item_id && _now - _last.time < 10000)) {
+                window.wgacaLastWishlistEvent = { key: _item.item_id, time: _now };
+                var _currentPage = sessionStorage.getItem('currentPageType') || '';
+                var _prevPage = sessionStorage.getItem('previousPageType') || '';
+                if (!_currentPage) {
+                    try {
+                        var _dlArr = window.dataLayer || [];
+                        for (var _dlIdx = 0; _dlIdx < _dlArr.length; _dlIdx++) {
+                            if (_dlArr[_dlIdx] && _dlArr[_dlIdx].pageType) { _currentPage = _dlArr[_dlIdx].pageType; break; }
+                        }
+                    } catch (_dlErr) {}
+                }
+                var _listPage = _currentPage === 'PDP Page' ? _prevPage : _currentPage;
+                _item.item_list_id = _item.item_list_id || _listPage.toLowerCase().replace(/\s+/g, '_');
+                _item.item_list_name = _item.item_list_name || _listPage;
+                var _currency = _item.currency || _item.currencyCode || 'USD';
+                delete _item.currencyCode;
+                delete _item.currency;
+                var _eid = 'add_to_wishlist-' + _item.item_id + '-' + _now;
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ ecommerce: null });
+                window.dataLayer.push({ event: 'add_to_wishlist', event_id: _eid, ecommerce: { currency: _currency, value: Number(_item.price) || 0, items: [_item] } });
+            }
+        }
+
         $('.wishlist-toast').trigger('show', function($toast) {
 
             if (data.wishlistName) {

@@ -27,7 +27,6 @@
                         data-wishlist-pid-quantity="<isprint value="${productList.pidQuantity}" style="INTEGER" encoding="off" />"
                         data-manage-label="${Resource.msg('link.toast.managelist', 'wishlist', null)}"
                         data-url="${pdict.wishlistAction && pdict.wishlistAction === 'move'? pdict.urls.moveProducts : pdict.urls.toggleProduct}"
-                        onclick="window.wgacaTrackWishlistFromModal && window.wgacaTrackWishlistFromModal(this)"
                     >
                         <isif condition="${productList.products[0]}">
                             <img class="wishlist-favorite-product-image" src="${productList.products[0].images.large[0].url}" alt="${productList.products[0].images.large[0].alt}" />

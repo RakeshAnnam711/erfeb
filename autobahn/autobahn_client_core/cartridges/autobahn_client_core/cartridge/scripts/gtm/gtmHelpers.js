@@ -262,7 +262,10 @@ base.getDataLayer = function (viewData) {
     var obj = base.getProductObject.apply(this, arguments);
 
     obj.brand = product.brand || '';
-    obj.product_gender = 'Women';
+
+    var master = (product.variant && product.variationModel && product.variationModel.master) ? product.variationModel.master : null;
+    var fdxGender = product.custom.fdxGender || (master ? master.custom.fdxGender : null);
+
     obj.item_variant = product.custom.material || '';
 
     var discountAmount = 0;
@@ -295,6 +298,53 @@ base.getDataLayer = function (viewData) {
     obj.stock_status = (product.availabilityModel.availability === 0) ? 'Out of stock' : 'In Stock';
     obj.currency = currencyCode;
     obj.price = salesPrice;
+
+    // Walk all categories to find the deepest merchandise navigation path (skip "brand" trees)
+    var itemCategory = '';
+    var itemCategory2 = '';
+    try {
+        var catSource = master || product;
+        var allCats = catSource.categories.iterator();
+        var bestPath = null;
+        while (allCats.hasNext()) {
+            var cat = allCats.next();
+            var path = [];
+            var current = cat;
+            while (current && current.parent) {
+                if (current.root) { break; }
+                path.unshift(current.displayName);
+                current = current.parent;
+            }
+            if (path.length > 0 && path[0].toLowerCase().indexOf('brand') === -1) {
+                if (!bestPath || path.length > bestPath.length) {
+                    bestPath = path;
+                }
+            }
+        }
+        if (bestPath && bestPath.length >= 2) {
+            itemCategory = bestPath[bestPath.length - 2];
+            itemCategory2 = bestPath[bestPath.length - 1];
+        } else if (bestPath && bestPath.length === 1) {
+            itemCategory = bestPath[0];
+        }
+        // Infer gender from top-level category when fdxGender is not set
+        if (!fdxGender && bestPath && bestPath.length > 0) {
+            var topCat = bestPath[0].toLowerCase().replace(/[^a-z]/g, '');
+            if (topCat === 'men' || topCat === 'mens') {
+                fdxGender = 'Men';
+            } else if (topCat === 'women' || topCat === 'womens') {
+                fdxGender = 'Women';
+            }
+        }
+    } catch (e) {
+        itemCategory = obj.item_category || '';
+    }
+    obj.product_gender = fdxGender ? String(fdxGender) : 'Women';
+    if (itemCategory) {
+        obj.item_category = itemCategory;
+        obj.item_category2 = itemCategory2;
+    }
+
     return obj;
 };
 

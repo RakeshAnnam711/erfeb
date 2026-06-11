@@ -7,7 +7,7 @@
         data-wishlistquantity="1"
         data-productname="${pdict.productname}"
         data-uuid="${pdict.uuid || ''}"
-        data-gtmdata='${pdict.gtmdata ? pdict.gtmdata : JSON.stringify(product.gtmData)}'
+        data-gtmdata="<isprint value="${pdict.gtmdata ? pdict.gtmdata : JSON.stringify(product.gtmData)}" encoding="htmlcontent" />"
         data-addmessage="${Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
         data-removemessage="${Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname)}"
         data-includeicon="${pdict.includeicon || 'false'}"

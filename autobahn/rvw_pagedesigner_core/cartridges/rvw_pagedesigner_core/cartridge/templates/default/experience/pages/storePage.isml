@@ -73,9 +73,6 @@
                     function initHomepageRecommendationFallback() {
                         toggleHomepageRecommendationFallback();
 
-                        window.setTimeout(toggleHomepageRecommendationFallback, 300);
-                        window.setTimeout(toggleHomepageRecommendationFallback, 1000);
-
                         if (window.MutationObserver) {
                             document.querySelectorAll('[data-einstein-slot]').forEach(function (einsteinContainer) {
                                 new MutationObserver(toggleHomepageRecommendationFallback).observe(einsteinContainer, {
