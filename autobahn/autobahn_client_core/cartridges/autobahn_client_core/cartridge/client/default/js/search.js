@@ -307,7 +307,7 @@ function createSelectedFiltersWithPriceUrl(selectedPriceFilter) {
     let {pmin, pmax} = selectedPriceFilter
     updateIntialUrl = updateIntialUrl == '' ? window.location.href : updateIntialUrl;
 
-    let urlObj = new URL(updateIntialUrl.startsWith('http') ? updateIntialUrl : 'https://dummy.com' + updateIntialUrl);
+    let urlObj = new URL(updateIntialUrl, window.location.origin);
 
     urlObj.searchParams.set('pmin', pmin);
     urlObj.searchParams.set('pmax', pmax);
@@ -592,6 +592,7 @@ function loadPriceRefineSearch(){
                 createSelectedFiltersWithPriceUrl(selectedPrice)
                 return;
             }
+            window._activePriceFilter = { pmin: minPrice, pmax: maxPrice };
             loadSearchResult(refineUrl);
             setTimeout(function () {
                 searchHelper.loadProductTiles(
@@ -680,32 +681,67 @@ function loadPriceRefineSearch(){
                 createSelectedFiltersWithPriceUrl(selectedPrice)
                 return;
             }
+            window._activePriceFilter = { pmin: minVal, pmax: maxVal };
             loadSearchResult(refineUrl);
         });
     });
 
-    // to persist filter after page reload
-    if(location.href.indexOf("pmin") != -1  || location.href.indexOf("pmax") != -1){
+    // to persist filter after page reload (desktop only — mobile uses filter-apply-btn flow)
+    if(!window.isMobile() && (location.href.indexOf("pmin") != -1  || location.href.indexOf("pmax") != -1)){
         var pMinPrice = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmin").replace(/,/g, ''));
         var pMaxPrice = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmax").replace(/,/g, ''));
 
-        // handle valid price range
-        if (pMaxPrice - pMinPrice >= priceGap && pMaxPrice <= parseInt(rangeInput[1].max) && pMinPrice >= parseInt(rangeInput[1].min)) {
-            rangeInput[0].value = pMinPrice;
-            rangeInput[1].value = pMaxPrice;
+        var sliderMin = parseInt(rangeInput[1].min);
+        var sliderMax = parseInt(rangeInput[1].max);
 
-            priceInput[0].value = pMinPrice;
-            priceInput[1].value = pMaxPrice;
+        var activePF = window._activePriceFilter;
+        if (activePF && activePF.pmin != null) {
+            // User has an active price selection — display it exactly, extending slider range if needed
+            var displayMin = activePF.pmin;
+            var displayMax = activePF.pmax;
+            var effectiveMin = Math.min(sliderMin, displayMin);
+            var effectiveMax = Math.max(sliderMax, displayMax);
 
-            range.style.left = (((pMinPrice - rangeInput[1].min) / (rangeInput[1].max - rangeInput[1].min)) * 100) + "%";
-            range.style.right = 100 - (((pMaxPrice - rangeInput[1].min) / (rangeInput[1].max - rangeInput[1].min)) * 100) + "%";
-        }
-        else {
-            // invalid price range, set back to valid range.
-            var currentUrl = location.href;
-            currentUrl = updateQueryParameter(decodeURIComponent(currentUrl), "pmin", parseInt(priceArray[0].trim()))
-            currentUrl = updateQueryParameter(decodeURIComponent(currentUrl), "pmax", parseInt(priceArray[1].trim()))
-            history.replaceState(undefined, '', currentUrl);
+            rangeInput[0].min = effectiveMin;
+            rangeInput[0].max = effectiveMax;
+            rangeInput[1].min = effectiveMin;
+            rangeInput[1].max = effectiveMax;
+
+            rangeInput[0].value = displayMin;
+            rangeInput[1].value = displayMax;
+            priceInput[0].value = displayMin;
+            priceInput[1].value = displayMax;
+
+            range.style.left = (((displayMin - effectiveMin) / (effectiveMax - effectiveMin)) * 100) + "%";
+            range.style.right = 100 - (((displayMax - effectiveMin) / (effectiveMax - effectiveMin)) * 100) + "%";
+        } else {
+            // No _activePriceFilter (e.g. direct URL load) — use URL values, extend slider if needed
+            var hasOverlap = pMaxPrice >= sliderMin && pMinPrice <= sliderMax;
+
+            if (hasOverlap) {
+                window._activePriceFilter = { pmin: pMinPrice, pmax: pMaxPrice };
+                var effectiveMin = Math.min(sliderMin, pMinPrice);
+                var effectiveMax = Math.max(sliderMax, pMaxPrice);
+
+                rangeInput[0].min = effectiveMin;
+                rangeInput[0].max = effectiveMax;
+                rangeInput[1].min = effectiveMin;
+                rangeInput[1].max = effectiveMax;
+
+                rangeInput[0].value = pMinPrice;
+                rangeInput[1].value = pMaxPrice;
+                priceInput[0].value = pMinPrice;
+                priceInput[1].value = pMaxPrice;
+
+                range.style.left = (((pMinPrice - effectiveMin) / (effectiveMax - effectiveMin)) * 100) + "%";
+                range.style.right = 100 - (((pMaxPrice - effectiveMin) / (effectiveMax - effectiveMin)) * 100) + "%";
+            } else {
+                // Truly no overlap (e.g. pmax=500 on a subcategory starting at 2350) — reset
+                var currentUrl = location.href;
+                currentUrl = updateQueryParameter(decodeURIComponent(currentUrl), "pmin", sliderMin);
+                currentUrl = updateQueryParameter(decodeURIComponent(currentUrl), "pmax", sliderMax);
+                history.replaceState(undefined, '', currentUrl);
+            }
         }
     }
 }

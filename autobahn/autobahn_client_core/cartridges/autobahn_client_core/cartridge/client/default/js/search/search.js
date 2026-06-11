@@ -1,6 +1,7 @@
 'use strict';
 
 var exports = $.extend({}, require('core/search/search'));
+var wishlistHelpers = require('core/wishlist/components/helpers');
 function updateSortOptions(response) {
     var $wrapper = $('<div>').append(response);
     var footer = $wrapper.find('.grid-footer');
@@ -13,15 +14,14 @@ function updateSortOptions(response) {
 }
 function copyPriceRange(url1, url2) {
     let url1Obj, url2Obj;
-    let base = 'https://dummy.com';
 
     try {
-        url1Obj = new URL(url1.startsWith('http') ? url1 : base + url1);
-        url2Obj = new URL(url2.startsWith('http') ? url2 : base + url2);
+        url1Obj = new URL(url1, window.location.origin);
+        url2Obj = new URL(url2, window.location.origin);
 
         ['pmin', 'pmax'].forEach(param => {
             const val = url1Obj.searchParams.get(param);
-            if (val && url2Obj.searchParams.has(param)) {
+            if (val) {
                 url2Obj.searchParams.set(param, val);
             }
         });
@@ -76,8 +76,24 @@ function applyFilter() {
 
             $(this).trigger('search:filter', event);
             module.exports.searchShared$XHR?.abort?.();
-            if (!window.isMobile()) {
-                refinementUrl = copyPriceRange(currentUrl, refinementUrl);
+            const isReset = $(this).is('button.reset');
+            if (isReset) {
+                window._activePriceFilter = null;
+            }
+            if (!window.isMobile() && !isReset) {
+                const apf = window._activePriceFilter;
+                if (apf && apf.pmin != null) {
+                    try {
+                        const urlObj = new URL(refinementUrl, window.location.origin);
+                        urlObj.searchParams.set('pmin', apf.pmin);
+                        urlObj.searchParams.set('pmax', apf.pmax);
+                        refinementUrl = refinementUrl.startsWith('http') ? urlObj.toString() : urlObj.pathname + urlObj.search;
+                    } catch(e) {
+                        refinementUrl = copyPriceRange(window.location.href, refinementUrl);
+                    }
+                } else {
+                    refinementUrl = copyPriceRange(window.location.href, refinementUrl);
+                }
             }
             if (window.isMobile() && $(this).is('.refinements li button')) {
                 refinementUrl = copyPriceRange(currentUrl, refinementUrl);
@@ -114,16 +130,17 @@ function applyFilter() {
                 success: function (response, status, xhr) {
                     // Update grid + refinements
                     parseResultsOptimized(response);
-                
+
                     loadProductTiles(document.querySelector('.product-grid'));
-                
+                    wishlistHelpers.updateLinkData();
+
                     const permalink = $(response).find(':input.permalink').val();
                     history.replaceState(
                         undefined,
                         document.title,
                         copyPriceRange(refinementUrl, permalink) || refinementUrl
                     );
-                
+
                     $('body').trigger('search:filter--success');
                 },                
 
@@ -319,6 +336,8 @@ function loadProductTiles(context, options) {
                     res.tile.innerHTML = res.html;
                     res.tile.dataset.loaded = 'true';
                 });
+
+                wishlistHelpers.updateLinkData();
 
                 isFirstBatch = false;
 
