@@ -27,52 +27,77 @@ module.exports = {
     addToCartStickyBar: function (){
 
         //main add to cart sticky vars
-        const SiteConstants = require('constants/SiteConstants');
         const addToCartStickyBar = document.getElementById('addtocart-sticky-bar');
         const addToCartContainer = document.getElementById('qty-cart-container');
         const body = document.body;
         const topHeader = document.getElementById('top-header');
+        const headerNav = document.getElementById('header-nav');
         const headerUtils = require('../utilities/headerUtils');
 
-        //if header is fixed, use just the nav bar to measure top of page, else use the entire header (may contain promo bar)
-        let topHeaderHeight = 0;
-        if (topHeader.classList.contains('fixed-header')) {
-            topHeaderHeight = headerUtils.getHeaderHeightNavOnly(); // WGACA MODIFICATION cleanup definition vs setting
+        if (!addToCartStickyBar || !addToCartContainer || addToCartStickyBar.dataset.stickyBarInitialized) {
+            return;
         }
 
-        // WGACA MODIFICATION - Update the value whenever the window is resized
-        window.addEventListener('resize', () => {
-            if (topHeader.classList.contains('fixed-header')) {
-                topHeaderHeight = document.getElementById('header-nav').offsetHeight;
-            }
-            if (addToCartStickyBar) {
-                addToCartStickyBar.style.top = `${topHeaderHeight}px`;
-            }
-        });
-        // END MODIFICATION
+        addToCartStickyBar.dataset.stickyBarInitialized = 'true';
+        addToCartStickyBar.style.transition = 'transform 550ms cubic-bezier(0.22, 1, 0.36, 1)';
+        addToCartStickyBar.style.willChange = 'transform';
 
-        if (addToCartStickyBar && addToCartContainer) {
-            window.addEventListener('scrollUpdate', function() {
-                //main sticky add to cart functionality - only show when scrolled past in-page add to cart section
-                if (window.pageYOffset > (addToCartContainer.offsetTop + addToCartContainer.offsetHeight + topHeaderHeight)) {
-                    body.classList.add('showstickybar');
-                    // WGACA MODIFICATION - reset header height
-                    if (topHeader.classList.contains('fixed-header')) {
-                        topHeaderHeight = document.getElementById('header-nav').offsetHeight;
-                    }
-                    // END MODIFICATION
-                    if (addToCartStickyBar) {
-                        addToCartStickyBar.style.top = `${topHeaderHeight}px`;
-                    }
-                } else if (body.classList.contains('showstickybar')) {
-                    body.classList.remove('showstickybar');
-                    setTimeout(() => {
-                        if (addToCartStickyBar) {
-                            addToCartStickyBar.removeAttribute('style');
-                        }
-                    }, SiteConstants.TransitionSpeed);
-                }
+        function isHeaderFixed() {
+            return topHeader.classList.contains('fixed-header')
+                && headerNav
+                && headerNav.classList.contains('fixed');
+        }
+
+        function getStickyBarTop() {
+            return isHeaderFixed()
+                ? headerUtils.getHeaderHeightNavOnly()
+                : 0;
+        }
+
+        function hideStickyBar() {
+            body.classList.remove('showstickybar');
+        }
+
+        function updateStickyBar() {
+            const addToCartRect = addToCartContainer.getBoundingClientRect();
+            const stickyBarTop = getStickyBarTop();
+            const canShowWithCurrentHeader = !topHeader.classList.contains('fixed-header')
+                || isHeaderFixed();
+            const isAddToCartAboveViewport = addToCartRect.height > 0
+                && addToCartRect.bottom <= stickyBarTop
+                && canShowWithCurrentHeader;
+
+            if (isAddToCartAboveViewport) {
+                body.classList.add('showstickybar');
+                addToCartStickyBar.style.top = `${stickyBarTop}px`;
+            } else {
+                hideStickyBar();
+            }
+        }
+
+        hideStickyBar();
+
+        window.addEventListener('scroll', updateStickyBar, { passive: true });
+        window.addEventListener('scrollUpdate', updateStickyBar);
+        window.addEventListener('resize', updateStickyBar);
+        window.addEventListener('load', updateStickyBar);
+
+        if (topHeader.classList.contains('fixed-header') && headerNav && window.MutationObserver) {
+            const headerStateObserver = new MutationObserver(() => {
+                updateStickyBar();
             });
+
+            headerStateObserver.observe(headerNav, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        }
+
+        if (window.ResizeObserver) {
+            const productLayout = addToCartContainer.closest('.product-detail');
+            const layoutObserver = new window.ResizeObserver(updateStickyBar);
+
+            layoutObserver.observe(productLayout || addToCartContainer.parentElement);
         }
     }
 };

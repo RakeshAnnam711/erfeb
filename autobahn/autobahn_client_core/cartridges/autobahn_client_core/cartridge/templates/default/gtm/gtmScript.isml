@@ -196,42 +196,43 @@ if (!email || email === 'null' || email === 'undefined') {
     var orderId = -1;
     var dataLayerEvent = {};
 
-    window.wgacaTrackWishlistFromModal = function (button) {
-        if (!button) {
+    window.wgacaPushAddToWishlist = function (productObject) {
+        if (!productObject) {
             return;
         }
 
-        if (button.getAttribute('data-wishlist-action-type') !== 'add') {
-            return;
-        }
-
-        if (!window.wgacaPendingWishlistGtmData) {
-            return;
-        }
-
-        var productObject;
-        try {
-            productObject = JSON.parse(window.wgacaPendingWishlistGtmData);
-        } catch (error) {
-            console.error('[GTM Wishlist] Invalid wishlist product data:', error);
+        var itemId = productObject.item_id || productObject.id || productObject.pid;
+        if (!itemId) {
             return;
         }
 
         var item = Object.assign({}, productObject);
+        item.item_id = itemId;
         var currency = productObject.currency || productObject.currencyCode || 'USD';
         var value = Number(productObject.price) || 0;
-        var itemId = productObject.item_id || productObject.id || productObject.pid || button.getAttribute('data-pid') || 'unknown';
         var eventId = 'add_to_wishlist-' + itemId + '-' + Date.now();
+        var lastWishlistEvent = window.wgacaLastWishlistEvent || {};
+
+        if (
+            lastWishlistEvent.key === itemId &&
+            Date.now() - lastWishlistEvent.time < 10000
+        ) {
+            return;
+        }
 
         delete item.currency;
         delete item.currencyCode;
         delete item.search_results_count;
         delete item.search_term;
 
-        item.quantity = Number(document.querySelector('select[name="quantity"]')?.value) || 1;
+        var quantitySelect = document.querySelector('select[name="quantity"]');
+        item.quantity = item.quantity || Number(quantitySelect && quantitySelect.value) || 1;
         item.affiliation = item.affiliation || 'WGACA';
-        item.item_list_id = item.item_list_id || (sessionStorage.getItem('currentPageType') || '').toLowerCase().replace(/\s+/g, '_');
-        item.item_list_name = item.item_list_name || sessionStorage.getItem('currentPageType') || '';
+        var _curPage = sessionStorage.getItem('currentPageType') || '';
+        var _prevPage = sessionStorage.getItem('previousPageType') || '';
+        var _listPage = (_curPage === 'PDP Page' && _prevPage) ? _prevPage : _curPage;
+        item.item_list_id = item.item_list_id || _listPage.toLowerCase().replace(/\s+/g, '_');
+        item.item_list_name = item.item_list_name || _listPage;
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ ecommerce: null });
@@ -251,8 +252,136 @@ if (!email || email === 'null' || email === 'undefined') {
             key: itemId,
             time: Date.now()
         };
-        window.wgacaPendingWishlistGtmData = null;
     };
+
+    function getWishlistGtmDataByPid(pid) {
+        var wishlistButton;
+
+        if (!pid) {
+            return '';
+        }
+
+        wishlistButton = document.querySelector('[data-wishlistpid="' + pid + '"][data-gtmdata], [data-pid="' + pid + '"][data-gtmdata]');
+        return wishlistButton ? wishlistButton.getAttribute('data-gtmdata') : '';
+    }
+
+    function pushPendingWishlistEvent(pid) {
+        var gtmData = window.wgacaPendingWishlistGtmData || getWishlistGtmDataByPid(pid);
+
+        if (!gtmData || !window.wgacaPushAddToWishlist) {
+            return;
+        }
+
+        try {
+            window.wgacaPushAddToWishlist(JSON.parse(gtmData));
+        } catch (error) {
+            console.error('[GTM Wishlist] Invalid wishlist product data:', error);
+        }
+    }
+
+    function getWishlistRequestParam(settings, paramName) {
+        var requestData = settings && settings.data ? settings.data : '';
+        var value = '';
+
+        if (typeof requestData === 'string') {
+            requestData.split('&').some(function (pair) {
+                var parts = pair.split('=');
+
+                if (decodeURIComponent(parts[0] || '') === paramName) {
+                    value = decodeURIComponent(parts[1] || '');
+                    return true;
+                }
+
+                return false;
+            });
+        } else if (requestData && typeof requestData === 'object') {
+            value = requestData[paramName] || '';
+        }
+
+        return value;
+    }
+
+    function isWishlistAddResponse(settings, response) {
+        var wishlistId;
+        var templateWrapper;
+        var listButton;
+
+        if (response && response.wishlistActionType) {
+            return response.wishlistActionType === 'add';
+        }
+
+        if (window.wgacaPendingWishlistAction === 'add') {
+            return true;
+        }
+
+        wishlistId = getWishlistRequestParam(settings, 'wishlistId');
+        if (!wishlistId || !response || !response.renderedTemplate) {
+            return false;
+        }
+
+        templateWrapper = document.createElement('div');
+        templateWrapper.innerHTML = response.renderedTemplate;
+        listButton = templateWrapper.querySelector('[data-wishlist-id="' + wishlistId + '"]');
+
+        return !!(listButton && listButton.classList.contains('selected'));
+    }
+
+    function registerWishlistAjaxTracker() {
+        if (!window.jQuery || window.wgacaWishlistAjaxTrackerRegistered) {
+            return false;
+        }
+
+        window.wgacaWishlistAjaxTrackerRegistered = true;
+        window.jQuery(document).ajaxSuccess(function (_event, xhr, settings) {
+            var response = xhr.responseJSON || {};
+            var isWishlistRequest = settings && settings.url && settings.url.indexOf('Wishlist-ToggleProduct') !== -1;
+            var pid = response.pid || getWishlistRequestParam(settings, 'pid') || window.wgacaPendingWishlistPid || '';
+
+            if (!isWishlistRequest || !isWishlistAddResponse(settings, response)) {
+                return;
+            }
+
+            pushPendingWishlistEvent(pid);
+            window.wgacaPendingWishlistAction = '';
+        });
+
+        return true;
+    }
+
+    window.wgacaTrackWishlistFromModal = function (button) {
+        if (!button || button.getAttribute('data-wishlist-action-type') !== 'add') {
+            return;
+        }
+
+        window.wgacaPendingWishlistAction = 'add';
+        window.wgacaPendingWishlistPid = button.getAttribute('data-pid') || '';
+        pushPendingWishlistEvent(button.getAttribute('data-pid'));
+    };
+
+    document.addEventListener('click', function (event) {
+        var wishlistButton;
+        var modalWishlistButton;
+
+        if (!event.target || !event.target.closest) {
+            return;
+        }
+
+        wishlistButton = event.target.closest('[data-wishlistpid][data-gtmdata]');
+        if (wishlistButton) {
+            window.wgacaPendingWishlistGtmData = wishlistButton.getAttribute('data-gtmdata') || '';
+            window.wgacaPendingWishlistPid = wishlistButton.getAttribute('data-wishlistpid') || '';
+        }
+
+        modalWishlistButton = event.target.closest('.wishlist-favorite-product-btn[data-wishlist-action-type="add"]');
+        if (modalWishlistButton) {
+            window.wgacaPendingWishlistAction = 'add';
+            window.wgacaPendingWishlistPid = modalWishlistButton.getAttribute('data-pid') || '';
+        }
+    }, true);
+
+    if (!registerWishlistAjaxTracker()) {
+        document.addEventListener('DOMContentLoaded', registerWishlistAjaxTracker);
+    }
 
     try {
         dataLayerEvent = <isprint value="${JSON.stringify(gtmDataLayer)}" encoding="off" />;
