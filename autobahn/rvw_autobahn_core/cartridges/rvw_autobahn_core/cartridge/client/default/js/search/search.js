@@ -327,6 +327,7 @@ baseSearch.initialize = () => $(document).ready(function () {
     localStorage.removeItem('refinement-category');
     $('.refinement-category').removeClass('active');
     $('.refinement-category').find('button.title').attr('aria-expanded', 'false');
+    wishlistHelpers.updateLinkData();
 });
 
 baseSearch.closeRefinements = function () {
