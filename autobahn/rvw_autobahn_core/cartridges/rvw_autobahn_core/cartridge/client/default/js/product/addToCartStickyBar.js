@@ -58,6 +58,12 @@ module.exports = {
             body.classList.remove('showstickybar');
         }
 
+        addToCartStickyBar.addEventListener('transitionend', function (event) {
+            if (event.propertyName === 'transform' && !body.classList.contains('showstickybar')) {
+                addToCartStickyBar.style.removeProperty('top');
+            }
+        });
+
         function updateStickyBar() {
             const addToCartRect = addToCartContainer.getBoundingClientRect();
             const stickyBarTop = getStickyBarTop();
