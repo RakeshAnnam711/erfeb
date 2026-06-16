@@ -41,6 +41,8 @@ module.exports = {
         addToCartStickyBar.dataset.stickyBarInitialized = 'true';
         addToCartStickyBar.style.transition = 'transform 550ms cubic-bezier(0.22, 1, 0.36, 1)';
         addToCartStickyBar.style.willChange = 'transform';
+        const showThresholdBuffer = 8;
+        let updateFrame = null;
 
         function isHeaderFixed() {
             return topHeader.classList.contains('fixed-header')
@@ -55,6 +57,7 @@ module.exports = {
         }
 
         function hideStickyBar() {
+            addToCartStickyBar.style.transition = 'transform 220ms ease-in';
             body.classList.remove('showstickybar');
         }
 
@@ -69,11 +72,15 @@ module.exports = {
             const stickyBarTop = getStickyBarTop();
             const canShowWithCurrentHeader = !topHeader.classList.contains('fixed-header')
                 || isHeaderFixed();
+            const triggerPoint = body.classList.contains('showstickybar')
+                ? stickyBarTop
+                : stickyBarTop - showThresholdBuffer;
             const isAddToCartAboveViewport = addToCartRect.height > 0
-                && addToCartRect.bottom <= stickyBarTop
+                && addToCartRect.bottom <= triggerPoint
                 && canShowWithCurrentHeader;
 
             if (isAddToCartAboveViewport) {
+                addToCartStickyBar.style.transition = 'transform 550ms cubic-bezier(0.22, 1, 0.36, 1)';
                 body.classList.add('showstickybar');
                 addToCartStickyBar.style.top = `${stickyBarTop}px`;
             } else {
@@ -81,16 +88,29 @@ module.exports = {
             }
         }
 
+        function scheduleStickyBarUpdate() {
+            if (updateFrame) {
+                return;
+            }
+
+            updateFrame = window.requestAnimationFrame(function () {
+                updateFrame = null;
+                updateStickyBar();
+            });
+        }
+
         hideStickyBar();
 
-        window.addEventListener('scroll', updateStickyBar, { passive: true });
-        window.addEventListener('scrollUpdate', updateStickyBar);
-        window.addEventListener('resize', updateStickyBar);
-        window.addEventListener('load', updateStickyBar);
+        window.addEventListener('scroll', scheduleStickyBarUpdate, { passive: true });
+        window.addEventListener('scrollUpdate', scheduleStickyBarUpdate);
+        window.addEventListener('resize', scheduleStickyBarUpdate);
+        window.addEventListener('load', scheduleStickyBarUpdate);
+        window.addEventListener('stickyHeaderChange', scheduleStickyBarUpdate);
+        window.addEventListener('scrollDirectionChange', scheduleStickyBarUpdate);
 
         if (topHeader.classList.contains('fixed-header') && headerNav && window.MutationObserver) {
             const headerStateObserver = new MutationObserver(() => {
-                updateStickyBar();
+                scheduleStickyBarUpdate();
             });
 
             headerStateObserver.observe(headerNav, {
@@ -101,7 +121,7 @@ module.exports = {
 
         if (window.ResizeObserver) {
             const productLayout = addToCartContainer.closest('.product-detail');
-            const layoutObserver = new window.ResizeObserver(updateStickyBar);
+            const layoutObserver = new window.ResizeObserver(scheduleStickyBarUpdate);
 
             layoutObserver.observe(productLayout || addToCartContainer.parentElement);
         }
