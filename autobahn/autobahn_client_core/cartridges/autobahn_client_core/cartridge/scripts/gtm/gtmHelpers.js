@@ -299,28 +299,48 @@ base.getDataLayer = function (viewData) {
     obj.currency = currencyCode;
     obj.price = salesPrice;
 
-    // Walk all categories to find the deepest merchandise navigation path (skip "brand" trees)
+    // Prefer the dedicated Classification Category (set on the Master Catalog product,
+    // e.g. "LUX / Jewelry"), since the storefront catalog's primaryCategory can point to a
+    // seasonal/marketing category (e.g. "Mother's Day") that isn't the real classification.
     var itemCategory = '';
     var itemCategory2 = '';
+    var bestPath = null;
     try {
         var catSource = master || product;
-        var allCats = catSource.categories.iterator();
-        var bestPath = null;
-        while (allCats.hasNext()) {
-            var cat = allCats.next();
-            var path = [];
-            var current = cat;
-            while (current && current.parent) {
-                if (current.root) { break; }
-                path.unshift(current.displayName);
-                current = current.parent;
+        var classificationCat = catSource.classificationCategory;
+        if (classificationCat) {
+            var classPath = [];
+            var classCurrent = classificationCat;
+            while (classCurrent && classCurrent.parent && !classCurrent.root) {
+                classPath.unshift(classCurrent.displayName);
+                classCurrent = classCurrent.parent;
             }
-            if (path.length > 0 && path[0].toLowerCase().indexOf('brand') === -1) {
-                if (!bestPath || path.length > bestPath.length) {
-                    bestPath = path;
+            if (classPath.length > 0) {
+                bestPath = classPath;
+            }
+        }
+
+        // Fallback: walk all categories to find the deepest merchandise navigation path
+        // (skip "brand" trees) when no classification category is set on the product.
+        if (!bestPath) {
+            var allCats = catSource.categories.iterator();
+            while (allCats.hasNext()) {
+                var cat = allCats.next();
+                var path = [];
+                var current = cat;
+                while (current && current.parent) {
+                    if (current.root) { break; }
+                    path.unshift(current.displayName);
+                    current = current.parent;
+                }
+                if (path.length > 0 && path[0].toLowerCase().indexOf('brand') === -1) {
+                    if (!bestPath || path.length > bestPath.length) {
+                        bestPath = path;
+                    }
                 }
             }
         }
+
         if (bestPath && bestPath.length >= 2) {
             itemCategory = bestPath[bestPath.length - 2];
             itemCategory2 = bestPath[bestPath.length - 1];
