@@ -22,6 +22,16 @@ function placeOrderStartPoint(lineItemContainer, paymentProcessor, paymentInstru
     return {success: true};
 }
 
+function getTaxCalculationErrorResponse() {
+    var taxCalculationHelpers = require('*/cartridge/scripts/helpers/taxCalculationHelpers');
+
+    if (taxCalculationHelpers.hasTaxCalculationError()) {
+        return taxCalculationHelpers.getTaxCalculationErrorResponse();
+    }
+
+    return null;
+}
+
 function placeOrderHandleMissingBasket() {
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('cybersourceCartridgeEnabled')) {
         if('isPaymentRedirectInvoked' in session.privacy && session.privacy.isPaymentRedirectInvoked && 'orderID' in session.privacy && null !== session.privacy.orderID) {
@@ -829,6 +839,12 @@ function submitPayment(req, res, next) {
             basketCalculationHelpers.calculateTotals(currentBasket);
         });
 
+        var taxCalculationErrorResponse = getTaxCalculationErrorResponse();
+        if (taxCalculationErrorResponse) {
+            res.json(taxCalculationErrorResponse);
+            return;
+        }
+
         // Re-calculate the payments.
         var calculatedPaymentTransaction = COHelpers.calculatePaymentTransaction(
             currentBasket
@@ -1102,6 +1118,12 @@ function placeOrder(req, res, next) {
             Transaction.wrap(function () {
                 basketCalculationHelpers.calculateTotals(currentBasket);
             });
+
+            var taxCalculationErrorResponse = getTaxCalculationErrorResponse();
+            if (taxCalculationErrorResponse) {
+                res.json(taxCalculationErrorResponse);
+                return next();
+            }
 
             // WGACA MODIFICATION - Additional Logging
             Logger.warn('rvw_integrations_core\\checkoutServicesHelper: validatePayment for the customer {0} :', currentBasket.customerEmail);

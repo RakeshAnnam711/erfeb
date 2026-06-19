@@ -228,7 +228,13 @@ baseShipping.methods.updateShippingMethodList = debounce(function ($shippingForm
         },
         success: function (data) {
             if (data.error) {
-                window.location.href = data.redirectUrl;
+                if (data.serverErrors && data.serverErrors.length) {
+                    $.each(data.serverErrors, function (index, element) {
+                        baseShipping.methods.createErrorNotification(element);
+                    });
+                } else if (data.redirectUrl) {
+                    window.location.href = data.redirectUrl;
+                }
             } else {
                 $('body').trigger('checkout:updateCheckoutView', {
                     order: data.order,

@@ -11,6 +11,18 @@ server.prepend('SubmitPayment', recaptcha.checkRecaptchaAjax);
 
 server.prepend('PlaceOrder', server.middleware.https, recaptcha.checkRecaptchaAjax);
 
+server.append('SubmitPayment', function (req, res, next) {
+    this.on('route:BeforeComplete', function (req, res) { // eslint-disable-line no-shadow
+        var taxCalculationHelpers = require('*/cartridge/scripts/helpers/taxCalculationHelpers');
+
+        if (taxCalculationHelpers.hasTaxCalculationError()) {
+            res.json(taxCalculationHelpers.getTaxCalculationErrorResponse());
+        }
+    });
+
+    next();
+});
+
 //Base SFRA doesn't even validate the shipments, so basically port CheckoutShippingServices-SubmitShipping validation here
 server.append('Get', server.middleware.https, function (req, res, next) {
     var BasketMgr = require('dw/order/BasketMgr');

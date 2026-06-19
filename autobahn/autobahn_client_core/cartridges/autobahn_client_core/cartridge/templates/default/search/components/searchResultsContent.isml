@@ -172,10 +172,10 @@
                                 <iscomment> <isinclude template="search/resultsCount" /> </iscomment>
                                 <div class="content">
                                     <div>
-                                        No search results found for "${displaySearchQuery}".
+                                        No Matches Found "${displaySearchQuery}".
                                     </div>
                                     <div>
-                                        Reset filters and try again.
+                                        Adjust your filters to discover more pre-loved styles.
                                         <a class="text-link reset pr-2"
                                         href="${pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)}
                                         </a>

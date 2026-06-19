@@ -19,10 +19,18 @@ exports.calculateTax = function (basket) {
             if (result) {
                 return new Status(Status.OK);
             }
+            if (taxJar.hasTaxCalculationError && taxJar.hasTaxCalculationError()) {
+                Logger.getLogger('TaxJar-Tax-Calculation', 'TaxJar').warn('TaxJar tax calculation failed with a checkout-blocking error.');
+                return new Status(Status.OK);
+            }
             Logger.getLogger('TaxJar-Tax-Calculation', 'TaxJar').warn('Reverting to default calculation.');
             return require('*/cartridge/scripts/hooks/cart/calculate').calculateTax(basket);
         } catch (e) {
             Logger.getLogger('TaxJar-Tax-Calculation', 'TaxJar').error('TaxJar error when calculating tax with message: ' + JSON.stringify(e));
+            if (taxJar.hasTaxCalculationError && taxJar.hasTaxCalculationError()) {
+                Logger.getLogger('TaxJar-Tax-Calculation', 'TaxJar').warn('TaxJar tax calculation failed with a checkout-blocking error.');
+                return new Status(Status.OK);
+            }
             Logger.getLogger('TaxJar-Tax-Calculation', 'TaxJar').warn('Reverting to default calculation.');
             return require('*/cartridge/scripts/hooks/cart/calculate').calculateTax(basket);
         }

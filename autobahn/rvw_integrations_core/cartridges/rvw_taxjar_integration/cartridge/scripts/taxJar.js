@@ -11,6 +11,8 @@ var MessageDigest = require('dw/crypto/MessageDigest');
 var Site = require('dw/system/Site');
 var CacheMgr = require('dw/system/CacheMgr');
 
+var TAX_CALCULATION_ERROR_KEY = 'TaxJarTaxCalculationError';
+
 /**
  * Calculates effective tax rate from taxable amount and tax collectable
  * @param  {Object} responseLineItem - Line item tax data from TaxJar response
@@ -207,12 +209,30 @@ function shipmentShouldCalculateTax(shipment) {
 
     var countryCode = shippingAddress.getCountryCode().getValue().toUpperCase();
     var stateCode = shippingAddress.getStateCode();
-    if (!TaxJarNexus.hasNexus(countryCode, stateCode)) {
+    if (countryCode !== 'US' && !TaxJarNexus.hasNexus(countryCode, stateCode)) {
         Logger.getLogger('TaxJar-Tax-Calculation', 'TaxJar').debug('Shipment does not have nexus. Country: ' + countryCode + ' State: ' + stateCode);
         return false;
     }
 
     return true;
+}
+
+function setTaxCalculationError(errorCode) {
+    if (typeof session !== 'undefined' && session.privacy) {
+        session.privacy[TAX_CALCULATION_ERROR_KEY] = errorCode;
+    }
+}
+
+function clearTaxCalculationError() {
+    if (typeof session !== 'undefined' && session.privacy) {
+        delete session.privacy[TAX_CALCULATION_ERROR_KEY];
+    }
+}
+
+function hasTaxCalculationError() {
+    return typeof session !== 'undefined'
+        && session.privacy
+        && !!session.privacy[TAX_CALCULATION_ERROR_KEY];
 }
 
 /**
@@ -505,6 +525,7 @@ function calculateTaxForShipment(shipment, basket) {
     var taxData = module.exports.getTaxData(requestBody);
 
     if (!module.exports.isTaxDataValid(taxData)) {
+        module.exports.setTaxCalculationError('invalid_address');
         return false;
     }
 
@@ -520,6 +541,8 @@ function calculateTaxForShipment(shipment, basket) {
  * @return {boolean} - true when TaxJar successfully calculated tax on basket, false when need to revert to default calculation
  **/
 function calculateTax(basket) {
+    module.exports.clearTaxCalculationError();
+
     var extraTaxCodeMap = JSON.parse(dw.system.Site.current.getCustomPreferenceValue('extraShippingTaxCodeJSON'));
     // Get a set of all special SLI tax codes
     var allExtraTaxCodes = new Set();
@@ -580,6 +603,9 @@ module.exports = {
     isEnabled: isEnabled,
     calculateTax: calculateTax,
     calculateTaxForShipment: calculateTaxForShipment,
+    setTaxCalculationError: setTaxCalculationError,
+    clearTaxCalculationError: clearTaxCalculationError,
+    hasTaxCalculationError: hasTaxCalculationError,
     getShipFromSettings: getShipFromSettings,
     filterProductTaxCode: filterProductTaxCode,
     maybeApplyLineItemTax: maybeApplyLineItemTax,
