@@ -347,13 +347,25 @@ base.getDataLayer = function (viewData) {
         } else if (bestPath && bestPath.length === 1) {
             itemCategory = bestPath[0];
         }
-        // Infer gender from top-level category when fdxGender is not set
-        if (!fdxGender && bestPath && bestPath.length > 0) {
-            var topCat = bestPath[0].toLowerCase().replace(/[^a-z]/g, '');
-            if (topCat === 'men' || topCat === 'mens') {
-                fdxGender = 'Men';
-            } else if (topCat === 'women' || topCat === 'womens') {
-                fdxGender = 'Women';
+        // Infer gender from all category paths when fdxGender is not set.
+        // classificationCategory is used for item_category but may not indicate gender
+        // (e.g. "LUX/Jewelry"), so we always scan every category the product belongs to.
+        if (!fdxGender) {
+            var genderCats = catSource.categories.iterator();
+            while (genderCats.hasNext() && !fdxGender) {
+                var gCat = genderCats.next();
+                var gCurrent = gCat;
+                while (gCurrent && !gCurrent.root) {
+                    var gName = gCurrent.displayName ? gCurrent.displayName.toLowerCase().replace(/[^a-z]/g, '') : '';
+                    if (gName === 'men' || gName === 'mens' || gName === 'menswear') {
+                        fdxGender = 'Men';
+                        break;
+                    } else if (gName === 'women' || gName === 'womens' || gName === 'womenswear') {
+                        fdxGender = 'Women';
+                        break;
+                    }
+                    gCurrent = gCurrent.parent;
+                }
             }
         }
     } catch (e) {
