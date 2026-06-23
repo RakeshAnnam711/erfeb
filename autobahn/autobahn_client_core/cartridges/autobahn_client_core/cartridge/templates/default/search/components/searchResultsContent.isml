@@ -139,7 +139,7 @@
                         <isif condition="${isNoResultsFallback && !empty(displaySearchQuery) && pdict.productSearch.productIds.length > 0}">
                             <div class="row">
                                 <div class="col-12 text-center mb-2">
-                                    No search results found for "${displaySearchQuery}".
+                                    ${Resource.msgf('label.noresultsfor.query', 'search', null, displaySearchQuery)}
                                 </div>
                                 <div class="col-12 text-center mb-2">
                                     ${Resource.msg('label.suggest.SearchCopy1', 'search', null)}
@@ -172,10 +172,14 @@
                                 <iscomment> <isinclude template="search/resultsCount" /> </iscomment>
                                 <div class="content">
                                     <div>
-                                        No search results found for "${displaySearchQuery}".
+                                        <isif condition="${!empty(displaySearchQuery)}">
+                                            ${Resource.msgf('label.noresultsfor.query', 'search', null, displaySearchQuery)}
+                                        <iselse/>
+                                            ${Resource.msg('label.no.matches.found', 'search', null)}
+                                        </isif>
                                     </div>
                                     <div>
-                                        Reset filters and try again.
+                                        ${Resource.msg('label.noresults.resetfilters', 'search', null)}
                                         <a class="text-link reset pr-2"
                                         href="${pdict.productSearch.resetLink}">${Resource.msg('link.reset', 'search', null)}
                                         </a>
