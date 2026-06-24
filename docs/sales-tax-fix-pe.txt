@@ -1,0 +1,283 @@
+FIle paths:
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/CheckoutShippingServices.js
+autobahn/link_taxjar/cartridges/int_taxjar_sfra/cartridge/scripts/hooks/taxjar/taxJarCalculate.js
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/shipping.js
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/controllers/CheckoutServices.js
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/scripts/helpers/taxCalculationHelpers.js
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/templates/resources/checkout.properties
+autobahn/rvw_integrations_core/cartridges/rvw_integrations_base/cartridge/scripts/helpers/checkoutServicesHelpers.js
+autobahn/rvw_integrations_core/cartridges/rvw_taxjar_integration/cartridge/scripts/taxJar.js
+Sales Tax Fix -Explanation
+
+What was happening before
+Customers could enter an address where the ZIP code did not match the city and state.
+
+Example:
+- City: Manhattan
+- State: NY
+- ZIP: 84074
+
+That ZIP code belongs to Utah, not Manhattan, NY.
+
+When this happened, TaxJar could not calculate tax correctly. Instead of stopping checkout, the site fell back to a default tax calculation. That fallback returned Sales Tax as $0.00, so the customer could continue without being charged the correct tax.
+
+What we changed
+Now, when TaxJar cannot calculate tax because the address is invalid, we save a temporary error flag in the shopper's session.
+
+In simple terms, the site remembers:
+
+"This checkout has a tax calculation/address problem."
+
+Then, when the shopper tries to continue to payment or place the order, checkout checks for that error flag.
+
+If the error flag exists:
+- checkout does not continue
+- the customer stays on checkout
+- the customer sees an address error message
+- the order cannot be placed
+
+If the error flag does not exist:
+- checkout continues normally
+- valid addresses can proceed
+
+What the customer sees
+For a bad ZIP/city/state combination, the customer should see:
+
+"The ZIP code entered does not match the selected City and State. Please correct the shipping address to continue."
+
+How this blocks Continue to Payment
+When the customer clicks Continue to Payment, the site sends the shipping information to the server.
+
+The server recalculates tax.
+
+If TaxJar fails because the address is bad, the server sends back an error instead of a success response.
+
+Because the response is an error, the checkout page does not move to payment.
+
+So the customer cannot continue until the address is fixed.
+
+Why this also protects Place Order
+We added the same check later in checkout too.
+
+That means even if a customer somehow gets past shipping, the site checks again before payment/place order. If the tax error is still present, the order is blocked.
+
+Final result
+Bad address:
+- tax is not allowed to silently become $0.00
+- checkout shows an error
+- customer cannot continue
+
+Good address:
+- tax calculates normally
+- checkout continues normally
+
+Code explanation
+
+1. TaxJar sets a temporary session error
+
+File:
+autobahn/rvw_integrations_core/cartridges/rvw_taxjar_integration/cartridge/scripts/taxJar.js
+
+Code:
+
+function setTaxCalculationError(errorCode) {
+    if (typeof session !== 'undefined' && session.privacy) {
+        session.privacy[TAX_CALCULATION_ERROR_KEY] = errorCode;
+    }
+}
+
+
+When TaxJar cannot calculate tax correctly, we save a temporary error in the shopper's session.
+
+This is like setting a note that says:
+
+"This checkout has a tax/address problem."
+
+2. TaxJar clears old errors before recalculating
+
+Code:
+
+function clearTaxCalculationError() {
+    if (typeof session !== 'undefined' && session.privacy) {
+        delete session.privacy[TAX_CALCULATION_ERROR_KEY];
+    }
+}
+
+function calculateTax(basket) {
+    module.exports.clearTaxCalculationError();
+
+    // tax calculation continues...
+}
+
+ :
+Before each new tax calculation, we remove any old tax error.
+
+This is important because if the customer fixes the address, we do not want the old error to keep blocking checkout.
+
+3. TaxJar marks the checkout as invalid when tax data is missing
+
+Code:
+
+var taxData = module.exports.getTaxData(requestBody);
+
+if (!module.exports.isTaxDataValid(taxData)) {
+    module.exports.setTaxCalculationError('invalid_address');
+    return false;
+}
+
+ :
+TaxJar is expected to return valid tax data.
+
+If TaxJar does not return valid tax data, we mark the session with an invalid address error.
+
+That is what prevents the system from silently treating tax as $0.00.
+
+4. The TaxJar hook avoids the old fallback behavior
+
+File:
+autobahn/link_taxjar/cartridges/int_taxjar_sfra/cartridge/scripts/hooks/taxjar/taxJarCalculate.js
+
+Code:
+
+if (taxJar.hasTaxCalculationError && taxJar.hasTaxCalculationError()) {
+    Logger.getLogger('TaxJar-Tax-Calculation', 'TaxJar').warn(
+        'TaxJar tax calculation failed with a checkout-blocking error.'
+    );
+    return new Status(Status.OK);
+}
+
+ :
+Before this fix, when TaxJar failed, the site used the default SFCC tax calculation.
+
+That default calculation was returning $0.00 tax.
+
+Now, if TaxJar failed because of this checkout-blocking address issue, we do not use the fallback tax calculation.
+
+We return control back to checkout, where the checkout controller will show the customer an error.
+
+5. Checkout checks whether the tax error exists
+
+File:
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/scripts/helpers/taxCalculationHelpers.js
+
+Code:
+
+function hasTaxCalculationError() {
+    return !!getTaxCalculationError();
+}
+
+ :
+Checkout asks:
+
+"Is there a tax calculation error saved in this customer's session?"
+
+If yes, checkout blocks the next step.
+
+If no, checkout continues normally.
+
+6. Checkout builds the customer-facing error response
+
+Code:
+
+function getTaxCalculationErrorResponse() {
+    return {
+        error: true,
+        errorStage: {
+            stage: 'shipping',
+            step: 'address'
+        },
+        fieldErrors: [],
+        serverErrors: [getTaxCalculationErrorMessage()],
+        errorMessage: getTaxCalculationErrorMessage(),
+        message: getTaxCalculationErrorMessage(),
+        redirectUrl: URLUtils.https(
+            'Checkout-Begin',
+            'stage',
+            'shipping',
+            'errormessagetext',
+            getTaxCalculationErrorMessage()
+        ).toString()
+    };
+}
+
+ :
+This creates the response that tells the checkout page:
+
+- there is an error
+- the error belongs to the shipping address step
+- show the ZIP/city/state mismatch message
+- do not move forward
+
+The redirect URL is only a fallback for older checkout JavaScript. The preferred behavior is to show the error inline without redirecting.
+
+7. Shipping checkout blocks Continue to Payment
+
+File:
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/CheckoutShippingServices.js
+
+Code:
+
+if (taxCalculationHelpers.hasTaxCalculationError()) {
+    res.json(taxCalculationHelpers.getTaxCalculationErrorResponse());
+}
+
+ :
+When the customer clicks Continue to Payment, the server checks for the tax error.
+
+If the error exists, the server sends an error response instead of a success response.
+
+Because checkout receives an error response, it does not move to payment.
+
+8. Payment and Place Order are also protected
+
+File:
+autobahn/rvw_integrations_core/cartridges/rvw_integrations_base/cartridge/scripts/helpers/checkoutServicesHelpers.js
+
+Code:
+
+var taxCalculationErrorResponse = getTaxCalculationErrorResponse();
+if (taxCalculationErrorResponse) {
+    res.json(taxCalculationErrorResponse);
+    return;
+}
+
+ :
+We also check again during payment and place order.
+
+This is a backup safety check.
+
+Even if the customer somehow reaches a later checkout step, the order still cannot be placed while the tax error exists.
+
+9. Frontend shows the error instead of redirecting
+
+File:
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/shipping.js
+
+Code:
+
+if (data.error) {
+    if (data.serverErrors && data.serverErrors.length) {
+        $.each(data.serverErrors, function (index, element) {
+            baseShipping.methods.createErrorNotification(element);
+        });
+    } else if (data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+    }
+}
+
+ :
+Before, this frontend code redirected for any error.
+
+Now it first checks whether the server sent a normal checkout error message.
+
+If yes, it shows the message on checkout.
+
+It only redirects when the server actually sends a redirect URL for a real redirect case, like cart/session problems.
+
+Short version:
+
+We added a guardrail around tax calculation.
+
+If TaxJar cannot calculate tax because the address is invalid, checkout now remembers that error, blocks the customer from continuing, and shows a clear address correction message.
+
+This prevents invalid addresses from falling back to $0.00 sales tax.

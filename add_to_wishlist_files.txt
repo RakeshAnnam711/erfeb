@@ -1,0 +1,64 @@
+ADD TO WISHLIST - GTM TRACKING CHANGES
+=======================================
+
+ISSUES FIXED
+------------
+1. Duplicate add_to_wishlist events firing for logged-in users
+2. item_list_id and item_list_name empty/incorrect on PDP wishlist adds
+3. item_category and item_category2 fields were always blank
+4. product_gender was hardcoded to "Women" for all products
+5. Product names with apostrophes breaking GTM data (JSON parse error)
+
+
+FILES CHANGED
+-------------
+
+1. autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/client/default/js/components/tagManager.js
+   - Removed MutationObserver wishlist listeners that caused duplicate events
+   - Fixed item_list_id / item_list_name: PDP now reads previousPageType so
+     navigating PLP → PDP correctly sends item_list_id = "plp_page"
+   - Exposed addToWishlist globally as window.wgacaPushAddToWishlist
+   - Replaced hardcoded dedup timeout with shared constant
+
+2. autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/gtm/gtmScript.isml
+   - Rewrote wgacaPushAddToWishlist with proper deduplication (10s window)
+   - Added AJAX tracker that catches Wishlist-ToggleProduct calls automatically
+   - Added click capture listener to store pending product data before AJAX fires
+   - Fixed item_list_id / item_list_name logic (PDP uses previousPageType)
+
+3. autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/wishlist/components/helpers.js
+   - Added GTM event push inside openToast for add actions
+   - Added 10s deduplication to prevent double events
+   - Fixed item_list_id / item_list_name: PDP uses previousPageType for correct list context
+
+4. autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/templates/default/wishlist/components/modalShowLists.isml
+   - Removed onclick="wgacaTrackWishlistFromModal(...)" from list buttons
+     (was firing a duplicate event before the AJAX even completed)
+
+5. autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/templates/default/product/components/wishlistIcon.isml
+   - Fixed data-gtmdata attribute encoding to handle apostrophes in product names
+     (was causing silent JSON parse failures for products like "O'Brien Coat")
+
+6. autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/Tile.js
+   - Removed blank overrides for item_category / item_category2
+   - Added logic to infer product_gender from PLP page category (cgid) by
+     walking the category tree for Men / Women
+
+7. autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/scripts/gtm/gtmHelpers.js
+   - Replaced hardcoded product_gender = "Women" with dynamic fdxGender
+     from product custom attributes, with category-tree fallback
+   - Added category path walking to populate item_category and item_category2
+     from the deepest merchandise navigation path (skips brand trees)
+
+
+COMPILED/STATIC FILES (patched directly — will be regenerated correctly on next build)
+---------------------------------------------------------------------------------------
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/static/default/js/main.js
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/static/default/js/wishlist/components/toggleProduct.js
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/static/default/js/wishlist/components/modalShowLists.js
+
+
+NOTE
+----
+The productDetailsContent.isml file also has a minor unrelated change
+(removed redundant setTimeout calls for Einstein fallback rendering).

@@ -1,0 +1,105 @@
+Sales Tax ZIP Code Mismatch Fix - Handoff Notes
+
+Ticket summary
+The issue was that checkout allowed customers to use a shipping address where the ZIP code did not match the selected city/state. Example: Manhattan, NY with ZIP 84074. TaxJar could not calculate tax for that invalid address, and the site fell back to the default SFCC tax calculation. Because the default tax table did not have a valid tax rate for that case, checkout showed Sales Tax as $0.00 and allowed the customer to continue.
+
+Plain English explanation
+Before the fix:
+- A customer could enter an invalid address combination, such as Manhattan, NY 84074.
+- TaxJar failed to return usable tax data for that address.
+- The site silently fell back to the platform's default tax calculation.
+- That fallback produced $0.00 sales tax.
+- The customer could continue to payment/place order with no tax charged.
+
+After the fix:
+- TaxJar failures caused by an invalid/mismatched address are captured as a checkout-blocking tax error.
+- The site no longer falls back to default $0.00 tax for this specific TaxJar failure.
+- The customer stays on checkout shipping and sees a clear message:
+  "The ZIP code entered does not match the selected City and State. Please correct the shipping address to continue."
+- The customer cannot continue until the address is corrected.
+
+Expected QA behavior
+Bad address test:
+- Address 1: 350 5th Ave
+- City: Manhattan
+- State: NY
+- ZIP: 84074
+- Expected result: checkout shows the ZIP/city/state mismatch error and does not allow the customer to proceed.
+
+Valid address regression test:
+- Address 1: 350 5th Ave
+- City: Manhattan
+- State: NY
+- ZIP: 10001
+- Expected result: TaxJar calculates tax normally and checkout can proceed.
+
+Valid address outside NJ/NY/CA:
+- Example: Salt Lake City, UT 84101
+- Expected result: TaxJar should calculate tax when applicable. The site should not default to $0.00 simply because the address is outside NJ, NY, or CA.
+
+Technical root cause
+TaxJar returned no valid tax breakdown for mismatched address data. The existing TaxJar hook treated that as a failed calculation and then called the default SFCC tax calculation fallback. The default fallback was not configured to calculate the correct regional tax in this scenario, so the order totals displayed $0.00 sales tax.
+
+Technical changes made
+1. TaxJar custom integration now records a tax calculation error in session when TaxJar returns invalid/no tax data.
+   File:
+   autobahn/rvw_integrations_core/cartridges/rvw_taxjar_integration/cartridge/scripts/taxJar.js
+
+   Key behavior:
+   - Added a session privacy key for TaxJar tax errors.
+   - Clears the error at the start of a new TaxJar calculation.
+   - Sets the error when TaxJar data is invalid.
+   - Exposes hasTaxCalculationError() so the TaxJar hook and checkout flow can detect it.
+
+2. TaxJar hook no longer falls back to default tax calculation for checkout-blocking TaxJar address failures.
+   File:
+   autobahn/link_taxjar/cartridges/int_taxjar_sfra/cartridge/scripts/hooks/taxjar/taxJarCalculate.js
+
+   Key behavior:
+   - If TaxJar returns invalid data and the custom session tax error exists, the hook returns OK without applying fallback default tax.
+   - This prevents SFCC fallback tax from setting Sales Tax to $0.00.
+   - Checkout controllers then read the session error and return a user-facing checkout error.
+
+3. New helper centralizes the tax error response.
+   File:
+   autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/scripts/helpers/taxCalculationHelpers.js
+
+   Key behavior:
+   - Reads the TaxJar tax error from session.
+   - Builds the standard checkout JSON error response.
+   - Includes serverErrors, errorMessage, message, and a safe redirect fallback to checkout shipping with errormessagetext.
+
+4. Checkout shipping and payment/place-order flows now stop when the tax error exists.
+   Files:
+   autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/CheckoutShippingServices.js
+   autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/controllers/CheckoutServices.js
+   autobahn/rvw_integrations_core/cartridges/rvw_integrations_base/cartridge/scripts/helpers/checkoutServicesHelpers.js
+
+   Key behavior:
+   - Shipping method updates, shipping submit, payment submit, and place order paths check for the tax error after recalculation.
+   - If the error exists, they return a checkout error instead of letting the customer proceed.
+
+5. Checkout frontend no longer redirects blindly for shipping-method update errors.
+   File:
+   autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/shipping.js
+
+   Key behavior:
+   - Previously, any updateShippingMethodList error caused window.location.href = data.redirectUrl.
+   - The tax error response is not a cart/session-expired redirect; it is a checkout validation error.
+   - The frontend now displays serverErrors on the checkout page and only redirects when a redirectUrl is actually provided.
+
+Important deployment note
+Because checkout frontend code is compiled into static JS, the static checkout bundle must be rebuilt/uploaded after the source JS change. If only cartridge server files are uploaded, the browser may still run old static JS and redirect instead of showing the inline error.
+
+Files to ensure are included
+- autobahn/rvw_integrations_core/cartridges/rvw_taxjar_integration/cartridge/scripts/taxJar.js
+- autobahn/link_taxjar/cartridges/int_taxjar_sfra/cartridge/scripts/hooks/taxjar/taxJarCalculate.js
+- autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/scripts/helpers/taxCalculationHelpers.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/CheckoutShippingServices.js
+- autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/controllers/CheckoutServices.js
+- autobahn/rvw_integrations_core/cartridges/rvw_integrations_base/cartridge/scripts/helpers/checkoutServicesHelpers.js
+- autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/shipping.js
+- autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/templates/resources/checkout.properties
+
+PM-friendly summary
+We fixed the tax bypass by making TaxJar address/tax failures block checkout instead of silently falling back to $0.00 sales tax. Customers now receive a clear address correction message when ZIP, city, and state do not match. Valid addresses still calculate tax normally and can proceed through checkout.

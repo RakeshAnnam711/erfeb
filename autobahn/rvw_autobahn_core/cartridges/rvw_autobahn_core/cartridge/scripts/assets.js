@@ -43,13 +43,19 @@ module.exports = {
         }
     },
     addJs: function (src, integrity, sequence) {
+        var staticSrc;
+
         // eslint-disable-next-line no-param-reassign
         sequence = !empty(sequence) ? sequence : 'defer'; // default JS behavior
 
         if (/((http(s)?:)?\/\/).*.js/.test(src)) {
             module.exports.addResource(module.exports.scripts, src, integrity, sequence);
         } else {
-            module.exports.addResource(module.exports.scripts, URLUtils.staticURL(src).toString(), integrity, sequence);
+            staticSrc = URLUtils.staticURL(src).toString();
+            if (src === '/js/productDetail.js') {
+                staticSrc += '?v=20260615-sticky-cart-9';
+            }
+            module.exports.addResource(module.exports.scripts, staticSrc, integrity, sequence);
         }
     },
     scripts: scripts,
