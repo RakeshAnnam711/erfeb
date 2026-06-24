@@ -686,6 +686,28 @@ function loadPriceRefineSearch(){
         });
     });
 
+    // Mobile: restore price text inputs from URL pmin/pmax without changing slider range (avoids breaking drag)
+    if (window.isMobile() && (location.href.indexOf("pmin") !== -1 || location.href.indexOf("pmax") !== -1)) {
+        var mobilePMin = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmin").replace(/,/g, ''));
+        var mobilePMax = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmax").replace(/,/g, ''));
+        var mobileSliderMin = parseInt(rangeInput[1].min);
+        var mobileSliderMax = parseInt(rangeInput[1].max);
+        // Always show the URL filter values in text inputs so the user sees what they set
+        priceInput[0].value = mobilePMin;
+        priceInput[1].value = mobilePMax;
+
+        // Clamp thumb positions to the slider's natural range (don't extend range on mobile)
+        var mobileThumbMin = Math.max(mobileSliderMin, Math.min(mobileSliderMax, mobilePMin));
+        var mobileThumbMax = Math.max(mobileSliderMin, Math.min(mobileSliderMax, mobilePMax));
+        rangeInput[0].value = mobileThumbMin;
+        rangeInput[1].value = mobileThumbMax;
+
+        if (mobileSliderMax > mobileSliderMin) {
+            range.style.left = (((mobileThumbMin - mobileSliderMin) / (mobileSliderMax - mobileSliderMin)) * 100) + "%";
+            range.style.right = 100 - (((mobileThumbMax - mobileSliderMin) / (mobileSliderMax - mobileSliderMin)) * 100) + "%";
+        }
+    }
+
     // to persist filter after page reload (desktop only — mobile uses filter-apply-btn flow)
     if(!window.isMobile() && (location.href.indexOf("pmin") != -1  || location.href.indexOf("pmax") != -1)){
         var pMinPrice = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmin").replace(/,/g, ''));
