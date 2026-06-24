@@ -1,0 +1,543 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+    var gtmHelpers = require('*/cartridge/scripts/gtm/gtmHelpers');
+    var globaleSession = require('*/cartridge/models/globale/session');
+    var gtmDataLayer = gtmHelpers.getDataLayer(pdict);
+    var GTMPageAction = pdict.action || (request.httpPath || '').replace(/^.+\//gi, '');
+
+    GTMPageAction = GTMPageAction.replace("-", "");
+    pdict.geCurrency = globaleSession.get('geCurrency') || request.session.getCurrency().getCurrencyCode();
+
+    var emailString = customer && customer.profile && customer.profile.email && customer.profile.email.toLowerCase();
+    var email_hash = emailString
+        ? dw.crypto.Encoding.toHex(
+              new dw.crypto.MessageDigest('SHA-256')
+                  .digestBytes(new dw.util.Bytes(emailString)))
+        : '';
+
+    var guestOrderEmail     = '';
+    var guestOrderEmailHash = '';
+
+    if (!customer.registered && pdict.order && pdict.order.orderEmail) {
+        guestOrderEmail = pdict.order.orderEmail.toLowerCase();
+        guestOrderEmailHash = dw.crypto.Encoding.toHex(
+            new dw.crypto.MessageDigest('SHA-256')
+                .digestBytes(new dw.util.Bytes(guestOrderEmail))
+        );
+    }
+
+    var pageviewEmail     = '';
+    var pageviewEmailHash = '';
+
+    if (customer.registered && emailString) {
+        pageviewEmail     = emailString;
+        pageviewEmailHash = email_hash;
+
+    } else if (guestOrderEmail) {
+        pageviewEmail     = guestOrderEmail;
+        pageviewEmailHash = guestOrderEmailHash;
+    }
+
+    pdict.pageviewEmail     = pageviewEmail;
+    pdict.pageviewEmailHash = pageviewEmailHash;
+if (!customer.registered && pdict.order && pdict.order.orderEmail) {
+    pdict.guestOrderEmailForSession = pdict.order.orderEmail.toLowerCase();
+}
+</isscript>
+<script>
+    var email  = '${pdict.pageviewEmail}';
+    if (
+    email &&
+    email !== 'null' &&
+    email !== 'undefined'
+) {
+    try {
+        sessionStorage.setItem('loggedInSessionEmail', email);
+    } catch(e) {
+        console.error('[GTM] Failed to store loggedInSessionEmail in sessionStorage:', e);
+    }
+}
+    var email_hash  = '${pdict.pageviewEmailHash}';
+    var subscribedEmail = sessionStorage.getItem('subscribedEmail');
+    var guestOrderEmailServer = '${pdict.guestOrderEmailForSession || ""}';
+if (
+  guestOrderEmailServer &&
+  guestOrderEmailServer !== 'null' &&
+  guestOrderEmailServer !== 'undefined'
+) {
+    try {
+        sessionStorage.setItem('guestOrderEmail', guestOrderEmailServer);
+        sessionStorage.setItem('loggedInSessionEmail', guestOrderEmailServer);
+    } catch(e) {
+        console.error('[GTM] Failed to store guestOrderEmail in sessionStorage:', e);
+    }
+}
+var guestOrderEmailSession = sessionStorage.getItem('guestOrderEmail');
+var loginSessionEmail = sessionStorage.getItem('loggedInSessionEmail');
+
+if (!email || email === 'null' || email === 'undefined') {
+    if (
+        guestOrderEmailSession &&
+        guestOrderEmailSession !== 'null' &&
+        guestOrderEmailSession !== 'undefined'
+    ) {
+        email = guestOrderEmailSession;
+    } else if (
+        loginSessionEmail &&
+        loginSessionEmail !== 'null' &&
+        loginSessionEmail !== 'undefined'
+    ) {
+        email = loginSessionEmail;
+    } else if (
+        subscribedEmail &&
+        subscribedEmail !== 'null' &&
+        subscribedEmail !== 'undefined'
+    ) {
+        email = subscribedEmail;
+    }
+}
+
+    var pageAction = '${(GTMPageAction || "unknown").toLowerCase()}';
+    var pageType = (pageAction == 'homeshow') ? 'Home Page' : pageAction;
+        pageType = (pageType == "searchshow") ? 'PLP Page': pageType;
+        pageType = (pageType == "cartshow") ? 'Cart Page': pageType;
+        pageType = (pageType == "blogshow") ? 'Blog Page': pageType;
+        pageType = (pageType == "productshow") ? 'PDP Page': pageType;
+        pageType = (pageType == "productshowincategory") ? 'PDP Page': pageType;
+        pageType = (pageType == "wishlistshow") ? 'Wish List Page': pageType;
+        pageType = (pageType == "checkoutbegin") ? 'Checkout Page': pageType;
+
+(function() {
+    function getNormalizedPath() {
+        return window.location.pathname;
+    }
+
+    function savePageType() {
+        var storedCurrentPageType = sessionStorage.getItem('currentPageType');
+        var storedCurrentPath = sessionStorage.getItem('currentPagePath');
+
+        var currentPath = getNormalizedPath();
+
+        if (storedCurrentPageType !== pageType || storedCurrentPath !== currentPath) {
+            if (storedCurrentPageType) {
+                sessionStorage.setItem('previousPageType', storedCurrentPageType);
+                sessionStorage.setItem('previousPagePath', storedCurrentPath);
+            } else {
+                sessionStorage.setItem('previousPageType', '');
+                sessionStorage.setItem('previousPagePath', '');
+            }
+            sessionStorage.setItem('currentPageType', pageType);
+            sessionStorage.setItem('currentPagePath', currentPath);
+        }
+    }
+
+    savePageType();
+
+    var originalPushState = history.pushState;
+    var originalReplaceState = history.replaceState;
+
+    history.pushState = function() {
+        originalPushState.apply(this, arguments);
+        setTimeout(savePageType, 0);
+    };
+
+    history.replaceState = function() {
+        originalReplaceState.apply(this, arguments);
+        setTimeout(savePageType, 0);
+    };
+
+    window.addEventListener('popstate', function() {
+        setTimeout(savePageType, 0);
+    });
+})();
+    var customObject = {};
+        customObject.pageType = pageType;
+        customObject.storeLanguage = '${request.httpLocale}';
+        customObject.currencyCode = '${pdict.geCurrency}';
+        customObject.userType  = ('${customer.authenticated}' == 'true') ? 'Registered' : 'Anonymous';
+        customObject.loggedInState = ('${customer.authenticated}' == 'true') ? 'YES' : 'No';
+    async function sha256ToHex(str) {
+    const data = new TextEncoder().encode(str.trim().toLowerCase());
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuffer))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+}
+(async function setHashes() {
+    if (
+      (!email_hash || email_hash === 'null' || email_hash === 'undefined') ||
+      (
+        email &&
+    email !== 'null' &&
+        email !== 'undefined' &&
+        email.toLowerCase() !== '${pdict.pageviewEmail}'.toLowerCase()
+      )
+    ) {
+        try {
+            if (email && email.trim() !== '') {
+                email_hash = await sha256ToHex(email);
+            } else {
+                email_hash = '';  // no email, no hash
+            }
+        } catch (e) {
+            console.error('[GTM] Failed to hash final fallback email:', e);
+        }
+    }
+
+    customObject.email = [null, undefined, '', false, 'null', 'undefined'].indexOf(email) === -1 ? email : '';
+    customObject.email_hash = [null, undefined, '', false, 'null', 'undefined'].indexOf(email_hash) === -1 ? email_hash : '';
+    customObject.user_id = '${customer.profile && customer.profile.getCustomerNo() ? customer.profile.getCustomerNo() : "" }';
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(customObject);
+
+})();
+    window.gtmEnabled = ${gtmHelpers.isEnabled ? 'true' : 'false'};
+    var orderId = -1;
+    var dataLayerEvent = {};
+
+    window.wgacaPushAddToWishlist = function (productObject) {
+        if (!productObject) {
+            return;
+        }
+
+        var itemId = productObject.item_id || productObject.id || productObject.pid;
+        if (!itemId) {
+            return;
+        }
+
+        var item = Object.assign({}, productObject);
+        item.item_id = itemId;
+        var currency = productObject.currency || productObject.currencyCode || 'USD';
+        var value = Number(productObject.price) || 0;
+        var eventId = 'add_to_wishlist-' + itemId + '-' + Date.now();
+        var lastWishlistEvent = window.wgacaLastWishlistEvent || {};
+
+        if (
+            lastWishlistEvent.key === itemId &&
+            Date.now() - lastWishlistEvent.time < 10000
+        ) {
+            return;
+        }
+
+        delete item.currency;
+        delete item.currencyCode;
+        delete item.search_results_count;
+        delete item.search_term;
+
+        var quantitySelect = document.querySelector('select[name="quantity"]');
+        item.quantity = item.quantity || Number(quantitySelect && quantitySelect.value) || 1;
+        item.affiliation = item.affiliation || 'WGACA';
+        var _curPage = sessionStorage.getItem('currentPageType') || '';
+        var _prevPage = sessionStorage.getItem('previousPageType') || '';
+        var _listPage = (_curPage === 'PDP Page' && _prevPage) ? _prevPage : _curPage;
+        item.item_list_id = item.item_list_id || _listPage.toLowerCase().replace(/\s+/g, '_');
+        item.item_list_name = item.item_list_name || _listPage;
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ ecommerce: null });
+        window.dataLayer.push({
+            event: 'add_to_wishlist',
+            event_id: eventId,
+            ecommerce: {
+                currency: currency,
+                event_id: eventId,
+                value: value,
+                items: [item]
+            }
+        });
+
+        window.wgacaLastWishlistEvent = {
+            key: itemId,
+            time: Date.now()
+        };
+    };
+
+    function getWishlistGtmDataByPid(pid) {
+        var wishlistButton;
+
+        if (!pid) {
+            return '';
+        }
+
+        wishlistButton = document.querySelector('[data-wishlistpid="' + pid + '"][data-gtmdata], [data-pid="' + pid + '"][data-gtmdata]');
+        return wishlistButton ? wishlistButton.getAttribute('data-gtmdata') : '';
+    }
+
+    function pushPendingWishlistEvent(pid) {
+        var gtmData = window.wgacaPendingWishlistGtmData || getWishlistGtmDataByPid(pid);
+
+        if (!gtmData || !window.wgacaPushAddToWishlist) {
+            return;
+        }
+
+        try {
+            window.wgacaPushAddToWishlist(JSON.parse(gtmData));
+        } catch (error) {
+            console.error('[GTM Wishlist] Invalid wishlist product data:', error);
+        }
+    }
+
+    function getWishlistRequestParam(settings, paramName) {
+        var requestData = settings && settings.data ? settings.data : '';
+        var value = '';
+
+        if (typeof requestData === 'string') {
+            requestData.split('&').some(function (pair) {
+                var parts = pair.split('=');
+
+                if (decodeURIComponent(parts[0] || '') === paramName) {
+                    value = decodeURIComponent(parts[1] || '');
+                    return true;
+                }
+
+                return false;
+            });
+        } else if (requestData && typeof requestData === 'object') {
+            value = requestData[paramName] || '';
+        }
+
+        return value;
+    }
+
+    function isWishlistAddResponse(settings, response) {
+        var wishlistId;
+        var templateWrapper;
+        var listButton;
+
+        if (response && response.wishlistActionType) {
+            return response.wishlistActionType === 'add';
+        }
+
+        if (window.wgacaPendingWishlistAction === 'add') {
+            return true;
+        }
+
+        wishlistId = getWishlistRequestParam(settings, 'wishlistId');
+        if (!wishlistId || !response || !response.renderedTemplate) {
+            return false;
+        }
+
+        templateWrapper = document.createElement('div');
+        templateWrapper.innerHTML = response.renderedTemplate;
+        listButton = templateWrapper.querySelector('[data-wishlist-id="' + wishlistId + '"]');
+
+        return !!(listButton && listButton.classList.contains('selected'));
+    }
+
+    function registerWishlistAjaxTracker() {
+        if (!window.jQuery || window.wgacaWishlistAjaxTrackerRegistered) {
+            return false;
+        }
+
+        window.wgacaWishlistAjaxTrackerRegistered = true;
+        window.jQuery(document).ajaxSuccess(function (_event, xhr, settings) {
+            var response = xhr.responseJSON || {};
+            var isWishlistRequest = settings && settings.url && settings.url.indexOf('Wishlist-ToggleProduct') !== -1;
+            var pid = response.pid || getWishlistRequestParam(settings, 'pid') || window.wgacaPendingWishlistPid || '';
+
+            if (!isWishlistRequest || !isWishlistAddResponse(settings, response)) {
+                return;
+            }
+
+            pushPendingWishlistEvent(pid);
+            window.wgacaPendingWishlistAction = '';
+        });
+
+        return true;
+    }
+
+    window.wgacaTrackWishlistFromModal = function (button) {
+        if (!button || button.getAttribute('data-wishlist-action-type') !== 'add') {
+            return;
+        }
+
+        window.wgacaPendingWishlistAction = 'add';
+        window.wgacaPendingWishlistPid = button.getAttribute('data-pid') || '';
+        pushPendingWishlistEvent(button.getAttribute('data-pid'));
+    };
+
+    document.addEventListener('click', function (event) {
+        var wishlistButton;
+        var modalWishlistButton;
+
+        if (!event.target || !event.target.closest) {
+            return;
+        }
+
+        wishlistButton = event.target.closest('[data-wishlistpid][data-gtmdata]');
+        if (wishlistButton) {
+            window.wgacaPendingWishlistGtmData = wishlistButton.getAttribute('data-gtmdata') || '';
+            window.wgacaPendingWishlistPid = wishlistButton.getAttribute('data-wishlistpid') || '';
+        }
+
+        modalWishlistButton = event.target.closest('.wishlist-favorite-product-btn[data-wishlist-action-type="add"]');
+        if (modalWishlistButton) {
+            window.wgacaPendingWishlistAction = 'add';
+            window.wgacaPendingWishlistPid = modalWishlistButton.getAttribute('data-pid') || '';
+        }
+    }, true);
+
+    if (!registerWishlistAjaxTracker()) {
+        document.addEventListener('DOMContentLoaded', registerWishlistAjaxTracker);
+    }
+
+    try {
+        dataLayerEvent = <isprint value="${JSON.stringify(gtmDataLayer)}" encoding="off" />;
+    } catch (error) {
+        window.console?.log(error);
+    }
+
+    // In all cases except Order Confirmation, the data layer should be pushed, so default to that case
+    var pushDataLayer = true;
+    if (pageAction === 'orderconfirm') {
+        // As of now, the correction is for order confirmation only
+        orderId = getOrderId(dataLayerEvent);
+
+        var ordersPushedToGoogle = getOrdersPushedToGoogle();
+        var orderHasBeenPushedToGoogle = orderHasBeenPushedToGoogle(orderId, ordersPushedToGoogle);
+        if (orderHasBeenPushedToGoogle) {
+            // If the data has already been sent, let's not push it again.
+            pushDataLayer = false;
+        }
+    }
+
+if (pushDataLayer) {
+    if (dataLayerEvent) {
+        try {
+            if (dataLayerEvent.event === 'view_item' && dataLayerEvent.ecommerce?.items) {
+                const previousPageType = sessionStorage.getItem('previousPageType') || '';
+
+                const isNonCategorySource =
+                    previousPageType === 'Home Page' ||
+                    previousPageType.startsWith('Homepage-') ||
+                    previousPageType === 'Home Page Featured' ||
+                    previousPageType === 'Cart Page' ||
+                    previousPageType === 'Wish List Page' ||
+                    previousPageType === 'wishlistshowdetail'||
+                    previousPageType === 'pageshow'||
+                    previousPageType === 'Recently Viewed'||
+                    previousPageType === 'You may also like'||
+                    previousPageType === 'SKU Search'||
+                    previousPageType === 'search_products_carousel' ||
+                    previousPageType === 'search_popularProducts_carousel' ||
+                    previousPageType === 'Mini Cart';
+
+                if (isNonCategorySource) {
+                    dataLayerEvent.ecommerce.items.forEach(function (item) {
+                        item.item_category = '';
+                        item.item_category2 = '';
+                    });
+                }
+            }
+        } catch (error) {
+            console.error('[GTM] Failed to clear item_category for view_item:', error);
+        }
+        try {
+            if (dataLayerEvent.event === 'view_item_list') {
+                const homepageClickTarget = sessionStorage.getItem('homepageClickTarget') || '';
+                const currentPageType = sessionStorage.getItem('currentPageType') || '';
+
+                if (
+                    homepageClickTarget === 'Home Page Featured' &&
+                    currentPageType === 'PLP Page'
+                ) {
+                    sessionStorage.setItem('previousPageType', homepageClickTarget);
+                    sessionStorage.removeItem('homepageClickTarget');
+                        dataLayerEvent.ecommerce.items.forEach(function (item) {
+                        item.item_category = '';
+                        item.item_category2 = '';
+                    });
+                }
+            }
+        } catch (error) {
+            console.error('Error setting previousPageType from homepageClickTarget:', error);
+        }
+
+        const list = window.localStorage.getItem('gtmlist');
+        if (dataLayerEvent.ecommerce?.detail?.actionField?.list) {
+            dataLayerEvent.ecommerce.detail.actionField.list = list;
+        }
+        try {
+            if (dataLayerEvent.ecommerce && Array.isArray(dataLayerEvent.ecommerce.items)) {
+                let previousPageType = sessionStorage.getItem('previousPageType') || '';
+                const currentPageType = sessionStorage.getItem('currentPageType') || '';
+
+                const listId = previousPageType.toLowerCase().replace(/\s+/g, '_') || '';
+                const listName = previousPageType || '';
+
+                if ('item_list_id' in dataLayerEvent.ecommerce) {
+                    dataLayerEvent.ecommerce.item_list_id = listId;
+                }
+                if ('item_list_name' in dataLayerEvent.ecommerce) {
+                    dataLayerEvent.ecommerce.item_list_name = listName;
+                }
+
+                dataLayerEvent.ecommerce.items.forEach(function (item) {
+                    item.item_list_id = listId;
+                    item.item_list_name = listName;
+                });
+            }
+        } catch (error) {
+            console.error('Error setting item_list_id and item_list_name:', error);
+        }
+        dataLayer.push(dataLayerEvent);
+
+        if (pageAction === 'orderconfirm') {
+            ordersPushedToGoogle.push(orderId);
+            window.localStorage.setItem('ordersPushedToGoogle', JSON.stringify(ordersPushedToGoogle));
+        }
+    }
+}
+
+    function getOrderId(dataLayer) {
+        if ('ecommerce' in dataLayer && 'transaction_id' in dataLayer.ecommerce) {
+            return dataLayer.ecommerce.transaction_id;
+        }
+
+        return -1;
+    }
+
+    function getOrdersPushedToGoogle() {
+        var ordersPushedToGoogleString = window.localStorage.getItem('ordersPushedToGoogle');
+        if (ordersPushedToGoogleString && ordersPushedToGoogleString.length > 0) {
+            return JSON.parse(ordersPushedToGoogleString);
+        }
+
+        return [];
+    }
+
+    function orderHasBeenPushedToGoogle(orderId, ordersPushedToGoogle) {
+        if (orderId) {
+            for (var index = 0; index < ordersPushedToGoogle.length; index++) {
+                if (ordersPushedToGoogle[index] === orderId) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+</script>
+
+<script>
+(function(w,d,s,l,i,a,p){
+  w[l]=w[l]||[];
+  w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),
+      dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+
+         '&gtm_auth='+a+'&gtm_preview='+p+'&gtm_cookies_win=x';
+  f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',
+   '${gtmHelpers.gtmContainer}',
+   '${gtmHelpers.gtmAuth}',
+   '${gtmHelpers.gtmPreview}');
+</script>
+
+<iscomment>This is where GTM events are initialized</iscomment>
+<script defer src="${URLUtils.staticURL('/js/tagmanager.js')}"></script>
+
+<isinclude template="gtm/gtmNoScript" />

@@ -1,0 +1,8 @@
+{
+    "hooks": [
+        { "name": "globale.outboundOrderStatusUpdate", "script": "./cartridge/scripts/hooks/orderNotifications.js" },
+        { "name": "globale.outboundOrderDispatchUpdate", "script": "./cartridge/scripts/hooks/orderNotifications.js" },
+        { "name": "globale.outboundOrderRefundUpdate", "script": "./cartridge/scripts/hooks/orderNotifications.js" },
+        { "name": "globale.outboundOrderRMAUpdate", "script": "./cartridge/scripts/hooks/orderNotifications.js"}
+    ]
+}

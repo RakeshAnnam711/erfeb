@@ -1,0 +1,166 @@
+<isscript>
+    var queryString = pdict.queryString;
+    var iscgid = queryString.indexOf('cgid=');
+    var ispid = queryString.indexOf('pid=');
+    var cgid = '';
+    var assetID = '';
+    if ( iscgid != -1 && ispid == -1) {
+        cgid = queryString.split('=')[1];
+        cgid = cgid.split('&lang')[0];
+        assetID = 'popular-search-'+cgid;
+        var catalogMgr = require('dw/catalog/CatalogMgr');
+        var category = catalogMgr.getCategory(cgid);
+        var popular = '';
+        if (category) {
+            popular = JSON.parse(category.custom.popularSearchKeywords);
+        }
+    }
+</isscript>
+<script>
+    window.signupUrls = {
+        subscribeUrl: '${URLUtils.abs("EmailSubscribe-Subscribe")}'
+    };
+
+    window.signupMessages = {
+        enterValidEmail: "${Resource.msg('pagefooter.entervalidemail', 'components', null)}",
+        enterEmailSubmit: "${Resource.msg('pagefooter.entervalidemailsubmit', 'components', null)}",
+        unexpectedError: "${Resource.msg('pagefooter.unexpectederror', 'components', null)}"
+    };
+</script>
+<script src="${URLUtils.staticURL('/js/components/footerSignup.js')}" defer></script>
+<isif condition="${cgid != '' && category && category.custom.popularSearchKeywords != null}">
+    <div class="container popular-search-section">
+        <div class="popular-search">
+            <div role="region" aria-label="${Resource.msg('popular.title', 'common', null)}">
+                <div class="popular-header">${Resource.msg('popular.title', 'common', null)}</div>
+                <isloop items="${popular}" var="category" status="subCatLoopStatus1">
+                    <a href="${URLUtils.url('Search-Show', 'cgid', category.id).toString();}" class="category-name" aria-label="${category.name}">${category.name}</a>
+                    <isif condition="${subCatLoopStatus1.last}">
+                    <iselse/>
+                        <span class="separator">|</span>
+                    </isif>
+                </isloop>
+            </div>
+        </div>
+    </div>
+</isif>
+
+
+<footer id="footercontent" role="region" aria-labelledby="footer-heading">
+    <span id="footer-heading" class="sr-only">Site Footer</span>
+    <div class="container">
+        <div class="row wgaca-updates-sign-up-area">
+            <div class="col-md-9 offset-md-3">
+                <label class="sign-up-lbl" for="wgaca-updates-sign-up-mail">${Resource.msg('pagefooter.signupmessage', 'components', null)}</label>
+                <div class="form-group input-area col-md-8 col-lg-7">
+                    <input type="text" class="form-control" id="wgaca-updates-sign-up-mail" name="pageUrl" placeholder="${Resource.msg('pagefooter.signupplaceholder', 'components', null)}" aria-label="${Resource.msg('pagefooter.signupplaceholder', 'components', null)}" />
+                    <button type="button" class="btn btn-primary" id="submit-email-btn" aria-label="${Resource.msg('pagefooter.submitemail', 'components', null)}">
+                        ${Resource.msg('pagefooter.submit', 'components', null)}
+                    </button>
+                </div>
+                <div id="subscription-status"></div>
+            </div>
+        </div>
+
+        <div class="footer-container row">
+
+            <div class="col-12 footer-item col-md-3">
+                <iscomment>
+                    <div class="email-signup-form">
+                        <iscontentasset aid="footerSignUp" />
+                    </div>
+                </iscomment>
+
+                <div class="store">
+                    <iscontentasset aid="footerStoreLocator" />
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="row">
+                    <div class="footer-item col-md-4 collapsible-sm">
+                        <iscontentasset aid="footerColumn3" />
+                    </div>
+                    <div class="footer-item col-md-4 collapsible-sm">
+                        <iscontentasset aid="footerColumn1" />
+                    </div>
+                    <div class="footer-item col-md-4 collapsible-sm">
+                        <iscontentasset aid="footerColumn2" />
+                    </div>
+                    <div class="col-md-1 text-right">
+                        <button class="back-to-top" title="${Resource.msg('button.back_to_top', 'common', null)}"
+                            aria-label="${Resource.msg('button.back_to_top', 'common', null)}">
+                            <span class="fa-stack fa-lg" aria-hidden="true">
+                                <i class="fa-circle fa-inverse fa-stack-2x"></i>
+                                <i class="fa-arrow-up fa-stack-1x"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <iscomment>
+                <div class="col-12 col-md-3 d-none d-md-block">
+                    <div class="store">
+                        <iscontentasset aid="footerStoreLocator" />
+                    </div>
+                </div>
+            </iscomment>
+            <div class="col-12 col-md-9 right-block offset-md-3">
+                <div class="footer-middle-block">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-4 sell-to-us">
+                            <iscontentasset aid="sellToUs" />
+                        </div>
+                        <div class="row d-md-none">
+                            <div class="col-12 col-md-4">
+                                <div class="footer-disclaimer">
+                                    <iscontentasset aid="footerDisclaimer" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <div class="social-back-to-top">
+                                <iscontentasset aid="footerSocial" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-none d-md-block">
+                        <div class="col-12 col-md-4">
+                            <div class="footer-disclaimer">
+                                <iscontentasset aid="footerDisclaimer" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-4 footer-bottom-block">
+            <div class="col-md-12 inner-wrapper inner-wrapper-sm">
+                <div class="col-12 col-md-6">
+                    <iscontentasset aid="footerCopy" />
+                </div>
+                <div class="col-12 text-md-right d-md-none postscript">
+                    <iscontentasset aid="footerBottomRight" />
+                </div>
+                <div class="col-12 col-md-6 text-md-right d-none d-md-block postscript">
+                    <iscontentasset aid="footerBottomRight" />
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<isinclude template="components/footer/enhanceChat.isml" />
+<isinclude template="util/localeModal" />
+ <script
+        <isif condition="${isOneTrustEnable}">
+            type='text/plain' class='optanon-category-C0003'
+        </isif>
+    defer>!function(){var b=function(){window.__AudioEyeSiteHash = "${dw.system.Site.getCurrent().getCustomPreferenceValue('AudioEye')}"; var a=document.createElement("script");a.src="https://wsmcdn.audioeye.com/aem.js";a.type="text/javascript";a.setAttribute("async","");document.getElementsByTagName("body")[0].appendChild(a)};"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",b):window.attachEvent&&window.attachEvent("onload",b):b()}();</script>
+<isinclude template="cart/cartRemoveProductModal" />
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('wishlistEnable')}">
+    <isinclude template="wishlist/components/modalShowListsWrapper" />
+</isif>
+
+<isprint value="${dw.system.HookMgr.callHook('app.template.domInject', 'postFooter', pdict) || ''}" encoding="off" />

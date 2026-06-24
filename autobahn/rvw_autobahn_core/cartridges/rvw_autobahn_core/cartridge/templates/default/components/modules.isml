@@ -1,0 +1,54 @@
+<iscomment>
+    This module is to replace the original contentasset model
+    @param bodyonly (bool) - will remove all markup around an asset and only display the body
+    @param customtitle (string) - being able to pass a dynamic title or text to a rendering template (usefull for dynamic category names in slot/content rendering templates)
+    @param product (oroduct object) - useful to extract and use product specific rendering template as well as the object itself
+    @param template (string) -  directly call and use a rendering template that lives in "/slots/content/" (pass just the template name)
+</iscomment>
+
+<ismodule template="components/content/customContentAsset"
+    name="contentasset"
+    attribute="aid"
+    attribute="bodyonly"
+    attribute="customtitle"
+    attribute="product"
+    attribute="template"
+    attribute="personalized"
+    attribute="pageid"
+    attribute="params"
+/>
+
+<ismodule template="product/components/quantityStepper"
+    name="quantitystepper"
+    attribute="qty"
+    attribute="min"
+    attribute="max"
+    attribute="size"
+    attribute="disabled"
+    attribute="cypresstarget"
+/>
+
+<ismodule template="product/components/addToCartGlobal"
+    name="addtocartglobal"
+    attribute="extraclass"
+/>
+
+<ismodule template="product/components/wishlistIcon"
+    name="wishlisticon"
+    attribute="extraclass"
+    attribute="nextaction"
+    attribute="wishlistpid"
+    attribute="productname"
+    attribute="uuid"
+    attribute="addmessage"
+    attribute="removemessage"
+    attribute="includeicon"
+    attribute="includetext"
+    attribute="isinwishlist"
+/>
+
+<ismodule template="checkout/billing/giftCertificatePaymentInstruments"
+    name="giftcertificatepaymentinstruments"
+    attribute="paymentinstruments"
+    attribute="currencycode"
+/>

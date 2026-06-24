@@ -1,0 +1,16 @@
+{
+    "hooks": [
+        {
+            "name": "dw.extensions.applepay.paymentAuthorized.placeOrder",
+            "script": "./cartridge/scripts/hooks/adyen_applepay"
+        },
+        {
+            "name": "forter.api.request.payment.adyen_component",
+            "script": "./cartridge/scripts/hooks/buildForterRequest"
+        },
+        {
+            "name": "signifyd.api.request.payment.adyen_component",
+            "script": "./cartridge/scripts/hooks/buildSignifydRequest"
+        }
+    ]
+}

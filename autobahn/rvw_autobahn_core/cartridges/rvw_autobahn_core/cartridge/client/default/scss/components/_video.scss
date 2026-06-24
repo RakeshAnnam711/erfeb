@@ -1,0 +1,160 @@
+.video-container {
+    position: relative;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
+    &.aspect-ratio-16-9 {
+        @include aspect-ratio($aspect-ratio-sixteen-nine);
+        .video-thumbnail:not(.btn) {
+            @include aspect-ratio($aspect-ratio-sixteen-nine);
+        }
+    }
+    &.aspect-ratio-9-16 {
+        @include aspect-ratio($aspect-ratio-nine-sixteen);
+        .video-thumbnail:not(.btn) {
+            @include aspect-ratio($aspect-ratio-nine-sixteen);
+        }
+    }
+    &.aspect-ratio-4-3 {
+        @include aspect-ratio($aspect-ratio-four-three);
+        .video-thumbnail:not(.btn) {
+            @include aspect-ratio($aspect-ratio-four-three);
+        }
+    }
+    &.aspect-ratio-3-4 {
+        @include aspect-ratio($aspect-ratio-three-four);
+        .video-thumbnail:not(.btn) {
+            @include aspect-ratio($aspect-ratio-three-four);
+        }
+    }
+    &.aspect-ratio-1-1 {
+        @include aspect-ratio($aspect-ratio-one-one);
+        .video-thumbnail:not(.btn) {
+            @include aspect-ratio($aspect-ratio-one-one);
+        }
+    }
+    
+    .video-player,
+    .video-player iframe,
+    video.vjs-tech {
+        @include absolute-cover;
+    }
+
+    .video-thumbnail:not(.btn) {
+        @include absolute-cover;
+        display: block;
+        opacity: 1;
+        transition: opacity $transition-speed;
+        z-index: 1;
+        &.faded {
+            opacity: 0;
+            transition: opacity $transition-speed;
+            .video-thumbnail-button {
+                @include icon($video-pause-icon, before, $video-pause-icon-size, $video-pause-icon-color);
+            }
+            .video-thumbnail-image {
+                opacity: 0;
+                pointer-events: none;
+            }
+            &:hover {
+                opacity: 1;
+            }
+        }
+        &:focus,
+        &:hover:not(.faded) {
+            .video-thumbnail-button {
+                &:before {
+                    color: $video-pause-icon-color-hover;
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+    &.has-controls {
+        .video-thumbnail.faded {
+            pointer-events: none;
+            .video-thumbnail-button {
+                opacity: 0;
+            }
+        }
+
+        // style video.js button and poster to match ours
+        .video-js {
+            .vjs-big-play-button {
+                @include absolute-center;
+                left: auto;
+                border: none;
+                background: transparent;
+                width: $video-play-icon-size;
+                height: $video-play-icon-size;
+                .vjs-icon-placeholder {
+                    @include icon($video-play-icon, before, $video-play-icon-size, $video-play-icon-color);
+                    &:before {
+                        transition: all $transition-speed ease-in-out;
+                    }
+                }
+            }
+            &:hover {
+                .vjs-icon-placeholder::before {
+                    color: $video-pause-icon-color-hover;
+                    transform: scale(1.1);
+                }
+            }
+            .vjs-poster {
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+            }
+        }
+    }
+
+    .video-thumbnail-button {
+        @include absolute-center;
+        @include icon($video-play-icon, before, $video-play-icon-size, $video-play-icon-color);
+        &:before {
+            transition: all $transition-speed ease-in-out;
+        }
+    }
+
+    .video-thumbnail-image {
+        @include absolute-cover;
+        display: block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        &.background-image-tablet,
+        &.background-image-desktop {
+            display: none;
+        }
+        @include media-breakpoint-up(md) {
+            &.background-image-mobile,
+            &.background-image-desktop {
+                display: none;
+            }
+            &.background-image-tablet {
+                display: block;
+            }
+        }
+        @include media-breakpoint-up(lg) {
+            &.background-image-mobile,
+            &.background-image-tablet {
+                display: none;
+            }
+            &.background-image-desktop {
+                display: block;
+            }
+        }
+    }
+}
+
+.video-modal {
+    .modal-dialog {
+        @include modal-size($video-modal-size);
+    }
+    .modal-body {
+        padding: 0;
+    }
+    .video-player {
+        width: 100%;
+    }
+}

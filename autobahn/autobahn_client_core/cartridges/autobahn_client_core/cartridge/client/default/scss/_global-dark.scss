@@ -1,0 +1,99 @@
+// This is a sample theme file that can be referenced by name in Theme Stylesheet attributes in categories, source codes, etc.
+
+@charset "UTF-8";
+//Brand specific styling customizations, overrides, & extensions
+
+@import "utilities/fonts-dark";
+
+// Set variables, then add Bootstrap components and Bootstrap overrides
+@import "variables-dark";
+@import "variables";
+@import "~core/bootstrap-custom-import";
+@import "~core/bootstrap-overrides";
+
+// Vendor styles
+@import "~tiny-slider/src/tiny-slider.scss";
+@import "~video.js/dist/video-js.min.css";
+
+// Utilities and helpers
+@import "mixins";
+@import "~core/utilities/animations";
+@import "~core/utilities/swatch";
+@import "~core/utilities/sizing";
+@import "helperClasses";
+@import "~core/utilities/responsiveUtils";
+@import "~core/flag-icon/flag-icon";
+
+// Components
+@import "~core/components/alert";
+@import "components/badges";
+@import "~core/components/blog";
+@import "components/breadcrumb";
+@import "~core/components/card";
+@import "components/carousel";
+@import "~core/components/categoryTiles";
+@import "~core/components/collapsibleItem";
+@import "components/common";
+@import "~core/components/contentGrid";
+@import "~core/components/contentTiles";
+@import "~core/components/creditCardField";
+@import "~core/components/discountStatusBar";
+@import "~core/components/dropdown";
+@import "~core/components/giftCertificate";
+@import "components/menu";
+@import "components/header";
+@import "components/headerSearch";
+@import "components/hero";
+@import "components/imageTextBlock";
+@import "components/imageAndOverlayText";
+@import "components/footer";
+@import "~core/components/formFields";
+@import "~core/components/layout";
+@import "~core/components/lists";
+@import "~core/components/miniCart";
+@import "components/modal";
+@import "~core/components/notification";
+@import "components/pageHeader";
+@import "~core/components/photoHotspots";
+@import "~core/components/popover";
+@import "~core/components/pricing";
+@import "~core/components/productCard";
+@import "components/productTiles";
+@import "~core/components/quickView";
+@import "components/slider";
+@import "components/social";
+@import "~core/components/spinner";
+@import "~core/components/tabs";
+@import "components/tooltip";
+@import "~core/components/video";
+@import "~core/components/consent";
+@import "~core/components/flexibleGrid";
+
+// Pages
+@import "~core/account/account";
+// @import "cart/cart";
+@import "checkout/checkout";
+@import "~core/contactUs";
+@import "product/detail";
+@import "components/meter";
+@import "product/grid";
+@import "~core/storeLocator/storeLocator";
+@import "~core/storeLocator/storeDetail";
+
+@import "wishlist/helpers";
+@import "~core/wishlist/card";
+@import "~core/wishlist/modal";
+@import "~core/wishlist/toast";
+@import "~core/wishlist/landing";
+@import "~core/wishlist/detail";
+
+@import "~core/styleguide/styleguide";
+
+// Optional integration styles
+@import "integrations";
+
+//overrides
+@import "overrides/affirmstyle";
+
+//smarty css
+@import "components/smarty";

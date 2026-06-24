@@ -1,0 +1,53 @@
+<div class="modal fade" id="smartyVerificationModal" tabindex="-1" role="dialog" aria-labelledby="smartyVerificationModal">
+    <div class="modal-dialog modal-dialog-centered smartyVerification-modal modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">${Resource.msg('smarty.modal.title','checkout', null)}</div>
+            </div>
+            <div class="modal-body">
+                <div class="subtitle"><div class="subtitle-inner-block">${Resource.msg('smarty.suggestion.subtitle','checkout', null)}</div></div>
+                <div class="infomessage" style="display:none;"><span class="icon-alert"></span> <span class="erro-message">${Resource.msg('smarty.error.notfound','checkout', null)}</span></div>
+                <div class="addresscontent row">
+                    <div class="userenterAddress col-12 col-sm-6">
+                        <div class="title">${Resource.msg('smarty.user.title','checkout', null)}</div>
+                        <div class="addressinfo">
+
+                        </div>
+                        <div class="btn-group">
+                        <button class="btn btn-primary change-address" data-dismiss="modal" aria-label="Close">${Resource.msg('smarty.button.changeaddress','checkout', null)}</button>
+                        <button class="btn btn-primary confirm-address">${Resource.msg('smarty.button.confirmaddress','checkout', null)}</button>
+                        </div>
+                    </div>
+                    <div class="suggestionAddress col-12 col-sm-6">
+                        <div class="title">${Resource.msg('smarty.suggestion.title','checkout', null)}</div>
+                        <div class="addressinfo">
+
+                        </div>
+                        <button class="btn btn-primary update-address">${Resource.msg('smarty.button.suggestedconfirm','checkout', null)}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="smartyPOVerificationModal" tabindex="-1" role="dialog" aria-labelledby="smartyVerificationModal">
+    <div class="modal-dialog modal-dialog-centered smartyVerification-modal modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">${Resource.msg('smarty.modal.po.title','checkout', null)}</div>
+            </div>
+            <div class="modal-body">
+                <div class="po-outer-block">
+                    <div class="po-inner-block">
+                        <div>${Resource.msg('smarty.nopo.label1','checkout', null)}</div>
+                        <div>${Resource.msg('smarty.nopo.label2','checkout', null)}</div>
+                    </div>
+                </div>
+                <div class="text-center pt-2">
+                <button type="button" class="btn btn-primary close-button" data-dismiss="modal">${Resource.msg('smarty.button.ok','checkout', null)}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

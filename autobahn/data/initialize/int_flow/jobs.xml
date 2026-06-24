@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="FlowCleanArchives" priority="0">
+        <description/>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="FlowCleanArchives">
+                <context site-id="RefArch" />
+            </contexts>
+            <flow-template template-id="FlowCleanArchives">
+                <step step-id="FlowCleanArchives" type="custom.Flow.cleanArchives" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="fileAgeInDays">7</parameter>
+                    </parameters>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2019-06-03Z</date>
+                <time>14:38:21.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+    <job job-id="FlowExportCatalog" priority="0">
+        <description>Export the catalog to Flow via SFTP</description>
+        <parameters/>
+        <flow>
+            <context site-id="Sites"/>
+            <step step-id="exportMaster" type="ExportCatalog" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="CatalogID">wgaca-master-catalog</parameter>
+                    <parameter name="ExportCategories">true</parameter>
+                    <parameter name="ExportProducts">true</parameter>
+                    <parameter name="ExportCategoryAssignments">true</parameter>
+                    <parameter name="ExportProductOptions">true</parameter>
+                    <parameter name="ExportRecommendations">false</parameter>
+                    <parameter name="ExportVariationAttributes">true</parameter>
+                    <parameter name="ExportFile">flow/WGACA/export/wgaca-master-catalog</parameter>
+                    <parameter name="OverwriteExportFile">true</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <split sequential="false">
+            <flow>
+                <context site-id="Sites"/>
+                <step step-id="exportListPricebook" type="ExportPriceBook" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="PriceBookID">wgaca-web-pricebook</parameter>
+                        <parameter name="ExportFile">flow/WGACA/export/wgaca-web-pricebook</parameter>
+                        <parameter name="OverwriteExportFile">true</parameter>
+                    </parameters>
+                </step>
+            </flow>
+            <flow>
+                <context site-id="Sites"/>
+                <step step-id="exportSalePricebook" type="ExportPriceBook" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="PriceBookID">wgaca-discount-pricebook</parameter>
+                        <parameter name="ExportFile">flow/WGACA/export/wgaca-discount-pricebook</parameter>
+                        <parameter name="OverwriteExportFile">true</parameter>
+                    </parameters>
+                </step>
+            </flow>
+        </split>
+        <flow>
+            <context site-id="WGACA"/>
+            <step step-id="flowExportProductImages" type="custom.Flow.exportProductImages" enforce-restart="false">
+                <description>Exports the site catalog product images as a CSV file</description>
+                <parameters>
+                    <parameter name="productImageSize">large</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="WGACA"/>
+            <step step-id="flowUploadFilesToFlow" type="custom.Flow.uploadFilesToFlow" enforce-restart="false">
+                <description>Upload the exported files to Flow</description>
+                <parameters>
+                    <parameter name="remoteFolder">sfcc/to-flow</parameter>
+                    <parameter name="disabled">false</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-11-10Z</date-from>
+                    <start-time>01:30:00.000Z</start-time>
+                    <interval>1d</interval>
+                    <day-of-week>
+                        <weekday>Saturday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Thursday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Sunday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="FlowFraudCheck" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="WGACA"/>
+            <step step-id="FlowUpdateFraudStatus" type="custom.Flow.updateOrderFraudStatus" enforce-restart="false">
+                <description/>
+                <parameters/>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-11-09Z</date-from>
+                    <start-time>19:31:00.000Z</start-time>
+                    <interval>5m</interval>
+                    <day-of-week>
+                        <weekday>Saturday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Thursday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Sunday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="FlowGenerateConfigurationJsonFiles" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="WGACA"/>
+            <step step-id="generateConfigurationJsonFiles" type="custom.Flow.generateConfigurationJsonFiles" enforce-restart="false">
+                <description/>
+                <parameters/>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2019-06-18Z</date>
+                <time>20:53:07.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+    <job job-id="FlowImportPriceBooks" priority="0">
+        <description>Import Price Books from Flow via SFTP</description>
+        <parameters/>
+        <flow>
+            <context site-id="WGACA"/>
+            <step step-id="flowDownloadPriceBooks" type="custom.Flow.downloadPricebooksFromFlow" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="remoteFolder">sfcc/from-flow</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="Sites"/>
+            <step step-id="importPricebooks" type="ImportPriceBook" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="WorkingFolder">flow/WGACA/pricebooks</parameter>
+                    <parameter name="NoFilesFoundHandling">OK</parameter>
+                    <parameter name="ImportMode">Merge</parameter>
+                    <parameter name="ImportFailedHandling">WARN</parameter>
+                    <parameter name="AfterImportFileHandling">Archive</parameter>
+                    <parameter name="ArchiveFolder">flow/WGACA/pricebooks/archive</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-11-09Z</date-from>
+                    <start-time>10:01:00.000Z</start-time>
+                    <interval>1d</interval>
+                    <day-of-week>
+                        <weekday>Saturday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Thursday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Sunday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="FlowImportShippingMethods" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="WGACA"/>
+            <step step-id="flowGenerateShippingMethods" type="custom.Flow.generateShippingMethodsImportFile" enforce-restart="false">
+                <description/>
+                <parameters/>
+            </step>
+            <step step-id="importShippingMethods" type="ImportShippingMethods" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="WorkingFolder">flow/WGACA/shippingmethods</parameter>
+                    <parameter name="NoFilesFoundHandling">OK</parameter>
+                    <parameter name="ImportMode">Merge</parameter>
+                    <parameter name="ImportFailedHandling">WARN</parameter>
+                    <parameter name="AfterImportFileHandling">Archive</parameter>
+                    <parameter name="ArchiveFolder">flow/WGACA/shippingmethods/archive</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2021-11-09Z</date-from>
+                    <start-time>10:00:40.000Z</start-time>
+                    <interval>1d</interval>
+                    <day-of-week>
+                        <weekday>Saturday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Thursday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Sunday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="FlowProcessNotifications" priority="0">
+        <description/>
+        <parameters/>
+        <split sequential="false">
+            <contexts template-ref="FlowProcessNotifications">
+                <context site-id="RefArch" />
+            </contexts>
+            <flow-template template-id="FlowProcessNotifications">
+                <step step-id="FlowProcessNotifications" type="custom.Flow.processFlowNotifications" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="toAddresses">logs-sfcc@flow.io</parameter>
+                    </parameters>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2019-07-01Z</date>
+                <time>16:19:21.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+</jobs>

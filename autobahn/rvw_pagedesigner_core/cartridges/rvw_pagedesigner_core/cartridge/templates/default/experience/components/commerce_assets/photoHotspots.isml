@@ -1,0 +1,33 @@
+<isset name="Constants" value="${require('*/cartridge/scripts/constants/SiteConstants')}" scope="page"/>
+<div class="photo-hotspots ${pdict.containerClass}">
+    <figure class="photo-tile-figure">
+        <picture>
+            <source srcset="${pdict.image.src.desktop} 1x, ${pdict.image.src.desktop2x} 2x" media="(min-width: ${Constants.BreakpointSizes.lg.toFixed()}px)"/>
+            <source srcset="${pdict.image.src.tablet} 1x, ${pdict.image.src.tablet2x} 2x" media="(min-width: ${Constants.BreakpointSizes.md.toFixed()}px)"/>
+            <source srcset="${pdict.image.src.mobile} 1x, ${pdict.image.src.mobile2x} 2x" media="(max-width: ${Constants.BreakpointSizes.md.toFixed() - 1}px)"/>
+            <img
+                class="photo-tile-image image-fluid w-100"
+                src="${pdict.image.src.desktop}"
+                alt="${!empty(pdict.customImageAlt) ? pdict.customImageAlt : pdict.image.alt}" title="${!empty(pdict.customImageAlt) ? pdict.customImageAlt : pdict.image.alt}"
+            />
+        </picture>
+        <figcaption>
+            <isloop items="${pdict.hotspots}" var="hotspot">
+                    <div
+                        class="hotspot ${hotspot.theme}"
+                        style="left: ${hotspot.left}; top: ${hotspot.top};"
+                    >
+                    <span
+                        class="hotspot-border-inner"
+                        data-toggle="tooltip"
+                        data-delay='{"show": ${Constants.TransitionSpeed}, "hide": ${Constants.TransitionSpeed}}'
+                        data-html="true"
+                        data-template='<div class="tooltip photo-hotspots-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner ${pdict.tooltipClass}"></div></div>'
+                        title='<isinclude template="/experience/components/commerce_assets/photoHotspotsTooltip.isml">'
+                    ></span>
+                    <span class="hotspot-border-outer"></span>
+                    </div>
+            </isloop>
+        </figcaption>
+    </figure>
+</div>

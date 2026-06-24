@@ -1,0 +1,15 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Product Details Page
+
+    It gets called by rvw_autobahn_core:templates/default/product/components/productAvailability.isml
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<isif condition="${currentSite.getCustomPreferenceValue('bopisCartridgeEnabled') && (currentSite.getCustomPreferenceValue('availableForInStorePickup') || product.availableForInStorePickup) && product.itemType !== 'digital' && pdict.action !== 'Wishlist-GetProduct'}">
+    <!-- In store inventory -->
+    <div class="pdp-in-store-inventory">
+        <isinclude template="product/components/pdpInstoreInventory" />
+    </div>
+</isif>

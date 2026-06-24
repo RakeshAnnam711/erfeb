@@ -1,0 +1,101 @@
+<iscomment>Set hover image to second image of "card" type</iscomment>
+<isif condition="${!empty(product.images.card) && product.images.card.length > 1 && product.images.card[1] && product.images.card[1].url}">
+    <isset name="altImageUrl" value="${product.images.card[1].url}" scope="page"/>
+    <isset name="altImageText" value="${product.images.card[1].alt}" scope="page"/>
+<iselse/>
+    <isset name="altImageUrl" value="" scope="page"/>
+</isif>
+
+<isset name="noImageUrl" value="${URLUtils.staticURL('/images/noimage-card.png')}" scope="page"/>
+<isset name="imageUrl" value="${product.images.card[0].url}" scope="page"/>
+<isset name="imageTitle" value="${product.images.card[0].title}" scope="page"/>
+<isset name="setOrBundle" value="${product.productType === 'set' || product.productType === 'bundle'}" scope="page" />
+<isif condition="${product.productType === 'set' && imageUrl.includes('noimage')}">
+    <isset name="imageUrl" value="${product.setProductsImages[0].card[0].url}" scope="page"/>
+    <isset name="imageTitle" value="${product.setProductsImages[0].card[0].title}" scope="page"/>
+    <isset name="altImageUrl" value="${product.setProductsImages[1].card[0].url}" scope="page"/>
+    <isset name="altImageText" value="${product.setProductsImages[1].card[0].alt}" scope="page"/>
+</isif>
+
+<div class="product-tile-image-container image-container ${!empty(altImageUrl) && pdict.abConfigs.plpShowSecondaryProductImage ? 'show-secondary-image' : 'no-secondary-image'}" cypress-target="productTileContainer">
+    <a href="${pdict.urls.product}" class="product-tile-image-link">
+        <img class="product-tile-image tile-image lazyload"
+            src="${noImageUrl}"
+            data-src="${imageUrl}"
+            alt="${product.productName}"
+            title="${imageTitle}"
+            onerror="this.src='${noImageUrl}'"
+        />
+        <isif condition="${!empty(altImageUrl) && pdict.abConfigs.plpShowSecondaryProductImage}">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="${altImageUrl}" alt="${altImageText}" class="tile-image product-tile-image-secondary lazyload" loading="auto" onerror="this.src='${URLUtils.staticURL('/images/noimage-card.png')}'" />
+        </isif>
+    </a>
+    <isif condition="${!pdict.display.hideWishlist}">
+        <iswishlisticon
+            wishlistpid="${product.wishlistpid}"
+            productname="${product.productName}"
+            addmessage="${'wishlist.addto.wishlist.icon'}"
+            removemessage="${'wishlist.removefrom.wishlist.icon'}"
+            includeicon="true"
+        />
+    </isif>
+
+    <isif condition="${pdict.display.showQuickView !== false || pdict.display.showQuickAddToCart !== false}">
+        <div class="quick-action-btns justify-content-end ${pdict.display.showQuickAddToCart !== false && !setOrBundle ? 'justify-content-between' : ''} ${pdict.quickbuyMethod == 'icon' || pdict.quickAddToCartMethod == 'icon' ? 'icons' : ''}">
+            <isif condition="${pdict.display.showQuickAddToCart !== false}">
+                <isif condition="${!empty(product.isOnlyVariant)}">
+                    <input type="hidden" class="add-to-cart-url" value="${URLUtils.url('Cart-AddProduct')}" data-quantity="1">
+                    <button
+                        data-url="${URLUtils.url('Cart-AddProduct')}"
+                        class="single-variant-quick-add-to-cart ${setOrBundle ? 'd-none' : ''} hidden-sm-down ${pdict.quickAddToCartMethod == 'button' ? 'btn btn-secondary btn-block' : ''} interactive add-to-cart-global"
+                        data-pid="${product.isOnlyVariant}"
+                        data-quantity="1"
+                        title="${Resource.msgf('button.quickAddtocart', 'common', null, product.productName)}"
+                        aria-label="${Resource.msgf('button.quickAddtocart', 'common', null, product.productName)}"
+                        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
+                            data-gtmdata="${JSON.stringify(product.gtmData)}"
+                        </isif>
+                    >
+                <iselse/>
+                    <button
+                        data-toggle="popover"
+                        data-url="${pdict.urls.quickAddToCart}"
+                        data-content="${Resource.msg('data.content.quickAddtocart', 'common', null)}"
+                        type="button"
+                        data-container="body"
+                        data-placement="top"
+                        class="quick-add-to-cart ${setOrBundle ? 'd-none' : ''} hidden-sm-down ${pdict.quickAddToCartMethod == 'button' ? 'btn btn-secondary btn-block' : ''} interactive"
+                        title="${Resource.msgf('button.quickAddtocart', 'common', null, product.productName)}"
+                        aria-label="${Resource.msgf('button.quickAddtocart', 'common', null, product.productName)}"
+                    >
+                </isif>
+                        <isif condition="${pdict.quickAddToCartMethod == 'icon'}">
+                            <div class="icon icon-add-to-cart d-flex justify-content-center">
+                                <div class="path2" ></div><div class="path3" ></div>
+                            </div>
+                        <iselse/>
+                            ${Resource.msg('button.quickAddtocart.buy', 'common', null)}
+                        </isif>
+                    </button>
+
+            </isif>
+            <isif condition="${pdict.display.showQuickView !== false}">
+                <a class="quickview hidden-sm-down ${pdict.quickbuyMethod == 'button' ? 'btn btn-secondary btn-block' : ''}"
+                    href="${pdict.urls.quickView}"
+                    data-pid="${product.id}"
+                    data-toggle="modal"
+                    data-target="#quickViewModal"
+                    title="${Resource.msgf('button.quickview', 'common', null, product.productName)}"
+                    aria-label="${Resource.msgf('button.quickview', 'common', null, product.productName)}"
+                >
+                <isif condition="${pdict.quickbuyMethod == 'icon'}">
+                    <div class="quickview-icon"></div>
+                <iselse/>
+                    ${Resource.msg('button.quickview.buy', 'common', null)}
+                </isif>
+                </a>
+            </isif>
+        </div>
+    </isif>
+</div>
+<isinclude template="/product/components/badges" />

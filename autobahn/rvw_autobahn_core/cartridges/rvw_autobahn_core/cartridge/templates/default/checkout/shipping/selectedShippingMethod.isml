@@ -1,0 +1,20 @@
+<iscomment>
+    This template gets overwritten in rvw_integrations_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_integrations_core
+</iscomment>
+<isif condition="${shippingModel.selectedShippingMethod && shippingMethod.ID === shippingModel.selectedShippingMethod.ID}">
+     <input
+         id="shippingMethod-${shippingMethod.ID}-${shippingModel.UUID}${lineItem ? '-' + lineItem.UUID : ''}"
+         name="${shippingAddress.shippingMethodID.htmlName}"
+         type="radio" class="custom-control-input"
+         value="${shippingMethod.ID}"
+         checked />
+ <iselse/>
+ <input id="shippingMethod-${shippingMethod.ID}-${shippingModel.UUID}${lineItem ? '-' + lineItem.UUID : ''}"
+        name="${shippingAddress.shippingMethodID.htmlName}"
+        type="radio" value="${shippingMethod.ID}"
+        class="custom-control-input" />
+ </isif>

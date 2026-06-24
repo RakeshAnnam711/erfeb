@@ -1,0 +1,9 @@
+<isif condition="${(!empty(pdict.categoryName) || !empty(pdict.customTitle)) && !pdict.hideTitle}">
+    <div class="page-header-title ${pdict.customClass}">
+        <isif condition="${!empty(pdict.customTitle)}">
+            ${pdict.customTitle}
+        <iselse/>
+            ${pdict.categoryName}
+        </isif>
+    </div>
+</isif>

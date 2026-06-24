@@ -1,0 +1,57 @@
+{
+    "name": "Image With Overlay Text",
+    "description": "This is a component combining an image with text",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "overlayComponent",
+            "attribute_definitions": [
+                {
+                    "id": "image",
+                    "name": "Image",
+                    "type": "image",
+                    "description": "For faster load time, please use images under 500 KB.",
+                    "required": false
+                },
+                {
+                    "id": "imageAlt",
+                    "name": "Image Alt Text",
+                    "type": "string",
+                    "description": "Add alternative text for image, default is an empty string. See following to better understand what to write: https://html.spec.whatwg.org/multipage/images.html#alt",
+                    "required": false
+                },
+                {
+                    "id": "overlayHeading",
+                    "name": "Overlay Heading",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "description",
+                    "name": "Secondary text",
+                    "description": "Optional additional text placed below the display name.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "backgroundColor",
+                    "name": "Container Color",
+                    "type": "string",
+                    "description": "Add color code, white is the default",
+                    "default_value": "#fff",
+                    "required": false
+                },
+                {
+                    "id": "overlayAlignment",
+                    "name": "Overlay alignment",
+                    "description": "Position of the text overlay, left is the default",
+                    "type": "enum",
+                    "values": ["left", "center", "right"],
+                    "default_value": "left",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

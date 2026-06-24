@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header clearfix">
+        <h4 class="pull-left">${Resource.msg('form.marketing.email.subscription.header.marketingcloud','forms',null)}</h4>
+    </div>
+
+    <div class="card-body card-info-group">
+        <div class="row">
+            <div class="col-12 px-0">
+                <isif condition="${!empty(pdict.AllLists) && pdict.AllLists.results && pdict.AllLists.results.length > 0}">
+
+                    <isloop items="${pdict.AllLists.results}" var="list" status="loopStatus">
+                        <isif condition="${list.Type !== 'Private'}">
+
+                            <iscomment> loop thru the subscribers lists and find the matching list if it exists</iscomment>
+                            <isset name="email" value="${pdict.MarketingEmail}" scope="page" />
+                            <isset name="subscriberInfo" value="" scope="page" />
+                            <isloop items="${pdict.SubscribersLists && pdict.SubscribersLists.results ? pdict.SubscribersLists.results : ''}" var="subscriberList">
+                                <isif condition="${subscriberList && subscriberList.properties && subscriberList.properties.ListID === list.ID}">
+                                    <isset name="subscriberInfo" value="${subscriberList.properties}" scope="page" />
+                                </isif>
+                            </isloop>
+
+                            <form id="${list.ID + '_SubscriptionForm'}" name="${list.ID + '_SubscriptionForm'}" class="mc-form container" method="POST" data-action="${URLUtils.url('Marketing-UpdateSubscription')}" novalidate>
+                                <div class="form-group ${loopStatus.first ? 'mt-0': ''}">
+                                    <div class="marketing-email-title">
+                                        ${list.ListName}
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+                                        <input
+                                            class="custom-control-input email-subscription"
+                                            data-type="${list.Type}"
+                                            data-partner-key="${list.PartnerKey}"
+                                            data-id="${list.ID}"
+                                            data-list-name="${list.ListName}"
+                                            data-list-classification="${list.ListClassification}"
+                                            data-subscriber-email="${email}"
+                                            type="checkbox"
+                                            name="${'subscription_' + list.ID}"
+                                            id="${'subscription_' + list.ID}"
+                                            <isif condition="${!empty(subscriberInfo)}">
+                                                data-subscriber-id="${subscriberInfo.ID}"
+                                                data-subscriber-object-id="${subscriberInfo.ObjectID}"
+                                                data-subscriber-partner-key="${subscriberInfo.PartnerKey}"
+                                                data-subscriber-subscriber-key="${subscriberInfo.SubscriberKey}"
+                                                value="${subscriberInfo.Status === 'Active'}"
+                                                ${subscriberInfo.Status === 'Active' ? 'checked': ''}
+                                            </isif>
+                                        />
+                                        <label for="${'subscription_' + list.ID}" class="custom-control-label checkout-checkbox">
+                                            ${list.Description}
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </isif>
+                    </isloop>
+                    <div id="fallback-fail-msg" data-msg="${Resource.msg('form.email.error.fallback','product', null)}"></div>
+                </isif>
+            </div>
+        </div>
+    </div>
+
+</div>

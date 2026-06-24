@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <standard-preferences>
+        <all-instances>
+            <preference preference-id="GenerateCustomerNumberEnabled">true</preference>
+            <preference preference-id="SiteCatalog">sitecatalogidreplaceme</preference>
+            <preference preference-id="SiteDefaultLocale">en_US</preference>
+            <preference preference-id="SiteInventoryList">inventory_m</preference>
+            <preference preference-id="SiteLibrary">Sitenamereplaceme</preference>
+            <preference preference-id="SiteLocales">default:en_US</preference>
+            <preference preference-id="SitePriceBooks">usd-m-list-prices:usd-m-sale-prices</preference>
+            <preference preference-id="SourceCodeCookieMaxAge">0</preference>
+            <preference preference-id="SourceCodeURLParameterName">src</preference>
+            <preference preference-id="StorefrontURLsEnabled">true</preference>
+        </all-instances>
+        <development>
+            <preference preference-id="RobotsTxtContent"/>
+            <preference preference-id="RobotsTxtMode">Cartridge</preference>
+        </development>
+        <staging>
+            <preference preference-id="RobotsTxtContent"/>
+            <preference preference-id="RobotsTxtMode">Cartridge</preference>
+        </staging>
+        <production/>
+    </standard-preferences>
+    <custom-preferences>
+        <all-instances>
+            <preference preference-id="adyenCartridgeEnabled">false</preference>
+            <preference preference-id="avataxCartridgeEnabled">false</preference>
+            <preference preference-id="bopisCartridgeEnabled">false</preference>
+            <preference preference-id="cybersourceCartridgeEnabled">false</preference>
+            <preference preference-id="forterEnabled">false</preference>
+            <preference preference-id="paypalCartridgeEnabled">false</preference>
+            <preference preference-id="giftCertificateEnabled">false</preference>
+            <preference preference-id="googlePlacesEnabled">false</preference>
+            <preference preference-id="GTMEnable">false</preference>
+            <preference preference-id="klaviyo_enabled">false</preference>
+            <preference preference-id="MarketingCloudForNewsletterEnabled">false</preference>
+            <preference preference-id="multishippingWithoutBopisEnabled">false</preference>
+            <preference preference-id="sfcommercepaymentsCartridgeEnabled">false</preference>
+            <preference preference-id="SignifydEnableCartridge">false</preference>
+            <preference preference-id="TaxJarEnable">false</preference>
+            <preference preference-id="Vertex_isEnabled">false</preference>
+            <preference preference-id="wishlistEnable">false</preference>
+            <preference preference-id="yotpoCartridgeEnabled">false</preference>
+            <preference preference-id="blogParentFolders">
+                <value>blogCategories</value>
+            </preference>
+            <preference preference-id="contentImageBreakpoints">
+            {
+                "mobile"    : 769,
+                "mobile2x"  : 1538,
+                "tablet"    : 1024,
+                "tablet2x"  : 2048,
+                "desktop"   : 1440,
+                "desktop2x" : 2880
+            }
+            </preference>
+            <preference preference-id="disConfiguration">
+            {
+                "viewTypeMapping":{
+                    "yotpo":"large",
+                    "hi-res":"large",
+                    "large":"large",
+                    "medium":"large",
+                    "small":"large",
+                    "thumbnail":"large",
+                    "swatch":"swatch",
+                    "card":"large"
+                },
+                "yotpo":{
+                    "scaleWidth":400,
+                    "scaleHeight":400
+                },
+                "hi-res":{
+                    "scaleWidth":1600,
+                    "scaleHeight":1600
+                },
+                "large":{
+                    "scaleWidth":800,
+                    "scaleHeight":800
+                },
+                "medium":{
+                    "scaleWidth":250,
+                    "scaleHeight":250
+                },
+                "small":{
+                    "scaleWidth":176,
+                    "scaleHeight":176
+                },
+                "thumbnail":{
+                    "scaleWidth":60,
+                    "scaleHeight":60
+                },
+                "swatch":{
+                    "scaleWidth":60,
+                    "scaleHeight":60
+                },
+                "card":{
+                    "scaleWidth":400,
+                    "scaleHeight":400
+                }
+            }
+            </preference>
+            <preference preference-id="contactUsFormTopics">
+                <value>General Information</value>
+                <value>My Account</value>
+                <value>Order Status</value>
+                <value>Other</value>
+            </preference>
+            <preference preference-id="enablePLPStickyRefinementBar">false</preference>
+            <preference preference-id="enablePdpStickyAddToCart">true</preference>
+            <preference preference-id="enableQuantityStepper">true</preference>
+            <preference preference-id="enableVariantSelectionInPdpStickyAddToCart">true</preference>
+            <preference preference-id="filterType">horizontal-one-dropdown</preference>
+            <preference preference-id="giftCertificateActivatedByExternalSystem">false</preference>
+            <preference preference-id="headerFixed">enhanced</preference>
+            <preference preference-id="headerLayout">logo-center</preference>
+            <preference preference-id="headerNavLayout">nav-center</preference>
+            <preference preference-id="headerSearch">search-icon-only</preference>
+            <preference preference-id="hideQty">false</preference>
+            <preference preference-id="megamenuNavLayout">mega-standard</preference>
+            <preference preference-id="pdpCollapsibleContentDesktop1">collapsed-expanded</preference>
+            <preference preference-id="pdpCollapsibleContentDesktop2">collapsed-expanded</preference>
+            <preference preference-id="pdpHideSingleVariants">true</preference>
+            <preference preference-id="pdpImageColumnWidth">7/12</preference>
+            <preference preference-id="pdpSwatchTypeAsImage">true</preference>
+            <preference preference-id="pdpThumbnailType">imagesDesktopDotsMobile</preference>
+            <preference preference-id="plpCollapseRefinementsDesktop">true</preference>
+            <preference preference-id="plpPromotionShow">false</preference>
+            <preference preference-id="plpQuickbuyButtonOrIcon">button</preference>
+            <preference preference-id="plpQuickAddToCartButtonOrIcon">hide</preference>
+            <preference preference-id="plpShowSecondaryProductImage">true</preference>
+            <preference preference-id="plpSwatchShow">always-show</preference>
+            <preference preference-id="plpSwatchTypeAsImage">true</preference>
+            <preference preference-id="productsPerRowDesktop">three</preference>
+            <preference preference-id="productsPerRowMobile">two</preference>
+            <preference preference-id="quickviewShowHeadlineAndDescription">true</preference>
+            <preference preference-id="storeSearchRadiusOptions">
+                <value>15</value>
+                <value>30</value>
+                <value>50</value>
+                <value>100</value>
+                <value>300</value>
+            </preference>
+            <preference preference-id="storeTypePreferences">
+            [
+                {
+                    "value": "default",
+                    "mapMarker": {
+                        "backgroundImage": "/images/icons/map-marker-default.svg",
+                        "color": "white"
+                    }
+                },
+                {
+                    "value": "retail",
+                    "mapMarker": {
+                        "backgroundImage": "/images/icons/map-marker-retail.svg",
+                        "color": "white"
+                    }
+                },
+                {
+                    "value": "outlet",
+                    "mapMarker": {
+                        "backgroundImage": "/images/icons/map-marker-outlet.svg",
+                        "color": "white"
+                    }
+                },
+                {
+                    "value": "outlet",
+                    "mapMarker": {
+                        "backgroundImage": "/images/icons/map-marker-outlet.svg",
+                        "color": "white"
+                    }
+                }
+            ]
+            </preference>
+            <preference preference-id="swatchableAttributes">["color","size"]</preference>
+            <preference preference-id="useDefaultProductVariant">true</preference>
+            <preference preference-id="variationAttributesToUse">
+                <value>size</value>
+            </preference>
+        </all-instances>
+        <development/>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+

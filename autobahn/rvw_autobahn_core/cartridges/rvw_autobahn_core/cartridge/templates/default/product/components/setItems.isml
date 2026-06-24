@@ -1,0 +1,118 @@
+<div class="set-items pb-3" itemtype="http://schema.org/SomeProducts" itemid="#product">
+    <isloop items="${productCopy.individualProducts}" var="product" status="loopState">
+
+            <isif condition="${!loopState.first}">
+                <hr/>
+            </isif>
+
+            <div class="container product-detail set-item product-set-item-detail"
+                data-swatchable-attributes="${productCopy.attrsToUseForSwatch}"
+                data-pid="${product.id}">
+
+                <div class="row py-3">
+                    <div class="col-12">
+                        <!-- Product Name -->
+                        <div class="row">
+                            <div class="d-md-none col-sm-12">
+                                <h3 class="product-name">
+                                    <a href="${URLUtils.url('Product-Show', 'pid', product.id)}">
+                                        ${product.productName}
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row product-set">
+
+                    <!-- Product Images Carousel -->
+                    <isinclude template="product/components/imageCarousel" />
+
+                    <div class="product-data ${productDataColumnClass}">
+                        <!-- Product Name -->
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="product-name hidden-sm-down">${product.productName}</h1>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+
+                                <div class="prices top-prices clearfix">
+                                    <isset name="price" value="${product.price}" scope="page" />
+                                    <isinclude template="product/components/pricing/main" />
+                                </div>
+
+                                <isinclude template="product/components/pidRating" />
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 set-item-details">
+
+                                <div class="attributes">
+                                    <isinclude template="product/components/mainAttributes" />
+
+                                    <isif condition="${product.variationAttributes}">
+                                        <isset name="noSwatchOverride" value="${false}" scope="page" />
+                                        <isset name="sizeChartHasBeenShown" value="${false}" scope="page"/>
+                                        <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                                            <div class="swatch row" data-attr="${attr.id}">
+                                                <div class="col-12">
+                                                    <isset name="sizeChartHasBeenShown" value="${true}" scope="page"/>
+                                                    <isinclude template="product/components/variationAttribute" />
+                                                </div>
+                                            </div>
+                                        </isloop>
+                                    </isif>
+
+
+                                    <isif condition="${product.options && product.options.length}">
+                                        <div class="row">
+                                            <isinclude template="product/components/options" />
+                                        </div>
+                                    </isif>
+
+                                    <!-- Size Chart -->
+                                    <isif condition="${product.variationAttributes && product.sizeChartId}">
+                                        <div class="row">
+                                            <div class="size-chart col-12">
+                                                <isinclude template="product/components/sizeChart" />
+                                            </div>
+                                        </div>
+                                    </isif>
+
+                                </div>
+
+                                <!-- Product Availability -->
+                                <isinclude template="product/components/productAvailability" />
+
+                                <isinclude template="integrations/product/components/beforeAddToCart"/>
+
+                                 <!-- Add To Cart and Quantity -->
+                                <div class="row qty-cart-container no-gutters" id="qty-cart-container">
+                                    <!-- Quantity Drop Down Menu -->
+                                    <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 ${product.hideQty ? 'd-none' : ''}">
+                                        <isinclude template="product/components/quantity" />
+                                    </div>
+
+                                    <div class="prices-add-to-cart-actions col-12 col-sm-6 col-md-7 col-lg-9">
+
+                                        <!-- Add To Cart -->
+                                        <isinclude template="product/components/addToCartProduct" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+    </isloop>
+</div>

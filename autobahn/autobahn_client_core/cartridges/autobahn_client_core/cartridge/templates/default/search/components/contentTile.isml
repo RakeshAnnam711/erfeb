@@ -1,0 +1,50 @@
+<a class="content-tile" href="${contentAsset.url}" itemscope itemtype="https://schema.org/${contentAsset.isBlog ? 'BlogPosting' : 'CreativeWork'}" aria-label="${contentAsset.name}">
+    <isif condition="${!empty(contentAsset.tileImage)}">
+        <span class="content-tile-image-wrapper" data-index="${index}">
+            <isif condition="${index < 4}">
+                <span class="content-tile-image" role="img" aria-label="${contentAsset.name}"
+                    style="background-image: url('${contentAsset.tileImage.src}');
+                            background-position-x: ${contentAsset.tileImage.focalPointX};
+                            background-position-y: ${contentAsset.tileImage.focalPointY};
+                            background-size: cover;">
+                    <img class="d-none" src="${contentAsset.tileImage.src}"
+                        alt="${contentAsset.tileImage.alt}"
+                        itemprop="image"
+                        loading="${index < 6 ? 'eager' : 'lazy'}"
+                        decoding="async"
+                        fetchpriority="${index < 3 ? 'high' : 'low'}"
+                        />
+                </span>
+            <iselse/>
+                <span class="content-tile-image" role="img" aria-label="${contentAsset.name}"
+                    data-bg="${contentAsset.tileImage.src}"
+                    style="background-image: url('${contentAsset.tileImage.src}');
+                            background-position-x: ${contentAsset.tileImage.focalPointX};
+                            background-position-y: ${contentAsset.tileImage.focalPointY};
+                            background-size: cover;">
+                    <img class="d-none" src="${contentAsset.tileImage.src}"
+                        alt="${contentAsset.tileImage.alt}"
+                        itemprop="image"
+                        loading="${index < 6 ? 'eager' : 'lazy'}"
+                        decoding="async"
+                        fetchpriority="${index < 3 ? 'high' : 'low'}"
+                        />
+                </span>
+            </isif>
+        </span>
+    </isif>
+    <span class="content-tile-body">
+        <isif condition="${!contentAsset.isBlog && !empty(contentAsset.categoryName)}">
+            <span class="content-tile-category">${contentAsset.categoryName}</span>
+        </isif>
+        <isif condition="${!empty(contentAsset.name)}">
+            <h2 class="content-tile-name" itemprop="${contentAsset.isBlog ? 'headline' : 'name'}">${contentAsset.name}</h2>
+        </isif>
+        <isif condition="${!empty(contentAsset.publishDateDisplay)}">
+            <span class="content-tile-date" itemprop="datePublished">${contentAsset.publishDateDisplay}</span>
+        </isif>
+        <isif condition="${!empty(contentAsset.description)}">
+            <p class="content-tile-description" itemprop="description">${contentAsset.description}</p>
+        </isif>
+    </span>
+</a>

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<promotions xmlns="http://www.demandware.com/xml/impex/promotion/2008-01-31">
+    <campaign campaign-id="DEMO-GLOBALE">
+        <description>Demo Global-e Campaign</description>
+        <enabled-flag>true</enabled-flag>
+        <campaign-scope>
+            <applicable-online/>
+        </campaign-scope>
+    </campaign>
+
+    <promotion promotion-id="DEMO-FREE-SHIPPING">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">Demo Free Shipping</name>
+        <callout-msg xml:lang="x-default">Demo Free Shipping</callout-msg>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDiscountType">FREE</custom-attribute>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <shipping-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>root</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <shipping-methods>
+                <method-id>GLOBALE</method-id>
+                <method-id>GLOBALE_STANDARD</method-id>
+                <method-id>GLOBALE_EXPRESS</method-id>
+                <method-id>GLOBALE_STORE_COLLECTION</method-id>
+                <method-id>GLOBALE_HUB</method-id>
+                <method-id>GLOBALE_DIRECT</method-id>
+                <method-id>GLOBALE_WYOL</method-id>
+            </shipping-methods>
+            <prohibit-nonqualifying-products>false</prohibit-nonqualifying-products>
+            <discounts condition-type="product-quantity">
+                <discount>
+                    <threshold>1</threshold>
+                    <free/>
+                </discount>
+            </discounts>
+        </shipping-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="DEMO-10OFF-PRODUCT">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">DEMO-10OFF-PRODUCT</name>
+        <callout-msg xml:lang="x-default">DEMO-10OFF-PRODUCT</callout-msg>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDiscountType">AMOUNT</custom-attribute>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>root</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <amount>10.0</amount>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="DEMO-10%-ORDER">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">Demo 10% Order</name>
+        <callout-msg xml:lang="x-default">Demo 10% Order</callout-msg>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDiscountType">PERCENTAGE</custom-attribute>
+        </custom-attributes>
+        <order-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>root</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <disable-global-excluded-products>true</disable-global-excluded-products>
+            <discount-only-qualifying-products>true</discount-only-qualifying-products>
+            <discounts condition-type="product-quantity">
+                <discount>
+                    <threshold>1</threshold>
+                    <percentage>10.0</percentage>
+                </discount>
+            </discounts>
+            <exclude-discounted-products>false</exclude-discounted-products>
+        </order-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="DEMO-10%-PRODUCT">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">Demo 10% Product</name>
+        <callout-msg xml:lang="x-default">Demo 10% Product</callout-msg>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDiscountType">PERCENTAGE</custom-attribute>
+        </custom-attributes>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>root</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <percentage>10.0</percentage>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="DEMO-10OFF-ORDER">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">DEMO-10OFF-ORDER</name>
+        <callout-msg xml:lang="x-default">DEMO-10OFF-ORDER</callout-msg>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDiscountType">AMOUNT</custom-attribute>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <order-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>root</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <discount-only-qualifying-products>true</discount-only-qualifying-products>
+            <discounts condition-type="product-quantity">
+                <discount>
+                    <threshold>1</threshold>
+                    <amount>10.0</amount>
+                </discount>
+            </discounts>
+            <exclude-discounted-products>false</exclude-discounted-products>
+        </order-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="DEMO-BONUS-PRODUCT">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">DEMO-BONUS-PRODUCT</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDiscountType">BONUS</custom-attribute>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <product-promotion-rule>
+            <simple-discount>
+                <bonus>
+                    <bonus-products>
+                        <product-id>682875540326M</product-id>
+                        <product-id>682875090845M</product-id>
+                    </bonus-products>
+                </bonus>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="DEMO-RESTRICTED-PRODUCTS">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>true</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">DEMO-RESTRICTED-PRODUCTS</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDiscountType">PERCENTAGE</custom-attribute>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <product-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>root</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+                <excluded-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>25493624M</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </excluded-products>
+            </qualifying-products>
+            <discounted-products>
+                <included-products/>
+                <excluded-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>root</category-id>
+                        </category-condition>
+                    </condition-group>
+                </excluded-products>
+            </discounted-products>
+            <disable-global-excluded-products>true</disable-global-excluded-products>
+            <discounts condition-type="product-amount">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <percentage>0.01</percentage>
+                </discount>
+            </discounts>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion-campaign-assignment promotion-id="DEMO-FREE-SHIPPING" campaign-id="DEMO-GLOBALE">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+        <customer-groups match-mode="any">
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="DEMO-FREE-SHIPPING"/>
+        </coupons>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="DEMO-10OFF-PRODUCT" campaign-id="DEMO-GLOBALE">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+        <customer-groups match-mode="any">
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="DEMO-10OFF-PRODUCT"/>
+        </coupons>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="DEMO-10%-ORDER" campaign-id="DEMO-GLOBALE">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+        <customer-groups match-mode="any">
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="DEMO-10%-ORDER"/>
+        </coupons>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="DEMO-10%-PRODUCT" campaign-id="DEMO-GLOBALE">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+        <customer-groups match-mode="any">
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="DEMO-10%-PRODUCT"/>
+        </coupons>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="DEMO-10OFF-ORDER" campaign-id="DEMO-GLOBALE">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+        <customer-groups match-mode="any">
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="DEMO-10OFF-ORDER"/>
+        </coupons>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="DEMO-BONUS-PRODUCT" campaign-id="DEMO-GLOBALE">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+        <customer-groups match-mode="any">
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="DEMO-BONUS"/>
+        </coupons>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="DEMO-RESTRICTED-PRODUCTS" campaign-id="DEMO-GLOBALE">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+        <customer-groups match-mode="any">
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+    </promotion-campaign-assignment>
+
+</promotions>

@@ -1,0 +1,48 @@
+{
+	"hooks": [
+		{
+			"name": "app.backinstock.subscribe",
+			"script": "./cartridge/scripts/hooks/backInStockNotification.js"
+		},
+		{
+			"name": "app.email.account.creation",
+			"script": "./cartridge/scripts/hooks/accountCreationEmail.js"
+		},
+		{
+			"name": "app.email.giftCertificate.recipient",
+			"script": "./cartridge/scripts/hooks/giftCertificateRecipientEmail"
+		},
+		{
+			"name": "app.email.order.confirmation",
+			"script": "./cartridge/scripts/hooks/confirmationEmail.js"
+		},
+		{
+			"name": "app.email.password.reset",
+			"script": "./cartridge/scripts/hooks/passwordResetEmail.js"
+		},
+		{
+			"name": "app.email.password.changed",
+			"script": "./cartridge/scripts/hooks/passwordChangeEmail.js"
+		},
+		{
+			"name": "app.mailingList.subscribe",
+			"script": "./cartridge/scripts/hooks/newsletter.js"
+		},
+		{
+			"name": "app.template.afterFooter",
+			"script": "./cartridge/scripts/hooks/afterFooter.js"
+		},
+		{
+			"name": "app.template.beforeHeader",
+			"script": "./cartridge/scripts/hooks/beforeHeader.js"
+		},
+		{
+			"name": "bm.styleguide",
+			"script": "./cartridge/scripts/hooks/styleguideEvents.js"
+		},
+        {
+            "name": "app.server.registerRoute",
+            "script": "~/cartridge/scripts/hooks/conversionTrackingCreateCookie.js"
+        }
+	]
+}

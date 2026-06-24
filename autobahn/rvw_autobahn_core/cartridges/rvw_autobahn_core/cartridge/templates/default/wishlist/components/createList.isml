@@ -1,0 +1,21 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<form class="wishlist-create-list-form" novalidate data-url="${URLUtils.url('Wishlist-AddList')}">
+    <div class="form-group">
+        <label for="newProductListName">
+            ${Resource.msg('text.modal.enterlistname', 'wishlist', null)}
+        </label>
+        <input
+            type="text"
+            class="form-control"
+            id="newProductListName"
+            aria-describedby="newProductListNameHelp"
+            required
+            data-error-duplicate-name="${Resource.msg('text.modal.duplicatelistnameerror', 'wishlist', null)}"
+            title="${Resource.msg('text.modal.invalidcharactersmessage', 'wishlist', null)}"
+        />
+        <div id="newProductListNameHelp" class="invalid-feedback"></div>
+    </div>
+    <button type="submit" class="wishlist-create-list-btn create">
+        ${Resource.msg('button.modal.createnewlist', 'wishlist', null)}
+    </button>
+</form>

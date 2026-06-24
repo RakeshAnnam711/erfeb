@@ -1,0 +1,42 @@
+.flex-grid-wrapper {
+    &.full-bleed {
+        padding-left: 0;
+        padding-right: 0;
+        overflow-x: hidden;
+    }
+    .grid-title:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6):not(.b1):not(.b2):not(.b3):not(.b4):not(.custom) {
+        @include header(1);
+    }
+
+    .flex-grid {
+        display: flex;
+        flex-flow: row wrap;
+
+        .flex-grid-item {
+            position: relative;
+            display: flex;
+            flex-flow: row wrap;
+            margin-bottom: $spacer*2;
+
+            @include media-breakpoint-up(xl) {
+                margin-bottom: $spacer-xl*2;
+            }
+
+            //Give child element full width to allow components like video component to display
+            > * {
+                width: 100%;
+            }
+        }
+
+        //applies to .flex-grid. placed below children to allow for override of flex-grid-item's bottom margin
+        &.no-gutters {
+            .row {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .flex-grid-item {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,148 @@
+// product line item dividers
+.product-info,
+.product-summary {
+    .product-line-item,
+    .bonus-product-line-item,
+    .multi-shipping,
+    .shipment-block {
+        & + .product-line-item,
+        & + .bonus-product-line-item,
+        & + .shipment-block {
+            margin-top: calc(#{$spacer} - (#{$spacer} / 2));
+            padding-top: $spacer;
+            border-top: $product-card-item-border-width solid $product-card-border-color;
+            border-radius: $card-border-radius;
+        }
+    }
+    .bonus-product-line-item {
+        & + .product-line-item,
+        & + .bonus-product-line-item {
+            border-top: none;
+        }
+    }
+    .shipment-block + .shipment-block {
+        margin-top: $spacer-xl;
+        padding-top: $spacer-xl;
+    }
+}
+
+.product-info,
+.product-summary,
+.multi-shipping {
+    .order-product-summary & {
+        padding: 0;
+        margin: 0;
+        h3:not(:first-child) {
+            margin-top: $spacer;
+        }
+    }
+    .product-summary-block {
+        & > .card {
+            border: none;
+            .card-body {
+                padding: 0;
+            }
+        }
+    }
+    .item-image {
+        width: $product-card-image-size-sm;
+        margin-right: $spacer;
+        flex-grow: 0;
+        flex-shrink: 0;
+        img.product-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    .line-item-name {
+        display: block;
+        font-family: $product-card-product-name-font-family;
+        @include paragraph-font-size($product-card-product-name-font-size);
+        text-transform: $product-card-product-name-text-transform;
+        font-weight: $product-card-product-name-font-weight;
+        text-decoration: $product-card-product-name-text-decoration;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: calc(100% - #{$spacer});
+        @include media-breakpoint-up(md) {
+            width: calc(100% - #{$spacer-xl});
+        }
+    }
+    .item-attributes {
+        color: $product-card-attribute-color;
+        padding: 0 0 calc(#{$spacer} / 2);
+        width: calc(100% - #{$product-card-image-size-sm});
+    }
+    .item-attributes,
+    .item-attributes p,
+    .item-price-qty,
+    .line-item-availability {
+        font-size: $product-card-attribute-size;
+        margin: 0;
+    }
+    .line-item-availability {
+        .line-item-attributes {
+            display: inline;
+        }
+    }
+    .line-item-pricing-info {
+        font-size: $product-card-attribute-size;
+        margin-bottom: 0;
+    }
+    .item-price-qty,
+    .product-card-footer {
+        padding-top: calc(#{$spacer} / 2);
+        padding-bottom: calc(#{$spacer} / 2);
+        &.row > .col {
+            padding: 0;
+        }
+        .line-item-unit-price + .line-item-quantity,
+        .col-4  + .line-item-quantity {
+            align-items: center;
+            text-align: center;
+        }
+        .line-item-total-price {
+            align-items: flex-end;
+            text-align: right;
+        }
+    }
+    .quantity-label {
+        display: $cart-product-quantity-label-display;
+    }
+    del,
+    .strike-through {
+        text-decoration: line-through;
+        color: $product-strike-through-price-color;
+        .value {
+            margin-right: 4px;
+        }
+    }
+    .bonus-line-item-msg {
+        margin-top: calc(#{$spacer} / 2);
+    }
+    .nested-line-item {
+        margin: 0;
+        border: 1px solid $product-card-border-color;
+        padding: calc(#{$spacer} / 2);
+        ~ .nested-line-item {
+            border-top: 0;
+        }
+    }
+    .bonus-line-item-msg,
+    .unit-price-label,
+    .qty-card-quantity-label,
+    .quantity-label,
+    .line-item-total-price-label {
+        @include label-styles;
+    }
+    .non-adjusted-price {
+        display: none;
+    }
+    .line-item-promo {
+        color: $product-card-promo-color;
+        font-size: $product-card-promo-font-size;
+    }
+}

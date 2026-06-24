@@ -1,0 +1,209 @@
+{
+    "name": "Title and CTA",
+    "description": "Show Title, sub title and CTA",
+    "group": "wgaca_assets",
+    "attribute_definition_groups": [
+    	{
+	    	"id": "titleContainer",
+	      	"attribute_definitions": [
+				{
+					"id": "textContainerClass",
+					"name": "Text Container Class",
+					"type": "string",
+					"description": "Add a class to the inner container of the component. Useful for overriding padding. e.g. 'p-0' See the Style Guide for more class options.",
+					"required": false
+				},
+				{
+					"id": "textContainerBackgroundColorMobile",
+					"name": "Text Container Background Color(Mobile)",
+					"type": "string",
+					"required": false
+				},
+				{
+					"id": "titleClass",
+					"name": "Title Class",
+					"type": "string",
+					"description": "Add a class directly to the title element to create space between the title and sub-title.",
+					"required": false
+				},
+				{
+	          		"id": "title",
+	          		"name": "Title",
+	          		"type": "string",
+	          		"required": true
+	        	},
+	        	{
+	          		"id": "titleColor",
+	          		"name": "Title Color",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "titleFontSize",
+	          		"name": "Title Font Size",
+	          		"description": "Title font size, default is 16px",
+	          		"type": "enum",
+                    "values": ["16px", "20px", "24px", "28px"],
+                    "default_value": "16px",
+	          		"required": false
+	        	},
+				{
+					"id": "titleFontSizeMobile",
+					"name": "Title Font size(Mobile)",
+					"description": "Sets title font size for mobile screens, default is 24px",
+					"type": "enum",
+				    "values": ["16px","18px", "24px", "28px"],
+				    "default_value": "24px",
+					"required": false
+			  	},
+				{
+					"id": "titleAlignment",
+					"name": "Title Alignment",
+					"description": "Title Alignment, default is unset",
+					"type": "enum",
+					"values": [
+						"unset",
+						"left",
+						"center",
+						"right"
+					],
+					"default_value": "unset",
+					"required": false
+				}
+	      	]
+	    },
+	    {
+	    	"id": "subTitleContainer",
+	      	"attribute_definitions": [
+				{
+					"id": "subTitleContainerClass",
+					"name": "Sub Title Container Class",
+					"type": "string",
+					"description": "Add a class to the inner container of the component. Useful for overriding padding. e.g. 'p-0' See the Style Guide for more class options.",
+					"required": false
+				},
+				{
+					"id": "subTitleWidth",
+					"name": "Subtitle Width",
+					"type": "string",
+					"description": "Set the width of subtitle, eg: '25%'",
+					"required": false
+				}, 
+				{
+	          		"id": "subTitle",
+	          		"name": "Sub Title",
+	          		"type": "string",
+	          		"required": true
+	        	},
+	        	{
+	          		"id": "subTitleColor",
+	          		"name": "Sub Title Color",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "SubTitleFontSize",
+	          		"name": "Sub Title Font Size",
+	          		"description": "Sub Title font size, default is 16px",
+	          		"type": "enum",
+                    "values": ["16px", "20px", "24px", "28px"],
+                    "default_value": "16px",
+	          		"required": false
+	        	},
+				{
+					"id": "subTitleFontSizeMobile",
+					"name": "Subtitle Font size(Mobile)",
+					"description": "Sets subtitle font size font size for mobile screens, default is 18px",
+					"type": "enum",
+					"values": ["16px", "18px", "24px"],
+					"default_value": "18px",
+					"required": false
+		  	   	},
+				{
+					"id": "SubTitleAlignment",
+					"name": "Sub Title Alignment",
+					"description": "Sub Title Alignment, default is unset",
+					"type": "enum",
+					"values": [
+						"unset",
+						"left",
+						"center",
+						"right"
+					],
+					"default_value": "unset",
+					"required": false
+				}
+	      	]
+	    },
+		{
+			"id": "shopButtonDiv",
+			"attribute_definitions": [
+				{
+					"id": "shopButtonDiv",
+					"name": "Select gird Only when using button alignment",
+					"description": "Select grid property only when using button alignment, Otherwise leave it unchanged",
+					"type": "enum",
+					"values": [
+						"grid"
+					],
+					"required": false
+				}
+			]
+		},
+	    {
+	    	"id": "ctaConfiguration",
+	      	"attribute_definitions": [
+				{
+					"id": "buttonContainerClass",
+					"name": "Button Container Class",
+					"type": "string",
+					"description": "Add a class to the inner container of the component. Useful for overriding padding. e.g. 'p-0' See the Style Guide for more class options.",
+					"required": false
+				},
+				{
+	          		"id": "buttonText",
+	          		"name": "Button Text",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+					"id": "buttonStyle",
+					"name": "Button Style",
+					"description": "Select button styling, default is btn-primary",
+					"type": "enum",
+				    "values": ["btn-primary", "btn-secondary", "btn-tertiary"],
+				    "default_value": "btn-primary",
+					"required": false
+			  	},
+				{
+					"id": "buttonAlignment",
+					"name": "Button Alignment",
+					"description": "Select button Alignment, default is unset",
+					"type": "enum",
+					"values": [
+						"unset",
+						"left",
+						"center",
+						"right"
+					],
+					"default_value": "unset",
+					"required": false
+				},
+	        	{
+	          		"id": "ctaUrl",
+	          		"name": "CTA Url",
+	          		"type": "url",
+	          		"required": false
+	        	},
+				{
+	          		"id": "ctaAriaLabel",
+	          		"name": "CTA Aria-label",
+					"description": "Aria-label is an attribute that provides an accessible name for screen readers helping users understand the purpose of an element.",
+	          		"type": "string",
+	          		"required": false
+	        	}
+	      	]
+	    }  
+    ],
+    "region_definitions": []
+}

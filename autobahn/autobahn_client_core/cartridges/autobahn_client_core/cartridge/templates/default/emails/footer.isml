@@ -1,0 +1,107 @@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="footer">
+                            <p class="closing">Thank You!<br/>What Goes Around Comes Around</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tbody align="center" width="640">
+                                    <tr>
+                                        <td height="60">
+                                            <hr>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="center" style="font-family:'BrandonGrotesqueRegular',Futura,sans-serif;font-size:12px;letter-spacing:0.5px;font-weight:bold;line-height:16px;color:#000001;text-transform:uppercase;padding:45px 0px 45px">
+                                            <span style="width:33%;text-align:center;white-space:nowrap;margin-left:8px;margin-right:8px;"><a href="https://www.whatgoesaroundnyc.com/about" style="text-decoration:none;color:#000001" target="_blank" rel="noopener">ABOUT US</a></span>
+                                            <span style="width:33%;text-align:center;white-space:nowrap;margin-left:8px;margin-right:8px;"><a href="https://www.whatgoesaroundnyc.com/faq" style="text-decoration:none;color:#000001" target="_blank" rel="noopener">FAQ</a></span>
+                                            <span style="width:33%;text-align:center;white-space:nowrap;margin-left:8px;margin-right:8px;"> <a href="https://www.whatgoesaroundnyc.com/contact-us" style="text-decoration:none;color:#000001" target="_blank" rel="noopener">CONTACT US</a></span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="center" style="padding:0px 0px 45px">
+                                            <table align="center" class="social" width="280" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:280px">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="center">
+                                                            <a href="https://www.linkedin.com/company/what-goes-around-comes-around/" target="_blank" rel="noopener"
+                                                                data-saferedirecturl="https://www.linkedin.com/company/what-goes-around-comes-around/">
+                                                                <img src="http://images.your-merchandise.com/20614/33415/inIcon.jpg"
+                                                                border="0" style="outline:none;text-decoration:none;border:none;display:block;margin:0 auto;"
+                                                                width="27" alt="LinkedIn" class="CToWUd">
+                                                            </a>
+                                                        </td>
+                                                        <td align="center">
+                                                            <a href="https://www.instagram.com/whatgoesaroundnyc/"
+                                                                target="_blank" rel="noopener"
+                                                                data-saferedirecturl="https://www.instagram.com/whatgoesaroundnyc/">
+                                                                <img src="http://images.your-merchandise.com/20614/33415/instaIcon.jpg"
+                                                                    width="27" border="0" style="outline:none;text-decoration:none;border:none;display:block;margin:0 auto;"
+                                                                    alt="Instagram" class="CToWUd">
+                                                            </a>
+                                                        </td>
+                                                        <td align="center">
+                                                            <a href="https://www.facebook.com/WhatGoesAroundNYC/"
+                                                                target="_blank" rel="noopener"
+                                                                data-saferedirecturl="https://www.facebook.com/WhatGoesAroundNYC/">
+                                                                <img src="http://images.your-merchandise.com/20614/33415/fbIcon.jpg"
+                                                                    width="27" border="0" style="outline:none;text-decoration:none;border:none;display:block;margin:0 auto;"
+                                                                    alt="Facebook" class="CToWUd">
+                                                            </a>
+                                                        </td>
+                                                        <td align="center">
+                                                            <a href="https://www.pinterest.co.uk/wgacany/"
+                                                                target="_blank" rel="noopener"
+                                                                data-saferedirecturl="https://www.pinterest.co.uk/wgacany/">
+                                                                <img src="http://images.your-merchandise.com/20614/33415/pinIcon.jpg"
+                                                                    width="27" border="0" style="outline:none;text-decoration:none;border:none;display:block;margin:0 auto;"
+                                                                    alt="Pinterest" class="CToWUd">
+                                                            </a>
+                                                        </td>
+                                                        <td align="center">
+															<a href="https://www.tiktok.com/@whatgoesaroundnyc"
+																target="_blank" rel="noopener"
+																data-saferedirecturl="https://www.tiktok.com/@whatgoesaroundnyc">
+																<img src="https://cdn-icons-png.flaticon.com/512/5969/5969008.png"
+																	width="27" border="0" style="outline:none;text-decoration:none;border:none;display:block;margin:0 auto;"
+																	alt="Tiktok" class="CToWUd">
+															</a>
+														</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="font-family:'BrandonGrotesqueRegular',Futura,sans-serif;font-size:12px;letter-spacing:0.5px;font-weight:bold;line-height:16px;color:#000001;text-transform:uppercase;padding:0px 0px 45px">
+                                            We are <i>always</i> buying - Sell to us
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding:0px 0px 45px">
+                                            <table class='footlink-wrapper' align="center" width="350" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:350px">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="center" style="font-family:'BrandonGrotesqueRegular',Arial,sans-serif;font-size:12px;letter-spacing:0.5px;font-weight:normal;line-height:16px;color:#88888a">
+                                                            &copy; WGACA ${new Date().getFullYear().toFixed()}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>

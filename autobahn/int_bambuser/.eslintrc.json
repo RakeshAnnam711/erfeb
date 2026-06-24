@@ -1,0 +1,80 @@
+{
+    "root": true,
+    "extends": "airbnb-base/legacy",
+    "env": {
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
+    "globals": {
+        "dw": "readonly",
+        "module": "readonly",
+        "require": "readonly",
+        "request": "readonly",
+        "$": "readonly",
+        "jQuery": "readonly",
+        "exports": "readonly"
+    },
+    "plugins": [
+        "only-var"
+    ],
+    "rules": {
+        "import/no-unresolved": "off",
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1,
+                "VariableDeclarator": 1
+            }
+        ],
+        "prefer-regex-literals": "off",
+        "func-names": "off",
+        "require-jsdoc": "error",
+        "valid-jsdoc": [
+            "error",
+            {
+                "preferType": {
+                    "Boolean": "boolean",
+                    "Number": "number",
+                    "object": "Object",
+                    "String": "string"
+                },
+                "requireReturn": false
+            }
+        ],
+        "vars-on-top": "off",
+        "global-require": "off",
+        "no-shadow": [
+            "error",
+            {
+                "allow": [
+                    "err",
+                    "callback"
+                ]
+            }
+        ],
+        "max-len": "off",
+        "no-loop-func": "off",
+        "no-param-reassign": "off",
+        "no-continue": "off",
+        "consistent-return": "off",
+        "dot-notation": "off",
+        "new-cap": "off",
+        "no-array-constructor": "off",
+        "prefer-exponentiation-operator": "off",
+        "prefer-template": "off",
+        "no-restricted-properties": [
+            1,
+            {
+                "object": "Math.pow"
+            }
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "no-useless-return":"off"
+    }
+}

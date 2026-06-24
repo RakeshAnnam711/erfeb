@@ -1,0 +1,21 @@
+<isset name="Constants" value="${require('*/cartridge/scripts/constants/SiteConstants')}" scope="page"/>
+<div class="photo-tile-container ${pdict.containerClass}" ${!empty(pdict.maxWidth) ? "style='margin: 0 auto; max-width: " + pdict.maxWidth +"px;'" : ""}>
+    <div class="row">
+        <div class="col-12">
+            <figure class="photo-tile-figure">
+                <picture>
+                    <source srcset="${pdict.image.src.desktop} 1x, ${pdict.image.src.desktop2x} 2x" media="(min-width: ${Constants.BreakpointSizes.lg.toFixed()}px)"/>
+                    <source srcset="${pdict.image.src.tablet} 1x, ${pdict.image.src.tablet2x} 2x" media="(min-width: ${Constants.BreakpointSizes.md.toFixed()}px)"/>
+                    <source srcset="${pdict.image.src.mobile} 1x, ${pdict.image.src.mobile2x} 2x" media="(max-width: ${Constants.BreakpointSizes.md.toFixed() - 1}px)"/>
+                    <img 
+                        class="photo-tile-image image-fluid w-100" 
+                        src="${pdict.image.src.desktop}" 
+                        style="--focal-point-x:${pdict.image.focalPointX}; --focal-point-y:${pdict.image.focalPointY}" 
+                        alt="${!empty(pdict.customImageAlt) ? pdict.customImageAlt : pdict.image.alt}" title="${!empty(pdict.customImageAlt) ? pdict.customImageAlt : pdict.image.alt}" 
+                        loading="lazy"
+                    />
+                </picture>
+            </figure>
+        </div>
+    </div>
+</div>

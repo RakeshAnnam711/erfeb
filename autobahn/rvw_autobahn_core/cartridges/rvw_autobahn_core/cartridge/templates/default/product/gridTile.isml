@@ -1,0 +1,18 @@
+<iscomment>
+    This overwrites what is in app_storefront_base.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in app_storefront_base
+</iscomment>
+<isinclude template="/components/modules" sf-toolkit="off" />
+<isset name="decoratorTemplate" value="${pdict.display.recommendation ? 'common/layout/recommendation' : 'common/layout/empty' }" scope="page"/>
+<isdecorate template="${decoratorTemplate}">
+    <isset name="showQuickView" value="${pdict.abConfigs.plpQuickbuyButtonOrIcon !== 'hide' ? true : false}" scope="page" />
+    <isset name="product" value="${pdict.product}" scope="page" />
+<div class="product" data-pid="${product.id}" data-section="${pdict.section}" >
+        <isprint value="${dw.system.HookMgr.callHook('app.template.domInject', 'productTile', pdict) || ''}"  encoding="off" />
+        <isinclude template="product/productTile" />
+    </div>
+</isdecorate>

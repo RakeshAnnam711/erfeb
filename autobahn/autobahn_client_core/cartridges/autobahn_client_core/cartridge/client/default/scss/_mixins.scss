@@ -1,0 +1,1295 @@
+@use "sass:math";
+
+// generate color classnames, e.g. ".color--red, .color--lg--red"
+@mixin color-classes($attribute) {
+    @each $name, $hex in $colors {
+        &--#{"" + $name} {
+            #{$attribute}: $hex;
+        }
+    }
+    &--md {
+        @include media-breakpoint-up(md) {
+            @each $name, $hex in $colors {
+                &--#{"" + $name} {
+                    #{$attribute}: $hex;
+                }
+            }
+        }
+    }
+    &--lg {
+        @include media-breakpoint-up(lg) {
+            @each $name, $hex in $colors {
+                &--#{"" + $name} {
+                    #{$attribute}: $hex;
+                }
+            }
+        }
+    }
+}
+
+// generate size classnames, e.g. ".font-size--12, .font-size--lg--22"
+@mixin size-classes($attribute, $from, $to) {
+    @for $i from $from through $to {
+        &--#{$i} {
+            #{$attribute}: #{$i}px !important;
+        }
+        &--md {
+            @include media-breakpoint-up(md) {
+                &--#{$i} {
+                    #{$attribute}: #{$i}px !important;
+                }
+            }
+        }
+        &--lg {
+            @include media-breakpoint-up(lg) {
+                &--#{$i} {
+                    #{$attribute}: #{$i}px !important;
+                }
+            }
+        }
+    }
+}
+
+// apply header styles, usage: @include header(2) // h2 styles
+@mixin header($headerIndex) {
+    $value: nth($headers, $headerIndex);
+
+    font-family: nth($value, 2);
+    font-size: nth($value, 3);
+    line-height: nth($value, 4);
+    font-weight: nth($value, 5);
+    letter-spacing: nth($value, 6);
+    text-transform: nth($value, 7);
+    font-style: nth($value, 8);
+    margin-bottom: nth($value, 9);
+
+    @include media-breakpoint-up(md) {
+        font-size: nth($value, 10);
+        line-height: nth($value, 11);
+        font-weight: nth($value, 12);
+        letter-spacing: nth($value, 13);
+        text-transform: nth($value, 14);
+        font-style: nth($value, 15);
+        margin-bottom: nth($value, 16);
+    }
+    @include media-breakpoint-up(lg) {
+        font-size: nth($value, 17);
+        line-height: nth($value, 18);
+        font-weight: nth($value, 19);
+        letter-spacing: nth($value, 20);
+        text-transform: nth($value, 21);
+        font-style: nth($value, 22);
+        margin-bottom: nth($value, 23);
+    }
+}
+
+// apply banner styles, usage: @include banner(2) // b2 styles
+@mixin banner($bannerIndex) {
+    $value: nth($banners, $bannerIndex);
+
+    font-family: nth($value, 2);
+    font-size: nth($value, 3);
+    line-height: nth($value, 4);
+    font-weight: nth($value, 5);
+    letter-spacing: nth($value, 6);
+    text-transform: nth($value, 7);
+    font-style: nth($value, 8);
+
+    @include media-breakpoint-up(md) {
+        font-size: nth($value, 9);
+        line-height: nth($value, 10);
+        font-weight: nth($value, 11);
+        letter-spacing: nth($value, 12);
+        text-transform: nth($value, 13);
+        font-style: nth($value, 14);
+    }
+    @include media-breakpoint-up(lg) {
+        font-size: nth($value, 15);
+        line-height: nth($value, 16);
+        font-weight: nth($value, 17);
+        letter-spacing: nth($value, 18);
+        text-transform: nth($value, 19);
+        font-style: nth($value, 20);
+    }
+}
+
+// apply paragraph styles, usage: @include paragraph-font-size(large)
+@mixin paragraph-font-size($size: normal) {
+    letter-spacing: $paragraph-letter-spacing;
+    @if $size == normal {
+        font-size: $paragraph-font-size;
+        @include media-breakpoint-up(lg) {
+            font-size: $paragraph-lg-font-size;
+        }
+    }
+    @if $size == large {
+        font-size: $paragraph-font-size-large;
+        @include media-breakpoint-up(lg) {
+            font-size: $paragraph-lg-font-size-large;
+        }
+    }
+    @if $size == small {
+        font-size: $paragraph-font-size-small;
+        @include media-breakpoint-up(lg) {
+            font-size: $paragraph-lg-font-size-small;
+        }
+    }
+}
+
+// apply font weight, usage: @include font-weight(bold), fall back to normal weight.
+@mixin font-weight($style: normal, $important: null) {
+    font-weight: if(map-has-key($font-weights, $style), map-get($font-weights, $style) $important, $style $important);
+}
+
+@mixin clearfix() {
+    &::after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+}
+
+@mixin disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+// This mixin should only be called from within _mixins.scss
+@mixin icon-styles($size, $color) {
+    font-family: $icomoon-font-family;
+    display: inline-block;
+    font-size: $size;
+    color: $color;
+    font-weight: normal;
+}
+
+// This mixin should only be called from within _mixins.scss
+@mixin button-icon-styles($position, $size, $color) {
+    @include icon-styles($size, $color);
+    position: absolute;
+    @if $position == after {
+        $afterIconButtonOffset: 10px;
+        transform: translateX($afterIconButtonOffset);
+    }
+    @if $position == before {
+        $beforeIconButtonOffset: $size + 10px;
+        transform: translateX(-$beforeIconButtonOffset);
+    }
+}
+
+@mixin button($style: "", $customBackground: "", $customText: "", $customBorder: "", $size: "") {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    border-width: $button-border-width;
+    border-style: solid;
+    font-family: $button-font;
+    text-transform: $button-text-transform;
+    transition: all $transition-speed ease-out;
+    text-decoration: none;
+    border-radius: $button-border-radius;
+    text-align: $button-text-align;
+    font-weight: $button-font-weight;
+    @if $size == small {
+        font-size: $button-sm-font-size;
+        line-height: $button-sm-line-height;
+        padding: $button-sm-padding-top $button-sm-padding-right $button-sm-padding-bottom $button-sm-padding-left;
+        letter-spacing: $button-sm-letter-spacing;
+    } @else {
+        font-size: $button-font-size;
+        letter-spacing: $button-letter-spacing;
+        line-height: $button-line-height;
+        padding: $button-padding-top $button-padding-right $button-padding-bottom $button-padding-left;
+    }
+    @if $style == primary {
+        font-family: $button-primary-font;
+        text-transform: $button-primary-text-transform;
+        color: $button-primary-color;
+        background-color: $button-primary-background;
+        border-width: $button-primary-border-width;
+        border-radius: $button-primary-border-radius;
+        border-color: $button-primary-border-color;
+        text-decoration: $button-primary-text-decoration;
+        text-align: $button-primary-text-align;
+        font-weight: $button-primary-font-weight;
+        @if $size == small {
+            padding: $button-sm-primary-padding-top $button-sm-primary-padding-right $button-sm-primary-padding-bottom $button-sm-primary-padding-left;
+        } @else {
+            padding: $button-primary-padding-top $button-primary-padding-right $button-primary-padding-bottom $button-primary-padding-left;
+        }
+        &:hover,
+        &:focus,
+        &[aria-describedby*="popover"] {
+            color: $button-primary-color-hover;
+            background-color: $button-primary-background-hover;
+            border-color: $button-primary-border-color-hover;
+            text-decoration: $button-primary-text-decoration-hover;
+        }
+        .dark-theme & {
+            color: $button-primary-dark-theme-color;
+            &:hover {
+               color:  $button-primary-dark-theme-color-hover;
+            }
+        }
+    }
+    @if $style == secondary {
+        font-family: $button-secondary-font;
+        text-transform: $button-secondary-text-transform;
+        color: $button-secondary-color;
+        border-width: $button-secondary-border-width;
+        border-radius: $button-secondary-border-radius;
+        background-color: $button-secondary-background;
+        border-color: $button-secondary-border-color;
+        text-decoration: $button-secondary-text-decoration;
+        text-align: $button-secondary-text-align;
+        font-weight: $button-secondary-font-weight;
+        @if $size == small {
+            padding: $button-sm-secondary-padding-top $button-sm-secondary-padding-right $button-sm-secondary-padding-bottom $button-sm-secondary-padding-left;
+        } @else {
+            padding: $button-secondary-padding-top $button-secondary-padding-right $button-secondary-padding-bottom $button-secondary-padding-left;
+        }
+        &:hover,
+        &:focus,
+        &[aria-describedby*="popover"] {
+            color: $button-secondary-color-hover;
+            background-color: $button-secondary-background-hover;
+            border-color: $button-secondary-border-color-hover;
+            text-decoration: $button-secondary-text-decoration-hover;
+        }
+        .dark-theme & {
+            color: $button-secondary-dark-theme-color;
+            &:hover {
+                color: $button-secondary-dark-theme-color-hover;
+            }
+        }
+    }
+    @if $style == tertiary {
+        font-family: $button-tertiary-font;
+        text-transform: $button-tertiary-text-transform;
+        color: $button-tertiary-color;
+        background-color: $button-tertiary-background;
+        border-radius: $button-tertiary-border-radius;
+        border-width: $button-tertiary-border-width;
+        border-color: $button-tertiary-border-color;
+        text-decoration: $button-tertiary-text-decoration;
+        text-align: $button-tertiary-text-align;
+        font-weight: $button-tertiary-font-weight;
+        @if $size == small {
+            padding: $button-sm-tertiary-padding-top $button-sm-tertiary-padding-right $button-sm-tertiary-padding-bottom $button-sm-tertiary-padding-left;
+        } @else {
+            padding: $button-tertiary-padding-top $button-tertiary-padding-right $button-tertiary-padding-bottom $button-tertiary-padding-left;
+        }
+        &:hover,
+        &:focus,
+        &[aria-describedby*="popover"] {
+            color: $button-tertiary-color-hover;
+            background-color: $button-tertiary-background-hover;
+            border-color: $button-tertiary-border-color-hover;
+            text-decoration: $button-tertiary-text-decoration-hover;
+        }
+        .dark-theme & {
+            color: $button-tertiary-dark-theme-color;
+            &:hover {
+                color: $button-tertiary-dark-theme-color-hover;
+            }
+        }
+    }
+    @if $style == custom {
+        background: $customBackground;
+        color: $customText;
+        border-color: $customBorder;
+        &:hover,
+        &:focus,
+        &[aria-describedby*="popover"] {
+            background: darken($customBackground, 5%);
+            border-color: darken($customBorder, 5%);
+        }
+    }
+
+    // If icon class is applied directly to button
+    &[class*="icon-"],
+    &[class^="icon-"] {
+        padding-left: calc(#{$button-padding-left} * 2);
+        @if $size == small {
+            padding-left: calc(#{$button-sm-padding-left} * 2);
+            &:before {
+                @include button-icon-styles(before, $button-sm-icon-size, inherit);
+            }
+        } @else {
+            &:before {
+                @include button-icon-styles(before, $button-icon-size, inherit);
+            }
+        }
+    }
+}
+
+// This mixin applies the styles for a set of tabs.
+// $tabSelector is used to set which child elements are considered a tab.
+// $tabActiveSelector is used to set which tab should receive the active styling.
+// $stretchTabs is a boolean that controls whether the tabs are stretched full-width using
+// flexbox, or whether they will collapse. If the tabs aren't stretched, a bottom-border and
+// negative bottom margin are used to stretch the border full-width.
+@mixin tab-container($tabSelector: '.nav-item', $tabActiveSelector: '.active', $stretchTabs: true) {
+    width: 100%;
+    @if $stretchTabs {
+        display: flex;
+        flex-wrap: wrap;
+    } @else {
+        display: block;
+        border-bottom: $tab-border-bottom;
+    }
+
+    #{$tabSelector} {
+        @include tab($tabActiveSelector);
+
+        @if $stretchTabs {
+            flex: 1 1 auto;
+        } @else {
+            margin-bottom: #{-$tab-border-width};
+
+            &#{$tabActiveSelector} {
+                background-color: $page-background-color;
+            }
+        }
+    }
+}
+
+// This mixin applies the styles for a tab. To apply the styles
+// to a set of tabs, use the tab-container mixin above.
+@mixin tab($activeSelector: '.active') {
+    font: $tab-font;
+    text-transform: $tab-text-transform;
+    font-weight: $tab-font-weight;
+    letter-spacing: $tab-letter-spacing;
+    padding-top: $tab-padding-top;
+    padding-right: $tab-padding-right;
+    padding-bottom: $tab-padding-bottom;
+    padding-left: $tab-padding-left;
+    text-decoration: $tab-text-decoration;
+    background: $tab-background;
+    color: $tab-color;
+    border-top: $tab-border-top;
+    border-right: $tab-border-right;
+    border-bottom: $tab-border-bottom;
+    border-left: $tab-border-left;
+    margin: 0;
+
+    &:hover {
+        text-decoration: $tab-text-decoration-hover;
+        background: $tab-background-hover;
+        color: $tab-color-hover;
+        border-top: $tab-border-top-hover;
+        border-right: $tab-border-right-hover;
+        border-bottom: $tab-border-bottom-hover;
+        border-left: $tab-border-left-hover;
+    }
+
+    &#{$activeSelector} {
+        text-decoration: $tab-text-decoration-active;
+        background: $tab-background-active;
+        color: $tab-color-active;
+        border-top: $tab-border-top-active;
+        border-right: $tab-border-right-active;
+        border-bottom: $tab-border-bottom-active;
+        border-left: $tab-border-left-active;
+    }
+}
+
+@mixin full-width() {
+    display: block;
+    width: 100%;
+}
+
+@mixin icon($icon, $position: before, $size: inherit, $color: inherit) {
+    @if $icon != '' {
+        &:#{$position} {
+            content: $icon;
+            @include icon-styles($size, $color);
+        }
+
+        // Handle mixin being applied to button, rather than a span inside it
+        // also hides any existing font-awesome icon to avoid template changes
+        // does not apply to buttons with a class of 'title', since those are collapsible items
+        &[class*="btn-"]:not(.title) {
+            &:#{$position} {
+                @include button-icon-styles($position, $button-icon-size, $color);
+            }
+            @if $position == before {
+                padding-left: calc(#{$button-padding-left} + #{$button-icon-size});
+            }
+            @if $position == after {
+                padding-right: calc(#{$button-padding-right} + #{$button-icon-size});
+            }
+            &.btn-sm {
+                &:#{$position} {
+                    @include button-icon-styles($position, $button-sm-icon-size, $color);
+                }
+                @if $position == before {
+                    padding-left: calc(#{$button-sm-padding-left} + #{$button-icon-size});
+                }
+                @if $position == after {
+                    padding-right: calc(#{$button-sm-padding-right} + #{$button-icon-size});
+                }
+            }
+            [class*="icon-"],
+            [class^="icon-"],
+            .fa {
+                display: none;
+            }
+        }
+    }
+}
+
+// vertically center the element inside of its first non-static parent
+@mixin vertical-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+// horizontally center the element inside of its first non-static parent
+@mixin horizontal-center {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+// vertically and horizontally centers the element inside of its first non-static parent
+@mixin absolute-center {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+// position absolutely on top of container, using the container's dimensions
+// container needs to be position relative or absolute
+@mixin absolute-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+// apply to html element in order to prevent background scrolling on mobile
+@mixin lock-scroll {
+    height: calc(100vh - 1px);
+    body {
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+}
+
+@mixin custom-scrollbar($size: $custom-scrollbar-size, $background-color: $custom-scrollbar-background-color, $foreground-color: $custom-scrollbar-foreground-color) {
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: $foreground-color $background-color;
+
+    /* Webkit / Blink */
+    &::-webkit-scrollbar {
+        height: $size;
+        width: $size;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $foreground-color;
+        border-radius: 9999px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: $background-color;
+    }
+}
+
+@mixin hide-scrollbar() {
+    scrollbar-width: none; // Firefox
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+@mixin delete-card-button($absolute: true) {
+    @include icon($product-card-remove-icon, before, $product-card-remove-icon-size, $product-card-remove-icon-color);
+    font-family: $body-font;
+    border: none;
+    border-radius: 50%;
+    font-size: 0;
+    @if $absolute {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: $card-body-padding-top $card-body-padding-right $card-body-padding-bottom $card-body-padding-left;
+    }
+    cursor: pointer;
+    z-index: 1;
+    background-color: $product-card-remove-icon-background;
+    padding: 4px 6px;
+    height: 22px;
+    width: 22px;
+}
+
+@mixin text-link {
+    color: $link-color;
+    font-weight: $link-font-weight;
+    text-decoration: $link-text-decoration;
+    cursor: pointer;
+    &:hover {
+        color: $link-color-hover;
+        text-decoration: $link-text-decoration-hover;
+    }
+    .dark-theme & {
+        color: $link-dark-theme-color;
+        &:hover {
+            color: $link-dark-theme-color-hover;
+        }
+    }
+}
+
+@mixin label-styles {
+    font-family: $form-label-font;
+    font-weight: $form-label-font-weight;
+    font-size: $form-label-font-size;
+    line-height: $form-label-line-height;
+    margin-bottom: $form-label-margin-bottom;
+    text-transform: $form-label-text-transform;
+    letter-spacing: $form-label-letter-spacing;
+}
+
+@mixin modal-size($size: "") {
+    max-width: none;
+    margin: $modal-margins-mobile;
+    @if $size == "" or $size == sm {
+        max-width: $modal-max-width;
+        @include media-breakpoint-up(sm) {
+            margin: $modal-margins-desktop;
+        }
+    }
+    @if $size == sm {
+        @include media-breakpoint-up(sm) {
+            max-width: $modal-sm-max-width;
+        }
+    }
+    @if $size == lg or $size == xl {
+        @include media-breakpoint-up(lg) {
+            max-width: $modal-lg-max-width;
+            margin: $modal-margins-desktop;
+        }
+    }
+    @if $size == xl {
+        @include media-breakpoint-up(xl) {
+            max-width: $modal-xl-max-width;
+        }
+    }
+}
+
+@mixin toast-message() {
+    @include horizontal-center;
+    position: fixed;
+    top: 0;
+    padding: 50px $spacer $spacer;
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+    z-index: $z-index-toast;
+}
+
+@mixin toast-alert() {
+    box-shadow: $toast-box-shadow;
+    text-align: center;
+
+    &.show {
+        display: block;
+    }
+    &:not(.alert-dismissible) {
+        animation: fadeIn $transition-speed, fadeOut $transition-speed linear calc(5s - #{$transition-speed});
+    }
+    &.alert-dismissible {
+        animation: fadeIn $transition-speed;
+        .close {
+            padding: $spacer;
+        }
+    }
+}
+
+// This mixin applies the form label styles.
+@mixin form-label {
+    color: $form-label-color;
+    font-family: $form-label-font;
+    font-weight: $form-label-font-weight;
+    font-size: $form-label-font-size;
+    margin-bottom: $form-label-margin-bottom;
+    text-transform: $form-label-text-transform;
+    letter-spacing: $form-label-letter-spacing;
+}
+
+// This mixin applies the text input styles.
+@mixin form-input {
+    border-color: $input-border-color;
+    background-color: $input-background-color;
+    outline: $input-outline;
+    box-shadow: $input-box-shadow;
+    color: $input-text-color;
+    border-width: $input-border-width;
+    border-radius: $input-border-radius;
+    font-family: $input-font;
+    font-size: $input-font-size;
+    line-height: $input-font-line-height;
+    letter-spacing: $input-font-letter-spacing;
+    padding-top: $input-padding-top;
+    padding-bottom: $input-padding-bottom;
+    padding-left: $input-padding-left;
+    padding-right: $input-padding-right;
+    height: $input-height;
+    outline: 0;
+
+    @include media-breakpoint-up(md) {
+        font-size: $input-font-size-md;
+    }
+    &::placeholder {
+        color: $input-placeholder-color;
+    }
+
+    &:hover {
+        border-color: $input-border-color-hover;
+        outline: $input-outline-hover;
+        box-shadow: $input-box-shadow-hover;
+    }
+
+    &:focus {
+        border-color: $input-border-color-focus;
+        outline: $input-outline-focus;
+        box-shadow: $input-box-shadow-focus;
+    }
+}
+
+@mixin checkbox-icon-background {
+    content: "";
+    width: $radiocheck-button-size;
+    height: $radiocheck-button-size;
+    border: 1px solid $radiocheck-border-color;
+    background-color: $radiocheck-background-color;
+    border-radius: $border-radius;
+}
+
+@mixin checkbox-icon-checked-background {
+    content: "";
+    width: $radiocheck-button-size;
+    height: $radiocheck-button-size;
+    background-color: $radiocheck-background-color-selected;
+    border: 1px solid $radiocheck-border-color-selected;
+    border-radius: $border-radius;
+}
+
+@mixin checkbox-icon-checked {
+    content: $icon-checkmark;
+    width: $radiocheck-button-size;
+    height: $radiocheck-button-size;
+    line-height: calc(#{$radiocheck-button-size} + 2px);
+    background: none;
+    font-family: $icomoon-font-family;
+    font-size: calc(#{$radiocheck-button-size} / 1.5);
+    text-align: center;
+    color: $radiocheck-icon-color;
+}
+
+@mixin radio-icon-background {
+    content: "";
+    width: $radiocheck-button-size;
+    height: $radiocheck-button-size;
+    border: 1px solid $radiocheck-border-color;
+    border-radius: 50%;
+    background-color: $radiocheck-background-color;
+}
+
+@mixin radio-icon-checked-background {
+    width: $radiocheck-button-size;
+    height: $radiocheck-button-size;
+    border-radius: 50%;
+    background-color: $radiocheck-icon-color;
+    border: 1px solid $radiocheck-border-color-selected;
+}
+
+@mixin radio-icon-checked {
+    content: "";
+    background: none;
+    width: $radiocheck-button-size - $radiobutton-selected-inset-amount;
+    height: $radiocheck-button-size - $radiobutton-selected-inset-amount;
+    top: calc(#{$radiobutton-selected-inset-amount}/ 2);
+    left: calc(-#{$radiocheck-button-size + $radiocheck-button-margin} + #{$radiobutton-selected-inset-amount}/ 2);
+    background-color: $radiocheck-background-color-selected;
+    border-radius: 50%;
+}
+
+@mixin radio-check-label {
+    font-family: $radiocheck-label-font;
+    font-weight: $radiocheck-label-font-weight;
+    font-size: $radiocheck-label-font-size;
+    text-transform: $radiocheck-label-text-transform;
+    letter-spacing: $radiocheck-label-letter-spacing;
+    vertical-align: middle;
+    transition: box-shadow $transition-speed ease-out;
+    &:hover:before {
+        box-shadow: 0 0 0 1px $radiocheck-border-color;
+    }
+}
+
+@mixin vertical-slider-thumbnails {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    .tns-outer,
+    .tns-ovh {
+        max-height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    .tns-inner {
+        width: calc(100% + 50px);
+        margin-right: -50px !important; // hide scrollbars
+        overflow: auto;
+        max-height: 100%;
+    }
+    .slider {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        width: 100% !important;
+    }
+    .slide {
+        display: block;
+        width: 100% !important;
+        padding-right: 0 !important;
+        &+.slide {
+            margin-top: $slider-thumbnail-spacing;
+        }
+    }
+    .slider-thumbnail-controls {
+        .prev,
+        .next {
+            left: 0;
+            text-align: center;
+            height: $slider-thumbnail-button-size;
+            width: $slider-thumbnail-width;
+            @include media-breakpoint-up(md) {
+                width: $slider-thumbnail-width-md;
+            }
+            @include media-breakpoint-up(lg) {
+                width: $slider-thumbnail-width-lg;
+            }
+            &::before {
+                transform: rotate(90deg);
+                top: auto;
+                bottom: 0;
+                left: calc(50% - calc(#{$slider-thumbnail-button-icon-size} / 2));
+                width: $slider-thumbnail-button-size;
+                height: $slider-thumbnail-button-icon-size;
+            }
+        }
+        .prev {
+            top: 0;
+        }
+        .next {
+            top: auto;
+            bottom: 0;
+        }
+    }
+}
+
+@mixin header-link {
+    font-family: $header-link-font;
+    text-decoration: none;
+    text-transform: $header-link-text-transform;
+    font-size: $header-link-font-size;
+    font-weight: $header-link-font-weight;
+    line-height: $header-link-line-height;
+    letter-spacing: $header-link-letter-spacing;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+@mixin visually-hidden {
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    height: 1px;
+    width: 1px;
+}
+
+// Used to visually connect left and right values. Apply mixin to container, which needs to include:
+// a .start-lines div with a span inside it, and an .end-lines div with a span inside it
+@mixin leading-lines($backgroundColor: $card-body-background, $size: $leading-lines-border-width, $color: $leading-lines-border-color) {
+    overflow: hidden;
+    margin: 0 0 $spacer;
+    label {
+        background-color: $backgroundColor;
+    }
+    p {
+        margin-bottom: 0;
+    }
+    .start-lines {
+        padding: 0;
+        align-self: center;
+        span {
+            position: relative;
+            background-color: $backgroundColor;
+            z-index: 2;
+            display: inline-block;
+            &:only-child,
+            &:last-child {
+                padding-right: $spacer;
+            }
+        }
+        &::before {
+            @include vertical-center;
+            width: 100vw;
+            white-space: nowrap;
+            content: "";
+            border-bottom: $size dotted $color;
+            margin-top: 1px;
+            z-index: 1;
+        }
+    }
+    .end-lines {
+        padding: 0;
+        align-self: center;
+        span {
+            position: relative;
+            background-color: $backgroundColor;
+            z-index: 2;
+            display: inline-block;
+            &:only-child,
+            &:last-child {
+                padding-left: $spacer;
+                padding-right: $spacer;
+                margin-right: -#{$spacer};
+            }
+        }
+    }
+}
+
+// Adds a diagonal line through a swatch, half white and half black to increase visibility on different backgrounds
+@mixin strike-through-swatch($size, $dark: $black, $light: $white) {
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%) rotate(45deg);
+        height: $size;
+        width: 1px;
+    }
+    &:after {
+        background-color: $dark;
+    }
+    &:before {
+        background-color: $light;
+        margin-right: 1px;
+    }
+}
+
+// Use to zoom an image when you hover its container. Pass in the selector of the
+// element that should be zoomed, e.g. '.background-image' and the amount to zoom it, e.g. 1.2
+@mixin zoom-image($imageSelector, $zoomAmount) {
+    @include media-breakpoint-up(md) {
+        #{$imageSelector} {
+            will-change: transform;
+            transition: transform $transition-speed ease-out;
+        }
+        &:hover {
+            #{$imageSelector} {
+                transform: scale($zoomAmount);
+            }
+        }
+    }
+}
+
+// Apply to a container to give it a forced aspect ratio by passing in a variable, e.g. $aspect-ratio-square
+@mixin aspect-ratio($ratio) {
+    @include clearfix;
+    &::before {
+        content: "";
+        display: block;
+        width: 1px;
+        margin-left: -1px;
+        float: left;
+        height: 0;
+        padding-top: $ratio;
+    }
+}
+
+// Navigation links
+@mixin navigation-link {
+    font-family: $nav-link-font-family;
+    text-decoration: $nav-link-text-decoration;
+    text-transform: $nav-link-text-transform;
+    font-size: $nav-link-font-size;
+    font-weight: $nav-link-font-weight;
+    line-height: $nav-link-line-height;
+    letter-spacing: $nav-link-letter-spacing;
+    &:hover {
+        text-decoration: $nav-link-text-decoration-hover;
+    }
+    &-secondary {
+        font-family: $megamenu-header-font;
+        font-size: $megamenu-header-font-size;
+        font-weight: $megamenu-header-font-weight;
+        line-height: $megamenu-header-line-height;
+        text-transform: $megamenu-header-text-transform;
+        color: $megamenu-header-color;
+        &:hover {
+            color: $megamenu-header-color-hover;
+        }
+    }
+    &-tertiary {
+        color: $megamenu-secondary-color;
+        font-family: $megamenu-secondary-font;
+        font-size: $megamenu-secondary-font-size;
+        font-weight: $megamenu-secondary-font-weight;
+        text-transform: $megamenu-secondary-text-transform;
+        &:hover {
+            color: $megamenu-secondary-color-hover;
+        }
+    }
+}
+
+@mixin navigation-link-secondary-nav {
+    color: $header-secondary-nav-link-top-level-color;
+    font-family: $header-secondary-nav-link-top-level-font-family;
+    text-decoration: $header-secondary-nav-link-top-level-text-decoration;
+    text-transform: $header-secondary-nav-link-top-level-text-transform;
+    font-size: $header-secondary-nav-link-top-level-font-size;
+    font-weight: $header-secondary-nav-link-top-level-font-weight;
+    line-height: $header-secondary-nav-link-top-level-line-height;
+    letter-spacing: $header-secondary-nav-link-top-level-letter-spacing;
+    &:hover {
+        text-decoration: $header-secondary-nav-link-top-level-text-decoration-hover;
+    }
+}
+
+// Remove default list styling
+@mixin remove-list-styling() {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+        padding: 0;
+    }
+}
+
+// Set refinements display of swatches to a vertical list or a grid
+@mixin refinement-display($type: 'vertical', $padding: $product-refinement-value-grid-padding-bottom) {
+    @if $type == 'vertical' {
+        flex-basis: 50%;
+    }
+    @if $type == 'grid' {
+        padding-bottom: $padding;
+    }
+}
+
+@mixin shortComponentAnimations($class, $easing) {
+    @if $class == hinge-drop            { perspective: 1000px; }
+    @if $class == flip-in-hor-top       { perspective: 2000px; }
+    @if $class == flip-in-hor-bottom    { perspective: 2000px; }
+    > [style*="animation-delay"],
+    > [class*="container"] > .row > [style*="animation-delay"] {
+        @if $class == hinge-drop { //this animation needs a bit longer to feel smoother
+            animation: #{$class}-short $hero-transition-speed-short*2 $easing;
+            transform-origin: 0px 0px 0px;
+        }
+        @else {
+            animation: #{$class}-short $hero-transition-speed-short $easing;
+        }
+    }
+}
+
+@mixin mediumComponentAnimations($class, $easing) {
+    @if $class == hinge-drop            { perspective: 750px; }
+    @if $class == flip-in-hor-top       { perspective: 2000px; }
+    @if $class == flip-in-hor-bottom    { perspective: 2000px; }
+    > [style*="animation-delay"],
+    > [class*="container"] > .row > [style*="animation-delay"] {
+        @if $class == hinge-drop {
+            animation: #{$class}-medium $hero-transition-speed-medium*2 $easing;
+            transform-origin: 0px 0px 0px;
+        }
+        @else {
+            animation: #{$class}-medium $hero-transition-speed-medium $easing;
+        }
+    }
+}
+
+@mixin longComponentAnimations($class, $easing) {
+    @if $class == hinge-drop            { perspective: 500px; }
+    @if $class == flip-in-hor-top       { perspective: 2000px; }
+    @if $class == flip-in-hor-bottom    { perspective: 2000px; }
+    > [style*="animation-delay"],
+    > [class*="container"] > .row > [style*="animation-delay"] {
+        @if $class == hinge-drop {
+            animation: #{$class}-long $hero-transition-speed-long*2 $easing;
+            transform-origin: 0px 0px 0px;
+        }
+        @else {
+            animation: #{$class}-long $hero-transition-speed-long $easing;
+        }
+    }
+}
+
+@mixin unsetComponentAnimations($class, $easing) {
+    opacity: 0;
+    > [style*="animation-delay"],
+    > [class*="container"] > .row > [style*="animation-delay"] {
+        opacity: 0; // this is overwritten by the animation after it fires
+        animation: unset;
+    }
+}
+
+@mixin resetComponentAnimations($class, $easing) {
+    $lengths: short, medium, long;
+    @each $length in $lengths {
+        $transition-speed-length: if($length == short, $hero-transition-speed-short, if($length == medium, $hero-transition-speed-medium, $hero-transition-speed-long));
+        &.#{"" + $class}--#{"" + $length} {
+            animation: #{$class}-#{$length} $transition-speed-length $easing;
+            > [style*="animation-delay"],
+            > [class*="container"] > .row > [style*="animation-delay"] {
+                animation: #{$class}-#{$length} $transition-speed-length $easing;
+            }
+        }
+    }
+}
+
+// Hero Stacking setup
+@mixin hero-stack-columns() {
+    .hero-media {
+        .hero & {
+            transform: translateX(50%);
+            top: 0;
+            position: relative;
+            width: calc(100% + #{$hero-textblock-outer-padding * 2});
+            margin: (-$hero-textblock-outer-padding) 0 $hero-textblock-outer-padding (-$hero-textblock-outer-padding * 2);
+        }
+        &.video-container {
+            margin-left: -50%;
+            position: absolute;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+    .hero.short & {
+        min-height: 0;
+        .hero-media {
+            height: $hero-min-height-short;
+        }
+    }
+    .hero.medium & {
+        min-height: 0;
+        .hero-media {
+            height: $hero-min-height-medium;
+        }
+    }
+    .hero.tall &,
+    .hero.screen-height & {
+        min-height: 0;
+        .hero-media {
+            height: $hero-min-height-tall;
+        }
+    }
+    &[class*="justify-content-md"] {
+        .hero.half-and-half & {
+            .hero-media {
+                left: auto;
+                right: 50%;
+                max-width: calc(100% + #{$hero-textblock-outer-padding * 2});
+            }
+            .hero-text {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+@mixin calculate-widths($width) {
+    $percentage: calc(#{$width} * 100%);
+    max-width: calc(100% - #{$percentage});
+}
+
+@mixin add-width-options() {
+    &.width-1-4 { @include calculate-widths(math.div(1,4)); }
+    &.width-1-3 { @include calculate-widths(math.div(1,3)); }
+    &.width-1-2,
+    &.width-1   { @include calculate-widths(math.div(1,2)); }
+    &.width-2-3 { @include calculate-widths(math.div(2,3)); }
+    &.width-3-4 { @include calculate-widths(math.div(3,4)); }
+}
+
+//Hero Media positioning
+@mixin hero-half-and-half-non-stacking() {
+    .hero-media {
+        //transform the hero-media images but not the video container
+        &:not(.video-container) {
+            transform: translateY(-50%);
+        }
+        @include add-width-options();
+    }
+    .hero-text {
+        &.width-1 {
+            max-width: 50%;
+        }
+    }
+    &.justify-content-md-start,
+    &.justify-content-md-center {
+        .hero-media {
+            right: 0;
+            left: auto;
+            @include add-width-options();
+        }
+        .hero-text {
+            padding-right: $hero-textblock-outer-padding;
+            @include media-breakpoint-up(md) {
+                padding-right: $hero-textblock-outer-padding-md;
+            }
+            @include media-breakpoint-up(lg) {
+                padding-right: $hero-textblock-outer-padding-lg;
+            }
+        }
+    }
+    &.justify-content-md-end {
+        .hero-media {
+            left: 0;
+            right: auto;
+            @include add-width-options();
+        }
+        .hero-text {
+            padding-left: $hero-textblock-outer-padding;
+            @include media-breakpoint-up(md) {
+                padding-left: $hero-textblock-outer-padding-md;
+            }
+            @include media-breakpoint-up(lg) {
+                padding-left: $hero-textblock-outer-padding-lg;
+            }
+        }
+    }
+}
+
+// new Auto-sizing For image option for hero
+@mixin reset-padding() {
+    padding: 0px;
+    @include media-breakpoint-up(sm) { padding: 0px; }
+    @include media-breakpoint-up(md) { padding: 0px; }
+    @include media-breakpoint-up(lg) { padding: 0px; }
+}
+@mixin hero-text-padding() {
+    padding: $hero-textblock-outer-padding;
+    padding-left: $hero-textblock-outer-padding;
+    padding-right: $hero-textblock-outer-padding;
+    @include media-breakpoint-up(md) {
+        padding: $hero-textblock-outer-padding-md;
+        padding-left: $hero-textblock-outer-padding-md;
+        padding-right: $hero-textblock-outer-padding-md;
+    }
+    @include media-breakpoint-up(lg) {
+        padding: $hero-textblock-outer-padding-lg;
+        padding-left: $hero-textblock-outer-padding-lg;
+        padding-right: $hero-textblock-outer-padding-lg;
+    }
+}
+@mixin half-half-hero-width($x: 1) {
+    &:not(.video-container) {
+        width: 100cqw;
+        max-width: calc(50cqw * #{$x}); //Default width
+        transform: none;
+        left: unset;
+        right: unset;
+    }
+}
+@mixin max-widths-with-full-bleed($mw: math.div(1,2), $x: '') {
+    max-width: calc(#{$mw} * 100cqw);
+    width: calc(#{$mw} * 100cqw);
+    @if $x { transform: none; }
+    .full-bleed & {
+        @if $x { transform: translateX(calc(((#{$mw} * 100vw) - (#{$mw} * 100cqw)) * #{$x})); }
+    }
+}
+@mixin auto-size-hero-image-n-text-widths($x: 1) {
+    picture {
+        img {
+            @include max-widths-with-full-bleed(math.div(1,2), $x);
+            &.width-1-4 { @include max-widths-with-full-bleed(math.div(3,4), $x); }
+            &.width-1-3 { @include max-widths-with-full-bleed(math.div(2,3), $x); }
+            &.width-1-2 { @include max-widths-with-full-bleed(math.div(1,2), $x); }
+            &.width-2-3 { @include max-widths-with-full-bleed(math.div(1,3), $x); }
+            &.width-3-4 { @include max-widths-with-full-bleed(math.div(1,4), $x); }
+        }
+        + .hero-text {
+            @include max-widths-with-full-bleed(math.div(1,2), null);
+            &.width-1-4 { @include max-widths-with-full-bleed(math.div(1,4), null); }
+            &.width-1-3 { @include max-widths-with-full-bleed(math.div(1,3), null); }
+            &.width-1-2 { @include max-widths-with-full-bleed(math.div(1,2), null); }
+            &.width-2-3 { @include max-widths-with-full-bleed(math.div(2,3), null); }
+            &.width-3-4 { @include max-widths-with-full-bleed(math.div(3,4), null); }
+        }
+    }
+}
+
+@mixin calculate-video-aspect-ratios($half-half, $width, $x, $y) {
+    $percentage: calc(#{$width} * 100%);
+    $width-calc: if($half-half, calc(100cqw - (100cqw * #{$width})), 100cqw);
+
+    picture,
+    .video-container {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        max-height: calc((100cqw / #{$x}) * #{$y});//use the full width when half-half heroes stack on mobile
+        min-height: calc((100cqw / #{$x}) * #{$y});//use the full width when half-half heroes stack on mobile
+        @include media-breakpoint-up(md) {
+            max-height: calc(((#{$width-calc} / #{$x}) * #{$y}));
+            min-height: calc(((#{$width-calc} / #{$x}) * #{$y}));
+        }
+    }
+    .video-container {
+        height: calc((100cqw / #{$x}) * #{$y}); //use the full width when half-half heroes stack on mobile
+        @include media-breakpoint-up(md) {
+            height: calc((#{$width-calc} / #{$x}) * #{$y});
+        }
+    }
+    &:not(.flex-md-column) {
+        @include media-breakpoint-only(md) {
+            .video-container {
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }
+        }
+    }
+    @include media-breakpoint-up(lg) {
+        .video-container {
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    }
+}
+
+$aspect-ratios: ( 16:9, 9:16, 4:3, 3:4, 1:1 );
+@mixin auto-size-generate-video-aspect-ratios($half-half: null) {
+    @each $x, $y in $aspect-ratios {
+        &.aspect-ratio-#{$x}-#{$y} {
+            &.video-width {
+                &-1-4 { @include calculate-video-aspect-ratios($half-half, math.div(1,4), $x, $y); }
+                &-1-3 { @include calculate-video-aspect-ratios($half-half, math.div(1,3), $x, $y); }
+                &-1-2,
+                &-1   { @include calculate-video-aspect-ratios($half-half, math.div(1,2), $x, $y); }
+                &-2-3 { @include calculate-video-aspect-ratios($half-half, math.div(2,3), $x, $y); }
+                &-3-4 { @include calculate-video-aspect-ratios($half-half, math.div(3,4), $x, $y); }
+            }
+        }
+    }
+}

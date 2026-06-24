@@ -1,0 +1,152 @@
+.discount-status-bar {
+    background: $discount-status-bar-background;
+    color: $discount-status-bar-text-color;
+    padding: $discount-status-bar-padding;
+
+    .discount-status-bar-data {
+        align-items: center;
+        .discount-status-bar-no-promo-message {
+            text-align: center;
+        }
+    }
+
+    .discount-status-bar-checkpoints {
+        align-items: flex-end;
+        max-width: calc(100% - #{$discount-status-bar-icon-size}/2);
+        @include media-breakpoint-up(sm) {
+            padding-bottom: calc((#{$discount-status-bar-threshold-font-size * $discount-status-bar-threshold-line-height}) + (#{$discount-status-bar-icon-size - $discount-status-bar-progress-height}/2) + #{$discount-status-bar-threshold-margin-top});
+        }
+    }
+
+    .discount-checkpoint-section {
+        margin-bottom: $spacer*2;
+        .discount-status-bar-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: $discount-status-bar-progress-height;
+            border-top: $discount-status-bar-progress-border-size solid $discount-status-bar-progress-border-color;
+            border-bottom: $discount-status-bar-progress-border-size solid $discount-status-bar-progress-border-color;
+            border-left: $discount-status-bar-progress-border-size solid $discount-status-bar-progress-border-color;
+            border-top-left-radius: $discount-status-bar-progress-border-radius;
+            border-bottom-left-radius: $discount-status-bar-progress-border-radius;
+            &-fill {
+                transition: width $transition-speed ease-out;
+                height: 100%;
+                background: $discount-status-bar-progress-fill-background-color;
+            }
+        }
+        @include media-breakpoint-up(sm) {
+            margin-bottom: 0;
+            .discount-status-bar-progress {
+                border-left: none;
+                border-radius: unset;
+            }
+            &:first-child {
+                .discount-status-bar-progress {
+                    border-left: $discount-status-bar-progress-border-size solid $discount-status-bar-progress-border-color;
+                    border-top-left-radius: $discount-status-bar-progress-border-radius;
+                    border-bottom-left-radius: $discount-status-bar-progress-border-radius;
+                }
+            }
+            &:last-child {
+                .discount-status-bar-progress {
+                    border-right: $discount-status-bar-progress-border-size solid $discount-status-bar-progress-border-color;
+                    border-top-right-radius: $discount-status-bar-progress-border-radius;
+                    border-bottom-right-radius: $discount-status-bar-progress-border-radius;
+                }
+            }
+        }
+    }
+
+    .discount-checkpoint {
+        text-align: right;
+        position: relative;
+        z-index: 1;
+        margin-right: calc(#{-$discount-status-bar-icon-size}/2);
+        margin-bottom: calc(#{-$discount-status-bar-icon-size}/2 + (#{$discount-status-bar-progress-height} + #{$discount-status-bar-progress-border-size})/2);
+
+        .discount-checkpoint-icon {
+            position: relative;
+            width: $discount-status-bar-icon-size;
+            height: $discount-status-bar-icon-size;
+            margin-left: auto;
+            border: 1px solid $discount-status-bar-icon-color;
+            border-radius: $discount-status-bar-icon-border-radius;
+            color: $discount-status-bar-icon-color;
+            background-color: $discount-status-bar-icon-background-color;
+            clear: both;
+            @include icon($discount-status-bar-icon);
+            &::before {
+                @include absolute-center;
+                font-size: calc(#{$discount-status-bar-icon-size}/2);
+            }
+        }
+        &.applied {
+            .discount-checkpoint-icon {
+                color: $discount-status-bar-icon-active-color;
+                background: $discount-status-bar-icon-active-background-color;
+                border-color: $discount-status-bar-icon-active-color;
+            }
+        }
+
+        .discount-checkpoint-promo-message {
+            font-size: $discount-status-bar-promo-message-font-size;
+            line-height: $discount-status-bar-promo-message-line-height;
+            margin-bottom: $discount-status-bar-promo-message-margin-bottom;
+            float: left;
+            text-align: left;
+            & + .discount-checkpoint-promo-message {
+                clear: left;
+            }
+            @include media-breakpoint-up(sm) {
+                float: none;
+                text-align: right;
+                margin-left: auto;
+                max-width: calc(100% - #{$discount-status-bar-icon-size});
+            }
+        }
+
+        .discount-checkpoint-threshold {
+            font-size: $discount-status-bar-threshold-font-size;
+            line-height: $discount-status-bar-threshold-line-height;
+            margin-bottom: $discount-status-bar-promo-message-margin-bottom;
+            float: right;
+            @include media-breakpoint-up(sm) {
+                float: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                margin-top: $discount-status-bar-threshold-margin-top;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .discount-status-bar-info {
+        text-align: center;
+        align-content: center;
+        margin-top: $spacer;
+        @include media-breakpoint-up(md) {
+            margin-top: 0;
+        }
+        .discount-status-bar-total {
+            font-family: $discount-status-bar-total-font;
+            font-size: $discount-status-bar-total-font-size;
+            line-height: $discount-status-bar-total-line-height;
+            margin-bottom: $discount-status-bar-total-margin-bottom;
+        }
+        .discount-status-bar-checkout-btn {
+            @include button($discount-status-bar-checkout-btn-style);
+        }
+    }
+
+    .discount-status-bar-completion-text {
+        color: $discount-status-bar-completion-text-color;
+        font-family: $discount-status-bar-completion-text-font;
+        font-size: $discount-status-bar-completion-text-font-size;
+        line-height: $discount-status-bar-completion-text-line-height;
+        margin-bottom: $discount-status-bar-completion-text-margin-bottom;
+    }
+}

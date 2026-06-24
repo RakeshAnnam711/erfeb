@@ -1,0 +1,10 @@
+
+@import "~core/components/tooltip";
+
+.info-icon,
+.tooltip-icon {
+    &:hover:before,
+    &[aria-describedby*="tooltip"]:before {
+        color: $brand-tertiary;
+    }
+}

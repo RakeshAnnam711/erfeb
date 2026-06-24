@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances>
+            <preference preference-id="StorefrontOrderAccess">allow_list</preference>
+            <preference preference-id="StorefrontOrderAccessAllowList">SOMUpdate-Submit,Order-Track</preference>
+            <preference preference-id="SOM_Order_History_Enabled">SBX_ORDERHISTORY_ENABLED</preference>
+            <preference preference-id="SOM_OrderHistory_Endpoint">SBX_ORDERHISTORY_ENDPOINT_REPLACEME</preference>
+            <preference preference-id="SOM_OrderHistory_LightningOut_URL">SBX_ORDERHISTORY_LIGHTNINGOUT_REPLACEME</preference>
+            <preference preference-id="SOM_OrderHistory_Namespace">c</preference>
+            <preference preference-id="SOM_OrderHistory_DetailURL">/on/demandware.store/Sites-Siteidreplaceme-Site/en_US/Order-Details?orderID=</preference>
+        </all-instances>
+    </custom-preferences>
+</preferences>

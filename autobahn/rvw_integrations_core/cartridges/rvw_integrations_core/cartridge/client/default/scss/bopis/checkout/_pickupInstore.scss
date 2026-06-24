@@ -1,0 +1,31 @@
+.in-store-inventory-dialog,
+.pickup-in-store {
+    .store-locator-container {
+        padding-left: 0;
+        padding-right: 0;
+        .store-result {
+            label::before,
+            label::after {
+                margin-top: 2px;
+                margin-left: 2px;
+            }
+        }
+    }
+}
+.pickup-in-store {
+    margin-bottom: $spacer;
+    .select-store,
+    &~.change-store {
+        margin-top: $spacer;
+    }
+    .results-card .card-title {
+        border-top: none;
+    }
+}
+
+.cart-page .line-item-store {
+    margin-top: $spacer;
+    .store-details {
+        margin-left: $spacer;
+    }
+}

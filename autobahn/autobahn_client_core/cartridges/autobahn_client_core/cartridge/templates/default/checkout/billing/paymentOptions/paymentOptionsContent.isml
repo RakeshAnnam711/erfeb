@@ -1,0 +1,57 @@
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+
+<isif condition="${currentSite.getCustomPreferenceValue('adyenCartridgeEnabled')}">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addCss('/css/adyenCss.css');
+    </isscript>
+    <iscomment>AdyenHelper is added via Checkout-Begin int_adyen_SFRA</iscomment>
+    <isset name="adyenPaymentFields" value="${pdict.forms.billingForm.adyenPaymentFields}" scope="page"/>
+    <isset name="creditFields" value="${pdict.forms.billingForm.creditCardFields}" scope="page"/>
+    <script src="${pdict.AdyenHelper.getCheckoutUrl()}" type="text/javascript"></script>
+
+    <input type="hidden" class="form-control" id="selectedPaymentOption" name="${pdict.forms.billingForm.paymentMethod.htmlName}" value="paymentMethod">
+</isif>
+
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption" status="loopSate">
+    <isif condition="${paymentOption.ID === 'Affirm' && require('*/cartridge/scripts/utils/affirmHelper').IsAffirmApplicable()}">
+   		<isinclude template="affirm/paymentMethodInputMF" />
+    <iselseif condition="${paymentOption.ID === 'AdyenComponent'}">
+        <iscomment> <isinclude template="checkout/billing/paymentOptions/adyenComponentContent"/> </iscomment>
+
+    <iselseif condition="${paymentOption.ID === 'AdyenPOS'}">
+        <isinclude template="checkout/billing/paymentOptions/adyenPosContent"/>
+
+    <iselseif condition="${paymentOption.ID === 'CREDIT_CARD'}">
+        <isinclude template="checkout/billing/paymentOptions/creditCardContent" />
+
+    <iselseif condition="${paymentOption.ID === 'Salesforce Payments'}">
+        <isinclude template="checkout/billing/paymentOptions/salesforcePaymentsContent" />
+
+    <iselseif condition="${paymentOption.ID === 'DW_APPLE_PAY'}">
+        <isinclude template="checkout/billing/paymentOptions/applePayContent" />
+
+    <iselseif condition="${currentSite.getCustomPreferenceValue('paypalCartridgeEnabled') && paymentOption.ID === 'PayPal' && pdict.paypal}">
+        <iscomment>standalone paypal</iscomment>
+        <isinclude template="paypal/checkout/paypalContent" />
+
+    <iselseif condition="${paymentOption.ID === dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE && pdict.giftCertificatePaymentMethodEnabled}">
+        <isinclude template="checkout/billing/paymentOptions/giftCertificateContent" />
+
+    <iselseif condition="${paymentOption.ID === 'VISA_CHECKOUT'}">
+        <isinclude template="checkout/billing/paymentOptions/visaCheckoutContent" />
+
+    <iselseif condition="${paymentOption.ID === 'PAYPAL'}">
+        <iscomment>cybersource paypal</iscomment>
+        <isinclude template="checkout/billing/paymentOptions/payPalContent" />
+
+    <iselseif condition="${paymentOption.ID === 'KLARNA'}">
+        <isinclude template="checkout/billing/paymentOptions/klarnaContent" />
+
+    <iselseif condition="${paymentOption.ID === 'DW_GOOGLE_PAY'}">
+        <isset name="isGooglePayEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableGooglePay')}" scope="page" />
+        <isif condition="${isGooglePayEnabled}">
+            <isinclude template="checkout/billing/paymentOptions/googlePayContent" />
+        </isif>
+    </isif>
+</isloop>

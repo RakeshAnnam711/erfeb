@@ -1,0 +1,35 @@
+<isset name="productPerRowDesktopPreference" value="${pdict.abConfigs.productsPerRowDesktop}" scope="page"/>
+<isset name="productPerRowDesktop" value="col-sm-4" scope="page" />
+<isset name="promoTileDesktopSize" value="4" scope="page" />
+<isif condition="${productPerRowDesktopPreference == 'four'}">
+    <isset name="productPerRowDesktop" value="col-sm-3" scope="page" />
+    <isset name="promoTileDesktopSize" value="3" scope="page" />
+</isif>
+
+<isset name="productPerRowMobilePreference" value="${pdict.abConfigs.productsPerRowMobile}" scope="page"/>
+<isset name="productPerRowMobile" value="col-6" scope="page" />
+<isif condition="${productPerRowMobilePreference == 'one'}">
+    <isset name="productPerRowMobile" value="col-12" scope="page" />
+</isif>
+
+<isloop items="${pdict.productSearch.productIds}" var="product">
+    <div class="${product.promoTile && product.spanChange ? (product.spanChange > 1 ? 'col-12 col-sm-' + promoTileDesktopSize*product.spanChange : productPerRowMobile + ' col-sm-' + promoTileDesktopSize*product.spanChange) : productPerRowMobile + ' ' + productPerRowDesktop}">
+        <isif condition="${product.promoTile}">
+            <isprint value="${product.promoTile}" encoding="off"/>
+        <iselse/>
+            <isobject object="${product.productSearchHit}" view="searchhit">
+                <isset name="tileURL" value="${URLUtils.url('Tile-Show', 'pid', product.productID, 'swatches', true, 'ratings', true)}" scope="page" />
+                <isif condition="${!empty(pdict.refinementValues) && !empty(pdict.refinementValues.key)}">
+                    <isset name="tileURL" value="${tileURL.append('key', pdict.refinementValues.key).append('values', pdict.refinementValues.values)}" scope="page" />
+                </isif>
+
+                <isif condition="${!empty(pdict.productSearch.category) && !empty(pdict.productSearch.category.id)}">
+                    <isset name="tileURL" value="${tileURL.append('cgid', pdict.productSearch.category.id)}" scope="page" />
+                    <isinclude url="${tileURL}" />
+                <iselse>
+                    <isinclude url="${tileURL}" />
+                </isif>
+            </isobject>
+        </isif>
+    </div>
+</isloop>

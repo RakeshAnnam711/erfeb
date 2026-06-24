@@ -1,0 +1,95 @@
+<isset name="product" value="${pdict.product}" scope="page"/>
+<isset name="isBundle" value="${false}" scope="page"/>
+<isset name="isProductSet" value="${true}" scope="page" />
+<isset name="isQuickView" value="${true}" scope="page" />
+<isset name="productCopy" value="${pdict.product}" scope="page"/>
+<isset name="setItemCount" value="${product.numberOfProductsInSet + ' ' + Resource.msg('label.set.item', 'product', null) + (product.individualProducts.length > 1 ? Resource.msg('label.pluralize', 'product', null) : '') + ':'}" scope="page" />
+<isset name="pdpImageColumnWidth" value="${product.pdpImageColumnWidth ? product.pdpImageColumnWidth.split('/')[0] : pdict.abConfigs.pdpImageColumnWidth.split('/')[0]}" scope="page"/>
+<isset name="setImageColumnClass" value="${'col-12 col-md-' + pdpImageColumnWidth}" scope="page" />
+<isset name="productDataColumnClass" value="${'col-12 col-md-' + (12 - pdpImageColumnWidth)}" scope="page"/>
+
+
+<div class="product-quickview product-${product.productType} col product-wrapper" data-pid="${product.id}">
+
+    <div class="row product-detail">
+        <!-- Product Images Carousel -->
+        <isset name="hasImages" value="${product.images['large'].length > 0 && !product.images['large'][0].url.includes('noimage') ? true : false}" scope="page"/>
+        <isif condition="${hasImages}">
+            <isinclude template="product/components/imageCarousel" />
+        <iselse/>
+            <isinclude template="product/components/imageCarouselSetGenerate" />
+        </isif>
+
+        <isset name="product" value="${productCopy}" scope="page" />
+        <div class="product-data ${productDataColumnClass}">
+            <div class="row">
+                <!-- Product Name -->
+                <div class="col-12">
+                    <h1 class="product-name">${product.productName}</h1>
+                </div>
+            </div>
+
+            <hr/>
+
+            <isif condition="${product.quickviewShowHeadlineAndDescription}">
+                <isif condition="${!empty(product.headline)}">
+                    <div class="row mt-3">
+                        <div class="col">
+                            ${product.headline}
+                        </div>
+                    </div>
+                    <hr/>
+                </isif>
+                <isif condition="${!empty(product.headlineDescription)}">
+                    <div class="row my-3">
+                        <div class="col product-headlinedescription">
+                            <isprint value="${product.headlineDescription}" encoding="off" />
+                        </div>
+                    </div>
+                </isif>
+            </isif>
+
+            <!-- Applicable Promotions -->
+            <div class="promotions">
+                <isinclude template="product/components/promotions" />
+            </div>
+
+        </div>
+        <div class="quickview-set-item-list col-12">
+            <isinclude template="product/components/setItemListQuickview" />
+        </div>
+    </div>
+
+     <!-- Set Item List -->
+
+    <isset name="product" value="${productCopy}" scope="page"/>
+
+</div>
+
+<div class="modal-footer row align-items-end">
+    <isset name="loopState" value="{count: 1}" scope="page" />
+
+    <div class="hidden-xs-down col availability align-self-end global-availability" data-ready-to-order="${product.readyToOrder}" data-available="${product.available}">
+        <div class="row">
+            <isinclude template="product/components/availability" />
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="row align-items-end">
+            <!-- Quantity -->
+            <div class="quantity col-4 ${product.hideQty ? 'd-none' : ''}">
+                <isinclude template="product/components/quantity" />
+            </div>
+
+            <div class="col-8 ml-auto">
+                <!-- Prices -->
+                <div class="mb-2">
+                    <isinclude template="product/components/pricing/setPrice" />
+                </div>
+
+                <isaddtocartglobal extraclass="qv-product-edit-add" />
+            </div>
+        </div>
+    </div>
+</div>

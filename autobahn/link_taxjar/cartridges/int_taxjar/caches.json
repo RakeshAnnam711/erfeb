@@ -1,0 +1,12 @@
+{
+  "caches": [
+    {
+      "id": "TaxJarTaxNexusCache",
+      "expireAfterSeconds": 43200
+    },
+    {
+      "id": "TaxJarTaxRateCache",
+      "expireAfterSeconds": 600
+    }
+  ]
+}

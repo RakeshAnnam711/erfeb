@@ -1,0 +1,45 @@
+<iscomment>
+    This is a blank template that gets overwritten in rvw_integrations_core
+    The overriding template in rvw_integrations_core has integrations specific to this area
+
+    Page Type: Checkout~Shipping
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/shipping/shippingCard.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_integrations_core
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<iscomment> Setup the Flags </iscomment>
+<isif condition="${currentSite.getCustomPreferenceValue('bopisCartridgeEnabled')}">
+    <isset name="shipmentSelectorClassName" value="${(pdict.order.usingMultiShipping || shipmentLoopState) || (pdict.customer.addresses && pdict.customer.addresses.length > 0) && !shippingModel.selectedShippingMethod.storePickupEnabled ? '' : 'd-none'}" scope="page" />
+    <isset name="shippingAddressClassName" value="${shippingModel.selectedShippingMethod.storePickupEnabled ? 'd-none' : ''}" scope="page"/>
+    <isset name="giftMessageClassName" value="${shippingModel.selectedShippingMethod.storePickupEnabled ? 'd-none' : ''}" scope="page"/>
+<iselse/>
+    <isset name="shipmentSelectorClassName" value="${(pdict.order.usingMultiShipping || shipmentLoopState) || (pdict.customer.addresses && pdict.customer.addresses.length > 0) ? '' : 'd-none'}" scope="page" />
+    <isset name="shippingAddressClassName" value="" scope="page"/>
+    <isset name="giftMessageClassName" value="" scope="page"/>
+</isif>
+<fieldset class="shipment-selector-block ${shipmentSelectorClassName} ">
+    <isinclude template="checkout/shipping/shipmentSelector" />
+</fieldset>
+
+<fieldset class="shipping-address-block ${shippingAddressClassName} shipping-address-block-styles">
+    <isinclude template="checkout/shipping/shippingAddress" />
+</fieldset>
+
+<fieldset class="shipping-method-block shipping-method-block-styles">
+    <h3>${Resource.msg('heading.shipping.method', 'checkout', null)}</h3>
+    <p class="shipping-method-description">${Resource.msg('heading.shipping.method.description','checkout',null)}</p>
+    <isinclude template="checkout/shipping/shippingMethod" />
+</fieldset>
+
+<isif condition="${currentSite.getCustomPreferenceValue('bopisCartridgeEnabled')}">
+    <fieldset class="pickup-in-store" data-url="${shippingModel.pickupInstoreUrl}">
+        <isif condition="${shippingModel.productLineItems.items[0].fromStoreId}">
+            <isinclude url="${URLUtils.url('Stores-GetStoreById', 'storeId', shippingModel.productLineItems.items[0].fromStoreId)}"/>
+        </isif>
+    </fieldset>
+</isif>
+<fieldset class="gift-message-block ${giftMessageClassName}">
+    <isinclude template="checkout/shipping/isGift" />
+</fieldset>

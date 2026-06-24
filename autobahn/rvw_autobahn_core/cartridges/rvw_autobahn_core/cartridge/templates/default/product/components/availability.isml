@@ -1,0 +1,13 @@
+<div class="col-12 availability-container">
+    <label class="availability non-input-label mb-0 mr-2">${Resource.msg('label.availability', 'common', null)}:</label>
+    <ul class="list-unstyled availability-msg p--small m-0">
+        <li>
+            <isif condition="${product.productType != 'bundle' && !product.readyToOrder}">
+                ${Resource.msg('info.selectforstock', 'product', 'Select Styles for Availability')}
+            <iselse/>
+                <isloop items="${product.availability.messages}" var="message">${message}</isloop>
+            </isif>
+        </li>
+    </ul>
+</div>
+

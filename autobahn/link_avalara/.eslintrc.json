@@ -1,0 +1,29 @@
+{
+    "root": true,
+    "extends": "airbnb-base/legacy",
+    "rules": {
+        "block-scoped-var": "off",
+        "no-undef": "off",
+        "linebreak-style": ["off", "windows"],
+        "import/no-unresolved": "off",
+        "indent": "off",
+        "func-names": "off",
+        "require-jsdoc": "error",
+        "valid-jsdoc": ["error", {
+            "preferType": {
+                "Boolean": "boolean",
+                "Number": "number",
+                "object": "Object",
+                "String": "string"
+            },
+            "requireReturn": false
+        }],
+        "vars-on-top": "off",
+        "global-require": "off",
+        "no-shadow": ["error", {
+            "allow": ["err", "callback"]
+        }],
+        "max-len": "off",
+        "no-param-reassign": "off"
+    }
+}

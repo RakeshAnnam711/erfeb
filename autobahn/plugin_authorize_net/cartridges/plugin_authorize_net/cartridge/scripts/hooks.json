@@ -1,0 +1,20 @@
+{
+    "hooks": [
+        {
+            "name": "app.payment.processor.authorize_net_credit",
+            "script": "./hooks/payment/processor/authorize_net_credit"
+        },
+        {
+            "name": "app.payment.form.processor.authorize_net_credit",
+            "script": "./hooks/payment/processor/authorize_net_form_processor"
+        },
+        {
+            "name": "forter.api.request.payment.authorize_net_credit",
+            "script": "./hooks/buildForterRequest.js"
+        },
+        {
+            "name": "signifyd.api.request.payment.authorize_net_credit",
+            "script": "./hooks/buildSignifydRequest.js"
+        }
+    ]
+}

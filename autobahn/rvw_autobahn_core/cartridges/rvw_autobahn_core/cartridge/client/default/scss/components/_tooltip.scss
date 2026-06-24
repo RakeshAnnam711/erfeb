@@ -1,0 +1,55 @@
+
+
+.info-icon,
+.tooltip-icon {
+    @include icon($tooltip-icon, before, $tooltip-icon-size, $brand-primary);
+    border: none;
+    padding: 0;
+    position: relative;
+    top: -2px;
+    background: inherit;
+    display: inline-block;
+    cursor: pointer;
+    font: inherit;
+    .icon {
+        display: none;
+    }
+    &:hover:before,
+    &[aria-describedby*="tooltip"]:before {
+        color: $brand-secondary;
+    }
+}
+
+.tooltip {
+    &.bs-tooltip-right .arrow:before {
+        border-right-color: $tooltip-background-color;
+    }
+    &.bs-tooltip-left .arrow:before {
+        border-left-color: $tooltip-background-color;
+    }
+    &.bs-tooltip-top .arrow:before {
+        border-top-color: $tooltip-background-color;
+    }
+    &.bs-tooltip-bottom .arrow:before {
+        border-bottom-color: $tooltip-background-color;
+    }
+    .tooltip-inner {
+        border-radius: $tooltip-border-radius;
+        padding: $tooltip-padding;
+        text-align: $tooltip-text-align;
+        max-width: $tooltip-max-width;
+        box-shadow: $tooltip-box-shadow;
+        &:not([class*='background--']) {
+            background: $tooltip-background-color;
+        }
+        &:not([class*='text--']) {
+            color: $tooltip-text-color;
+        }
+        &:not([class*='font-size--']) {
+            font-size: $tooltip-font-size;
+        }
+    }
+    &.show {
+        opacity: $tooltip-opacity;
+    }
+}

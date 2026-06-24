@@ -1,0 +1,201 @@
+// Login page
+.login-page {
+    padding-top: $spacer;
+
+    // Custom styles for login nav tabs to better match card header styles
+    .login-nav-tabs {
+        background: $card-header-background;
+        padding: 0;
+        border-bottom: none;
+        margin: -1px -1px $account-login-tabs-margin-bottom -1px;
+        .nav-link {
+            padding-top: $tab-padding-top;
+            padding-bottom: $tab-padding-bottom;
+            &:hover {
+                color: $tab-color-active;
+            }
+            &.active {
+                background: $card-body-background;
+                color: $tab-color-active;
+                border-color: $card-body-border-color;
+                border-width: 1px;
+            }
+            &:not(.active) {
+                border-bottom: 1px solid $card-header-border-color;
+                color: $tab-color;
+                margin-bottom: 1px;
+            }
+        }
+    }
+    .login-form-nav {
+        .login-oauth {
+            margin-top: $form-group-margin-top;
+        }
+        .remember-me {
+            margin-top: 20px;
+            .custom-control-label {
+                margin-bottom: 0;
+            }
+        }
+        .forgot-password {
+            margin-top: 20px;
+            @include label-styles;
+        }
+    }
+    .request-password-body {
+        margin-bottom: $spacer;
+    }
+    .privacy-policy {
+        margin-top: $spacer;
+    }
+    .login-nav-tabs .nav-link,
+    .card-header.track-order-header {
+        font-family: $card-header-font-family;
+        font-size: $card-body-font-size;
+        font-weight: $card-header-font-weight;
+        letter-spacing: $card-body-letter-spacing;
+        line-height: $card-body-line-height;
+        text-decoration: none;
+        text-transform: $card-header-text-transform;
+    }
+}
+
+// Dashboard pages
+.account-page {
+    padding-top: $spacer;
+    padding-bottom: $spacer;
+    .col-12 > .card:only-child {
+        .card-body > form {
+            @include media-breakpoint-up(lg) {
+                width: 750px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+    .card:not(:last-of-type) {
+        margin-bottom: 0;
+        .card-body,
+        .card-footer {
+            border-bottom: 0;
+        }
+    }
+    .card-header + .card-footer {
+        a {
+            color: inherit;
+        }
+    }
+    .dashboard-info,
+    dl dt,
+    .dashboard-cards-block-title,
+    .dashboard-info {
+        color: $card-body-color;
+    }
+    .dashboard-cards-block-title {
+        margin-bottom: $spacer;
+    }
+
+    .marketing-email-title {
+        color: $card-body-color;
+        margin-bottom: $spacer;
+        font-weight: $card-header-font-weight;
+    }
+
+    dl {
+        margin-bottom: $spacer-xl;
+        dd {
+            color: $card-form-value-color;
+            margin-bottom: 0;
+            margin-top: 1px;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .card-body {
+        &.card-info-group p,
+        .card-info-group p {
+            color: $card-form-value-color;
+        }
+        p {
+            color: $card-body-color;
+        }
+    }
+    .address-card .card-body div {
+        color: $card-form-value-color;
+    }
+    .card-info-group {
+        p {
+            margin-bottom: 5px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .wishlist-row {
+            position: relative;
+            &:not(:last-child) {
+                border-bottom: $card-wishlist-border-bottom;
+                margin-bottom: $card-wishlist-margin-bottom;
+                padding-bottom: $card-wishlist-padding-bottom;
+            }
+        }
+    }
+    .tracking-consent {
+        @include text-link;
+        display: inline-block;
+    }
+    .change-password-form,
+    [name=change-password-form],
+    .address-form,
+    .payment-form {
+        .row {
+            margin-top: $spacer-xl;
+        }
+    }
+    .col-12 > .address-card:only-child,
+    .col-12 > .payment-card:only-child {
+        .card-body {
+            position: relative;
+            @include media-breakpoint-up(lg) {
+                width: 100%;
+            }
+        }
+    }
+    .card-make-default-link,
+    .make-default-payment {
+        margin-top: $spacer;
+    }
+    .remove-btn {
+        @include delete-card-button;
+    }
+    .product-summary-block {
+        .shipment-block {
+            span.ship-to-name,
+            span.ship-to-address1,
+            span.ship-to-address2,
+            span.ship-to-phone,
+            span.ship-to-city-st-zip {
+                display: block;
+            }
+            h3:not(:first-child) {
+                margin-top: $spacer;
+            }
+        }
+    }
+}
+
+// Order cards
+.order-card {
+    .order-image-col {
+        min-width: 120px;
+        max-width: 120px;
+    }
+    .order-details-col {
+        max-width: calc(100% - 120px);
+        padding-left: 0;
+        @include media-breakpoint-up(sm) {
+            padding-left: $spacer;
+        }
+    }
+}

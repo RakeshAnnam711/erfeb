@@ -1,0 +1,185 @@
+{
+    "name": "Image and Text",
+    "description": "Main hero banner with optional text, ctas, and layout styles",
+    "group": "wgaca_assets",
+    "attribute_definition_groups": [
+    	{
+	    	"id": "Image",
+	      	"attribute_definitions": [
+				{
+					"id": "imageContainerClass",
+					"name": "Image Container Class",
+					"type": "string",
+					"description": "Add a class to the image container of the component (entire block containing image and text). Useful for overriding padding and margin. e.g. 'p-0' See the Style Guide for more class options.",
+					"required": false
+				},
+				{
+					"id": "imageClass",
+					"name": "Image Class",
+					"type": "string",
+					"description": "Add a class to the image itself. Useful for overriding padding and margin. e.g. 'p-0' See the Style Guide for more class options.",
+					"required": false
+				},
+	     		{
+	          		"id": "desktopImage",
+	          		"name": "Desktop Image",
+					"description": "For faster load time, please use images under 500 KB.",
+	          		"type": "image",
+	          		"required": true
+	        	},
+	        	{
+	          		"id": "mobileImage",
+	          		"name": "Mobile Image",
+					"description": "For faster load time, please use images under 500 KB.",
+	          		"type": "image",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "alt",
+	          		"name": "Alt Text",
+	          		"description": "The image alt text shown by the component.",
+	          		"type": "string",
+	          		"required": true
+	        	}
+	      	]
+	    },
+		{
+            "id": "TextSectionBlock",
+              "attribute_definitions": [
+				{
+					"id": "titleClass",
+					"name": "Title Class",
+					"type": "string",
+					"description": "Add a class to adjust the styling, spacing, and alignment of the title. e.g. 'mb-2' See the Style Guide for more class options.",
+					"required": false
+				},
+                {
+                      "id": "TextContent",
+                      "name": "Title",
+                      "type": "string",
+                      "required": false
+                },
+                {
+                      "id": "TextFontSize",
+                      "name": "Title Font size",
+                      "description": "Text font size, default is 14px",
+                      "type": "enum",
+                   	  "values": ["12px", "14px", "16px", "18px","24px"],
+                      "default_value": "14px",
+                      "required": false
+                },
+				{
+					"id": "titleColor",
+					"name": "Title Color",
+					"type": "string",
+					"required": false
+			  },
+			  {
+				"id": "subTitleClass",
+				"name": "Subtitle Class",
+				"type": "string",
+				"description": "Add a class to adjust the styling, spacing, and alignment of the subtitle. e.g. 'mb-2' See the Style Guide for more class options.",
+				"required": false
+			  },
+			  {
+					"id": "subTitle",
+					"name": "Sub Title",
+					"type": "string",
+					"required": false
+			    },
+				{
+					"id": "subTitleColor",
+					"name": "Sub Title Color",
+					"type": "string",
+					"required": false
+			  },
+			  {
+					"id": "subTitleFontSize",
+					"name": "Sub Title Font Size",
+					"description": "Sub Title font size, default is 16px",
+					"type": "enum",
+				  	"values": ["12px", "14px", "16px", "18px"],
+				  	"default_value": "16px",
+					"required": false
+			  }
+              ]
+        },
+		{
+			"id": "shopButtonDiv",
+			"attribute_definitions": [
+				{
+					"id": "shopButtonDiv",
+					"name": "Select gird Only when using button alignment",
+					"description": "Select grid property only when using button alignment, Otherwise leave it unchanged",
+					"type": "enum",
+					"values": [
+						"grid"
+					],
+					"required": false
+				}
+			]
+		},
+	    {
+	    	"id": "bannerLinkBlock",
+	      	"attribute_definitions": [
+				{
+					"id": "buttonClass",
+					"name": "Button Class",
+					"type": "string",
+					"description": "Add a class to adjust the styling, spacing, and alignment of the button. e.g. 'p-0' See the Style Guide for more class options.",
+					"required": false
+				},
+	      		{
+	          		"id": "buttonText",
+	          		"name": "Button Text",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+	          		"id": "buttonTextColor",
+	          		"name": "Button Text Color",
+	          		"description": "Default color is white for tertiary button",
+	          		"type": "string",
+	          		"required": false
+	        	},
+	        	{
+					"id": "buttonStyle",
+					"name": "Button Style",
+					"description": "Select button styling, default is btn-primary",
+					"type": "enum",
+				    "values": ["btn-primary", "btn-secondary", "btn-tertiary"],
+				    "default_value": "btn-primary",
+					"required": false
+			  	},
+				  {
+					"id": "buttonAlignment",
+					"name": "Button Alignment",
+					"description": "Select button Alignment, default is unset",
+					"type": "enum",
+					"values": [
+						"unset",
+						"left",
+						"center",
+						"right"
+					],
+					"default_value": "unset",
+					"required": false
+			  	},
+	        	{
+	          		"id": "ctaUrl",
+	          		"name": "CTA Url",
+	          		"type": "url",
+	          		"required": false
+	        	},
+				{
+	          		"id": "ctaImageAndTextAriaLabel",
+	          		"name": "CTA Aria-label",
+					"description": "Aria-label is an attribute that provides an accessible name for screen readers helping users understand the purpose of an element.",
+	          		"type": "string",
+	          		"required": false
+	        	}
+	      	]
+	    }
+    ],
+    "region_definitions": []
+}

@@ -1,0 +1,117 @@
+<ul class="suggestions container" role="listbox" id="search-results">
+    <isif condition="${pdict.suggestions.product && pdict.suggestions.product.phrases.length > 0 && !(pdict.suggestions.product.phrases.length === 1 && pdict.suggestions.product.phrases[0].exactMatch)}">
+        <li class="suggestions-header">
+            <div class="do-you-mean">${Resource.msg('label.suggest.doyoumean', 'search', null)}</div>
+        </li>
+        <li class="suggestions-items" role="option">
+            <isloop items="${pdict.suggestions.product.phrases}" var="phrase" status="listindex">
+                <div class="suggestions-item term item" id="phrase-${listindex.index}" role="option">
+                    <a href="${URLUtils.url('Search-Show', 'q', phrase.value)}">
+                        ${phrase.value}
+                    </a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+    <isif condition="${pdict.suggestions.product && pdict.suggestions.product.available}">
+        <li class="suggestions-header">${Resource.msg('label.suggest.products', 'search', null)}</li>
+        <li class="suggestions-items suggestions-products">
+            <isloop items="${pdict.suggestions.product.products}" var="product" status="listindex">
+                <div class="suggestions-item item" id="product-${listindex.index}" role="option">
+                    <a href="${product.url}" aria-label="${product.name}">
+                        <div class="swatch-thumbnail" style="background-image: url('${product.imageUrl}')"></div>
+                        <span class="name">${product.name}</span>
+                    </a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+    <isif condition="${pdict.suggestions.bestsellers.matching_products}">
+        <li class="suggestions-header">${Resource.msg('label.suggest.popular.products', 'search', null)}</li>
+        <li class="suggestions-items suggestions-products">
+            <isloop items="${pdict.suggestions.bestsellers.matching_products}" var="product" status="listindex">
+                <div class="suggestions-item" id="product-${listindex.index}" role="option">
+                    <a class="suggestions-products-a" href="${product.value.org_prod_url}" aria-label="${product.value.org_product}">
+                        <div class="swatch-thumbnail" style="background-image: url(${product.value.org_image_url})"></div>
+                        <span class="name">${product.value.org_product}</span>
+                    </a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+    <isif condition="${componentVisibility && pdict.suggestions.category && pdict.suggestions.category.available}">
+        <li class="suggestions-header">${Resource.msg('label.suggest.categories', 'search', null)}</li>
+        <li class="suggestions-items">
+            <isloop items="${pdict.suggestions.category.categories}" var="category" status="listindex">
+                <div class="suggestions-item item" id="category-${listindex.index}" role="option">
+                    <a href="${category.url}">
+                        <isif condition="${category.imageUrl != ''}">
+                            <div class="swatch-thumbnail" style="background-image: url('${category.imageUrl}')"></div>
+                        </isif>
+                        <span class="name">
+                            ${category.name}
+                            <isif condition="${category.parentID !== 'root'}">
+                                <span class="category-parent"> ${Resource.msg('label.suggest.in', 'search', null)} ${category.parentName}</span>
+                            </isif>
+                        </span>
+                    </a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+    <isif condition="${componentVisibility && pdict.suggestions.recent && pdict.suggestions.recent.available}">
+        <li class="suggestions-header">${Resource.msg('label.suggest.recent', 'search', null)}</li>
+        <li class="suggestions-items">
+            <isloop items="${pdict.suggestions.recent.phrases}" var="phrase" status="listindex">
+                <div class="suggestions-item item" id="phrase-2-${listindex.index}" role="option">
+                    <a class="name" href="${phrase.url}">${phrase.value}</a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+    <isif condition="${pdict.suggestions.popular && pdict.suggestions.popular.available}">
+        <li class="suggestions-header">${Resource.msg('label.suggest.popular', 'search', null)}</li>
+        <li class="suggestions-items">
+            <isloop items="${pdict.suggestions.popular.phrases}" var="phrase" status="listindex">
+                <div class="suggestions-item item" id="phrase-3-${listindex.index}" role="option">
+                    <a class="name" href="${phrase.url}">${phrase.value}</a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+    <isif condition="${pdict.suggestions.brand && pdict.suggestions.brand.available}">
+        <li class="suggestions-header">${Resource.msg('label.suggest.brand', 'search', null)}</li>
+        <li class="suggestions-items">
+            <isloop items="${pdict.suggestions.brand.phrases}" var="phrase" status="listindex">
+                <div class="suggestions-item item" id="phrase-4-${listindex.index}" role="option">
+                    <a class="name" href="${phrase.url}">${phrase.value}</a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+    <isif condition="${componentVisibility && pdict.suggestions.content && pdict.suggestions.content.available}">
+        <li class="suggestions-header">${Resource.msg('label.suggest.content', 'search', null)}</li>
+        <li class="suggestions-items">
+            <isloop items="${pdict.suggestions.content.contents}" var="content" status="listindex">
+                <div class="suggestions-item item" id="content-${listindex.index}" role="option">
+                    <a class="name" href="${content.url}">
+                        <isif condition="${!empty(content.imageUrl)}">
+                            <div class="swatch-thumbnail" style="background-image: url('${content.imageUrl}')"></div>
+                        </isif>
+                        <span class="name">${content.name}</span>
+                    </a>
+                </div>
+            </isloop>
+        </li>
+    </isif>
+    <li class="d-sm-none more-below">
+        <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+    </li>
+</ul>
+
+<span id="search-result-count" class="sr-only">
+    ${pdict.suggestions.message}
+</span>
+<span id="search-assistive-text" class="sr-only">
+    ${Resource.msg('label.header.search.assistive_msg', 'common', null)}
+</span>

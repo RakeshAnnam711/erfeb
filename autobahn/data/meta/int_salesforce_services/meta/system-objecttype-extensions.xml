@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="Promotion">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="IsProductPromotionForEveryone">
+                <display-name xml:lang="x-default">Is a Product Promotion for Everyone</display-name>
+                <description xml:lang="x-default">If true, then this product promotion is one that is available to everyone and will be included (used) when determining the Sale Price for a product that is sent out in a product feed, specifically the product feed that is sent to Salesforce Marketing Cloud.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Autobahn MarketingCloud ProductFeeds">
+                <display-name xml:lang="x-default">Autobahn MarketingCloud Product Feeds</display-name>
+                <attribute attribute-id="IsProductPromotionForEveryone"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="MarketingCloudAccountId">
+                <display-name xml:lang="x-default">Account Id (Mid)</display-name>
+                <description xml:lang="x-default">The account Id, Mid, of the business unit connecting to in Marketing Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudClientId">
+                <display-name xml:lang="x-default">Client Id</display-name>
+                <description xml:lang="x-default">The client Id for connecting to Marketing Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudClientSecret">
+                <display-name xml:lang="x-default">Client Secret</display-name>
+                <description xml:lang="x-default">The client secret for connecting to Marketing Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudCollectJsEnabled">
+                <display-name xml:lang="x-default">Collect Js is Enabled</display-name>
+                <description xml:lang="x-default">If true, then the collect.js script should be added to all pages and the events fire that support functionality such as abandon browse and abandon cart.&#13;
+The data is sent to the configured SFMC instance and that functionality must be enabled and configured on the SFMC side.&#13;
+This site preference is just for enabling the data to be sent to SFMC.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudEndpoint-Address">
+                <display-name xml:lang="x-default">Endpoint for Email Address Validation</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Marketing Cloud REST API to perform email address validation.&#13;
+Note that this value has a placeholder in it for the version, which is retrieved from the "MarketingCloudVersion" site preference. This is done so that all Marketing Cloud endpoints don't have to be updated when the version changes.&#13;
+For example, this value will likely be "/address/v{0}/validateEmail".&#13;
+When combined, the URL will be something like: "https://mcz7rh6w0pl2bf9gj8k6493r-5h4.rest.marketingcloudapis.com/address/v1/validateEmail"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/address/v{0}/validateEmail</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudEndpoint-Authentication">
+                <display-name xml:lang="x-default">Endpoint for Authentication</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Marketing Cloud REST API to perform authentication.&#13;
+For example, this value will likely be "/v2/token".&#13;
+When combined with the URL will be something like: "https://mcz7rh6w0pl2bf9gj8k6493r-5h4.auth.marketingcloudapis.com/v2/token"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/v2/token</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudEndpoint-DataEvents">
+                <display-name xml:lang="x-default">Endpoint for DataEvents</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Marketing Cloud REST API to perform actions related to DataEvents in Marketing Cloud. Note that this value has a placeholder in it for the version, which is retrieved from the "MarketingCloudVersion" site preference. This is done so that all Marketing Cloud endpoints don't have to be updated when the version changes.&#13;
+For example, this value will likely be "/hub/v{0}/dataevents".&#13;
+When combined with the MarketingCloudVersion and the URL will be something like: "https://mcz7rh6w0pl2bf9gj8k6493r-5h4.rest.marketingcloudapis.com/hub/v1/dataevents/key:rvw_styles/rowset"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/hub/v{0}/dataevents</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudEndpoint-DataExtension">
+                <display-name xml:lang="x-default">Endpoint for Inserting into a Data Extension</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Marketing Cloud REST API to insert data into a Data Extension.&#13;
+Note that this value has a placeholder in it for the version, which is retrieved from the "MarketingCloudVersion" site preference. This is done so that all Marketing Cloud endpoints don't have to be updated when the version changes.&#13;
+For example, this value will likely be "/data/v{0}/async/dataextensions".&#13;
+When combined with the URL will be something like: "https://mcz7rh6w0pl2bf9gj8k6493r-5h4.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:CommerceCloudAccountsExtension/rows"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/data/v{0}/async/dataextensions</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudEndpoint-Journeys">
+                <display-name xml:lang="x-default">Endpoint for Journeys</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Marketing Cloud REST API to perform actions related to Journeys in Marketing Cloud. Note that this value has a placeholder in it for the version, which is retrieved from the "MarketingCloudVersion" site preference. This is done so that all Marketing Cloud endpoints don't have to be updated when the version changes.&#13;
+For example, this value will likely be "/interaction/v{0}".&#13;
+When combined with the MarketingCloudVersion and the URL will be something like: "https://mcz7rh6w0pl2bf9gj8k6493r-5h4.rest.marketingcloudapis.com/interaction/v1/events"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/interaction/v{0}</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudEndpoint-Query">
+                <display-name xml:lang="x-default">Endpoint for Querying Content Assets</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Marketing Cloud REST API to perform queries, for all or by ID, for Content Assets in Martketing Cloud. Note that this value has a placeholder in it for the version, which is retrieved from the "MarketingCloudVersion" site preference. This is done so that all Marketing Cloud endpoints don't have to be updated when the version changes.&#13;
+For example, this value will likely be "/asset/v{0}/content/assets".&#13;
+When combined with the MarketingCloudVersion and the URL will be something like: "https://mcz7rh6w0pl2bf9gj8k6493r-5h4.rest.marketingcloudapis.com/asset/v1/content/assets/32647"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/asset/v{0}/content/assets</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudEndpoint-TriggeredSends">
+                <display-name xml:lang="x-default">Endpoint for Triggered Sends</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Marketing Cloud REST API to work with Triggered Sends.&#13;
+For example, this value will likely be "/messaging/v1/messageDefinitionSends".&#13;
+When combined with the URL will be something like: "https://mcz7rh6w0pl2bf9gj8k6493r-5h4.rest.marketingcloudapis.com/messaging/v1/messageDefinitionSends"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/messaging/v1/messageDefinitionSends</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudEndpoint-SOAPService">
+                <display-name xml:lang="x-default">Endpoint for SOAP Service</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Marketing Cloud SOAP API to work with Account Preferences.&#13;
+For example, this value will likely be "/Service.asmx".&#13;
+When combined with the URL will be something like: "https://mcz7rh6w0pl2bf9gj8k6493r-5h4.soap.marketingcloudapis.com/Service.asmx"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/Service.asmx</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudGetDeliveryDetailsAfterTriggeredSend">
+                <display-name xml:lang="x-default">Get Delivery Details After a Triggered Send</display-name>
+                <description xml:lang="x-default">If true, then after a call to execute a triggered send, a call will be made to get delivery details for that email send.&#13;
+This is meant as a debugging tool and should be off in production.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudForBMStyleguideSyncEnabled">
+                <display-name xml:lang="x-default">Enable BM.Styleguide Hook</display-name>
+                <description xml:lang="x-default">Enable per instance. Enable the bm.styleguide used by the bm_rvw_wizard cartridge.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudServiceIdForAuthentication">
+                <display-name xml:lang="x-default">Authentication Service Id</display-name>
+                <description xml:lang="x-default">Contains the Id of the service definition in Administration / Operations / Services that is used for authenticating and getting an Access Token for Marketing Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>MarketingCloud.HTTP.Authentication</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudServiceIdForRestApi">
+                <display-name xml:lang="x-default">REST API Service Id</display-name>
+                <description xml:lang="x-default">Contains the Id of the service definition in Administration / Operations / Services that is used for REST API calls made to Marketing Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>MarketingCloud.HTTP.Rest</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudServiceIdForSoapApi">
+                <display-name xml:lang="x-default">SOAP API Service Id</display-name>
+                <description xml:lang="x-default">Contains the Id of the service definition in Administration / Operations / Services that is used for SOAP API calls made to Marketing Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>MarketingCloud.HTTP.Soap</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudVersion">
+                <display-name xml:lang="x-default">Version</display-name>
+                <description xml:lang="x-default">The version of the API being called, for example, 1</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>1</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudTenantSpecificEndpointSubdomain">
+                <display-name xml:lang="x-default">Tenant Specific Endpoint Subdomain</display-name>
+                <description xml:lang="x-default">This value will replace the empty subdomain placeholder of '[[SC_ENTERPRISE_SUBDOMAIN_SITEPREF]]' within the service credential URLs. &#13;
+URLs can be specified within service credentials or be assembled dynamicly with this value.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudConsumerKey">
+                <display-name xml:lang="x-default">Consumer Key</display-name>
+                <description xml:lang="x-default">The consumer key for connecting to Service Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudConsumerSecret">
+                <display-name xml:lang="x-default">Consumer Secret</display-name>
+                <description xml:lang="x-default">The consumer secret for connecting to Service Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudEndpoint-Authentication">
+                <display-name xml:lang="x-default">Endpoint for Authentication</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Service Cloud REST API to perform authentication.&#13;
+For example, this value will likely be "/oauth2/token".&#13;
+When combined with the URL will be something like: "https://test.salesforce.com/services/oauth2/token"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/services/oauth2/token</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudEndpoint-Query">
+                <display-name xml:lang="x-default">Endpoint for Querying Salesforce</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Service Cloud REST API to perform queries against Salesforce. Note that this value has a placeholder in it for the version, which is retrieved from the "ServiceCloudVersion" site preference. This is done so that all Service Cloud endpoints don't have to be updated when the version changes.&#13;
+For example, this value will likely be "/data/v{0}/query".&#13;
+When combined with the ServiceCloudVersion and the URL will be something like: "https://test.salesforce.com/services/data/v52.0/query"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/services/data/v{0}/query</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudEndpoint-SObject">
+                <display-name xml:lang="x-default">Endpoint for CRUD operations against Salesforce objects</display-name>
+                <description xml:lang="x-default">This endpoint that will be suffixed on to the URL of the Service Cloud REST API to perform CRUD operations against Salesforce Objects. Note that this value has a placeholder in it for the version, which is retrieved from the "ServiceCloudVersion" site preference. This is done so that all Service Cloud endpoints don't have to be updated when the version changes.&#13;
+For example, this value will likely be "/data/v{0}/sobjects".&#13;
+When combined with the ServiceCloudVersion and the URL will be something like: "https://test.salesforce.com/services/data/v52.0/sobjects/Case"</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>/services/data/v{0}/sobjects</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudPassword">
+                <display-name xml:lang="x-default">Password</display-name>
+                <description xml:lang="x-default">The password for the user name used for connecting to Service Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudSecurityToken">
+                <display-name xml:lang="x-default">Security Token</display-name>
+                <description xml:lang="x-default">The security token for the user name used for connecting to Service Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudServiceIdForRestApi">
+                <display-name xml:lang="x-default">REST API Service Id</display-name>
+                <description xml:lang="x-default">Contains the Id of the service definition in Administration / Operations / Services that is used for REST API calls made to Service Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>ServiceCloud.HTTP.Rest</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudUserName">
+                <display-name xml:lang="x-default">UserName</display-name>
+                <description xml:lang="x-default">The user name for connecting to Service Cloud.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloudVersion">
+                <display-name xml:lang="x-default">Version</display-name>
+                <description xml:lang="x-default">The version of the API being called, for example, 52.0</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>52.0</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloud-PersonAccountRecordTypeId">
+                <display-name xml:lang="x-default">Person Account Record Type ID</display-name>
+                <description xml:lang="x-default">The value supplied for the 'RecordTypeId' attribute in the payload passed for creating a (Person)Account. This is an instance specific value; it is different for a a sandbox, pre-prod or prod Service Cloud environment.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceCloud-CustomerListId">
+                <display-name xml:lang="x-default">Customer List ID</display-name>
+                <description xml:lang="x-default">The value supplied for the 'B2C_CustomerList__pc' attribute in the payload passed for creating a (Person)Account. This value is only supplied for registered customers. Guest customers should pass null for this.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudForAccountCreationEnabled">
+                <display-name xml:lang="x-default">Use Marketing Cloud for Account Creation Email</display-name>
+                <description xml:lang="x-default">If true, then the account creation email will be sent through SFMC. If false, then the default behavior will be applied; sending through SFCC.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudForGiftCertificateEnabled">
+                <display-name xml:lang="x-default">Use Marketing Cloud for Gift Certificate</display-name>
+                <description xml:lang="x-default">If true, then the gift certificate email will be sent through SFMC. If false, then the default behavior will be applied; sending through SFCC.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="JourneyEventDefinitionKeyForNewsletter">
+                <display-name xml:lang="x-default">Journey Entry Event Key for Newsletter</display-name>
+                <description xml:lang="x-default">The journey key for sending Newsletter Emails stored in JSON by brandId. There are two options allowed formats: &#13;
+Option 1 (For Multibrand): [{"BrandId":"examplebrand1","Key":"Example_Brand1_WelcomeSeriesEvent"},{"BrandId":"examplebrand2","Key":"Example_Brand2_WelcomeSeriesEvent"}] &#13;
+Option 2 (Non-Multibrand): WelcomeSeriesEvent &#13;
+If multibrand is configured you must follow the above JSON standard to allow all brands to have their own external keys.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>WelcomeSeriesEvent</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="DataExtensionExternalKeyForNewsletter">
+                <display-name xml:lang="x-default">Data Extension External Key for Newsletter</display-name>
+                <description xml:lang="x-default">(Using this preference will disable the Journey Event) The external key for sending Newsletter Emails stored in JSON by brandId. There are two options allowed formats: &#13;
+Option 1 (For Multibrand): [{"BrandId":"examplebrand1","Key":"Example_Brand1_Confirmation"},{"BrandId":"examplebrand2","Key":"Example_Brand2_Confirmation"}] &#13;
+Option 2 (Non-Multibrand): Example_Brand_Confirmation &#13;
+If multibrand is configured you must follow the above JSON standard to allow all brands to have their own external keys. </description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudForNewsletterEnabled">
+                <display-name xml:lang="x-default">Use Marketing Cloud for Newsletter</display-name>
+                <description xml:lang="x-default">If true, then the newsletter email will be sent through SFMC. If false, then the default behavior will be applied; trigger via SFRA Hook.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudForOrderConfirmationEnabled">
+                <display-name xml:lang="x-default">Use Marketing Cloud for Order Confirmation</display-name>
+                <description xml:lang="x-default">If true, then the order confirmation email will be sent through SFMC. If false, then the default behavior will be applied; sending through SFCC.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudForPasswordResetEnabled">
+                <display-name xml:lang="x-default">Use Marketing Cloud for Password Reset</display-name>
+                <description xml:lang="x-default">If true, then the password reset email will be sent through SFMC. If false, then the default behavior will be applied; sending through SFCC.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudForPasswordChangeEnabled">
+                <display-name xml:lang="x-default">Use Marketing Cloud for Password Change</display-name>
+                <description xml:lang="x-default">If true, then the password change email will be sent through SFMC. If false, then the default behavior will be applied; sending through SFCC.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudUseContactIdForSubscriberKey">
+                <display-name xml:lang="x-default">Use ContactId for Subscriber Key</display-name>
+                <description xml:lang="x-default">If true, then call into Service Cloud to get the ContactId and use that as the SubscriberKey for transactional emails. If false, then email address will be used as the Subscriber Key.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="TriggeredSendExternalKeyForAccountCreation">
+                <display-name xml:lang="x-default">Triggered Send External Key for Account Creation</display-name>
+                <description xml:lang="x-default">The external key for sending Account Creation Emails stored in JSON by brandId. There are two options allowed formats: &#13;
+Option 1 (For Multibrand): [{"BrandId":"examplebrand1","Key":"Example_Brand1_Account_Creation"},{"BrandId":"examplebrand2","Key":"Example_Brand2_Account_Creation"}] &#13;
+Option 2 (Non-Multibrand): Example_Brand_Account_Creation &#13;
+If multibrand is configured you must follow the above JSON standard to allow all brands to have their own external keys.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>AccountCreation</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="DataExtensionExternalKeyForBackInStock">
+                <display-name xml:lang="x-default">Data Extension External Key for Back In Stock</display-name>
+                <description xml:lang="x-default">The external key for sending Back In Stock Emails stored in JSON by brandId. There are two options allowed formats: &#13;
+Option 1 (For Multibrand): [{"BrandId":"examplebrand1","Key":"Example_Brand1_Back_in_Stock"},{"BrandId":"examplebrand2","Key":"Example_Brand2_Back_in_Stock"}] &#13;
+Option 2 (Non-Multibrand): Example_Brand_Back_in_Stock &#13;
+If multibrand is configured you must follow the above JSON standard to allow all brands to have their own external keys.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>BIS_Subscribers</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="TriggeredSendExternalKeyForGiftCertificate">
+                <display-name xml:lang="x-default">Triggered Send External Key for Gift Certificate</display-name>
+                <description xml:lang="x-default">The external key for sending Gift Certificate Emails stored in JSON by brandId. There are two options allowed formats: &#13;
+Option 1 (For Multibrand): [{"BrandId":"examplebrand1","Key":"Example_Brand1_Gift_Card"},{"BrandId":"examplebrand2","Key":"Example_Brand2_Gift_Card"}] &#13;
+Option 2 (Non-Multibrand): Example_Brand_Gift_Card &#13;
+If multibrand is configured you must follow the above JSON standard to allow all brands to have their own external keys.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>GiftCertificate</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="TriggeredSendExternalKeyForOrderConfirmation">
+                <display-name xml:lang="x-default">Triggered Send External Key for Order Confirmation</display-name>
+                <description xml:lang="x-default">The external key for sending Order Confirmation Emails stored in JSON by brandId. There are two options allowed formats: &#13;
+Option 1 (For Multibrand): [{"BrandId":"examplebrand1","Key":"Example_Brand1_Confirmation"},{"BrandId":"examplebrand2","Key":"Example_Brand2_Confirmation"}] &#13;
+Option 2 (Non-Multibrand): Example_Brand_Confirmation &#13;
+If multibrand is configured you must follow the above JSON standard to allow all brands to have their own external keys. </description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>OrderConfirmation</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="TriggeredSendExternalKeyForPasswordReset">
+                <display-name xml:lang="x-default">Triggered Send External Key for Password Reset</display-name>
+                <description xml:lang="x-default">The external key for sending Password Reset Emails stored in JSON by brandId. There are two options allowed formats: &#13;
+Option 1 (For Multibrand): [{"BrandId":"examplebrand1","Key":"Example_Brand1_Password_Reset"},{"BrandId":"examplebrand2","Key":"Example_Brand2_Password_Reset"}] &#13;
+Option 2 (Non-Multibrand): Example_Brand_Password_Reset &#13;
+If multibrand is configured you must follow the above JSON standard to allow all brands to have their own external keys.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>PasswordReset</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="TriggeredSendExternalKeyForPasswordChange">
+                <display-name xml:lang="x-default">Triggered Send External Key for Password Change</display-name>
+                <description xml:lang="x-default">The external key for sending Password Change Emails stored in JSON by brandId. There are two options allowed formats: &#13;
+Option 1 (For Multibrand): [{"BrandId":"examplebrand1","Key":"Example_Brand1_Password_Change"},{"BrandId":"examplebrand2","Key":"Example_Brand2_Password_Change"}] &#13;
+Option 2 (Non-Multibrand): Example_Brand_Password_Change &#13;
+If multibrand is configured you must follow the above JSON standard to allow all brands to have their own external keys.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>PasswordChangedConfirmation</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudTenantSpecificEndpointSubdomain">
+                <display-name xml:lang="x-default">Tenant Specific Endpoint Subdomain</display-name>
+                <description xml:lang="x-default">This value will replace the empty subdomain placeholder of '[[MC_ENTERPRISE_SUBDOMAIN_SITEPREF]]' within the service credential URLs. &#13;
+URLs can be specified within service credentials or be assembled dynamicly with this value. &#13;
+More details: https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/your-subdomain-tenant-specific-endpoints.html</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudFTPUserId">
+                <display-name xml:lang="x-default">MC FTP Host User ID</display-name>
+                <description xml:lang="x-default">Optional, sevice credentials can be directly configured. This value will be used by bm_autobahn_core to replace '[[sitepref|MarketingCloudFTPUserId]]' string for FTP Job Component</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="MarketingCloudFTPPassword">
+                <display-name xml:lang="x-default">MC FTP Host Password</display-name>
+                <description xml:lang="x-default">Optional, sevice credentials can be directly configured. This value will be used by bm_autobahn_core to replace '[[sitepref|MarketingCloudFTPPassword]]' string for FTP Job Component</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ShowLiveChat">
+                <display-name xml:lang="x-default">Show Live Chat</display-name>
+                <description xml:lang="x-default">Preference to show or hide the Live Chat. False by default.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ChatBaseUrl">
+                <display-name xml:lang="x-default">Base URL</display-name>
+                <description xml:lang="x-default">Base url of the instance that hosts the live chat agents.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServerInstanceUrl">
+                <display-name xml:lang="x-default">Server Instance URL</display-name>
+                <description xml:lang="x-default">Organization Salesforce instance. Comprised of salesforce-managed instance code and domain.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ChatOrganizationId">
+                <display-name xml:lang="x-default">Organization ID</display-name>
+                <description xml:lang="x-default">Unique identifier for Salesforce environment.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="AgentContentUrl">
+                <display-name xml:lang="x-default">Live Agent Content URL</display-name>
+                <description xml:lang="x-default">Live Agent deployment content URL.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="DeploymentId">
+                <display-name xml:lang="x-default">Deployment ID</display-name>
+                <description xml:lang="x-default">ID for Live Chat Deployment.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ButtonId">
+                <display-name xml:lang="x-default">Button ID</display-name>
+                <description xml:lang="x-default">ID for Live Chat Button.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="BaseLiveAgentUrl">
+                <display-name xml:lang="x-default">Base Live Agent URL</display-name>
+                <description xml:lang="x-default">URL for Live Agent Server.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ESWLiveAgentDevName">
+                <display-name xml:lang="x-default">ESW Live Agent Dev Name</display-name>
+                <description xml:lang="x-default">ESW Live Agent Dev Name</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="LiveAgentName">
+                <display-name xml:lang="x-default">Live Agent Name</display-name>
+                <description xml:lang="x-default">Live Agent Name</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ServiceJSURL">
+                <display-name xml:lang="x-default">Service JS URL</display-name>
+                <description xml:lang="x-default">Service JS URL</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ButtonSourceAttribute">
+                <display-name xml:lang="x-default">Button Source Attribute</display-name>
+                <description xml:lang="x-default">Script Source Attribute if embedded service is not populated.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="OfflineSupportEnabled">
+                <display-name xml:lang="x-default">Offline Support Enabled</display-name>
+                <description xml:lang="x-default">Preference to enable or disable offline support. Disabled by Default.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="InitEswUrl">
+                <display-name xml:lang="x-default">Initialize ESW URL</display-name>
+                <description xml:lang="x-default">URL used to initialize ESW if the embedded service is populated.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ConversionTrackingEventCodeResource">
+                <display-name xml:lang="x-default">Conversion Tracking Event Code Resource</display-name>
+                <description xml:lang="x-default">Marketing Cloud Conversion Tracking event code</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ConversionTrackingUTMSource">
+                <display-name xml:lang="x-default">Query string UTM source</display-name>
+                <description xml:lang="x-default">Expected UTM Source for Marketing Cloud Conversion Tracking</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>sfmc</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="ConversionTrackingCookieAge">
+                <display-name xml:lang="x-default">Marketing Cloud Conversion Tracking Cookie Max Age</display-name>
+                <description xml:lang="x-default">Age for conversion tracking cookie</description>
+                <type>enum-of-int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                 <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">24_HOURS</display>
+                        <value>86400</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">ONE_WEEK</display>
+                        <value>604800</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">TWO_WEEKS</display>
+                        <value>1209600</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">ONE_MONTH</display>
+                        <value>2628288</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="ConversionTrackingToken">
+                <display-name xml:lang="x-default">Marketing Cloud Conversion Tracking Token</display-name>
+                <description xml:lang="x-default">Token for Marketing Cloud Conversion Tracking</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="MarketingCloud">
+                <display-name xml:lang="x-default">Marketing Cloud</display-name>
+                <attribute attribute-id="MarketingCloudClientId"/>
+                <attribute attribute-id="MarketingCloudClientSecret"/>
+                <attribute attribute-id="MarketingCloudAccountId"/>
+                <attribute attribute-id="MarketingCloudVersion"/>
+                <attribute attribute-id="MarketingCloudTenantSpecificEndpointSubdomain"/>
+                <attribute attribute-id="MarketingCloudFTPUserId"/>
+                <attribute attribute-id="MarketingCloudFTPPassword"/>
+                <attribute attribute-id="MarketingCloudCollectJsEnabled"/>
+                <attribute attribute-id="MarketingCloudServiceIdForAuthentication"/>
+                <attribute attribute-id="MarketingCloudServiceIdForRestApi"/>
+                <attribute attribute-id="MarketingCloudServiceIdForSoapApi"/>
+                <attribute attribute-id="MarketingCloudEndpoint-Authentication"/>
+                <attribute attribute-id="MarketingCloudEndpoint-Address"/>
+                <attribute attribute-id="MarketingCloudEndpoint-DataEvents"/>
+                <attribute attribute-id="MarketingCloudEndpoint-DataExtension"/>
+                <attribute attribute-id="MarketingCloudEndpoint-Journeys"/>
+                <attribute attribute-id="MarketingCloudEndpoint-Query"/>
+                <attribute attribute-id="MarketingCloudEndpoint-TriggeredSends"/>
+                <attribute attribute-id="MarketingCloudEndpoint-SOAPService"/>
+                <attribute attribute-id="MarketingCloudGetDeliveryDetailsAfterTriggeredSend"/>
+                <attribute attribute-id="MarketingCloudForBMStyleguideSyncEnabled"/>
+            </attribute-group>
+            <attribute-group group-id="MarketingCloudConversionTracking">
+                <display-name xml:lang="x-default">Marketing Cloud Conversion Tracking</display-name>
+                <attribute attribute-id="ConversionTrackingEventCodeResource"/>
+                <attribute attribute-id="ConversionTrackingUTMSource"/>
+                <attribute attribute-id="ConversionTrackingCookieAge"/>
+                <attribute attribute-id="ConversionTrackingToken"/>
+            </attribute-group>
+            <attribute-group group-id="ServiceCloud">
+                <display-name xml:lang="x-default">Service Cloud</display-name>
+                <attribute attribute-id="ServiceCloudTenantSpecificEndpointSubdomain"/>
+                <attribute attribute-id="ServiceCloudConsumerKey"/>
+                <attribute attribute-id="ServiceCloudConsumerSecret"/>
+                <attribute attribute-id="ServiceCloudUserName"/>
+                <attribute attribute-id="ServiceCloudPassword"/>
+                <attribute attribute-id="ServiceCloudSecurityToken"/>
+                <attribute attribute-id="ServiceCloudVersion"/>
+                <attribute attribute-id="ServiceCloudServiceIdForRestApi"/>
+                <attribute attribute-id="ServiceCloudEndpoint-Query"/>
+                <attribute attribute-id="ServiceCloudEndpoint-Authentication"/>
+                <attribute attribute-id="ServiceCloudEndpoint-SObject"/>
+                <attribute attribute-id="ServiceCloud-PersonAccountRecordTypeId"/>
+                <attribute attribute-id="ServiceCloud-CustomerListId"/>
+            </attribute-group>
+            <attribute-group group-id="MarketingCloudTransactionalEmails">
+                <display-name xml:lang="x-default">Marketing Cloud Transactional Emails</display-name>
+                <attribute attribute-id="MarketingCloudUseContactIdForSubscriberKey"/>
+                <attribute attribute-id="DataExtensionExternalKeyForBackInStock"/>
+                <attribute attribute-id="MarketingCloudForNewsletterEnabled"/>
+                <attribute attribute-id="JourneyEventDefinitionKeyForNewsletter"/>
+                <attribute attribute-id="DataExtensionExternalKeyForNewsletter"/>
+                <attribute attribute-id="MarketingCloudForOrderConfirmationEnabled"/>
+                <attribute attribute-id="TriggeredSendExternalKeyForOrderConfirmation"/>
+                <attribute attribute-id="MarketingCloudForAccountCreationEnabled"/>
+                <attribute attribute-id="TriggeredSendExternalKeyForAccountCreation"/>
+                <attribute attribute-id="MarketingCloudForPasswordResetEnabled"/>
+                <attribute attribute-id="TriggeredSendExternalKeyForPasswordReset"/>
+                <attribute attribute-id="MarketingCloudForPasswordChangeEnabled"/>
+                <attribute attribute-id="TriggeredSendExternalKeyForPasswordChange"/>
+                <attribute attribute-id="MarketingCloudForGiftCertificateEnabled"/>
+                <attribute attribute-id="TriggeredSendExternalKeyForGiftCertificate"/>
+            </attribute-group>
+            <attribute-group group-id="LiveChatAttributes">
+                <display-name xml:lang="x-default">Live Chat Attributes</display-name>
+                <attribute attribute-id="ShowLiveChat"/>
+                <attribute attribute-id="ChatBaseUrl"/>
+                <attribute attribute-id="ServerInstanceUrl"/>
+                <attribute attribute-id="ChatOrganizationId"/>
+                <attribute attribute-id="AgentContentUrl"/>
+                <attribute attribute-id="DeploymentId"/>
+                <attribute attribute-id="ButtonId"/>
+                <attribute attribute-id="BaseLiveAgentUrl"/>
+                <attribute attribute-id="ESWLiveAgentDevName"/>
+                <attribute attribute-id="LiveAgentName"/>
+                <attribute attribute-id="ServiceJSURL"/>
+                <attribute attribute-id="ButtonSourceAttribute"/>
+                <attribute attribute-id="OfflineSupportEnabled"/>
+                <attribute attribute-id="InitEswUrl"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

@@ -1,0 +1,5 @@
+<isdecorate template="common/layout/page">
+    <isinclude template="product/components/productDetailsContent" />
+    <isinclude template="product/components/productDetailsReviews" />
+    <isinclude template="product/components/productDetailsRecommendations" />
+</isdecorate>

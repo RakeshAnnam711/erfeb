@@ -1,0 +1,14 @@
+<li class="dropdown-item" role="menuitem">
+    <a class="dropdown-link header-link" href="${URLUtils.https('Account-Show')}" role="button" tabindex="0" cypress-target="accountDropdownDashboard">${Resource.msg('link.header.myaccount', 'account', null)}</a>
+</li>
+<li class="dropdown-item" role="menuitem">
+    <a class="dropdown-link header-link" href="${URLUtils.https('Order-History')}" role="button" tabindex="0" cypress-target="accountDropdownOrderHistory">${Resource.msg('link.header.orderhistory', 'account', null)}</a>
+</li>
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('wishlistEnable')}">
+    <li class="dropdown-item" role="menuitem">
+        <a class="dropdown-link header-link" href="${URLUtils.https('Wishlist-Show')}" role="button" tabindex="0">${Resource.msg('link.wishlist.myaccount', 'account', null)}</a>
+    </li>
+</isif>
+<li class="dropdown-item" role="menuitem">
+    <a class="dropdown-link header-link" href="${URLUtils.url('Login-Logout')}" role="button" tabindex="0" cypress-target="accountDropdownLogout">${Resource.msg('link.header.logout', 'account', null)}</a>
+</li>

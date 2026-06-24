@@ -1,0 +1,29 @@
+.data-checkout-stage {
+    .salesforce-paymentrequest-element {
+        display: block;
+    }
+
+    // Customer ------------------------------
+    &[data-checkout-stage=customer] {
+        .salesforce-paymentrequest-element {
+            display: none;
+        }
+    }
+}
+
+.salesforce-paymentrequest-element:not(:empty) {
+    margin-bottom: 1rem;
+}
+
+.express-checkout-buttons {
+    min-height: 2.75rem;
+
+    .salesforce-paymentrequest-element {
+        border: $card-border-width solid transparent;
+        padding: 0 $card-spacer-x;
+
+        &:not(:empty) {
+            margin: 0;
+        }
+    }
+}

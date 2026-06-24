@@ -1,0 +1,14 @@
+{
+    "name": "Date and Time Picker",
+    "description": "A date and time picker",
+    "resources": {
+        "scripts": [
+            "/experience/editors/thirdParty/flatpickr/flatpickr.js",
+            "/experience/editors/dateTimePicker.js"
+        ],
+        "styles": [
+            "/experience/editors/thirdParty/flatpickr/flatpickr.css",
+            "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+        ]
+    }
+}

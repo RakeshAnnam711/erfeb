@@ -1,0 +1,20 @@
+<div id="iconUsage" class="sg__header3">Icon Usage</div>
+<p>Icons can be added using either the icon&rsquo;s name as a helper class or by using a mixin. The mixin provides the additional options of placement, size, and color.</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="icon-star text-center p-3"></div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="icon-star text-center p-3"></div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="sg__gold-star-icon text-center background--black"></div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {
+    @include icon($icon-star, after, 50px, gold);
+}</script></code></pre>
+    </div>
+</div>

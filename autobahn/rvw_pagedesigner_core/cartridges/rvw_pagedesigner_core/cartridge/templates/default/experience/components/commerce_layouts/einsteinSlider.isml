@@ -1,0 +1,56 @@
+<isif condition="${!empty(pdict.recommender)}">
+    <isif condition="${pdict.title}">
+        <div class="slider-title text-${pdict.titleAlign} ${pdict.titleClass}">
+            <isprint value="${pdict.title}" encoding="off" />
+        </div>
+    </isif>
+
+    <div id="${pdict.id}"
+        class="slider-container delay-init ${pdict.containerClass} pagination-style-${pdict.paginationStyle} ${pdict.displayIndicators.sm} ${pdict.displayIndicators.md} ${pdict.displayIndicators.lg} ${pdict.displayControls.sm} ${pdict.displayControls.md} ${pdict.displayControls.lg} ${pdict.insideIndicators.sm} ${pdict.insideIndicators.md} ${pdict.insideIndicators.lg} ${pdict.insideControls.sm} ${pdict.insideControls.md} ${pdict.insideControls.lg} ${pdict.percentageOfNextSlide.sm} ${pdict.percentageOfNextSlide.md} ${pdict.percentageOfNextSlide.lg} ${pdict.percentageOfPrevSlide.sm} ${pdict.percentageOfPrevSlide.md} ${pdict.percentageOfPrevSlide.lg} ${pdict.controlsTheme}"
+        data-slider-autoplay="${pdict.autoplay}"
+        data-slider-gutter="${pdict.gutters.sm}"
+        data-slider-gutter-md="${pdict.gutters.md}"
+        data-slider-gutter-lg="${pdict.gutters.lg}"
+        data-slider-items="${pdict.slidesToDisplay.sm}"
+        data-slider-items-md="${pdict.slidesToDisplay.md}"
+        data-slider-items-lg="${pdict.slidesToDisplay.lg}"
+        data-slider-loop="${!pdict.disableLoop}"
+        data-slider-speed="${pdict.speed}"
+        data-slider-pause-button-placement ="${pdict.pauseButtonPlacement}"
+    >
+        <div id="einstein-${pdict.uuid}" class="slider einstein-data">
+            <isloop begin="1" end="${pdict.limit}" status="loopstatus">
+                <div data-position="${loopstatus.index}" class="slide">
+                    <isinclude url="${URLUtils.url('Tile-PlaceHolder', 'pid', 'placeholder', 'pview', 'tile', 'ratings', 'false', 'swatches', 'false', 'showQuickView', 'false')}" />
+                </div>
+            </isloop>
+        </div>
+        <!--- Ensure character encoding issues are avoided via JS application --->
+        <isscript>
+            var einsteindataset = {
+                recommender: pdict.recommender,
+                url: pdict.urls.tile,
+                uuid: pdict.uuid
+            };
+
+            if (!empty(pdict.anchorArray) && pdict.anchorArray.length > 0) {
+                einsteindataset.anchors = JSON.stringify(pdict.anchorArray.toArray());
+            }
+        </isscript>
+        <script id="einstein-${pdict.uuid}-script">
+            (function () {
+                var el = document.getElementById('einstein-${pdict.uuid}'),
+                    dataset = <isprint value="${JSON.stringify(einsteindataset)}" encoding="off"/>;
+
+                if (el) {
+                    for (var opt in dataset) {
+                        el.dataset[opt] = dataset[opt];
+                    }
+                }
+
+                var elem = document.getElementById('einstein-${pdict.uuid}-script');
+                elem && elem.parentNode.removeChild(elem);
+            } ());
+        </script>
+    </div>
+</isif>

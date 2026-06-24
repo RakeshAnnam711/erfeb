@@ -1,0 +1,37 @@
+<div class="multi-ship-action-buttons">
+    <button class="btn btn-outline-primary col-12 btn-enter-multi-ship ${shippingModel.shippingAddress || (shippingModel.selectedShippingMethod && shippingModel.selectedShippingMethod.storePickupEnabled) ? 'd-none' : '' }"
+            data-action="enter">
+        ${Resource.msg('button.enter.address', 'checkout', null)}
+    </button>
+
+    <div class="row multi-ship-address-actions d-none justify-content-around">
+        <button class="btn btn-outline-primary col-5 btn-cancel-multi-ship-address" data-action="cancel">
+            ${Resource.msg('button.cancel', 'checkout', null)}
+        </button>
+        <button class="btn btn-outline-primary col-5 btn-save-multi-ship" data-action="save">
+            ${Resource.msg('button.save', 'checkout', null)}
+        </button>
+    </div>
+
+    <button class="btn btn-outline-primary col-12 btn-save-multi-ship save-shipment d-none" data-action="save">
+        ${Resource.msg('button.save', 'checkout', null)}
+    </button>
+
+    <iscomment>Link edit button directly to cart page for In-store Pickup items</iscomment>
+    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('bopisCartridgeEnabled') && shippingModel.selectedShippingMethod && shippingModel.selectedShippingMethod.storePickupEnabled}">
+        <iscomment>Get UUID from lineItem if multiship or shippingModel.productLineItems if single ship</iscomment>
+        <isif condition="${lineItem}">
+            <isset name="itemUUID" value="${lineItem.UUID}" scope="page"/>
+        <iselse/>
+            <isloop items="${shippingModel.productLineItems.items}" var="item">
+                <isset name="itemUUID" value="${item.UUID}" scope="page"/>
+            </isloop>
+        </isif>
+        <a class="btn btn-outline-primary col-12" href="${URLUtils.https('Cart-Show', 'editUUID', !empty(itemUUID) ? itemUUID : '')}" data-action="edit">${Resource.msg('button.edit', 'checkout', null)}</a>
+    <iselse/>
+        <button class="btn btn-outline-primary btn-edit-multi-ship col-12 ${shippingModel.shippingAddress ? '' : 'd-none' }"
+                data-action="edit">
+            ${Resource.msg('button.edit', 'checkout', null)}
+        </button>
+    </isif>
+</div>

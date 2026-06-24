@@ -1,0 +1,24 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/billing/storedPaymentInstruments.isml
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isset name="currentSite" value="${dw.system.Site.getCurrent()}" scope="page"/>
+<isif condition="${currentSite.getCustomPreferenceValue('cybersourceCartridgeEnabled')}">
+    <iscomment> Cybersource Secure Acceptance </iscomment>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <div class="selectedCardID-wrapper">
+                    <input type="hidden" class="form-control selectedCardID" id="selectedCardID"
+                        value="" name="dwfrm_billing_creditCardFields_selectedCardID" >
+                </div>
+            </div>
+        </div>
+    </div>
+</isif>

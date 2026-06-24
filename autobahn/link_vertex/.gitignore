@@ -1,0 +1,44 @@
+### Eclipse template
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Tern plugin
+.tern-project
+
+# Code Recommenders
+.recommenders/
+workspace/
+
+# NPM packages
+node_modules
+
+# Static bundle files
+cartridges/app_storefront_core/cartridge/static
+
+# Base cartridges
+cartridges/app_storefront_core/
+cartridges/bm_app_storefront_base/
+cartridges/app_storefront_base/
+cartridges/modules/
+
+# ES Lint
+.eslintignore
+.eslintrc.json
+
+# VS Code Typescript Engine
+jsconfig.json
+dw.json
+.vscode
