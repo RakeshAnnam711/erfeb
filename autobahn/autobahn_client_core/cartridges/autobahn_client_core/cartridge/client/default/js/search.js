@@ -603,15 +603,22 @@ function loadPriceRefineSearch(){
     });
 
     // configure range textbox and add event listener on change
+    var sliderRangeMin = parseInt(priceArray[0].trim());
+    var sliderRangeMax = parseInt(priceArray[1].trim());
+    // Prevent degenerate slider (min===max causes browser to render thumbs broken)
+    if (sliderRangeMax <= sliderRangeMin) sliderRangeMax = sliderRangeMin + 1;
+
     rangeInput.forEach((input) => {
         //set min and max price range by default
-        $(input).attr("min", parseInt(priceArray[0].trim()));
-        $(input).attr("max", parseInt(priceArray[1].trim()));
+        $(input).attr("min", sliderRangeMin);
+        $(input).attr("max", sliderRangeMax);
         if($(input).hasClass("range-min")){
-            $(input).val(parseInt(priceArray[0].trim()));
+            $(input).val(sliderRangeMin);
         }
         if($(input).hasClass("range-max")){
-            $(input).val(parseInt(priceArray[1].trim()));
+            $(input).val(sliderRangeMax);
+            range.style.left = "0%";
+            range.style.right = "0%";
         }
 
         input.addEventListener("input", (event) => {
@@ -686,26 +693,26 @@ function loadPriceRefineSearch(){
         });
     });
 
-    // Mobile: restore price text inputs from URL pmin/pmax without changing slider range (avoids breaking drag)
+    console.log('[Price v3]');
+    // Mobile: restore exact user price values from URL — same extend logic as desktop
     if (window.isMobile() && (location.href.indexOf("pmin") !== -1 || location.href.indexOf("pmax") !== -1)) {
         var mobilePMin = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmin").replace(/,/g, ''));
         var mobilePMax = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmax").replace(/,/g, ''));
         var mobileSliderMin = parseInt(rangeInput[1].min);
         var mobileSliderMax = parseInt(rangeInput[1].max);
-        // Always show the URL filter values in text inputs so the user sees what they set
+        var mobileEffectiveMin = Math.min(mobileSliderMin, mobilePMin);
+        var mobileEffectiveMax = Math.max(mobileSliderMax, mobilePMax);
+
+        rangeInput[0].min = mobileEffectiveMin;
+        rangeInput[0].max = mobileEffectiveMax;
+        rangeInput[1].min = mobileEffectiveMin;
+        rangeInput[1].max = mobileEffectiveMax;
+        rangeInput[0].value = mobilePMin;
+        rangeInput[1].value = mobilePMax;
         priceInput[0].value = mobilePMin;
         priceInput[1].value = mobilePMax;
-
-        // Clamp thumb positions to the slider's natural range (don't extend range on mobile)
-        var mobileThumbMin = Math.max(mobileSliderMin, Math.min(mobileSliderMax, mobilePMin));
-        var mobileThumbMax = Math.max(mobileSliderMin, Math.min(mobileSliderMax, mobilePMax));
-        rangeInput[0].value = mobileThumbMin;
-        rangeInput[1].value = mobileThumbMax;
-
-        if (mobileSliderMax > mobileSliderMin) {
-            range.style.left = (((mobileThumbMin - mobileSliderMin) / (mobileSliderMax - mobileSliderMin)) * 100) + "%";
-            range.style.right = 100 - (((mobileThumbMax - mobileSliderMin) / (mobileSliderMax - mobileSliderMin)) * 100) + "%";
-        }
+        range.style.left = (((mobilePMin - mobileEffectiveMin) / (mobileEffectiveMax - mobileEffectiveMin)) * 100) + "%";
+        range.style.right = 100 - (((mobilePMax - mobileEffectiveMin) / (mobileEffectiveMax - mobileEffectiveMin)) * 100) + "%";
     }
 
     // to persist filter after page reload (desktop only — mobile uses filter-apply-btn flow)
