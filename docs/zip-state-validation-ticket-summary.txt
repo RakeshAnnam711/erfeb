@@ -1,0 +1,172 @@
+ZIP and State Validation Ticket Summary
+
+Ticket issue
+------------
+Checkout was allowing users to continue when the selected shipping state and ZIP code did not match.
+
+Example:
+- Address: 20 W 34th St, New York, NY
+- Selected state: New York
+- Entered ZIP: 94105
+
+94105 belongs to California, not New York. This kind of mismatch should not allow the user to continue to payment.
+
+
+Latest requirement
+------------------
+The final requirement is not to block checkout based on tax amount.
+
+The rule is:
+- If selected state and ZIP code match, user can continue, even if tax is $0.00.
+- If selected state and ZIP code do not match, show an error and block the user from continuing to payment.
+- This ZIP/state validation applies only to United States shipping addresses.
+
+
+What was changed
+----------------
+1. Backend validation was added in CheckoutShippingServices.js.
+
+File path:
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/CheckoutShippingServices.js
+
+The backend checks the selected state and ZIP code during SubmitShipping before allowing the user to move to payment.
+
+If the ZIP belongs to a different state, the controller returns a field error for the ZIP code field and marks the response as an error.
+
+The backend runs this check only when the shipping country is US. Other countries are skipped because their postal code formats do not follow US ZIP prefix rules.
+
+This is the final protection because backend validation cannot be bypassed by disabling browser JavaScript.
+
+
+2. A helper function getStateCodeFromPostalCode() was added.
+
+This function reads the first 3 digits of the ZIP code and maps that ZIP prefix to a US state code.
+
+Example:
+
+getStateCodeFromPostalCode('94105') returns 'CA'
+getStateCodeFromPostalCode('10001') returns 'NY'
+getStateCodeFromPostalCode('07102') returns 'NJ'
+getStateCodeFromPostalCode('28202') returns 'NC'
+
+Then the code compares:
+- selected state from checkout form
+- expected state from ZIP code
+
+If they are different, checkout is blocked.
+
+
+3. Frontend message display was added.
+
+A small frontend validation script was added in the shipping address template.
+
+File path:
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/shipping/zipStateValidationScript.isml
+
+Purpose:
+- Show the error message below the ZIP field when the user enters a mismatched ZIP/state combination.
+- Keep the user on the shipping step.
+- Re-show the error when the user clicks continue/payment.
+
+This frontend script is only for user experience. The backend SubmitShipping validation is still the real enforcement.
+
+The frontend script also checks the country field. If the selected country is not US, it skips this ZIP/state validation and clears any ZIP mismatch message that may already be visible.
+
+
+4. Shipping templates include the frontend validation script.
+
+File paths:
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/shipping/shippingAddress.isml
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/templates/default/checkout/shipping/shippingAddress.isml
+
+These templates include zipStateValidationScript.isml so the ZIP mismatch message can be shown on the checkout shipping form.
+
+
+5. Error message resource was added.
+
+File path:
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/resources/checkout.properties
+
+Message key:
+smarty.error.zipmismatch
+
+This resource is used by both backend validation and frontend display.
+
+
+Why ZIP prefix ranges were used
+-------------------------------
+US ZIP codes are grouped geographically. The first 3 digits of a ZIP code can be used to identify the state-level ZIP range.
+
+Example:
+
+if (postalPrefixInRange(prefix, 350, 369)) return 'AL';
+
+This means:
+- ZIP 35203 has prefix 352.
+- 352 is between 350 and 369.
+- That ZIP belongs to Alabama.
+- So the expected state code is AL.
+
+Other examples:
+- ZIP prefixes 900-961 belong to CA.
+- ZIP prefixes 100-149 belong to NY.
+- ZIP prefixes 070-089 belong to NJ.
+- ZIP prefixes 270-289 belong to NC.
+
+This is state-level ZIP validation. It does not validate the exact street address.
+
+This mapping is only valid for United States ZIP codes. It should not be used for other countries.
+
+
+Important limitation
+--------------------
+This solution validates whether the ZIP code belongs to the selected state.
+
+It does not validate whether the exact street, city, state, and ZIP combination is a real deliverable address.
+
+For full address validation, an external address validation service such as Smarty, USPS, Avalara, or similar would be required.
+
+For non-US addresses, this custom ZIP/state check is skipped.
+
+
+Expected behavior
+-----------------
+Valid ZIP/state:
+- User can continue to payment.
+- Tax may be $0.00 or non-zero depending on tax rules.
+- Checkout should not block only because tax is $0.00.
+
+Invalid ZIP/state:
+- Error message should show below the ZIP code field.
+- User should stay on the shipping step.
+- User should not be able to continue to payment.
+
+Non-US address:
+- Custom US ZIP/state validation should not run.
+- Checkout should continue using the existing non-US address/tax validation behavior.
+
+
+Sample QA test cases
+--------------------
+Valid cases:
+- 20 W 34th St, New York, NY 10001 should pass.
+- 1 Raymond Plaza W, Newark, NJ 07102 should pass.
+- 415 Mission St, San Francisco, CA 94105 should pass.
+- 800 S Mint St, Charlotte, NC 28202 should pass.
+
+Invalid cases:
+- New York + 94105 should fail because 94105 belongs to CA.
+- California + 10001 should fail because 10001 belongs to NY.
+- New Jersey + 94102 should fail because 94102 belongs to CA.
+- North Carolina + 07102 should fail because 07102 belongs to NJ.
+
+
+Simple summary
+--------------
+We added a checkout safety check that compares the selected state with the state identified from the ZIP code.
+
+If both match, checkout continues normally.
+
+If they do not match, checkout displays a ZIP mismatch error and prevents the user from going to payment.
+
+The change is independent of TaxJar/tax amount. A $0.00 tax value is allowed as long as the ZIP and selected state match.

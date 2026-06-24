@@ -30,6 +30,7 @@
 
         function validateZipState(event) {
             var form = event.target.closest('form');
+            var countryField;
             var zipField;
             var stateField;
             var expectedState;
@@ -41,6 +42,7 @@
                 return;
             }
 
+            countryField = form.querySelector('.shippingCountry');
             zipField = form.querySelector('.shippingZipCode');
             stateField = form.querySelector('.shippingState');
 
@@ -48,9 +50,19 @@
                 return;
             }
 
+            errorNode = zipField.parentNode.querySelector('.invalid-feedback');
+
+            if (countryField && countryField.value && countryField.value.toUpperCase() !== 'US') {
+                zipField.classList.remove('is-invalid');
+                if (errorNode) {
+                    errorNode.innerHTML = '';
+                    errorNode.style.display = '';
+                }
+                return;
+            }
+
             expectedState = getExpectedState(zipField.value);
             selectedState = (stateField.value || '').toUpperCase();
-            errorNode = zipField.parentNode.querySelector('.invalid-feedback');
 
             if (expectedState && selectedState && expectedState !== selectedState) {
                 zipField.classList.add('is-invalid');

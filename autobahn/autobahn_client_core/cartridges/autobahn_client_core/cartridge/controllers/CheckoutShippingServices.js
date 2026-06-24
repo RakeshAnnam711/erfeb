@@ -86,6 +86,10 @@ function hasPostalStateMismatch(stateCode, postalCode) {
     return expectedStateCode && stateCode && expectedStateCode !== stateCode.toString().toUpperCase();
 }
 
+function isUSAddress(countryCode) {
+    return !countryCode || countryCode.toString().toUpperCase() === 'US';
+}
+
 server.append('SelectShippingMethod', server.middleware.https, function (req, res, next) {
     this.on('route:BeforeComplete', function (req, res) {
         var currentBasket = BasketMgr.getCurrentBasket();
@@ -123,13 +127,14 @@ server.prepend(
         var currentBasket = BasketMgr.getCurrentBasket();
         var form = server.forms.getForm('shipping');
         var addressFields = form.shippingAddress.addressFields;
+        var countryCode = addressFields.country.value;
         var selectedStateCode = addressFields.states.stateCode.value;
         var postalCode = addressFields.postalCode.value;
         var fieldErrors;
         var postalCodeFieldName;
         var errorMessage;
 
-        if (hasPostalStateMismatch(selectedStateCode, postalCode)) {
+        if (isUSAddress(countryCode) && hasPostalStateMismatch(selectedStateCode, postalCode)) {
             if (currentBasket) {
                 req.session.privacyCache.set(currentBasket.defaultShipment.UUID, 'invalid');
             }
