@@ -1,3 +1,5 @@
+/* global request, session */
+
 'use strict';
 
 var AbstractOperation = require('*/cartridge/models/globale/generic/AbstractOperation');
@@ -40,6 +42,12 @@ PaymentRedirectOperation.prototype.run = function () {
 
     // check cart token
     this.operationResult.cartToken = httpParameterMap.isParameterSubmitted('token') && httpParameterMap.token.stringValue;
+    var httpCookies = request.httpCookies;
+    if (!this.operationResult.cartToken && session.privacy.geCartToken) {
+        this.operationResult.cartToken = session.privacy.geCartToken;
+    } else if (!this.operationResult.cartToken && httpCookies && httpCookies.GlobalE_Cart_Token) {
+        this.operationResult.cartToken = httpCookies.GlobalE_Cart_Token.getValue();
+    }
 
     // check error message
     var pdErrorCode = httpParameterMap.isParameterSubmitted('errorCode') && httpParameterMap.errorCode.rawValue;

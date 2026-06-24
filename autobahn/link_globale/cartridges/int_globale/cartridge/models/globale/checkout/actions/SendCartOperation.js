@@ -1,3 +1,5 @@
+/* global request, response, session */
+
 'use strict';
 
 var AbstractOperation = require('*/cartridge/models/globale/generic/AbstractOperation');
@@ -28,6 +30,24 @@ SendCartOperation.prototype.triggerError = function (errorCode, errorMessage) {
 
     throw Error(this.operationResult.errorMessage);
 };
+
+/**
+ * Saves cart token so payment redirects can recover it if the redirect URL loses the token.
+ * @param {string} cartToken - Global-e cart token
+ * @param {Object} globaleHelpers - Global-e helpers
+ */
+function saveCartToken(cartToken, globaleHelpers) {
+    var Cookie = require('dw/web/Cookie');
+
+    session.privacy.geCartToken = cartToken;
+
+    var cookie = new Cookie('GlobalE_Cart_Token', cartToken);
+    cookie.setDomain(request.httpHost);
+    cookie.setPath('/');
+    cookie.setMaxAge(globaleHelpers.getPreference(globaleHelpers.preferenceKeys.geCookieLifetime));
+    cookie.setSecure(true);
+    response.addHttpCookie(cookie);
+}
 
 /**
  * Sends SendCart
@@ -101,6 +121,9 @@ SendCartOperation.prototype.run = function () {
             });
             globaleSession.setPrivacy('geCheckoutCartToken', this.operationResult.sendCartData.MerchantCartHash);
             this.operationResult.cartToken = cartToken;
+        }
+        if (this.operationResult.cartToken) {
+            saveCartToken(this.operationResult.cartToken, globaleHelpers);
         }
     } catch (e) {
         this.triggerError(105, 'Impossible to get Cart Token: ' + e.message + '; ' + e.stack);
