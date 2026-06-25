@@ -309,75 +309,6 @@ function normalizeZipCode(value) {
     return normalizeAddressValue(value).split('-')[0];
 }
 
-function zipPrefixInRange(prefix, start, end) {
-    return prefix >= start && prefix <= end;
-}
-
-function getStateCodeFromZip(zipCode) {
-    var normalizedZip = normalizeZipCode(zipCode);
-    var prefix;
-
-    if (!/^\d{5}$/.test(normalizedZip)) {
-        return null;
-    }
-
-    prefix = parseInt(normalizedZip.substring(0, 3), 10);
-
-    if (zipPrefixInRange(prefix, 350, 369)) return 'AL';
-    if (zipPrefixInRange(prefix, 995, 999)) return 'AK';
-    if (zipPrefixInRange(prefix, 850, 865)) return 'AZ';
-    if (zipPrefixInRange(prefix, 716, 729) || prefix === 755) return 'AR';
-    if (zipPrefixInRange(prefix, 900, 961)) return 'CA';
-    if (zipPrefixInRange(prefix, 800, 816)) return 'CO';
-    if (zipPrefixInRange(prefix, 60, 69)) return 'CT';
-    if (zipPrefixInRange(prefix, 197, 199)) return 'DE';
-    if (zipPrefixInRange(prefix, 320, 349)) return 'FL';
-    if (zipPrefixInRange(prefix, 300, 319) || zipPrefixInRange(prefix, 398, 399)) return 'GA';
-    if (zipPrefixInRange(prefix, 967, 968)) return 'HI';
-    if (zipPrefixInRange(prefix, 832, 838)) return 'ID';
-    if (zipPrefixInRange(prefix, 600, 629)) return 'IL';
-    if (zipPrefixInRange(prefix, 460, 479)) return 'IN';
-    if (zipPrefixInRange(prefix, 500, 528)) return 'IA';
-    if (zipPrefixInRange(prefix, 660, 679)) return 'KS';
-    if (zipPrefixInRange(prefix, 400, 427)) return 'KY';
-    if (zipPrefixInRange(prefix, 700, 715)) return 'LA';
-    if (zipPrefixInRange(prefix, 39, 49)) return 'ME';
-    if (zipPrefixInRange(prefix, 206, 219)) return 'MD';
-    if (zipPrefixInRange(prefix, 10, 27) || zipPrefixInRange(prefix, 55, 55)) return 'MA';
-    if (zipPrefixInRange(prefix, 480, 499)) return 'MI';
-    if (zipPrefixInRange(prefix, 550, 567)) return 'MN';
-    if (zipPrefixInRange(prefix, 386, 397)) return 'MS';
-    if (zipPrefixInRange(prefix, 630, 658)) return 'MO';
-    if (zipPrefixInRange(prefix, 590, 599)) return 'MT';
-    if (zipPrefixInRange(prefix, 680, 693)) return 'NE';
-    if (zipPrefixInRange(prefix, 889, 898)) return 'NV';
-    if (zipPrefixInRange(prefix, 30, 38)) return 'NH';
-    if (zipPrefixInRange(prefix, 70, 89)) return 'NJ';
-    if (zipPrefixInRange(prefix, 870, 884)) return 'NM';
-    if (zipPrefixInRange(prefix, 100, 149) || prefix === 5 || prefix === 63 || prefix === 90) return 'NY';
-    if (zipPrefixInRange(prefix, 270, 289)) return 'NC';
-    if (zipPrefixInRange(prefix, 580, 588)) return 'ND';
-    if (zipPrefixInRange(prefix, 430, 459)) return 'OH';
-    if (zipPrefixInRange(prefix, 730, 749)) return 'OK';
-    if (zipPrefixInRange(prefix, 970, 979)) return 'OR';
-    if (zipPrefixInRange(prefix, 150, 196)) return 'PA';
-    if (zipPrefixInRange(prefix, 6, 9)) return 'PR';
-    if (zipPrefixInRange(prefix, 28, 29)) return 'RI';
-    if (zipPrefixInRange(prefix, 290, 299)) return 'SC';
-    if (zipPrefixInRange(prefix, 570, 577)) return 'SD';
-    if (zipPrefixInRange(prefix, 370, 385)) return 'TN';
-    if (zipPrefixInRange(prefix, 750, 799) || zipPrefixInRange(prefix, 885, 885)) return 'TX';
-    if (zipPrefixInRange(prefix, 840, 847)) return 'UT';
-    if (zipPrefixInRange(prefix, 50, 54)) return 'VT';
-    if (zipPrefixInRange(prefix, 201, 205) || zipPrefixInRange(prefix, 220, 246)) return 'VA';
-    if (zipPrefixInRange(prefix, 980, 994)) return 'WA';
-    if (zipPrefixInRange(prefix, 247, 268)) return 'WV';
-    if (zipPrefixInRange(prefix, 530, 549)) return 'WI';
-    if (zipPrefixInRange(prefix, 820, 831)) return 'WY';
-
-    return null;
-}
-
 function showGoogleZipError(form) {
     var zipInput = form.find('.shippingZipCode');
     var message = zipInput.attr('data-zip-mismatch-message') || '';
@@ -438,7 +369,6 @@ function validateUSZipState(form, callback) {
     var googleState = normalizeAddressValue(form.attr('data-google-selected-state'));
     var currentState = normalizeAddressValue(form.find('.shippingState').val());
     var currentZip = normalizeZipCode(form.find('.shippingZipCode').val());
-    var fallbackZipState = getStateCodeFromZip(currentZip);
     var expectedState = googleState || currentState;
 
     if (!/^\d{5}$/.test(currentZip) || !currentState || currentState !== expectedState) {
@@ -447,7 +377,7 @@ function validateUSZipState(form, callback) {
     }
 
     if (!window.google || !google.maps || !google.maps.Geocoder) {
-        callback(fallbackZipState === expectedState);
+        callback(true);
         return;
     }
 

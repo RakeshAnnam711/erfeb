@@ -18,6 +18,27 @@ Production storefront is using Google Places autocomplete for address suggestion
 Even though Smarty preferences exist in Business Manager, live checkout suggestions show "powered by Google", and the frontend integration config does not expose Smarty values. Because of that, this fix uses the Google autocomplete selection that is already active on the storefront.
 
 
+Why we moved with Google instead of Smarty
+------------------------------------------
+Smarty is configured in Business Manager, but the storefront behavior showed that Smarty was not the active autocomplete source on the live checkout page.
+
+How we confirmed this:
+- In the live checkout UI, address suggestions displayed "powered by Google". That confirms the visible suggestions are coming from Google Places, not Smarty.
+- In the browser console, window.CachedData.siteIntegrations did not include Smarty values such as smartyEnabled, smartyAPIUrl, smartyAPIKey, or smartyAddressURL.
+- The same frontend config did include googlePlacesEnabled = true.
+- When testing Smarty URLs directly, Smarty returned an authentication error for the configured key. Example response:
+  {"errors":[{"message":"Authentication required"}]}
+
+Because of this, enabling or relying on Smarty from checkout would require separate Smarty credential/config work and could also change the currently active live address suggestion behavior.
+
+For this ticket, we followed the working production path:
+- Google Places is already active for address suggestions.
+- Google returns the selected address state/country.
+- Google Geocoder can confirm whether the final entered ZIP exists and belongs to the expected state.
+
+This lets us block cross-state and invalid ZIP changes without depending on Smarty.
+
+
 What was changed
 ----------------
 1. Store the state/country returned by Google autocomplete.
@@ -53,6 +74,10 @@ If the selected state does not match the Google-selected state, or Google cannot
 
 The ZIP code entered does not match the selected City and State. Please correct the shipping address to continue.
 
+There is no hardcoded ZIP prefix fallback in the final implementation. If Google Geocoder is available and cannot confirm the ZIP/state combination, checkout blocks the user instead of guessing.
+
+If Google Maps/Geocoder is unavailable, checkout allows the user to continue. This fail-open behavior avoids blocking checkout because of a third-party outage, quota issue, or browser/network problem.
+
 
 3. Saved address dropdown is excluded from Google validation.
 
@@ -64,59 +89,20 @@ When a shopper chooses a saved address from the address dropdown, the code clear
 Reason:
 Saved addresses do not come from a fresh Google autocomplete selection, so they should not be validated against a previous Google-selected address.
 
+4. Use resource message for the ZIP mismatch text.
 
-Important limitation
---------------------
-This fix validates the path where the shopper selects an address from Google autocomplete and then edits the ZIP/state afterward. It also validates the current US state/ZIP after refresh, because the Google-selected marker may be lost but the form values remain.
+File path:
 
-It does not fully validate:
-- A manually typed address where the shopper never selects a Google suggestion.
-- A saved address selected from the saved address dropdown.
-- Whether the ZIP is correct for the exact street address.
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/resources/checkout.properties
 
-Those paths would require a real address validation API call on submit, such as Smarty Street Address validation, Google Address Validation API, or another backend validation service.
+The ZIP mismatch message uses this existing resource key:
+- smarty.error.zipmismatch
 
-This fix validates state/ZIP compatibility using Google when available. For example, a New York Google-selected address with New York selected as the state and a valid New York ZIP can continue, while a New York Google-selected address with an invalid ZIP like 00000/10100 or a California, Maryland, or New Hampshire ZIP is blocked.
+The shipping ZIP field exposes that resource text through a data attribute, and the checkout JavaScript reads that value when showing the error.
 
 
-Expected QA behavior
---------------------
-Scenario 1: Google-selected address, unchanged ZIP/state
-- Select a valid Google suggestion.
-- Leave ZIP/state as Google filled them.
-- Continue to Payment should work.
-
-Scenario 2: Google-selected address, changed ZIP to valid same-state ZIP
-- Select a valid Google suggestion for New York.
-- Change ZIP to another valid New York ZIP.
-- Continue to Payment should work.
-
-Scenario 3: Google-selected address, changed ZIP to invalid ZIP
-- Select a valid Google suggestion for New York.
-- Change ZIP to 00000 or 10100.
-- Continue to Payment should be blocked.
-- ZIP field should show the mismatch error.
-
-Scenario 4: Google-selected address, changed ZIP to different-state ZIP
-- Select a valid Google suggestion for New York.
-- Change ZIP to a California ZIP like 94105.
-- Continue to Payment should be blocked.
-- ZIP field should show the mismatch error.
-
-Scenario 5: Refresh after wrong ZIP
-- Select a Google address.
-- Change ZIP to a different-state or invalid ZIP.
-- Refresh the page.
-- Click Continue to Payment.
-- Checkout should still be blocked.
-
-Scenario 6: Saved address dropdown
-- Select a saved address.
-- The current US state/ZIP compatibility check can still run, but saved addresses are not validated against a previous Google-selected address.
-
-
-Plain English summary
----------------------
+Summary
+---------
 We are using the Google address suggestion the shopper selected as the trusted state for this specific flow.
 
 If the shopper selects a Google address and then changes the state or ZIP before payment, checkout checks whether the selected state matches the Google-selected state and whether Google can confirm the entered ZIP belongs to that state.
