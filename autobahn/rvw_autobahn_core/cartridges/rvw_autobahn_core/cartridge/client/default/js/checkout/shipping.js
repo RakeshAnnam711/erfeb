@@ -176,6 +176,11 @@ baseShipping.selectSingleShipAddress = function () {
         var shipmentUUID = selectedOption[0].value;
         var originalUUID = $('input[name=shipmentUUID]', form).val();
         var element;
+
+        form.removeAttribute('data-google-selected-state');
+        form.removeAttribute('data-google-selected-zip');
+        form.removeAttribute('data-google-selected-country');
+
         Object.keys(attrs).forEach(function (attr) {
             element = attr === 'countryCode' ? 'country' : attr;
             if ((element === 'country' && shipmentUUID === 'new') || element === 'isGift') {

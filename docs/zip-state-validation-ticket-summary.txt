@@ -1,172 +1,124 @@
-ZIP and State Validation Ticket Summary
+Google Autocomplete ZIP Validation Ticket Summary
 
 Ticket issue
 ------------
-Checkout was allowing users to continue when the selected shipping state and ZIP code did not match.
+Checkout was allowing users to continue when the selected shipping address and ZIP code no longer matched.
 
 Example:
-- Address: 20 W 34th St, New York, NY
-- Selected state: New York
-- Entered ZIP: 94105
+- User selects a Google address suggestion for New York.
+- Google fills the ZIP code as 10001.
+- User manually changes the ZIP code to 94105.
+- Checkout should not allow the user to continue to payment.
 
-94105 belongs to California, not New York. This kind of mismatch should not allow the user to continue to payment.
 
+Current approach
+----------------
+Production storefront is using Google Places autocomplete for address suggestions.
 
-Latest requirement
-------------------
-The final requirement is not to block checkout based on tax amount.
-
-The rule is:
-- If selected state and ZIP code match, user can continue, even if tax is $0.00.
-- If selected state and ZIP code do not match, show an error and block the user from continuing to payment.
-- This ZIP/state validation applies only to United States shipping addresses.
+Even though Smarty preferences exist in Business Manager, live checkout suggestions show "powered by Google", and the frontend integration config does not expose Smarty values. Because of that, this fix uses the Google autocomplete selection that is already active on the storefront.
 
 
 What was changed
 ----------------
-1. Backend validation was added in CheckoutShippingServices.js.
+1. Store the state/country returned by Google autocomplete.
 
 File path:
-autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/CheckoutShippingServices.js
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/thirdParty/googleAutoComplete.js
 
-The backend checks the selected state and ZIP code during SubmitShipping before allowing the user to move to payment.
+When a shopper selects a Google address suggestion, the code already fills the checkout address fields.
 
-If the ZIP belongs to a different state, the controller returns a field error for the ZIP code field and marks the response as an error.
-
-The backend runs this check only when the shipping country is US. Other countries are skipped because their postal code formats do not follow US ZIP prefix rules.
-
-This is the final protection because backend validation cannot be bypassed by disabling browser JavaScript.
-
-
-2. A helper function getStateCodeFromPostalCode() was added.
-
-This function reads the first 3 digits of the ZIP code and maps that ZIP prefix to a US state code.
-
-Example:
-
-getStateCodeFromPostalCode('94105') returns 'CA'
-getStateCodeFromPostalCode('10001') returns 'NY'
-getStateCodeFromPostalCode('07102') returns 'NJ'
-getStateCodeFromPostalCode('28202') returns 'NC'
-
-Then the code compares:
-- selected state from checkout form
-- expected state from ZIP code
-
-If they are different, checkout is blocked.
+Now it also stores these Google-selected values on the shipping form:
+- data-google-selected-state
+- data-google-selected-zip
+- data-google-selected-country
 
 
-3. Frontend message display was added.
-
-A small frontend validation script was added in the shipping address template.
+2. Block payment if Google cannot confirm the entered ZIP belongs to the selected state.
 
 File path:
-autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/shipping/zipStateValidationScript.isml
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/client/default/js/checkout/plugin/members.js
 
-Purpose:
-- Show the error message below the ZIP field when the user enters a mismatched ZIP/state combination.
-- Keep the user on the shipping step.
-- Re-show the error when the user clicks continue/payment.
+Before checkout moves from Shipping to Payment, the code checks the current US shipping state and ZIP.
 
-This frontend script is only for user experience. The backend SubmitShipping validation is still the real enforcement.
+If a Google-selected state is available, it uses that as the expected state. If the page was refreshed and the Google-selected state is no longer available, it uses the currently selected State dropdown value.
 
-The frontend script also checks the country field. If the selected country is not US, it skips this ZIP/state validation and clears any ZIP mismatch message that may already be visible.
+It checks:
+- Google-selected state or current selected state
+- Currently selected state
+- The currently entered ZIP code
 
+Checkout first requires the entered ZIP to be a 5-digit US ZIP. Then it asks Google Geocoder to confirm that the ZIP exists and belongs to the Google-selected state.
 
-4. Shipping templates include the frontend validation script.
+If the selected state does not match the Google-selected state, or Google cannot confirm the entered ZIP belongs to that state, checkout stays on Shipping and shows this error below the ZIP field:
 
-File paths:
-autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/shipping/shippingAddress.isml
-autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/templates/default/checkout/shipping/shippingAddress.isml
-
-These templates include zipStateValidationScript.isml so the ZIP mismatch message can be shown on the checkout shipping form.
+The ZIP code entered does not match the selected City and State. Please correct the shipping address to continue.
 
 
-5. Error message resource was added.
+3. Saved address dropdown is excluded from Google validation.
 
 File path:
-autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/resources/checkout.properties
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/shipping.js
 
-Message key:
-smarty.error.zipmismatch
+When a shopper chooses a saved address from the address dropdown, the code clears the stored Google-selected ZIP/state.
 
-This resource is used by both backend validation and frontend display.
-
-
-Why ZIP prefix ranges were used
--------------------------------
-US ZIP codes are grouped geographically. The first 3 digits of a ZIP code can be used to identify the state-level ZIP range.
-
-Example:
-
-if (postalPrefixInRange(prefix, 350, 369)) return 'AL';
-
-This means:
-- ZIP 35203 has prefix 352.
-- 352 is between 350 and 369.
-- That ZIP belongs to Alabama.
-- So the expected state code is AL.
-
-Other examples:
-- ZIP prefixes 900-961 belong to CA.
-- ZIP prefixes 100-149 belong to NY.
-- ZIP prefixes 070-089 belong to NJ.
-- ZIP prefixes 270-289 belong to NC.
-
-This is state-level ZIP validation. It does not validate the exact street address.
-
-This mapping is only valid for United States ZIP codes. It should not be used for other countries.
+Reason:
+Saved addresses do not come from a fresh Google autocomplete selection, so they should not be validated against a previous Google-selected address.
 
 
 Important limitation
 --------------------
-This solution validates whether the ZIP code belongs to the selected state.
+This fix validates the path where the shopper selects an address from Google autocomplete and then edits the ZIP/state afterward. It also validates the current US state/ZIP after refresh, because the Google-selected marker may be lost but the form values remain.
 
-It does not validate whether the exact street, city, state, and ZIP combination is a real deliverable address.
+It does not fully validate:
+- A manually typed address where the shopper never selects a Google suggestion.
+- A saved address selected from the saved address dropdown.
+- Whether the ZIP is correct for the exact street address.
 
-For full address validation, an external address validation service such as Smarty, USPS, Avalara, or similar would be required.
+Those paths would require a real address validation API call on submit, such as Smarty Street Address validation, Google Address Validation API, or another backend validation service.
 
-For non-US addresses, this custom ZIP/state check is skipped.
-
-
-Expected behavior
------------------
-Valid ZIP/state:
-- User can continue to payment.
-- Tax may be $0.00 or non-zero depending on tax rules.
-- Checkout should not block only because tax is $0.00.
-
-Invalid ZIP/state:
-- Error message should show below the ZIP code field.
-- User should stay on the shipping step.
-- User should not be able to continue to payment.
-
-Non-US address:
-- Custom US ZIP/state validation should not run.
-- Checkout should continue using the existing non-US address/tax validation behavior.
+This fix validates state/ZIP compatibility using Google when available. For example, a New York Google-selected address with New York selected as the state and a valid New York ZIP can continue, while a New York Google-selected address with an invalid ZIP like 00000/10100 or a California, Maryland, or New Hampshire ZIP is blocked.
 
 
-Sample QA test cases
+Expected QA behavior
 --------------------
-Valid cases:
-- 20 W 34th St, New York, NY 10001 should pass.
-- 1 Raymond Plaza W, Newark, NJ 07102 should pass.
-- 415 Mission St, San Francisco, CA 94105 should pass.
-- 800 S Mint St, Charlotte, NC 28202 should pass.
+Scenario 1: Google-selected address, unchanged ZIP/state
+- Select a valid Google suggestion.
+- Leave ZIP/state as Google filled them.
+- Continue to Payment should work.
 
-Invalid cases:
-- New York + 94105 should fail because 94105 belongs to CA.
-- California + 10001 should fail because 10001 belongs to NY.
-- New Jersey + 94102 should fail because 94102 belongs to CA.
-- North Carolina + 07102 should fail because 07102 belongs to NJ.
+Scenario 2: Google-selected address, changed ZIP to valid same-state ZIP
+- Select a valid Google suggestion for New York.
+- Change ZIP to another valid New York ZIP.
+- Continue to Payment should work.
+
+Scenario 3: Google-selected address, changed ZIP to invalid ZIP
+- Select a valid Google suggestion for New York.
+- Change ZIP to 00000 or 10100.
+- Continue to Payment should be blocked.
+- ZIP field should show the mismatch error.
+
+Scenario 4: Google-selected address, changed ZIP to different-state ZIP
+- Select a valid Google suggestion for New York.
+- Change ZIP to a California ZIP like 94105.
+- Continue to Payment should be blocked.
+- ZIP field should show the mismatch error.
+
+Scenario 5: Refresh after wrong ZIP
+- Select a Google address.
+- Change ZIP to a different-state or invalid ZIP.
+- Refresh the page.
+- Click Continue to Payment.
+- Checkout should still be blocked.
+
+Scenario 6: Saved address dropdown
+- Select a saved address.
+- The current US state/ZIP compatibility check can still run, but saved addresses are not validated against a previous Google-selected address.
 
 
-Simple summary
---------------
-We added a checkout safety check that compares the selected state with the state identified from the ZIP code.
+Plain English summary
+---------------------
+We are using the Google address suggestion the shopper selected as the trusted state for this specific flow.
 
-If both match, checkout continues normally.
+If the shopper selects a Google address and then changes the state or ZIP before payment, checkout checks whether the selected state matches the Google-selected state and whether Google can confirm the entered ZIP belongs to that state.
 
-If they do not match, checkout displays a ZIP mismatch error and prevents the user from going to payment.
-
-The change is independent of TaxJar/tax amount. A $0.00 tax value is allowed as long as the ZIP and selected state match.
+If the ZIP belongs to a different state, checkout blocks payment and shows the ZIP error.

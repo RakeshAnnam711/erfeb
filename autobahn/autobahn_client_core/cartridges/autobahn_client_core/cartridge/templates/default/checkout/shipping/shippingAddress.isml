@@ -132,7 +132,8 @@
             </label>
             <input type="text" class="form-control shippingZipCode" id="shippingZipCode${lineItem ? lineItem.UUID : 'default'}" aria-describedby="${lineItem ? lineItem.UUID : 'default'}ZipCode"
                 value="${shippingAddress.postalCode||''}" <isprint value="${addressFields.postalCode.attributes}" encoding="off"/>
-                autocomplete="section-${lineItem ? lineItem.UUID : 'default'} shipping postal-code" cypress-target="shippingAddressZipField" />
+                autocomplete="section-${lineItem ? lineItem.UUID : 'default'} shipping postal-code" cypress-target="shippingAddressZipField"
+                data-zip-mismatch-message="${Resource.msg('smarty.error.zipmismatch', 'checkout', null)}" />
             <div class="invalid-feedback" id="${lineItem ? lineItem.UUID : 'default'}ZipCode"><isprint value="${addressFields.postalCode.error}" /></div>
             <span>${Resource.msg('example.postalcode','forms',null)}</span>
         </div>

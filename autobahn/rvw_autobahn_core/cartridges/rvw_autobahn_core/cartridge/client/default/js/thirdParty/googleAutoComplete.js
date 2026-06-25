@@ -93,6 +93,28 @@ function GoogleAutoComplete(autocomplete, element) {
         }
     };
 
+    function getPlaceComponent(place, type, valueType) {
+        var components = place && place.address_components ? place.address_components : [];
+
+        for (var i = 0; i < components.length; i++) {
+            if (components[i].types.indexOf(type) !== -1) {
+                return components[i][valueType] || '';
+            }
+        }
+
+        return '';
+    }
+
+    function storeGoogleSelectedShippingAddress(place) {
+        if (!element.form) {
+            return;
+        }
+
+        element.form.setAttribute('data-google-selected-state', getPlaceComponent(place, 'administrative_area_level_1', 'short_name'));
+        element.form.setAttribute('data-google-selected-zip', getPlaceComponent(place, 'postal_code', 'long_name'));
+        element.form.setAttribute('data-google-selected-country', getPlaceComponent(place, 'country', 'short_name'));
+    }
+
     var fillInCheckoutAddress = function fillInCheckoutAddress() {
         var checkout = document.getElementById('checkout-main');
         if (checkout) {
@@ -150,6 +172,8 @@ function GoogleAutoComplete(autocomplete, element) {
                 }
             }
         }
+
+        storeGoogleSelectedShippingAddress(place);
     }
     var fillInAddress2 = function fillInAddress2() {
         var place = autocomplete.getPlace();
@@ -282,7 +306,7 @@ function initAutocomplete() {
     // } else {
     //     var formFieldToAutoComplete = document.querySelectorAll('[id="address1"]'); // my account
     // }
-    if (!(toggleObject.smartyEnabled)) {
+    if (toggleObject.googlePlacesEnabled || !(toggleObject.smartyEnabled)) {
         if (checkout) {
             if (checkout.dataset.checkoutStage === 'shipping' || checkout.dataset.checkoutStage === 'customer') {
                 var formFieldToAutoComplete = document.querySelectorAll('[id^="shippingAddressOne"]'); // checkout
