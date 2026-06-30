@@ -115,6 +115,24 @@ function GoogleAutoComplete(autocomplete, element) {
         element.form.setAttribute('data-google-selected-country', getPlaceComponent(place, 'country', 'short_name'));
     }
 
+    function clearGoogleSelectedShippingAddress() {
+        if (!element.form) {
+            return;
+        }
+
+        element.form.removeAttribute('data-google-selected-state');
+        element.form.removeAttribute('data-google-selected-zip');
+        element.form.removeAttribute('data-google-selected-country');
+    }
+
+    function refreshShippingAfterGoogleSelection() {
+        if (!element.form) {
+            return;
+        }
+
+        $(element.form).find('.shippingState').trigger('change');
+    }
+
     var fillInCheckoutAddress = function fillInCheckoutAddress() {
         var checkout = document.getElementById('checkout-main');
         if (checkout) {
@@ -163,10 +181,6 @@ function GoogleAutoComplete(autocomplete, element) {
                             }
                             //set form field value with new value
                             element.value = val;
-
-                            if (componentID === 'shippingStatedefault') {
-                                $(element).change();
-                            }
                         }
                     }
                 }
@@ -174,6 +188,7 @@ function GoogleAutoComplete(autocomplete, element) {
         }
 
         storeGoogleSelectedShippingAddress(place);
+        refreshShippingAfterGoogleSelection();
     }
     var fillInAddress2 = function fillInAddress2() {
         var place = autocomplete.getPlace();
@@ -278,6 +293,7 @@ function GoogleAutoComplete(autocomplete, element) {
         var checkout = document.getElementById('checkout-main');
         if (checkout) {
             googleAutocompleteListener = autocomplete.addListener('place_changed', fillInCheckoutAddress);
+            element.addEventListener('input', clearGoogleSelectedShippingAddress);
         } else {
             googleAutocompleteListener = autocomplete.addListener('place_changed', fillInAddress2);
         }
@@ -289,6 +305,7 @@ function GoogleAutoComplete(autocomplete, element) {
         element.disabled = false;
         element.setAttribute('placeholder', ' ');
         google.maps.event.clearInstanceListeners(element);
+        element.removeEventListener('input', clearGoogleSelectedShippingAddress);
         if (googleAutocompleteListener !== null) {
             googleAutocompleteListener.remove();
         }

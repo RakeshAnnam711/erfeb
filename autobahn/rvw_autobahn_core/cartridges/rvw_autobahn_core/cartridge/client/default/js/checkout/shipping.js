@@ -4,6 +4,7 @@ var addressHelpers = require('./address');
 
 var debounce = require('lodash/debounce');
 var baseShipping = require('base/checkout/shipping');
+var googleAddressValidation = require('./googleAddressValidation');
 
 function updateShippingAddressFormValues(shipping) {
     var addressObject = $.extend({}, shipping.shippingAddress);
@@ -203,8 +204,29 @@ baseShipping.selectSingleShipAddress = function () {
     });
 };
 
+function validateZipStateBeforeTaxReload($shippingForm, updateAfterValidation) {
+    if (!googleAddressValidation.shouldValidateUSZipState($shippingForm)) {
+        googleAddressValidation.clearZipError($shippingForm);
+        if (updateAfterValidation) {
+            baseShipping.methods.updateShippingMethodList($shippingForm);
+        }
+        return;
+    }
+
+    googleAddressValidation.validateUSZipState($shippingForm, function (isValid) {
+        if (isValid) {
+            googleAddressValidation.clearZipError($shippingForm);
+            if (updateAfterValidation) {
+                baseShipping.methods.updateShippingMethodList($shippingForm);
+            }
+        } else {
+            googleAddressValidation.showZipError($shippingForm);
+        }
+    });
+}
+
 const updateShipping = (e) => {
-    baseShipping.methods.updateShippingMethodList($(e.currentTarget.form));
+    validateZipStateBeforeTaxReload($(e.currentTarget.form), true);
 };
 
 /**
@@ -254,6 +276,7 @@ baseShipping.methods.updateShippingMethodList = debounce(function ($shippingForm
 baseShipping.updateShippingList = () => {
     $('select[name$="shippingAddress_addressFields_states_stateCode"]').on('change', updateShipping);
     $('input[name$="dwfrm_shipping_shippingAddress_addressFields_postalCode"]').on('blur', updateShipping);
+    validateZipStateBeforeTaxReload($('.single-shipping .shipping-form'), false);
 }
 
 baseShipping.methods.updateShippingAddressFormValues = updateShippingAddressFormValues;
