@@ -1,0 +1,140 @@
+# The Editorialist — SFCC Connection Requirements
+
+Integration needs OCAPI for catalog sync and SCAPI for marking orders exported.
+
+---
+
+## Environments
+
+| Value | Sandbox | Production |
+| --- | --- | --- |
+| Instance host | `bgnd-007.dx.commercecloud.salesforce.com` | `staging-na01-whatgoesaroundcomesaround.demandware.net` |
+| Site ID | `WGACA` | `WGACA` |
+| Organization ID | `f_ecom_bgnd_dev` | TBD — BM > Administration > Site Development > Salesforce Commerce API Settings |
+| Short code | `ydqcoxb5` | TBD — BM > Administration > Site Development > Salesforce Commerce API Settings |
+| Primary catalog ID | `storefront-catalog-wgaca` | `storefront-catalog-wgaca` |
+| Inventory list ID | `wgaca-web` | `wgaca-web` |
+| Price book IDs | `wgaca-web-pricebook`, `wgaca-discount-pricebook` | `wgaca-web-pricebook`, `wgaca-discount-pricebook` |
+| Default locale | `en_US` | `en_US` |
+| Currency | `USD` | `USD` |
+
+> Use separate API client IDs and secrets for sandbox and production. Never share credentials between environments.
+
+---
+
+## Authentication
+
+Both APIs use OAuth 2.0 `client_credentials`. Keep OCAPI and SCAPI on separate clients — a SCAPI Admin API client cannot be used for OCAPI.
+
+| | OCAPI | SCAPI |
+| --- | --- | --- |
+| Client created in | Business Manager > OCAPI Settings | Account Manager |
+| Token endpoint | `https://{instance-host}/dw/oauth2/access_token` | `https://account.demandware.com/dwsso/oauth2/access_token` |
+| Grant type | `client_credentials` | `client_credentials` |
+
+---
+
+## OCAPI — Catalog Sync
+
+**Base URL:** `https://{instance-host}/s/-/dw/data/v21.10`
+
+**Required resources:**
+
+| Resource | Method | Purpose |
+| --- | --- | --- |
+| `/catalogs/storefront-catalog-wgaca/products/{id}` | `GET` | Fetch single product |
+| `/product_search` | `POST` | Bulk / filtered catalog sync |
+| `/catalogs/storefront-catalog-wgaca/categories/{id}` | `GET` | Category hierarchy (if needed) |
+| `/inventory_lists/wgaca-web/product_inventory_records/{id}` | `GET` | Stock / ATS (if needed) |
+| `/price_books/wgaca-web-pricebook/price_tables/{id}` | `GET` | Pricing (if needed) |
+
+**OCAPI allowlist entry to add** in `autobahn/data/initialize/autobahn_client_core/sites/WGACA/ocapi-settings/wapi_data_config.json`:
+
+```json
+{
+  "client_id": "THE_EDITORIALIST_CLIENT_ID",
+  "resources": [
+    { "resource_id": "/catalogs/*/products/*", "methods": ["get"], "read_attributes": "(**)", "write_attributes": "(**)" },
+    { "resource_id": "/product_search", "methods": ["post"], "read_attributes": "(**)", "write_attributes": "(**)" },
+    { "resource_id": "/catalogs/*/categories/*", "methods": ["get"], "read_attributes": "(**)", "write_attributes": "(**)" },
+    { "resource_id": "/inventory_lists/*/product_inventory_records/*", "methods": ["get"], "read_attributes": "(**)", "write_attributes": "(**)" },
+    { "resource_id": "/price_books/*/price_tables/*", "methods": ["get"], "read_attributes": "(**)", "write_attributes": "(**)" }
+  ]
+}
+```
+
+Remove any resources The Editorialist confirms they don't need before production.
+
+---
+
+## SCAPI — Mark Orders Exported
+
+**Base URL:** `https://{short-code}.api.commercecloud.salesforce.com`
+
+**Decision needed:** native `exportStatus` field vs a custom order attribute (e.g. `theEditorialistExported`). Confirm with The Editorialist before creating the SCAPI client.
+
+**Required endpoints:**
+
+| Resource | Method | Purpose |
+| --- | --- | --- |
+| `/order/v1/organizations/{org-id}/orders/{order-no}` | `GET` | Read order before update (idempotency check) |
+| `/order/v1/organizations/{org-id}/orders/{order-no}` | `PATCH` | Write export marker |
+
+**Required scopes** (capture exact names from Account Manager when creating the client):
+- Minimum order-read scope
+- Minimum order-write scope
+
+---
+
+## Business Manager Setup Steps
+
+Steps that require a human with BM / Account Manager access:
+
+**In Account Manager (`account.demandware.com`):**
+1. Confirm production Organization ID and short code from BM > Administration > Site Development > Salesforce Commerce API Settings (sandbox values already confirmed: org `f_ecom_bgnd_dev`, short code `ydqcoxb5`).
+2. Create a new **OCAPI client** for The Editorialist (sandbox), note the client ID and secret.
+3. Create a separate **OCAPI client** for production.
+4. Create a **SCAPI Admin API client** for The Editorialist (sandbox): assign the `Salesforce Commerce API` role for the WGACA org and add only the order read/write scopes.
+5. Repeat step 4 for production.
+
+**In Business Manager (`/on/BusinessManager`):**
+1. Go to **Administration > Site Development > Open Commerce API Settings > Data**.
+2. Add the new Editorialist client entry (JSON block above) to both sandbox and production instances.
+3. If using a custom order attribute, go to **Administration > Site Development > System Object Types > Order** and create the custom attribute (e.g. `theEditorialistExported`, type Boolean; `theEditorialistExportedAt`, type Date).
+4. Confirm the OCAPI version in use matches `_v` in the existing `wapi_data_config.json`.
+
+---
+
+## Call Agenda — Questions for The Editorialist
+
+**Catalog sync (OCAPI)**
+- Which product fields do you need? (title, description, images, price, inventory, categories?)
+- Masters only or variants too?
+- Do you need online/offline filtering handled on our side?
+- Full refresh or delta sync? How often?
+
+**Order export (SCAPI)**
+- Do you want to update SFCC's native `exportStatus` field, or do you need a custom attribute on the order?
+- Who initiates the mark — you calling our SCAPI endpoint, or us pushing a notification to you?
+
+**Technical**
+- Do you have static outbound IPs? (needed to restrict API access by IP)
+
+---
+
+## Open Items
+
+- [x] Sandbox Organization ID (`f_ecom_bgnd_dev`) and short code (`ydqcoxb5`) confirmed from BM > Administration > Site Development > Salesforce Commerce API Settings
+- [ ] Retrieve production Organization ID and short code from the same BM page on the production instance
+- [ ] Confirm with The Editorialist: which catalog fields, master vs variant behavior, delta-sync strategy
+- [ ] Decide: native `exportStatus` or custom order attribute for export marker
+- [ ] Confirm production instance host (is it staging-na01 or a separate live SFCC instance?)
+- [ ] Confirm whether The Editorialist can provide static outbound IPs for allowlisting
+
+---
+
+## References
+
+- Active OCAPI settings: `autobahn/data/initialize/autobahn_client_core/sites/WGACA/ocapi-settings/wapi_data_config.json`
+- SCAPI Admin API authorization: https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/authorization-for-admin-apis.html
+- SCAPI base URL reference: https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/base-url.html

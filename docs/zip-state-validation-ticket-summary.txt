@@ -36,12 +36,12 @@ For this ticket, we followed the working production path:
 - Google returns the selected address state/country.
 - Google Geocoder can confirm whether the final entered ZIP exists and belongs to the expected state.
 
-This lets us block cross-state and invalid ZIP changes without depending on Smarty.
+This lets us block wrong state/ZIP combinations and invalid ZIP changes without depending on Smarty.
 
 
 What was changed
 ----------------
-1. Store the state/country returned by Google autocomplete.
+1. Store the address values returned by Google autocomplete.
 
 File path:
 autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/thirdParty/googleAutoComplete.js
@@ -53,8 +53,65 @@ Now it also stores these Google-selected values on the shipping form:
 - data-google-selected-zip
 - data-google-selected-country
 
+These stored values are used later to compare the final ZIP/state.
 
-2. Block payment if Google cannot confirm the entered ZIP belongs to the selected state.
+When the shopper edits Address 1 manually, these stored Google-selected values are cleared so an older Google-selected address cannot affect validation for the new address.
+
+When the shopper selects a new Google address suggestion, the fresh Google-selected values are stored and the shipping/tax reload flow is triggered again.
+
+2. Added shared Google ZIP/state validation helper.
+
+File path:
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/googleAddressValidation.js
+
+This is a new helper file.
+
+It contains the common validation logic used by both:
+- the tax/shipping reload flow
+- the Continue to Payment safety check
+
+The helper:
+- normalizes ZIP/state values
+- shows and clears the ZIP error message
+- asks Google Geocoder whether the entered ZIP exists and belongs to the selected state
+- fails open if Google Maps/Geocoder is unavailable
+
+Important:
+City is not used as the blocking validation rule for this ticket. The blocking validation remains ZIP + state.
+
+City dropdown behavior:
+- Removed from the current implementation.
+- City remains a textbox.
+- City validation is not included in the current fix.
+
+
+3. Validate during tax/shipping reload instead of waiting only for Continue to Payment.
+
+File path:
+autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/shipping.js
+
+The checkout already recalculates shipping/tax when the shopper changes State or blurs the ZIP field.
+
+Now, before that tax/shipping reload happens, the code runs the Google ZIP/state validation.
+
+If the ZIP/state is valid:
+- the ZIP error is cleared
+- shipping/tax reload continues
+
+If the ZIP/state is invalid:
+- the ZIP error is shown immediately under the ZIP field
+- the shipping/tax reload is not called for that invalid ZIP/state
+- the shopper stays on the Shipping step
+
+This means the error appears during the same flow where tax is recalculated, not only after clicking Continue to Payment.
+
+This file also clears stored Google-selected data when a shopper chooses a saved address from the saved address dropdown.
+
+Reason:
+Saved addresses do not come from a fresh Google autocomplete selection, so they should not be validated against a previous Google-selected address.
+
+
+4. Keep Continue to Payment as a final safety check.
 
 File path:
 autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/client/default/js/checkout/plugin/members.js
@@ -68,28 +125,18 @@ It checks:
 - Currently selected state
 - The currently entered ZIP code
 
-Checkout first requires the entered ZIP to be a 5-digit US ZIP. Then it asks Google Geocoder to confirm that the ZIP exists and belongs to the Google-selected state.
+Checkout first requires the entered ZIP to be a 5-digit US ZIP. Then it asks Google Geocoder to confirm that the ZIP exists and belongs to the expected state.
 
-If the selected state does not match the Google-selected state, or Google cannot confirm the entered ZIP belongs to that state, checkout stays on Shipping and shows this error below the ZIP field:
+If the selected state does not match the Google-selected state, or Google cannot confirm the entered ZIP belongs to the expected state, checkout stays on Shipping and shows this error below the ZIP field:
 
 The ZIP code entered does not match the selected City and State. Please correct the shipping address to continue.
 
-There is no hardcoded ZIP prefix fallback in the final implementation. If Google Geocoder is available and cannot confirm the ZIP/state combination, checkout blocks the user instead of guessing.
+There is no hardcoded ZIP prefix fallback in the final implementation. If Google Geocoder is available and cannot confirm the state/ZIP combination, checkout blocks the user instead of guessing.
 
 If Google Maps/Geocoder is unavailable, checkout allows the user to continue. This fail-open behavior avoids blocking checkout because of a third-party outage, quota issue, or browser/network problem.
 
 
-3. Saved address dropdown is excluded from Google validation.
-
-File path:
-autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/shipping.js
-
-When a shopper chooses a saved address from the address dropdown, the code clears the stored Google-selected ZIP/state.
-
-Reason:
-Saved addresses do not come from a fresh Google autocomplete selection, so they should not be validated against a previous Google-selected address.
-
-4. Use resource message for the ZIP mismatch text.
+5. Use resource message for the ZIP mismatch text.
 
 File path:
 
@@ -100,11 +147,33 @@ The ZIP mismatch message uses this existing resource key:
 
 The shipping ZIP field exposes that resource text through a data attribute, and the checkout JavaScript reads that value when showing the error.
 
+File path:
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/shipping/shippingAddress.isml
+
+The ZIP input has this data attribute:
+- data-zip-mismatch-message
+
+That lets the JavaScript show the same resource-based error message below the ZIP field.
+
 
 Summary
 ---------
 We are using the Google address suggestion the shopper selected as the trusted state for this specific flow.
 
-If the shopper selects a Google address and then changes the state or ZIP before payment, checkout checks whether the selected state matches the Google-selected state and whether Google can confirm the entered ZIP belongs to that state.
+If the shopper selects a Google address and then changes the state or ZIP, checkout checks whether the selected state matches the Google-selected state and whether Google can confirm the entered ZIP belongs to that state.
 
-If the ZIP belongs to a different state, checkout blocks payment and shows the ZIP error.
+If the ZIP belongs to a different state, checkout shows the ZIP error during the tax/shipping reload flow and blocks the shopper from proceeding.
+
+Continue to Payment still runs the same validation as a backup safety check.
+
+
+Files touched for this fix
+--------------------------
+Existing files changed:
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/client/default/js/checkout/plugin/members.js
+- autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/shipping.js
+- autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/thirdParty/googleAutoComplete.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/shipping/shippingAddress.isml
+
+New file added:
+- autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/client/default/js/checkout/googleAddressValidation.js
