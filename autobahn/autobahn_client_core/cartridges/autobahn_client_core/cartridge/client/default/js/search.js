@@ -303,7 +303,9 @@ function updateSortOptions(response, promoTileCount) {
 // Funcation to create url of selected filters for mobile
 function createSelectedFiltersWithPriceUrl(selectedPriceFilter) {
     $('.helpButton')?.addClass('d-none');    // handling the visibility of overlapping .helpButton
-    let updateIntialUrl = $('.filter-apply-btn').attr("data-href");
+    let $applyButton = $('.refinement-bar .filter-apply-btn:visible').first();
+    $applyButton = $applyButton.length ? $applyButton : $('.filter-apply-btn').first();
+    let updateIntialUrl = $applyButton.attr("data-href");
     let {pmin, pmax} = selectedPriceFilter
     updateIntialUrl = updateIntialUrl == '' ? window.location.href : updateIntialUrl;
 
@@ -313,7 +315,7 @@ function createSelectedFiltersWithPriceUrl(selectedPriceFilter) {
     urlObj.searchParams.set('pmax', pmax);
 
     let updatedUrl = updateIntialUrl.startsWith('http') ? urlObj.toString() : urlObj.pathname + urlObj.search;
-    $('.filter-apply-btn').attr('data-href', updatedUrl);
+    $applyButton.attr('data-href', updatedUrl);
 }
 
 //Sort order functionality --start
@@ -686,8 +688,8 @@ function loadPriceRefineSearch(){
         });
     });
 
-    // to persist filter after page reload (desktop only — mobile uses filter-apply-btn flow)
-    if(!window.isMobile() && (location.href.indexOf("pmin") != -1  || location.href.indexOf("pmax") != -1)){
+    // Persist selected price values after reload/Ajax refresh until reset.
+    if(location.href.indexOf("pmin") != -1  || location.href.indexOf("pmax") != -1){
         var pMinPrice = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmin").replace(/,/g, ''));
         var pMaxPrice = parseInt(getQueryParameter(decodeURIComponent(location.href), "pmax").replace(/,/g, ''));
 

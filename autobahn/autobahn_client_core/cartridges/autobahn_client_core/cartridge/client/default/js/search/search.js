@@ -33,6 +33,157 @@ function copyPriceRange(url1, url2) {
         return url2;
     }
 }
+
+function copyAppliedFilterParams(sourceUrl, targetUrl) {
+    var sourceUrlObj;
+    var targetUrlObj;
+
+    if (!targetUrl) {
+        return sourceUrl;
+    }
+
+    try {
+        sourceUrlObj = new URL(sourceUrl, window.location.origin);
+        targetUrlObj = new URL(targetUrl, window.location.origin);
+
+        sourceUrlObj.searchParams.forEach(function (value, key) {
+            if (/^prefn\d+$/.test(key) || /^prefv\d+$/.test(key) || ['pmin', 'pmax', 'srule', 'start', 'sz'].indexOf(key) > -1) {
+                targetUrlObj.searchParams.set(key, value);
+            }
+        });
+
+        return targetUrl.startsWith('http')
+            ? targetUrlObj.toString()
+            : targetUrlObj.pathname + targetUrlObj.search;
+    } catch (e) {
+        return sourceUrl;
+    }
+}
+
+function normalizeRefinementAttrId(attrId) {
+    var refinementAttrIds = {
+        refinementcolor: 'refinementColor',
+        subcategory: 'pSubCategory',
+        psubcategory: 'pSubCategory'
+    };
+
+    return refinementAttrIds[attrId] || attrId;
+}
+
+function getPreferencePairFromUrl(url, attrId, fallbackValue) {
+    var normalizedAttrId = normalizeRefinementAttrId(attrId);
+    var pair = {
+        attrId: normalizedAttrId,
+        value: fallbackValue
+    };
+
+    try {
+        var urlObj = new URL(url, window.location.origin);
+        urlObj.searchParams.forEach(function (paramValue, paramKey) {
+            if (!/^prefn\d+$/.test(paramKey)) {
+                return;
+            }
+
+            var index = paramKey.replace('prefn', '');
+            var preferenceValue = urlObj.searchParams.get('prefv' + index);
+            if (paramValue === normalizedAttrId) {
+                pair.attrId = paramValue;
+                if (!pair.value && preferenceValue) {
+                    pair.value = preferenceValue;
+                }
+            }
+        });
+    } catch (e) {
+        // Keep the label fallback when the generated refinement URL cannot be parsed.
+    }
+
+    return pair;
+}
+
+function readPreferenceParams(url) {
+    var filters = {};
+
+    if (!url) {
+        return filters;
+    }
+
+    try {
+        var urlObj = new URL(url, window.location.origin);
+        urlObj.searchParams.forEach(function (paramValue, paramKey) {
+            if (!/^prefn\d+$/.test(paramKey)) {
+                return;
+            }
+
+            var index = paramKey.replace('prefn', '');
+            var prefv = urlObj.searchParams.get('prefv' + index);
+            if (prefv) {
+                filters[normalizeRefinementAttrId(paramValue)] = prefv.split('|');
+            }
+        });
+    } catch (e) {
+        return filters;
+    }
+
+    return filters;
+}
+
+function removePreferenceParams(urlObj) {
+    Array.from(urlObj.searchParams.keys()).forEach(function (key) {
+        if (/^prefn\d+$/.test(key) || /^prefv\d+$/.test(key)) {
+            urlObj.searchParams.delete(key);
+        }
+    });
+}
+
+function getFilterApplyButton() {
+    var $visibleButton = $('.refinement-bar .filter-apply-btn:visible').first();
+
+    return $visibleButton.length ? $visibleButton : $('.filter-apply-btn').first();
+}
+
+function createSelectedFiltersUrl(initialUrl, attrId, selectedFilter) {
+    $('.helpButton')?.addClass('d-none');
+
+    var applyUrl = getFilterApplyButton().attr('data-href') || '';
+    var baseUrl = applyUrl || window.location.href || initialUrl;
+    var urlObj;
+
+    try {
+        urlObj = new URL(baseUrl, window.location.origin);
+    } catch (e) {
+        return initialUrl;
+    }
+
+    var selectedFilters = readPreferenceParams(baseUrl);
+    var selectedPreference = getPreferencePairFromUrl(initialUrl, attrId, selectedFilter);
+    var selectedValues = selectedPreference.value ? selectedPreference.value.split('|') : [];
+
+    removePreferenceParams(urlObj);
+
+    selectedFilters[selectedPreference.attrId] = selectedFilters[selectedPreference.attrId] || [];
+    selectedValues.forEach(function (value) {
+        var existingIndex = selectedFilters[selectedPreference.attrId].indexOf(value);
+        if (existingIndex > -1) {
+            selectedFilters[selectedPreference.attrId].splice(existingIndex, 1);
+        } else {
+            selectedFilters[selectedPreference.attrId].push(value);
+        }
+    });
+
+    if (!selectedFilters[selectedPreference.attrId].length) {
+        delete selectedFilters[selectedPreference.attrId];
+    }
+
+    Object.keys(selectedFilters).forEach(function (key, index) {
+        urlObj.searchParams.set('prefn' + (index + 1), key);
+        urlObj.searchParams.set('prefv' + (index + 1), selectedFilters[key].join('|'));
+    });
+
+    return baseUrl.startsWith('http') ? urlObj.toString() : urlObj.pathname + urlObj.search;
+}
+
+exports.methods = exports.methods || {};
+exports.methods.createSelectedFiltersUrl = createSelectedFiltersUrl;
 function applyFilter() {
     $('.container').off(
         'click',
@@ -40,7 +191,7 @@ function applyFilter() {
         'click',
         '.refinements li button, .refinement-bar button.reset, .refinement-bar button.filter-apply-btn, .filter-value button, .swatch-filter button, .filter-value button.reset',
         function (event) {
-            const currentUrl = $('.filter-apply-btn').attr('data-href') || window.location.href;
+            const currentUrl = getFilterApplyButton().attr('data-href') || window.location.href;
 
             if (!window.isMobile()) {
                 var category = $(event.currentTarget).closest('.refinement');
@@ -109,7 +260,7 @@ function applyFilter() {
                     label
                 );
 
-                $('.filter-apply-btn').attr('data-href', newFilterUrl || refinementUrl);
+                getFilterApplyButton().attr('data-href', newFilterUrl || refinementUrl);
                 return;
             }
             if (
@@ -137,7 +288,7 @@ function applyFilter() {
                     history.replaceState(
                         undefined,
                         document.title,
-                        copyPriceRange(refinementUrl, permalink) || refinementUrl
+                        copyAppliedFilterParams(refinementUrl, permalink)
                     );
                 
                     $('body').trigger('search:filter--success');
