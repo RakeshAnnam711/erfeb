@@ -47,7 +47,7 @@ function copyAppliedFilterParams(sourceUrl, targetUrl) {
         targetUrlObj = new URL(targetUrl, window.location.origin);
 
         sourceUrlObj.searchParams.forEach(function (value, key) {
-            if (/^prefn\d+$/.test(key) || /^prefv\d+$/.test(key) || ['pmin', 'pmax', 'srule', 'start', 'sz'].indexOf(key) > -1) {
+            if (/^prefn\d+$/.test(key) || /^prefv\d+$/.test(key) || ['cgid', 'pmin', 'pmax', 'srule', 'start', 'sz'].indexOf(key) > -1) {
                 targetUrlObj.searchParams.set(key, value);
             }
         });
@@ -62,12 +62,55 @@ function copyAppliedFilterParams(sourceUrl, targetUrl) {
 
 function normalizeRefinementAttrId(attrId) {
     var refinementAttrIds = {
+        cgid: 'cgid',
+        category: 'pCategory',
+        pcategory: 'pCategory',
+        plp_category_refinement: 'pCategory',
         refinementcolor: 'refinementColor',
         subcategory: 'pSubCategory',
         psubcategory: 'pSubCategory'
     };
 
     return refinementAttrIds[attrId] || attrId;
+}
+
+function isCategoryRefinement(attrId) {
+    return normalizeRefinementAttrId(attrId) === 'cgid';
+}
+
+function getCategoryIdFromUrl(url) {
+    try {
+        return new URL(url, window.location.origin).searchParams.get('cgid');
+    } catch (e) {
+        return null;
+    }
+}
+
+function createSelectedCategoryUrl(initialUrl) {
+    var categoryId = getCategoryIdFromUrl(initialUrl);
+    var applyUrl = getFilterApplyButton().attr('data-href') || '';
+    var sourceUrl = applyUrl || window.location.href || initialUrl;
+    var sourceUrlObj;
+    var targetUrlObj;
+
+    try {
+        sourceUrlObj = new URL(sourceUrl, window.location.origin);
+        targetUrlObj = new URL(initialUrl, window.location.origin);
+    } catch (e) {
+        return initialUrl;
+    }
+
+    sourceUrlObj.searchParams.forEach(function (value, key) {
+        if (/^prefn\d+$/.test(key) || /^prefv\d+$/.test(key) || ['pmin', 'pmax', 'srule', 'start', 'sz'].indexOf(key) > -1) {
+            targetUrlObj.searchParams.set(key, value);
+        }
+    });
+
+    if (categoryId) {
+        targetUrlObj.searchParams.set('cgid', categoryId);
+    }
+
+    return initialUrl.startsWith('http') ? targetUrlObj.toString() : targetUrlObj.pathname + targetUrlObj.search;
 }
 
 function getPreferencePairFromUrl(url, attrId, fallbackValue) {
@@ -86,8 +129,9 @@ function getPreferencePairFromUrl(url, attrId, fallbackValue) {
 
             var index = paramKey.replace('prefn', '');
             var preferenceValue = urlObj.searchParams.get('prefv' + index);
-            if (paramValue === normalizedAttrId) {
-                pair.attrId = paramValue;
+            var normalizedParamValue = normalizeRefinementAttrId(paramValue);
+            if (normalizedParamValue === normalizedAttrId) {
+                pair.attrId = normalizedParamValue;
                 if (!pair.value && preferenceValue) {
                     pair.value = preferenceValue;
                 }
@@ -143,6 +187,10 @@ function getFilterApplyButton() {
 
 function createSelectedFiltersUrl(initialUrl, attrId, selectedFilter) {
     $('.helpButton')?.addClass('d-none');
+
+    if (isCategoryRefinement(attrId)) {
+        return createSelectedCategoryUrl(initialUrl);
+    }
 
     var applyUrl = getFilterApplyButton().attr('data-href') || '';
     var baseUrl = applyUrl || window.location.href || initialUrl;
