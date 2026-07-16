@@ -303,9 +303,7 @@ function updateSortOptions(response, promoTileCount) {
 // Funcation to create url of selected filters for mobile
 function createSelectedFiltersWithPriceUrl(selectedPriceFilter) {
     $('.helpButton')?.addClass('d-none');    // handling the visibility of overlapping .helpButton
-    let $applyButton = $('.refinement-bar .filter-apply-btn:visible').first();
-    $applyButton = $applyButton.length ? $applyButton : $('.filter-apply-btn').first();
-    let updateIntialUrl = $applyButton.attr("data-href");
+    let updateIntialUrl = searchHelper.methods.getMobileFilterApplyUrl();
     let {pmin, pmax} = selectedPriceFilter
     updateIntialUrl = updateIntialUrl == '' ? window.location.href : updateIntialUrl;
 
@@ -315,7 +313,7 @@ function createSelectedFiltersWithPriceUrl(selectedPriceFilter) {
     urlObj.searchParams.set('pmax', pmax);
 
     let updatedUrl = updateIntialUrl.startsWith('http') ? urlObj.toString() : urlObj.pathname + urlObj.search;
-    $applyButton.attr('data-href', updatedUrl);
+    searchHelper.methods.setMobileFilterApplyUrl(updatedUrl);
 }
 
 //Sort order functionality --start

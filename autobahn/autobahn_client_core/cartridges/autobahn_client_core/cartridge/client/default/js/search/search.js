@@ -2,6 +2,7 @@
 
 var exports = $.extend({}, require('core/search/search'));
 var wishlistHelpers = require('core/wishlist/components/helpers');
+var mobileFilterApplyUrl = '';
 function updateSortOptions(response) {
     var $wrapper = $('<div>').append(response);
     var footer = $wrapper.find('.grid-footer');
@@ -88,7 +89,7 @@ function getCategoryIdFromUrl(url) {
 
 function createSelectedCategoryUrl(initialUrl) {
     var categoryId = getCategoryIdFromUrl(initialUrl);
-    var applyUrl = getFilterApplyButton().attr('data-href') || '';
+    var applyUrl = getMobileFilterApplyUrl();
     var sourceUrl = applyUrl || window.location.href || initialUrl;
     var sourceUrlObj;
     var targetUrlObj;
@@ -179,10 +180,19 @@ function removePreferenceParams(urlObj) {
     });
 }
 
-function getFilterApplyButton() {
-    var $visibleButton = $('.refinement-bar .filter-apply-btn:visible').first();
+function getMobileFilterApplyButton() {
+    return $('.mobile-search-refinements .filter-apply-btn').first();
+}
 
-    return $visibleButton.length ? $visibleButton : $('.filter-apply-btn').first();
+function getMobileFilterApplyUrl() {
+    return mobileFilterApplyUrl;
+}
+
+function setMobileFilterApplyUrl(url) {
+    mobileFilterApplyUrl = url || '';
+    getMobileFilterApplyButton().attr('data-href', mobileFilterApplyUrl);
+
+    return mobileFilterApplyUrl;
 }
 
 function createSelectedFiltersUrl(initialUrl, attrId, selectedFilter) {
@@ -192,7 +202,7 @@ function createSelectedFiltersUrl(initialUrl, attrId, selectedFilter) {
         return createSelectedCategoryUrl(initialUrl);
     }
 
-    var applyUrl = getFilterApplyButton().attr('data-href') || '';
+    var applyUrl = getMobileFilterApplyUrl();
     var baseUrl = applyUrl || window.location.href || initialUrl;
     var urlObj;
 
@@ -232,6 +242,8 @@ function createSelectedFiltersUrl(initialUrl, attrId, selectedFilter) {
 
 exports.methods = exports.methods || {};
 exports.methods.createSelectedFiltersUrl = createSelectedFiltersUrl;
+exports.methods.getMobileFilterApplyUrl = getMobileFilterApplyUrl;
+exports.methods.setMobileFilterApplyUrl = setMobileFilterApplyUrl;
 function applyFilter() {
     $('.container').off(
         'click',
@@ -239,7 +251,7 @@ function applyFilter() {
         'click',
         '.refinements li button, .refinement-bar button.reset, .refinement-bar button.filter-apply-btn, .filter-value button, .swatch-filter button, .filter-value button.reset',
         function (event) {
-            const currentUrl = getFilterApplyButton().attr('data-href') || window.location.href;
+            const currentUrl = getMobileFilterApplyUrl() || window.location.href;
 
             if (!window.isMobile()) {
                 var category = $(event.currentTarget).closest('.refinement');
@@ -256,6 +268,9 @@ function applyFilter() {
             }
 
             let refinementUrl = $(this).attr('data-href');
+            if (window.isMobile() && $(this).is('.refinement-bar button.filter-apply-btn')) {
+                refinementUrl = getMobileFilterApplyUrl() || refinementUrl;
+            }
 
             // Safety check: ensure refinementUrl exists
             if (!refinementUrl) {
@@ -278,6 +293,7 @@ function applyFilter() {
             const isReset = $(this).is('button.reset');
             if (isReset) {
                 window._activePriceFilter = null;
+                setMobileFilterApplyUrl('');
             }
             if (!window.isMobile() && !isReset) {
                 const apf = window._activePriceFilter;
@@ -308,7 +324,7 @@ function applyFilter() {
                     label
                 );
 
-                getFilterApplyButton().attr('data-href', newFilterUrl || refinementUrl);
+                setMobileFilterApplyUrl(newFilterUrl || refinementUrl);
                 return;
             }
             if (
