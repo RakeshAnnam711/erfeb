@@ -1,0 +1,424 @@
+LIVE CHECKOUT FLOW - TICKET AND SPRINT PLANNING
+================================================
+
+Overall Goal
+------------
+The Live Checkout Flow is meant to support live-selling products from discovery through checkout and order processing.
+
+Customers should be able to:
+- See live products clearly marked as live items.
+- Understand pricing before and after the live drop.
+- Add live items through the approved live-selling flow.
+- See live items in cart and checkout with the correct labels and policy messages.
+- Complete checkout with live-selling terms acknowledged.
+
+Business and operations teams should be able to:
+- Track which live show and host sold the item.
+- Prevent customers from removing locked live items.
+- Apply the correct shipping and final-sale rules.
+- Exclude live items from self-service returns.
+- Report sales and commission by live show and host.
+
+
+Important Planning Note
+-----------------------
+Many tickets depend on the same basic foundation:
+
+- A product must be identifiable as a live item.
+- A live item must carry show/host/item-number information.
+- Cart and order line items must preserve that live metadata.
+- Checkout and downstream systems must be able to detect live orders.
+
+Because of this, we should not treat each ticket as a completely separate build. Several tickets should be grouped together in the same sprint because one cannot be completed properly without the other.
+
+
+Ticket Groups
+=============
+
+
+GROUP 1: Live Product Setup and Display
+--------------------------------------
+Recommended sprint: Sprint 1
+
+Tickets / Requirements included:
+- Req 1.0: Create Live Shopping category/page/navigation.
+- WIP-792 / Req 1.1: Display product images on live item tiles.
+- Req 1.2: Show a live-exclusive label/badge.
+- WIP-793 / Req 1.3: Hide price until the live item is dropped on air.
+- WIP-794 / Req 1.4: Show original price while live price is hidden.
+- WIP-795 / Req 1.5: Auto-number live products per show with badges.
+- WIP-796 / Req 2.9: Show live discount percentage/amount after price reveal.
+
+Why these tickets should be grouped:
+All of these tickets are about how live products appear before the customer adds them to cart. They depend on live product identification, live show setup, item numbering, product image display, and price reveal logic.
+
+scope:
+Create the live shopping product experience. A customer should be able to find live items, see the product image, see that it is live-exclusive, see the show item number, and understand the price state.
+
+Expected behavior:
+- Live items appear in the correct live shopping area.
+- Existing product images are reused.
+- Live items show a visible live badge.
+- Live items show a show-specific item number.
+- Before the live drop, the live price is hidden.
+- Original/retail price can still be shown before the drop.
+- After the live price is revealed, discount information can be displayed.
+
+Dependencies:
+- Product custom attributes or another reliable way to identify live items.
+- Show management data.
+- Item numbering rules.
+- Price book setup and online-from/online-to timing.
+- Product image availability.
+
+Risks / questions:
+- Who creates and manages live shows?
+- Is item numbering automatic or manual?
+- Can one product appear in multiple shows with different numbers?
+- What exactly controls price reveal: price book timing, show status, or manual trigger?
+
+
+GROUP 2: Live Add-to-Cart and Cart Line Item Behavior
+----------------------------------------------------
+Recommended sprint: Sprint 2
+
+Tickets / Requirements included:
+- WIP-797 / Req 1.7: Generate and send SMS add-to-cart links for live items.
+- WIP-798 / Req 1.8: Display "LIVE" tag on cart line items.
+- Req 2.4: Remove standard Add to Cart for live-sale products.
+- WIP-800 / Req 2.5: Disable/remove the cart remove button for locked live items.
+
+Why these tickets should be grouped:
+These tickets define how a live item gets into the cart and how it behaves once it is there. The add-to-cart link must preserve live metadata so the cart can display the LIVE tag and lock the item correctly.
+
+scope:
+Build the live add-to-cart flow and make sure live items behave differently from normal storefront items in the cart.
+
+Expected behavior:
+- A live item or bundle can be added to cart from a live-specific link.
+- Standard Add to Cart is hidden or disabled for live-only products.
+- Cart line item displays a LIVE tag.
+- LIVE tag persists in cart, mini cart, and checkout.
+- Customer cannot remove locked live items from cart.
+- Business/Live Selling team can still manage the cart through approved internal tools.
+
+Dependencies:
+- SMS or live-selling platform integration.
+- Live item number/show metadata from Group 1.
+- Cart line item custom attributes.
+- Server-side remove/update blocking, not only UI hiding.
+
+Risks / questions:
+- Who generates the SMS link?
+- Does the link add the item directly, or does it open PDP/cart first?
+- Should customer login be required before adding the live item?
+- Can the same link be reused?
+- Can live and normal storefront items exist in the same cart?
+- Should quantity update also be locked for live items?
+
+
+GROUP 3: Live Policy Messaging and Checkout Acknowledgement
+----------------------------------------------------------
+Recommended sprint: Sprint 2 or Sprint 3, depending on legal/business readiness
+
+Tickets / Requirements included:
+- WIP-801 / Req 2.0: Display final sale messaging for all live items.
+- WIP-802 / Req 2.2: Add Live Selling Terms & Conditions with checkout acknowledgement.
+
+Why these tickets should be grouped:
+Both tickets are policy-related and need legal/business-approved copy. They also affect PDP, cart, checkout, and order confirmation.
+
+scope:
+Make sure customers clearly understand live sale rules before placing the order.
+
+Expected behavior:
+- Final sale message appears on live item PDP.
+- Final sale message appears in cart for live items.
+- Final sale message appears in checkout for live items.
+- Checkout shows Live Selling Terms & Conditions link/checkbox when live items are present.
+- Customer must acknowledge the terms before placing a live order.
+- Acknowledgement is saved to the order with timestamp.
+
+Dependencies:
+- Legal-approved final sale message.
+- Legal-approved Live Selling Terms & Conditions page/content.
+- Checkout form update.
+- Order custom attributes for acceptance tracking.
+- Order confirmation email/text update if required.
+
+Risks / questions:
+- Who owns final sale and T&C copy?
+- Should T&C acceptance be required for every live order or once per customer?
+- Where should acceptance timestamp be stored?
+- Does order confirmation email need to be updated in the same sprint?
+
+
+GROUP 4: Live Order Metadata and Operations
+------------------------------------------
+Recommended sprint: Sprint 3
+
+Tickets / Requirements included:
+- WIP-803 / Req 2.3: Auto-capture show metadata on live orders.
+- WIP-805 / Req 2.7: Auto-apply free 2-day shipping for live orders.
+- WIP-791 / Req 2.1: Exclude live items from self-service returns portal.
+
+Why these tickets should be grouped:
+These tickets depend on live items being correctly identified at order and line-item level. Shipping, returns, and operations all need reliable order metadata.
+
+scope:
+Make live orders operationally usable after checkout. The order should carry show details, shipping should be applied correctly, and return rules should recognize live items.
+
+Expected behavior:
+- Live orders capture show name, show date, host, and item information.
+- Metadata is visible/searchable for operations or order management.
+- Live orders automatically receive free 2-day shipping if required.
+- No promo code is needed for free 2-day shipping.
+- Live items are excluded from self-service returns.
+- If a customer tries to return a live item, they see an explanatory message or the item is not offered for return.
+
+Dependencies:
+- Order and order line item custom attributes.
+- Shipping method/rule configuration.
+- Returns portal/integration support.
+- Show and host metadata from earlier groups.
+
+Risks / questions:
+- Does free 2-day shipping apply only to live items or the full mixed cart?
+- What is the exact shipping method ID?
+- Can Customer Service override return exclusions?
+- Which system consumes show metadata: SFCC BM, OMS, SOM, or another tool?
+
+
+GROUP 5: Cart Expiration / Inventory Release
+--------------------------------------------
+Recommended sprint: Separate technical sprint or spike before build
+
+Tickets / Requirements included:
+- WIP-799 / Req 1.9: Implement cart expiration timer for live items.
+
+Why this should be separate:
+This is one of the riskiest tickets. It touches inventory reservation, cart cleanup, timing, customer warnings, and possibly scheduled jobs. It should not be hidden inside normal cart UI work.
+
+scope:
+Live items should not stay reserved forever if checkout is not completed. After a configured hold time, the item should release back to inventory.
+
+Expected behavior:
+- Live item has a configurable reservation/hold time.
+- If checkout is not completed in time, the live item is released.
+- Released item becomes available to other live customers.
+- Customer receives warning before expiration where possible.
+- Admins can configure the hold duration.
+
+Dependencies:
+- Inventory reservation behavior must be confirmed.
+- Scheduler/job approach must be agreed.
+- Hold duration must be confirmed by Live Selling team.
+- Cart line item must store reservation timestamp.
+
+Risks / questions:
+- Does SFCC actually reserve inventory at add-to-cart time in the current setup?
+- Should expiration happen by scheduled job, on page refresh, or both?
+- What happens if customer is already on payment page?
+- Should standard cart items remain if only live items expire?
+- How should customer be notified?
+
+
+GROUP 6: Commission Reporting
+-----------------------------
+Recommended sprint: Sprint 4 or reporting phase
+
+Tickets / Requirements included:
+- WIP-804 / Req 2.6: Track host commission per live show.
+
+Why this should come later:
+Commission reporting depends on reliable show ID, host ID, order metadata, line-item metadata, cancellations, and returns. It should be built after live order metadata is stable.
+
+scope:
+Create a reporting/export capability so finance or operations can calculate host commission by live show.
+
+Expected behavior:
+- Each live order line item is tagged with host ID and show ID.
+- Report/export aggregates sales by host and show.
+- Report accounts for returns and cancellations.
+- Data is accurate and auditable.
+- Multiple hosts per show can be supported if required.
+
+Dependencies:
+- Host management system or host metadata source.
+- Show metadata.
+- Order/line-item metadata.
+- Reporting/export infrastructure.
+- Return/cancellation data.
+
+Risks / questions:
+- How is commission calculated?
+- Is commission based on gross sales or net after returns/cancellations?
+- Can a show have multiple hosts?
+- Where should the report live: BM export, OMS report, BI tool, or custom job?
+
+
+Recommended Sprint Breakdown
+============================
+
+
+Sprint 0: Discovery and Design
+------------------------------
+Goal:
+Confirm the technical and business foundation before development starts.
+
+Include:
+- Confirm live item data model.
+- Confirm show/host/item-number source.
+- Confirm SMS/add-to-cart flow.
+- Confirm mixed cart rules.
+- Confirm expiration rules.
+- Confirm shipping rules.
+- Confirm order metadata.
+- Confirm legal copy ownership.
+
+Output:
+- Final technical approach.
+- Final MVP scope.
+- Confirmed custom attributes.
+- Confirmed dependency owners.
+
+
+Sprint 1: Live Product Setup and Display
+----------------------------------------
+Goal:
+Make live products visible and understandable before cart.
+
+Include:
+- Group 1 tickets.
+
+Deliverables:
+- Live category/page/navigation.
+- Live product badges.
+- Product images.
+- Item numbers.
+- Price hidden before drop.
+- Original price display.
+- Live discount display if pricing logic is ready.
+- Standard Add to Cart hidden for live-only items.
+
+
+Sprint 2: Live Cart and Checkout MVP
+------------------------------------
+Goal:
+Allow customers to add live items through the live flow and complete checkout with correct cart behavior.
+
+Include:
+- Group 2 tickets.
+- Group 3 tickets if legal copy is ready.
+
+Deliverables:
+- SMS/add-to-cart link behavior.
+- LIVE tag on cart/checkout line items.
+- Remove disabled/hidden for live locked items.
+- Final sale messaging.
+- T&C acknowledgement in checkout.
+- Order acceptance timestamp.
+
+
+Sprint 3: Operations, Shipping, Returns
+---------------------------------------
+Goal:
+Make live orders usable for fulfillment and operational processes.
+
+Include:
+- Group 4 tickets.
+
+Deliverables:
+- Show metadata on orders.
+- Host/show/item metadata on line items.
+- Free 2-day shipping behavior.
+- Returns portal exclusion.
+
+
+Sprint 4: Expiration and Reporting
+----------------------------------
+Goal:
+Complete higher-risk operational automation and reporting.
+
+Include:
+- Group 5 cart expiration.
+- Group 6 commission reporting.
+
+Deliverables:
+- Live item hold/expiration logic.
+- Inventory release behavior.
+- Customer expiration warning if feasible.
+- Host/show commission report or export.
+
+
+Suggested MVP
+=============
+
+Recommended MVP should include:
+- Live product identification.
+- Live badge/label.
+- Live item number.
+- Price hidden before drop.
+- Live add-to-cart link.
+- LIVE tag in cart/checkout.
+- Customer cannot remove locked live item.
+- Final sale message.
+- T&C acknowledgement in checkout.
+- Order/line-item live metadata.
+
+Recommended non-MVP or later phase:
+- Cart expiration timer.
+- Commission reporting.
+- Returns portal automation.
+- Advanced mixed-cart shipping rules.
+- Discount percentage display if pricing logic is not ready.
+
+
+Main Dependencies To Discuss In Call
+====================================
+
+- Who owns live show creation?
+- Who owns host data?
+- Who owns item numbering?
+- Who owns SMS link generation?
+- What is the source of truth for a live item?
+- What is the cart hold duration?
+- Should customers be warned before expiration?
+- Can live and normal products be in the same cart?
+- Should free 2-day shipping apply to the full order or only live items?
+- What system handles returns?
+- What system needs commission reporting?
+- Is legal copy ready for final sale and T&C?
+
+
+Recommended Call Flow
+=====================
+
+1. Start with the overall goal.
+2. Explain that tickets are grouped by dependency, not just Jira order.
+3. Confirm Sprint 0 discovery items first.
+4. Walk through Group 1 product setup/display.
+5. Walk through Group 2 cart/checkout MVP.
+6. Confirm whether policy tickets are ready for Sprint 2.
+7. Move operations/shipping/returns to Sprint 3.
+8. Keep expiration and commission as later/high-risk work unless business says they are MVP.
+9. End with open questions and owners.
+
+
+Summary
+=====================
+
+The live checkout work should be delivered in layers:
+
+First, define what a live item is and how it appears on the site.
+
+Second, build the live add-to-cart and locked cart behavior.
+
+Third, add customer-facing legal/policy messaging in checkout.
+
+Fourth, make sure orders carry the right metadata for fulfillment, shipping, and returns.
+
+Finally, add advanced operational features like cart expiration and commission reporting.
+
+This order reduces risk because every later feature depends on reliable live item and live order metadata.
+

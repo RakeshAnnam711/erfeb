@@ -274,29 +274,42 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="prices top-prices clearfix">
-                        <isset name="price" value="${product.price}" scope="page" />
-                        <isinclude template="product/components/pricing/main" />
-                        <iscomment>
-                            <isinclude url="${URLUtils.url('Flow-GetDeliveryWindow')}" />
-                        </iscomment>
-
-                        <isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}"
-                            scope="page" />
-                        <isif condition="${globaleSession.get('geOperatedCountry')}">
-                            <iscomment> ${lineItem.priceTotal.price} </iscomment>
-                        <iselse/>
-                                <!-- Applicable Promotions -->
-                                <div class="promotions">
-                                    <isinclude template="product/components/promotions" />
-                                </div>
-                        </isif>
-
+            <isif condition="${product.isLiveSellingProduct}">
+                <div class="row">
+                    <div class="col">
+                        <div class="live-selling-product-meta live-selling-product-meta-pdp">
+                            <span class="badge-product live-selling-badge">${product.liveSellingBadgeText}</span>
+                            <isif condition="${!empty(product.liveSellingItemID)}">
+                                <span class="live-selling-item-id">Item ID: ${product.liveSellingItemID}</span>
+                            </isif>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <iselse/>
+                <div class="row">
+                    <div class="col">
+                        <div class="prices top-prices clearfix">
+                            <isset name="price" value="${product.price}" scope="page" />
+                            <isinclude template="product/components/pricing/main" />
+                            <iscomment>
+                                <isinclude url="${URLUtils.url('Flow-GetDeliveryWindow')}" />
+                            </iscomment>
+
+                            <isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}"
+                                scope="page" />
+                            <isif condition="${globaleSession.get('geOperatedCountry')}">
+                                <iscomment> ${lineItem.priceTotal.price} </iscomment>
+                            <iselse/>
+                                    <!-- Applicable Promotions -->
+                                    <div class="promotions">
+                                        <isinclude template="product/components/promotions" />
+                                    </div>
+                            </isif>
+
+                        </div>
+                    </div>
+                </div>
+            </isif>
 
             <!-- Product Condition Modal -->
             <div class="modal fade" id="conditionScaleModal" tabindex="-1" role="dialog"
@@ -512,7 +525,7 @@
 
                 <iscomment>Sticky Add to Cart</iscomment>
                 <div id="addtocart-sticky-bar-isml">
-                    <isif condition="${product.enableStickyAddToCart}">
+                    <isif condition="${product.enableStickyAddToCart && !product.isLiveSellingProduct}">
                         <isinclude template="product/components/addToCartStickyBar" />
                     </isif>
                 </div>
@@ -530,31 +543,32 @@
                 <isinclude template="integrations/product/components/beforeAddToCart" />
 
                 <!-- Add To Cart and Quantity -->
-                <div class="row qty-cart-container no-gutters" id="qty-cart-container">
-                    <isif condition="${(!isBundle && product.options.length === 0) || !product.variationAttributes}">
-                        <!-- Quantity Drop Down Menu -->
-                        <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 <isif condition=" ${product.hideQty}">
-                            d-none
-                    </isif>">
-                    <isinclude template="product/components/quantity" />
-                </div>
-                </isif>
+                <isif condition="${!product.isLiveSellingProduct}">
+                    <div class="row qty-cart-container no-gutters" id="qty-cart-container">
+                        <isif condition="${(!isBundle && product.options.length === 0) || !product.variationAttributes}">
+                            <!-- Quantity Drop Down Menu -->
+                            <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 <isif condition=" ${product.hideQty}">
+                                d-none
+                        </isif>">
+                        <isinclude template="product/components/quantity" />
+                    </div>
+                    </isif>
 
-                <div class="prices-add-to-cart-actions col-12 col-sm-6 col-md-12">
-                    <!-- Add To Cart -->
-                    <div id="add-to-cart-template">
-                        <isinclude template="product/components/addToCartProduct" />
-                    </div>
-                    <div class="wishlist-icon-area">
-                        <isif condition="${pdict.isWishlistModal !== true}">
-                            <iswishlisticon wishlistpid="${product.wishlistpid}" productname="${product.productName}"
-                                gtmdata="${JSON.stringify(product.gtmData)}"
-                                addmessage="${'wishlist.addto.wishlist.icon'}"
-                                removemessage="${'wishlist.removefrom.wishlist.icon'}" includeicon="true" />
-                        </isif>
-                    </div>
-                    <isif
-                        condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('disableMakeAnOfferDisplay') && !!product.makeAnOfferEnabled}">
+                    <div class="prices-add-to-cart-actions col-12 col-sm-6 col-md-12">
+                        <!-- Add To Cart -->
+                        <div id="add-to-cart-template">
+                            <isinclude template="product/components/addToCartProduct" />
+                        </div>
+                        <div class="wishlist-icon-area">
+                            <isif condition="${pdict.isWishlistModal !== true}">
+                                <iswishlisticon wishlistpid="${product.wishlistpid}" productname="${product.productName}"
+                                    gtmdata="${JSON.stringify(product.gtmData)}"
+                                    addmessage="${'wishlist.addto.wishlist.icon'}"
+                                    removemessage="${'wishlist.removefrom.wishlist.icon'}" includeicon="true" />
+                            </isif>
+                        </div>
+                        <isif
+                            condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('disableMakeAnOfferDisplay') && !!product.makeAnOfferEnabled}">
                         <!-- Submit an offer modal -->
                         <div class="submit-offer">
                             <div class="">
@@ -600,12 +614,12 @@
             </div>
             </isif>
 
-            <isset name="price" value="${product.price}" scope="page" />
-            <isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}"
-                scope="page" />
-            <isif condition="${globaleSession.get('geOperatedCountry')}">
-                <iscomment> ${lineItem.priceTotal.price} </iscomment>
-            <iselse/>
+                        <isset name="price" value="${product.price}" scope="page" />
+                        <isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}"
+                            scope="page" />
+                        <isif condition="${globaleSession.get('geOperatedCountry')}">
+                            <iscomment> ${lineItem.priceTotal.price} </iscomment>
+                        <iselse/>
 
                 <!-- Affirm OSM -->
                 <isinclude template="util/affirmModule" />
@@ -625,9 +639,10 @@
                         data-purchase-amount="${(product.price.sales.value * 100).toFixed()}"
                     ></klarna-placement>
                 </isif>
+                        </isif>
+                    </div>
+                </div>
             </isif>
-        </div>
-    </div>
 
 
 

@@ -10,16 +10,25 @@
 			<div class="tile-body">
 				<isinclude template="product/components/productTileName" />
 
-				<isset name="price" value="${product.price}" scope="page" />
-				<isif condition="${product.productType === 'set'}">
-					<isinclude template="product/components/pricing/setPrice" />
-				<iselse>
-					<isinclude template="product/components/pricing/main" />
-				</isif>
-				<isinclude template="util/affirmModule"/>
-				<isaffirmpromo context="plp" fpname="${require('*/cartridge/scripts/utils/affirmUtils').getFPNameForPLP(false, product)}" price="${price}"/>
+				<isif condition="${product.isLiveSellingProduct}">
+					<div class="live-selling-product-meta">
+						<span class="badge-product live-selling-badge">${product.liveSellingBadgeText}</span>
+						<isif condition="${!empty(product.liveSellingItemID)}">
+							<span class="live-selling-item-id">Item ID: ${product.liveSellingItemID}</span>
+						</isif>
+					</div>
+				<iselse/>
+					<isset name="price" value="${product.price}" scope="page" />
+					<isif condition="${product.productType === 'set'}">
+						<isinclude template="product/components/pricing/setPrice" />
+					<iselse>
+						<isinclude template="product/components/pricing/main" />
+					</isif>
+					<isinclude template="util/affirmModule"/>
+					<isaffirmpromo context="plp" fpname="${require('*/cartridge/scripts/utils/affirmUtils').getFPNameForPLP(false, product)}" price="${price}"/>
 
 					<isinclude template="integrations/product/productTileIntegrationsPostPrice"/>
+				</isif>
 
 				<iscomment> to hide promotional code text in PLP </iscomment>
 				<iscomment> <isif condition="${dw.system.Site.current.preferences.custom.plpPromotionShow === true}">
@@ -37,49 +46,51 @@
 				</isif>
 			</div>
 			<!-- Add To Cart -->
-			<div class="add-to-cart-btn-area">
-				<iscomment> <isinclude template="product/components/addToCartProduct" /> </iscomment>
+			<isif condition="${!product.isLiveSellingProduct}">
+				<div class="add-to-cart-btn-area">
+					<iscomment> <isinclude template="product/components/addToCartProduct" /> </iscomment>
 
-				<div class="row cart-and-ipay commercepayments" is-available="${product.available}">
-					<div class="col-sm-12 bisnform ${product.showBISN ? '' : 'd-none'}">
-						<iscomment>
-							<isinclude url="${URLUtils.url('Product-ShowBackInStockNotification', 'pid', product.id)}" />
-						</iscomment>
-					</div>
-				
-					<div class="col-sm-12 addtocartbutton ${product.showBISN ? 'd-none' : ''}">
-						<input type="hidden" class="add-to-cart-url"
-							value="${pdict.addToCartUrl === null ? URLUtils.url('Cart-AddProduct') : pdict.addToCartUrl}" />
-						<input type="hidden" class="get-cart-url" value="${URLUtils.url('Cart-Get')}" />
-						<button onclick="dataLayerPushAddtoCart()" class="add-to-cart btn btn-primary" data-toggle="modal"
-							aria-label="Add ${product.productName} to Cart" data-target="#chooseBonusProductModal" <isif
-							condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
-							data-gtmdata="${JSON.stringify(product.gtmData)}" <iscomment> formatted as 'product.gtmGA4Data' </iscomment>
-							</isif>
-							data-pid="${product.id}"
+					<div class="row cart-and-ipay commercepayments" is-available="${product.available}">
+						<div class="col-sm-12 bisnform ${product.showBISN ? '' : 'd-none'}">
 							<iscomment>
-								<isif condition="${!product.available}">
-									data-url="${URLUtils.url('Cart-AddProduct')}"
+								<isinclude url="${URLUtils.url('Product-ShowBackInStockNotification', 'pid', product.id)}" />
+							</iscomment>
+						</div>
+					
+						<div class="col-sm-12 addtocartbutton ${product.showBISN ? 'd-none' : ''}">
+							<input type="hidden" class="add-to-cart-url"
+								value="${pdict.addToCartUrl === null ? URLUtils.url('Cart-AddProduct') : pdict.addToCartUrl}" />
+							<input type="hidden" class="get-cart-url" value="${URLUtils.url('Cart-Get')}" />
+							<button onclick="dataLayerPushAddtoCart()" class="add-to-cart btn btn-primary" data-toggle="modal"
+								aria-label="Add ${product.productName} to Cart" data-target="#chooseBonusProductModal" <isif
+								condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
+								data-gtmdata="${JSON.stringify(product.gtmData)}" <iscomment> formatted as 'product.gtmGA4Data' </iscomment>
 								</isif>
-							</iscomment>
-							<iscomment> ${product.readyToOrder || product.available || product.gtmData.stock_status == "In Stock" ? "" : "disabled"}>
-								<i class="fa fa-shopping-bag"></i>${Resource.msg('button.addtocart', 'common', null)} </iscomment>
-							${!product.readyToOrder || !product.available || !(product.gtmData.stock_status == "In Stock") ? "disabled" : ""}
-							cypress-target="addToCartButton">
-							<iscomment> <i class="fa fa-shopping-bag"></i> </iscomment>
-							${Resource.msg('button.addtocart', 'common', null)}
-						</button>
-						<isif condition="${typeof hideExtensions === 'undefined' || hideExtensions !== 'true'}">
-							<iscomment>
-								<isinclude template="product/components/addToCartButtonExtension" />
-							</iscomment>
-						</isif>
-				
-						<isprint value="${dw.system.HookMgr.callHook('app.template.domInject', 'productAddToCart', pdict) || ''}"
-							encoding="off" />
+								data-pid="${product.id}"
+								<iscomment>
+									<isif condition="${!product.available}">
+										data-url="${URLUtils.url('Cart-AddProduct')}"
+									</isif>
+								</iscomment>
+								<iscomment> ${product.readyToOrder || product.available || product.gtmData.stock_status == "In Stock" ? "" : "disabled"}>
+									<i class="fa fa-shopping-bag"></i>${Resource.msg('button.addtocart', 'common', null)} </iscomment>
+								${!product.readyToOrder || !product.available || !(product.gtmData.stock_status == "In Stock") ? "disabled" : ""}
+								cypress-target="addToCartButton">
+								<iscomment> <i class="fa fa-shopping-bag"></i> </iscomment>
+								${Resource.msg('button.addtocart', 'common', null)}
+							</button>
+							<isif condition="${typeof hideExtensions === 'undefined' || hideExtensions !== 'true'}">
+								<iscomment>
+									<isinclude template="product/components/addToCartButtonExtension" />
+								</iscomment>
+							</isif>
+					
+							<isprint value="${dw.system.HookMgr.callHook('app.template.domInject', 'productAddToCart', pdict) || ''}"
+								encoding="off" />
+						</div>
 					</div>
 				</div>
-			</div>
+			</isif>
 		</isif>
 	</a>
     <!-- END_dwmarker -->

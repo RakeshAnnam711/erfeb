@@ -118,6 +118,11 @@
             <div class="cart row">
                     <iscomment> product cards section </iscomment>
                     <div class="col-sm-7 product-cards-section" role="table" aria-label="Cart Items">
+                        <div class="cart-items-actions text-right">
+                            <button type="button" class="btn btn-secondary remove-all-products" data-action="${URLUtils.url('Cart-ClearCart')}">
+                                Remove All
+                            </button>
+                        </div>
                         <isloop items="${pdict.items}" var="lineItem" status="productLoop">
                             <isif condition="${lineItem.productType === 'bundle'}">
                                 <isinclude template="cart/productCard/cartBundleCard" />
@@ -142,9 +147,11 @@
                     </div>
                     <iscomment> totals, and checkout actions </iscomment>
                     <div class="col-sm-5 card totals">
-                        <div class="card-body promocode_section px-3">
-                            <isinclude template="cart/cartPromoCode" />
-                        </div>
+                        <isif condition="${!pdict.isAgentBasket}">
+                            <div class="card-body promocode_section px-3">
+                                <isinclude template="cart/cartPromoCode" />
+                            </div>
+                        </isif>
                         <isif condition="${hasNonCouponDiscount}">
                             <div class="card-body campaigns-section">
                                 <isinclude template="cart/cartCampaignCode" />

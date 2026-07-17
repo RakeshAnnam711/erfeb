@@ -1,5 +1,7 @@
 <isset name="isCouponApplied" value="${pdict.totals.discounts.length>0 && pdict.totals.discounts[0].type == 'coupon' && pdict.totals.discounts[0].applied}" scope="page" />
 <isset name="hasCoupons" value="${cartSummary.cart.hasCoupons}" scope="page" />
+<isset name="isAgentRestrictedBasket" value="${pdict.isAgentRestrictedBasket || require('*/cartridge/scripts/helpers/agentBasketLineItemLocks').isRestrictedBasket(require('dw/order/BasketMgr').getCurrentBasket())}" scope="page" />
+<isif condition="${!isAgentRestrictedBasket}">
         <form action="${pdict.actionUrls.submitCouponCodeUrl}" class="promo-code-form" method="GET" name="promo-code-form">
             <div class="form-group">
                 <label for="couponCode" class="promo-code-title">${Resource.msg('label.promo.code','cart',null)}</label>
@@ -51,3 +53,4 @@
                 </ul>
             </div>
         </form>
+</isif>

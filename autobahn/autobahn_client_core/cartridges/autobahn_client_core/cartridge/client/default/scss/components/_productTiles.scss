@@ -173,6 +173,27 @@
             justify-content: flex-end;
         }
     }
+    .live-selling-product-meta {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+
+        .live-selling-badge {
+            background-color: $black;
+            border-color: $black;
+            color: $white;
+            padding: 3px 6px;
+        }
+
+        .live-selling-item-id {
+            color: $base-font-color;
+            font-weight: 500;
+        }
+    }
     .ratings {
         margin-bottom: $product-tile-rating-margin-bottom;
         font-size: $product-tile-rating-star-size;

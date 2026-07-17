@@ -17,6 +17,13 @@
     </div>
     <iscomment> product summary section </iscomment>
     <div class="product-summary">
+        <isif condition="${pdict.items.length !== 0}">
+            <div class="minicart-actions text-right">
+                <button type="button" class="btn btn-secondary remove-all-products" data-action="${URLUtils.url('Cart-ClearCart')}">
+                    Remove All
+                </button>
+            </div>
+        </isif>
         <isloop items="${pdict.items}" var="lineItem" status="productLoop">
             <isif condition="${lineItem.bonusProductLineItemUUID === 'bonus'}">
                 <div class="minicart-item bonus-product-line-item uuid-${lineItem.UUID}">

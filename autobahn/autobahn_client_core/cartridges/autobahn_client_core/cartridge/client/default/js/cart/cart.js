@@ -298,6 +298,29 @@ coreCart.init = function () {
         document.getElementById('ge-country-selector').click();
     });
 
+    $('body').on('click', '.remove-all-products', function (e) {
+        e.preventDefault();
+
+        const actionUrl = $(this).data('action');
+        if (!actionUrl) {
+            return;
+        }
+
+        $.spinner().start();
+        $.ajax({
+            url: actionUrl,
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $('body').trigger('cart:update', data);
+                window.location.reload();
+            },
+            error: function () {
+                $.spinner().stop();
+            }
+        });
+    });
+
     // reset promo code input section when user types in
     document.querySelectorAll('.promo-code-form .form-control').forEach(input => {
         input.addEventListener('input', () => {

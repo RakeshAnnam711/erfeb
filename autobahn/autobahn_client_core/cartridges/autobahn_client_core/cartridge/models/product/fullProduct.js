@@ -3,6 +3,7 @@
 var base = module.superModule;
 
 var brandLink = require('*/cartridge/models/product/decorators/brandLink');
+var liveSelling = require('*/cartridge/models/product/decorators/liveSelling');
 
 /**
  * Decorate product with full product information
@@ -21,6 +22,7 @@ var brandLink = require('*/cartridge/models/product/decorators/brandLink');
 module.exports = function fullProduct(product, apiProduct, options) {
     base.call(this, product, apiProduct, options);
     brandLink(product, apiProduct, options);
+    liveSelling(product, apiProduct);
 
     return product;
 };

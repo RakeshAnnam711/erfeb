@@ -1,0 +1,417 @@
+Live Selling / CSC Handoff - Current Status Notes
+=================================================
+
+Purpose
+-------
+This document explains the full current task:
+
+1. Live-selling PLP/PDP behavior.
+2. CSC / Business Manager handoff cart behavior.
+3. Order and product line item attributes.
+4. What was implemented earlier.
+5. What was attempted now.
+6. What is currently not working.
+7. Recommended next steps.
+
+
+Latest Live-Selling Requirement
+-------------------------------
+The latest requirement is not only cart locking. It also includes a dedicated
+live-selling shopping experience.
+
+Live-selling PLP/category:
+- Create or configure a dedicated live-selling PLP/category.
+- Products assigned to this live-selling category should show on the PLP.
+- Hide price on live-selling PLP products.
+- Hide Add to Cart / quick add on live-selling PLP products.
+- Show a live-selling badge.
+- Show a live-selling item ID.
+
+Live-selling PDP:
+- For live-selling products, hide price.
+- Hide Add to Cart.
+- Hide quantity controls.
+- Hide sticky Add to Cart.
+- Show a live-selling badge.
+- Show a live-selling item ID.
+
+Live-selling checkout/order:
+- Customer should not add live-selling products directly from PLP/PDP.
+- Customer Support / CSC adds products through BM handoff basket.
+- After successful payment, order/export should include:
+  - existing live-shopping / CSC attributes
+  - host name
+  - event date
+
+Important clarification:
+- The content asset live-weekly-schedule is only for showing the public live
+  schedule/host/event information on the live shopping page.
+- Do not append product/category behavior into that content asset.
+- Live-selling product/category metadata should be handled separately through
+  product/category custom attributes and PLP/PDP logic.
+
+
+Live-Selling Custom Attributes
+------------------------------
+Product custom attributes:
+- isLiveSellingProduct
+  Boolean. Marks a product as live-selling even outside the live category.
+
+- liveSellingItemID
+  String. Displayed as the live item ID on PLP/PDP.
+
+- liveSellingBadgeText
+  String. Displayed as badge text. If blank, the code can default to LIVE.
+
+- liveSellingHostName
+  String. Host name to carry through to order/export.
+
+- liveSellingEventDate
+  String. Event date to carry through to order/export.
+
+Category custom attribute:
+- isLiveSellingCategory
+  Boolean. Marks a category as live-selling. Products in this category should
+  behave like live-selling products on PLP/PDP.
+
+Order custom attributes:
+- isLiveShoppingOrder
+  Boolean. True when the order belongs to the live-shopping flow.
+
+- liveSellingHostName
+  String. Host name copied to the order.
+
+- liveSellingEventDate
+  String. Event date copied to the order.
+
+ProductLineItem custom attributes:
+- isLiveSellingLineItem
+  Boolean. True for line items that belong to live shopping.
+
+- liveSellingItemID
+  String. Copied from product to order line item.
+
+- liveSellingHostName
+  String. Copied from product to order line item.
+
+- liveSellingEventDate
+  String. Copied from product to order line item.
+
+
+Live-Selling Files Changed / Involved
+-------------------------------------
+Product decorator:
+autobahn_client_core/cartridge/models/product/decorators/liveSelling.js
+
+Product model wiring:
+autobahn_client_core/cartridge/models/product/productTile.js
+autobahn_client_core/cartridge/models/product/fullProduct.js
+
+PLP templates:
+autobahn_client_core/cartridge/templates/default/product/productTile.isml
+rvw_autobahn_core/cartridge/templates/default/product/components/productTileImage.isml
+
+PDP template:
+autobahn_client_core/cartridge/templates/default/product/components/productDetailsContent.isml
+
+Styles:
+autobahn_client_core/cartridge/client/default/scss/components/_productTiles.scss
+autobahn_client_core/cartridge/client/default/scss/product/_pdp-consolidated.scss
+
+Order/pre-place logic:
+rvw_som_integration/cartridge/scripts/checkout/doPrePlaceOrder.js
+
+Metadata:
+data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml
+data/meta/rvw_som_integration/meta/system-objecttype-extensions.xml
+
+
+Live-Selling Test Notes
+-----------------------
+The live-selling PLP initially showed "No Matches Found".
+
+The issue was product data, not PLP code:
+- Category existed.
+- Some assigned sample products were offline, not searchable, or not in stock.
+- SFCC search only renders products that are eligible for search.
+
+Debug confirmed that the category did return a product when the product was:
+- online
+- searchable
+- assigned to the category
+- available/in stock
+
+Important test product from debugging:
+- QNB58221I9013
+
+Expected PLP/PDP test:
+- Open live-selling category.
+- Product should render.
+- Price hidden.
+- Add to Cart hidden.
+- Badge and item ID visible.
+- Normal non-live products should still behave normally.
+
+
+CSC Handoff Cart Requirement
+----------------------------
+When a Customer Service Representative adds products/coupons in Business
+Manager / CSC and hands the basket to the customer:
+
+- CSC-added products must be locked.
+- Customer must not remove CSC products.
+- Customer must not update CSC product quantity.
+- Customer must not add CSC products to wishlist.
+- Promo/coupon input must be hidden.
+- Customer must not remove CSC-applied coupons.
+- Customer-added storefront products must remain editable.
+- Remove All must clear the entire cart.
+
+
+Earlier Working CSC Direction
+-----------------------------
+There were two earlier directions.
+
+1. Older/simple cart-level lock:
+   - Used pdict.isAgentBasket.
+   - If basket was considered an agent basket, templates hid promo/remove/
+     wishlist globally.
+   - This was simpler and worked for pure CSC baskets.
+   - It did not fully support mixed baskets, because the whole basket became
+     locked.
+
+2. Later improved line-item lock:
+   - CSC products should get ProductLineItem.custom.isCSCHandoffLineItem = true.
+   - Storefront products should get ProductLineItem.custom.isStorefrontLineItem
+     = true.
+   - Cart UI should lock only CSC line items.
+   - Storefront-added line items should remain editable.
+
+The improved line-item approach is the correct direction for the final
+requirement because it supports mixed baskets.
+
+
+CSC Handoff Custom Attributes
+-----------------------------
+ProductLineItem custom attributes:
+- isCSCHandoffLineItem
+  Boolean. Required for durable CSC product locking.
+
+- isStorefrontLineItem
+  Boolean. Required to keep customer-added products editable in mixed baskets.
+
+Order custom attributes:
+- isCSCHandoffOrder
+  Boolean. True when order contains CSC handoff products.
+
+Note:
+If the business decides CSC handoff and live-shopping are the same for
+reporting, we may keep only one order-level flag in the future.
+
+
+CSC Files Involved
+------------------
+Main helper:
+autobahn_client_core/cartridge/scripts/helpers/agentBasketLineItemLocks.js
+
+Cart controller:
+autobahn_client_core/cartridge/controllers/Cart.js
+
+CSC handoff hook:
+autobahn_client_core/cartridge/scripts/hooks/cscBasketHandoff.js
+
+Hooks registration:
+autobahn_client_core/hooks.json
+
+Basket merge hook:
+autobahn_client_core/cartridge/scripts/hooks/mergeBasketUtil.js
+
+Cart templates:
+autobahn_client_core/cartridge/templates/default/cart/cart.isml
+autobahn_client_core/cartridge/templates/default/cart/cartPromoCode.isml
+autobahn_client_core/cartridge/templates/default/cart/productCard/cartProductCard.isml
+autobahn_client_core/cartridge/templates/default/cart/productCard/cartProductCardEdit.isml
+
+Mini cart / checkout product card template:
+autobahn_client_core/cartridge/templates/default/checkout/cart/miniCart.isml
+autobahn_client_core/cartridge/templates/default/checkout/productCard/productCardProductNameAndRemove.isml
+
+Order/pre-place logic:
+rvw_som_integration/cartridge/scripts/checkout/doPrePlaceOrder.js
+
+
+What We Tried Now For CSC
+-------------------------
+1. Added/restored agentBasketLineItemLocks.js.
+
+2. Added per-line-item CSC/storefront flags:
+   - isCSCHandoffLineItem
+   - isStorefrontLineItem
+
+3. Added controller guards in Cart.js:
+   - RemoveProductLineItem
+   - UpdateQuantity
+   - EditProductLineItem
+   - AddCoupon
+   - RemoveCouponLineItem
+
+4. Added Remove All / ClearCart endpoint.
+
+5. Added UI checks to hide:
+   - promo input
+   - remove icon
+   - wishlist control
+
+6. Added cscBasketHandoff.js hook based on the later CSC commit.
+
+7. Added hook registrations in hooks.json for:
+   - dw.ocapi.shop.basket.agent.afterPUT
+   - dw.ocapi.shop.basket.agent.afterPOST
+   - dw.ocapi.shop.basket.agent.modifyPUTResponse
+   - dw.ocapi.shop.basket.agent.modifyPOSTResponse
+
+8. Tried restoring pdict.isAgentBasket compatibility because older templates
+   used that flag.
+
+
+Important SFCC Error Encountered
+--------------------------------
+We repeatedly hit this error:
+
+Cannot invoke "java.lang.Integer.intValue()" because the return value of
+"com.demandware.beehive.orm.capi.common.accessor.AttributeAccessor.get(...)
+" is null
+
+This happened in controller Cart.
+
+This error is strongly associated with reading basket/line item metadata that
+can be null or internally integer-backed in SFCC.
+
+Risky reads from older code:
+- basket.channelType
+- basket.getChannelType()
+- basket.agentBasket
+
+The old live-shopping-dro branch used these reads. That branch is useful for
+understanding the old behavior, but it is not safe to copy directly.
+
+Safer direction:
+- Avoid channelType/getChannelType/agentBasket property reads.
+- Prefer explicit CSC line-item custom attribute markers.
+- Use hook-time marking if possible.
+
+
+Current CSC Problem
+-------------------
+The cart page renders, but CSC handoff products are still showing:
+
+- Add to wishlist
+- Remove icon
+- Promo code box
+
+This means:
+- Cart templates are loading.
+- UI guards exist.
+- Controller guards exist.
+- But the basket/line item is not being classified as restricted/locked at
+  render time.
+
+Most likely current issue:
+- CSC product line item is not getting isCSCHandoffLineItem = true before the
+  cart page renders.
+
+Possible causes:
+1. CSC OCAPI basket hooks are not firing.
+2. hooks.json was not uploaded or code version was not refreshed.
+3. The actual CSC handoff flow does not use the hook names we registered.
+4. Existing basket was created before the hook/code was active.
+5. Custom attributes exist in BM but are not being written during handoff.
+
+
+What Not To Do
+--------------
+Do not reintroduce these checks unless we confirm they are safe on this sandbox:
+
+- basket.channelType
+- basket.getChannelType()
+- basket.agentBasket
+
+They can trigger the Integer.intValue() Cart controller error.
+
+Also be careful with marking all merged source baskets as CSC. That can
+accidentally lock normal stored storefront baskets during login.
+
+
+Recommended Next Debug Step
+---------------------------
+Add a temporary safe debug endpoint or log for the current cart that prints:
+
+- Basket UUID
+- Product line item UUIDs
+- Product IDs
+- isCSCHandoffLineItem value
+- isStorefrontLineItem value
+- session.custom.agentLockedLineItemUUIDs
+- session.custom.agentLockedBasketUUID
+
+Do not read:
+- channelType
+- getChannelType
+- agentBasket
+
+The goal is to answer:
+
+Are CSC product line items ever getting isCSCHandoffLineItem = true?
+
+If no:
+- Fix belongs in the CSC handoff hook / BM handoff flow.
+
+If yes:
+- Fix belongs in cart model decoration / template checks.
+
+
+Current Practical Testing Advice
+--------------------------------
+After any change to hooks.json:
+
+1. Upload hooks.json.
+2. Upload cscBasketHandoff.js.
+3. Upload agentBasketLineItemLocks.js.
+4. Upload Cart.js and templates.
+5. Activate or refresh the code version.
+6. Clear storefront cache.
+7. Create a fresh CSC handoff basket.
+
+Existing baskets may not have the required line item custom attributes, so
+fresh handoff testing is important.
+
+
+Expected Final Test Cases
+-------------------------
+Live-selling PLP/PDP:
+- Live category product renders.
+- PLP price hidden.
+- PLP Add to Cart hidden.
+- PLP badge/item ID visible.
+- PDP price hidden.
+- PDP Add to Cart/quantity/sticky add hidden.
+- PDP badge/item ID visible.
+- Normal products still show normal PLP/PDP controls.
+
+CSC handoff:
+- CSC product appears in cart.
+- CSC product has no remove icon.
+- CSC product has no wishlist action.
+- CSC product quantity cannot be updated.
+- Promo input hidden.
+- CSC coupon removal blocked.
+- Customer can add storefront product.
+- Storefront product remains editable.
+- Remove All clears CSC and storefront products.
+- Checkout/order placement works.
+
+Order/BM:
+- Order-level live-shopping/CSC flags are set as expected.
+- ProductLineItem-level live-shopping/CSC/storefront flags are set as expected.
+- Host name and event date are available on order/order line item for live
+  selling orders.

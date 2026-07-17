@@ -150,6 +150,45 @@ This custom attribute has been added to the ProductLineItem so that it will be a
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="isLiveSellingLineItem">
+                <display-name xml:lang="x-default">Is Live Selling Line Item</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingItemID">
+                <display-name xml:lang="x-default">Live Selling Item ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingHostName">
+                <display-name xml:lang="x-default">Live Selling Host Name</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingEventDate">
+                <display-name xml:lang="x-default">Live Selling Event Date</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="isCSCHandoffLineItem">
+                <display-name xml:lang="x-default">Is CSC Handoff Line Item</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="isStorefrontLineItem">
+                <display-name xml:lang="x-default">Is Storefront Line Item</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
             <!-- END MODIFICATION -->
         </custom-attribute-definitions>
         <group-definitions>
@@ -175,6 +214,18 @@ This custom attribute has been added to the ProductLineItem so that it will be a
                 <attribute attribute-id="quantityFulfilled"/>
                 <attribute attribute-id="quantityOrdered"/>
                 <attribute attribute-id="Narvar_LOM__image_url"/>
+            </attribute-group>
+            <attribute-group group-id="LiveSelling">
+                <display-name xml:lang="x-default">Live Selling</display-name>
+                <attribute attribute-id="isLiveSellingLineItem"/>
+                <attribute attribute-id="liveSellingItemID"/>
+                <attribute attribute-id="liveSellingHostName"/>
+                <attribute attribute-id="liveSellingEventDate"/>
+            </attribute-group>
+            <attribute-group group-id="CSCHandoff">
+                <display-name xml:lang="x-default">CSC Handoff</display-name>
+                <attribute attribute-id="isCSCHandoffLineItem"/>
+                <attribute attribute-id="isStorefrontLineItem"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

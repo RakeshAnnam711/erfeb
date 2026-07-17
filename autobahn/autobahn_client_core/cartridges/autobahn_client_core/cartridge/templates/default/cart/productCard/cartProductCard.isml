@@ -59,7 +59,7 @@
                     </isloop>
 
                     <iscomment> wishlist and remove buttons </iscomment>
-                    <isif condition="${!lineItem.isBonusProductLineItem}">
+                    <isif condition="${!lineItem.isBonusProductLineItem && !lineItem.isAgentLockedLineItem && !pdict.isAgentBasket}">
                         <isinclude template="cart/productCard/cartProductCardEdit" />
                     </isif>
                 </div>

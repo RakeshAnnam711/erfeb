@@ -2,10 +2,11 @@
     This overwrites what is in rvw_integration_core.
     The reason for the duplication is to update the design while keeping the template unaffected in rvw_integration_core.
 </iscomment>
+<isset name="isAgentLockedLineItem" value="${lineItem.isAgentLockedLineItem || require('*/cartridge/scripts/helpers/agentBasketLineItemLocks').isLockedUUID(require('dw/order/BasketMgr').getCurrentBasket(), lineItem.UUID)}" scope="page"/>
 
 <div class="line-item-brand-section">
     <h1 class="line-item-name line-item-brand-name">${empty(lineItem.brand) ? '' : lineItem.brand}</h1>
-    <isif condition="${!lineItem.isBonusProductLineItem}">
+    <isif condition="${!lineItem.isBonusProductLineItem && !isAgentLockedLineItem}">
         <div class="remove-line-item">
             <button type="button" class="remove-btn remove-product icon-close" data-toggle="modal"
                     data-target="#removeProductModal" data-pid="${lineItem.id}"
