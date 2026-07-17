@@ -13981,6 +13981,27 @@ known for their artistic motifs and rich hues, amongst a line of instantly-recog
         </custom-attributes>
     </category>
 
+    <category category-id="live-selling-dev-products">
+        <display-name xml:lang="x-default">Live Selling Dev Products</display-name>
+        <description xml:lang="x-default">Development PLP category for live selling products.</description>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <template/>
+        <page-attributes>
+            <page-title xml:lang="x-default">Live Selling Dev Products</page-title>
+            <page-url xml:lang="x-default">live-selling-dev-products</page-url>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="contentSubLinksOnly">false</custom-attribute>
+            <custom-attribute attribute-id="enableMegamenu">false</custom-attribute>
+            <custom-attribute attribute-id="isLiveSellingCategory">true</custom-attribute>
+            <custom-attribute attribute-id="menuHighlight">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">false</custom-attribute>
+            <custom-attribute attribute-id="showInMenuAlways">false</custom-attribute>
+            <custom-attribute attribute-id="showViewAllLink">false</custom-attribute>
+        </custom-attributes>
+    </category>
+
     <category category-id="search-category">
         <display-name xml:lang="x-default">SEO Categories</display-name>
         <online-flag>false</online-flag>
@@ -214805,13 +214826,23 @@ known for their artistic motifs and rich hues, amongst a line of instantly-recog
 
     <category-assignment category-id="bambuserliveshopping" product-id="Q3B0596DWB004"/>
 
+    <category-assignment category-id="live-selling-dev-products" product-id="QJABVI1YPB015"/>
+
     <category-assignment category-id="bambuserliveshopping" product-id="Q5B00J1LE9004"/>
+
+    <category-assignment category-id="live-selling-dev-products" product-id="QNA1A2ABIB001"/>
 
     <category-assignment category-id="bambuserliveshopping" product-id="Q5B00J1LK9012"/>
 
+    <category-assignment category-id="live-selling-dev-products" product-id="Q6B0270EI6004"/>
+
     <category-assignment category-id="bambuserliveshopping" product-id="Q5B5ID3PW9000"/>
 
+    <category-assignment category-id="live-selling-dev-products" product-id="QJA0FKP40B008"/>
+
     <category-assignment category-id="bambuserliveshopping" product-id="Q6A3DV1IKB000"/>
+
+    <category-assignment category-id="live-selling-dev-products" product-id="Q6BALI1IK1052"/>
 
     <category-assignment category-id="bambuserliveshopping" product-id="Q6A4911IKB001"/>
 

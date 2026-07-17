@@ -48,9 +48,9 @@
         />
     </isif>
 
-    <isif condition="${pdict.display.showQuickView !== false || pdict.display.showQuickAddToCart !== false}">
-        <div class="quick-action-btns justify-content-end ${pdict.display.showQuickAddToCart !== false && !setOrBundle ? 'justify-content-between' : ''} ${pdict.quickbuyMethod == 'icon' || pdict.quickAddToCartMethod == 'icon' ? 'icons' : ''}">
-            <isif condition="${pdict.display.showQuickAddToCart !== false}">
+    <isif condition="${pdict.display.showQuickView !== false || (pdict.display.showQuickAddToCart !== false && !product.isLiveSellingProduct)}">
+        <div class="quick-action-btns justify-content-end ${pdict.display.showQuickAddToCart !== false && !product.isLiveSellingProduct && !setOrBundle ? 'justify-content-between' : ''} ${pdict.quickbuyMethod == 'icon' || pdict.quickAddToCartMethod == 'icon' ? 'icons' : ''}">
+            <isif condition="${pdict.display.showQuickAddToCart !== false && !product.isLiveSellingProduct}">
                 <isif condition="${!empty(product.isOnlyVariant)}">
                     <input type="hidden" class="add-to-cart-url" value="${URLUtils.url('Cart-AddProduct')}" data-quantity="1">
                     <button

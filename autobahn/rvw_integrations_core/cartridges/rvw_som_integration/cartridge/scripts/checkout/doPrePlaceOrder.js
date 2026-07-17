@@ -24,6 +24,93 @@ function buildStorefrontUrl(path, fallbackUrl) {
     return baseUrl + relativePath;
 }
 
+function addUnique(values, value) {
+    if (!empty(value) && values.indexOf(value) === -1) {
+        values.push(value);
+    }
+}
+
+function getCustomValue(customAttributes, attributeID) {
+    var value;
+
+    try {
+        if (!customAttributes || !(attributeID in customAttributes)) {
+            return '';
+        }
+
+        value = customAttributes[attributeID];
+
+        if (empty(value)) {
+            return '';
+        }
+
+        return value.toString();
+    } catch (e) {
+        return '';
+    }
+}
+
+function getCustomBoolean(customAttributes, attributeID) {
+    try {
+        return !!(customAttributes && attributeID in customAttributes && customAttributes[attributeID]);
+    } catch (e) {
+        return false;
+    }
+}
+
+function isLiveSellingCategory(category) {
+    var liveCategoryIDs = ['live-selling-dev-products'];
+    var categoryID;
+
+    if (empty(category)) {
+        return false;
+    }
+
+    try {
+        categoryID = category.ID || (typeof category.getID === 'function' && category.getID());
+
+        if (liveCategoryIDs.indexOf(categoryID) > -1) {
+            return true;
+        }
+
+        return getCustomBoolean(category.custom, 'isLiveSellingCategory');
+    } catch (e) {
+        return false;
+    }
+}
+
+function isLiveSellingProduct(product) {
+    var categories;
+    var foundLiveCategory = false;
+
+    if (empty(product)) {
+        return false;
+    }
+
+    if (getCustomBoolean(product.custom, 'isLiveSellingProduct')) {
+        return true;
+    }
+
+    try {
+        if (isLiveSellingCategory(product.primaryCategory)) {
+            return true;
+        }
+
+        categories = product.categories;
+        if (categories) {
+            categories.toArray().forEach(function (category) {
+                if (isLiveSellingCategory(category)) {
+                    foundLiveCategory = true;
+                }
+            });
+        }
+    } catch (e) {
+        return false;
+    }
+
+    return foundLiveCategory;
+}
+
 /**
  * Allows an override for integrations to implement logic after an order is placed.
  * @param {dw.order.Order} order - The order object to be placed
@@ -36,6 +123,9 @@ function doPrePlaceOrder(order) {
         var zetaTrackEventService = require('*/cartridge/scripts/services/zetaTrackEventService');
         var shipments = order.getShipments();
         var billingAddress = order.getBillingAddress();
+        var isLiveSellingOrder = false;
+        var liveSellingHostNames = [];
+        var liveSellingEventDates = [];
         if (shipments.length > 0) {
             dwTransaction.begin();
             order.custom.somCC_checkoutStorefront = somOrderHelper.GetOrderCheckoutStorefront(order);
@@ -56,6 +146,24 @@ function doPrePlaceOrder(order) {
                         var product = lineItem && lineItem.product;
 
                         if (!empty(product)) {
+                            if (isLiveSellingProduct(product)) {
+                                try {
+                                    var liveSellingItemID = getCustomValue(product.custom, 'liveSellingItemID') || product.ID;
+                                    var liveSellingHostName = getCustomValue(lineItem.custom, 'liveSellingHostName') || getCustomValue(product.custom, 'liveSellingHostName');
+                                    var liveSellingEventDate = getCustomValue(lineItem.custom, 'liveSellingEventDate') || getCustomValue(product.custom, 'liveSellingEventDate');
+
+                                    isLiveSellingOrder = true;
+                                    lineItem.custom.isLiveSellingLineItem = true;
+                                    lineItem.custom.liveSellingItemID = liveSellingItemID;
+                                    lineItem.custom.liveSellingHostName = liveSellingHostName;
+                                    lineItem.custom.liveSellingEventDate = liveSellingEventDate;
+                                    addUnique(liveSellingHostNames, liveSellingHostName);
+                                    addUnique(liveSellingEventDates, liveSellingEventDate);
+                                } catch(err) {
+                                    dwLogger.warn('Missing ProductLineItem live selling custom attribute definition: ' + err);
+                                }
+                            }
+
                             var imageObject = new Object;
 
                             images(imageObject, product, { types: ['small','large'], quantity: 'single' });
@@ -111,6 +219,15 @@ function doPrePlaceOrder(order) {
                     }
                 });
             });
+            try {
+                if (isLiveSellingOrder) {
+                    order.custom.isLiveSellingOrder = true;
+                    order.custom.liveSellingHostName = liveSellingHostNames.join(', ');
+                    order.custom.liveSellingEventDate = liveSellingEventDates.join(', ');
+                }
+            } catch(err) {
+                dwLogger.warn('Missing Order live selling custom attribute definition: ' + err);
+            }
             try {
                 if (!empty(billingAddress.firstName)) {
                     order.custom.somCC_billingFirstName = billingAddress.firstName;

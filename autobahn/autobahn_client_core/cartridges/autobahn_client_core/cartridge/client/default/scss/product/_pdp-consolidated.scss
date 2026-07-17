@@ -77,6 +77,28 @@
 .product-detail {
     margin-bottom: 0;
 
+    .live-selling-product-meta-pdp {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0 18px;
+        font-size: 13px;
+        text-transform: uppercase;
+
+        .live-selling-badge {
+            background-color: $black;
+            border-color: $black;
+            color: $white;
+            padding: 4px 8px;
+        }
+
+        .live-selling-item-id {
+            color: $base-font-color;
+            font-weight: 500;
+        }
+    }
+
     .product-number {
         .product-id {
             color: $pdp-product-number-color;

@@ -12,7 +12,13 @@ function mergeBasket(sourceBasket, currentBasket) {
 		// nothing to merge if there was no source basket (e.g. getStoredBasket() returned null)
 		return;
 	}
-	var basketMergeContext = new BasketMergeContext(currentBasket);
+	var isAgentSourceBasket = false;
+	try {
+		isAgentSourceBasket = typeof sourceBasket.isAgentBasket === "function" && sourceBasket.isAgentBasket();
+	} catch (e) {
+		isAgentSourceBasket = false;
+	}
+	var basketMergeContext = new BasketMergeContext(currentBasket, isAgentSourceBasket);
 	transaction.wrap(() => {
 		// merge shipments
 		mergeShipments(sourceBasket, basketMergeContext);
@@ -158,13 +164,18 @@ function mergeProductItem(sourceItem, mergeContext) {
 		// item merged
 		newQuantity = oldQuantity + sourceItem.quantityValue;
 		dw.system.Logger.debug(info + " increase quantity " + oldQuantity + " -> " + newQuantity);
+		if (mergeContext.isAgentSourceBasket) {
+			// pre-existing target item was not created from the agent basket, so it is not marked
+			// as a CSC handoff line item here; the merged-in CSC quantity is not separately locked
+			dw.system.Logger.warn(info + " CSC handoff item merged into an existing non-CSC line item, quantity not locked");
+		}
 	} else {
 		// new item created
 		newQuantity = sourceItem.quantityValue;
 		dw.system.Logger.debug(info + " create with quantity " + newQuantity);
 		// copy Attributes only for new product line items
 		targetItem.setQuantityValue(newQuantity);
-		copyProductItemAttributes(info, sourceItem, targetItem);
+		copyProductItemAttributes(info, sourceItem, targetItem, mergeContext.isAgentSourceBasket);
 	}
 	// update the merge context
 	mergeContext.updateQuantity(targetItem, newQuantity);
@@ -172,16 +183,23 @@ function mergeProductItem(sourceItem, mergeContext) {
 
 /**
  * Copy product line item
- * @param {string} info 
+ * @param {string} info
  * @param {dw.order.ProductLineItem} sourceItem - the source product line item
- * @param {dw.order.ProductLineItem} targetItem - the target product line item 
+ * @param {dw.order.ProductLineItem} targetItem - the target product line item
+ * @param {boolean} isAgentSourceBasket - true when sourceItem originates from a CSC/BM agent basket
  */
-function copyProductItemAttributes(info, sourceItem, targetItem) {
+function copyProductItemAttributes(info, sourceItem, targetItem, isAgentSourceBasket) {
 	var copyInfo = info + " copy ProductLineItem"
 	// copy system attributes
 	copySystemAttributes(copyInfo, sourceItem, targetItem)
-	// copying custom attributes 
+	// copying custom attributes
 	copyCustomAttributes(copyInfo, sourceItem, targetItem);
+	if (isAgentSourceBasket) {
+		// mark line items handed off from a CSC/BM agent basket so cart locking (agentBasketLineItemLocks)
+		// can identify and lock them once they land in the customer's own (non-agent) basket
+		targetItem.custom.isCSCHandoffLineItem = true;
+		dw.system.Logger.debug(info + " marked as CSC handoff line item");
+	}
 	// copy productInventoryListID
 	copySystemAttributeIfExisting(copyInfo, sourceItem, targetItem, "productInventoryListID", true);
 	var sourceDependentItems = getDependentProductItems(sourceItem);
@@ -197,7 +215,7 @@ function copyProductItemAttributes(info, sourceItem, targetItem) {
 			if (targetDependentItem.product && targetDependentItem.product.isMaster() && sourceDependentItem.product && !sourceDependentItem.product.isMaster()) {
 				targetDependentItem.replaceProduct(sourceDependentItem.product)
 			}
-			copyProductItemAttributes(dependentInfo, sourceDependentItem, targetDependentItem)
+			copyProductItemAttributes(dependentInfo, sourceDependentItem, targetDependentItem, isAgentSourceBasket)
 		} else {
 			dw.system.Logger.warn(dependentInfo + " target item missing " + key);
 		}
@@ -616,9 +634,11 @@ function TargetProductLineItem(targetItem) {
 
 /**
  * @param {dw.order.Basket} currentBasket
+ * @param {boolean} isAgentSourceBasket - true when the basket being merged in is a CSC/BM agent basket
  */
-function BasketMergeContext(currentBasket) {
+function BasketMergeContext(currentBasket, isAgentSourceBasket) {
 	this.currentBasket = currentBasket;
+	this.isAgentSourceBasket = isAgentSourceBasket;
 	var _targetProductLineItems = getItemsByUUID(currentBasket, item => new TargetProductLineItem(item));
 
 	this.getTargetProductLineItems =

@@ -1,5 +1,7 @@
 <!--- Edit product --->
 <isset name="isGiftCertificateLineItem" value="${lineItem.productType === 'giftCertificate'}" scope="page"/>
+<isset name="isAgentLockedLineItem" value="${lineItem.isAgentLockedLineItem || require('*/cartridge/scripts/helpers/agentBasketLineItemLocks').isLockedUUID(require('dw/order/BasketMgr').getCurrentBasket(), lineItem.UUID)}" scope="page"/>
+<isif condition="${!isAgentLockedLineItem}">
 <div class="product-edit m-0">
     <iswishlisticon
         extraclass="move"
@@ -19,3 +21,4 @@
         <isinclude template="integrations/cart/productCard/cartProductCard/deleteButton" />
     </isif>
 </div>
+</isif>
