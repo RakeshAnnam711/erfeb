@@ -1,0 +1,94 @@
+PdpMakeAnOffer content asset changes
+Fixed file checked:
+/home/inno-rakesh/Desktop/err/codex_fix/pdpMakeAnOfferFix.html
+
+Line numbers below are based on pdpMakeAnOfferFix.html.
+
+1. Line 10
+   Added hidden Salesforce standard Contact Name field:
+   <input id="name" maxlength="80" name="name" type="hidden" value="" />
+
+   Reason:
+   This lets the script submit a full customer name to Salesforce Web-to-Case
+   using the standard "name" field, in addition to the custom first/last fields.
+
+2. Line 18
+   Updated First Name input:
+   - disabled="disabled" was removed
+   - readonly="readonly" was added
+   - type was changed from "firstname" to "text"
+
+   Current mapping:
+   name="00N2S000007S6FN"
+
+   Reason:
+   Disabled form fields are not submitted to Salesforce. Readonly fields are
+   submitted but still cannot be edited by the customer. "firstname" is not a
+   valid HTML input type, so it should be "text".
+
+3. Line 20
+   Updated Last Name input:
+   - disabled="disabled" was removed
+   - readonly="readonly" was added
+   - type was changed from "lastname" to "text"
+
+   Current mapping:
+   name="00N2S000007S6LN"
+
+   Reason:
+   Disabled form fields are not submitted to Salesforce. Readonly fields are
+   submitted but still cannot be edited by the customer. "lastname" is not a
+   valid HTML input type, so it should be "text".
+
+4. Line 26
+   Updated Email input:
+   - disabled="disabled" was removed
+   - readonly="readonly" was added
+
+   Current mapping:
+   name="00N2S000007S8pt"
+
+   Reason:
+   Disabled email is not submitted to Salesforce. Readonly email is submitted
+   and still remains non-editable.
+
+5. Between lines 28 and 31
+   Removed the duplicate hidden email block that existed in the old file:
+   <div class="row d-none">
+   <div class="col-12"><label for="email">Email</label> ... id="email" ...</div>
+   </div>
+
+   Reason:
+   The old file had two elements with id="email". Duplicate IDs can cause
+   document.getElementById("email") to read the wrong field and can make the
+   submitted email behavior confusing.
+
+6. Line 38
+   Updated submit button:
+   - type was changed from "submit" to "button"
+
+   Reason:
+   The custom JavaScript validates the fields, sets hidden values, then calls
+   offerForm.submit(). Using type="button" prevents native form submission from
+   bypassing that custom logic.
+
+7. Line 149
+   Added JavaScript to populate the hidden Salesforce Contact Name field:
+   document.getElementById("name").value = `${firstName} ${lastName}`.trim();
+
+   Reason:
+   This sets the standard Web-to-Case "name" field before the form submits.
+
+Existing Salesforce field mappings in pdpMakeAnOfferFix.html:
+- Line 10: SKU custom field: 00N2S000007S8qS
+- Line 18: First Name custom field: 00N2S000007S6FN
+- Line 20: Last Name custom field: 00N2S000007S6LN
+- Line 26: Email custom field: 00N2S000007S8pt
+- Line 28: Phone custom field: 00N2S000007S7PN
+- Line 32: Offer custom field: 00N2S000007S7Cv
+
+Salesforce destination was not changed:
+- Line 10 form action:
+  https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8
+- Line 10 orgid:
+  00Df4000001SZOK

@@ -1,0 +1,486 @@
+<!--
+    PDP Make an Offer Web-to-Case form.
+    This content asset is rendered inside the PDP Make an Offer modal.
+-->
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript">
+    window.SALESFORCE_WEB_TO_CASE_CONFIG = {
+        actionUrl: 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8',
+        orgId: '00Df4000001SZOK',
+        fields: {
+            orgId: 'orgid',
+            sku: '00N2S000007S8qS',
+            contactName: 'name',
+            firstName: '00N2S000007S6FN',
+            lastName: '00N2S000007S6LN',
+            email: '00N2S000007S8pt',
+            phoneNumber: '00N2S000007S7PN',
+            offerAmount: '00N2S000007S7Cv'
+        }
+    };
+</script>
+
+<div class="container" id="MakeAnOfferForm">
+    <div class="row">
+        <div class="col-12">
+            <p class="font--secondary offer-text">
+                Submit your best offer. You will receive a follow-up email after our team has reviewed your offer.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <form
+            action=""
+            class="col-12"
+            id="offerForm"
+            method="POST"
+            target="hiddenframe"
+        >
+            <input id="salesforceOrgId" type="hidden" value="">
+            <input id="sku" type="hidden" value="">
+            <input id="name" maxlength="80" type="hidden" value="">
+
+            <!--
+                Optional Web-to-Case debug fields.
+                Enable only when testing with a safe email recipient.
+
+                <input type="hidden" name="debug" value="1">
+                <input type="hidden" name="debugEmail" value="aconn@wgacany.com">
+            -->
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="firstname">First Name</label>
+                    <input
+                        class="form-control required"
+                        id="firstname"
+                        maxlength="80"
+                        readonly="readonly"
+                        size="20"
+                        type="text"
+                    >
+                </div>
+
+                <div class="col-6">
+                    <label for="lastname">Last Name</label>
+                    <input
+                        class="form-control required"
+                        id="lastname"
+                        maxlength="80"
+                        readonly="readonly"
+                        size="20"
+                        type="text"
+                    >
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 d-none">
+                    <label for="countryCode">Country Code</label>
+                    <select class="form-control required" id="countryCode" name="countryCode">
+                        <option selected="selected" value="+1">+1 (United States)</option>
+                        <option value="+44">+44 (United Kingdom)</option>
+                        <option value="+91">+91 (India)</option>
+                        <option value="+61">+61 (Australia)</option>
+                        <option value="+81">+81 (Japan)</option>
+                        <option value="+49">+49 (Germany)</option>
+                        <option value="+33">+33 (France)</option>
+                        <option value="+39">+39 (Italy)</option>
+                        <option value="+34">+34 (Spain)</option>
+                        <option value="+86">+86 (China)</option>
+                        <option value="+7">+7 (Russia)</option>
+                        <option value="+82">+82 (South Korea)</option>
+                        <option value="+55">+55 (Brazil)</option>
+                        <option value="+62">+62 (Indonesia)</option>
+                        <option value="+64">+64 (New Zealand)</option>
+                        <option value="+60">+60 (Malaysia)</option>
+                        <option value="+65">+65 (Singapore)</option>
+                        <option value="+27">+27 (South Africa)</option>
+                        <option value="+971">+971 (United Arab Emirates)</option>
+                        <option value="+63">+63 (Philippines)</option>
+                        <option value="+46">+46 (Sweden)</option>
+                        <option value="+31">+31 (Netherlands)</option>
+                        <option value="+41">+41 (Switzerland)</option>
+                        <option value="+32">+32 (Belgium)</option>
+                        <option value="+52">+52 (Mexico)</option>
+                        <option value="+98">+98 (Iran)</option>
+                        <option value="+90">+90 (Turkey)</option>
+                        <option value="+94">+94 (Sri Lanka)</option>
+                        <option value="+880">+880 (Bangladesh)</option>
+                        <option value="+66">+66 (Thailand)</option>
+                        <option value="+94">+94 (Sri Lanka)</option>
+                        <option value="+92">+92 (Pakistan)</option>
+                        <option value="+356">+356 (Malta)</option>
+                        <option value="+57">+57 (Colombia)</option>
+                        <option value="+48">+48 (Poland)</option>
+                        <option value="+45">+45 (Denmark)</option>
+                        <option value="+43">+43 (Austria)</option>
+                        <option value="+36">+36 (Hungary)</option>
+                        <option value="+420">+420 (Czech Republic)</option>
+                        <option value="+421">+421 (Slovakia)</option>
+                        <option value="+351">+351 (Portugal)</option>
+                        <option value="+30">+30 (Greece)</option>
+                        <option value="+40">+40 (Romania)</option>
+                        <option value="+56">+56 (Chile)</option>
+                        <option value="+58">+58 (Venezuela)</option>
+                        <option value="+94">+94 (Sri Lanka)</option>
+                        <option value="+972">+972 (Israel)</option>
+                        <option value="+353">+353 (Ireland)</option>
+                        <option value="+213">+213 (Algeria)</option>
+                        <option value="+220">+220 (Gambia)</option>
+                        <option value="+234">+234 (Nigeria)</option>
+                        <option value="+231">+231 (Liberia)</option>
+                        <option value="+84">+84 (Vietnam)</option>
+                        <option value="+995">+995 (Georgia)</option>
+                        <option value="+374">+374 (Armenia)</option>
+                        <option value="+977">+977 (Nepal)</option>
+                        <option value="+374">+374 (Armenia)</option>
+                        <option value="+963">+963 (Syria)</option>
+                        <option value="+964">+964 (Iraq)</option>
+                        <option value="+965">+965 (Kuwait)</option>
+                        <option value="+966">+966 (Saudi Arabia)</option>
+                        <option value="+968">+968 (Oman)</option>
+                        <option value="+971">+971 (United Arab Emirates)</option>
+                        <option value="+372">+372 (Estonia)</option>
+                        <option value="+375">+375 (Belarus)</option>
+                        <option value="+380">+380 (Ukraine)</option>
+                        <option value="+48">+48 (Poland)</option>
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <label for="email">Email</label>
+                    <input
+                        class="form-control required"
+                        id="email"
+                        maxlength="80"
+                        readonly="readonly"
+                        size="20"
+                        type="email"
+                    >
+                </div>
+
+                <div class="col-6">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input
+                        class="form-control required"
+                        id="phoneNumber"
+                        pattern="[0-9]*"
+                        readonly="readonly"
+                        size="20"
+                        type="tel"
+                    >
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="00N2S000007S7Cv">Offer:</label>
+                    <span class="currency-symbol">$</span>
+                    <input
+                        class="offer-input form-control required"
+                        id="00N2S000007S7Cv"
+                        min="1"
+                        readonly="readonly"
+                        size="20"
+                        step="any"
+                        type="number"
+                    >
+                </div>
+
+                <div class="col-6">
+                    <label for="Retail-Price">Retail:</label>
+                    <span class="currency-symbol">$</span>
+                    <input
+                        class="offer-retail form-control"
+                        disabled="disabled"
+                        id="Retail-Price"
+                        min="1"
+                        name="Retail-Price"
+                        size="20"
+                        type="number"
+                    >
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <button
+                        class="btn btn-primary font--primary"
+                        id="offer-submit-btn"
+                        name="send"
+                        type="button"
+                        value="submit offer"
+                    >
+                        submit offer
+                    </button>
+                    <span id="errorcode"></span>
+                </div>
+            </div>
+
+            <div id="offerResponseMessage">&nbsp;</div>
+        </form>
+    </div>
+</div>
+
+<iframe id="hiddenframe" name="hiddenframe" style="display: none;"></iframe>
+
+<script type="text/javascript">
+    function applySalesforceWebToCaseConfig() {
+        var config = window.SALESFORCE_WEB_TO_CASE_CONFIG;
+
+        document.getElementById('offerForm').action = config.actionUrl;
+        document.getElementById('salesforceOrgId').name = config.fields.orgId;
+        document.getElementById('salesforceOrgId').value = config.orgId;
+        document.getElementById('sku').name = config.fields.sku;
+        document.getElementById('name').name = config.fields.contactName;
+        document.getElementById('firstname').name = config.fields.firstName;
+        document.getElementById('lastname').name = config.fields.lastName;
+        document.getElementById('email').name = config.fields.email;
+        document.getElementById('phoneNumber').name = config.fields.phoneNumber;
+        document.getElementById('00N2S000007S7Cv').name = config.fields.offerAmount;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var url = new URL(window.location.href);
+        var productPrice = document.querySelector('.product-data .price .sales .value').getAttribute('content');
+        var productSku = document.querySelector('.product-data .product-id').textContent;
+        var offerMade = url.searchParams.get('sentOffer');
+        var offerInput = document.getElementById('00N2S000007S7Cv');
+        var retailPriceInput = document.getElementById('Retail-Price');
+
+        applySalesforceWebToCaseConfig();
+        document.getElementById('sku').value = productSku;
+
+        if (offerMade === 'true') {
+            showResponse();
+        }
+
+        retailPriceInput.value = Math.trunc(productPrice);
+        offerInput.value = Math.trunc(productPrice);
+
+        offerInput.addEventListener('input', function (event) {
+            var currencyRate = document.getElementById('pdpCurrencyRate').value;
+            var offer = offerInput.value;
+            var price = document.querySelector('.product-data .price .sales .value').getAttribute('content');
+            var placedOffer = Math.trunc(offer / currencyRate);
+            var productPriceUSD = Math.trunc(price / currencyRate);
+            var submitButton = document.querySelector('#offer-submit-btn');
+
+            document.getElementById('pdpProductUSDPrice').value = placedOffer;
+            submitButton.disabled = 'disabled';
+
+            if (placedOffer < Math.round(productPriceUSD - (productPriceUSD * 0.25))) {
+                event.target.style.borderColor = 'red';
+                document.getElementById('errorcode').innerHTML =
+                    'Offer is too low for consideration. Please increase your offer<br>';
+                submitButton.disabled = 'disabled';
+            } else if (Number(offer) > Number(price)) {
+                event.target.style.borderColor = 'red';
+                document.getElementById('errorcode').innerHTML =
+                    'Offer price should not be more than the retail price.<br>';
+                submitButton.disabled = 'disabled';
+            } else {
+                document.getElementById('errorcode').innerHTML = ' ';
+                event.target.style.borderColor = 'inherit';
+                submitButton.disabled = '';
+            }
+        });
+
+        document.querySelector('#offer-submit-btn').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            var errorElement = document.getElementById('errorcode');
+            var firstName = document.getElementById('firstname').value.trim();
+            var lastName = document.getElementById('lastname').value.trim();
+            var phoneNumber = document.getElementById('phoneNumber').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var placedOffer = document.getElementById('pdpProductUSDPrice').value;
+            var isValid = true;
+
+            errorElement.innerHTML = '';
+            document.getElementById('name').value = (firstName + ' ' + lastName).trim();
+
+            var firstNameError = validateName(firstName);
+            if (firstNameError) {
+                isValid = false;
+                errorElement.innerHTML += '<p style="color: red;">' + firstNameError + '</p>';
+            }
+
+            var lastNameError = validateName(lastName);
+            if (lastNameError) {
+                isValid = false;
+                errorElement.innerHTML += '<p style="color: red;">' + lastNameError + '</p>';
+            }
+
+            var phoneNumberError = validatePhoneNumber(phoneNumber);
+            if (phoneNumberError) {
+                isValid = false;
+                errorElement.innerHTML += '<p style="color: red;">' + phoneNumberError + '</p>';
+            }
+
+            var emailError = validateEmail(email);
+            if (emailError) {
+                isValid = false;
+                errorElement.innerHTML += '<p style="color: red;">' + emailError + '</p>';
+            }
+
+            if (isValid) {
+                var oldPhone = document.getElementById('phoneNumber').getAttribute('oldPhoneNumber');
+
+                offerInput.value = placedOffer;
+                document.getElementById('offerForm').submit();
+
+                document.getElementById('MakeAnOfferForm').innerHTML =
+                    '<h3>Offer Sent!</h3>' +
+                    (oldPhone !== phoneNumber
+                        ? "<div class='mt-2'>The phone number on your profile has been updated successfully.</div>"
+                        : '') +
+                    "<button type='button' class='btn btn-primary' data-dismiss='modal' aria-label='Close'>Close</button>";
+
+                window.parent.postMessage({
+                    action: 'CustomerOfferSent',
+                    phoneNumber: oldPhone === phoneNumber ? '' : phoneNumber
+                }, '*');
+            }
+        });
+    });
+
+    function showResponse() {
+        document.getElementById('MakeAnOfferForm').innerHTML =
+            "<h3>Offer Sent!</br></h3><button type='button' class='btn btn-primary' data-dismiss='modal' aria-label='Close'>Close</button>";
+
+        document.querySelector('.btn-submit-offer').click();
+    }
+
+    function validateEmail(email) {
+        var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!email) {
+            return 'Email is required.';
+        }
+
+        if (!re.test(String(email).trim())) {
+            return 'Please enter a valid email address.';
+        }
+
+        return null;
+    }
+
+    function validateName(name) {
+        if (!name) {
+            return 'Name is required.';
+        }
+
+        return null;
+    }
+
+    function validatePhoneNumber(phoneNumber) {
+        if (!phoneNumber || phoneNumber.trim() === '') {
+            return 'Phone Number is required.';
+        }
+
+        if (!/^\d+$/.test(phoneNumber)) {
+            return 'Phone number must contain digits only.';
+        }
+
+        return null;
+    }
+
+    function validateFields() {
+        var firstName = document.getElementById('firstname').value.trim();
+        var lastName = document.getElementById('lastname').value.trim();
+        var phoneNumber = document.getElementById('phoneNumber').value.trim();
+        var errorElement = document.getElementById('errorcode');
+        var isValid = true;
+
+        errorElement.innerHTML = '';
+
+        var firstNameError = validateName(firstName);
+        if (firstNameError) {
+            isValid = false;
+            errorElement.innerHTML += '<p style="color: red;">' + firstNameError + '</p>';
+        }
+
+        var lastNameError = validateName(lastName);
+        if (lastNameError) {
+            isValid = false;
+            errorElement.innerHTML += '<p style="color: red;">' + lastNameError + '</p>';
+        }
+
+        var phoneNumberError = validatePhoneNumber(phoneNumber);
+        if (phoneNumberError) {
+            isValid = false;
+            errorElement.innerHTML += '<p style="color: red;">' + phoneNumberError + '</p>';
+        }
+
+        return isValid;
+    }
+</script>
+
+<style type="text/css">
+    #MakeAnOfferForm {
+        text-align: center;
+    }
+
+    #MakeAnOfferForm #offerForm {
+        padding: 0;
+        text-align: left;
+    }
+
+    #submitOfferModal .modal-header .modal-title {
+        margin: 0 auto;
+    }
+
+    #submitOfferModal .modal-body .btn-primary {
+        margin-top: 24px;
+        width: 100%;
+    }
+
+    #submitOfferModal #errorcode {
+        color: red;
+        display: block;
+        margin-top: 8px;
+    }
+
+    #submitOfferModal .modal-body .form-control {
+        margin-bottom: 16px;
+        padding-left: 24px;
+    }
+
+    #submitOfferModal .modal-body .form-control.offer-input,
+    #submitOfferModal .modal-body .form-control.offer-retail {
+        padding-left: 45px;
+    }
+
+    #submitOfferModal .modal-footer {
+        display: none;
+    }
+
+    #submitOfferModal .modal-body .offer-text {
+        font-size: 16px;
+        font--weight: 400;
+    }
+
+    #submitOfferModal .modal-body {
+        height: 100%;
+    }
+
+    #submitOfferModal .modal-body .currency-symbol {
+        left: 35px;
+        position: absolute;
+        top: 40px;
+    }
+
+    @media screen and (max-width: 595px) {
+        #submitOfferModal .modal-body .form-control {
+            padding-right: 0;
+        }
+
+        #submitOfferModal .modal-body .currency-symbol {
+            left: 25px;
+        }
+    }
+</style>

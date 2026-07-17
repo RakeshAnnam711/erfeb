@@ -594,11 +594,6 @@ function loadPriceRefineSearch(){
             }
             window._activePriceFilter = { pmin: minPrice, pmax: maxPrice };
             loadSearchResult(refineUrl);
-            setTimeout(function () {
-                searchHelper.loadProductTiles(
-                    document.querySelector('.product-grid-inner') || document
-                );
-            }, 0);
         });
     });
 

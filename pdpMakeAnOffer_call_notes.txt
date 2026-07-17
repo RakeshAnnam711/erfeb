@@ -1,0 +1,221 @@
+PdpMakeAnOffer call notes
+=========================
+
+Fixed HTML file:
+/home/inno-rakesh/Desktop/err/codex_fix/pdpMakeAnOfferFix.html
+
+Purpose
+-------
+This content asset renders the PDP "Make an Offer" modal and submits offer data
+to Salesforce using Web-to-Case.
+
+
+Environment config
+------------------
+Lines 7-22 define the environment-specific Salesforce configuration:
+
+- Line 9:
+  Web-to-Case action URL.
+
+- Line 10:
+  Salesforce org id.
+
+- Lines 12-19:
+  Salesforce Web-to-Case field names / custom field ids.
+
+Current config:
+
+- orgId: 00Df4000001SZOK
+- sku: 00N2S000007S8qS
+- contactName: name
+- firstName: 00N2S000007S6FN
+- lastName: 00N2S000007S6LN
+- email: 00N2S000007S8pt
+- phoneNumber: 00N2S000007S7PN
+- offerAmount: 00N2S000007S7Cv
+
+Why this change was made:
+Previously the Salesforce field ids were hardcoded directly on each input.
+Now each environment can update one config block instead of searching through
+the full HTML form.
+
+
+How config is applied
+---------------------
+Lines 229-242 define applySalesforceWebToCaseConfig().
+
+This function applies the config to the form:
+
+- Line 232:
+  Sets the form action URL.
+
+- Lines 233-234:
+  Sets orgid field name and org id value.
+
+- Lines 235-241:
+  Sets the Salesforce name attributes for SKU, contact name, first name,
+  last name, email, phone, and offer amount.
+
+Line 252 calls applySalesforceWebToCaseConfig() before setting field values or
+submitting the form.
+
+
+Field details
+-------------
+Lines 34-40:
+- Form element.
+- The action is blank in HTML and gets assigned from config on line 232.
+
+Line 41:
+- Hidden org id field.
+- id: salesforceOrgId
+- name/value are assigned from config on lines 233-234.
+
+Line 42:
+- Hidden SKU field.
+- id: sku
+- Salesforce field name is assigned from config on line 235.
+- Value is set from PDP product id on line 253.
+
+Line 43:
+- Hidden standard Contact Name field.
+- id: name
+- Salesforce field name is assigned from config on line 236.
+- Value is set on line 275 as First Name + Last Name.
+
+Lines 55-63:
+- First Name input.
+- id: firstname
+- Salesforce field name is assigned from config on line 237.
+- Editable by the customer.
+- Value is still required and submitted to Salesforce.
+
+Lines 68-76:
+- Last Name input.
+- id: lastname
+- Salesforce field name is assigned from config on line 238.
+- Editable by the customer.
+- Value is still required and submitted to Salesforce.
+
+Lines 153-164:
+- Email input.
+- id: email
+- Salesforce field name is assigned from config on line 239.
+- Editable by the customer.
+- Value is still required, email-format validated, and submitted to Salesforce.
+
+Lines 168-175:
+- Phone input.
+- id: phoneNumber
+- Salesforce field name is assigned from config on line 240.
+- This is currently mapped to 00N2S000007S7PN.
+- If phone is not appearing in Salesforce, ask Salesforce team to confirm this
+  field id and whether that field is on the Case layout / Web-to-Case allowed.
+
+Lines 183-190:
+- Offer amount input.
+- id: 00N2S000007S7Cv
+- Salesforce field name is assigned from config on line 241.
+- Before submit, the JS replaces this value with the USD offer value.
+
+Lines 197-207:
+- Retail price display field.
+- Disabled, intentionally not submitted.
+
+Lines 213-221:
+- Submit button.
+- type="button" so the JS validation runs before form submission.
+
+Line 226:
+- hiddenframe iframe.
+- The Web-to-Case form posts into this hidden iframe so the PDP does not navigate away.
+
+
+JavaScript flow
+---------------
+Lines 245-250:
+- Reads PDP values:
+  - URL
+  - product price
+  - product SKU
+  - sentOffer query param
+  - offer input
+  - retail price input
+
+Line 252:
+- Applies Salesforce config to the form.
+
+Line 253:
+- Sets SKU hidden field value.
+
+Lines 255-257:
+- Shows "Offer Sent" if URL has sentOffer=true.
+
+Lines 259-260:
+- Sets retail and initial offer values from PDP price.
+
+Lines 262-288:
+- Runs when offer amount changes.
+- Converts local offer amount to USD using pdpCurrencyRate.
+- Writes converted USD value to pdpProductUSDPrice.
+- Validates:
+  - offer must be at least 75 percent of retail
+  - offer must not be more than retail
+- Disables submit button if invalid.
+
+Lines 290-346:
+- Runs when submit button is clicked.
+- Prevents native submit.
+- Reads first name, last name, phone, email, and converted offer amount.
+- Clears previous error messages.
+- Line 302 sets standard contact name:
+  document.getElementById('name').value = (firstName + ' ' + lastName).trim();
+- Validates first name, last name, phone, and email.
+- If valid:
+  - Line 331 sets offer input to converted USD value.
+  - Line 332 submits the Web-to-Case form.
+  - Lines 334-339 show "Offer Sent".
+  - Lines 341-344 notify parent PDP script using CustomerOfferSent.
+
+
+Phone issue talking point
+-------------------------
+We are currently sending phone through this config field:
+
+phoneNumber: 00N2S000007S7PN
+
+If phone is not appearing in Salesforce, ask:
+
+1. Is 00N2S000007S7PN the correct Web-to-Case field id in this org?
+2. Is the field on the Case object and on the Product Support Case layout?
+3. Is Web-to-Case allowed to populate that field?
+4. Should the phone field use standard Web-to-Case name="phone" instead?
+
+
+What to ask Salesforce team
+---------------------------
+1. Confirm the field ids in lines 12-19 are valid for the target org.
+2. Confirm whether dev/staging should use org id 00Df4000001SZOK.
+3. Confirm where phone should appear on the Case.
+4. Confirm whether Contact Name should use standard name, custom fields, or both.
+5. Confirm whether phone should allow only digits.
+
+
+Testing checklist
+-----------------
+1. Open eligible PDP as logged-in customer.
+2. Click Make an Offer.
+3. Confirm first name, last name, email, and phone populate.
+4. Enter valid offer.
+5. Submit.
+6. Confirm Salesforce Case has:
+   - SKU
+   - first name
+   - last name
+   - contact/full name
+   - email
+   - phone
+   - offer amount
+7. If phone is missing, inspect the form before submit and confirm:
+   - phoneNumber input has a value
+   - phoneNumber input has name="00N2S000007S7PN" after config applies
