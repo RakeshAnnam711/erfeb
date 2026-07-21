@@ -115,14 +115,14 @@ declare global {
 			/**
 			* RTW Order
 			* @group RTWOrder - RTW Order
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#205) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#248)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#205) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#255)
 			*/
 			isRTWOrder: boolean | null;
 
 			/**
 			* Is Bambuser Order
 			* @group RTWOrder - RTW Order
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#211) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#249)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#211) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#256)
 			*/
 			isbambuserorder: boolean | null;
 
@@ -136,21 +136,30 @@ declare global {
 			/**
 			* Is Live Selling Order
 			* @group RTWOrder - RTW Order
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#224) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#250)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#224) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#257)
 			*/
 			isLiveSellingOrder: boolean | null;
 
 			/**
+			* Is CSC Handoff Order
+
+				True when the order contains at least one line item added by Customer Service / BM handoff. Independent of isLiveSellingOrder - a CSC handoff order is only also a live selling order when the agent explicitly marks a line item as live selling.
+			* @group RTWOrder - RTW Order
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#230) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#258)
+			*/
+			isCSCHandoffOrder: boolean | null;
+
+			/**
 			* Live Selling Host Name
 			* @group RTWOrder - RTW Order
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#230) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#251)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#237) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#259)
 			*/
 			liveSellingHostName: string | null;
 
 			/**
 			* Live Selling Event Date
 			* @group RTWOrder - RTW Order
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#237) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#252)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#244) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#260)
 			*/
 			liveSellingEventDate: string | null;
 
@@ -161,7 +170,7 @@ declare global {
 
 				used for mapping the order of Tiktok
 			* @group Standard - Standard Address
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#259) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#287)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#267) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#295)
 			*/
 			isTiktokOrder: boolean | null;
 
@@ -172,7 +181,7 @@ declare global {
 
 				Related Product SKU for redirecting
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#295) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1494)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#303) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1502)
 			*/
 			relatedProduct: string | null;
 
@@ -181,14 +190,14 @@ declare global {
 
 				WGACA About the Bag
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#308) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1495)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#316) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1503)
 			*/
 			about_the_bag: string | null;
 
 			/**
 			* Amazon Earring Design
 			* @group AmazonProductFeed - Amazon Product Feed
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#321) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1607)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#329) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1615)
 			*/
 			amazonEarring_Design: EnumValue<'ball' | 'climber' | 'cluster' | 'cuff' | 'dangle' | 'drop' | 'fake_gauge' | 'fake_plug' | 'front_and_back' | 'hoop' | 'jacket' | 'non_pierced' | 'stud' | 'threader' | 'wrap' | null> | null;
 
@@ -197,14 +206,14 @@ declare global {
 
 				Export Product To Amazon
 			* @group AmazonProductFeed - Amazon Product Feed
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#394) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1605)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#402) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1613)
 			*/
 			amazonProductExport: boolean | null;
 
 			/**
 			* Amazon Product Type
 			* @group AmazonProductFeed - Amazon Product Feed
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#405) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1608)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#413) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1616)
 			*/
 			amazonProduct_Type: string | null;
 
@@ -213,7 +222,7 @@ declare global {
 
 				Export Product To Amazon Today
 			* @group AmazonProductFeed - Amazon Product Feed
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#417) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1606)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#425) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1614)
 			*/
 			amazonTodayProductExport: boolean | null;
 
@@ -222,7 +231,7 @@ declare global {
 
 				WGACA Authenticity Card
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#428) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1496)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#436) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1504)
 			*/
 			authenticity_card: boolean | null;
 
@@ -231,7 +240,7 @@ declare global {
 
 				Set the color to be used for the badge background. Use css appropriate values.
 			* @group badges - Badges
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#439) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1584)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#447) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1592)
 			*/
 			badgeBackgroundColors: ReadonlyArray<string> | null;
 
@@ -240,7 +249,7 @@ declare global {
 
 				Set the color to be used for the badge border. Use css appropriate values.
 			* @group badges - Badges
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#451) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1585)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#459) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1593)
 			*/
 			badgeBorderColors: ReadonlyArray<string> | null;
 
@@ -249,7 +258,7 @@ declare global {
 
 				Set the font size to be used for the badge text. Use css appropriate values.
 			* @group badges - Badges
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#463) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1582)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#471) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1590)
 			*/
 			badgeFontSizes: ReadonlyArray<string> | null;
 
@@ -258,14 +267,14 @@ declare global {
 
 				Set the color to be used for the badge text. Use css appropriate values.
 			* @group badges - Badges
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#475) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1583)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#483) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1591)
 			*/
 			badgeTextColors: ReadonlyArray<string> | null;
 
 			/**
 			* Bag Silhouette
 			* @group TikTok - TikTok
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#487) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1613)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#495) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1621)
 			*/
 			bagSilhouette: string | null;
 
@@ -274,7 +283,7 @@ declare global {
 
 				WGACA Closure
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#499) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1497)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#507) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1505)
 			*/
 			closure: string | null;
 
@@ -283,7 +292,7 @@ declare global {
 
 				WGACA Condition Name
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#512) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1499)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#520) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1507)
 			*/
 			condition_name: string | null;
 
@@ -292,7 +301,7 @@ declare global {
 
 				WGACA Condition Notes
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#525) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1500)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#533) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1508)
 			*/
 			condition_notes: string | null;
 
@@ -301,7 +310,7 @@ declare global {
 
 				WGACA Country of Origin
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#538) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1501)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#546) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1509)
 			*/
 			country_of_origin: string | null;
 
@@ -310,42 +319,42 @@ declare global {
 
 				WGACA Depth
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#551) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1502)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#559) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1510)
 			*/
 			depth: string | null;
 
 			/**
 			* Depth
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#564) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#572) 
 			*/
 			dimDepth: string | null;
 
 			/**
 			* Height
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#576) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#584) 
 			*/
 			dimHeight: string | null;
 
 			/**
 			* Weight
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#588) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#596) 
 			*/
 			dimWeight: string | null;
 
 			/**
 			* Width
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#600) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#608) 
 			*/
 			dimWidth: string | null;
 
 			/**
 			* Enable RTW Product
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#612) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1540)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#620) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1548)
 			*/
 			enableRTWProduct: boolean | null;
 
@@ -354,7 +363,7 @@ declare global {
 
 				Marks this product as a live selling item. Price and storefront Add to Cart are hidden on PLP and PDP.
 			* @group LiveSelling - Live Selling
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#622) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1551)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#630) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1559)
 			*/
 			isLiveSellingProduct: boolean | null;
 
@@ -363,7 +372,7 @@ declare global {
 
 				Item ID shown on the live selling PLP and PDP.
 			* @group LiveSelling - Live Selling
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#634) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1552)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#642) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1560)
 			*/
 			liveSellingItemID: string | null;
 
@@ -372,7 +381,7 @@ declare global {
 
 				Optional badge text shown for live selling products. Defaults to LIVE.
 			* @group LiveSelling - Live Selling
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#647) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1553)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#655) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1561)
 			*/
 			liveSellingBadgeText: string | null;
 
@@ -381,7 +390,7 @@ declare global {
 
 				Temporary product-level host value for demo/order export until the final schedule mapping is confirmed.
 			* @group LiveSelling - Live Selling
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#660) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1554)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#668) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1562)
 			*/
 			liveSellingHostName: string | null;
 
@@ -390,14 +399,14 @@ declare global {
 
 				Temporary product-level event date value for demo/order export until the final schedule mapping is confirmed.
 			* @group LiveSelling - Live Selling
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#673) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1555)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#681) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1563)
 			*/
 			liveSellingEventDate: string | null;
 
 			/**
 			* Cartons
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#686) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1592)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#694) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1600)
 			*/
 			fdxCartons: ReadonlyArray<string> | null;
 
@@ -406,7 +415,7 @@ declare global {
 
 				Example: Cotton
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#697) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1589)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#705) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1597)
 			*/
 			fdxComposition: string | null;
 
@@ -415,14 +424,14 @@ declare global {
 
 				Country of Origin (CoO) of the product. Two-letter ISO code of the product Country of Origin.
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#710) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1590)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#718) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1598)
 			*/
 			fdxCountryOfOrigin: string | null;
 
 			/**
 			* Export Control Classification Number
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#723) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1594)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#731) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1602)
 			*/
 			fdxEccn: string | null;
 
@@ -431,7 +440,7 @@ declare global {
 
 				Defines whether or not the product, typically with textiles, is a men, women, boy, girl, or unisex. Example: Women's blouse
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#735) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1600)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#743) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1608)
 			*/
 			fdxGender: string | null;
 
@@ -440,7 +449,7 @@ declare global {
 
 				Defines whether a product is hazardous or not:
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#748) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1591)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#756) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1599)
 			*/
 			fdxHazFlag: boolean | null;
 
@@ -449,7 +458,7 @@ declare global {
 
 				Code that allows the calculation of tax payable in the destination country or territory of the shipment.
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#759) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1593)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#767) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1601)
 			*/
 			fdxHsCode: string | null;
 
@@ -458,14 +467,14 @@ declare global {
 
 				Example: importFlag = "AR,PE,BO,BR". Twoletter ISO code of the product country or territory.
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#772) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1597)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#780) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1605)
 			*/
 			fdxImportFlag: string | null;
 
 			/**
 			* Is fixed pricing allowed for current product
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#785) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1601)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#793) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1609)
 			*/
 			fdxIsFixedPricing: boolean | null;
 
@@ -474,14 +483,14 @@ declare global {
 
 				Example: licenseFlag = "AR,PE,BO,BR". Twoletter ISO code of the product country or territory.
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#795) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1598)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#803) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1606)
 			*/
 			fdxLicenseFlag: string | null;
 
 			/**
 			* Multi Country of Origin
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#808) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1596)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#816) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1604)
 			*/
 			fdxMultiCountryOfOrigin: boolean | null;
 
@@ -490,14 +499,14 @@ declare global {
 
 				This field defines the unit of measurement used to express the product dimensions. Possible values are: inches (in), centimeters (cm)
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#818) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1599)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#826) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1607)
 			*/
 			fdxUnitDimension: EnumValue<'in' | 'cm' | null> | null;
 
 			/**
 			* Unit Weight
 			* @group FedEx Attributes - FedEx Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#840) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1595)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#848) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1603)
 			*/
 			fdxUnitWeight: EnumValue<'lb' | 'kg' | 'oz' | 'g' | null> | null;
 
@@ -506,14 +515,14 @@ declare global {
 
 				WGACA Final Sale
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#869) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1503)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#877) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1511)
 			*/
 			final_sale: boolean | null;
 
 			/**
 			* Genre
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#880) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#888) 
 			*/
 			gameGenre: ReadonlyArray<EnumValue<'Action' | 'Educational' | 'Kids' | 'Racing' | 'Role-Playing' | 'Sports' | 'Strategy'>> | null;
 
@@ -522,14 +531,14 @@ declare global {
 
 				WGACA Handle
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#922) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1504)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#930) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1512)
 			*/
 			handle: string | null;
 
 			/**
 			* Handle Drop
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#935) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1505)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#943) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1513)
 			*/
 			handle_drop: string | null;
 
@@ -538,7 +547,7 @@ declare global {
 
 				WGACA Hardware
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#947) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1506)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#955) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1514)
 			*/
 			hardware: string | null;
 
@@ -547,28 +556,28 @@ declare global {
 
 				WGACA Height
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#960) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1507)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#968) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1515)
 			*/
 			height: string | null;
 
 			/**
 			* Image Aspect Ratio
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#973) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#981) 
 			*/
 			imageAspectRatio: string | null;
 
 			/**
 			* Image path LOA
 			* @group TikTok - TikTok
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#985) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1614)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#993) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1622)
 			*/
 			imagepathLOA: string | null;
 
 			/**
 			* Includes
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#997) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1508)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1005) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1516)
 			*/
 			includes: string | null;
 
@@ -577,21 +586,21 @@ declare global {
 
 				WGACA Interior
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1009) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1509)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1017) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1517)
 			*/
 			interior: string | null;
 
 			/**
 			* Interior Pockets
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1022) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1510)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1030) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1518)
 			*/
 			interior_pockets: string | null;
 
 			/**
 			* Is Tiktok Enabled
 			* @group TikTok - TikTok
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1034) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1612)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1042) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1620)
 			*/
 			isTiktokEnabled: boolean | null;
 
@@ -600,7 +609,7 @@ declare global {
 
 				WGACA length
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1044) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1511)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1052) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1519)
 			*/
 			length: string | null;
 
@@ -609,14 +618,14 @@ declare global {
 
 				WGACA Lining
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1057) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1512)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1065) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1520)
 			*/
 			lining: string | null;
 
 			/**
 			* Location
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1070) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1538)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1078) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1546)
 			*/
 			location: ReadonlyArray<EnumValue<'Online Only' | 'Beverly Hills' | 'Soho' | 'Wooster'>> | null;
 
@@ -625,7 +634,7 @@ declare global {
 
 				WGACA Make Offer Enabled
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1100) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1513)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1108) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1521)
 			*/
 			make_offer_enabled: boolean | null;
 
@@ -634,7 +643,7 @@ declare global {
 
 				WGACA Material
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1111) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1514)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1119) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1522)
 			*/
 			material: string | null;
 
@@ -643,7 +652,7 @@ declare global {
 
 				WGACA Page URL PIM Slug
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1124) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1515)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1132) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1523)
 			*/
 			page_url: string | null;
 
@@ -652,28 +661,28 @@ declare global {
 
 				Parent and child category separated by a " - " i.e. "Bags - Backpacks". This is used for custom filtering on certain PLP's.
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1137) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1516)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1145) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1524)
 			*/
 			plp_category_refinement: string | null;
 
 			/**
 			* PLP Custom Refinement Category  (Multi)
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1150) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1158) 
 			*/
 			plp_category_refinement_multi: ReadonlyArray<string> | null;
 
 			/**
 			* Refinement Color
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1161) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1169) 
 			*/
 			refinementColor: EnumValue<'beige' | 'black' | 'blue' | 'bronze' | 'brown' | 'burgundy' | 'clear' | 'colorless' | 'cream' | 'gold' | 'green' | 'grey' | 'gunmetal' | 'leather' | 'miscellaneous' | 'natural' | 'navy' | 'orange' | 'palladium' | 'pink' | 'purple' | 'red' | 'silver' | 'tan' | 'white' | 'yellow' | null> | null;
 
 			/**
 			* Resolution
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1278) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1286) 
 			*/
 			resolution: string | null;
 
@@ -682,7 +691,7 @@ declare global {
 
 				WGACA Season
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1290) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1517)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1298) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1525)
 			*/
 			season: string | null;
 
@@ -691,7 +700,7 @@ declare global {
 
 				WGACA Serial
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1303) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1518)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1311) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1526)
 			*/
 			serial: string | null;
 
@@ -700,7 +709,7 @@ declare global {
 
 				WGACA Shipping Restrictions
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1316) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1519)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1324) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1527)
 			*/
 			shipping_restrictions: boolean | null;
 
@@ -709,7 +718,7 @@ declare global {
 
 				WGACA Shipping Returns
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1327) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1520)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1335) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1528)
 			*/
 			shipping_returns: string | null;
 
@@ -718,7 +727,7 @@ declare global {
 
 				WGACA Sizing
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1340) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1522)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1348) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1530)
 			*/
 			sizing: string | null;
 
@@ -727,7 +736,7 @@ declare global {
 
 				WGACA Skip Sync
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1353) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1524)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1361) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1532)
 			*/
 			skip_sync: boolean | null;
 
@@ -736,7 +745,7 @@ declare global {
 
 				WGACA Slug
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1364) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1526)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1372) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1534)
 			*/
 			slug: string | null;
 
@@ -745,7 +754,7 @@ declare global {
 
 				WGACA Strap Drop 1
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1377) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1527)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1385) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1535)
 			*/
 			strap_drop_1: string | null;
 
@@ -754,14 +763,14 @@ declare global {
 
 				WGACA Strap Drop 2
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1390) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1528)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1398) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1536)
 			*/
 			strap_drop_2: string | null;
 
 			/**
 			* Product Notes
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1403) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1529)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1411) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1537)
 			*/
 			uid: string | null;
 
@@ -770,7 +779,7 @@ declare global {
 
 				WGACA URL Key
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1414) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1530)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1422) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1538)
 			*/
 			url_key: string | null;
 
@@ -779,7 +788,7 @@ declare global {
 
 				WGACA Weight
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1427) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1531)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1435) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1539)
 			*/
 			weight: string | null;
 
@@ -788,7 +797,7 @@ declare global {
 
 				WGACA Width
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1440) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1532)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1448) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1540)
 			*/
 			width: string | null;
 
@@ -797,21 +806,21 @@ declare global {
 
 				WGACA Year
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1453) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1533)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1461) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1541)
 			*/
 			year: string | null;
 
 			/**
 			* Product Category
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1466) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1546)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1474) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1554)
 			*/
 			pCategory: string | null;
 
 			/**
 			* Product Sub Category
 			* @group WGACA-Custom-Attributes - WGACA Custom Attributes
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1478) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1547)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1486) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1555)
 			*/
 			pSubCategory: string | null;
 
@@ -822,7 +831,7 @@ declare global {
 
 				Enable Special Promotion Callout Msg to display when discount is 0
 			* @group enableSpecialPromotionCalloutMsg - Enable Special Promotion Callout Msg
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1698) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1709)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1706) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1717)
 			*/
 			enableSpecialPromotionCalloutMsg: boolean | null;
 
@@ -833,7 +842,7 @@ declare global {
 
 				it will include JS in head tag for all pages.
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1716) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1879)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1724) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1887)
 			*/
 			CustomHeaderScripts: string | null;
 
@@ -842,7 +851,7 @@ declare global {
 
 				Enter the category structure here for categorizing blog articles.
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1723) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1731) 
 			*/
 			blogCategories: string | null;
 
@@ -851,7 +860,7 @@ declare global {
 
 				Disable Account Registration Email Send
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1730) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1877)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1738) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1885)
 			*/
 			disableAccountRegistrationEmailSend: boolean | null;
 
@@ -860,7 +869,7 @@ declare global {
 
 				Disable Make An Offer
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1738) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1873)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1746) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1881)
 			*/
 			disableMakeAnOfferDisplay: boolean | null;
 
@@ -869,7 +878,7 @@ declare global {
 
 				Disable Order Confirmation
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1746) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1874)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1754) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1882)
 			*/
 			disableOrderConfirmation: boolean | null;
 
@@ -878,7 +887,7 @@ declare global {
 
 				Disable Request Next
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1754) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1762) 
 			*/
 			disableRequestNextDisplay: boolean | null;
 
@@ -887,7 +896,7 @@ declare global {
 
 				Enable Frenzy Recommendation on Home page
 			* @group Frenzy recommendation - Frenzy recommendation
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1761) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1888)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1769) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1896)
 			*/
 			enableFrenzyRecommendationOnHome: boolean | null;
 
@@ -896,7 +905,7 @@ declare global {
 
 				Enable Frenzy Recommendation on PDP page
 			* @group Frenzy recommendation - Frenzy recommendation
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1768) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1889)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1776) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1897)
 			*/
 			enableFrenzyRecommendationOnPDP: boolean | null;
 
@@ -905,7 +914,7 @@ declare global {
 
 				Enable Frenzy Recommendation On Search
 			* @group Frenzy recommendation - Frenzy recommendation
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1775) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1890)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1783) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1898)
 			*/
 			enableFrenzyRecommendationOnSearch: boolean | null;
 
@@ -914,28 +923,28 @@ declare global {
 
 				Enable Frenzy Recommendation On Search Bar
 			* @group Frenzy recommendation - Frenzy recommendation
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1782) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1891)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1790) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1899)
 			*/
 			enableFrenzyRecommendationOnSearchBar: boolean | null;
 
 			/**
 			* Enable Tangiblee
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1789) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1878)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1797) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1886)
 			*/
 			enableTangiblee: boolean | null;
 
 			/**
 			* North Beam Enabled
 			* @group northBeamConfig - North Beam Config
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1796) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1884)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1804) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1892)
 			*/
 			isNorthBeamEnabled: boolean | null;
 
 			/**
 			* Smart API Key
 			* @group smartyAddressAutocomplete - Smarty Address Autocomplete
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1802) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1897)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1810) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1905)
 			*/
 			smartyAPIKey: string | null;
 
@@ -944,14 +953,14 @@ declare global {
 
 				Smarty API URL
 			* @group smartyAddressAutocomplete - Smarty Address Autocomplete
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1809) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1896)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1817) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1904)
 			*/
 			smartyAPIUrl: string | null;
 
 			/**
 			* Smarty Address URL
 			* @group smartyAddressAutocomplete - Smarty Address Autocomplete
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1817) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1898)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1825) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1906)
 			*/
 			smartyAddressURL: string | null;
 
@@ -960,35 +969,35 @@ declare global {
 
 				Smarty address enabled
 			* @group smartyAddressAutocomplete - Smarty Address Autocomplete
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1824) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1895)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1832) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1903)
 			*/
 			smartyEnabled: boolean | null;
 
 			/**
 			* Storefront Base URL
 			* @group Storefront Configs - Storefront Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1831) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1869)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1839) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1877)
 			*/
 			storefrontBaseUrl: string | null;
 
 			/**
 			* OneTrust Consent Script
 			* @group OneTrust Configs - OneTrust Cookie Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1838) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1903)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1846) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1911)
 			*/
 			OneTrustConsentScript: string | null;
 
 			/**
 			* Enable OneTrust
 			* @group OneTrust Configs - OneTrust Cookie Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1844) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1902)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1852) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1910)
 			*/
 			OneTrustEnable: boolean | null;
 
 			/**
 			* List Of Non-Authorized Brands
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1851) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1880)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1859) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1888)
 			*/
 			NonAuthorizedBrands: string | null;
 
@@ -997,7 +1006,7 @@ declare global {
 			/**
 			* 
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1910) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1918) 
 			*/
 			storeType: EnumValue<'retail' | 'outlet' | 'comingSoon' | 'other' | null> | null;
 
@@ -1012,7 +1021,7 @@ declare global {
 
 				it will include JS in head tag for all pages.
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1716) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1879)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1724) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1887)
 			*/
 			(name: 'CustomHeaderScripts'): string | null;
 			
@@ -1021,7 +1030,7 @@ declare global {
 
 				Enter the category structure here for categorizing blog articles.
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1723) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1731) 
 			*/
 			(name: 'blogCategories'): string | null;
 			
@@ -1030,7 +1039,7 @@ declare global {
 
 				Disable Account Registration Email Send
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1730) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1877)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1738) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1885)
 			*/
 			(name: 'disableAccountRegistrationEmailSend'): boolean | null;
 			
@@ -1039,7 +1048,7 @@ declare global {
 
 				Disable Make An Offer
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1738) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1873)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1746) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1881)
 			*/
 			(name: 'disableMakeAnOfferDisplay'): boolean | null;
 			
@@ -1048,7 +1057,7 @@ declare global {
 
 				Disable Order Confirmation
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1746) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1874)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1754) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1882)
 			*/
 			(name: 'disableOrderConfirmation'): boolean | null;
 			
@@ -1057,7 +1066,7 @@ declare global {
 
 				Disable Request Next
 			* 
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1754) 
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1762) 
 			*/
 			(name: 'disableRequestNextDisplay'): boolean | null;
 			
@@ -1066,7 +1075,7 @@ declare global {
 
 				Enable Frenzy Recommendation on Home page
 			* @group Frenzy recommendation - Frenzy recommendation
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1761) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1888)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1769) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1896)
 			*/
 			(name: 'enableFrenzyRecommendationOnHome'): boolean | null;
 			
@@ -1075,7 +1084,7 @@ declare global {
 
 				Enable Frenzy Recommendation on PDP page
 			* @group Frenzy recommendation - Frenzy recommendation
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1768) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1889)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1776) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1897)
 			*/
 			(name: 'enableFrenzyRecommendationOnPDP'): boolean | null;
 			
@@ -1084,7 +1093,7 @@ declare global {
 
 				Enable Frenzy Recommendation On Search
 			* @group Frenzy recommendation - Frenzy recommendation
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1775) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1890)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1783) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1898)
 			*/
 			(name: 'enableFrenzyRecommendationOnSearch'): boolean | null;
 			
@@ -1093,28 +1102,28 @@ declare global {
 
 				Enable Frenzy Recommendation On Search Bar
 			* @group Frenzy recommendation - Frenzy recommendation
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1782) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1891)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1790) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1899)
 			*/
 			(name: 'enableFrenzyRecommendationOnSearchBar'): boolean | null;
 			
 			/**
 			* Enable Tangiblee
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1789) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1878)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1797) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1886)
 			*/
 			(name: 'enableTangiblee'): boolean | null;
 			
 			/**
 			* North Beam Enabled
 			* @group northBeamConfig - North Beam Config
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1796) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1884)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1804) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1892)
 			*/
 			(name: 'isNorthBeamEnabled'): boolean | null;
 			
 			/**
 			* Smart API Key
 			* @group smartyAddressAutocomplete - Smarty Address Autocomplete
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1802) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1897)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1810) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1905)
 			*/
 			(name: 'smartyAPIKey'): string | null;
 			
@@ -1123,14 +1132,14 @@ declare global {
 
 				Smarty API URL
 			* @group smartyAddressAutocomplete - Smarty Address Autocomplete
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1809) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1896)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1817) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1904)
 			*/
 			(name: 'smartyAPIUrl'): string | null;
 			
 			/**
 			* Smarty Address URL
 			* @group smartyAddressAutocomplete - Smarty Address Autocomplete
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1817) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1898)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1825) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1906)
 			*/
 			(name: 'smartyAddressURL'): string | null;
 			
@@ -1139,35 +1148,35 @@ declare global {
 
 				Smarty address enabled
 			* @group smartyAddressAutocomplete - Smarty Address Autocomplete
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1824) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1895)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1832) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1903)
 			*/
 			(name: 'smartyEnabled'): boolean | null;
 			
 			/**
 			* Storefront Base URL
 			* @group Storefront Configs - Storefront Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1831) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1869)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1839) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1877)
 			*/
 			(name: 'storefrontBaseUrl'): string | null;
 			
 			/**
 			* OneTrust Consent Script
 			* @group OneTrust Configs - OneTrust Cookie Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1838) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1903)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1846) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1911)
 			*/
 			(name: 'OneTrustConsentScript'): string | null;
 			
 			/**
 			* Enable OneTrust
 			* @group OneTrust Configs - OneTrust Cookie Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1844) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1902)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1852) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1910)
 			*/
 			(name: 'OneTrustEnable'): boolean | null;
 			
 			/**
 			* List Of Non-Authorized Brands
 			* @group WGACA Configs - WGACA Custom Configurations
-			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1851) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1880)
+			* @source [attribute](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1859) | [group](file:///home/inno-rakesh/Desktop/err/work/sf/autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml#1888)
 			*/
 			(name: 'NonAuthorizedBrands'): string | null;
 			

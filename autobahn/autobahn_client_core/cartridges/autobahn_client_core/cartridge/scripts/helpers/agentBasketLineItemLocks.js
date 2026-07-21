@@ -243,12 +243,27 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
 
     storedStorefrontUUIDs = getStoredStorefrontUUIDs(basket);
     hasStorefrontItems = hasStorefrontLineItems(basket);
+
+    // Purge any UUID the session previously cached as locked but that is now confirmed storefront. This
+    // is what actually makes forceMarkStorefrontLineItem's correction stick: without this, a line item
+    // that the sweep briefly (and wrongly) locked earlier in the same request - before the AddProduct
+    // handler corrected its persisted isCSCHandoffLineItem attribute - stayed locked forever, because the
+    // session-cached UUID list only ever gets merged into, never purged, on later calls.
+    if (basket && basket.allProductLineItems) {
+        collections.forEach(basket.allProductLineItems, function (lineItem) {
+            if (isStorefrontLineItem(lineItem) || storedStorefrontUUIDs.indexOf(lineItem.UUID) > -1) {
+                lockedUUIDs = lockedUUIDs.filter(function (uuid) {
+                    return uuid !== lineItem.UUID;
+                });
+            }
+        });
+    }
+
     // Sweep any unclassified line item into CSC on every render while this basket is CSC-sourced. This
     // must stay "always on" (not one-time) so a live-selling item pushed from CSC *after* the customer has
     // already been shopping still gets locked. It is safe against re-claiming customer-added items because
     // Cart.js's AddProduct handler now unconditionally corrects a new item's classification via
-    // forceMarkStorefrontLineItem right after this sweep may have run during the same request's response
-    // build - so any storefront addition is self-healing rather than depending on sweep ordering.
+    // forceMarkStorefrontLineItem, and the purge above keeps the session cache in sync with that correction.
     shouldMarkUnclassifiedAsCSC = forceCurrentItemsLocked || isAgentBasket(basket) || isCustomerServiceCenterBasket(basket);
 
     if (basket && basket.allProductLineItems && shouldMarkUnclassifiedAsCSC) {
