@@ -227,6 +227,13 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="isCSCHandoffOrder">
+                <display-name xml:lang="x-default">Is CSC Handoff Order</display-name>
+                <description xml:lang="x-default">True when the order contains at least one line item added by Customer Service / BM handoff. Independent of isLiveSellingOrder - a CSC handoff order is only also a live selling order when the agent explicitly marks a line item as live selling.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
             <attribute-definition attribute-id="liveSellingHostName">
                 <display-name xml:lang="x-default">Live Selling Host Name</display-name>
                 <type>string</type>
@@ -248,6 +255,7 @@
                 <attribute attribute-id="isRTWOrder"/>
                 <attribute attribute-id="isbambuserorder"/>
                 <attribute attribute-id="isLiveSellingOrder"/>
+                <attribute attribute-id="isCSCHandoffOrder"/>
                 <attribute attribute-id="liveSellingHostName"/>
                 <attribute attribute-id="liveSellingEventDate"/>
             </attribute-group>

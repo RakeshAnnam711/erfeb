@@ -58,6 +58,29 @@ function getCustomBoolean(customAttributes, attributeID) {
     }
 }
 
+/**
+ * Reads a boolean custom attribute as a tri-state value so an agent's explicit choice can be told apart
+ * from a field that was never touched. Returns true/false when the attribute holds an explicit value,
+ * or undefined when it is null/unset (attribute never saved for this line item).
+ */
+function getCustomBooleanTriState(customAttributes, attributeID) {
+    try {
+        if (!customAttributes || !(attributeID in customAttributes)) {
+            return undefined;
+        }
+
+        var value = customAttributes[attributeID];
+
+        if (value === null || value === undefined) {
+            return undefined;
+        }
+
+        return !!value;
+    } catch (e) {
+        return undefined;
+    }
+}
+
 function isLiveSellingCategory(category) {
     var liveCategoryIDs = ['live-selling-dev-products'];
     var categoryID;
@@ -124,6 +147,7 @@ function doPrePlaceOrder(order) {
         var shipments = order.getShipments();
         var billingAddress = order.getBillingAddress();
         var isLiveSellingOrder = false;
+        var isCSCHandoffOrder = false;
         var liveSellingHostNames = [];
         var liveSellingEventDates = [];
         if (shipments.length > 0) {
@@ -145,8 +169,20 @@ function doPrePlaceOrder(order) {
                     try {
                         var product = lineItem && lineItem.product;
 
+                        if (getCustomBoolean(lineItem.custom, 'isCSCHandoffLineItem')) {
+                            isCSCHandoffOrder = true;
+                        }
+
                         if (!empty(product)) {
-                            if (isLiveSellingProduct(product)) {
+                            // The CSC agent's explicit choice on the Product Detail form ("Is Live Selling
+                            // Line Item") is authoritative when present - checked or unchecked, it overrides
+                            // the catalog product's own isLiveSellingProduct flag for this specific handoff.
+                            // Only fall back to the product-level flag when the agent never touched that
+                            // field at all (attribute still null/unset for this line item).
+                            var agentLiveSellingChoice = getCustomBooleanTriState(lineItem.custom, 'isLiveSellingLineItem');
+                            var lineItemIsLiveSelling = agentLiveSellingChoice !== undefined ? agentLiveSellingChoice : isLiveSellingProduct(product);
+
+                            if (lineItemIsLiveSelling) {
                                 try {
                                     var liveSellingItemID = getCustomValue(product.custom, 'liveSellingItemID') || product.ID;
                                     var liveSellingHostName = getCustomValue(lineItem.custom, 'liveSellingHostName') || getCustomValue(product.custom, 'liveSellingHostName');
@@ -224,6 +260,9 @@ function doPrePlaceOrder(order) {
                     order.custom.isLiveSellingOrder = true;
                     order.custom.liveSellingHostName = liveSellingHostNames.join(', ');
                     order.custom.liveSellingEventDate = liveSellingEventDates.join(', ');
+                }
+                if (isCSCHandoffOrder) {
+                    order.custom.isCSCHandoffOrder = true;
                 }
             } catch(err) {
                 dwLogger.warn('Missing Order live selling custom attribute definition: ' + err);

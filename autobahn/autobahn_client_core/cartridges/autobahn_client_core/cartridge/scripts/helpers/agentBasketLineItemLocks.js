@@ -168,6 +168,25 @@ function markStorefrontLineItem(lineItem) {
     }
 }
 
+// Unlike markStorefrontLineItem, this does not check isCSCHandoffLineItem first. It is used right after
+// a storefront AddProduct call, where the caller has just matched this exact line item by productID for
+// the current request. Because Add to Cart is hidden on PLP/PDP for CSC/live-selling products, a genuine
+// storefront click can never target an existing CSC line item's product - so any CSC flag found here must
+// be a false positive from the classification sweep running earlier in the same request (during the base
+// AddProduct response/model build, before this correction runs) and is safe to clear.
+function forceMarkStorefrontLineItem(lineItem) {
+    var basket;
+    var storefrontUUIDs;
+
+    setCustomBoolean(lineItem, CSC_LINE_ITEM_ATTR, false);
+    setCustomBoolean(lineItem, STOREFRONT_LINE_ITEM_ATTR, true);
+
+    basket = getLineItemContainer(lineItem);
+    storefrontUUIDs = getStoredStorefrontUUIDs(basket);
+    addUnique(storefrontUUIDs, lineItem.UUID);
+    setStoredStorefrontUUIDs(basket, storefrontUUIDs);
+}
+
 function getPersistedLockedUUIDs(basket) {
     var lockedUUIDs = [];
 
@@ -224,12 +243,13 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
 
     storedStorefrontUUIDs = getStoredStorefrontUUIDs(basket);
     hasStorefrontItems = hasStorefrontLineItems(basket);
-    // Only sweep unclassified line items into CSC the first time this basket is seen as CSC-sourced
-    // (i.e. no line item has been persisted as isCSCHandoffLineItem yet). isCustomerServiceCenterBasket()
-    // reflects a permanent, basket-level flag that never resets, so gating on it directly would re-claim
-    // every future customer-added item as CSC too. Once at least one item is persisted as CSC, later
-    // additions are left unclassified here and rely on markStorefrontLineItem (Cart.js AddProduct) instead.
-    shouldMarkUnclassifiedAsCSC = forceCurrentItemsLocked || ((isAgentBasket(basket) || isCustomerServiceCenterBasket(basket)) && persistedLockedUUIDs.length === 0);
+    // Sweep any unclassified line item into CSC on every render while this basket is CSC-sourced. This
+    // must stay "always on" (not one-time) so a live-selling item pushed from CSC *after* the customer has
+    // already been shopping still gets locked. It is safe against re-claiming customer-added items because
+    // Cart.js's AddProduct handler now unconditionally corrects a new item's classification via
+    // forceMarkStorefrontLineItem right after this sweep may have run during the same request's response
+    // build - so any storefront addition is self-healing rather than depending on sweep ordering.
+    shouldMarkUnclassifiedAsCSC = forceCurrentItemsLocked || isAgentBasket(basket) || isCustomerServiceCenterBasket(basket);
 
     if (basket && basket.allProductLineItems && shouldMarkUnclassifiedAsCSC) {
         Transaction.wrap(function () {
@@ -291,6 +311,7 @@ module.exports = {
     isLockedUUID: isLockedUUID,
     isRestrictedBasket: isRestrictedBasket,
     isAgentBasket: isAgentBasket,
+    forceMarkStorefrontLineItem: forceMarkStorefrontLineItem,
     markCurrentLineItemsAsCSCHandoff: markCurrentLineItemsAsCSCHandoff,
     markStorefrontLineItem: markStorefrontLineItem
 };
