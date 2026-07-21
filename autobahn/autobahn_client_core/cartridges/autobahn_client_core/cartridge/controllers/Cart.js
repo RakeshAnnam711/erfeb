@@ -92,8 +92,12 @@ server.append('AddProduct', function (req, res, next) {
         Transaction.wrap(function () {
             var productListItems = currentBasket.productLineItems;
             for (var i = 0; i < currentBasket.productLineItems.length; i++) {
-                if (productListItems[i].productID === pid && !agentLocks.isCSCHandoffLineItem(productListItems[i])) {
-                    agentLocks.markStorefrontLineItem(productListItems[i]);
+                if (productListItems[i].productID === pid) {
+                    // Unconditional: a CSC classification found here can only be a false positive from the
+                    // lock sweep running earlier in this same request (base AddProduct's own response/model
+                    // build happens before this append), since Add to Cart is hidden for CSC/live-selling
+                    // products and a genuine storefront click can never target an existing CSC line item.
+                    agentLocks.forceMarkStorefrontLineItem(productListItems[i]);
                 }
             }
         });

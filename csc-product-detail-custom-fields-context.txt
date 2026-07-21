@@ -1,0 +1,80 @@
+SFCC CSC Product Detail Custom Fields - Context
+================================================
+
+Requirement
+-----------
+When a Customer Service Center agent adds a product to a customer's basket,
+the agent needs to enter the following information:
+
+1. Is Live Selling Line Item
+   - Displayed as a checkbox.
+   - Stores true when selected and false when not selected.
+
+2. Live Selling Host Name
+   - Displayed as a text field.
+   - Stores the host name entered by the agent.
+
+
+What We Changed
+---------------
+We opened:
+
+Administration > Site Development > Customer Service Center Settings
+
+We selected the Product Detail customizable area and updated its JSON
+configuration.
+
+An attribute_form widget named "live-selling-fields" was added to the Product
+Detail layout. The form contains these ProductLineItem custom attributes:
+
+- c_isLiveSellingLineItem
+- c_liveSellingHostName
+
+The c_ prefix is required when custom attributes are referenced from the CSC
+JSON configuration.
+
+
+Result
+------
+The CSC Product Detail page now displays:
+
+- A checkbox for Is Live Selling Line Item.
+- A text box for Live Selling Host Name.
+
+The values are stored against the individual product line item in the basket,
+not against the catalog product.
+
+For example:
+
+isLiveSellingLineItem = true
+liveSellingHostName = "John Smith"
+
+
+Basket Handoff
+--------------
+After the product is added, the agent can click Hand Off Basket. The same basket
+is handed back to the registered customer, so values saved on its product line
+items remain associated with those products.
+
+
+Expected Flow
+-------------
+Agent selects a product
+  -> Agent checks Is Live Selling Line Item
+  -> Agent enters the host name
+  -> Agent adds the product to the basket
+  -> The two values are saved on the product line item
+  -> Agent clicks Hand Off Basket
+  -> The customer receives the basket with the saved values
+
+
+Testing
+-------
+1. Create or open a basket for a registered customer in CSC.
+2. Select a product.
+3. Select the Is Live Selling Line Item checkbox.
+4. Enter a host name.
+5. Add the product to the basket.
+6. Confirm that the values remain on the product line item.
+7. Hand off the basket.
+8. Confirm that the handed-off basket still contains the saved values.
