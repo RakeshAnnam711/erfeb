@@ -1,0 +1,401 @@
+Live-Selling and CSC Handoff Cart Behavior - Implementation Summary
+===================================================================
+Requirement
+--------------
+1. Live-selling product experience
+
+The business wants a dedicated live-selling product listing/category where
+products are visible to customers, but customers cannot buy them directly from
+the storefront.
+
+Expected behavior:
+
+- Create/configure a dedicated live-selling PLP/category.
+- Live-selling products should display on PLP.
+- Hide product price on PLP.
+- Hide Add to Cart / quick add on PLP.
+- Hide product price on PDP.
+- Hide Add to Cart, quantity selector, and sticky Add to Cart on PDP.
+- Show a live-selling badge.
+- Show a live-selling item ID.
+- After successful order placement, send/store live-selling host name and event
+  date on the order/order line item.
+
+2. CSC / BM handoff cart behavior
+
+Products are added by Customer Service from Business Manager / CSC and handed
+off to the customer. Those CSC-added products must not be editable by the
+customer.
+
+Expected behavior:
+
+- CSC-added products must be locked in the cart.
+- Customer should not remove CSC-added products.
+- Customer should not update CSC product quantity.
+- Customer should not move CSC products to wishlist.
+- Promo/coupon box should be hidden for CSC handoff baskets.
+- Customer can still continue shopping normally.
+- Products added by customer from storefront should remain editable.
+- Storefront-added products should allow remove, wishlist, and quantity update.
+- Remove All should clear the full basket.
+
+
+2. How We Achieved Live-Selling PLP/PDP
+--------------------------------------
+Step 1: Added metadata fields
+
+We added custom attributes through system-objecttype-extensions.xml so Business
+Manager can store live-selling data.
+
+Category:
+
+- isLiveSellingCategory
+
+Product:
+
+- isLiveSellingProduct
+- liveSellingItemID
+- liveSellingBadgeText
+- liveSellingHostName
+- liveSellingEventDate
+
+Order:
+
+- liveSellingHostName
+- liveSellingEventDate
+
+ProductLineItem:
+
+- liveSellingItemID
+- liveSellingHostName
+- liveSellingEventDate
+
+Step 2: Added product model decoration
+
+Created a live-selling decorator so PLP/PDP product models can expose:
+
+- isLiveSellingProduct
+- liveSellingItemID
+- liveSellingBadgeText
+- liveSellingHostName
+- liveSellingEventDate
+
+This allows templates to decide whether to show normal purchase controls or
+live-selling-only display.
+
+Step 3: Updated PLP templates
+
+On product tiles, when a product is live-selling:
+
+- Price is hidden.
+- Add to Cart / quick add is hidden.
+- Badge is displayed.
+- Item ID is displayed.
+
+Step 4: Updated PDP templates
+
+On PDP, when a product is live-selling:
+
+- Price is hidden.
+- Quantity selector is hidden.
+- Add to Cart button is hidden.
+- Sticky Add to Cart is hidden.
+
+Step 5: Updated order placement logic
+
+During pre-place-order logic, live-selling product data is copied from product
+or basket line item context to order/order line item custom attributes.
+
+This is used for downstream reporting/export after payment is successful.
+
+
+3. How We Achieved CSC Handoff Cart Locking
+-------------------------------------------
+Step 1: Added line-item flags
+
+ProductLineItem custom attributes were added:
+
+- isCSCHandoffLineItem
+- isStorefrontLineItem
+
+Purpose:
+
+- isCSCHandoffLineItem means the item came from CSC/BM handoff and should be
+  locked.
+- isStorefrontLineItem means the customer added the item from the storefront
+  and should still be able to edit/remove it.
+
+Step 2: Added helper for lock detection
+
+Added agentBasketLineItemLocks.js.
+
+This helper is responsible for:
+
+- Tracking locked CSC line item UUIDs.
+- Reading persisted ProductLineItem custom attributes.
+- Decorating cart/shipping models with isAgentLockedLineItem.
+- Identifying storefront-added line items.
+- Helping controller/template code decide which controls to hide.
+
+Step 3: Updated cart controller guards
+
+Cart controller behavior was updated so locked CSC line items cannot be changed
+by normal storefront actions.
+
+Blocked for CSC-locked line items:
+
+- Remove product.
+- Update quantity.
+- Coupon add/remove where basket is restricted.
+
+Allowed:
+
+- Remove All clears the complete cart.
+- Storefront-added products remain editable.
+
+Step 4: Updated templates
+
+Cart, mini cart, and checkout/cart product card templates were updated to hide
+restricted controls when a line item is marked as locked.
+
+For CSC-locked products:
+
+- Hide remove icon/button.
+- Hide Add to Wishlist.
+- Hide quantity update controls.
+- Hide promo/coupon section for restricted handoff basket.
+
+For storefront-added products:
+
+- Show remove.
+- Show wishlist.
+- Show quantity update.
+
+Step 5: Added Remove All
+
+Remove All was added to:
+
+- Cart page.
+- Mini cart.
+
+Remove All is intended to clear the whole basket, including both CSC and
+storefront products.
+
+Note:
+Remove All should not be shown on checkout page based on the later requirement.
+
+
+4. Business Manager / Data Setup Needed
+--------------------------------------
+1. Import metadata
+
+Import the system object metadata files into Business Manager:
+
+- autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml
+- autobahn/data/meta/rvw_som_integration/meta/system-objecttype-extensions.xml
+
+2. Confirm attributes in BM
+
+Check these object types in Business Manager:
+
+Category:
+
+- isLiveSellingCategory
+
+Product:
+
+- isLiveSellingProduct
+- liveSellingItemID
+- liveSellingBadgeText
+- liveSellingHostName
+- liveSellingEventDate
+
+Order:
+
+- liveSellingHostName
+- liveSellingEventDate
+
+ProductLineItem:
+
+- liveSellingItemID
+- liveSellingHostName
+- liveSellingEventDate
+- isCSCHandoffLineItem
+- isStorefrontLineItem
+
+3. Product setup for live-selling PLP
+
+For products to appear on the live-selling PLP:
+
+- Product must be assigned to the live-selling category.
+- Product must be online.
+- Product must be searchable.
+- Product must be available/in stock.
+- Product index must be rebuilt after changes.
+- Cache may need to be cleared.
+
+4. Category setup
+
+The dev category used during development was:
+
+- live-selling-dev-products
+
+The final production category can be created later by the business/team. The
+code is attribute-driven, so the category ID can change as long as products and
+attributes are configured correctly.
+
+
+5. Custom Objects / Attributes Used For This Task
+-------------------------------------------------
+No SFCC CustomObjectMgr custom object type is used for this live-selling/CSC
+handoff implementation.
+
+For this ticket, we used system object custom attributes only. These are fields
+added to existing SFCC system objects such as Category, Product, Order, and
+ProductLineItem.
+
+System object attributes used:
+
+Category:
+
+- isLiveSellingCategory
+
+Product:
+
+- isLiveSellingProduct
+- liveSellingItemID
+- liveSellingBadgeText
+- liveSellingHostName
+- liveSellingEventDate
+
+Order:
+
+- liveSellingHostName
+- liveSellingEventDate
+
+ProductLineItem:
+
+- liveSellingItemID
+- liveSellingHostName
+- liveSellingEventDate
+- isCSCHandoffLineItem
+- isStorefrontLineItem
+
+Why we used these attributes:
+
+- Product/category attributes control whether a product behaves as
+  live-selling on PLP/PDP.
+- Product live-selling fields provide badge, item ID, host name, and event date.
+- Order and ProductLineItem fields store live-selling details after order
+  placement.
+- isCSCHandoffLineItem locks CSC/BM handoff products in the customer cart.
+- isStorefrontLineItem keeps customer-added products editable in mixed baskets.
+
+Files where these attributes are defined:
+
+- autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml
+- autobahn/data/meta/rvw_som_integration/meta/system-objecttype-extensions.xml
+
+Important:
+Do not import or maintain unrelated custom-objecttype-definitions.xml entries
+for this requirement. They are not part of this task.
+
+
+6. Testing Steps
+----------------
+Live-selling PLP/PDP test:
+
+1. Import metadata.
+2. Assign product to live-selling category.
+3. Mark product online.
+4. Mark product searchable.
+5. Ensure product has inventory/availability.
+6. Fill live-selling product fields:
+   - isLiveSellingProduct
+   - liveSellingItemID
+   - liveSellingBadgeText
+   - liveSellingHostName
+   - liveSellingEventDate
+7. Rebuild product index.
+8. Clear cache if needed.
+9. Open live-selling category PLP.
+10. Confirm product appears.
+11. Confirm price and Add to Cart are hidden.
+12. Confirm badge and item ID are visible.
+13. Open PDP.
+14. Confirm price, quantity, Add to Cart, and sticky Add to Cart are hidden.
+
+CSC handoff cart test:
+
+1. Login to BM/CSC.
+2. Create basket/order for customer.
+3. Add product from CSC.
+4. Handoff basket to customer.
+5. Login as customer on storefront.
+6. Open mini cart and cart page.
+7. Confirm CSC product is visible.
+8. Confirm CSC product does not show:
+   - Remove
+   - Add to Wishlist
+   - Quantity update
+9. Confirm promo/coupon box is hidden.
+10. Add a new product manually from storefront.
+11. Confirm storefront product does show:
+   - Remove
+   - Add to Wishlist
+   - Quantity update
+12. Click Remove All.
+13. Confirm full cart becomes empty.
+
+Order attribute test:
+
+1. Place order with live-selling/CSC product.
+2. Open order in BM.
+3. Check order custom attributes:
+   - liveSellingHostName
+   - liveSellingEventDate
+4. Check order product line item custom attributes:
+   - liveSellingItemID
+   - liveSellingHostName
+   - liveSellingEventDate
+   - isCSCHandoffLineItem, if applicable
+
+
+7. Files Touched
+----------------
+Modified files:
+
+- .vscode/system-objecttype-extensions.d.ts
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/client/default/js/cart/cart.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/client/default/scss/components/_productTiles.scss
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/client/default/scss/product/_pdp-consolidated.scss
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/controllers/Cart.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/models/product/fullProduct.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/models/product/productTile.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/scripts/hooks/mergeBasketUtil.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/cart.isml
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/cartPromoCode.isml
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/productCard/cartProductCard.isml
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/cart/productCard/cartProductCardEdit.isml
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/cart/miniCart.isml
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/checkout/productCard/productCardProductNameAndRemove.isml
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/product/components/productDetailsContent.isml
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/templates/default/product/productTile.isml
+- autobahn/autobahn_client_core/hooks.json
+- autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml
+- autobahn/data/clienttest/autobahn_client_core/catalogs/storefront-catalog-wgaca/catalog.xml
+- autobahn/data/meta/rvw_som_integration/meta/system-objecttype-extensions.xml
+- autobahn/rvw_autobahn_core/cartridges/rvw_autobahn_core/cartridge/templates/default/product/components/productTileImage.isml
+- autobahn/rvw_integrations_core/cartridges/rvw_som_integration/cartridge/scripts/checkout/doPrePlaceOrder.js
+
+New files:
+
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/models/product/decorators/liveSelling.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/models/productLineItem/productLineItem.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/scripts/helpers/agentBasketLineItemLocks.js
+- autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/scripts/hooks/cscBasketHandoff.js
+- csc-handoff-current-status-notes.txt
+- live-checkout-sprint-plan.md
+- live-checkout-ticket-sprint-plan.txt
+
+
