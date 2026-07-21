@@ -223,6 +223,7 @@ server.get('DebugCSC', function (req, res, next) {
             debugInfo.lineItems.push({
                 uuid: li.UUID,
                 productID: li.productID,
+                isLineItemLiveSelling: agentLocks.isLineItemLiveSelling(li),
                 allCustomAttributes: dumpCustom(li)
             });
         });

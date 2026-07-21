@@ -10,6 +10,7 @@ var SESSION_STOREFRONT_KEY = 'storefrontLineItemUUIDs';
 var SESSION_STOREFRONT_BASKET_KEY = 'storefrontLineItemBasketUUID';
 var CSC_LINE_ITEM_ATTR = 'isCSCHandoffLineItem';
 var STOREFRONT_LINE_ITEM_ATTR = 'isStorefrontLineItem';
+var LIVE_CATEGORY_IDS = ['live-selling-dev-products'];
 
 function getBasketUUID(basket) {
     try {
@@ -220,6 +221,89 @@ function hasStorefrontLineItems(basket) {
     return found;
 }
 
+function getCustomBooleanTriState(object, attributeID) {
+    try {
+        if (!object || !object.custom || !(attributeID in object.custom)) {
+            return undefined;
+        }
+
+        var value = object.custom[attributeID];
+
+        if (value === null || value === undefined) {
+            return undefined;
+        }
+
+        return !!value;
+    } catch (e) {
+        return undefined;
+    }
+}
+
+function isLiveSellingCategory(category) {
+    if (!category) {
+        return false;
+    }
+
+    try {
+        var categoryID = category.ID || (typeof category.getID === 'function' && category.getID());
+
+        if (LIVE_CATEGORY_IDS.indexOf(categoryID) > -1) {
+            return true;
+        }
+
+        return getCustomBoolean(category, 'isLiveSellingCategory');
+    } catch (e) {
+        return false;
+    }
+}
+
+function isLiveSellingProduct(product) {
+    var foundLiveCategory = false;
+
+    if (!product) {
+        return false;
+    }
+
+    if (getCustomBoolean(product, 'isLiveSellingProduct')) {
+        return true;
+    }
+
+    try {
+        if (isLiveSellingCategory(product.primaryCategory)) {
+            return true;
+        }
+
+        if (product.categories) {
+            collections.forEach(product.categories, function (category) {
+                if (isLiveSellingCategory(category)) {
+                    foundLiveCategory = true;
+                }
+            });
+        }
+    } catch (e) {
+        return false;
+    }
+
+    return foundLiveCategory;
+}
+
+// Mirrors the tri-state resolution used in doPrePlaceOrder.js at checkout, so cart locking and order-level
+// live selling reporting always agree: the CSC agent's explicit checkbox choice (checked or unchecked) on
+// this line item wins when present, otherwise fall back to the catalog product's own live selling flag.
+function isLineItemLiveSelling(lineItem) {
+    try {
+        var agentChoice = getCustomBooleanTriState(lineItem, 'isLiveSellingLineItem');
+
+        if (agentChoice !== undefined) {
+            return agentChoice;
+        }
+
+        return isLiveSellingProduct(lineItem.product);
+    } catch (e) {
+        return false;
+    }
+}
+
 function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     var lockedUUIDs = getStoredLockedUUIDs(basket);
     var persistedLockedUUIDs = getPersistedLockedUUIDs(basket);
@@ -244,18 +328,30 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     storedStorefrontUUIDs = getStoredStorefrontUUIDs(basket);
     hasStorefrontItems = hasStorefrontLineItems(basket);
 
-    // Purge any UUID the session previously cached as locked but that is now confirmed storefront. This
-    // is what actually makes forceMarkStorefrontLineItem's correction stick: without this, a line item
-    // that the sweep briefly (and wrongly) locked earlier in the same request - before the AddProduct
-    // handler corrected its persisted isCSCHandoffLineItem attribute - stayed locked forever, because the
-    // session-cached UUID list only ever gets merged into, never purged, on later calls.
+    // Release any line item that is no longer correctly locked: either it's confirmed storefront, or it
+    // was previously locked as CSC but is no longer live selling (the CSC agent unchecked "Is Live Selling
+    // Line Item" after initially checking it, or otherwise changed their mind). Without this, a line item's
+    // isCSCHandoffLineItem flag only ever gets set by the sweep below and never re-evaluated once true, so
+    // it would stay locked forever even after the agent explicitly marks it not-live-selling. This also
+    // covers the session-cache staleness case: a line item the sweep briefly (and wrongly) locked earlier
+    // in the same request - before AddProduct's forceMarkStorefrontLineItem corrected it - stays purged
+    // here instead of persisting forever, since the session-cached UUID list otherwise only ever grows.
     if (basket && basket.allProductLineItems) {
-        collections.forEach(basket.allProductLineItems, function (lineItem) {
-            if (isStorefrontLineItem(lineItem) || storedStorefrontUUIDs.indexOf(lineItem.UUID) > -1) {
-                lockedUUIDs = lockedUUIDs.filter(function (uuid) {
-                    return uuid !== lineItem.UUID;
-                });
-            }
+        Transaction.wrap(function () {
+            collections.forEach(basket.allProductLineItems, function (lineItem) {
+                var isKnownStorefrontItem = isStorefrontLineItem(lineItem) || storedStorefrontUUIDs.indexOf(lineItem.UUID) > -1;
+                var shouldRelease = isKnownStorefrontItem || (isCSCHandoffLineItem(lineItem) && !isLineItemLiveSelling(lineItem));
+
+                if (shouldRelease) {
+                    if (isCSCHandoffLineItem(lineItem)) {
+                        setCustomBoolean(lineItem, CSC_LINE_ITEM_ATTR, false);
+                    }
+
+                    lockedUUIDs = lockedUUIDs.filter(function (uuid) {
+                        return uuid !== lineItem.UUID;
+                    });
+                }
+            });
         });
     }
 
@@ -264,6 +360,8 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     // already been shopping still gets locked. It is safe against re-claiming customer-added items because
     // Cart.js's AddProduct handler now unconditionally corrects a new item's classification via
     // forceMarkStorefrontLineItem, and the purge above keeps the session cache in sync with that correction.
+    // Only live selling items get locked - a CSC agent adding a plain, non-live-selling product should
+    // leave that item fully editable for the customer, same as if they'd added it themselves.
     shouldMarkUnclassifiedAsCSC = forceCurrentItemsLocked || isAgentBasket(basket) || isCustomerServiceCenterBasket(basket);
 
     if (basket && basket.allProductLineItems && shouldMarkUnclassifiedAsCSC) {
@@ -271,7 +369,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
             collections.forEach(basket.allProductLineItems, function (lineItem) {
                 var isKnownStorefrontItem = isStorefrontLineItem(lineItem) || storedStorefrontUUIDs.indexOf(lineItem.UUID) > -1;
 
-                if (!isKnownStorefrontItem && !isCSCHandoffLineItem(lineItem)) {
+                if (!isKnownStorefrontItem && !isCSCHandoffLineItem(lineItem) && isLineItemLiveSelling(lineItem)) {
                     markCSCHandoffLineItem(lineItem);
                     addUnique(lockedUUIDs, lineItem.UUID);
                 }
@@ -323,6 +421,7 @@ module.exports = {
     ensureLockedLineItems: ensureLockedLineItems,
     isCSCHandoffLineItem: isCSCHandoffLineItem,
     isCustomerServiceCenterBasket: isCustomerServiceCenterBasket,
+    isLineItemLiveSelling: isLineItemLiveSelling,
     isLockedUUID: isLockedUUID,
     isRestrictedBasket: isRestrictedBasket,
     isAgentBasket: isAgentBasket,
