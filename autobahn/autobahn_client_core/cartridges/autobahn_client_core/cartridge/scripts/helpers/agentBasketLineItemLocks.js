@@ -224,7 +224,12 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
 
     storedStorefrontUUIDs = getStoredStorefrontUUIDs(basket);
     hasStorefrontItems = hasStorefrontLineItems(basket);
-    shouldMarkUnclassifiedAsCSC = forceCurrentItemsLocked || isAgentBasket(basket) || isCustomerServiceCenterBasket(basket) || lockedUUIDs.length || persistedLockedUUIDs.length;
+    // Only sweep unclassified line items into CSC the first time this basket is seen as CSC-sourced
+    // (i.e. no line item has been persisted as isCSCHandoffLineItem yet). isCustomerServiceCenterBasket()
+    // reflects a permanent, basket-level flag that never resets, so gating on it directly would re-claim
+    // every future customer-added item as CSC too. Once at least one item is persisted as CSC, later
+    // additions are left unclassified here and rely on markStorefrontLineItem (Cart.js AddProduct) instead.
+    shouldMarkUnclassifiedAsCSC = forceCurrentItemsLocked || ((isAgentBasket(basket) || isCustomerServiceCenterBasket(basket)) && persistedLockedUUIDs.length === 0);
 
     if (basket && basket.allProductLineItems && shouldMarkUnclassifiedAsCSC) {
         Transaction.wrap(function () {
@@ -233,10 +238,6 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
 
                 if (!isKnownStorefrontItem && !isCSCHandoffLineItem(lineItem)) {
                     markCSCHandoffLineItem(lineItem);
-                    addUnique(lockedUUIDs, lineItem.UUID);
-                }
-
-                if (isCSCHandoffLineItem(lineItem)) {
                     addUnique(lockedUUIDs, lineItem.UUID);
                 }
             });
