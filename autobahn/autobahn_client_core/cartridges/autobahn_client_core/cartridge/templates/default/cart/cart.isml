@@ -23,6 +23,9 @@
     <input type="hidden" name="get-cart-summary-data" value="${URLUtils.url('Cart-GetSummaryData')}" />
     <input type="hidden" name="add-to-cart-url" value="${URLUtils.url('Cart-AddProduct')}"/>
     <input type="hidden" name="get-cart-url" value="${URLUtils.url('Cart-Get')}"/>
+    <isif condition="${pdict.isAgentRestrictedBasket}">
+        <input type="hidden" id="check-expired-csc-url" value="${URLUtils.url('Cart-CheckExpired')}"/>
+    </isif>
 
     <isif condition="${pdict.reportingURLs && pdict.reportingURLs.length}">
         <isinclude template="reporting/reportingUrls" />
