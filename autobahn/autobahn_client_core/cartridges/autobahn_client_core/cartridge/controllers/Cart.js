@@ -112,6 +112,20 @@ server.append('Show', function (req, res, next) {
     var viewData = res.getViewData();
 
     if (currentBasket) {
+        var expiredUUIDs = agentLocks.removeExpiredCSCLineItems(currentBasket);
+
+        if (expiredUUIDs.length) {
+            Transaction.wrap(function () {
+                require('*/cartridge/scripts/helpers/basketCalculationHelpers').calculateTotals(currentBasket);
+            });
+
+            if (viewData.items) {
+                viewData.items = viewData.items.filter(function (item) {
+                    return expiredUUIDs.indexOf(item.UUID) === -1;
+                });
+            }
+        }
+
         agentLocks.ensureLockedLineItems(currentBasket);
         agentLocks.decorateCartModelItems(viewData.items, currentBasket);
         viewData.isAgentRestrictedBasket = agentLocks.isRestrictedBasket(currentBasket);
@@ -235,6 +249,30 @@ server.get('DebugCSC', function (req, res, next) {
     next();
 });
 
+// Lightweight endpoint polled by the client-side cart page to catch CSC line items expiring while the
+// customer is sitting on the page without navigating anywhere (a plain page-load check would never fire
+// in that case). Removes anything expired and reports whether the page needs to refresh.
+server.get('CheckExpired', function (req, res, next) {
+    var currentBasket = BasketMgr.getCurrentBasket();
+    var expiredUUIDs = [];
+
+    if (currentBasket) {
+        expiredUUIDs = agentLocks.removeExpiredCSCLineItems(currentBasket);
+
+        if (expiredUUIDs.length) {
+            Transaction.wrap(function () {
+                require('*/cartridge/scripts/helpers/basketCalculationHelpers').calculateTotals(currentBasket);
+            });
+        }
+    }
+
+    res.json({
+        expired: expiredUUIDs.length > 0,
+        expiredUUIDs: expiredUUIDs
+    });
+    next();
+});
+
 // Controller endpoint to return the structured cart summary JSON
 server.get('GetSummaryData', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
@@ -248,6 +286,23 @@ server.get('GetSummaryData', function (req, res, next) {
 server.append('MiniCartShow', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
     var viewData = res.getViewData();
+
+    if (currentBasket) {
+        var expiredUUIDs = agentLocks.removeExpiredCSCLineItems(currentBasket);
+
+        if (expiredUUIDs.length) {
+            Transaction.wrap(function () {
+                require('*/cartridge/scripts/helpers/basketCalculationHelpers').calculateTotals(currentBasket);
+            });
+
+            if (viewData.items) {
+                viewData.items = viewData.items.filter(function (item) {
+                    return expiredUUIDs.indexOf(item.UUID) === -1;
+                });
+            }
+        }
+    }
+
     var cartSummary = cartSummaryBuilder.getCartSummary(currentBasket);
     if (currentBasket) {
         agentLocks.ensureLockedLineItems(currentBasket);

@@ -12,7 +12,6 @@
 
 				<isif condition="${product.isLiveSellingProduct}">
 					<div class="live-selling-product-meta">
-						<span class="badge-product live-selling-badge">${product.liveSellingBadgeText}</span>
 						<isif condition="${!empty(product.liveSellingItemID)}">
 							<span class="live-selling-item-id">Item ID: ${product.liveSellingItemID}</span>
 						</isif>

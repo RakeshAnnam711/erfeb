@@ -11,6 +11,7 @@ var SESSION_STOREFRONT_BASKET_KEY = 'storefrontLineItemBasketUUID';
 var CSC_LINE_ITEM_ATTR = 'isCSCHandoffLineItem';
 var STOREFRONT_LINE_ITEM_ATTR = 'isStorefrontLineItem';
 var LIVE_CATEGORY_IDS = ['live-selling-dev-products'];
+var CSC_EXPIRATION_MINUTES = 5;
 
 function getBasketUUID(basket) {
     try {
@@ -386,6 +387,47 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     return lockedUUIDs;
 }
 
+// Removes CSC handoff line items that have sat in the basket, unpurchased, longer than
+// CSC_EXPIRATION_MINUTES. Clock starts at the line item's own creationDate (when the CSC agent added it),
+// not the customer's session activity. Returns the UUIDs of whatever got removed (empty array if nothing
+// expired), so the caller can both recalculate basket totals and patch any view data it already built from
+// the pre-removal basket state instead of rendering a now-stale line item.
+function removeExpiredCSCLineItems(basket) {
+    var expiredItems = [];
+    var now = new Date().getTime();
+    var expirationMs = CSC_EXPIRATION_MINUTES * 60 * 1000;
+
+    if (!basket || !basket.allProductLineItems) {
+        return [];
+    }
+
+    collections.forEach(basket.allProductLineItems, function (lineItem) {
+        try {
+            if (isCSCHandoffLineItem(lineItem) && lineItem.creationDate && (now - lineItem.creationDate.getTime()) >= expirationMs) {
+                expiredItems.push(lineItem);
+            }
+        } catch (e) {
+            // Skip this line item on any unexpected read failure rather than blocking the whole check.
+        }
+    });
+
+    if (!expiredItems.length) {
+        return [];
+    }
+
+    var removedUUIDs = expiredItems.map(function (lineItem) {
+        return lineItem.UUID;
+    });
+
+    Transaction.wrap(function () {
+        expiredItems.forEach(function (lineItem) {
+            basket.removeProductLineItem(lineItem);
+        });
+    });
+
+    return removedUUIDs;
+}
+
 function isRestrictedBasket(basket) {
     return ensureLockedLineItems(basket).length > 0;
 }
@@ -427,5 +469,6 @@ module.exports = {
     isAgentBasket: isAgentBasket,
     forceMarkStorefrontLineItem: forceMarkStorefrontLineItem,
     markCurrentLineItemsAsCSCHandoff: markCurrentLineItemsAsCSCHandoff,
-    markStorefrontLineItem: markStorefrontLineItem
+    markStorefrontLineItem: markStorefrontLineItem,
+    removeExpiredCSCLineItems: removeExpiredCSCLineItems
 };

@@ -106,4 +106,7 @@
         </div>
     </isif>
 </div>
+<isif condition="${product.isLiveSellingProduct}">
+    <span class="badge-product live-selling-badge">${product.liveSellingBadgeText}</span>
+</isif>
 <isinclude template="/product/components/badges" />

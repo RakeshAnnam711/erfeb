@@ -173,6 +173,23 @@
             justify-content: flex-end;
         }
     }
+    // Rendered inside product-tile-image-container (productTileImage.isml), a sibling of .tile-body, so
+    // .product-tile (position: relative) is the nearest positioned ancestor - .tile-body also sets
+    // position: relative and is closer in the DOM to anything nested under .live-selling-product-meta,
+    // which is why this lives as its own top-level rule instead of nested there.
+    .live-selling-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 2;
+        background-color: $black;
+        border-color: $black;
+        color: $white;
+        padding: 3px 6px;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
     .live-selling-product-meta {
         display: flex;
         align-items: center;
@@ -181,13 +198,6 @@
         margin-top: 8px;
         font-size: 12px;
         text-transform: uppercase;
-
-        .live-selling-badge {
-            background-color: $black;
-            border-color: $black;
-            color: $white;
-            padding: 3px 6px;
-        }
 
         .live-selling-item-id {
             color: $base-font-color;
