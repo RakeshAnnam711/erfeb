@@ -652,6 +652,19 @@
                 <externally-defined-flag>false</externally-defined-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="liveSellingEventID">
+                <display-name xml:lang="x-default">Live Selling Event ID</display-name>
+                <description xml:lang="x-default">Identifier for the live selling event/stream this product is featured in, separate from the per-product liveSellingItemID.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="liveSellingBadgeText">
                 <display-name xml:lang="x-default">Live Selling Badge Text</display-name>
                 <description xml:lang="x-default">Optional badge text shown for live selling products. Defaults to LIVE.</description>
@@ -1558,6 +1571,7 @@
                 <display-name xml:lang="x-default">Live Selling</display-name>
                 <attribute attribute-id="isLiveSellingProduct"/>
                 <attribute attribute-id="liveSellingItemID"/>
+                <attribute attribute-id="liveSellingEventID"/>
                 <attribute attribute-id="liveSellingBadgeText"/>
                 <attribute attribute-id="liveSellingHostName"/>
                 <attribute attribute-id="liveSellingEventDate"/>

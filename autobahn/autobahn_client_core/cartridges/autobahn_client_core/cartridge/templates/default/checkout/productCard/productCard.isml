@@ -83,6 +83,10 @@
                     <iscontentasset aid ="finalsalecalloutmsg"/>
                 </isif>
 
+                <isif condition="${lineItem.isAgentLockedLineItem}">
+                    <p class="live-selling-returns-message">${Resource.msg('label.liveselling.noreturns', 'cart', null)}</p>
+                </isif>
+
                 <iscomment> promotion section </iscomment>
                 <div class="line-item-promo item-${lineItem.UUID}">
                     <isinclude template="checkout/productCard/productCardProductPromotions" />

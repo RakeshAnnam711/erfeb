@@ -199,9 +199,10 @@
         font-size: 12px;
         text-transform: uppercase;
 
-        .live-selling-item-id {
+        .live-selling-badge-text {
             color: $base-font-color;
             font-weight: 500;
+            background: none;
         }
     }
     .ratings {
