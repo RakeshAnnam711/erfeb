@@ -1561,6 +1561,7 @@
                 <attribute attribute-id="enableRTWProduct"/>
                 <attribute attribute-id="isLiveSellingProduct"/>
                 <attribute attribute-id="liveSellingItemID"/>
+                <attribute attribute-id="liveSellingEventID"/>
                 <attribute attribute-id="liveSellingBadgeText"/>
                 <attribute attribute-id="liveSellingHostName"/>
                 <attribute attribute-id="liveSellingEventDate"/>
