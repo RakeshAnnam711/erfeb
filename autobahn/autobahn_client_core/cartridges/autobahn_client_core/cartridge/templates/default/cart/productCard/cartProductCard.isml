@@ -45,6 +45,9 @@
                         <isif condition="${Product.custom.final_sale}">
                             <iscontentasset aid ="finalsalecalloutmsg"/>
                         </isif>
+                        <isif condition="${lineItem.isAgentLockedLineItem}">
+                            <p class="live-selling-returns-message">${Resource.msg('label.liveselling.noreturns', 'cart', null)}</p>
+                        </isif>
                         <isinclude template="checkout/productCard/productCardProductPromotions" />
                     </div>
                     <isloop items="${lineItem.variationAttributes}" var="attribute">

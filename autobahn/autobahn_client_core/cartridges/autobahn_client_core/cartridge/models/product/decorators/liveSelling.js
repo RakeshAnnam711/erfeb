@@ -92,6 +92,7 @@ module.exports = function liveSelling(object, apiProduct) {
 
     define(object, 'isLiveSellingProduct', isLiveSellingProduct);
     define(object, 'liveSellingItemID', getCustomValue(apiProduct.custom, 'liveSellingItemID') || apiProduct.ID);
+    define(object, 'liveSellingEventID', getCustomValue(apiProduct.custom, 'liveSellingEventID'));
     define(object, 'liveSellingBadgeText', badgeText);
     define(object, 'liveSellingHostName', getCustomValue(apiProduct.custom, 'liveSellingHostName'));
     define(object, 'liveSellingEventDate', getCustomValue(apiProduct.custom, 'liveSellingEventDate'));
