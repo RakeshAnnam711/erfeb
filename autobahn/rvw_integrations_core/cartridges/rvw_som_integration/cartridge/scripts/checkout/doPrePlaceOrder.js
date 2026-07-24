@@ -81,59 +81,6 @@ function getCustomBooleanTriState(customAttributes, attributeID) {
     }
 }
 
-function isLiveSellingCategory(category) {
-    var liveCategoryIDs = ['live-selling-dev-products'];
-    var categoryID;
-
-    if (empty(category)) {
-        return false;
-    }
-
-    try {
-        categoryID = category.ID || (typeof category.getID === 'function' && category.getID());
-
-        if (liveCategoryIDs.indexOf(categoryID) > -1) {
-            return true;
-        }
-
-        return getCustomBoolean(category.custom, 'isLiveSellingCategory');
-    } catch (e) {
-        return false;
-    }
-}
-
-function isLiveSellingProduct(product) {
-    var categories;
-    var foundLiveCategory = false;
-
-    if (empty(product)) {
-        return false;
-    }
-
-    if (getCustomBoolean(product.custom, 'isLiveSellingProduct')) {
-        return true;
-    }
-
-    try {
-        if (isLiveSellingCategory(product.primaryCategory)) {
-            return true;
-        }
-
-        categories = product.categories;
-        if (categories) {
-            categories.toArray().forEach(function (category) {
-                if (isLiveSellingCategory(category)) {
-                    foundLiveCategory = true;
-                }
-            });
-        }
-    } catch (e) {
-        return false;
-    }
-
-    return foundLiveCategory;
-}
-
 /**
  * Allows an override for integrations to implement logic after an order is placed.
  * @param {dw.order.Order} order - The order object to be placed
@@ -168,19 +115,23 @@ function doPrePlaceOrder(order) {
                 .forEach(function(lineItem) {
                     try {
                         var product = lineItem && lineItem.product;
+                        var isCSCLineItem = getCustomBoolean(lineItem.custom, 'isCSCHandoffLineItem');
 
-                        if (getCustomBoolean(lineItem.custom, 'isCSCHandoffLineItem')) {
+                        if (isCSCLineItem) {
                             isCSCHandoffOrder = true;
                         }
 
                         if (!empty(product)) {
-                            // The CSC agent's explicit choice on the Product Detail form ("Is Live Selling
-                            // Line Item") is authoritative when present - checked or unchecked, it overrides
-                            // the catalog product's own isLiveSellingProduct flag for this specific handoff.
-                            // Only fall back to the product-level flag when the agent never touched that
-                            // field at all (attribute still null/unset for this line item).
+                            // isLiveSellingOrder is intentionally stricter here than the cart-side locking
+                            // check (agentBasketLineItemLocks.js), which still falls back to the catalog
+                            // product's own isLiveSellingProduct flag when the agent never touches the
+                            // checkbox. For order-level reporting, only the CSC agent's explicit "Is Live
+                            // Selling Line Item" = true counts - a normal customer-purchased product never
+                            // qualifies (isCSCLineItem gates that), and neither does a CSC line item where the
+                            // agent left the checkbox unchecked/untouched, even if the catalog product itself
+                            // is flagged live-selling.
                             var agentLiveSellingChoice = getCustomBooleanTriState(lineItem.custom, 'isLiveSellingLineItem');
-                            var lineItemIsLiveSelling = agentLiveSellingChoice !== undefined ? agentLiveSellingChoice : isLiveSellingProduct(product);
+                            var lineItemIsLiveSelling = isCSCLineItem && agentLiveSellingChoice === true;
 
                             if (lineItemIsLiveSelling) {
                                 try {
