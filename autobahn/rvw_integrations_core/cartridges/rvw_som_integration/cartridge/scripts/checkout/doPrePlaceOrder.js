@@ -58,6 +58,17 @@ function getCustomBoolean(customAttributes, attributeID) {
     }
 }
 
+// liveSellingEventID/HostName/EventDate/BadgeText are static, shared across every live selling product for
+// the current event, so they are Site Preferences rather than per-product/per-line-item custom attributes.
+function getSitePreferenceValue(prefID) {
+    try {
+        var value = Site.getCurrent().getCustomPreferenceValue(prefID);
+        return empty(value) ? '' : value.toString();
+    } catch (e) {
+        return '';
+    }
+}
+
 /**
  * Reads a boolean custom attribute as a tri-state value so an agent's explicit choice can be told apart
  * from a field that was never touched. Returns true/false when the attribute holds an explicit value,
@@ -136,8 +147,11 @@ function doPrePlaceOrder(order) {
                             if (lineItemIsLiveSelling) {
                                 try {
                                     var liveSellingItemID = getCustomValue(product.custom, 'liveSellingItemID') || product.ID;
-                                    var liveSellingHostName = getCustomValue(lineItem.custom, 'liveSellingHostName') || getCustomValue(product.custom, 'liveSellingHostName');
-                                    var liveSellingEventDate = getCustomValue(lineItem.custom, 'liveSellingEventDate') || getCustomValue(product.custom, 'liveSellingEventDate');
+                                    // Host name and event date are static for the whole event (Site
+                                    // Preferences), not per-product/per-line-item - whatever the agent may
+                                    // have typed into the CSC line item's own host name field is ignored.
+                                    var liveSellingHostName = getSitePreferenceValue('liveSellingHostName');
+                                    var liveSellingEventDate = getSitePreferenceValue('liveSellingEventDate');
 
                                     isLiveSellingOrder = true;
                                     lineItem.custom.isLiveSellingLineItem = true;
