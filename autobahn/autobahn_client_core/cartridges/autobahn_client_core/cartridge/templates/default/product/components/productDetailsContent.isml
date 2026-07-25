@@ -278,10 +278,10 @@
                 <div class="row">
                     <div class="col">
                         <div class="live-selling-product-meta live-selling-product-meta-pdp">
-                            <span class="badge-product live-selling-badge">${product.liveSellingBadgeText}</span>
                             <isif condition="${!empty(product.liveSellingItemID)}">
-                                <span class="live-selling-item-id">Item ID: ${product.liveSellingItemID}</span>
+                                <span class="badge-product live-selling-badge">${Resource.msgf('label.liveselling.itemid', 'product', null, product.liveSellingItemID)}</span>
                             </isif>
+                            <span class="live-selling-badge-text">${product.liveSellingBadgeText}</span>
                         </div>
                     </div>
                 </div>

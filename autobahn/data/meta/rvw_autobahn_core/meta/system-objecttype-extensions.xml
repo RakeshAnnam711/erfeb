@@ -2039,6 +2039,7 @@ It will also be likely that the related site preference "viewOutOfStockItems", s
                 <attribute attribute-id="contentPerRowMobile"/>
                 <attribute attribute-id="cookieConsentAge"/>
                 <attribute attribute-id="countriesJSONOverride"/>
+                <attribute attribute-id="cscHandoffExpirationHours"/>
                 <attribute attribute-id="enableConsentTracking"/>
                 <attribute attribute-id="enableCookieConsent"/>
                 <attribute attribute-id="enablePLPStickyRefinementBar"/>
@@ -2055,6 +2056,11 @@ It will also be likely that the related site preference "viewOutOfStockItems", s
                 <attribute attribute-id="headerSearchMinTermLength"/>
                 <attribute attribute-id="headerSearchMaxSuggestions"/>
                 <attribute attribute-id="hideQty"/>
+                <attribute attribute-id="liveSellingBadgeText"/>
+                <attribute attribute-id="liveSellingEventDate"/>
+                <attribute attribute-id="liveSellingEventID"/>
+                <attribute attribute-id="liveSellingHostName"/>
+                <attribute attribute-id="liveSellingPlatform"/>
                 <attribute attribute-id="loginRedirectExclusions"/>
                 <attribute attribute-id="megamenuNavLayout"/>
                 <attribute attribute-id="navMenuCategoryDepth"/>

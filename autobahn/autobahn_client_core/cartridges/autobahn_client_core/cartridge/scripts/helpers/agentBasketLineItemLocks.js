@@ -3,6 +3,7 @@
 var collections = require('*/cartridge/scripts/util/collections');
 var LineItemCtnr = require('dw/order/LineItemCtnr');
 var Transaction = require('dw/system/Transaction');
+var Site = require('dw/system/Site');
 
 var SESSION_KEY = 'agentLockedLineItemUUIDs';
 var SESSION_BASKET_KEY = 'agentLockedBasketUUID';
@@ -11,7 +12,23 @@ var SESSION_STOREFRONT_BASKET_KEY = 'storefrontLineItemBasketUUID';
 var CSC_LINE_ITEM_ATTR = 'isCSCHandoffLineItem';
 var STOREFRONT_LINE_ITEM_ATTR = 'isStorefrontLineItem';
 var LIVE_CATEGORY_IDS = ['live-selling-dev-products'];
-var CSC_EXPIRATION_MINUTES = 5;
+var DEFAULT_EXPIRATION_MS = 5 * 60 * 1000; // 5 minutes, used only if the site preference is unset/invalid
+
+// Business-configurable via the cscHandoffExpirationHours Site Preference, so the business can change the
+// expiration window without a code deploy. Falls back to the original 5-minute default if left blank.
+function getExpirationMs() {
+    try {
+        var hours = Site.getCurrent().getCustomPreferenceValue('cscHandoffExpirationHours');
+
+        if (hours === null || hours === undefined || isNaN(hours) || hours <= 0) {
+            return DEFAULT_EXPIRATION_MS;
+        }
+
+        return hours * 60 * 60 * 1000;
+    } catch (e) {
+        return DEFAULT_EXPIRATION_MS;
+    }
+}
 
 function getBasketUUID(basket) {
     try {
@@ -387,15 +404,17 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     return lockedUUIDs;
 }
 
-// Removes CSC handoff line items that have sat in the basket, unpurchased, longer than
-// CSC_EXPIRATION_MINUTES. Clock starts at the line item's own creationDate (when the CSC agent added it),
-// not the customer's session activity. Returns the UUIDs of whatever got removed (empty array if nothing
-// expired), so the caller can both recalculate basket totals and patch any view data it already built from
-// the pre-removal basket state instead of rendering a now-stale line item.
+// Removes CSC handoff line items that have sat in the basket, unpurchased, longer than the
+// cscHandoffExpirationHours Site Preference. Clock starts at the line item's own creationDate (when the
+// CSC agent added it), not the customer's session activity. Each line item is evaluated independently, so
+// e.g. two CSC items added at different times each expire on their own schedule. Returns the UUIDs of
+// whatever got removed (empty array if nothing expired), so the caller can both recalculate basket totals
+// and patch any view data it already built from the pre-removal basket state instead of rendering a
+// now-stale line item.
 function removeExpiredCSCLineItems(basket) {
     var expiredItems = [];
     var now = new Date().getTime();
-    var expirationMs = CSC_EXPIRATION_MINUTES * 60 * 1000;
+    var expirationMs = getExpirationMs();
 
     if (!basket || !basket.allProductLineItems) {
         return [];
