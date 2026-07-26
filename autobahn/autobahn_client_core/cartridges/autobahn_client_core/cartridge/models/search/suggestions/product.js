@@ -10,6 +10,26 @@ var ACTION_ENDPOINT = preferences.suggestionsActionEnpoint
     : "Product-Show";
 var IMAGE_SIZE = preferences.imageSize ? preferences.imageSize : "medium";
 var images = require("*/cartridge/models/product/decorators/images");
+var CatalogMgr = require("dw/catalog/CatalogMgr");
+
+var LIVE_SELLING_CATEGORY_ID = 'live-selling-dev-products';
+
+/**
+ * Live selling products are only browsable on their own dedicated category page - never via
+ * search-as-you-type suggestions. Mirrors the same category-assignment check used to filter
+ * them out of regular search/category results (models/search/productSearch.js).
+ *
+ * @param {dw.catalog.Product} product - Suggested product
+ * @return {boolean} - True if the product should be hidden from suggestions
+ */
+function isHiddenLiveSellingProduct(product) {
+    try {
+        var liveSellingCategory = CatalogMgr.getCategory(LIVE_SELLING_CATEGORY_ID);
+        return !!(liveSellingCategory && product && product.isAssignedToCategory(liveSellingCategory));
+    } catch (e) {
+        return false;
+    }
+}
 
 /**
  * Get Image URL
@@ -71,15 +91,16 @@ function getProducts(suggestedProducts, maxItems, rawQuery, stripeMidValue) {
         // Log error details if API call fails
         // dw.system.Logger.error("Failed to fetch products: " + (result ? result.error : "Unknown error"));
             var product = null;
-            for (var i = 0; i < maxItems; i++) {
-                if (suggestedProducts.hasNext()) {
-                    product = suggestedProducts.next().productSearchHit.product;
-                    products.push({
-                        name: product.name,
-                        imageUrl: getImageUrl(product),
-                        url: URLUtils.url(ACTION_ENDPOINT, 'pid', product.ID)
-                    });
+            while (products.length < maxItems && suggestedProducts.hasNext()) {
+                product = suggestedProducts.next().productSearchHit.product;
+                if (isHiddenLiveSellingProduct(product)) {
+                    continue;
                 }
+                products.push({
+                    name: product.name,
+                    imageUrl: getImageUrl(product),
+                    url: URLUtils.url(ACTION_ENDPOINT, 'pid', product.ID)
+                });
             }
     }
 
