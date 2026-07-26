@@ -271,10 +271,14 @@ function doPrePlaceOrder(order) {
 
             dwTransaction.commit();
             try {
+                var cscOrderNotes = getCustomValue(order.custom, 'cscOrderNotes');
                 var payload = {
                     order_id: order.orderNo,
                     event_id: order.UUID
                 };
+                if (!empty(cscOrderNotes)) {
+                    payload.csc_order_notes = cscOrderNotes;
+                }
                 var response = orderEventService.call(payload);
                 if (!response.ok) {
                     dwLogger.error('orderEventITPF failed for Order {0}: {1}', order.orderNo, response.errorMessage || 'Unknown error');
