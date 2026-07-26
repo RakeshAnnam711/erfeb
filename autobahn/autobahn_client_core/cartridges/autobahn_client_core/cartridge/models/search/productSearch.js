@@ -4,8 +4,10 @@ var collections = require('*/cartridge/scripts/util/collections');
 var searchRefinementsFactory = require('*/cartridge/scripts/factories/searchRefinements');
 var base = module.superModule;
 var URLUtils = require('dw/web/URLUtils');
+var CatalogMgr = require('dw/catalog/CatalogMgr');
 
 var ACTION_ENDPOINT_AJAX = 'Search-Show';
+var LIVE_SELLING_CATEGORY_ID = 'live-selling-dev-products';
 
 /**
  * Returns the refinement values that have been selected
@@ -64,6 +66,24 @@ function ProductSearch(productSearch, httpParams, sortingRule, sortingOptions, r
     }
     base.apply(this, arguments);
 
+    // Live selling products are only browsable on their own dedicated category page - everywhere
+    // else (other categories, keyword search) they're filtered out of the rendered grid. Filtering
+    // on category assignment (rather than the isLiveSellingProduct custom attribute) avoids relying
+    // on search-index refinement behavior for a boolean attribute that's unset on most of the catalog.
+    if (!this.category || this.category.id !== LIVE_SELLING_CATEGORY_ID) {
+        var liveSellingCategory = CatalogMgr.getCategory(LIVE_SELLING_CATEGORY_ID);
+
+        if (liveSellingCategory && this.productIds) {
+            this.productIds = this.productIds.filter(function (item) {
+                try {
+                    var product = item.productSearchHit && item.productSearchHit.product;
+                    return !(product && product.isAssignedToCategory(liveSellingCategory));
+                } catch (e) {
+                    return true;
+                }
+            });
+        }
+    }
 }
 
 ProductSearch.prototype = Object.create(base.prototype);
