@@ -233,6 +233,12 @@ server.get('DebugCSC', function (req, res, next) {
 
         debugInfo.basketCustomAttributes = dumpCustom(currentBasket);
 
+        try {
+            debugInfo.defaultShipmentCustomAttributes = currentBasket.defaultShipment ? dumpCustom(currentBasket.defaultShipment) : null;
+        } catch (e) {
+            debugInfo.defaultShipmentCustomAttributes = 'ERROR: ' + e.message;
+        }
+
         currentBasket.allProductLineItems.toArray().forEach(function (li) {
             debugInfo.lineItems.push({
                 uuid: li.UUID,

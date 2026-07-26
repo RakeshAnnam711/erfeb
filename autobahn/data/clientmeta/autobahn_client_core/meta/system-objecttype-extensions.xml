@@ -248,6 +248,14 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="cscOrderNotes">
+                <display-name xml:lang="x-default">CSC Order Notes</display-name>
+                <description xml:lang="x-default">Note entered by the CSC agent at handoff time. Written to a real Business Manager order note and included in the fulfillment payload when the order is placed.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="RTWOrder">
@@ -258,6 +266,26 @@
                 <attribute attribute-id="isCSCHandoffOrder"/>
                 <attribute attribute-id="liveSellingHostName"/>
                 <attribute attribute-id="liveSellingEventDate"/>
+                <attribute attribute-id="cscOrderNotes"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Shipment">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="cscOrderNotes">
+                <display-name xml:lang="x-default">CSC Order Notes</display-name>
+                <description xml:lang="x-default">Temporary basket storage for the order note entered by a CSC agent.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="CSCOrderNotes">
+                <display-name xml:lang="x-default">CSC Order Notes</display-name>
+                <attribute attribute-id="cscOrderNotes"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
