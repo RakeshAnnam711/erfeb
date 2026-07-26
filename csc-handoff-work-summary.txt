@@ -10,30 +10,47 @@ Live-selling product experience:
 - Hide price and Add to Cart/quick add on PLP and PDP (also hide quantity
   selector and sticky Add to Cart on PDP).
 - Show a live-selling badge and item ID.
+- Live-selling products should only be findable on their own dedicated
+  category page - hidden from every other category, from keyword search
+  results, and from search-as-you-type suggestions.
 - After order placement, store live-selling host name and event date on the
-  order/order line item.
+  order/order line item. Live-selling line items are excluded from returns,
+  the same way final-sale products already are.
 
 CSC / BM handoff cart behavior:
 
 - Products added by Customer Service through Business Manager and handed off
   to the customer must be locked - customer cannot remove, change quantity,
-  or wishlist them, and the promo/coupon box is hidden.
+  or wishlist them, and the promo/coupon box is hidden. Only live-selling
+  CSC items lock; a plain CSC-added product behaves like a normal item.
 - Products the customer adds themselves from the storefront must stay fully
   editable, even in the same (mixed) basket.
 - Remove All clears the whole basket, CSC and storefront items alike.
+- A CSC agent can type a handoff note while building the basket. That note
+  should end up as a real Business Manager order note and be sent to
+  fulfillment.
 
 
 2. What Was Built - Live-Selling PLP/PDP
 --------------------------------------------
-- Custom attributes added (see section 5 for the full list) so Business
+- Custom attributes added (see section 8 for the full list) so Business
   Manager can flag a product/category as live-selling and store badge/item
   ID/host/event date.
 - A live-selling decorator (models/product/decorators/liveSelling.js) exposes
-  those fields on the product model for PLP/PDP templates.
+  those fields on the product model for PLP/PDP templates. A product counts
+  as live-selling if EITHER its own isLiveSellingProduct flag is checked OR
+  it is assigned to the live-selling category - whichever is true is enough,
+  you do not need to set both.
 - PLP/PDP templates hide price and Add to Cart when a product is
-  live-selling, and show the badge + item ID instead.
+  live-selling, and show the badge + item ID instead (badge and item ID
+  positions were swapped partway through the work - see section 6.6).
 - Checkout logic (doPrePlaceOrder.js) copies live-selling data onto the
-  order and order line item once payment succeeds.
+  order and order line item once payment succeeds, and marks live-selling
+  line items non-returnable (see section 6.8).
+- Live-selling event details (event ID, host name, event date, badge text)
+  are Site Preferences, not per-product fields - they are the same value
+  for every product during a given event, so they only need to be set once
+  per event instead of on every product (see section 6.9).
 
 
 3. What Was Built - CSC Handoff Cart Locking
@@ -49,30 +66,105 @@ CSC / BM handoff cart behavior:
 - Cart, mini cart, and checkout templates hide Remove/Wishlist/quantity
   controls and the promo box for locked items; storefront items keep them.
 - Remove All clears the entire basket (added to cart page and mini cart).
+- Only live-selling CSC items lock, not every CSC-added item (see section
+  6.2).
+- A CSC-locked item still sitting unpurchased past a configurable time limit
+  is automatically removed from the basket (see section 6.5).
 
 
-4. Refinements After Initial Build
+4. What Was Built - CSC Order Handoff Notes
+-------------------------------------------------
+A CSC agent can type a free-text note while building a customer's basket in
+the Business Manager Customer Service Center screen (a new "Order Notes" tab
+added to that screen's config). What happens with that note:
+
+- The note is saved on the basket's default shipment
+  (defaultShipment.custom.cscOrderNotes) - it turned out this Business
+  Manager screen can only save custom attributes at the shipment/customer
+  level, not directly on the basket/order itself, so this is where it has
+  to live while the basket is still being built.
+- When the basket becomes an order (checkoutHelpers.js), the note is copied
+  onto the order (order.custom.cscOrderNotes) and added as a real Business
+  Manager order note (Order Detail > Notes tab) via order.addNote(). Note:
+  the correct API is addNote(), not createNote() - createNote() does not
+  exist on dw.order.Order, this was confirmed by checking the actual SFCC
+  API type definitions after first trying the wrong method name.
+- The note is also included in the order-placed payload sent to fulfillment
+  (orderEventITPFservice), as csc_order_notes. Not yet confirmed whether the
+  fulfillment system's endpoint actually reads/uses that field - it should
+  be checked with whoever owns that integration before relying on it
+  operationally, since the payload today mostly just sends an order ID/event
+  ID, suggesting fulfillment may pull full order details a different way.
+- The Cart-DebugCSC endpoint (temporary debug tool, see section 7) was
+  extended to show the shipment's custom attributes, to make it possible to
+  verify the note saved correctly before placing an order.
+
+
+5. What Was Built - Restrict Live-Selling Products to Their Own Category
+-------------------------------------------------------------------------
+Live-selling products are now hidden from every category page, keyword
+search, and search-as-you-type suggestions except the dedicated live-selling
+category page itself. Direct product page (PDP) links still work normally -
+only listing/search pages are affected.
+
+How it works: rather than relying on the isLiveSellingProduct attribute or
+the site-wide "searchable" flag (both considered and ruled out - see below),
+the fix checks category assignment directly. On any page that is not the
+live-selling category, any product assigned to the live-selling category is
+filtered out of the results before they are shown.
+
+- models/search/productSearch.js - filters the product grid on every
+  category page, keyword search, pagination, and sort-change request (all of
+  these share this one model, so one change covers all of them).
+- models/search/suggestions/product.js - separately filters the
+  search-as-you-type dropdown, which uses a different, unrelated mechanism
+  in SFCC and needed its own fix.
+
+Why not the simpler options:
+- The site-wide "searchable" flag was ruled out because it is not
+  per-category - turning it off would also hide the product from the
+  live-selling page itself, which defeats the purpose.
+- Filtering by the isLiveSellingProduct true/false attribute at the search
+  index level was ruled out because the attribute is left unset ("none") on
+  almost every other product in the catalog, not explicitly set to false.
+  Search index filters that expect an explicit true/false value could behave
+  unpredictably against a value that was never set, and the risk was hard to
+  rule out without a live reindex test. Category assignment does not have
+  this problem - every product's category assignment is always a known,
+  indexed fact.
+
+Known limitation: because the filtering happens after the search has already
+run, the "X results" count and pagination are based on the full,
+unfiltered number. On the rare category page that also happens to contain a
+live-selling product, the displayed count can be slightly higher than what
+actually renders. Accepted as a minor, low-frequency cosmetic gap given how
+few products are live-selling at any one time.
+
+Test product used during development: QJABVI1YPB015 (assigned to the
+live-selling category plus 8 other real categories at the time of testing).
+
+
+6. Refinements After Initial Build
 ---------------------------------------
-4.1 CSC Product Detail custom fields (agent-facing, BM config only)
+6.1 CSC Product Detail custom fields (agent-facing, BM config only)
 
 Business Manager's Customer Service Center Settings > Product Detail area
-now shows an "Is Live Selling Line Item" checkbox and "Live Selling Host
-Name" text field when an agent adds a product to a basket. These bind to
-ProductLineItem attributes that already existed - no new attributes were
-created.
+shows an "Is Live Selling Line Item" checkbox and "Live Selling Host Name"
+text field when an agent adds a product to a basket. These bind to
+ProductLineItem attributes that already existed.
 
-4.2 Lock only live-selling line items, not every CSC-added item
+6.2 Lock only live-selling line items, not every CSC-added item
 
 Originally any CSC-added product was locked regardless of live-selling
 status. Changed so only live-selling items lock; a plain CSC-added product
 now behaves like a normal customer item. isLineItemLiveSelling() resolves
 this the same way at both cart-lock time and checkout: the agent's explicit
 checkbox choice (checked or unchecked) wins if they touched it, otherwise it
-falls back to the catalog product's own isLiveSellingProduct flag. Locks
-also now release automatically if an agent unchecks the box after initially
-checking it - previously a lock, once set, could never be cleared.
+falls back to whether the product counts as live-selling (its own flag, or
+its category assignment). Locks also release automatically if an agent
+unchecks the box after initially checking it.
 
-4.3 Session lock-cache staleness fix
+6.3 Session lock-cache staleness fix
 
 The session-cached list of "locked" line item UUIDs used to only grow, never
 shrink, so a line item briefly mis-locked during its own add-to-cart request
@@ -80,66 +172,154 @@ could stay locked forever even after its real attribute was corrected. Fixed
 by purging the session cache to match the real attribute state on every
 check.
 
-4.4 isCSCHandoffOrder (order-level)
+6.4 isCSCHandoffOrder (order-level)
 
-New order attribute, set independently of isLiveSellingOrder, true whenever
-any line item on the order was CSC-locked. Lets a plain CSC handoff order be
+Order attribute, set independently of isLiveSellingOrder, true whenever any
+line item on the order was CSC-locked. Lets a plain CSC handoff order be
 told apart from a live-selling CSC handoff order in reporting.
+isLiveSellingOrder itself is intentionally stricter: it only gets set when
+the agent explicitly checked the live-selling box for at least one line item
+- it never falls back to the product's own flag or category assignment the
+way cart locking does, so a normal customer order is never accidentally
+marked live-selling.
 
-4.5 5-minute CSC line item auto-expiration
+6.5 CSC line item auto-expiration (now a configurable Site Preference)
 
-A CSC-locked line item still sitting unpurchased 5 minutes after being added
-is automatically removed from the basket. Checked reactively on cart
-page-load/navigation, plus a client-side poll every 30 seconds while the
-cart page is open (server always re-validates elapsed time; the client only
-triggers the check). Known limit: this is not a true background timer - SFCC
-has no supported way for a scheduled job to reach into an arbitrary
-customer's basket, so if the customer closes the tab and never returns nothing
-removes the item until their next visit.
+A CSC-locked item still sitting unpurchased past a time limit is
+automatically removed from the basket. Originally hardcoded to 5 minutes,
+now configurable via the cscHandoffExpirationHours Site Preference (in
+hours - e.g. 0.1 hours = 6 minutes; defaults to 5 minutes if left blank).
+Checked reactively on cart page-load/navigation, plus a client-side poll
+every 30 seconds while the cart page is open (the server always
+re-validates elapsed time; the client only triggers the check). Known
+limit: this is not a true background timer - SFCC has no supported way for
+a scheduled job to reach into an arbitrary customer's basket, so if the
+customer closes the tab and never returns, nothing removes the item until
+their next visit.
 
-4.6 PLP live-selling badge position
+6.6 PLP/PDP badge and item ID position swap
 
-Moved from the tile body (below the image, in normal text flow) to overlay
-the top-left corner of the product image, matching the site's existing
-promotional badge pattern. Item ID text stays in its original spot near the
-product name.
+Badge moved from the tile body (below the image, in normal text flow) to
+overlay the top-left corner of the product image on the PLP, matching the
+site's existing promotional badge pattern. On both PLP and PDP, the spot
+that used to show the badge now shows "Item: <item ID>" as a styled pill,
+and the spot that used to show the item ID now shows the plain badge text
+with no background.
+
+6.7 Event ID and event date attributes added
+
+liveSellingEventID and liveSellingEventDate were added to support the badge
+swap and reporting; not rendered anywhere on the storefront by design at the
+time they were added.
+
+6.8 Final Sale / No Returns for live-selling products
+
+Live-selling line items are excluded from returns the same way final-sale
+products already are, by reusing the existing somCC_returnable export flag
+(set false in doPrePlaceOrder.js for live-selling line items). The original
+custom cart warning message ("This is a live selling product, returns are
+not allowed") on the cart/mini-cart product card was kept exactly as built
+- only the functional no-returns flag was added on top, the display message
+was not changed or removed.
+
+6.9 Static live-selling fields moved from Product to Site Preferences
+
+liveSellingEventID, liveSellingHostName, liveSellingEventDate, and
+liveSellingBadgeText used to be per-product custom attributes. Since they
+are always the same value across an entire event (not per-product), they
+were moved to Site Preferences and fully removed from Product metadata.
+liveSellingItemID stayed on Product, since that genuinely is per-product.
+Two new Site Preferences were also added: cscHandoffExpirationHours (see
+6.5) and liveSellingPlatform (placeholder, not yet wired into any code -
+created for future use, e.g. Instagram/TikTok/Bambuser).
+
+Recurring lesson learned while doing this: a new Site Preference (or any
+new custom attribute) needs to be listed in BOTH its own dedicated Business
+Manager group AND the general "catch-all" group already used for that
+object type (Autobahn Configs for Site Preferences, WGACA-Custom-Attributes
+for Product), or it can render inconsistently or not at all in Business
+Manager. This tripped up liveSellingEventID, then liveSellingPlatform,
+before the pattern was recognized and applied correctly from the start for
+later attributes.
+
+6.10 isLiveSellingProduct made effectively optional
+
+Once the live-selling decorator and cart-locking logic both treat category
+assignment as equally sufficient (see section 2), the isLiveSellingProduct
+checkbox is no longer strictly required for a product to behave correctly
+as live-selling - assigning it to the live-selling category alone is
+enough for display, badge, and cart-locking behavior. The attribute is
+being kept for now as a way to flag a product as live-selling without
+assigning it to the category, but is a candidate for removal later if that
+flexibility turns out not to be needed (not done yet - flagged for cleanup).
 
 
-5. Business Manager Setup Needed
+7. Temporary Debug Tooling
+-------------------------------
+Cart-DebugCSC (Cart.js) - a temporary GET endpoint added during
+investigation, still present, used throughout this work to inspect a live
+basket's classification state (channel type, locked line item UUIDs,
+per-line-item and per-shipment custom attributes) directly from the browser
+without needing Business Manager. Marked TEMP DEBUG in the code; candidate
+for removal once this work is considered stable.
+
+
+8. Business Manager Setup Needed
 -------------------------------------
 Import metadata:
 
 - autobahn/data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml
+- autobahn/data/meta/rvw_autobahn_core/meta/system-objecttype-extensions.xml
 - autobahn/data/meta/rvw_som_integration/meta/system-objecttype-extensions.xml
 
 Custom attributes to confirm exist in BM after import:
 
 - Category: isLiveSellingCategory
-- Product: isLiveSellingProduct, liveSellingItemID, liveSellingBadgeText,
-  liveSellingHostName, liveSellingEventDate
+- Product: isLiveSellingProduct, liveSellingItemID
 - Order: isLiveSellingOrder, isCSCHandoffOrder, liveSellingHostName,
-  liveSellingEventDate
+  liveSellingEventDate, cscOrderNotes
+- Shipment: cscOrderNotes (temporary storage while a CSC basket is still
+  being built - see section 4)
 - ProductLineItem: isLiveSellingLineItem, liveSellingItemID,
   liveSellingHostName, liveSellingEventDate, isCSCHandoffLineItem,
   isStorefrontLineItem
+- Site Preferences (Custom Preferences): liveSellingEventID,
+  liveSellingHostName, liveSellingEventDate, liveSellingBadgeText,
+  cscHandoffExpirationHours, liveSellingPlatform
 
 No SFCC custom object types are used anywhere in this work - only system
 object custom attributes on existing objects.
 
 Product/category setup for the live-selling PLP to show a product: product
-must be online, searchable, assigned to the live-selling category, and
-available/in stock; rebuild the product index and clear cache after changes.
+must be online, assigned to the live-selling category, and available/in
+stock. Rebuild the product index and clear cache after category assignment
+changes (not strictly required for the category-restriction filter itself,
+which reads live category assignment directly rather than the search index,
+but still good practice after catalog changes).
 Dev category used: live-selling-dev-products (production category can be a
-different ID - the code is attribute-driven, not tied to this specific ID).
+different ID - most of the code reads this ID from a constant, not
+something dynamically configured yet).
+
+Business Manager Customer Service Center "New Order" screen config (a JSON
+config edited directly in Business Manager, not stored in this repo) needed
+a new "Order Notes" tab added, mapped to the Shipment-level cscOrderNotes
+attribute (see section 4) - Basket/Order-level custom attributes could not
+be saved through that screen, only Shipment/Customer-level ones could.
 
 
-6. Testing Steps
+9. Testing Steps
 ---------------------
 Live-selling PLP/PDP: import metadata, assign product to live-selling
-category, mark online/searchable/in-stock, fill live-selling fields, rebuild
-index, open the category PLP and confirm price/Add to Cart are hidden and
-badge/item ID show; open PDP and confirm price/quantity/Add to
-Cart/sticky-add are all hidden.
+category, mark online/in-stock, fill live-selling Site Preferences, open the
+category PLP and confirm price/Add to Cart are hidden and badge/item ID
+show; open PDP and confirm price/quantity/Add to Cart/sticky-add are all
+hidden.
+
+Live-selling category restriction: with that same product, visit any other
+category it is also assigned to and confirm it does NOT appear; search for
+it by keyword and confirm it does NOT appear in results or in the
+search-as-you-type dropdown; open its PDP directly by URL and confirm it
+still loads normally.
 
 CSC handoff cart: add a product via CSC, hand off the basket, log in as the
 customer, confirm the CSC item has no Remove/Wishlist/quantity-update and
@@ -147,24 +327,33 @@ the promo box is hidden; add a product manually as the customer and confirm
 it has all controls; click Remove All and confirm the cart empties
 completely.
 
+CSC order notes: type a note in the CSC "Order Notes" tab while building a
+basket, hand it off, check Cart-DebugCSC for
+defaultShipmentCustomAttributes.cscOrderNotes to confirm it saved; place the
+order and confirm the order's CSC Order Notes attribute is populated and a
+"CSC Order Note" entry appears on the order's Notes tab in Business Manager.
+
 Order attributes: place an order containing a live-selling/CSC product,
 check isCSCHandoffOrder / isLiveSellingOrder / liveSellingHostName /
-liveSellingEventDate on the order, and the matching fields plus
-isCSCHandoffLineItem on the order line item.
+liveSellingEventDate / cscOrderNotes on the order, and the matching fields
+plus isCSCHandoffLineItem on the order line item.
 
 
-7. Files Touched
+10. Files Touched
 ---------------------
 Core logic:
 
-- autobahn_client_core/cartridge/scripts/helpers/agentBasketLineItemLocks.js (new)
 - autobahn_client_core/cartridge/controllers/Cart.js
 - autobahn_client_core/cartridge/models/product/decorators/liveSelling.js (new)
-- autobahn_client_core/cartridge/models/productLineItem/productLineItem.js (new)
-- autobahn_client_core/cartridge/models/product/productTile.js
 - autobahn_client_core/cartridge/models/product/fullProduct.js
-- autobahn_client_core/cartridge/scripts/hooks/mergeBasketUtil.js
+- autobahn_client_core/cartridge/models/product/productTile.js
+- autobahn_client_core/cartridge/models/productLineItem/productLineItem.js (new)
+- autobahn_client_core/cartridge/models/search/productSearch.js
+- autobahn_client_core/cartridge/models/search/suggestions/product.js
+- autobahn_client_core/cartridge/scripts/checkout/checkoutHelpers.js
+- autobahn_client_core/cartridge/scripts/helpers/agentBasketLineItemLocks.js (new)
 - autobahn_client_core/cartridge/scripts/hooks/cscBasketHandoff.js (new)
+- autobahn_client_core/cartridge/scripts/hooks/mergeBasketUtil.js
 - autobahn_client_core/hooks.json
 - rvw_integrations_core/cartridge/scripts/checkout/doPrePlaceOrder.js
 
@@ -175,28 +364,45 @@ Templates:
 - autobahn_client_core/cartridge/templates/default/cart/productCard/cartProductCard.isml
 - autobahn_client_core/cartridge/templates/default/cart/productCard/cartProductCardEdit.isml
 - autobahn_client_core/cartridge/templates/default/checkout/cart/miniCart.isml
+- autobahn_client_core/cartridge/templates/default/checkout/productCard/productCard.isml
 - autobahn_client_core/cartridge/templates/default/checkout/productCard/productCardProductNameAndRemove.isml
-- autobahn_client_core/cartridge/templates/default/product/productTile.isml
 - autobahn_client_core/cartridge/templates/default/product/components/productDetailsContent.isml
+- autobahn_client_core/cartridge/templates/default/product/productTile.isml
+- autobahn_client_core/cartridge/templates/default/search/searchResults.isml (adds the
+  plp-bottom content slot)
 - rvw_autobahn_core/cartridge/templates/default/product/components/productTileImage.isml
+
+Resource/properties files:
+
+- autobahn_client_core/cartridge/templates/resources/cart.properties
+- autobahn_client_core/cartridge/templates/resources/product.properties
 
 Client-side / styling:
 
 - autobahn_client_core/cartridge/client/default/js/cart/cart.js
+- autobahn_client_core/cartridge/client/default/scss/cart/_cart.scss
 - autobahn_client_core/cartridge/client/default/scss/components/_productTiles.scss
 - autobahn_client_core/cartridge/client/default/scss/product/_pdp-consolidated.scss
 
 Metadata / data:
 
 - data/clientmeta/autobahn_client_core/meta/system-objecttype-extensions.xml
+- data/meta/rvw_autobahn_core/meta/system-objecttype-extensions.xml
 - data/meta/rvw_som_integration/meta/system-objecttype-extensions.xml
 - data/clienttest/autobahn_client_core/catalogs/storefront-catalog-wgaca/catalog.xml
+- .vscode/system-objecttype-extensions.d.ts (auto-generated typings, kept in
+  sync alongside every metadata change)
+
+Not tracked in this repo (edited directly in Business Manager):
+
+- Business Manager Customer Service Center "New Order" screen JSON config
+  (adds the "Order Notes" tab, see section 8)
 
 
-8. Open Topic - Live-Selling Pricing, Auto Item IDs, Visibility, Category Activation
+11. Open Topics - Live-Selling Pricing and Auto Item IDs
 ------------------------------------------------------------------------------------------
 
-8.1 Event pricing (separate price book for live-selling)
+11.1 Event pricing (separate price book for live-selling)
 
 Asking for: a special price during the live-selling event, visible ONLY on
 the live-selling page, that reverts to normal automatically afterward, and
@@ -222,7 +428,7 @@ Questions to ask the business:
 - Should the event go live on a pre-set schedule (specific start/end dates),
   or via a manual on/off switch someone flips?
 
-8.2 Automatic item ID numbering
+11.2 Automatic item ID numbering
 
 Asking for: item IDs auto-numbered 1 through N based on how many products
 are in the live-selling category, in an order the business controls, with no
@@ -252,26 +458,16 @@ Questions to ask the business:
 - Should item numbers stay permanent once assigned, or is it fine for them
   to shift if an earlier product is removed?
 
-8.3 Hide live-selling products from search, other categories, and normal
-navigation
+11.3 Hide live-selling products from search, other categories, and normal
+navigation - RESOLVED, see section 5
 
-Asking for: a live-selling product should only be findable through the
-live-selling page/URL - not search, not other listing pages, not other
-categories.
+This was originally an open question with a flagged architectural conflict
+(the live-selling page depended on the same "searchable" switch this
+requirement would need to turn off). It has since been built - see section
+5 for what was actually implemented and why the originally-assumed
+"searchable flag" approach was not used.
 
-Important conflict: today's live-selling page is built on the same
-"searchable" switch that controls whether a product shows up in search and
-regular category pages. Turning that switch off to satisfy this requirement
-would also break the live-selling page itself, since it currently depends on
-the same switch to show anything at all. Making this work cleanly requires
-rebuilding the live-selling page to fetch its products directly, independent
-of search - a real piece of additional work, not a small setting change.
-
-Questions to ask the business:
-- Confirm this is worth the additional rebuild work described above, given
-  it is a bigger change than a settings tweak.
-
-8.4 Category activation on/off
+11.4 Category activation on/off
 
 Asking for: a single on/off switch for the live-selling event - when on,
 products show on the live-selling page only; when off, they disappear from
@@ -281,12 +477,11 @@ What's possible: the on/off switch and scheduling are already native,
 solved SFCC features (categories have their own active/inactive toggle and
 go-live/expire dates) - nothing new needed for the switch itself.
 
-Question to ask the business (currently undefined, per their own
-requirement wording):
-- What should happen to a product that is assigned to BOTH a normal category
-  AND the live-selling category at the same time? Should it be locked down
-  (no price/Add to Cart) everywhere it appears while the event is active,
-  even in its normal category - or fully purchasable normally, and only
-  restricted specifically on the live-selling page? Today's code would
-  default to the first option by accident of how the flag check works, not
-  by deliberate decision.
+The question that used to be open here - what happens to a product assigned
+to both a normal category and the live-selling category at the same time -
+is now effectively answered by how sections 2 and 5 were built: today, such
+a product is hidden from its normal category entirely and only shows,
+locked down (no price/Add to Cart), on the live-selling page. It is not
+possible today for a product to be both live-selling AND normally
+purchasable in another category at the same time - that would need
+additional work if the business ever wants that combination.
