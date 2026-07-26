@@ -160,6 +160,13 @@ function doPrePlaceOrder(order) {
                                     lineItem.custom.liveSellingEventDate = liveSellingEventDate;
                                     addUnique(liveSellingHostNames, liveSellingHostName);
                                     addUnique(liveSellingEventDates, liveSellingEventDate);
+
+                                    // Reuse the exact same SOM export flag final_sale products use
+                                    // (set by autobahn_client_core's doPrePlaceOrder, which runs before this
+                                    // one via the base module chain) rather than a separate live-selling
+                                    // return flag - live selling line items are excluded from returns the
+                                    // same way final sale ones are.
+                                    lineItem.custom.somCC_returnable = false;
                                 } catch(err) {
                                     dwLogger.warn('Missing ProductLineItem live selling custom attribute definition: ' + err);
                                 }
