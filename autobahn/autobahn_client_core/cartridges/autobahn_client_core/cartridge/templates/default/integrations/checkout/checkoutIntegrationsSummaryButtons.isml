@@ -1,0 +1,35 @@
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('yotpoCartridgeEnabled')}">
+    <isinclude template="loyalty/yotpoRedemptionWidget" />
+</isif>
+
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('sfcommercepaymentsCartridgeEnabled')}">
+    <div class="js-paymentmethod-mutationobserver mt-3">
+        <div class="paymentmethodwarning js-paymentmethodwarning-msgcontainer d-none mb-3"
+            data-iframepresent="false"
+            <isif condition="${dw.system.Site.current.getCustomPreferenceValue('bopisCartridgeEnabled')}">
+                data-bopis_msg="${dw.web.Resource.msg('bopis.buynow.compat.warn', 'instorePickup', null)}"
+                data-bopis_show="${pdict.order.hasPickupInstoreItem ? true : false}"
+                data-bopis_disable="true"
+            </isif>
+            <isif condition="${dw.system.Site.current.getCustomPreferenceValue('subproEnabled')}">
+                data-subpro_msg="${dw.web.Resource.msg('subpro.buynow.compat.warn', 'checkout', null)}"
+                data-subpro_show="${pdict.isSubPro}"
+                data-subpro_disable="true"
+            </isif>
+            <isif condition="${currentSite.getCustomPreferenceValue('multishippingWithoutBopisEnabled')}">
+                data-multiship_msg="${dw.web.Resource.msg('multiship.buynow.compat.warn', 'checkout', null)}"
+                data-multiship_show="${pdict.order.usingMultiShipping && !pdict.order.hasPickupInstoreItem ? true : false}"
+                data-multiship_disable="true"
+            </isif>
+        ></div>
+
+        <div class="js-paymentmethodwarning-affectedcontainer">
+        <isif condition="${pdict.commercePaymentsConfiguration.expressCheckoutEnabled}">
+            <div class="row">
+                <iscomment> <div class="col-12 express-checkout-buttons">
+                    <isinclude template="_commercepayments/components/product/paymentRequestButtons"/>
+                </div> </iscomment>
+            </div>
+        </isif>
+    </div>
+</isif>

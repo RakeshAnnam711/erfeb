@@ -1,0 +1,53 @@
+<div class="container store-locator-container" <isif condition="${!empty(pdict.setPreferredStoreActionUrl)}">data-setpreferredstoreactionurl="${pdict.setPreferredStoreActionUrl}"</isif>>
+    <isset name="idUUID" value="${dw.util.UUIDUtils.createUUID()}" scope="page" />
+    <iscontentasset aid="storeLocatorHeader"/>
+
+    <div class="row">
+        <div class="${pdict.horizontalView === 'true' ? 'col-md-6 d-flex align-items-start flex-column' : 'col-md-12'}">
+            <div class="card search-form">
+                <isinclude template="storeLocator/storeLocatorFields" />
+            </div>
+        </div>
+
+        <div class="${pdict.horizontalView === 'true' ? 'col-md-6' : 'col-md-12'}">
+            <div class="card results-card">
+                <div class="card-header card-title">
+                    <isinclude template="storeLocator/storeLocatorRadius" />
+                </div>
+                <div class="card-body">
+                    <p class="text-center store-locator-no-results" style="display: none;">
+                        ${Resource.msg('no.stores.with.inventory', 'storeLocator', null)}
+                    </p>
+                    <p class="text-center store-locator-no-results-for-product" style="display: none;">
+                        ${Resource.msg('no.stores.with.inventory.for.product', 'storeLocator', null)}
+                    </p>
+                    <p class="text-center store-locator-failed-to-set-preferred alert alert-danger error-message" style="display: none;">
+                        ${Resource.msg('error.storelocator.header.set', 'storeLocator', null)}
+                    </p>
+                    <isif condition="${pdict.showMap === true || pdict.showMap === 'true'}">
+                        <div class="filter-results text-center" style="display:none;" role="tablist" data-action-url="${pdict.stores.actionUrl}">
+                            <button class='btn btn-primary btn-sm active' data-toggle="tab" role="tab" aria-selected="true" data-filter="all">${Resource.msg('input.select.allStores', 'storeLocator', null)}</button>
+                            <isloop items="${pdict.stores.storeTypes}" var="storeType" status="i">
+                                <button class="btn btn-secondary btn-sm" data-toggle="tab" role="tab"
+                                    aria-selected="false" data-filter="${storeType.value}" style="display:none;">${storeType.displayValue}</button>
+                            </isloop>
+                        </div>
+                    </isif>
+                    <div class="results tab-content" data-search-key="${JSON.stringify(pdict.stores.searchKey)}"
+                        data-radius="${pdict.stores.radius}" data-has-results="${pdict.stores.stores.length > 0}">
+                        <div class="tab-pane show active" id="storeType-all-${idUUID}" role="tabpanel" aria-labelledby="storeType-all">
+                            <isinclude template="storeLocator/storeLocatorResults" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <isif condition="${pdict.showMap === false || pdict.showMap === 'false' || pdict.showSelectStore === 'true'}">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-block select-store" disabled>${Resource.msg('button.select.store', 'storeLocator', null)}</button>
+            </div>
+        </div>
+    </isif>
+</div>

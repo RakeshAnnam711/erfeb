@@ -1,0 +1,23 @@
+{
+    "name": "Product Details Page",
+    "description": "The product details page for a given product.",
+    "attribute_definitions": [
+        {
+            "id": "product",
+            "name": "Product",
+            "description": "The product to render the PDP for.",
+            "type": "product",
+            "required": false
+        },
+        {
+            "id": "category",
+            "name": "Category",
+            "description": "The category for the PDP, if available.",
+            "type": "category",
+            "required": false
+        }
+    ],
+    "supported_object_types": [
+        "category", "product"
+    ]
+}

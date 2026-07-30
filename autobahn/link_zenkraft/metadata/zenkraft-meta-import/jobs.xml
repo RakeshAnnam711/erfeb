@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+     <job job-id="SendShippingNotifications" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="SendNotifications" type="ExecuteScriptModule" enforce-restart="false">
+                <description>Filter orders by creation date from the date entered including it.</description>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">int_zenkraft_sfra/cartridge/scripts/zenkraftJobs.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">SendShippingNotifications</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">true</parameter>
+                    <parameter name="day">10</parameter>
+                    <parameter name="month">9</parameter>
+                    <parameter name="year">2020</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="false">
+                <recurrence>
+                    <date-from>2020-07-03Z</date-from>
+                    <start-time>00:26:59.000Z</start-time>
+                    <interval>1h</interval>
+                    <day-of-week>
+                        <weekday>Monday</weekday>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Sunday</weekday>
+                        <weekday>Friday</weekday>
+                        <weekday>Saturday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Thursday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+    <job job-id="UpdateReturnCases" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="SiteGenesis"/>
+            <step step-id="GetReturnTrackingAndUpdateIt" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">int_zenkraft/cartridge/scripts/zenkraftJobs.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">sendReturnsNotifications</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">true</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2020-10-09Z</date>
+                <time>09:42:56.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+</jobs>

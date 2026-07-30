@@ -1,0 +1,72 @@
+<div class="card-title product-line-item">
+
+    <isif condition="${lineItem.productType === 'bundle'}">
+        <div class="bundle-includes">${Resource.msg('msg.bundle.includes', 'cart', null)}</div>
+        <!--- individual bundled line items --->
+        <isinclude template="cart/productCard/cartProductCardBundledItems" />
+    <iselse/>
+        <div class="product-line-item-details d-flex flex-row">
+            <div class="item-image">
+                <img class="product-image" src="${lineItem.images.small[0].url}" alt="${lineItem.images.small[0].alt}"
+                    title="${lineItem.images.small[0].title}">
+            </div>
+            <div class="item-attributes">
+                <div class="line-item-header">
+                    <isinclude template="checkout/productCard/productCardProductName" />
+                </div>
+                <isloop items="${lineItem.variationAttributes}" var="attribute">
+                    <p class="line-item-attributes">${attribute.displayName}: ${attribute.displayValue}</p>
+                </isloop>
+
+                <div class="item-options">
+                    <isloop items="${lineItem.options}" var="option">
+                        <div class="line-item-option">${option.displayName}</div>
+                    </isloop>
+                </div>
+            </div>
+        </div>
+
+        <isif condition="${lineItem.bonusProductLineItemUUID === 'bonus'}">
+            <isloop items="${pdict.order.items.items}" var="fullProduct">
+                <isif condition="${fullProduct.bonusProductLineItemUUID === 'bonus'}">
+                    
+                    <isif condition="${lineItem.UUID === fullProduct.UUID}">
+                        <div class="bonus-product-line-item uuid-${lineItem.UUID}">
+                            <isloop items="${fullProduct.bonusProducts}" var="nestedLineItem" status="loopState">
+                                <isif condition="${loopState.first}">
+                                    <div class="bonus-line-item-msg">${Resource.msg('text.lineitem.bonus.msg', 'cart', null)}:</div>
+                                </isif>
+                                <div class="nested-line-item">
+                                    <div class="product-line-item-details d-flex flex-row">
+                                        <div class="item-image">
+                                            <img class="product-image" src="${nestedLineItem.images.small[0].url}" alt="${nestedLineItem.images.small[0].alt}"
+                                                title="${nestedLineItem.images.small[0].title}">
+                                        </div>
+                                        <div class="item-attributes">
+                                            <div class="line-item-header">
+                                                <div class="line-item-name" title="${nestedLineItem.productName}">${nestedLineItem.productName}</div>
+                                            </div>
+
+                                            <isloop items="${nestedLineItem.variationAttributes}" var="attribute">
+                                                <p class="line-item-attributes">${attribute.displayName}: ${attribute.displayValue}</p>
+                                            </isloop>
+
+                                            <div class="item-options">
+                                                <isloop items="${nestedLineItem.options}" var="option">
+                                                    <div class="line-item-option">${option.displayName}</div>
+                                                </isloop>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </isloop>
+                        </div>
+                    </isif>
+
+                </isif>
+            </isloop>
+        </isif>
+
+    </isif>
+
+</div>

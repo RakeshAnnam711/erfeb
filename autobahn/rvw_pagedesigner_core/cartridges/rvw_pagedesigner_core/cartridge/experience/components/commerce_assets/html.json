@@ -1,0 +1,29 @@
+{
+    "name": "HTML",
+    "description": "Component that allows the use of raw HTML. Should be used sparingly and only when raw html is absolutely necessary.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "htmlArea",
+            "name": "HTML",
+            "description": "HTML to display on the page.",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "html",
+                    "name": "HTML",
+                    "type": "text",
+                    "description": "This can be used to enter free-form text, HTML, Javascript (using <script> tags), CSS (using <style> tags), or to reference a content asset or chromeless Page Designer page (using <iscontentasset aid='assetId'/>).",
+                    "required": true
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

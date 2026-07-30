@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="SignifydOrderSessionId">
+                <display-name xml:lang="x-default">Signifyd Order Session ID</display-name>
+                <description xml:lang="x-default">Signifyd Order Session ID</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="SignifydCaseID">
+                <display-name xml:lang="x-default">Signifyd Case ID</display-name>
+                <description xml:lang="x-default">The Case ID that is returned after the Create Case call. This attribute also gets(could) passed down in the order export as a custom attribute.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="SignifydFraudScore">
+                <display-name xml:lang="x-default">Signifyd Fraud Score</display-name>
+                <description xml:lang="x-default">Fraud Score Rounded up integer. Updated when webhook called.</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="SignifydGuaranteeDisposition">
+                <display-name xml:lang="x-default">Signifyd Guarantee Disposition</display-name>
+                <description xml:lang="x-default">Order status when webhook is called.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">APPROVED</display>
+                        <value>approved</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">DECLINED</display>
+                        <value>declined</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="SignifydOrderURL">
+                <display-name xml:lang="x-default">Signifyd Order URL</display-name>
+                <description xml:lang="x-default">Updated when webhook called from the 'orderURL' value provided in JSON data</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="SignifydRetryCount">
+                <display-name xml:lang="x-default">Signifyd Retry Count</display-name>
+                <description xml:lang="x-default">Number of times the Signifyd Job tried to call the API</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="basketUUID">
+                <display-name xml:lang="x-default">Basket UUID</display-name>
+                <description xml:lang="x-default">UUID of basket used to create this order</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Signifyd">
+                <display-name xml:lang="x-default">Signifyd</display-name>
+                <attribute attribute-id="SignifydCaseID"/>
+                <attribute attribute-id="SignifydFraudScore"/>
+                <attribute attribute-id="SignifydGuaranteeDisposition"/>
+                <attribute attribute-id="SignifydOrderURL"/>
+                <attribute attribute-id="SignifydRetryCount"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="PaymentTransaction">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="authorizePaymentResult">
+                <display-name xml:lang="x-default">authorizePaymentResult</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    </type-extension>
+
+    <type-extension type-id="Product">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="signifydItemIsDigital">
+                <display-name xml:lang="x-default">Signifyd Item Is Digital</display-name>
+                <type>boolean</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="signifyd">
+                <display-name xml:lang="x-default">Signifyd</display-name>
+                <attribute attribute-id="signifydItemIsDigital"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ShippingMethod">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="signifydShipper">
+                <display-name xml:lang="x-default">Signifyd Shipper</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">FEDEX</display>
+                        <value>FEDEX</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">DHL</display>
+                        <value>DHL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">SHIPWIRE</display>
+                        <value>SHIPWIRE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">USPS</display>
+                        <value>USPS</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">UPS</display>
+                        <value>UPS</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="signifydShippingMethod">
+                <display-name xml:lang="x-default">Signifyd Shipping Method</display-name>
+                <type>enum-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">EXPRESS</display>
+                        <value>EXPRESS</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">ELECTRONIC</display>
+                        <value>ELECTRONIC</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">FIRST_CLASS</display>
+                        <value>FIRST_CLASS</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">FIRST_CLASS_INTERNATIONAL</display>
+                        <value>FIRST_CLASS_INTERNATIONAL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">FREE</display>
+                        <value>FREE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">FREIGHT</display>
+                        <value>FREIGHT</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">GROUND</display>
+                        <value>GROUND</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">INTERNATIONAL</display>
+                        <value>INTERNATIONAL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">OVERNIGHT</display>
+                        <value>OVERNIGHT</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">PRIORITY</display>
+                        <value>PRIORITY</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">PRIORITY_INTERNATIONAL</display>
+                        <value>PRIORITY_INTERNATIONAL</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">PICKUP</display>
+                        <value>PICKUP</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">STANDARD</display>
+                        <value>STANDARD</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">STORE_TO_STORE</display>
+                        <value>STORE_TO_STORE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">TWO_DAY</display>
+                        <value>TWO_DAY</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="signifyd">
+                <display-name xml:lang="x-default">Signifyd</display-name>
+                <attribute attribute-id="signifydShipper"/>
+                <attribute attribute-id="signifydShippingMethod"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="SignifydApiKey">
+                <display-name xml:lang="x-default">Signifyd API Key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="SignifydHoldOrderEnable">
+                <display-name xml:lang="x-default">Export Approved Orders Only</display-name>
+                <description xml:lang="x-default">When an order is approved for guarantee update the Export Status to "Ready to Export"</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="SignifydEnableCartridge">
+                <display-name xml:lang="x-default">Enable Signifyd Cartridge</display-name>
+                <description xml:lang="x-default">When selected the Signifyd integration will be enabled otherwise it will be disabled.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="SignifydMaxRetryCount">
+                <display-name xml:lang="x-default">Signifyd Max Retry Count</display-name>
+                <description xml:lang="x-default">Maximum number of times the Signifyd Job will try to call the API for each order</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>3</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Signifyd Settings">
+                <display-name xml:lang="x-default">Signifyd Settings</display-name>
+                <attribute attribute-id="SignifydHoldOrderEnable"/>
+                <attribute attribute-id="SignifydApiKey"/>
+                <attribute attribute-id="SignifydEnableCartridge"/>
+                <attribute attribute-id="SignifydMaxRetryCount"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>

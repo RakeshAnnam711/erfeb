@@ -1,0 +1,80 @@
+<p>This site is built using the <a class="sg__link" href="https://getbootstrap.com/docs/4.0/layout/grid/" target="_blank" rel="noopener">Bootstrap Grid System</a>. It can be configured by setting variables in <span class="pre">scss/_variables.scss</span>.</p>
+<ul>
+    <li><span class="pre">$grid-breakpoints</span> are used to define the viewport widths at which responsive changes will happen. There are five breakpoints available:
+        <ul class="mb-3 mt-2">
+            <li>Extra Small: <span class="pre">xs</span><span class="d-sm-none"> &larr;</span></li>
+            <li>Small: <span class="pre">sm</span><span class="d-none d-sm-inline d-md-none text--gray"> &larr;</span></li>
+            <li>Medium: <span class="pre">md</span><span class="d-none d-md-inline d-lg-none text--gray"> &larr;</span></li>
+            <li>Large: <span class="pre">lg</span><span class="d-none d-lg-inline d-xl-none text--gray"> &larr;</span></li>
+            <li>Extra Large: <span class="pre">xl</span><span class="d-none d-xl-inline text--gray"> &larr;</span></li>
+        </ul>
+    </li>
+    <li><span class="pre">$container-max-widths</span> can be used to prevent the <span class="pre">.container</span> divs from expanding to the full width of the breakpoints defined above.</li>
+</ul>
+
+<div id="breakpointUsage" class="sg__header3">Breakpoint Usage</div>
+<p>Content can be shown or hidden by using either helper classes or the media-breakpoint mixin. Try resizing your browser to view the various configurations below:</p>
+<div class="row">
+    <div class="col-md-6 align-self-center text-center">
+        <h4 class="d-sm-none">Your browser is currently at the extra small breakpoint: <span class="pre">xs</span></h4>
+        <h4 class="d-none d-sm-block d-md-none">Your browser is currently at the small breakpoint: <span class="pre">sm</span></h4>
+        <h4 class="d-none d-md-block d-lg-none">Your browser is currently at the medium breakpoint: <span class="pre">md</span></h4>
+        <h4 class="d-none d-lg-block d-xl-none">Your browser is currently at the large breakpoint: <span class="pre">lg</span></h4>
+        <h4 class="d-none d-xl-block">Your browser is currently at the extra large breakpoint: <span class="pre">xl</span></h4>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="d-sm-none">
+            <pre><code class='language-markup'><script type="text/plain" class="language-markup"><h4 class="d-sm-none">Your browser is currently at the extra small breakpoint: <span class="pre">xs</span></h4></script></code></pre>
+            <pre><code class='language-css'><script type="text/plain" class="language-css">h4 {
+    @include media-breakpoint-up(sm) {
+        display: none;
+    }
+}</script></code></pre>
+    </div>
+    <div class="d-none d-sm-block d-md-none">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><h4 class="d-none d-sm-block d-md-none">Your browser is currently at the small breakpoint: <span class="pre">sm</span></h4></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">h4 {
+    display: none;
+    @include media-breakpoint-up(sm) {
+        display: block;
+    }
+    @include media-breakpoint-up(md) {
+        display: none;
+    }
+}</script></code></pre>
+    </div>
+    <div class="d-none d-md-block d-lg-none">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><h4 class="d-none d-md-block d-lg-none">Your browser is currently at the medium breakpoint: <span class="pre">md</span></h4></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">h4 {
+    display: none;
+    @include media-breakpoint-up(md) {
+        display: block;
+    }
+    @include media-breakpoint-up(lg) {
+        display: none;
+    }
+}</script></code></pre>
+    </div>
+    <div class="d-none d-lg-block d-xl-none">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><h4 class="d-none d-lg-block d-xl-none">Your browser is currently at the large breakpoint: <span class="pre">lg</span></h4></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">h4 {
+    display: none;
+    @include media-breakpoint-up(lg) {
+        display: block;
+    }
+    @include media-breakpoint-up(xl) {
+        display: none;
+    }
+}</script></code></pre>
+    </div>
+    <div class="d-none d-xl-block">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><h4 class="d-none d-xl-block">Your browser is currently at the extra large breakpoint: <span class="pre">xl</span></h4></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">h4 {
+    display: none;
+    @include media-breakpoint-up(xl) {
+        display: block;
+    }
+}</script></code></pre>
+        </div>
+    </div>
+</div>

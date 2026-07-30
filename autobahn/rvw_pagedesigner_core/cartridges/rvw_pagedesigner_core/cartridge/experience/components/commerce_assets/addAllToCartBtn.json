@@ -1,0 +1,67 @@
+{
+    "name": "Add All To Cart Button",
+    "description": "In conjunction with products, this hides the default 'Add To Cart' buttons and adds one 'Add All To Cart' button.",
+    "group": "dynamic_components",
+    "attribute_definition_groups": [
+        {
+            "id": "buttonAttributes",
+            "name": "Button Attributes",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to the button's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "productID",
+                    "name": "Product Set ID",
+                    "description": "Give this group of products a new product ID.",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "id": "buttonType",
+                    "name": "Set or Bundle",
+                    "description": "Defaults to Set. Bundles hide all individual product add-to-cart buttons.",
+                    "type": "enum",
+                    "values": [
+                        "Set",
+                        "Bundle"
+                    ],
+                    "default_value": "Set",
+                    "required": false
+                },
+                {
+                    "id": "buttonText",
+                    "name": "Button Text",
+                    "type": "string",
+                    "description": "Defaults to 'Add All To Cart'.",
+                    "required": false
+                },
+                {
+                    "id": "buttonStyle",
+                    "name": "Button Style",
+                    "description": "Defaults to Primary button style",
+                    "type": "enum",
+                    "values": [
+                        "Primary",
+                        "Secondary",
+                        "Tertiary",
+                        "Primary Disabled"
+                    ],
+                    "default_value": "Primary",
+                    "required": false
+                },
+                {
+                    "id": "buttonClass",
+                    "name": "Button Custom Class",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+  }

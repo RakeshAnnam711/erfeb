@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stores xmlns="http://www.demandware.com/xml/impex/store/2007-04-30">
+    <store store-id="store1">
+        <name>Commerce Cloud</name>
+        <address1>10 Presidential Way</address1>
+        <city>Woburn</city>
+        <postal-code>01801</postal-code>
+        <state-code>MA</state-code>
+        <country-code>US</country-code>
+        <email>store@email.com</email>
+        <fax>800-800-8000</fax>
+        <store-events xml:lang="x-default">Men's Denim Jeans $20 off!&lt;br /&gt;&#13;
+All Men's T-shirts are 2 for $40!&lt;br /&gt;</store-events>
+        <store-hours xml:lang="x-default">Mon - Sat: 10am - 9pm&lt;br /&gt;&#13;
+Sun: 12pm - 6pm</store-hours>
+        <latitude>42.5273334</latitude>
+        <longitude>-71.13758250000001</longitude>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>
+            <custom-attribute attribute-id="inventoryListId">inventory_m_store_store1</custom-attribute>
+            <custom-attribute attribute-id="storeType" xml:lang="x-default">retail</custom-attribute>
+        </custom-attributes>
+    </store>
+
+    <store store-id="store2">
+        <name>Downtown TV Shop</name>
+        <address1>333 Washington St</address1>
+        <city>Boston</city>
+        <postal-code>02108</postal-code>
+        <state-code>MA</state-code>
+        <country-code>US</country-code>
+        <email>contact@downtowntvshop.com</email>
+        <phone>+1-617-695-1565</phone>
+        <store-hours xml:lang="x-default">Mon - Sat: 10am - 9pm&lt;br /&gt;&#13;
+            Sun: 12pm - 6pm</store-hours>
+        <latitude>42.3569512</latitude>
+        <longitude>-71.05902600000002</longitude>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>
+            <custom-attribute attribute-id="inventoryListId">inventory_m_store_store2</custom-attribute>
+            <custom-attribute attribute-id="storeType" xml:lang="x-default">outlet</custom-attribute>
+        </custom-attributes>
+    </store>
+</stores>

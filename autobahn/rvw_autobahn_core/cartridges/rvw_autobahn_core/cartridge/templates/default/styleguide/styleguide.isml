@@ -1,0 +1,264 @@
+<isdecorate template="common/layout/blank">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+
+        // Prism syntax highlighter JS/CSS
+        assets.addJs('https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js');
+        assets.addJs('https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/unescaped-markup/prism-unescaped-markup.min.js');
+        assets.addCss('https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css');
+        assets.addCss('https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/unescaped-markup/prism-unescaped-markup.css');
+
+        // Styleguide-specific JS/CSS
+        assets.addJs('/js/styleguide.js');
+        assets.addCss('/css/styleguide.css');
+    </isscript>
+
+
+    <div class="container styleguide" style="${!empty(pdict.currentFavicon) ? pdict.currentFavicon : ''}">
+        <div class="row no-gutters">
+
+            <!-- Left Nav -->
+            <div class="sg-nav__toggle"></div>
+            <nav class="sg-nav nav col" id="sgNav">
+                <div class="sg-nav__inner">
+                    <a class="sg__logo" href="${URLUtils.url('Home-Show')}" target="_blank" rel="noopener" title="${ Resource.msgf('global.homepage.tooltip', 'common', null, Resource.msg('global.storename', 'common', null), Resource.msg('global.home', 'common', null)) }">
+                        <iscomment> <img class="w-75 d-block" src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename', 'common', null)}"/> </iscomment>
+                    </a>
+                    <div class="sg__header1 mb-2">StyleGuide</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${URLUtils.url('Page-Show','cid', 'module-guide-columns')}" target="_blank" rel="noopener">Module Guide &nbsp;<span class="icon-offsite"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#brand">Brand</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#colors">Colors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#typography">Typography</a>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#fonts">Fonts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#headers">Headers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#banners">Banners</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#paragraphs">Paragraphs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#lists">Lists</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#links">Links</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#icons">Icons</a>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#availableIcons">Available Icons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#iconUsage">Icon Usage</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#storeTypeIcons">Store Type Icons</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#buttons">Buttons</a>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#defaultButtons">Default Buttons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#disabledButtons">Disabled Buttons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#smallButtons">Small Buttons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#fullwidthButtons">Full-width Buttons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#iconButtons">Icon Buttons</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#customButtons">Custom Buttons</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#forms">Forms</a>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#inputFields">Input Fields</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#selectDropdowns">Select Dropdowns</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#radiochecks">Radio Buttons and Checkboxes</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#gridsystem">Grid System</a>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#breakpointUsage">Breakpoint Usage</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#columns">Columns</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#components">Components</a>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#alerts">Alerts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#cards">Cards</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#collapsible">Collapsible</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#modals">Modals</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#popovers">Popovers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#slider">Slider</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tabs">Tabs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tooltips">Tooltips</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#utilities">Utilities</a>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#sizing">Sizing</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#themes">Themes</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main section -->
+            <div class="main col">
+
+                <section class="main__section section--brand">
+                    <div id="brand" class="sg__header2">Brand</div>
+                    <isinclude template="/styleguide/brand/brand"/>
+                </section>
+
+                <section class="main__section section--colors">
+                    <div id="colors" class="sg__header2">Colors</div>
+                    <isinclude template="/styleguide/colors/colors"/>
+                </section>
+
+                <section class="main__section section--typography">
+                    <div id="typography" class="sg__header2">Typography</div>
+                    <isinclude template="/styleguide/typography/fonts"/>
+                    <isinclude template="/styleguide/typography/headers"/>
+                    <isinclude template="/styleguide/typography/bannerHeaders"/>
+                    <isinclude template="/styleguide/typography/paragraphs"/>
+                    <isinclude template="/styleguide/typography/lists"/>
+                    <isinclude template="/styleguide/typography/links"/>
+                </section>
+
+                <section class="main__section section--icons">
+                    <div id="icons" class="sg__header2">Icons</div>
+                    <isinclude template="/styleguide/icons/availableIcons"/>
+                    <isinclude template="/styleguide/icons/iconUsage"/>
+                    <isinclude template="/styleguide/icons/storeType"/>
+                </section>
+
+                <section class="main__section section--buttons">
+                    <div id="buttons" class="sg__header2">Buttons</div>
+                    <isinclude template="/styleguide/buttons/defaultButtons"/>
+                    <isinclude template="/styleguide/buttons/disabledButtons"/>
+                    <isinclude template="/styleguide/buttons/smallButtons"/>
+                    <isinclude template="/styleguide/buttons/fullWidthButtons"/>
+                    <isinclude template="/styleguide/buttons/iconButtons"/>
+                    <isinclude template="/styleguide/buttons/customButtons"/>
+                </section>
+
+                <section class="main__section section--forms">
+                    <div id="forms" class="sg__header2">Forms</div>
+                    <isinclude template="/styleguide/forms/inputFields"/>
+                    <isinclude template="/styleguide/forms/selectDropdowns"/>
+                    <isinclude template="/styleguide/forms/radioButtonsAndCheckboxes"/>
+                </section>
+
+                <section class="main__section section--gridsystem">
+                    <div id="gridsystem" class="sg__header2">Grid System</div>
+                    <isinclude template="/styleguide/gridSystem/breakpointUsage"/>
+                    <isinclude template="/styleguide/gridSystem/columns"/>
+                </section>
+
+                <section class="main__section section--components">
+                    <div id="components" class="sg__header2">Components</div>
+                    <isinclude template="/styleguide/components/alerts"/>
+                    <isinclude template="/styleguide/components/cards"/>
+                    <isinclude template="/styleguide/components/collapsible"/>
+                    <isinclude template="/styleguide/components/modals"/>
+                    <isinclude template="/styleguide/components/popovers"/>
+                    <isinclude template="/styleguide/components/slider"/>
+                    <isinclude template="/styleguide/components/tabs"/>
+                    <isinclude template="/styleguide/components/tooltips"/>
+                </section>
+
+                <section class="main__section section--utilities">
+                    <div id="utilities" class="sg__header2">Utilities</div>
+                    <isinclude template="/styleguide/utilities/sizing"/>
+                </section>
+
+                <section class="main__section section--themes">
+                    <div id="themes" class="sg__header2">Themes</div>
+                    <isinclude template="/styleguide/themes/themes"/>
+                </section>
+
+
+                <!-- Copy/paste these snippets for use in new sections -->
+                <!-- Header 2
+                    <div id="[[id]]" class="sg__header2">[[name]]</div>
+                -->
+                <!-- Header 3
+                    <div id="[[id]]" class="sg__header3">[[name]]</div>
+                -->
+                <!-- Element row
+                <div class="row">
+                    <div class="col-md-6">
+                        [[element]]
+                    </div>
+                    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+                        <pre><code class='language-markup'><script type="text/plain" class="language-markup">[[element]]</script></code></pre>
+                    </div>
+                </div>
+                -->
+
+            </div>
+        </div>
+    </div>
+</isdecorate>

@@ -1,0 +1,23 @@
+<isif condition="${typeof product === 'undefined' || empty(product)}">
+    <isset name="product" value="${pdict.product}" scope="page"/>
+</isif>
+<isif condition="${product.collapsibleContent && product.collapsibleContent.length > 0}">
+    <div class="main-content-item">
+        <isloop items="${product.collapsibleContent}" var="collapsibleItem" status="loopState">
+            <div class="collapsible-content-group card no-borders ${!loopState.first ? 'border-top' : ''} ${collapsibleItem.state == 'collapsed-expanded' || collapsibleItem.state == 'collapsed-closed' ? 'collapsible-xl' : 'collapsible-sm'}" data-expand="${collapsibleItem.state == 'collapsed-expanded' ? 'true' : 'false'}">
+                <isif condition="${!empty(collapsibleItem.title)}">
+                    <div class="card-header" id="collapsible-title-${loopState && loopState.count ? loopState.count : '1'}">
+                        <button type="button" class="card-title title" aria-expanded="${collapsibleItem.state == 'collapsed-expanded' ? 'true' : 'false'}" aria-controls="collapsible-description-${loopState && loopState.count ? loopState.count : '1' }">
+                            ${collapsibleItem.title}
+                        </button>
+                    </div>
+                </isif>
+                <div class="card-body" aria-labelledby="collapsible-title-${loopState && loopState.count ? loopState.count : '1'}">
+                    <div class="value content" id="collapsible-description-${loopState && loopState.count ? loopState.count : '1'}">
+                        <isprint value="${collapsibleItem.content}" encoding="off" />
+                    </div>
+                </div>
+            </div>
+        </isloop>
+    </div>
+</isif>

@@ -1,0 +1,27 @@
+<div class="card mt-5">
+    <div class="card-header clearfix">
+        <h4 class="pull-left">${Resource.msg('form.marketing.your.email','forms',null)}</h4>
+    </div>
+
+    <div class="card-body card-info-group">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 px-0">
+                <form class="mc-email-form container" method="POST" action="${URLUtils.url('Marketing-EmailPreferenceCenter')}">
+                    <div class="form-group mt-0">
+                        <input type="text" class="form-control mc-email-input" value="${pdict.MarketingEmail || ''}" id="email" name="email" aria-describedby="emailHelp" />
+                        <span id="emailHelp" class="form-text">${Resource.msg('form.marketing.help.text.enter.email','forms',null)}</span>
+                    </div>
+                    <div class="form-group mc-update-email-button ${pdict.MarketingEmail ? 'd-none' : ''}">
+                        <button type="submit" class="btn btn-primary">
+                            <isif condition="${pdict.MarketingEmail}">
+                                ${Resource.msg('form.marketing.button.update.email','forms',null)}
+                            <iselse/>
+                                ${Resource.msg('form.marketing.button.submit.email','forms',null)}
+                            </isif>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

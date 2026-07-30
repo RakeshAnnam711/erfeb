@@ -1,0 +1,72 @@
+@import "~core/components/common";
+
+html {
+    font-family: $default-text-font;
+}
+
+.page {
+    background-color: $white;
+}
+
+.pdp {
+    background-color: #f7f7f7;
+}
+
+.product-detail .product-shipping a, .blog.page-designer .experience-main p a {
+    color: $yellow;
+    text-decoration: underline;
+}
+
+picture img {
+    width: 100%;
+}
+
+// Additional classes for page designer components
+.w-40 {
+    width: 40%;
+}
+
+.text-white-sm-up{
+    @include media-breakpoint-up(sm){
+        color: $white;
+    }
+}
+
+.promo-code-section {
+    color: $success;
+}
+
+.title-block {
+	.title {
+		font-family: $didot;
+		font-weight: 600;
+		line-height: 30px;
+	}
+}
+
+// custom styles for klarna OSM
+klarna-placement::part(osm-container) {
+    padding: 0;
+    border: 0;
+    width: fit-content;
+    background: transparent;
+    font-family: $primary-font;
+
+    font-size: 0.857rem;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+}
+
+klarna-placement::part(osm-cta) {
+    margin-left: 5px;
+    font-family: var(--primary-font, brandon-grotesque);
+    font-size: 0.857rem;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+}

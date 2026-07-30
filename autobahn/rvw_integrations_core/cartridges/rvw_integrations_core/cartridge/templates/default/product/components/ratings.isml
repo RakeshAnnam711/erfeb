@@ -1,0 +1,17 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    It gets called by rvw_autobahn_core:templates/default/product/components/rating.isml
+
+    Try to keep this template blank as any changes here need to also be carried over to the same template in rvw_autobahn_core
+</iscomment>
+<div class="ratings">
+    <isif condition="${dw.system.Site.current.getCustomPreferenceValue('yotpoCartridgeEnabled') && pdict.yotpoWidgetData && pdict.yotpoWidgetData.isRatingsEnabled}">
+        <isinclude template="widget/yotpoRatingsWidget"/>
+    <iselse/>
+        <isif condition="${pdict.display && pdict.display.ratings}">
+            <isinclude template="product/components/productRating"/>
+        </isif>
+    </isif>
+</div>

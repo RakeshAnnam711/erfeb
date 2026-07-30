@@ -1,0 +1,81 @@
+.experience-main .breadcrumb-wrapper {
+	padding: 1rem;
+}
+
+.search-results .page-header .breadcrumb-wrapper {
+	padding: 0;
+	display: block !important;
+}
+
+.experience-commerce_layouts-slider {
+	margin-bottom: 1.875rem;
+	.tns-outer {
+        padding-bottom: 30px !important;
+    }
+}
+
+.image-text-overlay {
+	position: relative;
+	margin-bottom: 1.875rem;
+	margin-top: 1.25rem;
+}
+
+.image-text-overlay picture {
+	position: relative;
+    display: block;
+    //height: 100%;
+    width: 100%;
+}
+
+.image-text-overlay .content-block {
+	padding: 0 20px;
+	@include media-breakpoint-up(lg) {
+	    padding: 2.5rem;
+	    position: absolute;
+	    top: 50%;
+		left: 0;
+    	transform: translate(0%, -50%);
+	}
+}
+
+.image-text-overlay .overlay-heading {
+	font-size: 24px;
+    line-height: 1.17;
+    font-weight: 500;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    font-style: normal;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.image-text-overlay .mainbanner-image {
+	width: 100%;
+	//height: 100%;
+	//object-fit: cover;
+	
+}
+
+.image-text-overlay .overlay-text {
+    padding: 1.875rem;
+}
+
+@include media-breakpoint-down(md) {
+	.image-text-overlay picture {
+		display: none;
+	}
+	.image-text-overlay .overlay-text {
+		width: 100%;
+	    position: relative;
+	    transform: none;
+	    padding: 0;
+	    left: 0;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	.image-text-overlay .overlay-text {
+		max-width: 39.375rem;
+		margin-left: 0;
+	}
+}

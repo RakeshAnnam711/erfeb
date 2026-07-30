@@ -1,0 +1,40 @@
+<isif condition="${product && product.variationAttributes && product.variationAttributes.length > 0 && product.variationAttributes[0].values && product.variationAttributes[0].values.length > 0}">
+<iscomment>
+    rvw_autobahn_core/cartridge/models/product/decorators/searchVariationAttributes.js
+    implies there will always be one variationAttributes Array result [0] but null value check has been added for product.variationAttributes
+
+    ZNOTE:  There is a disconnect between looping through the attribute order and showing them in that order...
+    as opposed to the actual image that is displayed which is based on the first variant product (not variant color). So we can get a potential mismatch of product tile swatch selected vs product tile image shown
+</iscomment>
+    <div class="color-swatches">
+        <div class="swatches">
+            <isset name="addColorCount" value="0" scope="page" />
+            <isloop items="${product.variationAttributes[0].values}" var="swatch" status="loopState">
+                <isset name="image" value="${swatch.images[swatch.imageType][0]}" scope="page" />
+                <isif condition="${loopState.count < 5
+                                && swatch.images != null
+                                && image != null
+                                && image.url != null}">
+                    <a class="swatch-link" href="${swatch.url}" aria-label="${product.productName}, ${swatch.displayValue}">
+                        <span class="swatch ${swatch.imageType === 'thumbnail' ? 'swatch-thumbnail' : 'swatch-circle'} ${swatch.selected ? 'selected' : ''} ${swatch.available ? 'available' : 'unavailable'} ${swatch.selectable ? 'selectable' : 'unselectable'}"
+                                data-index="${loopState.count-1}"
+                                data-wishlistpid="${swatch.wishlistpid || ''}"
+                                data-hover-image-secondary="${swatch.images.card && swatch.images.card[1] ? swatch.images.card[1].url : null}"
+                                data-hover-image="${swatch.images.card && swatch.images.card[0] ? swatch.images.card[0].url : null}"
+                                style="background-image: url('${image.url}'), url('${URLUtils.staticURL('/images/noimage-swatch.png')}')"
+                        ></span>
+                        <span class="sr-only">
+                            Product swatch type of ${swatch.displayValue}.
+                        </span>
+                    </a>
+                <iselse/>
+                    <isset name="addColorCount" value="1" scope="page" />
+                    <isbreak/>
+                </isif>
+            </isloop>
+        </div>
+        <isif condition="${addColorCount > 0}">
+            <a href="${pdict.urls.product}" class="swatch-color-count" aria-label="${Resource.msgf('label.tile.swatch.more', 'product', null, product.productName)}">${Resource.msgf('product.tile.swatchcount.colors','product', null, product.variationAttributes[0].values.length.toFixed(0))}</a>
+        </isif>
+    </div>
+</isif>

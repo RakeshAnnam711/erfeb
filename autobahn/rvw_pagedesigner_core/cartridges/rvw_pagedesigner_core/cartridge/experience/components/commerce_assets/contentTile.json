@@ -1,0 +1,28 @@
+{
+    "name": "Content Tile",
+    "description": "Select a content asset or Page Designer page in tile format.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "contentTile",
+            "name": "Content Tile Settings",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "assetId",
+                    "name": "Asset ID",
+                    "description": "Enter the ID of a content asset or Page Designer page.",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

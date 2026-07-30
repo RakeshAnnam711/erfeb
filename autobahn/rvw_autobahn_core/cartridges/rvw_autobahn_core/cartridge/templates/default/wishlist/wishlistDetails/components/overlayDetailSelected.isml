@@ -1,0 +1,25 @@
+<isif condition="${pdict.listSelected}">
+    <div
+        id="wishlistOverlayDetailSelected"
+        class="wishlist-overlay-detail-selected"
+        role="alert"
+        aria-labelledby="wishlistOverlayDetailSelectedLabel"
+        tabindex="-1"
+        aria-hidden="true"
+    >
+        <div id="wishlistOverlayDetailSelectedLabel" class="wishlist-overlay-detail-selected-label">
+            <button type="button" class="wishlist-overlay-detail-selected-add" data-url="${pdict.urls.addToCart}">
+                ${Resource.msg('button.addselectedtocart','wishlist', null)}
+            </button>
+
+            <isif condition="${customer.authenticated && (pdict.listSelected.listOwner && pdict.listSelected.listOwner === customer.ID)}">
+                <button type="button" class="wishlist-overlay-detail-selected-move">
+                    ${Resource.msg('button.move','wishlist', null)}
+                </button>
+                <button type="button" class="wishlist-overlay-detail-selected-remove" data-url="${pdict.urls.removeProducts}">
+                    ${Resource.msg('button.remove','wishlist', null)}
+                </button>
+            </isif>
+        </div>
+    </div>
+</isif>

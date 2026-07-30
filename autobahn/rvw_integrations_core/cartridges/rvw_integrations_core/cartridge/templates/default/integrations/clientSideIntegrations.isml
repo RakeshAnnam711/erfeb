@@ -1,0 +1,7 @@
+<iscomment>
+    This template adds window.siteIntegrations which is a JSON object that holds all the values for the integrations
+    that are enabled on this site (based off of the site preference values in BM)
+</iscomment>
+<script type="text/javascript">
+    window.siteIntegrations = <isprint value="${JSON.stringify(pdict.siteIntegrationsConfig)}" encoding="off"/>;
+</script>

@@ -1,0 +1,236 @@
+<div id="tabs" class="sg__header3">Tabs  <a
+    role="button"
+    tabindex="0"
+    class="icon-search tooltip-icon"
+    data-toggle="popover"
+    data-placement="bottom"
+    title="Find it in the Storefront"
+    data-content="
+        <ul>
+            <li>Login <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Home-Show')}' target='_blank' rel='noopener'></a></li>
+            <li>Search Products/Articles <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Search-Show', 'q', 'pants')}' target='_blank' rel='noopener'></a></li>
+            <li>Payment Options <a class='icon-offsite tooltip-icon' href='${URLUtils.https('Checkout-Begin', 'stage', 'payment')}' target='_blank' rel='noopener'></a></li>
+        </ul>
+    "></a></div>
+<p>Tabbed navigation is powered by the <a href="https://getbootstrap.com/docs/4.0/components/navs/#javascript-behavior" target="_blank" rel="noopener">Bootstrap Navs</a> component.</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="sg__header4">Tab style (<span class="pre">nav-tabs</span>)</div>
+        <div class="nav-tabs-container">
+            <ul class="nav nav-tabs nav-fill custom-scrollbar" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tab1" data-toggle="tab" href="#pane1" role="tab" aria-controls="pane1" aria-selected="true">Tab 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab2" data-toggle="tab" href="#pane2" role="tab" aria-controls="pane2" aria-selected="false">Tab 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab3" data-toggle="tab" href="#pane3" role="tab" aria-controls="pane3" aria-selected="false">Tab 3</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane py-3 show active" id="pane1" role="tabpanel" aria-labelledby="tab1">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna nunc id cursus metus aliquam. Arcu bibendum at varius vel pharetra vel. Volutpat est velit egestas dui. Tristique senectus et netus et malesuada fames. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Eros in cursus turpis massa tincidunt dui ut ornare. Tortor id aliquet lectus proin nibh nisl. Ullamcorper sit amet risus nullam eget felis eget nunc. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ut sem viverra aliquet eget sit amet tellus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+                </div>
+                <div class="tab-pane py-3" id="pane2" role="tabpanel" aria-labelledby="tab2">
+                    <p>Praesent tristique magna sit amet purus gravida quis. Odio facilisis mauris sit amet massa vitae. At elementum eu facilisis sed odio morbi quis commodo. Elementum integer enim neque volutpat. Tincidunt praesent semper feugiat nibh. Amet luctus venenatis lectus magna fringilla. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Lacus vel facilisis volutpat est. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Aliquet risus feugiat in ante metus dictum at tempor. Et tortor consequat id porta nibh venenatis cras. Egestas congue quisque egestas diam. Iaculis at erat pellentesque adipiscing. Arcu bibendum at varius vel pharetra vel. Ipsum consequat nisl vel pretium lectus. Tempor orci dapibus ultrices in iaculis nunc sed augue. Pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl. Bibendum arcu vitae elementum curabitur. Metus dictum at tempor commodo ullamcorper a lacus.</p>
+                </div>
+                <div class="tab-pane py-3" id="pane3" role="tabpanel" aria-labelledby="tab3">
+                    <p>Faucibus a pellentesque sit amet. Aliquet nec ullamcorper sit amet risus nullam. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Tempor orci dapibus ultrices in iaculis nunc. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Convallis a cras semper auctor neque vitae tempus quam. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Eu turpis egestas pretium aenean. Enim diam vulputate ut pharetra. Nullam ac tortor vitae purus faucibus ornare. Magnis dis parturient montes nascetur ridiculus. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Urna molestie at elementum eu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="nav-tabs-container">
+    <ul class="nav nav-tabs nav-fill custom-scrollbar" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="tab1" data-toggle="tab" href="#pane1" role="tab" aria-controls="pane1" aria-selected="true">Tab 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab2" data-toggle="tab" href="#pane2" role="tab" aria-controls="pane2" aria-selected="false">Tab 2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab3" data-toggle="tab" href="#pane3" role="tab" aria-controls="pane3" aria-selected="false">Tab 3</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane py-3 show active" id="pane1" role="tabpanel" aria-labelledby="tab1">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna nunc id cursus metus aliquam. Arcu bibendum at varius vel pharetra vel. Volutpat est velit egestas dui. Tristique senectus et netus et malesuada fames. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Eros in cursus turpis massa tincidunt dui ut ornare. Tortor id aliquet lectus proin nibh nisl. Ullamcorper sit amet risus nullam eget felis eget nunc. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ut sem viverra aliquet eget sit amet tellus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+        </div>
+        <div class="tab-pane py-3" id="pane2" role="tabpanel" aria-labelledby="tab2">
+            <p>Praesent tristique magna sit amet purus gravida quis. Odio facilisis mauris sit amet massa vitae. At elementum eu facilisis sed odio morbi quis commodo. Elementum integer enim neque volutpat. Tincidunt praesent semper feugiat nibh. Amet luctus venenatis lectus magna fringilla. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Lacus vel facilisis volutpat est. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Aliquet risus feugiat in ante metus dictum at tempor. Et tortor consequat id porta nibh venenatis cras. Egestas congue quisque egestas diam. Iaculis at erat pellentesque adipiscing. Arcu bibendum at varius vel pharetra vel. Ipsum consequat nisl vel pretium lectus. Tempor orci dapibus ultrices in iaculis nunc sed augue. Pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl. Bibendum arcu vitae elementum curabitur. Metus dictum at tempor commodo ullamcorper a lacus.</p>
+        </div>
+        <div class="tab-pane py-3" id="pane3" role="tabpanel" aria-labelledby="tab3">
+            <p>Faucibus a pellentesque sit amet. Aliquet nec ullamcorper sit amet risus nullam. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Tempor orci dapibus ultrices in iaculis nunc. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Convallis a cras semper auctor neque vitae tempus quam. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Eu turpis egestas pretium aenean. Enim diam vulputate ut pharetra. Nullam ac tortor vitae purus faucibus ornare. Magnis dis parturient montes nascetur ridiculus. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Urna molestie at elementum eu.</p>
+        </div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="nav-tabs-container">
+            <ul class="nav nav-tabs custom-scrollbar" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tab1" data-toggle="tab" href="#pane4" role="tab" aria-controls="home" aria-selected="true">Tab 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab2" data-toggle="tab" href="#pane5" role="tab" aria-controls="home" aria-selected="false">Tab 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab3" data-toggle="tab" href="#pane6" role="tab" aria-controls="home" aria-selected="false">Tab 3</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane py-3 show active" id="pane4" role="tabpanel" aria-labelledby="tab1">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna nunc id cursus metus aliquam. Arcu bibendum at varius vel pharetra vel. Volutpat est velit egestas dui. Tristique senectus et netus et malesuada fames. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Eros in cursus turpis massa tincidunt dui ut ornare. Tortor id aliquet lectus proin nibh nisl. Ullamcorper sit amet risus nullam eget felis eget nunc. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ut sem viverra aliquet eget sit amet tellus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+                </div>
+                <div class="tab-pane py-3" id="pane5" role="tabpanel" aria-labelledby="tab2">
+                    <p>Praesent tristique magna sit amet purus gravida quis. Odio facilisis mauris sit amet massa vitae. At elementum eu facilisis sed odio morbi quis commodo. Elementum integer enim neque volutpat. Tincidunt praesent semper feugiat nibh. Amet luctus venenatis lectus magna fringilla. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Lacus vel facilisis volutpat est. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Aliquet risus feugiat in ante metus dictum at tempor. Et tortor consequat id porta nibh venenatis cras. Egestas congue quisque egestas diam. Iaculis at erat pellentesque adipiscing. Arcu bibendum at varius vel pharetra vel. Ipsum consequat nisl vel pretium lectus. Tempor orci dapibus ultrices in iaculis nunc sed augue. Pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl. Bibendum arcu vitae elementum curabitur. Metus dictum at tempor commodo ullamcorper a lacus.</p>
+                </div>
+                <div class="tab-pane py-3" id="pane6" role="tabpanel" aria-labelledby="tab3">
+                    <p>Faucibus a pellentesque sit amet. Aliquet nec ullamcorper sit amet risus nullam. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Tempor orci dapibus ultrices in iaculis nunc. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Convallis a cras semper auctor neque vitae tempus quam. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Eu turpis egestas pretium aenean. Enim diam vulputate ut pharetra. Nullam ac tortor vitae purus faucibus ornare. Magnis dis parturient montes nascetur ridiculus. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Urna molestie at elementum eu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="nav-tabs-container">
+    <ul class="nav nav-tabs custom-scrollbar" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="tab1" data-toggle="tab" href="#pane4" role="tab" aria-controls="home" aria-selected="true">Tab 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab2" data-toggle="tab" href="#pane5" role="tab" aria-controls="home" aria-selected="false">Tab 2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab3" data-toggle="tab" href="#pane6" role="tab" aria-controls="home" aria-selected="false">Tab 3</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane py-3 show active" id="pane4" role="tabpanel" aria-labelledby="tab1">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna nunc id cursus metus aliquam. Arcu bibendum at varius vel pharetra vel. Volutpat est velit egestas dui. Tristique senectus et netus et malesuada fames. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Eros in cursus turpis massa tincidunt dui ut ornare. Tortor id aliquet lectus proin nibh nisl. Ullamcorper sit amet risus nullam eget felis eget nunc. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ut sem viverra aliquet eget sit amet tellus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+        </div>
+        <div class="tab-pane py-3" id="pane5" role="tabpanel" aria-labelledby="tab2">
+            <p>Praesent tristique magna sit amet purus gravida quis. Odio facilisis mauris sit amet massa vitae. At elementum eu facilisis sed odio morbi quis commodo. Elementum integer enim neque volutpat. Tincidunt praesent semper feugiat nibh. Amet luctus venenatis lectus magna fringilla. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Lacus vel facilisis volutpat est. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Aliquet risus feugiat in ante metus dictum at tempor. Et tortor consequat id porta nibh venenatis cras. Egestas congue quisque egestas diam. Iaculis at erat pellentesque adipiscing. Arcu bibendum at varius vel pharetra vel. Ipsum consequat nisl vel pretium lectus. Tempor orci dapibus ultrices in iaculis nunc sed augue. Pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl. Bibendum arcu vitae elementum curabitur. Metus dictum at tempor commodo ullamcorper a lacus.</p>
+        </div>
+        <div class="tab-pane py-3" id="pane6" role="tabpanel" aria-labelledby="tab3">
+            <p>Faucibus a pellentesque sit amet. Aliquet nec ullamcorper sit amet risus nullam. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Tempor orci dapibus ultrices in iaculis nunc. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Convallis a cras semper auctor neque vitae tempus quam. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Eu turpis egestas pretium aenean. Enim diam vulputate ut pharetra. Nullam ac tortor vitae purus faucibus ornare. Magnis dis parturient montes nascetur ridiculus. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Urna molestie at elementum eu.</p>
+        </div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="sg__header4">Link style (<span class="pre">nav-links</span>)</div>
+        <div class="nav-tabs-container">
+            <ul class="nav nav-links custom-scrollbar" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="linktab1" data-toggle="tab" href="#linkpane1" role="tab" aria-controls="linkpane1" aria-selected="true">Tab 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linktab2" data-toggle="tab" href="#linkpane2" role="tab" aria-controls="linkpane2" aria-selected="false">Tab 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linktab3" data-toggle="tab" href="#linkpane3" role="tab" aria-controls="linkpane3" aria-selected="false">Tab 3</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane p-3 show active" id="linkpane1" role="tabpanel" aria-labelledby="linktab1">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna nunc id cursus metus aliquam. Arcu bibendum at varius vel pharetra vel. Volutpat est velit egestas dui. Tristique senectus et netus et malesuada fames. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Eros in cursus turpis massa tincidunt dui ut ornare. Tortor id aliquet lectus proin nibh nisl. Ullamcorper sit amet risus nullam eget felis eget nunc. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ut sem viverra aliquet eget sit amet tellus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+                </div>
+                <div class="tab-pane p-3" id="linkpane2" role="tabpanel" aria-labelledby="linktab2">
+                    <p>Praesent tristique magna sit amet purus gravida quis. Odio facilisis mauris sit amet massa vitae. At elementum eu facilisis sed odio morbi quis commodo. Elementum integer enim neque volutpat. Tincidunt praesent semper feugiat nibh. Amet luctus venenatis lectus magna fringilla. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Lacus vel facilisis volutpat est. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Aliquet risus feugiat in ante metus dictum at tempor. Et tortor consequat id porta nibh venenatis cras. Egestas congue quisque egestas diam. Iaculis at erat pellentesque adipiscing. Arcu bibendum at varius vel pharetra vel. Ipsum consequat nisl vel pretium lectus. Tempor orci dapibus ultrices in iaculis nunc sed augue. Pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl. Bibendum arcu vitae elementum curabitur. Metus dictum at tempor commodo ullamcorper a lacus.</p>
+                </div>
+                <div class="tab-pane p-3" id="linkpane3" role="tabpanel" aria-labelledby="linktab3">
+                    <p>Faucibus a pellentesque sit amet. Aliquet nec ullamcorper sit amet risus nullam. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Tempor orci dapibus ultrices in iaculis nunc. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Convallis a cras semper auctor neque vitae tempus quam. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Eu turpis egestas pretium aenean. Enim diam vulputate ut pharetra. Nullam ac tortor vitae purus faucibus ornare. Magnis dis parturient montes nascetur ridiculus. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Urna molestie at elementum eu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="nav-tabs-container">
+    <ul class="nav nav-links custom-scrollbar" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="linktab1" data-toggle="tab" href="#linkpane1" role="tab" aria-controls="linkpane1" aria-selected="true">Tab 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="linktab2" data-toggle="tab" href="#linkpane2" role="tab" aria-controls="linkpane2" aria-selected="false">Tab 2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="linktab3" data-toggle="tab" href="#linkpane3" role="tab" aria-controls="linkpane3" aria-selected="false">Tab 3</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane p-3 show active" id="linkpane1" role="tabpanel" aria-labelledby="linktab1">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna nunc id cursus metus aliquam. Arcu bibendum at varius vel pharetra vel. Volutpat est velit egestas dui. Tristique senectus et netus et malesuada fames. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Eros in cursus turpis massa tincidunt dui ut ornare. Tortor id aliquet lectus proin nibh nisl. Ullamcorper sit amet risus nullam eget felis eget nunc. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ut sem viverra aliquet eget sit amet tellus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+        </div>
+        <div class="tab-pane p-3" id="linkpane2" role="tabpanel" aria-labelledby="linktab2">
+            <p>Praesent tristique magna sit amet purus gravida quis. Odio facilisis mauris sit amet massa vitae. At elementum eu facilisis sed odio morbi quis commodo. Elementum integer enim neque volutpat. Tincidunt praesent semper feugiat nibh. Amet luctus venenatis lectus magna fringilla. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Lacus vel facilisis volutpat est. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Aliquet risus feugiat in ante metus dictum at tempor. Et tortor consequat id porta nibh venenatis cras. Egestas congue quisque egestas diam. Iaculis at erat pellentesque adipiscing. Arcu bibendum at varius vel pharetra vel. Ipsum consequat nisl vel pretium lectus. Tempor orci dapibus ultrices in iaculis nunc sed augue. Pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl. Bibendum arcu vitae elementum curabitur. Metus dictum at tempor commodo ullamcorper a lacus.</p>
+        </div>
+        <div class="tab-pane p-3" id="linkpane3" role="tabpanel" aria-labelledby="linktab3">
+            <p>Faucibus a pellentesque sit amet. Aliquet nec ullamcorper sit amet risus nullam. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Tempor orci dapibus ultrices in iaculis nunc. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Convallis a cras semper auctor neque vitae tempus quam. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Eu turpis egestas pretium aenean. Enim diam vulputate ut pharetra. Nullam ac tortor vitae purus faucibus ornare. Magnis dis parturient montes nascetur ridiculus. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Urna molestie at elementum eu.</p>
+        </div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="sg__header4">Pill style (<span class="pre">nav-pills</span>)</div>
+        <div class="nav-tabs-container">
+            <ul class="nav nav-pills custom-scrollbar" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pilltab1" data-toggle="tab" href="#pillpane1" role="tab" aria-controls="pillpane1" aria-selected="true">Tab 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pilltab2" data-toggle="tab" href="#pillpane2" role="tab" aria-controls="pillpane2" aria-selected="false">Tab 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pilltab3" data-toggle="tab" href="#pillpane3" role="tab" aria-controls="pillpane3" aria-selected="false">Tab 3</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane p-3 show active" id="pillpane1" role="tabpanel" aria-labelledby="pilltab1">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna nunc id cursus metus aliquam. Arcu bibendum at varius vel pharetra vel. Volutpat est velit egestas dui. Tristique senectus et netus et malesuada fames. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Eros in cursus turpis massa tincidunt dui ut ornare. Tortor id aliquet lectus proin nibh nisl. Ullamcorper sit amet risus nullam eget felis eget nunc. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ut sem viverra aliquet eget sit amet tellus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+                </div>
+                <div class="tab-pane p-3" id="pillpane2" role="tabpanel" aria-labelledby="pilltab2">
+                    <p>Praesent tristique magna sit amet purus gravida quis. Odio facilisis mauris sit amet massa vitae. At elementum eu facilisis sed odio morbi quis commodo. Elementum integer enim neque volutpat. Tincidunt praesent semper feugiat nibh. Amet luctus venenatis lectus magna fringilla. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Lacus vel facilisis volutpat est. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Aliquet risus feugiat in ante metus dictum at tempor. Et tortor consequat id porta nibh venenatis cras. Egestas congue quisque egestas diam. Iaculis at erat pellentesque adipiscing. Arcu bibendum at varius vel pharetra vel. Ipsum consequat nisl vel pretium lectus. Tempor orci dapibus ultrices in iaculis nunc sed augue. Pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl. Bibendum arcu vitae elementum curabitur. Metus dictum at tempor commodo ullamcorper a lacus.</p>
+                </div>
+                <div class="tab-pane p-3" id="pillpane3" role="tabpanel" aria-labelledby="pilltab3">
+                    <p>Faucibus a pellentesque sit amet. Aliquet nec ullamcorper sit amet risus nullam. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Tempor orci dapibus ultrices in iaculis nunc. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Convallis a cras semper auctor neque vitae tempus quam. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Eu turpis egestas pretium aenean. Enim diam vulputate ut pharetra. Nullam ac tortor vitae purus faucibus ornare. Magnis dis parturient montes nascetur ridiculus. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Urna molestie at elementum eu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6  pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="nav-tabs-container">
+    <ul class="nav nav-pills custom-scrollbar" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pilltab1" data-toggle="tab" href="#pillpane1" role="tab" aria-controls="pillpane1" aria-selected="true">Tab 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pilltab2" data-toggle="tab" href="#pillpane2" role="tab" aria-controls="pillpane2" aria-selected="false">Tab 2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pilltab3" data-toggle="tab" href="#pillpane3" role="tab" aria-controls="pillpane3" aria-selected="false">Tab 3</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane p-3 show active" id="pillpane1" role="tabpanel" aria-labelledby="pilltab1">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna nunc id cursus metus aliquam. Arcu bibendum at varius vel pharetra vel. Volutpat est velit egestas dui. Tristique senectus et netus et malesuada fames. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Eros in cursus turpis massa tincidunt dui ut ornare. Tortor id aliquet lectus proin nibh nisl. Ullamcorper sit amet risus nullam eget felis eget nunc. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ut sem viverra aliquet eget sit amet tellus. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+        </div>
+        <div class="tab-pane p-3" id="pillpane2" role="tabpanel" aria-labelledby="pilltab2">
+            <p>Praesent tristique magna sit amet purus gravida quis. Odio facilisis mauris sit amet massa vitae. At elementum eu facilisis sed odio morbi quis commodo. Elementum integer enim neque volutpat. Tincidunt praesent semper feugiat nibh. Amet luctus venenatis lectus magna fringilla. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Lacus vel facilisis volutpat est. Amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Aliquet risus feugiat in ante metus dictum at tempor. Et tortor consequat id porta nibh venenatis cras. Egestas congue quisque egestas diam. Iaculis at erat pellentesque adipiscing. Arcu bibendum at varius vel pharetra vel. Ipsum consequat nisl vel pretium lectus. Tempor orci dapibus ultrices in iaculis nunc sed augue. Pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl. Bibendum arcu vitae elementum curabitur. Metus dictum at tempor commodo ullamcorper a lacus.</p>
+        </div>
+        <div class="tab-pane p-3" id="pillpane3" role="tabpanel" aria-labelledby="pilltab3">
+            <p>Faucibus a pellentesque sit amet. Aliquet nec ullamcorper sit amet risus nullam. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Tempor orci dapibus ultrices in iaculis nunc. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Convallis a cras semper auctor neque vitae tempus quam. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Eu turpis egestas pretium aenean. Enim diam vulputate ut pharetra. Nullam ac tortor vitae purus faucibus ornare. Magnis dis parturient montes nascetur ridiculus. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Urna molestie at elementum eu.</p>
+        </div>
+    </div>
+</div></script></code></pre>
+    </div>
+</div>

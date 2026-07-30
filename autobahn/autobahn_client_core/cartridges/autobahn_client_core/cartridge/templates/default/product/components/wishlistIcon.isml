@@ -1,0 +1,25 @@
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('wishlistEnable') && pdict.wishlistpid}">
+    <button data-href="${URLUtils.url('Wishlist-ToggleProduct')}"
+       class="wishlist wishlist-toggle-product ${pdict.extraclass || ''}"
+       data-nextaction="${pdict.nextaction || ''}"
+       data-wishlistpid="${pdict.wishlistpid}"
+       data-productname="${pdict.productname}"
+       data-uuid="${pdict.uuid || ''}"
+       data-gtmdata="${pdict.gtmdata ? pdict.gtmdata : JSON.stringify(product.gtmData)}"
+       data-addmessage="${Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
+       data-removemessage="${Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname)}"
+       data-includeicon="${pdict.includeicon}"
+       data-includetext="${pdict.includetext}"
+       onclick="window.wgacaPendingWishlistGtmData=this.getAttribute('data-gtmdata')"
+       title="${pdict.isinwishlist === 'true' ? Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname) : Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
+       aria-label="${pdict.isinwishlist === 'true' ? Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname) : Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}"
+       ${pdict.isdisabled || ''}
+    >
+        <isif condition="${pdict.includeicon === 'true'}">
+            <div class="wishlist-icon ${pdict.isinwishlist ? 'selected' : ''} ${pdict.includetext ? 'd-inline' : 'before'}"></div>
+        </isif>
+        <isif condition="${pdict.includetext === 'true'}">
+            <span>${pdict.isinwishlist === 'true' ? Resource.msgf(pdict.removemessage, 'wishlist', null, pdict.productname) : Resource.msgf(pdict.addmessage, 'wishlist', null, pdict.productname)}</span>
+        </isif>
+    </button>
+</isif>

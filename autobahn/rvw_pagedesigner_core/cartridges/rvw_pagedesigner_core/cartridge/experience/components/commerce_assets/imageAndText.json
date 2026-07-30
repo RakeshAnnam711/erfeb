@@ -1,0 +1,269 @@
+{
+    "name": "Image With Text",
+    "description": "This is a component combining an image with text",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "ITCImage",
+            "attribute_definitions": [
+                {
+                    "id": "subtitle",
+                    "name": "Subtitle",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "subtitleClass",
+                    "name": "Subtitle Class",
+                    "type": "string",
+                    "description": "Add a class to override the default subtitle styles, e.g. 'text--yellow'. See the Style Guide for class options. Add 'custom' to remove other styles directly applied to this element.",
+                    "required": false
+                },
+                {
+                    "id": "heading",
+                    "name": "Heading text",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "headingClass",
+                    "name": "Primary text class",
+                    "description": "Additional class(es) to add to the heading for styling purposes, e.g. 'h2 text--black mb-2'. Add 'custom' to remove other styles directly applied to this element.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText",
+                    "name": "Secondary text",
+                    "description": "Optional additional text placed below the display name.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass",
+                    "name": "Secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'. Add 'custom' to remove other styles directly applied to this element.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "buttonText",
+                    "name": "Button Text",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "buttonAction",
+                    "name": "Button Action",
+                    "description": "To use this button to launch a video in a modal, enter the video's URL as an 'External' link type. YouTube, Vimeo and self-hosted MP4s are supported.",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "buttonOpenNewTab",
+                    "name": "Open link in new tab",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "buttonStyle",
+                    "name": "Button Style",
+                    "description": "Defaults to Primary button style",
+                    "type": "enum",
+                    "values": [
+                        "Primary",
+                        "Secondary",
+                        "Tertiary",
+                        "Primary Disabled"
+                    ],
+                    "default_value": "Primary",
+                    "required": false
+                },
+                {
+                    "id": "buttonClass",
+                    "name": "Button Custom Class",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "textPlacement",
+                    "name": "Text placement",
+                    "type": "enum",
+                    "values": [
+                        "inside image",
+                        "below image"
+                    ],
+                    "default_value": "below image",
+                    "required": false
+                },
+                {
+                    "id": "textAlignment",
+                    "name": "Text alignment",
+                    "description": "Only applicable if Text Placement is set to 'below image'.",
+                    "type": "enum",
+                    "values": ["left", "center", "right"],
+                    "default_value": "center",
+                    "required": false
+                },
+                {
+                    "id": "textClass",
+                    "name": "Text Custom Class - WGACA MODIFICATION",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "image",
+                    "name": "Image",
+                    "type": "image",
+                    "description": "For faster load time, please use images under 500 KB.",
+                    "required": false
+                },
+                {
+                    "id": "backgroundImageAlt",
+                    "name": "Background Image Alt Text",
+                    "type": "string",
+                    "description": "Add alternative text for image, default is an empty string. See following to better understand what to write: https://html.spec.whatwg.org/multipage/images.html#alt",
+                    "required": false
+                },
+                {
+                    "id": "backgroundClass",
+                    "name": "Container Class",
+                    "type": "string",
+                    "description": "Adds a custom class to the container. This can be used to set a background color for the component if there is no image selected. e.g. 'background--brand-secondary' See the Style Guide for more color options.",
+                    "required": false
+                },
+                {
+                    "id": "backgroundVideoURL",
+                    "name": "Background Video URL",
+                    "type": "string",
+                    "description": "Add a URL for a video to play as the background image. YouTube, Vimeo, and self-hosted MP4s are supported.",
+                    "required": false
+                },
+                {
+                    "id": "backgroundVideoPlayWhenFullyInView",
+                    "name": "Play background video only when fully in view",
+                    "description": "If selected, the background video will not play until the entire component is visible in the viewport window. Default behavior is to start playing as soon as any portion is visible on the screen.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "ITCLink",
+                    "name": "Image Link",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "linkOpenNewTab",
+                    "name": "Open link in new tab",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "zoom",
+                    "name": "Zoom image on hover",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "imagesize",
+                    "name": "image size",
+                    "description": "Style used in this field if the image needs to be sized up or down. example '80%', 'cover', or 'contain'. Default is 'cover', which will scale the image up to fill the container.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "aspectRatio",
+                    "name": "Aspect ratio",
+                    "description": "Choose a shape for the Category Tile. Default is square.",
+                    "type": "enum",
+                    "values": ["square", "landscape", "portrait"],
+                    "default_value": "square",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "animationOptions",
+            "name": "Animation Options",
+            "description": "Animations are applied to each text element.",
+            "attribute_definitions": [
+                {
+                    "id": "textAnimation",
+                    "name": "Text Animation",
+                    "type": "enum",
+                    "values": [
+                        "None",
+                        "Fade in",
+                        "Zoom in",
+                        "Hinge drop",
+                        "Flip in top",
+                        "Flip in bottom",
+                        "Slide in from top",
+                        "Slide in from left",
+                        "Slide in from right",
+                        "Slide in from bottom"
+                    ],
+                    "default_value": "None",
+                    "description": "Select an option below to animate in the text elements when this component is scrolled to on the page.",
+                    "required": false
+                },
+                {
+                    "id": "textAnimationDistance",
+                    "name": "Text Animation Duration",
+                    "description": "Choose a duration for the animation to travel. Default is Medium. Short will make the animation more subtle and Long will make it more extreme.",
+                    "type": "enum",
+                    "values": [
+                        "Short",
+                        "Medium",
+                        "Long"
+                    ],
+                    "default_value": "Medium",
+                    "required": false
+                },
+                {
+                    "id": "subtitleAnimationDelay",
+                    "name": "Subtitle Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "titleAnimationDelay",
+                    "name": "Primary Text Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "bodyAnimationDelay",
+                    "name": "Secondary Text Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "buttonsAnimationDelay",
+                    "name": "Buttons Animation Delay",
+                    "description": "Enter a number (in milliseconds) for the animation delay. Default is 300.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "textAnimationPlayOnce",
+                    "name": "Play Text Animation Once Only",
+                    "description": "If selected, the animation will not reset when the user scrolls back to the top of the page.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "disableMobileAnimation",
+                    "name": "Disable Mobile Animation",
+                    "description": "If selected, animation will only occur on desktop (lg breakpoint and up).",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

@@ -1,0 +1,4 @@
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('PP_ShowCreditFinancialBanners') && paypalCalculatedCost && paypalCalculatedCost.isAvailable()}">
+    <isset name="paypalCalculatedCost" value="${dw.value.Money(price.value, price.currency)}" scope="page"/>
+    <isinclude template="paypalCreditFinancingOptions/lowerCostPerMonthBanner"/>
+</isif>

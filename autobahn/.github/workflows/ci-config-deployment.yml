@@ -1,0 +1,81 @@
+name: Continuous Build - Autobahn QA Configurations Deployment
+
+run-name: Run ${{ github.event_name }} from ${{ github.ref_name }} to ${{ inputs.environment }}${{ inputs.sandbox }} of ${{ inputs.build_command_base }}${{ inputs.build_command_payment }}${{ inputs.build_command_shipping }}${{ inputs.build_command_tax }}${{ inputs.build_command_fraud }} by @${{ github.actor }}
+
+on:
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: Where to deploy to
+                required: true
+                default: 'development'
+                type: choice
+                options:
+                    - development
+                    - staging
+                    - sandbox
+            sandbox:
+                description: 'If sandbox environment number: ex. "001" or "001, 002"'
+                required: false
+            build_command_base:
+                description: 'AB vs ABE'
+                required: true
+                default: 'data:ab'
+                type: choice
+                options:
+                    - 'data:ab'
+                    - 'data:abe'
+            build_command_payment:
+                description: 'Payment SVC'
+                required: true
+                type: choice
+                options:
+                    - ':adyen'
+                    - ':cybersource'
+                    - ':paypal'
+                    - ':sfpay'
+            build_command_shipping:
+                description: 'Shipping SVC'
+                required: false
+                default: ''
+                type: choice
+                options:
+                    - ''
+                    - _shipstation
+            build_command_tax:
+                description: 'Tax SVC'
+                required: false
+                default: ''
+                type: choice
+                options:
+                    - ''
+                    - _avalara
+                    - _taxjar
+                    - _vertex
+            build_command_email:
+                description: 'Email SVC'
+                required: false
+                default: ''
+                type: choice
+                options:
+                    - ''
+                    - _klaviyo
+                    - _mcloud
+            build_command_fraud:
+                description: 'Fraud SVC'
+                required: false
+                default: ''
+                type: choice
+                options:
+                    - ''
+                    - _forter
+                    - _signifyd
+
+jobs:
+    run_build_metadata:
+        uses: ./.github/workflows/ci-meta-deployment.yml
+        with:
+            environment: ${{ github.event.inputs.environment }}
+            sandbox: ${{ github.event.inputs.sandbox }}
+            build_commands: ${{ github.event.inputs.build_command_base }}${{ github.event.inputs.build_command_payment }}${{ github.event.inputs.build_command_shipping }}${{ github.event.inputs.build_command_tax }}${{ github.event.inputs.build_command_email }}${{ github.event.inputs.build_command_fraud }}
+        secrets: inherit

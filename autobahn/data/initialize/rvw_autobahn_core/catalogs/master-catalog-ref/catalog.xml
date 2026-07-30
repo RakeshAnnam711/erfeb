@@ -1,0 +1,1398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="master-catalog-ref">
+    <header>
+        <image-settings>
+            <internal-location base-path="/images"/>
+            <view-types>
+                <view-type>large</view-type>
+                <view-type>medium</view-type>
+                <view-type>small</view-type>
+                <view-type>swatch</view-type>
+                <view-type>hi-res</view-type>
+            </view-types>
+            <variation-attribute-id>color</variation-attribute-id>
+            <alt-pattern>${productname}, ${variationvalue}, ${viewtype}</alt-pattern>
+            <title-pattern>${productname}, ${variationvalue}</title-pattern>
+        </image-settings>
+    </header>
+
+    <category category-id="root">
+        <display-name xml:lang="x-default">Master Catalog Wizard - Classification Categories</display-name>
+        <online-flag>true</online-flag>
+        <template/>
+        <page-attributes/>
+    </category>
+
+    <category category-id="unclassified">
+        <display-name xml:lang="x-default">Unclassified</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <template/>
+        <page-attributes/>
+    </category>
+
+    <product product-id="hydra-38-backpack">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <display-name xml:lang="x-default">Hydra 38 Backpack</display-name>
+        <short-description xml:lang="x-default">Breathable pack for moving fast on weekend-long hiking missions.</short-description>
+        <long-description xml:lang="x-default">Breathable pack for moving fast on weekend-long hiking missions.</long-description>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>true</searchable-flag>
+        <images>
+            <image-group view-type="large">
+                <image path="hydra-38-backpack/hydra-38-backpack_none_base_25ab5670.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="hydra-38-backpack/hydra-38-backpack_none_base_26840bb3.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="large">
+                <variation attribute-id="color" value="blue"/>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_blue_9a704d05.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_blue_fdb52b5b.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_blue_7afcf5e7.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="large">
+                <variation attribute-id="color" value="orange"/>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_orange_c8b45305.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_orange_9da2a3ad.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_orange_a4458275.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="large">
+                <variation attribute-id="color" value="white"/>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_white_0041001b.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_white_2ab08637.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="hydra-38-backpack/hydra-38-backpack_color_white_de2ed83e.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+        </images>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="badgeClasses" xml:lang="x-default">
+                <value>text--red</value>
+            </custom-attribute>
+            <custom-attribute attribute-id="badgeNames" xml:lang="x-default">
+                <value>NEW</value>
+            </custom-attribute>
+            <custom-attribute attribute-id="collapsibleContent1" xml:lang="x-default">&lt;ul&gt;
+    &lt;li&gt;The patent-pending Dyno Lift System&amp;trade; doesn&amp;rsquo;t add weight and features self-equalizing, on-the-fly, adjustable load lifters&lt;/li&gt;
+    &lt;li&gt;New full-trampoline back panel for breathability and comfort&lt;/li&gt;
+    &lt;li&gt;T6 aluminum frame for superior load control and freedom of movement&lt;/li&gt;
+    &lt;li&gt;Beaver-tail pocket allows you to stash gear outside of the pack for quick access or for drying clothes&lt;/li&gt;
+    &lt;li&gt;6+ pockets&lt;/li&gt;
+    &lt;li&gt;Hydration sleeve&lt;/li&gt;
+    &lt;li&gt;Lash points&lt;/li&gt;
+    &lt;li&gt;Sternum strap with whistle buckle&lt;/li&gt;
+    &lt;li&gt;Reflective webbing for visibility&lt;/li&gt;
+    &lt;li&gt;Quick-Dry back panel is breathable and dries fast for maximum comfort&amp;lt;/li&amp;gt;&lt;/li&gt;
+    &lt;li&gt;Stretch side pockets provide on-the-fly water bottle access&lt;/li&gt;
+    &lt;li&gt;Two tool keepers&lt;/li&gt;
+&lt;/ul&gt;</custom-attribute>
+            <custom-attribute attribute-id="collapsibleContent2" xml:lang="x-default">&lt;p&gt;Style:&lt;br /&gt;
+NF0A3S5J&lt;/p&gt;
+
+&lt;p&gt;Avg Weight:&lt;br /&gt;
+S/M: 2 lbs 3 oz / L/XL: 2 lbs 4 oz&lt;/p&gt;
+
+&lt;p&gt;Dimensions:&lt;br /&gt;
+S/M: 22&amp;quot; x 13.2&amp;quot; x 10.2&amp;quot; (56 cm x 33.5 cm x 26 cm) / L/XL: 24&amp;quot; x 13.2&amp;quot; x 10.2&amp;quot; (61 cm x 33.5 cm x 26 cm)&lt;/p&gt;
+
+&lt;p&gt;Volume:&lt;br /&gt;
+2319 in&amp;sup3; (38 liters)&lt;/p&gt;
+
+&lt;p&gt;Fabric:&lt;br /&gt;
+70D IronLite&amp;trade; nylon&lt;/p&gt;
+
+&lt;p&gt;Source:&lt;br /&gt;
+Imported&lt;/p&gt;
+
+&lt;p&gt;Guarantee:&lt;br /&gt;
+Lifetime Warranty&lt;/p&gt;</custom-attribute>
+            <custom-attribute attribute-id="collapsibleTitle1" xml:lang="x-default">FEATURES</custom-attribute>
+            <custom-attribute attribute-id="collapsibleTitle2" xml:lang="x-default">SPECIFICATIONS</custom-attribute>
+        </custom-attributes>
+        <variations>
+            <attributes>
+                <shared-variation-attribute attribute-id="color" variation-attribute-id="color"/>
+                <shared-variation-attribute attribute-id="size" variation-attribute-id="size"/>
+            </attributes>
+            <variants>
+                <variant product-id="hydra-38-backpack-blue-S"/>
+                <variant product-id="hydra-38-backpack-blue-L"/>
+                <variant product-id="hydra-38-backpack-orange-S"/>
+                <variant product-id="hydra-38-backpack-orange-L"/>
+                <variant product-id="hydra-38-backpack-white-S"/>
+                <variant product-id="hydra-38-backpack-white-L"/>
+            </variants>
+        </variations>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="hydra-38-backpack-blue-L">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">blue</custom-attribute>
+            <custom-attribute attribute-id="size">L</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="hydra-38-backpack-blue-S">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">blue</custom-attribute>
+            <custom-attribute attribute-id="size">S</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="hydra-38-backpack-orange-L">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">orange</custom-attribute>
+            <custom-attribute attribute-id="size">L</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="hydra-38-backpack-orange-S">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">orange</custom-attribute>
+            <custom-attribute attribute-id="size">S</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="hydra-38-backpack-white-L">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">white</custom-attribute>
+            <custom-attribute attribute-id="size">L</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="hydra-38-backpack-white-S">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">white</custom-attribute>
+            <custom-attribute attribute-id="size">S</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <display-name xml:lang="x-default">Women's Fave Lite Lfc Full Zip</display-name>
+        <short-description xml:lang="x-default">Keep the pace quick in this lightweight full-zip sweatshirt that features a cozy hood and split kangaroo pocket for mile 1 to mile 10 comfort.</short-description>
+        <long-description xml:lang="x-default">Keep the pace quick in this lightweight full-zip sweatshirt that features a cozy hood and split kangaroo pocket for mile 1 to mile 10 comfort.</long-description>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>true</searchable-flag>
+        <images>
+            <image-group view-type="large">
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_none_base_fa0fa813.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_none_base_c02aceb1.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="large">
+                <variation attribute-id="color" value="gray"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_gray_bee14deb.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="large">
+                <variation attribute-id="color" value="green"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_green_54a96611.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_green_be2b07b5.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_green_fc325c99.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_green_dd1c16eb.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_green_bec0ab3a.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="large">
+                <variation attribute-id="color" value="peach"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_peach_4755df41.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="large">
+                <variation attribute-id="color" value="pink"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_pink_56d1db19.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="large">
+                <variation attribute-id="color" value="teal"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_teal_175252e0.jpg">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="swatch">
+                <variation attribute-id="color" value="gray"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_gray_f16f3e23.png">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="swatch">
+                <variation attribute-id="color" value="green"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_green_8c72e427.png">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="swatch">
+                <variation attribute-id="color" value="peach"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_peach_10fcb17d.png">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="swatch">
+                <variation attribute-id="color" value="pink"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_pink_0c7306e6.png">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+            <image-group view-type="swatch">
+                <variation attribute-id="color" value="teal"/>
+                <image path="women-s-fave-lite-lfc-full-zip/women-s-fave-lite-lfc-full-zip_color_teal_40226899.png">
+                    <alt xml:lang="x-default">
+          </alt>
+                    <title xml:lang="x-default">
+          </title>
+                </image>
+            </image-group>
+        </images>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="badgeClasses" xml:lang="x-default">
+                <value>text--red</value>
+            </custom-attribute>
+            <custom-attribute attribute-id="badgeNames" xml:lang="x-default">
+                <value>NEW</value>
+            </custom-attribute>
+            <custom-attribute attribute-id="collapsibleContent1" xml:lang="x-default">&lt;ul&gt;
+    &lt;li&gt;Slim fit&lt;/li&gt;
+    &lt;li&gt;Split kangaroo hand pocket&lt;/li&gt;
+    &lt;li&gt;Set-in sleeves&lt;/li&gt;
+    &lt;li&gt;Thumb-loop cuffs&lt;/li&gt;
+    &lt;li&gt;Slim fit&lt;/li&gt;
+    &lt;li&gt;Three-piece hood with drawcord&lt;/li&gt;
+    &lt;li&gt;Split kangaroo hand pocket&lt;/li&gt;
+&lt;/ul&gt;</custom-attribute>
+            <custom-attribute attribute-id="collapsibleContent2" xml:lang="x-default">Fabric:&lt;br/&gt;
+250 g/m² 70% cotton, 30% polyester&lt;br/&gt;&lt;br/&gt;
+Hps:&lt;br/&gt;
+26"&lt;br/&gt;&lt;br/&gt;
+Center back:&lt;br/&gt;
+26"&lt;br/&gt;&lt;br/&gt;
+Solid:&lt;br/&gt;
+220 g/m² 90% polyester, 10% elastane&lt;br/&gt;&lt;br/&gt;
+Source:&lt;br/&gt;
+Imported&lt;br/&gt;&lt;br/&gt;
+Heather:&lt;br/&gt;
+220 g/m² 90% polyester, 10% elastane&lt;br/&gt;&lt;br/&gt;
+Guarantee:&lt;br/&gt;
+Lifetime warranty&lt;br/&gt;&lt;br/&gt;
+Care instructions:&lt;br/&gt;
+Machine wash&lt;br/&gt;&lt;br/&gt;</custom-attribute>
+            <custom-attribute attribute-id="collapsibleTitle1" xml:lang="x-default">FEATURES</custom-attribute>
+            <custom-attribute attribute-id="collapsibleTitle2" xml:lang="x-default">SPECIFICATIONS</custom-attribute>
+        </custom-attributes>
+        <variations>
+            <attributes>
+                <shared-variation-attribute attribute-id="color" variation-attribute-id="color"/>
+                <shared-variation-attribute attribute-id="size" variation-attribute-id="size"/>
+            </attributes>
+            <variants>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-gray-S"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-gray-M"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-gray-L"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-green-S"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-green-M"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-green-L"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-pink-S"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-pink-M"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-pink-L"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-teal-S"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-teal-M"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-teal-L"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-peach-S"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-peach-M"/>
+                <variant product-id="women-s-fave-lite-lfc-full-zip-peach-L"/>
+            </variants>
+        </variations>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-gray-L">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">gray</custom-attribute>
+            <custom-attribute attribute-id="size">L</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-gray-M">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">gray</custom-attribute>
+            <custom-attribute attribute-id="size">M</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-gray-S">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">gray</custom-attribute>
+            <custom-attribute attribute-id="size">S</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-green-L">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">green</custom-attribute>
+            <custom-attribute attribute-id="size">L</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-green-M">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">green</custom-attribute>
+            <custom-attribute attribute-id="size">M</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-green-S">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">green</custom-attribute>
+            <custom-attribute attribute-id="size">S</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-peach-L">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">peach</custom-attribute>
+            <custom-attribute attribute-id="size">L</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-peach-M">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">peach</custom-attribute>
+            <custom-attribute attribute-id="size">M</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-peach-S">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">peach</custom-attribute>
+            <custom-attribute attribute-id="size">S</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-pink-L">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">pink</custom-attribute>
+            <custom-attribute attribute-id="size">L</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-pink-M">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">pink</custom-attribute>
+            <custom-attribute attribute-id="size">M</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-pink-S">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">pink</custom-attribute>
+            <custom-attribute attribute-id="size">S</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-teal-L">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">teal</custom-attribute>
+            <custom-attribute attribute-id="size">L</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-teal-M">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">teal</custom-attribute>
+            <custom-attribute attribute-id="size">M</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <product product-id="women-s-fave-lite-lfc-full-zip-teal-S">
+        <ean/>
+        <upc/>
+        <unit/>
+        <min-order-quantity>1</min-order-quantity>
+        <step-quantity>1</step-quantity>
+        <store-force-price-flag>false</store-force-price-flag>
+        <store-non-inventory-flag>false</store-non-inventory-flag>
+        <store-non-revenue-flag>false</store-non-revenue-flag>
+        <store-non-discountable-flag>false</store-non-discountable-flag>
+        <online-flag>true</online-flag>
+        <available-flag>false</available-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="color">teal</custom-attribute>
+            <custom-attribute attribute-id="size">S</custom-attribute>
+        </custom-attributes>
+        <pinterest-enabled-flag>false</pinterest-enabled-flag>
+        <facebook-enabled-flag>false</facebook-enabled-flag>
+        <store-attributes>
+            <force-price-flag>false</force-price-flag>
+            <non-inventory-flag>false</non-inventory-flag>
+            <non-revenue-flag>false</non-revenue-flag>
+            <non-discountable-flag>false</non-discountable-flag>
+        </store-attributes>
+    </product>
+
+    <variation-attribute attribute-id="color" variation-attribute-id="color">
+        <variation-attribute-values>
+            <variation-attribute-value value="amber">
+                <display-value xml:lang="x-default">Amber</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="assorted">
+                <display-value xml:lang="x-default">Assorted</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="blue">
+                <display-value xml:lang="x-default">Blue</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="black">
+                <display-value xml:lang="x-default">Black</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="black-white">
+                <display-value xml:lang="x-default">Black &amp; White</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="bronze">
+                <display-value xml:lang="x-default">Bronze</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="brown">
+                <display-value xml:lang="x-default">Brown</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="charcoal">
+                <display-value xml:lang="x-default">Charcoal</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="clear">
+                <display-value xml:lang="x-default">Clear</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="copper">
+                <display-value xml:lang="x-default">Copper</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="coral">
+                <display-value xml:lang="x-default">Coral</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="cream">
+                <display-value xml:lang="x-default">Cream</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="crimson">
+                <display-value xml:lang="x-default">Crimson</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="cyan">
+                <display-value xml:lang="x-default">Cyan</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="denim">
+                <display-value xml:lang="x-default">Denim</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="gold">
+                <display-value xml:lang="x-default">Gold</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="gray">
+                <display-value xml:lang="x-default">Gray</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="green">
+                <display-value xml:lang="x-default">Green</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="indigo">
+                <display-value xml:lang="x-default">Indigo</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="ivory">
+                <display-value xml:lang="x-default">Ivory</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="khaki">
+                <display-value xml:lang="x-default">Khaki</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="lavender">
+                <display-value xml:lang="x-default">Lavender</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="lime">
+                <display-value xml:lang="x-default">Lime</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="maroon">
+                <display-value xml:lang="x-default">Maroon</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="mint">
+                <display-value xml:lang="x-default">Mint</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="multicolor">
+                <display-value xml:lang="x-default">Multicolor</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="natural">
+                <display-value xml:lang="x-default">Natural</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="navy">
+                <display-value xml:lang="x-default">Navy</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="none">
+                <display-value xml:lang="x-default">None</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="olive">
+                <display-value xml:lang="x-default">Olive</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="orange">
+                <display-value xml:lang="x-default">Orange</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="pink">
+                <display-value xml:lang="x-default">Pink</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="purple">
+                <display-value xml:lang="x-default">Purple</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="red">
+                <display-value xml:lang="x-default">Red</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="rose">
+                <display-value xml:lang="x-default">Rose</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="rust">
+                <display-value xml:lang="x-default">Rust</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="salmon">
+                <display-value xml:lang="x-default">Salmon</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="silver">
+                <display-value xml:lang="x-default">Silver</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="tan">
+                <display-value xml:lang="x-default">Tan</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="teal">
+                <display-value xml:lang="x-default">Teal</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="transparent">
+                <display-value xml:lang="x-default">Transparent</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="turquiose">
+                <display-value xml:lang="x-default">Turquiose</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="violet">
+                <display-value xml:lang="x-default">Violet</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="white">
+                <display-value xml:lang="x-default">White</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="wine">
+                <display-value xml:lang="x-default">Wine</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="yellow">
+                <display-value xml:lang="x-default">Yellow</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="black-n-blue">
+                <display-value xml:lang="x-default">Black-n-blue</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="amber-blue">
+                <display-value xml:lang="x-default">amber-blue</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="peach">
+                <display-value xml:lang="x-default">peach</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="oliver">
+                <display-value xml:lang="x-default">oliver</display-value>
+            </variation-attribute-value>
+        </variation-attribute-values>
+    </variation-attribute>
+
+    <variation-attribute attribute-id="size" variation-attribute-id="size">
+        <variation-attribute-values>
+            <variation-attribute-value value="none">
+                <display-value xml:lang="x-default">None</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="1SFA">
+                <display-value xml:lang="x-default">One Size Fits All</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="4XS">
+                <display-value xml:lang="x-default">4X-Small</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="3XS">
+                <display-value xml:lang="x-default">3X-Small</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="2XS">
+                <display-value xml:lang="x-default">XX-Small</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="XS">
+                <display-value xml:lang="x-default">X-Small</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="S">
+                <display-value xml:lang="x-default">Small</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="M">
+                <display-value xml:lang="x-default">Medium</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="L">
+                <display-value xml:lang="x-default">Large</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="XL">
+                <display-value xml:lang="x-default">X-Large</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="2XL">
+                <display-value xml:lang="x-default">2X-Large</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="3XL">
+                <display-value xml:lang="x-default">3X-Large</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="4XL">
+                <display-value xml:lang="x-default">4X-Large</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="5XL">
+                <display-value xml:lang="x-default">5X-Large</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="6XL">
+                <display-value xml:lang="x-default">6X-Large</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="YS">
+                <display-value xml:lang="x-default">Youth Small</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="YM">
+                <display-value xml:lang="x-default">Youth Medium</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="YL">
+                <display-value xml:lang="x-default">Youth Large</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="0mo">
+                <display-value xml:lang="x-default">0 Months</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="3mo">
+                <display-value xml:lang="x-default">3 Months</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="6mo">
+                <display-value xml:lang="x-default">6 Months</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="9mo">
+                <display-value xml:lang="x-default">9 Months</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="12mo">
+                <display-value xml:lang="x-default">12 Months</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="18mo">
+                <display-value xml:lang="x-default">18 Months</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="24mo">
+                <display-value xml:lang="x-default">24 Months</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="1T">
+                <display-value xml:lang="x-default">1T</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="2T">
+                <display-value xml:lang="x-default">2T</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="3T">
+                <display-value xml:lang="x-default">3T</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="4T">
+                <display-value xml:lang="x-default">4T</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="kids-4">
+                <display-value xml:lang="x-default">Kids 4</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="kids-5">
+                <display-value xml:lang="x-default">Kids 5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="kids-6">
+                <display-value xml:lang="x-default">Kids 6</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="kids-8">
+                <display-value xml:lang="x-default">Kids 8</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="kids-10">
+                <display-value xml:lang="x-default">Kids 10</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="kids-12">
+                <display-value xml:lang="x-default">Kids 12</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="0">
+                <display-value xml:lang="x-default">0</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="2">
+                <display-value xml:lang="x-default">2</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="4">
+                <display-value xml:lang="x-default">4</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="4.5">
+                <display-value xml:lang="x-default">4.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="5">
+                <display-value xml:lang="x-default">5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="5.5">
+                <display-value xml:lang="x-default">5.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="6">
+                <display-value xml:lang="x-default">6</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="6.5">
+                <display-value xml:lang="x-default">6.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="7">
+                <display-value xml:lang="x-default">7</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="7.5">
+                <display-value xml:lang="x-default">7.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="8">
+                <display-value xml:lang="x-default">8</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="8.5">
+                <display-value xml:lang="x-default">8.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="9">
+                <display-value xml:lang="x-default">9</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="9.5">
+                <display-value xml:lang="x-default">9.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="10">
+                <display-value xml:lang="x-default">10</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="10.5">
+                <display-value xml:lang="x-default">10.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="11">
+                <display-value xml:lang="x-default">11</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="11.5">
+                <display-value xml:lang="x-default">11.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="12">
+                <display-value xml:lang="x-default">12</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="12.5">
+                <display-value xml:lang="x-default">12.5</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="13">
+                <display-value xml:lang="x-default">13</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="14">
+                <display-value xml:lang="x-default">14</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="15">
+                <display-value xml:lang="x-default">15</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="16">
+                <display-value xml:lang="x-default">16</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="18">
+                <display-value xml:lang="x-default">18</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="20">
+                <display-value xml:lang="x-default">20</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="22">
+                <display-value xml:lang="x-default">22</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="24">
+                <display-value xml:lang="x-default">24</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="26">
+                <display-value xml:lang="x-default">26</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="28">
+                <display-value xml:lang="x-default">28</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="30">
+                <display-value xml:lang="x-default">30</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="32">
+                <display-value xml:lang="x-default">32</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="34">
+                <display-value xml:lang="x-default">34</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="36">
+                <display-value xml:lang="x-default">36</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="38">
+                <display-value xml:lang="x-default">38</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="40">
+                <display-value xml:lang="x-default">40</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="42">
+                <display-value xml:lang="x-default">42</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="44">
+                <display-value xml:lang="x-default">44</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="46">
+                <display-value xml:lang="x-default">46</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="48">
+                <display-value xml:lang="x-default">48</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="50">
+                <display-value xml:lang="x-default">50</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="52">
+                <display-value xml:lang="x-default">52</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="54">
+                <display-value xml:lang="x-default">54</display-value>
+            </variation-attribute-value>
+            <variation-attribute-value value="56">
+                <display-value xml:lang="x-default">56</display-value>
+            </variation-attribute-value>
+        </variation-attribute-values>
+    </variation-attribute>
+
+</catalog>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <standard-preferences>
+        <all-instances>
+            <preference preference-id="ActiveLocales">en_CO:en_KW:en_CN:en_KY:en_CR:en_TC:en_CW:en_TH:en_CU:en_CV:en_CY:en_LI:en_TT:en_DE:en_TR:en_LK:en_TW:en_LU:en_DK:en_UA:en_DO:en_MA:it:en_ME:en_DZ:en_MC:zh:en_EC:en_US:ja:en_MQ:en_EG:en_MV:en_AM:en_IS:it_IT:en_IT:en_AR:en_AU:en_AT:ja_JP:en_AW:de_DE:ar_QA:default:en_BB:en_BA:en_BG:en_JO:en_BE:en_JM:en_RU:en_BH:en_JP:en_BO:en_BM:fr_CA:en_BR:en_SC:en_BS:en_SA:en_SG:en_SE:en_BZ:en_SI:en_CA:en_CH:en_SV:en_CK:en_CL:en_KR:de:en_PF:en_PL:en_PK:en_PT:en_HK:en_HN:en_HU:en_HR:en_QA:en:es:en_IE:en_AE:en_AF:en_AD:en_IL:en_AI:en_AG:nl:en_MX:en_VG:en_ES:en_VE:en_VI:en_VN:fr:fr_FR:en_NO:en_NL:en_FJ:en_FI:en_FR:en_NZ:en_GD:en_GB:en_GE:en_GI:zh_CN</preference>
+            <preference preference-id="CustomCartridges">
+                bm_autobahn_core:
+                autobahn_client_core:
+                bm_pagedesigner_custom:
+                bm_adyen:
+                bm_paypal_configuration:
+                bm_paypal:
+                bm_affirm:
+                int_affirm:
+                bm_app_storefront_base:
+                app_storefront_base:
+                bc_job_components:
+                int_taxjar:
+            </preference>
+            <preference preference-id="CustomEmailConfiguration">{"enabled":false}</preference>
+            <preference preference-id="CustomImpexFolders">src/feeds/export</preference>
+            <preference preference-id="EnforceHTTPS">true</preference>
+            <preference preference-id="InstanceTimezone">US/Eastern</preference>
+            <preference preference-id="OverridingPriceBooksEnabled">false</preference>
+            <preference preference-id="QuotaNotificationEmailToAddresses">sami@redvanworkshop.com</preference>
+            <preference preference-id="QuotaNotificationEnableEmail">true</preference>
+            <preference preference-id="SSOSupportState">sso_only</preference>
+        </all-instances>
+        <development/>
+        <staging/>
+        <production/>
+    </standard-preferences>
+    <custom-preferences>
+        <all-instances/>
+        <development/>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+

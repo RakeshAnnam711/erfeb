@@ -1,0 +1,17 @@
+<li class="nav-item d-lg-none user-unauthenticated" role="menuitem">
+    <a href="${URLUtils.https('Login-Show')}" class="nav-link user-message" cypress-target="mobileNavDropdown">${Resource.msg('link.header.login', 'account', null)}</a>
+</li>
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('wishlistEnable')}">
+    <li class="nav-item d-lg-none user-wishlist user-unauthenticated" role="menuitem">
+        <a href="${URLUtils.https('Wishlist-Show')}" class="nav-link user-message">${Resource.msg('link.wishlist', 'account', null)}</a>
+    </li>
+</isif>
+
+<script>
+    ((cust, menu, el, p) => {
+        if (!cust?.isAuthenticated) return;
+        el.insertAdjacentHTML('afterend', menu);
+        el.parentNode.querySelectorAll('li.user-unauthenticated')?.forEach(n => n.remove());
+        !!cust.name && el.parentNode.querySelector('.user-message.user-name')?.replaceChildren(cust.name);
+    })(window.UncachedData?.customer, window.CachedData.template.authMobileAccountHeader, document.currentScript)
+</script>

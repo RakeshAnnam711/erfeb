@@ -1,0 +1,43 @@
+{
+    "name": "Discount Status Bar",
+    "description": "Component that shows the status of any approaching promotions. Only one may be used per page.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "settings",
+            "name": "Component Settings",
+            "description": "",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "campaignId",
+                    "name": "Campaign ID",
+                    "description": "For best results, group the promotions you want to appear in this component under a common campaign, and enter the campaign ID here to limit promotions to just that campaign.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "buttonText",
+                    "name": "Checkout Button Text",
+                    "description": "Optional custom text for the Checkout button.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "completionMessage",
+                    "name": "Completion Message",
+                    "description": "A message to show the user after all promotion thresholds have been met, at which point this will replace the basket total amount.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

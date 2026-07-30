@@ -1,0 +1,55 @@
+<isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/sortOrderMenu.js');
+</isscript> 
+  
+  <isif condition="${pdict.productSearch.productIds.length > 0}">
+  <isset name="defaultSortLink" value="${pdict.productSearch.productSort.options[0].url}" scope="page"/>
+
+     <div class="custom-dropdown dropdown">
+        <button id="sortBy" class="dropdown-toggle sort-by-options"  aria-label="Sort By">
+            <span class="icon-sort"></span>
+            Sort By
+        </button>
+        <div id="sortOptions" class="sort-options d-none" aria-labelledby="dropdownSortBy">
+           <div class="top-bar d-lg-none">
+                <div class="title">
+                    Sort By
+                </div>
+                 <button class="close" aria-label="close sort menu">
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+            <ul class=""  aria-label="Sort By" role="radiogroup">
+                <isloop items="${pdict.productSearch.productSort.options}" var="option">
+                    <li class="dropdown-item" role="radio" aria-checked="">
+                        <button class="sortDropdown" data-id="${option.id}" data-href="${option.url}"
+                            <isif condition="${pdict.productSearch.productSort.ruleId === option.id}">data-selected="true"</isif>>
+                            <isif condition="${pdict.productSearch.productSort.ruleId === option.id}">
+                                <i class="fa fa-check-circle"></i>
+                            <iselse>
+                                <i class="fa fa-circle-o"></i>
+                            </isif>
+
+                            <span>
+                                ${option.displayName}
+                            </span>
+                        </button>
+                    </li>
+                </isloop>
+            </ul>
+             <!--- Sort Apply and Reset Button For Mobile --->
+            <div class="btn-container d-lg-none">
+                <div class="btn-wrapper">
+                    <button class="text-link secondary-bar-links reset" data-href="${defaultSortLink}">${Resource.msg('link.reset', 'search', null)}</button>
+                </div>
+                <div class="btn-wrapper apply-btn-wrapper">
+                    <button class="sort-apply-btn" data-href="${defaultSortLink}">${Resource.msg('label.apply', 'search', null)}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</isif>
+
+

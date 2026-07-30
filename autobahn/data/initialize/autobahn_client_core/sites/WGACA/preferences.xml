@@ -1,0 +1,3657 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <standard-preferences>
+        <all-instances>
+            <preference preference-id="EnforceHTTPS">true</preference>
+            <preference preference-id="SiteCatalog">storefront-catalog-wgaca</preference>
+            <preference preference-id="SiteCurrencies">USD:EUR:JPY:CNY:AUD:CAD:DKK:HKD:MXN:ILS:TWD:NZD:NOK:PLN:GBP:RUB:SAR:SGD:KRW:SEK:CHF:THB:AED:DZD:ARS:AMD:AWG:BSD:BHD:BBD:BZD:BMD:BOB:BRL:BGN:XPF:CVE:KYD:CLP:COP:BAM:CRC:HRK:DOP:XCD:EGP:FJD:GEL:GIP:HNL:UAH:HUF:ISK:JMD:JOD:KWD:MVR:MAD:ANG:PKR:SCR:LKR:TTD:TRY:VEF:VND:QAR</preference>
+            <preference preference-id="SiteCustomerList">WGACA</preference>
+            <preference preference-id="SiteDefaultLocale">en_US</preference>
+            <preference preference-id="SiteInventoryList">wgaca-web</preference>
+            <preference preference-id="SiteLibrary">WGACASharedLibrary</preference>
+            <preference preference-id="SiteLocales">en_US:en_TR:en_LI:en_PL:en_PK:en_DE:en_TT:en_LK:en_HN:en_PT:en_HK:en_TW:en_CL:en_CK:en_KR:en_KY:en_CO:en_KW:en_CN:en_CR:en_TC:default:en_CY:en_PF:en_CW:en_TH:en_CV:en_ME:en_EC:en_IE:en_EG:en_AG:en_MQ:en_AE:en_AD:en_IL:en_HR:en_LU:en_DK:en_HU:en_DO:en_QA:en_DZ:en_MC:en_MA:en_VN:en_NL:en_NO:en_BB:en_BA:en_BH:en_JP:en_BG:en_JO:en_FJ:en_BE:en_FI:en_JM:en_IS:en_MV:en_AI:en_ES:en_AM:en_IT:en_MX:en_AR:en_VG:en_VE:en_AW:en_AU:en_AT:en_VI:en_BZ:en_CA:en_GE:en_GD:en_GB:en_GI:en_CH:en_SV:en_SA:en_BO:en_FR:en_NZ:en_BM:en_SE:en_BS:en_BR:en_SC:en_SI:en_SG</preference>
+            <preference preference-id="SitePriceBooks">wgaca-discount-pricebook:wgaca-web-pricebook</preference>
+            <preference preference-id="SiteTimezone">Etc/UTC</preference>
+            <preference preference-id="StorefrontOrderAccess">unrestricted</preference>
+            <preference preference-id="StorefrontOrderFiltering">true</preference>
+            <preference preference-id="StorefrontURLsEnabled">true</preference>
+        </all-instances>
+    </standard-preferences>
+    <custom-preferences>
+        <all-instances/>
+        <development>
+            <preference preference-id="adyenCartridgeEnabled">true</preference>
+            <preference preference-id="Adyen_API_Key">AQE0hmfuXNWTK0Qc+iSHmmUsgOueW6pfAoZEXEZZy324v3REi8lyJB1tvVGjCt0tdXs77FI4/hDBXVsNvuR83LVYjEgiTGAH-y1p3udl/uG8TASfor36kiFi4nazff98NZ7yzJZ3BZmg=-i1i6+t$dk?8bv*NBapt</preference>
+            <preference preference-id="Adyen_merchantCode">WhatGoesAroundComesAroundECOM</preference>
+            <preference preference-id="Adyen_Mode">TEST</preference>
+            <preference preference-id="Adyen_notification_password">WGACA2025</preference>
+            <preference preference-id="Adyen_notification_user">WGACAN0t1fication$</preference>
+            <preference preference-id="Adyen3DS2Enabled">true</preference>
+            <preference preference-id="AdyenOneClickEnabled">true</preference>
+            <preference preference-id="AdyenRecurringEnabled">true</preference>
+            <preference preference-id="AdyenSecuredFieldsEnabled">true</preference>
+            <preference preference-id="AffirmMode">sandbox</preference>
+            <preference preference-id="AffirmOnline">true</preference>
+            <preference preference-id="AffirmPaymentMaxTotal">17500</preference>
+            <preference preference-id="AffirmPrivateKey">dc9eBKhwGP1ov2kVY6H1BYIvUjpC89MV</preference>
+            <preference preference-id="AffirmProductMessage">true</preference>
+            <preference preference-id="AffirmPublicKey">KRIYW4XA1PQDXIUY</preference>
+            <preference preference-id="CustomHeaderScripts">&lt;!-- Begin: Northbeam pixel --&gt;
+&lt;script&gt;(function(){var r;(n=r=r||{}).A="identify",n.B="trackPageView",n.C="fireEmailCaptureEvent",n.D="fireCustomGoal",n.E="firePurchaseEvent";var n="//j.northbeam.io/ota-sp/38c5280d-2220-488b-b529-da6f4030571d.js";function t(n){for(var e=[],r=1;r&lt;arguments.length;r++)e[r-1]=arguments[r];a.push({fnName:n,args:e})}var a=[],e=((e={_q:a})[r.A]=function(n,e){return t(r.A,n,e)},e[r.B]=function(){return t(r.B)},e[r.C]=function(n,e){return t(r.C,n,e)},e[r.D]=function(n,e){return t(r.D,n,e)},e[r.E]=function(n){return t(r.E,n)},window.Northbeam=e,document.createElement("script"));e.async=!0,e.src=n,document.head.appendChild(e);})()&lt;/script&gt;
+&lt;!-- End: Northbeam pixel --&gt;
+
+&lt;!-- Begin: Organization Schema Code --&gt;
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "image": "https://www.whatgoesaroundnyc.com/on/demandware.static/Sites-WGACA-Site/-/default/dwe2e8cdaa/images/logo.png",
+  "url": "https://www.whatgoesaroundnyc.com/",
+  "sameAs": [
+    "https://www.instagram.com/whatgoesaroundnyc/",
+    "https://www.facebook.com/WhatGoesAroundNYC/",
+    "https://www.pinterest.com/wgacany/",
+    "https://www.linkedin.com/company/what-goes-around-comes-around/",
+    "https://www.tiktok.com/@whatgoesaroundnyc"
+  ],
+  "logo": "https://www.whatgoesaroundnyc.com/on/demandware.static/Sites-WGACA-Site/-/default/dwe2e8cdaa/images/logo.png",
+  "name": "WHAT GOES AROUND COMES AROUND LLC",
+  "description": "",
+  "email": "cs@whatgoesaroundnyc.com",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "351 W Broadway",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "postalCode": "10013",
+      "addressCountry": {
+        "@type": "Country",
+        "name": "US",
+        "identifier": "US"
+      },
+      "telephone": "646-807-4517"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "113 Wooster St",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "postalCode": "10012",
+      "addressCountry": {
+        "@type": "Country",
+        "name": "US",
+        "identifier": "US"
+      },
+      "telephone": "212-343-1225"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "9520 Brighton Way",
+      "addressLocality": "Beverly Hills",
+      "addressRegion": "CA",
+      "postalCode": "90210",
+      "addressCountry": {
+        "@type": "Country",
+        "name": "US",
+        "identifier": "US"
+      },
+      "telephone": "310-858-0250"
+    }
+  ]
+}
+&lt;/script&gt;
+&lt;!-- End: Organization Schema Code --&gt;</preference>
+            <preference preference-id="GTMEnable">true</preference>
+            <preference preference-id="GTMID">GTM-TWD47VQ</preference>
+            <preference preference-id="SignifydApiKey">NO977l7ZB8B4z7ttwsFk2wy4O</preference>
+            <preference preference-id="SignifydEnableCartridge">false</preference>
+            <preference preference-id="SignifydHoldOrderEnable">false</preference>
+            <preference preference-id="TaxJarEnable">true</preference>
+            <preference preference-id="TaxJarShipFromAddress">812 Jersey Ave, 8th Floor, Jersey City, NJ 07310</preference>
+            <preference preference-id="TaxJarShipFromCity">Jersey City</preference>
+            <preference preference-id="TaxJarShipFromCountryCode">US</preference>
+            <preference preference-id="TaxJarShipFromState">NJ</preference>
+            <preference preference-id="TaxJarShipFromZip">07310</preference>
+            <preference preference-id="badgeDisplayLocation">badge-bottom-left</preference>
+            <preference preference-id="bambuser_cart_integration">true</preference>
+            <preference preference-id="bambuser_checkout_miniplayer">player.BUTTON.MINIMIZE</preference>
+            <preference preference-id="bambuser_conversion_tracker">true</preference>
+            <preference preference-id="bambuser_conversion_tracker_url">https://cdn.liveshopping.bambuser.com/metrics/bambuser.min.js</preference>
+            <preference preference-id="bambuser_dismiss_miniplayer">player.BUTTON.MINIMIZE</preference>
+            <preference preference-id="bambuser_enabled">true</preference>
+            <preference preference-id="bambuser_fab_widget_id">9qomxc0wTjEDaqzsBcw0</preference>
+            <preference preference-id="bambuser_fab_widget_scripturl">https://lcx-widgets.bambuser.com/embed.js</preference>
+            <preference preference-id="bambuser_floating_action_button">true</preference>
+            <preference preference-id="bambuser_image_size">large</preference>
+            <preference preference-id="bambuser_liveshopping_scripturl">https://lcx-embed.bambuser.com/default/embed.js</preference>
+            <preference preference-id="bambuser_product_miniplayer">player.BUTTON.AUTO</preference>
+            <preference preference-id="bambuser_show_overview">true</preference>
+            <preference preference-id="blogCategories">
+                [
+                    {
+                        "id": "automobileSize",
+                        "name": "Automobile Size",
+                        "subcategories": [
+                            {
+                                "id": "compact",
+                                "name": "Compact Car",
+                                "parentId": "automobileSize"
+                            },
+                            {
+                                "id": "fullSize",
+                                "name": "Full Size Car",
+                                "parentId": "automobileSize"
+                            },
+                            {
+                                "id": "microcar",
+                                "name": "Microcar",
+                                "parentId": "automobileSize"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "bodyStyle",
+                        "name": "Body Style",
+                        "subcategories": [
+                            {
+                                "id": "hardtop",
+                                "name": "Hardtop",
+                                "parentId": "bodyStyle"
+                            },
+                            {
+                                "id": "convertible",
+                                "name": "Convertible",
+                                "parentId": "bodyStyle",
+                                "subcategories": [
+                                    {
+                                        "id": "retractibleHardtop",
+                                        "name": "Rectractible Hardtop",
+                                        "parentId": "convertible"
+                                    },
+                                    {
+                                        "id": "roadster",
+                                        "name": "Roadster",
+                                        "parentId": "convertible"
+                                    },
+                                    {
+                                        "id": "tTop",
+                                        "name": "T-top",
+                                        "parentId": "convertible"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "van",
+                                "name": "Van",
+                                "parentId": "bodyStyle",
+                                "subcategories": [
+                                    {
+                                        "id": "leisure",
+                                        "name": "Leisure Vehicle",
+                                        "parentId": "van"
+                                    },
+                                    {
+                                        "id": "panel",
+                                        "name": "Panel Van",
+                                        "parentId": "van"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            </preference>
+            <preference preference-id="contactUsFormTopics">
+                <value>General Information</value>
+                <value>My Account</value>
+                <value>Order Status</value>
+                <value>Other</value>
+            </preference>
+            <preference preference-id="contentPerRowDesktop">4</preference>
+            <preference preference-id="contentPerRowMobile">2</preference>
+            <preference preference-id="customerServiceEmail">help+dev@whatgoesaroundnyc.com</preference>
+            <preference preference-id="disConfiguration">{
+                    "viewTypeMapping":{
+                        "yotpo":"large",
+                        "hi-res":"large",
+                        "large":"large",
+                        "medium":"large",
+                        "small":"large",
+                        "thumbnail":"large",
+                        "swatch":"swatch",
+                        "card":"large"
+                    },
+                    "yotpo":{
+                        "scaleWidth":400,
+                        "scaleHeight":600
+                    },
+                    "hi-res":{
+                        "scaleWidth":1600,
+                        "scaleHeight":2400
+                    },
+                    "large":{
+                        "scaleWidth":550,
+                        "scaleHeight":825
+                    },
+                    "medium":{
+                        "scaleWidth":250,
+                        "scaleHeight":375
+                    },
+                    "small":{
+                        "scaleWidth":75,
+                        "scaleHeight":100
+                    },
+                    "thumbnail":{
+                        "scaleWidth":60,
+                        "scaleHeight":90
+                    },
+                    "swatch":{
+                        "scaleWidth":60,
+                        "scaleHeight":90
+                    },
+                    "card":{
+                        "scaleWidth":400,
+                        "scaleHeight":600
+                    }
+                }</preference>
+            <preference preference-id="disableMakeAnOfferDisplay">false</preference>
+            <preference preference-id="disableOrderConfirmation">false</preference>
+            <preference preference-id="disableRequestNextDisplay">false</preference>
+            <preference preference-id="enableConsentTracking">true</preference>
+            <preference preference-id="enableCookieConsent">false</preference>
+            <preference preference-id="enableFrenzyRecommendationOnPDP">true</preference>
+            <preference preference-id="enableFrenzyRecommendationOnSearch">true</preference>
+            <preference preference-id="enablePLPStickyRefinementBar">true</preference>
+            <preference preference-id="enablePdpStickyAddToCart">true</preference>
+            <preference preference-id="enableQuantityStepper">false</preference>
+            <preference preference-id="enableRecaptcha">true</preference>
+            <preference preference-id="enableTangiblee">true</preference>
+            <preference preference-id="enableVariantSelectionInPdpStickyAddToCart">true</preference>
+            <preference preference-id="enableZenkraftEstimatedDeliveryDates">true</preference>
+            <preference preference-id="enableZenkraftShipping">true</preference>
+            <preference preference-id="enableZenkraftShippingRates">true</preference>
+            <preference preference-id="filterType">horizontal-multiple-dropdowns</preference>
+            <preference preference-id="flowExcludedLocalesJSON">[
+  {
+    "id": "algeria",
+    "currencyCode": "DZD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "DZA",
+    "defaultSfccLocale": "en_DZ",
+    "countries": [
+      "DZA"
+    ],
+    "sfccLocales": [
+      "en_DZ"
+    ],
+    "sfccLocalesCountryMap": {
+      "DZA": [
+        "en_DZ"
+      ]
+    }
+  },
+  {
+    "id": "andorra",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "AND",
+    "defaultSfccLocale": "en_AD",
+    "countries": [
+      "AND"
+    ],
+    "sfccLocales": [
+      "en_AD"
+    ],
+    "sfccLocalesCountryMap": {
+      "AND": [
+        "en_AD"
+      ]
+    }
+  },
+  {
+    "id": "anguilla",
+    "currencyCode": "XCD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "AIA",
+    "defaultSfccLocale": "en_AI",
+    "countries": [
+      "AIA"
+    ],
+    "sfccLocales": [
+      "en_AI"
+    ],
+    "sfccLocalesCountryMap": {
+      "AIA": [
+        "en_AI"
+      ]
+    }
+  },
+  {
+    "id": "antigua-and-barbuda",
+    "currencyCode": "XCD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ATG",
+    "defaultSfccLocale": "en_AG",
+    "countries": [
+      "ATG"
+    ],
+    "sfccLocales": [
+      "en_AG"
+    ],
+    "sfccLocalesCountryMap": {
+      "ATG": [
+        "en_AG"
+      ]
+    }
+  },
+  {
+    "id": "argentina",
+    "currencyCode": "ARS",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ARG",
+    "defaultSfccLocale": "en_AR",
+    "countries": [
+      "ARG"
+    ],
+    "sfccLocales": [
+      "en_AR"
+    ],
+    "sfccLocalesCountryMap": {
+      "ARG": [
+        "en_AR"
+      ]
+    }
+  },
+  {
+    "id": "armenia",
+    "currencyCode": "AMD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ARM",
+    "defaultSfccLocale": "en_AM",
+    "countries": [
+      "ARM"
+    ],
+    "sfccLocales": [
+      "en_AM"
+    ],
+    "sfccLocalesCountryMap": {
+      "ARM": [
+        "en_AM"
+      ]
+    }
+  },
+  {
+    "id": "aruba",
+    "currencyCode": "AWG",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ABW",
+    "defaultSfccLocale": "en_AW",
+    "countries": [
+      "ABW"
+    ],
+    "sfccLocales": [
+      "en_AW"
+    ],
+    "sfccLocalesCountryMap": {
+      "ABW": [
+        "en_AW"
+      ]
+    }
+  },
+  {
+    "id": "australia",
+    "currencyCode": "AUD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "AUS",
+    "defaultSfccLocale": "en_AU",
+    "countries": [
+      "AUS"
+    ],
+    "sfccLocales": [
+      "en_AU"
+    ],
+    "sfccLocalesCountryMap": {
+      "AUS": [
+        "en_AU"
+      ]
+    }
+  },
+  {
+    "id": "austria",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "AUT",
+    "defaultSfccLocale": "en_AT",
+    "countries": [
+      "AUT"
+    ],
+    "sfccLocales": [
+      "en_AT"
+    ],
+    "sfccLocalesCountryMap": {
+      "AUT": [
+        "en_AT"
+      ]
+    }
+  },
+  {
+    "id": "bahamas",
+    "currencyCode": "BSD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BHS",
+    "defaultSfccLocale": "en_BS",
+    "countries": [
+      "BHS"
+    ],
+    "sfccLocales": [
+      "en_BS"
+    ],
+    "sfccLocalesCountryMap": {
+      "BHS": [
+        "en_BS"
+      ]
+    }
+  },
+  {
+    "id": "bahrain",
+    "currencyCode": "BHD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BHR",
+    "defaultSfccLocale": "en_BH",
+    "countries": [
+      "BHR"
+    ],
+    "sfccLocales": [
+      "en_BH"
+    ],
+    "sfccLocalesCountryMap": {
+      "BHR": [
+        "en_BH"
+      ]
+    }
+  },
+  {
+    "id": "barbados",
+    "currencyCode": "BBD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BRB",
+    "defaultSfccLocale": "en_BB",
+    "countries": [
+      "BRB"
+    ],
+    "sfccLocales": [
+      "en_BB"
+    ],
+    "sfccLocalesCountryMap": {
+      "BRB": [
+        "en_BB"
+      ]
+    }
+  },
+  {
+    "id": "belgium",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BEL",
+    "defaultSfccLocale": "en_BE",
+    "countries": [
+      "BEL"
+    ],
+    "sfccLocales": [
+      "en_BE"
+    ],
+    "sfccLocalesCountryMap": {
+      "BEL": [
+        "en_BE"
+      ]
+    }
+  },
+  {
+    "id": "belize",
+    "currencyCode": "BZD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BLZ",
+    "defaultSfccLocale": "en_BZ",
+    "countries": [
+      "BLZ"
+    ],
+    "sfccLocales": [
+      "en_BZ"
+    ],
+    "sfccLocalesCountryMap": {
+      "BLZ": [
+        "en_BZ"
+      ]
+    }
+  },
+  {
+    "id": "bermuda",
+    "currencyCode": "BMD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BMU",
+    "defaultSfccLocale": "en_BM",
+    "countries": [
+      "BMU"
+    ],
+    "sfccLocales": [
+      "en_BM"
+    ],
+    "sfccLocalesCountryMap": {
+      "BMU": [
+        "en_BM"
+      ]
+    }
+  },
+  {
+    "id": "bolivia",
+    "currencyCode": "BOB",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BOL",
+    "defaultSfccLocale": "en_BO",
+    "countries": [
+      "BOL"
+    ],
+    "sfccLocales": [
+      "en_BO"
+    ],
+    "sfccLocalesCountryMap": {
+      "BOL": [
+        "en_BO"
+      ]
+    }
+  },
+  {
+    "id": "bosnia-and-herzegovina",
+    "currencyCode": "BAM",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BIH",
+    "defaultSfccLocale": "en_BA",
+    "countries": [
+      "BIH"
+    ],
+    "sfccLocales": [
+      "en_BA"
+    ],
+    "sfccLocalesCountryMap": {
+      "BIH": [
+        "en_BA"
+      ]
+    }
+  },
+  {
+    "id": "british-virgin-islands",
+    "currencyCode": "USD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "VGB",
+    "defaultSfccLocale": "en_VG",
+    "countries": [
+      "VGB"
+    ],
+    "sfccLocales": [
+      "en_VG"
+    ],
+    "sfccLocalesCountryMap": {
+      "VGB": [
+        "en_VG"
+      ]
+    }
+  },
+  {
+    "id": "bulgaria",
+    "currencyCode": "BGN",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BGR",
+    "defaultSfccLocale": "en_BG",
+    "countries": [
+      "BGR"
+    ],
+    "sfccLocales": [
+      "en_BG"
+    ],
+    "sfccLocalesCountryMap": {
+      "BGR": [
+        "en_BG"
+      ]
+    }
+  },
+  {
+    "id": "cabo-verde",
+    "currencyCode": "CVE",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CPV",
+    "defaultSfccLocale": "en_CV",
+    "countries": [
+      "CPV"
+    ],
+    "sfccLocales": [
+      "en_CV"
+    ],
+    "sfccLocalesCountryMap": {
+      "CPV": [
+        "en_CV"
+      ]
+    }
+  },
+  {
+    "id": "canada",
+    "currencyCode": "CAD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CAN",
+    "defaultSfccLocale": "en_CA",
+    "countries": [
+      "CAN"
+    ],
+    "sfccLocales": [
+      "en_CA"
+    ],
+    "sfccLocalesCountryMap": {
+      "CAN": [
+        "en_CA"
+      ]
+    }
+  },
+  {
+    "id": "cayman-islands",
+    "currencyCode": "KYD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CYM",
+    "defaultSfccLocale": "en_KY",
+    "countries": [
+      "CYM"
+    ],
+    "sfccLocales": [
+      "en_KY"
+    ],
+    "sfccLocalesCountryMap": {
+      "CYM": [
+        "en_KY"
+      ]
+    }
+  },
+  {
+    "id": "chile",
+    "currencyCode": "CLP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CHL",
+    "defaultSfccLocale": "en_CL",
+    "countries": [
+      "CHL"
+    ],
+    "sfccLocales": [
+      "en_CL"
+    ],
+    "sfccLocalesCountryMap": {
+      "CHL": [
+        "en_CL"
+      ]
+    }
+  },
+  {
+    "id": "china",
+    "currencyCode": "CNY",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CHN",
+    "defaultSfccLocale": "en_CN",
+    "countries": [
+      "CHN"
+    ],
+    "sfccLocales": [
+      "en_CN"
+    ],
+    "sfccLocalesCountryMap": {
+      "CHN": [
+        "en_CN"
+      ]
+    }
+  },
+  {
+    "id": "colombia",
+    "currencyCode": "COP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "COL",
+    "defaultSfccLocale": "en_CO",
+    "countries": [
+      "COL"
+    ],
+    "sfccLocales": [
+      "en_CO"
+    ],
+    "sfccLocalesCountryMap": {
+      "COL": [
+        "en_CO"
+      ]
+    }
+  },
+  {
+    "id": "cook-islands",
+    "currencyCode": "NZD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "COK",
+    "defaultSfccLocale": "en_CK",
+    "countries": [
+      "COK"
+    ],
+    "sfccLocales": [
+      "en_CK"
+    ],
+    "sfccLocalesCountryMap": {
+      "COK": [
+        "en_CK"
+      ]
+    }
+  },
+  {
+    "id": "costa-rica",
+    "currencyCode": "CRC",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CRI",
+    "defaultSfccLocale": "en_CR",
+    "countries": [
+      "CRI"
+    ],
+    "sfccLocales": [
+      "en_CR"
+    ],
+    "sfccLocalesCountryMap": {
+      "CRI": [
+        "en_CR"
+      ]
+    }
+  },
+  {
+    "id": "croatia",
+    "currencyCode": "HRK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "HRV",
+    "defaultSfccLocale": "en_HR",
+    "countries": [
+      "HRV"
+    ],
+    "sfccLocales": [
+      "en_HR"
+    ],
+    "sfccLocalesCountryMap": {
+      "HRV": [
+        "en_HR"
+      ]
+    }
+  },
+  {
+    "id": "cura-ao",
+    "currencyCode": "ANG",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CUW",
+    "defaultSfccLocale": "en_CW",
+    "countries": [
+      "CUW"
+    ],
+    "sfccLocales": [
+      "en_CW"
+    ],
+    "sfccLocalesCountryMap": {
+      "CUW": [
+        "en_CW"
+      ]
+    }
+  },
+  {
+    "id": "cyprus",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CYP",
+    "defaultSfccLocale": "en_CY",
+    "countries": [
+      "CYP"
+    ],
+    "sfccLocales": [
+      "en_CY"
+    ],
+    "sfccLocalesCountryMap": {
+      "CYP": [
+        "en_CY"
+      ]
+    }
+  },
+  {
+    "id": "denmark",
+    "currencyCode": "DKK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "DNK",
+    "defaultSfccLocale": "en_DK",
+    "countries": [
+      "DNK"
+    ],
+    "sfccLocales": [
+      "en_DK"
+    ],
+    "sfccLocalesCountryMap": {
+      "DNK": [
+        "en_DK"
+      ]
+    }
+  },
+  {
+    "id": "dominican-republic",
+    "currencyCode": "DOP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "DOM",
+    "defaultSfccLocale": "en_DO",
+    "countries": [
+      "DOM"
+    ],
+    "sfccLocales": [
+      "en_DO"
+    ],
+    "sfccLocalesCountryMap": {
+      "DOM": [
+        "en_DO"
+      ]
+    }
+  },
+  {
+    "id": "ecuador",
+    "currencyCode": "USD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ECU",
+    "defaultSfccLocale": "en_EC",
+    "countries": [
+      "ECU"
+    ],
+    "sfccLocales": [
+      "en_EC"
+    ],
+    "sfccLocalesCountryMap": {
+      "ECU": [
+        "en_EC"
+      ]
+    }
+  },
+  {
+    "id": "egypt",
+    "currencyCode": "EGP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "EGY",
+    "defaultSfccLocale": "en_EG",
+    "countries": [
+      "EGY"
+    ],
+    "sfccLocales": [
+      "en_EG"
+    ],
+    "sfccLocalesCountryMap": {
+      "EGY": [
+        "en_EG"
+      ]
+    }
+  },
+  {
+    "id": "el-salvador",
+    "currencyCode": "USD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SLV",
+    "defaultSfccLocale": "en_SV",
+    "countries": [
+      "SLV"
+    ],
+    "sfccLocales": [
+      "en_SV"
+    ],
+    "sfccLocalesCountryMap": {
+      "SLV": [
+        "en_SV"
+      ]
+    }
+  },
+  {
+    "id": "fiji",
+    "currencyCode": "FJD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "FJI",
+    "defaultSfccLocale": "en_FJ",
+    "countries": [
+      "FJI"
+    ],
+    "sfccLocales": [
+      "en_FJ"
+    ],
+    "sfccLocalesCountryMap": {
+      "FJI": [
+        "en_FJ"
+      ]
+    }
+  },
+  {
+    "id": "finland",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "FIN",
+    "defaultSfccLocale": "en_FI",
+    "countries": [
+      "FIN"
+    ],
+    "sfccLocales": [
+      "en_FI"
+    ],
+    "sfccLocalesCountryMap": {
+      "FIN": [
+        "en_FI"
+      ]
+    }
+  },
+  {
+    "id": "france",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "FRA",
+    "defaultSfccLocale": "en_FR",
+    "countries": [
+      "FRA"
+    ],
+    "sfccLocales": [
+      "en_FR"
+    ],
+    "sfccLocalesCountryMap": {
+      "FRA": [
+        "en_FR"
+      ]
+    }
+  },
+  {
+    "id": "french-polynesia",
+    "currencyCode": "XPF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "PYF",
+    "defaultSfccLocale": "en_PF",
+    "countries": [
+      "PYF"
+    ],
+    "sfccLocales": [
+      "en_PF"
+    ],
+    "sfccLocalesCountryMap": {
+      "PYF": [
+        "en_PF"
+      ]
+    }
+  },
+  {
+    "id": "georgia",
+    "currencyCode": "GEL",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "GEO",
+    "defaultSfccLocale": "en_GE",
+    "countries": [
+      "GEO"
+    ],
+    "sfccLocales": [
+      "en_GE"
+    ],
+    "sfccLocalesCountryMap": {
+      "GEO": [
+        "en_GE"
+      ]
+    }
+  },
+  {
+    "id": "germany",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "DEU",
+    "defaultSfccLocale": "en_DE",
+    "countries": [
+      "DEU"
+    ],
+    "sfccLocales": [
+      "en_DE"
+    ],
+    "sfccLocalesCountryMap": {
+      "DEU": [
+        "en_DE"
+      ]
+    }
+  },
+  {
+    "id": "gibraltar",
+    "currencyCode": "GIP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "GIB",
+    "defaultSfccLocale": "en_GI",
+    "countries": [
+      "GIB"
+    ],
+    "sfccLocales": [
+      "en_GI"
+    ],
+    "sfccLocalesCountryMap": {
+      "GIB": [
+        "en_GI"
+      ]
+    }
+  },
+  {
+    "id": "grenada",
+    "currencyCode": "XCD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "GRD",
+    "defaultSfccLocale": "en_GD",
+    "countries": [
+      "GRD"
+    ],
+    "sfccLocales": [
+      "en_GD"
+    ],
+    "sfccLocalesCountryMap": {
+      "GRD": [
+        "en_GD"
+      ]
+    }
+  },
+  {
+    "id": "honduras",
+    "currencyCode": "HNL",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "HND",
+    "defaultSfccLocale": "en_HN",
+    "countries": [
+      "HND"
+    ],
+    "sfccLocales": [
+      "en_HN"
+    ],
+    "sfccLocalesCountryMap": {
+      "HND": [
+        "en_HN"
+      ]
+    }
+  },
+  {
+    "id": "hong-kong",
+    "currencyCode": "HKD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "HKG",
+    "defaultSfccLocale": "en_HK",
+    "countries": [
+      "HKG"
+    ],
+    "sfccLocales": [
+      "en_HK"
+    ],
+    "sfccLocalesCountryMap": {
+      "HKG": [
+        "en_HK"
+      ]
+    }
+  },
+  {
+    "id": "hungary",
+    "currencyCode": "HUF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "HUN",
+    "defaultSfccLocale": "en_HU",
+    "countries": [
+      "HUN"
+    ],
+    "sfccLocales": [
+      "en_HU"
+    ],
+    "sfccLocalesCountryMap": {
+      "HUN": [
+        "en_HU"
+      ]
+    }
+  },
+  {
+    "id": "iceland",
+    "currencyCode": "ISK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ISL",
+    "defaultSfccLocale": "en_IS",
+    "countries": [
+      "ISL"
+    ],
+    "sfccLocales": [
+      "en_IS"
+    ],
+    "sfccLocalesCountryMap": {
+      "ISL": [
+        "en_IS"
+      ]
+    }
+  },
+  {
+    "id": "ireland",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "IRL",
+    "defaultSfccLocale": "en_IE",
+    "countries": [
+      "IRL"
+    ],
+    "sfccLocales": [
+      "en_IE"
+    ],
+    "sfccLocalesCountryMap": {
+      "IRL": [
+        "en_IE"
+      ]
+    }
+  },
+  {
+    "id": "israel",
+    "currencyCode": "ILS",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ISR",
+    "defaultSfccLocale": "en_IL",
+    "countries": [
+      "ISR"
+    ],
+    "sfccLocales": [
+      "en_IL"
+    ],
+    "sfccLocalesCountryMap": {
+      "ISR": [
+        "en_IL"
+      ]
+    }
+  },
+  {
+    "id": "italy",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ITA",
+    "defaultSfccLocale": "en_IT",
+    "countries": [
+      "ITA"
+    ],
+    "sfccLocales": [
+      "en_IT"
+    ],
+    "sfccLocalesCountryMap": {
+      "ITA": [
+        "en_IT"
+      ]
+    }
+  },
+  {
+    "id": "jamaica",
+    "currencyCode": "JMD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "JAM",
+    "defaultSfccLocale": "en_JM",
+    "countries": [
+      "JAM"
+    ],
+    "sfccLocales": [
+      "en_JM"
+    ],
+    "sfccLocalesCountryMap": {
+      "JAM": [
+        "en_JM"
+      ]
+    }
+  },
+  {
+    "id": "japan",
+    "currencyCode": "JPY",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "JPN",
+    "defaultSfccLocale": "en_JP",
+    "countries": [
+      "JPN"
+    ],
+    "sfccLocales": [
+      "en_JP"
+    ],
+    "sfccLocalesCountryMap": {
+      "JPN": [
+        "en_JP"
+      ]
+    }
+  },
+  {
+    "id": "jordan",
+    "currencyCode": "JOD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "JOR",
+    "defaultSfccLocale": "en_JO",
+    "countries": [
+      "JOR"
+    ],
+    "sfccLocales": [
+      "en_JO"
+    ],
+    "sfccLocalesCountryMap": {
+      "JOR": [
+        "en_JO"
+      ]
+    }
+  },
+  {
+    "id": "kuwait",
+    "currencyCode": "KWD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "KWT",
+    "defaultSfccLocale": "en_KW",
+    "countries": [
+      "KWT"
+    ],
+    "sfccLocales": [
+      "en_KW"
+    ],
+    "sfccLocalesCountryMap": {
+      "KWT": [
+        "en_KW"
+      ]
+    }
+  },
+  {
+    "id": "liechtenstein",
+    "currencyCode": "CHF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "LIE",
+    "defaultSfccLocale": "en_LI",
+    "countries": [
+      "LIE"
+    ],
+    "sfccLocales": [
+      "en_LI"
+    ],
+    "sfccLocalesCountryMap": {
+      "LIE": [
+        "en_LI"
+      ]
+    }
+  },
+  {
+    "id": "luxembourg",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "LUX",
+    "defaultSfccLocale": "en_LU",
+    "countries": [
+      "LUX"
+    ],
+    "sfccLocales": [
+      "en_LU"
+    ],
+    "sfccLocalesCountryMap": {
+      "LUX": [
+        "en_LU"
+      ]
+    }
+  },
+  {
+    "id": "maldives",
+    "currencyCode": "MVR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MDV",
+    "defaultSfccLocale": "en_MV",
+    "countries": [
+      "MDV"
+    ],
+    "sfccLocales": [
+      "en_MV"
+    ],
+    "sfccLocalesCountryMap": {
+      "MDV": [
+        "en_MV"
+      ]
+    }
+  },
+  {
+    "id": "martinique",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MTQ",
+    "defaultSfccLocale": "en_MQ",
+    "countries": [
+      "MTQ"
+    ],
+    "sfccLocales": [
+      "en_MQ"
+    ],
+    "sfccLocalesCountryMap": {
+      "MTQ": [
+        "en_MQ"
+      ]
+    }
+  },
+  {
+    "id": "mexico",
+    "currencyCode": "MXN",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MEX",
+    "defaultSfccLocale": "en_MX",
+    "countries": [
+      "MEX"
+    ],
+    "sfccLocales": [
+      "en_MX"
+    ],
+    "sfccLocalesCountryMap": {
+      "MEX": [
+        "en_MX"
+      ]
+    }
+  },
+  {
+    "id": "monaco",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MCO",
+    "defaultSfccLocale": "en_MC",
+    "countries": [
+      "MCO"
+    ],
+    "sfccLocales": [
+      "en_MC"
+    ],
+    "sfccLocalesCountryMap": {
+      "MCO": [
+        "en_MC"
+      ]
+    }
+  },
+  {
+    "id": "montenegro",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MNE",
+    "defaultSfccLocale": "en_ME",
+    "countries": [
+      "MNE"
+    ],
+    "sfccLocales": [
+      "en_ME"
+    ],
+    "sfccLocalesCountryMap": {
+      "MNE": [
+        "en_ME"
+      ]
+    }
+  },
+  {
+    "id": "morocco",
+    "currencyCode": "MAD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MAR",
+    "defaultSfccLocale": "en_MA",
+    "countries": [
+      "MAR"
+    ],
+    "sfccLocales": [
+      "en_MA"
+    ],
+    "sfccLocalesCountryMap": {
+      "MAR": [
+        "en_MA"
+      ]
+    }
+  },
+  {
+    "id": "netherlands",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "NLD",
+    "defaultSfccLocale": "en_NL",
+    "countries": [
+      "NLD"
+    ],
+    "sfccLocales": [
+      "en_NL"
+    ],
+    "sfccLocalesCountryMap": {
+      "NLD": [
+        "en_NL"
+      ]
+    }
+  },
+  {
+    "id": "new-zealand",
+    "currencyCode": "NZD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "NZL",
+    "defaultSfccLocale": "en_NZ",
+    "countries": [
+      "NZL"
+    ],
+    "sfccLocales": [
+      "en_NZ"
+    ],
+    "sfccLocalesCountryMap": {
+      "NZL": [
+        "en_NZ"
+      ]
+    }
+  },
+  {
+    "id": "norway",
+    "currencyCode": "NOK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "NOR",
+    "defaultSfccLocale": "en_NO",
+    "countries": [
+      "NOR"
+    ],
+    "sfccLocales": [
+      "en_NO"
+    ],
+    "sfccLocalesCountryMap": {
+      "NOR": [
+        "en_NO"
+      ]
+    }
+  },
+  {
+    "id": "pakistan",
+    "currencyCode": "PKR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "PAK",
+    "defaultSfccLocale": "en_PK",
+    "countries": [
+      "PAK"
+    ],
+    "sfccLocales": [
+      "en_PK"
+    ],
+    "sfccLocalesCountryMap": {
+      "PAK": [
+        "en_PK"
+      ]
+    }
+  },
+  {
+    "id": "poland",
+    "currencyCode": "PLN",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "POL",
+    "defaultSfccLocale": "en_PL",
+    "countries": [
+      "POL"
+    ],
+    "sfccLocales": [
+      "en_PL"
+    ],
+    "sfccLocalesCountryMap": {
+      "POL": [
+        "en_PL"
+      ]
+    }
+  },
+  {
+    "id": "portugal",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "PRT",
+    "defaultSfccLocale": "en_PT",
+    "countries": [
+      "PRT"
+    ],
+    "sfccLocales": [
+      "en_PT"
+    ],
+    "sfccLocalesCountryMap": {
+      "PRT": [
+        "en_PT"
+      ]
+    }
+  },
+  {
+    "id": "republic-of-korea",
+    "currencyCode": "KRW",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "KOR",
+    "defaultSfccLocale": "en_KR",
+    "countries": [
+      "KOR"
+    ],
+    "sfccLocales": [
+      "en_KR"
+    ],
+    "sfccLocalesCountryMap": {
+      "KOR": [
+        "en_KR"
+      ]
+    }
+  },
+  {
+    "id": "saudi-arabia",
+    "currencyCode": "SAR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SAU",
+    "defaultSfccLocale": "en_SA",
+    "countries": [
+      "SAU"
+    ],
+    "sfccLocales": [
+      "en_SA"
+    ],
+    "sfccLocalesCountryMap": {
+      "SAU": [
+        "en_SA"
+      ]
+    }
+  },
+  {
+    "id": "seychelles",
+    "currencyCode": "SCR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SYC",
+    "defaultSfccLocale": "en_SC",
+    "countries": [
+      "SYC"
+    ],
+    "sfccLocales": [
+      "en_SC"
+    ],
+    "sfccLocalesCountryMap": {
+      "SYC": [
+        "en_SC"
+      ]
+    }
+  },
+  {
+    "id": "singapore",
+    "currencyCode": "SGD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SGP",
+    "defaultSfccLocale": "en_SG",
+    "countries": [
+      "SGP"
+    ],
+    "sfccLocales": [
+      "en_SG"
+    ],
+    "sfccLocalesCountryMap": {
+      "SGP": [
+        "en_SG"
+      ]
+    }
+  },
+  {
+    "id": "slovenia",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SVN",
+    "defaultSfccLocale": "en_SI",
+    "countries": [
+      "SVN"
+    ],
+    "sfccLocales": [
+      "en_SI"
+    ],
+    "sfccLocalesCountryMap": {
+      "SVN": [
+        "en_SI"
+      ]
+    },
+    "taxIncluded": "Includes VAT"
+  },
+  {
+    "id": "spain",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ESP",
+    "defaultSfccLocale": "en_ES",
+    "countries": [
+      "ESP"
+    ],
+    "sfccLocales": [
+      "en_ES"
+    ],
+    "sfccLocalesCountryMap": {
+      "ESP": [
+        "en_ES"
+      ]
+    }
+  },
+  {
+    "id": "sri-lanka",
+    "currencyCode": "LKR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "LKA",
+    "defaultSfccLocale": "en_LK",
+    "countries": [
+      "LKA"
+    ],
+    "sfccLocales": [
+      "en_LK"
+    ],
+    "sfccLocalesCountryMap": {
+      "LKA": [
+        "en_LK"
+      ]
+    }
+  },
+  {
+    "id": "sweden",
+    "currencyCode": "SEK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SWE",
+    "defaultSfccLocale": "en_SE",
+    "countries": [
+      "SWE"
+    ],
+    "sfccLocales": [
+      "en_SE"
+    ],
+    "sfccLocalesCountryMap": {
+      "SWE": [
+        "en_SE"
+      ]
+    }
+  },
+  {
+    "id": "switzerland",
+    "currencyCode": "CHF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CHE",
+    "defaultSfccLocale": "en_CH",
+    "countries": [
+      "CHE"
+    ],
+    "sfccLocales": [
+      "en_CH"
+    ],
+    "sfccLocalesCountryMap": {
+      "CHE": [
+        "en_CH"
+      ]
+    }
+  },
+  {
+    "id": "taiwan",
+    "currencyCode": "TWD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "TWN",
+    "defaultSfccLocale": "en_TW",
+    "countries": [
+      "TWN"
+    ],
+    "sfccLocales": [
+      "en_TW"
+    ],
+    "sfccLocalesCountryMap": {
+      "TWN": [
+        "en_TW"
+      ]
+    }
+  },
+  {
+    "id": "thailand",
+    "currencyCode": "THB",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "THA",
+    "defaultSfccLocale": "en_TH",
+    "countries": [
+      "THA"
+    ],
+    "sfccLocales": [
+      "en_TH"
+    ],
+    "sfccLocalesCountryMap": {
+      "THA": [
+        "en_TH"
+      ]
+    }
+  },
+  {
+    "id": "trinidad-and-tobago",
+    "currencyCode": "TTD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "TTO",
+    "defaultSfccLocale": "en_TT",
+    "countries": [
+      "TTO"
+    ],
+    "sfccLocales": [
+      "en_TT"
+    ],
+    "sfccLocalesCountryMap": {
+      "TTO": [
+        "en_TT"
+      ]
+    }
+  },
+  {
+    "id": "turkey",
+    "currencyCode": "TRY",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "TUR",
+    "defaultSfccLocale": "en_TR",
+    "countries": [
+      "TUR"
+    ],
+    "sfccLocales": [
+      "en_TR"
+    ],
+    "sfccLocalesCountryMap": {
+      "TUR": [
+        "en_TR"
+      ]
+    }
+  },
+  {
+    "id": "turks-and-caicos-islands",
+    "currencyCode": "USD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "TCA",
+    "defaultSfccLocale": "en_TC",
+    "countries": [
+      "TCA"
+    ],
+    "sfccLocales": [
+      "en_TC"
+    ],
+    "sfccLocalesCountryMap": {
+      "TCA": [
+        "en_TC"
+      ]
+    }
+  },
+  {
+    "id": "united-arab-emirates",
+    "currencyCode": "AED",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ARE",
+    "defaultSfccLocale": "en_AE",
+    "countries": [
+      "ARE"
+    ],
+    "sfccLocales": [
+      "en_AE"
+    ],
+    "sfccLocalesCountryMap": {
+      "ARE": [
+        "en_AE"
+      ]
+    },
+    "taxIncluded": "Includes VAT"
+  },
+  {
+    "id": "united-kingdom",
+    "currencyCode": "GBP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "GBR",
+    "defaultSfccLocale": "en_GB",
+    "countries": [
+      "GBR"
+    ],
+    "sfccLocales": [
+      "en_GB"
+    ],
+    "sfccLocalesCountryMap": {
+      "GBR": [
+        "en_GB"
+      ]
+    }
+  },
+  {
+    "id": "venezuela",
+    "currencyCode": "VEF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "VEN",
+    "defaultSfccLocale": "en_VE",
+    "countries": [
+      "VEN"
+    ],
+    "sfccLocales": [
+      "en_VE"
+    ],
+    "sfccLocalesCountryMap": {
+      "VEN": [
+        "en_VE"
+      ]
+    }
+  },
+  {
+    "id": "vietnam",
+    "currencyCode": "VND",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "VNM",
+    "defaultSfccLocale": "en_VN",
+    "countries": [
+      "VNM"
+    ],
+    "sfccLocales": [
+      "en_VN"
+    ],
+    "sfccLocalesCountryMap": {
+      "VNM": [
+        "en_VN"
+      ]
+    }
+  }
+]</preference>
+            <preference preference-id="flowExperiencesJSON">[
+  {
+    "id": "algeria",
+    "currencyCode": "DZD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "DZA",
+    "defaultSfccLocale": "en_DZ",
+    "countries": [
+      "DZA"
+    ],
+    "sfccLocales": [
+      "en_DZ"
+    ],
+    "sfccLocalesCountryMap": {
+      "DZA": [
+        "en_DZ"
+      ]
+    }
+  },
+  {
+    "id": "andorra",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "AND",
+    "defaultSfccLocale": "en_AD",
+    "countries": [
+      "AND"
+    ],
+    "sfccLocales": [
+      "en_AD"
+    ],
+    "sfccLocalesCountryMap": {
+      "AND": [
+        "en_AD"
+      ]
+    }
+  },
+  {
+    "id": "anguilla",
+    "currencyCode": "XCD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "AIA",
+    "defaultSfccLocale": "en_AI",
+    "countries": [
+      "AIA"
+    ],
+    "sfccLocales": [
+      "en_AI"
+    ],
+    "sfccLocalesCountryMap": {
+      "AIA": [
+        "en_AI"
+      ]
+    }
+  },
+  {
+    "id": "antigua-and-barbuda",
+    "currencyCode": "XCD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ATG",
+    "defaultSfccLocale": "en_AG",
+    "countries": [
+      "ATG"
+    ],
+    "sfccLocales": [
+      "en_AG"
+    ],
+    "sfccLocalesCountryMap": {
+      "ATG": [
+        "en_AG"
+      ]
+    }
+  },
+  {
+    "id": "argentina",
+    "currencyCode": "ARS",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ARG",
+    "defaultSfccLocale": "en_AR",
+    "countries": [
+      "ARG"
+    ],
+    "sfccLocales": [
+      "en_AR"
+    ],
+    "sfccLocalesCountryMap": {
+      "ARG": [
+        "en_AR"
+      ]
+    }
+  },
+  {
+    "id": "armenia",
+    "currencyCode": "AMD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ARM",
+    "defaultSfccLocale": "en_AM",
+    "countries": [
+      "ARM"
+    ],
+    "sfccLocales": [
+      "en_AM"
+    ],
+    "sfccLocalesCountryMap": {
+      "ARM": [
+        "en_AM"
+      ]
+    }
+  },
+  {
+    "id": "aruba",
+    "currencyCode": "AWG",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ABW",
+    "defaultSfccLocale": "en_AW",
+    "countries": [
+      "ABW"
+    ],
+    "sfccLocales": [
+      "en_AW"
+    ],
+    "sfccLocalesCountryMap": {
+      "ABW": [
+        "en_AW"
+      ]
+    }
+  },
+  {
+    "id": "australia",
+    "currencyCode": "AUD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "AUS",
+    "defaultSfccLocale": "en_AU",
+    "countries": [
+      "AUS"
+    ],
+    "sfccLocales": [
+      "en_AU"
+    ],
+    "sfccLocalesCountryMap": {
+      "AUS": [
+        "en_AU"
+      ]
+    }
+  },
+  {
+    "id": "austria",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "AUT",
+    "defaultSfccLocale": "en_AT",
+    "countries": [
+      "AUT"
+    ],
+    "sfccLocales": [
+      "en_AT"
+    ],
+    "sfccLocalesCountryMap": {
+      "AUT": [
+        "en_AT"
+      ]
+    }
+  },
+  {
+    "id": "bahamas",
+    "currencyCode": "BSD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BHS",
+    "defaultSfccLocale": "en_BS",
+    "countries": [
+      "BHS"
+    ],
+    "sfccLocales": [
+      "en_BS"
+    ],
+    "sfccLocalesCountryMap": {
+      "BHS": [
+        "en_BS"
+      ]
+    }
+  },
+  {
+    "id": "bahrain",
+    "currencyCode": "BHD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BHR",
+    "defaultSfccLocale": "en_BH",
+    "countries": [
+      "BHR"
+    ],
+    "sfccLocales": [
+      "en_BH"
+    ],
+    "sfccLocalesCountryMap": {
+      "BHR": [
+        "en_BH"
+      ]
+    }
+  },
+  {
+    "id": "barbados",
+    "currencyCode": "BBD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BRB",
+    "defaultSfccLocale": "en_BB",
+    "countries": [
+      "BRB"
+    ],
+    "sfccLocales": [
+      "en_BB"
+    ],
+    "sfccLocalesCountryMap": {
+      "BRB": [
+        "en_BB"
+      ]
+    }
+  },
+  {
+    "id": "belgium",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BEL",
+    "defaultSfccLocale": "en_BE",
+    "countries": [
+      "BEL"
+    ],
+    "sfccLocales": [
+      "en_BE"
+    ],
+    "sfccLocalesCountryMap": {
+      "BEL": [
+        "en_BE"
+      ]
+    }
+  },
+  {
+    "id": "belize",
+    "currencyCode": "BZD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BLZ",
+    "defaultSfccLocale": "en_BZ",
+    "countries": [
+      "BLZ"
+    ],
+    "sfccLocales": [
+      "en_BZ"
+    ],
+    "sfccLocalesCountryMap": {
+      "BLZ": [
+        "en_BZ"
+      ]
+    }
+  },
+  {
+    "id": "bermuda",
+    "currencyCode": "BMD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BMU",
+    "defaultSfccLocale": "en_BM",
+    "countries": [
+      "BMU"
+    ],
+    "sfccLocales": [
+      "en_BM"
+    ],
+    "sfccLocalesCountryMap": {
+      "BMU": [
+        "en_BM"
+      ]
+    }
+  },
+  {
+    "id": "bolivia",
+    "currencyCode": "BOB",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BOL",
+    "defaultSfccLocale": "en_BO",
+    "countries": [
+      "BOL"
+    ],
+    "sfccLocales": [
+      "en_BO"
+    ],
+    "sfccLocalesCountryMap": {
+      "BOL": [
+        "en_BO"
+      ]
+    }
+  },
+  {
+    "id": "bosnia-and-herzegovina",
+    "currencyCode": "BAM",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BIH",
+    "defaultSfccLocale": "en_BA",
+    "countries": [
+      "BIH"
+    ],
+    "sfccLocales": [
+      "en_BA"
+    ],
+    "sfccLocalesCountryMap": {
+      "BIH": [
+        "en_BA"
+      ]
+    }
+  },
+  {
+    "id": "british-virgin-islands",
+    "currencyCode": "USD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "VGB",
+    "defaultSfccLocale": "en_VG",
+    "countries": [
+      "VGB"
+    ],
+    "sfccLocales": [
+      "en_VG"
+    ],
+    "sfccLocalesCountryMap": {
+      "VGB": [
+        "en_VG"
+      ]
+    }
+  },
+  {
+    "id": "bulgaria",
+    "currencyCode": "BGN",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "BGR",
+    "defaultSfccLocale": "en_BG",
+    "countries": [
+      "BGR"
+    ],
+    "sfccLocales": [
+      "en_BG"
+    ],
+    "sfccLocalesCountryMap": {
+      "BGR": [
+        "en_BG"
+      ]
+    }
+  },
+  {
+    "id": "cabo-verde",
+    "currencyCode": "CVE",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CPV",
+    "defaultSfccLocale": "en_CV",
+    "countries": [
+      "CPV"
+    ],
+    "sfccLocales": [
+      "en_CV"
+    ],
+    "sfccLocalesCountryMap": {
+      "CPV": [
+        "en_CV"
+      ]
+    }
+  },
+  {
+    "id": "canada",
+    "currencyCode": "CAD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CAN",
+    "defaultSfccLocale": "en_CA",
+    "countries": [
+      "CAN"
+    ],
+    "sfccLocales": [
+      "en_CA"
+    ],
+    "sfccLocalesCountryMap": {
+      "CAN": [
+        "en_CA"
+      ]
+    }
+  },
+  {
+    "id": "cayman-islands",
+    "currencyCode": "KYD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CYM",
+    "defaultSfccLocale": "en_KY",
+    "countries": [
+      "CYM"
+    ],
+    "sfccLocales": [
+      "en_KY"
+    ],
+    "sfccLocalesCountryMap": {
+      "CYM": [
+        "en_KY"
+      ]
+    }
+  },
+  {
+    "id": "chile",
+    "currencyCode": "CLP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CHL",
+    "defaultSfccLocale": "en_CL",
+    "countries": [
+      "CHL"
+    ],
+    "sfccLocales": [
+      "en_CL"
+    ],
+    "sfccLocalesCountryMap": {
+      "CHL": [
+        "en_CL"
+      ]
+    }
+  },
+  {
+    "id": "china",
+    "currencyCode": "CNY",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CHN",
+    "defaultSfccLocale": "en_CN",
+    "countries": [
+      "CHN"
+    ],
+    "sfccLocales": [
+      "en_CN"
+    ],
+    "sfccLocalesCountryMap": {
+      "CHN": [
+        "en_CN"
+      ]
+    }
+  },
+  {
+    "id": "colombia",
+    "currencyCode": "COP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "COL",
+    "defaultSfccLocale": "en_CO",
+    "countries": [
+      "COL"
+    ],
+    "sfccLocales": [
+      "en_CO"
+    ],
+    "sfccLocalesCountryMap": {
+      "COL": [
+        "en_CO"
+      ]
+    }
+  },
+  {
+    "id": "cook-islands",
+    "currencyCode": "NZD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "COK",
+    "defaultSfccLocale": "en_CK",
+    "countries": [
+      "COK"
+    ],
+    "sfccLocales": [
+      "en_CK"
+    ],
+    "sfccLocalesCountryMap": {
+      "COK": [
+        "en_CK"
+      ]
+    }
+  },
+  {
+    "id": "costa-rica",
+    "currencyCode": "CRC",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CRI",
+    "defaultSfccLocale": "en_CR",
+    "countries": [
+      "CRI"
+    ],
+    "sfccLocales": [
+      "en_CR"
+    ],
+    "sfccLocalesCountryMap": {
+      "CRI": [
+        "en_CR"
+      ]
+    }
+  },
+  {
+    "id": "croatia",
+"currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "HRV",
+    "defaultSfccLocale": "en_HR",
+    "countries": [
+      "HRV"
+    ],
+    "sfccLocales": [
+      "en_HR"
+    ],
+    "sfccLocalesCountryMap": {
+      "HRV": [
+        "en_HR"
+      ]
+    }
+  },
+  {
+    "id": "cura-ao",
+    "currencyCode": "ANG",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CUW",
+    "defaultSfccLocale": "en_CW",
+    "countries": [
+      "CUW"
+    ],
+    "sfccLocales": [
+      "en_CW"
+    ],
+    "sfccLocalesCountryMap": {
+      "CUW": [
+        "en_CW"
+      ]
+    }
+  },
+  {
+    "id": "cyprus",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CYP",
+    "defaultSfccLocale": "en_CY",
+    "countries": [
+      "CYP"
+    ],
+    "sfccLocales": [
+      "en_CY"
+    ],
+    "sfccLocalesCountryMap": {
+      "CYP": [
+        "en_CY"
+      ]
+    }
+  },
+  {
+    "id": "denmark",
+    "currencyCode": "DKK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "DNK",
+    "defaultSfccLocale": "en_DK",
+    "countries": [
+      "DNK"
+    ],
+    "sfccLocales": [
+      "en_DK"
+    ],
+    "sfccLocalesCountryMap": {
+      "DNK": [
+        "en_DK"
+      ]
+    }
+  },
+  {
+    "id": "dominican-republic",
+    "currencyCode": "DOP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "DOM",
+    "defaultSfccLocale": "en_DO",
+    "countries": [
+      "DOM"
+    ],
+    "sfccLocales": [
+      "en_DO"
+    ],
+    "sfccLocalesCountryMap": {
+      "DOM": [
+        "en_DO"
+      ]
+    }
+  },
+  {
+    "id": "ecuador",
+    "currencyCode": "USD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ECU",
+    "defaultSfccLocale": "en_EC",
+    "countries": [
+      "ECU"
+    ],
+    "sfccLocales": [
+      "en_EC"
+    ],
+    "sfccLocalesCountryMap": {
+      "ECU": [
+        "en_EC"
+      ]
+    }
+  },
+  {
+    "id": "egypt",
+    "currencyCode": "EGP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "EGY",
+    "defaultSfccLocale": "en_EG",
+    "countries": [
+      "EGY"
+    ],
+    "sfccLocales": [
+      "en_EG"
+    ],
+    "sfccLocalesCountryMap": {
+      "EGY": [
+        "en_EG"
+      ]
+    }
+  },
+  {
+    "id": "el-salvador",
+    "currencyCode": "USD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SLV",
+    "defaultSfccLocale": "en_SV",
+    "countries": [
+      "SLV"
+    ],
+    "sfccLocales": [
+      "en_SV"
+    ],
+    "sfccLocalesCountryMap": {
+      "SLV": [
+        "en_SV"
+      ]
+    }
+  },
+  {
+    "id": "fiji",
+    "currencyCode": "FJD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "FJI",
+    "defaultSfccLocale": "en_FJ",
+    "countries": [
+      "FJI"
+    ],
+    "sfccLocales": [
+      "en_FJ"
+    ],
+    "sfccLocalesCountryMap": {
+      "FJI": [
+        "en_FJ"
+      ]
+    }
+  },
+  {
+    "id": "finland",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "FIN",
+    "defaultSfccLocale": "en_FI",
+    "countries": [
+      "FIN"
+    ],
+    "sfccLocales": [
+      "en_FI"
+    ],
+    "sfccLocalesCountryMap": {
+      "FIN": [
+        "en_FI"
+      ]
+    }
+  },
+  {
+    "id": "france",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "FRA",
+    "defaultSfccLocale": "en_FR",
+    "countries": [
+      "FRA"
+    ],
+    "sfccLocales": [
+      "en_FR"
+    ],
+    "sfccLocalesCountryMap": {
+      "FRA": [
+        "en_FR"
+      ]
+    }
+  },
+  {
+    "id": "french-polynesia",
+    "currencyCode": "XPF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "PYF",
+    "defaultSfccLocale": "en_PF",
+    "countries": [
+      "PYF"
+    ],
+    "sfccLocales": [
+      "en_PF"
+    ],
+    "sfccLocalesCountryMap": {
+      "PYF": [
+        "en_PF"
+      ]
+    }
+  },
+  {
+    "id": "georgia",
+    "currencyCode": "GEL",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "GEO",
+    "defaultSfccLocale": "en_GE",
+    "countries": [
+      "GEO"
+    ],
+    "sfccLocales": [
+      "en_GE"
+    ],
+    "sfccLocalesCountryMap": {
+      "GEO": [
+        "en_GE"
+      ]
+    }
+  },
+  {
+    "id": "germany",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "DEU",
+    "defaultSfccLocale": "en_DE",
+    "countries": [
+      "DEU"
+    ],
+    "sfccLocales": [
+      "en_DE"
+    ],
+    "sfccLocalesCountryMap": {
+      "DEU": [
+        "en_DE"
+      ]
+    }
+  },
+  {
+    "id": "gibraltar",
+    "currencyCode": "GIP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "GIB",
+    "defaultSfccLocale": "en_GI",
+    "countries": [
+      "GIB"
+    ],
+    "sfccLocales": [
+      "en_GI"
+    ],
+    "sfccLocalesCountryMap": {
+      "GIB": [
+        "en_GI"
+      ]
+    }
+  },
+  {
+    "id": "grenada",
+    "currencyCode": "XCD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "GRD",
+    "defaultSfccLocale": "en_GD",
+    "countries": [
+      "GRD"
+    ],
+    "sfccLocales": [
+      "en_GD"
+    ],
+    "sfccLocalesCountryMap": {
+      "GRD": [
+        "en_GD"
+      ]
+    }
+  },
+  {
+    "id": "honduras",
+    "currencyCode": "HNL",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "HND",
+    "defaultSfccLocale": "en_HN",
+    "countries": [
+      "HND"
+    ],
+    "sfccLocales": [
+      "en_HN"
+    ],
+    "sfccLocalesCountryMap": {
+      "HND": [
+        "en_HN"
+      ]
+    }
+  },
+  {
+    "id": "hong-kong",
+    "currencyCode": "HKD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "HKG",
+    "defaultSfccLocale": "en_HK",
+    "countries": [
+      "HKG"
+    ],
+    "sfccLocales": [
+      "en_HK"
+    ],
+    "sfccLocalesCountryMap": {
+      "HKG": [
+        "en_HK"
+      ]
+    }
+  },
+  {
+    "id": "hungary",
+    "currencyCode": "HUF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "HUN",
+    "defaultSfccLocale": "en_HU",
+    "countries": [
+      "HUN"
+    ],
+    "sfccLocales": [
+      "en_HU"
+    ],
+    "sfccLocalesCountryMap": {
+      "HUN": [
+        "en_HU"
+      ]
+    }
+  },
+  {
+    "id": "iceland",
+    "currencyCode": "ISK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ISL",
+    "defaultSfccLocale": "en_IS",
+    "countries": [
+      "ISL"
+    ],
+    "sfccLocales": [
+      "en_IS"
+    ],
+    "sfccLocalesCountryMap": {
+      "ISL": [
+        "en_IS"
+      ]
+    }
+  },
+  {
+    "id": "ireland",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "IRL",
+    "defaultSfccLocale": "en_IE",
+    "countries": [
+      "IRL"
+    ],
+    "sfccLocales": [
+      "en_IE"
+    ],
+    "sfccLocalesCountryMap": {
+      "IRL": [
+        "en_IE"
+      ]
+    }
+  },
+  {
+    "id": "israel",
+    "currencyCode": "ILS",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ISR",
+    "defaultSfccLocale": "en_IL",
+    "countries": [
+      "ISR"
+    ],
+    "sfccLocales": [
+      "en_IL"
+    ],
+    "sfccLocalesCountryMap": {
+      "ISR": [
+        "en_IL"
+      ]
+    }
+  },
+  {
+    "id": "italy",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ITA",
+    "defaultSfccLocale": "en_IT",
+    "countries": [
+      "ITA"
+    ],
+    "sfccLocales": [
+      "en_IT"
+    ],
+    "sfccLocalesCountryMap": {
+      "ITA": [
+        "en_IT"
+      ]
+    }
+  },
+  {
+    "id": "jamaica",
+    "currencyCode": "JMD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "JAM",
+    "defaultSfccLocale": "en_JM",
+    "countries": [
+      "JAM"
+    ],
+    "sfccLocales": [
+      "en_JM"
+    ],
+    "sfccLocalesCountryMap": {
+      "JAM": [
+        "en_JM"
+      ]
+    }
+  },
+  {
+    "id": "japan",
+    "currencyCode": "JPY",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "JPN",
+    "defaultSfccLocale": "en_JP",
+    "countries": [
+      "JPN"
+    ],
+    "sfccLocales": [
+      "en_JP"
+    ],
+    "sfccLocalesCountryMap": {
+      "JPN": [
+        "en_JP"
+      ]
+    }
+  },
+  {
+    "id": "jordan",
+    "currencyCode": "JOD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "JOR",
+    "defaultSfccLocale": "en_JO",
+    "countries": [
+      "JOR"
+    ],
+    "sfccLocales": [
+      "en_JO"
+    ],
+    "sfccLocalesCountryMap": {
+      "JOR": [
+        "en_JO"
+      ]
+    }
+  },
+  {
+    "id": "kuwait",
+    "currencyCode": "KWD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "KWT",
+    "defaultSfccLocale": "en_KW",
+    "countries": [
+      "KWT"
+    ],
+    "sfccLocales": [
+      "en_KW"
+    ],
+    "sfccLocalesCountryMap": {
+      "KWT": [
+        "en_KW"
+      ]
+    }
+  },
+  {
+    "id": "liechtenstein",
+    "currencyCode": "CHF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "LIE",
+    "defaultSfccLocale": "en_LI",
+    "countries": [
+      "LIE"
+    ],
+    "sfccLocales": [
+      "en_LI"
+    ],
+    "sfccLocalesCountryMap": {
+      "LIE": [
+        "en_LI"
+      ]
+    }
+  },
+  {
+    "id": "luxembourg",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "LUX",
+    "defaultSfccLocale": "en_LU",
+    "countries": [
+      "LUX"
+    ],
+    "sfccLocales": [
+      "en_LU"
+    ],
+    "sfccLocalesCountryMap": {
+      "LUX": [
+        "en_LU"
+      ]
+    }
+  },
+  {
+    "id": "maldives",
+    "currencyCode": "MVR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MDV",
+    "defaultSfccLocale": "en_MV",
+    "countries": [
+      "MDV"
+    ],
+    "sfccLocales": [
+      "en_MV"
+    ],
+    "sfccLocalesCountryMap": {
+      "MDV": [
+        "en_MV"
+      ]
+    }
+  },
+  {
+    "id": "martinique",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MTQ",
+    "defaultSfccLocale": "en_MQ",
+    "countries": [
+      "MTQ"
+    ],
+    "sfccLocales": [
+      "en_MQ"
+    ],
+    "sfccLocalesCountryMap": {
+      "MTQ": [
+        "en_MQ"
+      ]
+    }
+  },
+  {
+    "id": "mexico",
+    "currencyCode": "MXN",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MEX",
+    "defaultSfccLocale": "en_MX",
+    "countries": [
+      "MEX"
+    ],
+    "sfccLocales": [
+      "en_MX"
+    ],
+    "sfccLocalesCountryMap": {
+      "MEX": [
+        "en_MX"
+      ]
+    }
+  },
+  {
+    "id": "monaco",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MCO",
+    "defaultSfccLocale": "en_MC",
+    "countries": [
+      "MCO"
+    ],
+    "sfccLocales": [
+      "en_MC"
+    ],
+    "sfccLocalesCountryMap": {
+      "MCO": [
+        "en_MC"
+      ]
+    }
+  },
+  {
+    "id": "montenegro",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MNE",
+    "defaultSfccLocale": "en_ME",
+    "countries": [
+      "MNE"
+    ],
+    "sfccLocales": [
+      "en_ME"
+    ],
+    "sfccLocalesCountryMap": {
+      "MNE": [
+        "en_ME"
+      ]
+    }
+  },
+  {
+    "id": "morocco",
+    "currencyCode": "MAD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "MAR",
+    "defaultSfccLocale": "en_MA",
+    "countries": [
+      "MAR"
+    ],
+    "sfccLocales": [
+      "en_MA"
+    ],
+    "sfccLocalesCountryMap": {
+      "MAR": [
+        "en_MA"
+      ]
+    }
+  },
+  {
+    "id": "netherlands",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "NLD",
+    "defaultSfccLocale": "en_NL",
+    "countries": [
+      "NLD"
+    ],
+    "sfccLocales": [
+      "en_NL"
+    ],
+    "sfccLocalesCountryMap": {
+      "NLD": [
+        "en_NL"
+      ]
+    }
+  },
+  {
+    "id": "new-zealand",
+    "currencyCode": "NZD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "NZL",
+    "defaultSfccLocale": "en_NZ",
+    "countries": [
+      "NZL"
+    ],
+    "sfccLocales": [
+      "en_NZ"
+    ],
+    "sfccLocalesCountryMap": {
+      "NZL": [
+        "en_NZ"
+      ]
+    }
+  },
+  {
+    "id": "norway",
+    "currencyCode": "NOK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "NOR",
+    "defaultSfccLocale": "en_NO",
+    "countries": [
+      "NOR"
+    ],
+    "sfccLocales": [
+      "en_NO"
+    ],
+    "sfccLocalesCountryMap": {
+      "NOR": [
+        "en_NO"
+      ]
+    }
+  },
+  {
+    "id": "pakistan",
+    "currencyCode": "PKR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "PAK",
+    "defaultSfccLocale": "en_PK",
+    "countries": [
+      "PAK"
+    ],
+    "sfccLocales": [
+      "en_PK"
+    ],
+    "sfccLocalesCountryMap": {
+      "PAK": [
+        "en_PK"
+      ]
+    }
+  },
+  {
+    "id": "poland",
+    "currencyCode": "PLN",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "POL",
+    "defaultSfccLocale": "en_PL",
+    "countries": [
+      "POL"
+    ],
+    "sfccLocales": [
+      "en_PL"
+    ],
+    "sfccLocalesCountryMap": {
+      "POL": [
+        "en_PL"
+      ]
+    }
+  },
+  {
+    "id": "portugal",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "PRT",
+    "defaultSfccLocale": "en_PT",
+    "countries": [
+      "PRT"
+    ],
+    "sfccLocales": [
+      "en_PT"
+    ],
+    "sfccLocalesCountryMap": {
+      "PRT": [
+        "en_PT"
+      ]
+    }
+  },
+  {
+    "id": "qatar",
+    "currencyCode": "QAR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "QAT",
+    "defaultSfccLocale": "en_QA",
+    "countries": [
+      "QAT"
+    ],
+    "sfccLocales": [
+      "en_QA"
+    ],
+    "sfccLocalesCountryMap": {
+      "QAT": [
+        "en_QA"
+      ]
+    },
+    "taxIncluded": "Includes VAT"
+  },
+  {
+    "id": "republic-of-korea",
+    "currencyCode": "KRW",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "KOR",
+    "defaultSfccLocale": "en_KR",
+    "countries": [
+      "KOR"
+    ],
+    "sfccLocales": [
+      "en_KR"
+    ],
+    "sfccLocalesCountryMap": {
+      "KOR": [
+        "en_KR"
+      ]
+    }
+  },
+  {
+    "id": "saudi-arabia",
+    "currencyCode": "SAR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SAU",
+    "defaultSfccLocale": "en_SA",
+    "countries": [
+      "SAU"
+    ],
+    "sfccLocales": [
+      "en_SA"
+    ],
+    "sfccLocalesCountryMap": {
+      "SAU": [
+        "en_SA"
+      ]
+    }
+  },
+  {
+    "id": "seychelles",
+    "currencyCode": "SCR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SYC",
+    "defaultSfccLocale": "en_SC",
+    "countries": [
+      "SYC"
+    ],
+    "sfccLocales": [
+      "en_SC"
+    ],
+    "sfccLocalesCountryMap": {
+      "SYC": [
+        "en_SC"
+      ]
+    }
+  },
+  {
+    "id": "singapore",
+    "currencyCode": "SGD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SGP",
+    "defaultSfccLocale": "en_SG",
+    "countries": [
+      "SGP"
+    ],
+    "sfccLocales": [
+      "en_SG"
+    ],
+    "sfccLocalesCountryMap": {
+      "SGP": [
+        "en_SG"
+      ]
+    }
+  },
+  {
+    "id": "slovenia",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SVN",
+    "defaultSfccLocale": "en_SI",
+    "countries": [
+      "SVN"
+    ],
+    "sfccLocales": [
+      "en_SI"
+    ],
+    "sfccLocalesCountryMap": {
+      "SVN": [
+        "en_SI"
+      ]
+    },
+    "taxIncluded": "Includes VAT"
+  },
+  {
+    "id": "spain",
+    "currencyCode": "EUR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ESP",
+    "defaultSfccLocale": "en_ES",
+    "countries": [
+      "ESP"
+    ],
+    "sfccLocales": [
+      "en_ES"
+    ],
+    "sfccLocalesCountryMap": {
+      "ESP": [
+        "en_ES"
+      ]
+    }
+  },
+  {
+    "id": "sri-lanka",
+    "currencyCode": "LKR",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "LKA",
+    "defaultSfccLocale": "en_LK",
+    "countries": [
+      "LKA"
+    ],
+    "sfccLocales": [
+      "en_LK"
+    ],
+    "sfccLocalesCountryMap": {
+      "LKA": [
+        "en_LK"
+      ]
+    }
+  },
+  {
+    "id": "sweden",
+    "currencyCode": "SEK",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "SWE",
+    "defaultSfccLocale": "en_SE",
+    "countries": [
+      "SWE"
+    ],
+    "sfccLocales": [
+      "en_SE"
+    ],
+    "sfccLocalesCountryMap": {
+      "SWE": [
+        "en_SE"
+      ]
+    }
+  },
+  {
+    "id": "switzerland",
+    "currencyCode": "CHF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "CHE",
+    "defaultSfccLocale": "en_CH",
+    "countries": [
+      "CHE"
+    ],
+    "sfccLocales": [
+      "en_CH"
+    ],
+    "sfccLocalesCountryMap": {
+      "CHE": [
+        "en_CH"
+      ]
+    }
+  },
+  {
+    "id": "taiwan",
+    "currencyCode": "TWD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "TWN",
+    "defaultSfccLocale": "en_TW",
+    "countries": [
+      "TWN"
+    ],
+    "sfccLocales": [
+      "en_TW"
+    ],
+    "sfccLocalesCountryMap": {
+      "TWN": [
+        "en_TW"
+      ]
+    }
+  },
+  {
+    "id": "thailand",
+    "currencyCode": "THB",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "THA",
+    "defaultSfccLocale": "en_TH",
+    "countries": [
+      "THA"
+    ],
+    "sfccLocales": [
+      "en_TH"
+    ],
+    "sfccLocalesCountryMap": {
+      "THA": [
+        "en_TH"
+      ]
+    }
+  },
+  {
+    "id": "trinidad-and-tobago",
+    "currencyCode": "TTD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "TTO",
+    "defaultSfccLocale": "en_TT",
+    "countries": [
+      "TTO"
+    ],
+    "sfccLocales": [
+      "en_TT"
+    ],
+    "sfccLocalesCountryMap": {
+      "TTO": [
+        "en_TT"
+      ]
+    }
+  },
+  {
+    "id": "turkey",
+    "currencyCode": "TRY",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "TUR",
+    "defaultSfccLocale": "en_TR",
+    "countries": [
+      "TUR"
+    ],
+    "sfccLocales": [
+      "en_TR"
+    ],
+    "sfccLocalesCountryMap": {
+      "TUR": [
+        "en_TR"
+      ]
+    }
+  },
+  {
+    "id": "turks-and-caicos-islands",
+    "currencyCode": "USD",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "TCA",
+    "defaultSfccLocale": "en_TC",
+    "countries": [
+      "TCA"
+    ],
+    "sfccLocales": [
+      "en_TC"
+    ],
+    "sfccLocalesCountryMap": {
+      "TCA": [
+        "en_TC"
+      ]
+    }
+  },
+  {
+    "id": "united-arab-emirates",
+    "currencyCode": "AED",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "ARE",
+    "defaultSfccLocale": "en_AE",
+    "countries": [
+      "ARE"
+    ],
+    "sfccLocales": [
+      "en_AE"
+    ],
+    "sfccLocalesCountryMap": {
+      "ARE": [
+        "en_AE"
+      ]
+    },
+    "taxIncluded": "Includes VAT"
+  },
+  {
+    "id": "united-kingdom",
+    "currencyCode": "GBP",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "GBR",
+    "defaultSfccLocale": "en_GB",
+    "countries": [
+      "GBR"
+    ],
+    "sfccLocales": [
+      "en_GB"
+    ],
+    "sfccLocalesCountryMap": {
+      "GBR": [
+        "en_GB"
+      ]
+    }
+  },
+  {
+    "id": "venezuela",
+    "currencyCode": "VEF",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "VEN",
+    "defaultSfccLocale": "en_VE",
+    "countries": [
+      "VEN"
+    ],
+    "sfccLocales": [
+      "en_VE"
+    ],
+    "sfccLocalesCountryMap": {
+      "VEN": [
+        "en_VE"
+      ]
+    }
+  },
+  {
+    "id": "vietnam",
+    "currencyCode": "VND",
+    "shippingConfigurationKey": "world",
+    "defaultLanguage": "en",
+    "defaultCountry": "VNM",
+    "defaultSfccLocale": "en_VN",
+    "countries": [
+      "VNM"
+    ],
+    "sfccLocales": [
+      "en_VN"
+    ],
+    "sfccLocalesCountryMap": {
+      "VNM": [
+        "en_VN"
+      ]
+    }
+  }
+]</preference>
+            <preference preference-id="giftCertificateEnabled">false</preference>
+            <preference preference-id="googleApiKey">AIzaSyA6S8r0FG4JiQNbhsV4RmxibApZj2MFhBE</preference>
+            <preference preference-id="googleMapsAPIKey">AIzaSyA6S8r0FG4JiQNbhsV4RmxibApZj2MFhBE</preference>
+            <preference preference-id="headerLayout">logo-center</preference>
+            <preference preference-id="headerNavLayout">nav-center</preference>
+            <preference preference-id="headerSearch">search-icon-only</preference>
+            <preference preference-id="hideQty">true</preference>
+            <preference preference-id="isNorthBeamEnabled">true</preference>
+            <preference preference-id="listPriceDefault">wgaca-web-pricebook</preference>
+            <preference preference-id="pdHomePageID">homepage-september-2024</preference>
+            <preference preference-id="pdpCollapsibleContentDesktop1">collapsed-expanded</preference>
+            <preference preference-id="pdpCollapsibleContentDesktop2">collapsed-expanded</preference>
+            <preference preference-id="pdpCollapsibleContentDesktop3">collapsed-closed</preference>
+            <preference preference-id="pdpCollapsibleContentDesktop4">collapsed-closed</preference>
+            <preference preference-id="pdpHideSingleVariants">true</preference>
+            <preference preference-id="pdpImageColumnWidth">4/12</preference>
+            <preference preference-id="plpCollapseRefinementsDesktop">true</preference>
+            <preference preference-id="plpCollapseRefinementsMobile">true</preference>
+            <preference preference-id="plpDefaultPageSize">60</preference>
+            <preference preference-id="plpPromotionShow">true</preference>
+            <preference preference-id="plpQuickbuyButtonOrIcon">icon</preference>
+            <preference preference-id="plpShowSecondaryProductImage">true</preference>
+            <preference preference-id="plpSwatchTypeAsImage">true</preference>
+            <preference preference-id="productsPerRowDesktop">four</preference>
+            <preference preference-id="productsPerRowMobile">two</preference>
+            <preference preference-id="sfcommercepaymentsCartridgeEnabled">false</preference>
+            <preference preference-id="sfraOrderConfirmationEmailDisabled">true</preference>
+            <preference preference-id="smartyAPIUrl">https://us-autocomplete-pro.api.smartystreets.com/lookup?key=124640434924628049&amp;search=</preference>
+            <preference preference-id="smartyEnabled">true</preference>
+            <preference preference-id="storeTypePreferences">
+                [
+                    {
+                        "value": "default",
+                        "mapMarker": {
+                            "backgroundImage": "/images/icons/map-marker-default.svg",
+                            "color": "white"
+                        }
+                    },
+                    {
+                        "value": "retail",
+                        "mapMarker": {
+                            "backgroundImage": "/images/icons/map-marker-retail.svg",
+                            "color": "white"
+                        }
+                    },
+                    {
+                        "value": "outlet",
+                        "mapMarker": {
+                            "backgroundImage": "/images/icons/map-marker-outlet.svg",
+                            "color": "white"
+                        }
+                    },
+                    {
+                        "value": "outlet",
+                        "mapMarker": {
+                            "backgroundImage": "/images/icons/map-marker-outlet.svg",
+                            "color": "white"
+                        }
+                    }
+                ]
+            </preference>
+            <preference preference-id="swatchableAttributes">["color","size"]</preference>
+            <preference preference-id="wishlistEnable">true</preference>
+            <preference preference-id="zenkraftCarrier">fedex</preference>
+            <preference preference-id="zenkraftCurrencyCode">USD</preference>
+            <preference preference-id="zenkraftDebugLog">true</preference>
+            <preference preference-id="zenkraftDefaultProductWeight">1</preference>
+            <preference preference-id="zenkraftDimensionUnits">IN</preference>
+            <preference preference-id="zenkraftMasterAPIKey">4sKjfWspCOlGHrHP2sM9oF4JtnfuYLs7UztkfEYPXP6haVFuVu</preference>
+            <preference preference-id="zenkraftPackagingType">your_packaging</preference>
+            <preference preference-id="zenkraftProdMode">true</preference>
+            <preference preference-id="zenkraftSenderCity">Jersey City</preference>
+            <preference preference-id="zenkraftSenderCompany">What Goes Around Comes Around</preference>
+            <preference preference-id="zenkraftSenderCountryCode">US</preference>
+            <preference preference-id="zenkraftSenderEmail">help@whatgoesaroundnyc.com</preference>
+            <preference preference-id="zenkraftSenderName">Shipping</preference>
+            <preference preference-id="zenkraftSenderPhone">212-564-6650</preference>
+            <preference preference-id="zenkraftSenderPostalCode">07310</preference>
+            <preference preference-id="zenkraftSenderStateCode">NJ</preference>
+            <preference preference-id="zenkraftSenderStreet">812 Jersey Ave</preference>
+            <preference preference-id="zenkraftShipLabelFileType">PDF</preference>
+            <preference preference-id="zenkraftShippingAccount">267024326</preference>
+            <preference preference-id="zenkraftWeightUnits">LB</preference>
+        </development>
+    </custom-preferences>
+</preferences>
+

@@ -1,0 +1,15 @@
+{
+  "engines": {
+    "node": ">=4.0"
+  },
+  "dependencies": {
+    "cleave.js": "^1.5.3",
+    "mobx": "^5.15.4"
+  },
+  "packageName": "rvw_integrations_core",
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
+}

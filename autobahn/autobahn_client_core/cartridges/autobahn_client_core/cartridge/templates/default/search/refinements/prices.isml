@@ -1,0 +1,28 @@
+<div class="price-filter-wrapper">
+    <isif condition="${refinement.isPriceRefinement}">
+        <iscomment>
+            Keep dynamic range for reference:
+        </iscomment>
+        <input type="hidden" id="minMaxPriceValue" value="${refinement.values[0].displayValue}" />
+        <input type="hidden" id="refineUrl" value="${refinement.values[0].url}" />
+        <div class="price-input">
+            <div class="field">
+                <span class="currency-symbol"> ${refinement.values[0].symbol}</span>
+                <input type="number" class="input-min" name="min" aria-label="Minimum price filter input" />
+            </div>
+            <div class="separator">To</div>
+            <div class="field">
+                <span class="currency-symbol"> ${refinement.values[0].symbol} </span>
+                <input type="number" class="input-max" name="max" aria-label="Maximum price filter input" />
+            </div>
+        </div>
+        <p class="error d-none"> Price filter value should be in range  ${refinement.values[0].displayValue.replace(/\.\d+$/, '')}</p>
+        <div class="slider">
+            <div class="progress"></div>
+        </div>
+        <div class="range-input">
+            <input type="range" class="range-min" step="1" name="range min" aria-label="Minimum price range slider" />
+            <input type="range" class="range-max" step="1" name="range max" aria-label="Maximum price range slider" />
+        </div>
+    </isif>
+</div>

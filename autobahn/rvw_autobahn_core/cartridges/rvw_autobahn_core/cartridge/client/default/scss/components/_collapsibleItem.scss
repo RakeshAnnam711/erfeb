@@ -1,0 +1,123 @@
+@each $size in map-keys($grid-breakpoints) {
+
+    @include media-breakpoint-down($size) {
+        .collapsible-#{$size} {
+            border-color: $collapsible-border-color;
+            .card-header {
+                padding: 0;
+                border-color: $collapsible-border-color;
+                border-radius: 0;
+                &:first-child {
+                    border-radius: 0;
+                }
+                &:last-child {
+                    border-radius: 0;
+                }
+                button {
+                    text-align: left;
+                    display: block;
+                    width: 100%;
+                    &:focus {
+                        z-index: 1; // keep focus outline visible
+                    }
+                }
+            }
+            .title {
+                @include icon($collapsible-header-icon-expand, after, $collapsible-header-icon-size, $collapsible-header-icon-color);
+                background-color: $collapsible-header-background;
+                color: $collapsible-header-color;
+                padding-top: $card-header-padding-top;
+                padding-right: $card-header-padding-right + $collapsible-header-icon-size + 5px;
+                padding-bottom: $card-header-padding-bottom;
+                padding-left: $card-header-padding-left;
+                user-select: none;
+                border-width: 0;
+                cursor: pointer;
+                &::after {
+                    position: absolute;
+                    top: $card-header-padding-top;
+                    right: $card-header-padding-right;
+                }
+            }
+            .content,
+            .card-body {
+                display: none;
+                background-color: $collapsible-body-background;
+                color: $collapsible-body-color;
+                border-radius: 0;
+                &:first-child {
+                    border-radius: 0;
+                }
+                &:last-child {
+                    border-radius: 0;
+                    border-bottom: none;
+                }
+            }
+            &:not(:last-child) {
+                margin-bottom: 0;
+                border-bottom: none;
+                border-radius: 0;
+                &+.collapsible-#{$size} {
+                    border-radius: 0;
+                }
+            }
+            &.aside,
+            &.no-borders {
+                .title::after {
+                    right: 0;
+                }
+            }
+            &.aside .title::after {
+                top: $card-aside-header-padding-top;
+            }
+            &.no-borders .title::after {
+                top: $card-header-padding-top;
+            }
+            &:first-child {
+                .card-header,
+                .card-title {
+                    border-radius: calc(#{$card-border-radius} - 1px) calc(#{$card-border-radius} - 1px)  0 0 ;
+                }
+            }
+            &:last-child {
+                .card-header,
+                .card-title,
+                .card-body {
+                    border-radius: 0 0 calc(#{$card-border-radius} - 1px) calc(#{$card-border-radius} - 1px);
+                }
+                &:not(.active):not(.aside):not(.no-borders) {
+                    .card-header {
+                        border-bottom: 1px solid $collapsible-border-color;
+                    }
+                }
+            }
+            &.active {
+                > .card-header > .title,
+                > .content-asset > .title, // footer accordions
+                > .title {
+                    @include icon($collapsible-header-icon-close, after, $collapsible-header-icon-size, $collapsible-header-icon-color);
+                }
+                > .content,
+                > .content-asset > .content,
+                > .card-body {
+                    display: block;
+                    > .content:not(.values) { // prevent from affecting plp refinements
+                        display: block;
+                    }
+                }
+                &:last-child {
+                    .card-header,
+                    .card-title {
+                        border-radius: 0;
+                        border-bottom: none;
+                    }
+                    &:not(.aside):not(.no-borders) {
+                        .card-body {
+                            border-bottom: 1px solid $collapsible-border-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

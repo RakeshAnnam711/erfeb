@@ -1,0 +1,43 @@
+{
+    "name": "Image Tile",
+    "description": "Select a photo that you want to insert into your layout component",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "photoTileImage",
+            "name": "Image Tile",
+            "description": "This is a simple Image Tile component where you drag and drop it into any layout component ",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "image",
+                    "name": "Image Tile Component Image",
+                    "description": "Select a photo to be displayed",
+                    "type": "image",
+                    "required": true
+                },
+                {
+                    "id": "customImageAlt",
+                    "name": "Custom Image Alt Text",
+                    "type": "string",
+                    "description": "Add alternative text for image, default is an empty string. See following to better understand what to write: https://html.spec.whatwg.org/multipage/images.html#alt",
+                    "required": false
+                },
+                {
+                    "id": "maxWidth",
+                    "name": "Maximum Width",
+                    "type": "integer",
+                    "description": "Add maximum width in pixels to the image",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

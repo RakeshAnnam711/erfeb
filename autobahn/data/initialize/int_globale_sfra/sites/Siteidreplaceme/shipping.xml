@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shipping xmlns="http://www.demandware.com/xml/impex/shipping/2007-03-31">
+    <shipping-method method-id="GLOBALE" default="false">
+        <display-name xml:lang="x-default">GLOBALE</display-name>
+        <description xml:lang="x-default">Global-e Generic Shipping (default)</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0.01</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="isGeShippingMethod">true</custom-attribute>
+        </custom-attributes>
+    </shipping-method>
+    <shipping-method method-id="GLOBALE_STANDARD" default="false">
+        <display-name xml:lang="x-default">GLOBALE STANDARD</display-name>
+        <description xml:lang="x-default">Global-e Standard Shipping</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0.01</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="isGeShippingMethod">true</custom-attribute>
+        </custom-attributes>
+    </shipping-method>
+    <shipping-method method-id="GLOBALE_EXPRESS" default="false">
+        <display-name xml:lang="x-default">GLOBALE EXPRESS</display-name>
+        <description xml:lang="x-default">Global-e Express Shipping</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0.01</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="isGeShippingMethod">true</custom-attribute>
+        </custom-attributes>
+    </shipping-method>
+    <shipping-method method-id="GLOBALE_STORE_COLLECTION" default="false">
+        <display-name xml:lang="x-default">GLOBALE STORE COLLECTION</display-name>
+        <description xml:lang="x-default">Global-e Store Collection</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0.01</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="isGeShippingMethod">true</custom-attribute>
+        </custom-attributes>
+    </shipping-method>
+    <shipping-method method-id="GLOBALE_HUB" default="false">
+        <display-name xml:lang="x-default">GLOBALE HUB</display-name>
+        <description xml:lang="x-default">Global-e Shipping via GE Hub</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0.01</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="isGeShippingMethod">true</custom-attribute>
+        </custom-attributes>
+    </shipping-method>
+    <shipping-method method-id="GLOBALE_DIRECT" default="false">
+        <display-name xml:lang="x-default">GLOBALE DIRECT</display-name>
+        <description xml:lang="x-default">Global-e Shipping Direct from Brand Hub</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0.01</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="isGeShippingMethod">true</custom-attribute>
+        </custom-attributes>
+    </shipping-method>
+    <shipping-method method-id="GLOBALE_WYOL" default="false">
+        <display-name xml:lang="x-default">GLOBALE WYOL</display-name>
+        <description xml:lang="x-default">Brand own carrier service</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0.01</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="isGeShippingMethod">true</custom-attribute>
+        </custom-attributes>
+    </shipping-method>
+</shipping>

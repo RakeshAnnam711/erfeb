@@ -1,0 +1,12 @@
+{
+    "name": "Content Folder Picker",
+    "description": "A custom editor that allows you to pick a folder from an alphabetized list of the site's content folders.",
+    "resources": {
+        "scripts": [
+            "/experience/editors/contentFolderPickerScript.js"
+        ],
+        "styles": [
+            "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+        ]
+    }
+}

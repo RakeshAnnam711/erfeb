@@ -1,0 +1,20 @@
+.content-grid {
+
+    // vertical spacing between content grids
+    &+.content-grid {
+        margin-top: $spacer*2;
+    }
+
+    // vartical spacing between grid items
+    .content-column[class*='col-md'] {
+        @include media-breakpoint-down(sm) {
+            &+.content-column[class*='col-12'] {
+                margin-top: $spacer*2;
+            }
+            &+.content-column[class*='col-6']:nth-child(4n),
+            &+.content-column[class*='col-6']:nth-child(4n-1) {
+                margin-top: $spacer*2;
+            }
+        }
+    }
+}

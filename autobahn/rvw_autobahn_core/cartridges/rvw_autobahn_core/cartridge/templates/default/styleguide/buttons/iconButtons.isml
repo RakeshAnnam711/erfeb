@@ -1,0 +1,32 @@
+<div id="iconButtons" class="sg__header3">Icon Buttons</div>
+<p>Icons can be added to buttons by applying a helper class or mixin to the button itself. This can be useful for creating button icons without needing to modify the .isml template, and will replace any existing icon that is on that button.</p>
+<p>Note: When using a mixin, you have the added capability to position the icon to the right of the button text instead of the left.</p>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-primary icon-print">Icon Button</button>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button class="btn btn-primary icon-lock">Icon Button</button></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include icon($icon-lock)}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-primary sg__print-icon">Icon Button</button>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {@include icon($icon-arrow-right, after)}</script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-primary btn-sm icon-print">Small Icon Button</button>
+    </div>
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><button class="btn btn-primary btn-sm icon-print">Small Icon Button</button></script></code></pre>
+        <pre><code class='language-css'><script type="text/plain" class="language-css">.element {
+    @include button(primary, null, null, null, small);
+    @include icon($icon-print);
+}</script></code></pre>
+    </div>
+</div>

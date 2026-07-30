@@ -1,0 +1,10 @@
+<div class="row brand-logos">
+    <div class="col-6 brand-logos__col1">
+        <div class="sg__header4">Logo</div>
+        <div class="brand-logo"></div>
+    </div>
+    <div class="brand-logos__col2 col-6">
+        <div class="sg__header4">Favicon</div>
+        <div class="brand-favicon"></div>
+    </div>
+</div>

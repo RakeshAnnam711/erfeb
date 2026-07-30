@@ -1,0 +1,44 @@
+<isif condition="${pdict.listSelected}">
+    <div
+        id="wishlistModalShareList"
+        class="wishlist-modal-share-list modal fade"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="wishlistModalShareListLabel"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div id="wishlistModalShareListLabel" class="wishlist-modal-share-list-title modal-title">
+                        ${Resource.msgf('title.modal.sharelist', 'wishlist', null, pdict.listSelected.name)}
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="${Resource.msg('button.modal.dismiss', 'wishlist', null)}">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class="container modal-body">
+                    <form class="copy">
+                        <div class="form-group col-12">
+                            <label for="wishlistExperienceShareUrl">
+                                ${Resource.msg('text.modal.shareyourlink', 'wishlist', null)}
+                            </label>
+                            <fieldset class="input-group">
+                                <input type="text" class="form-control" id="wishlistExperienceShareUrl" aria-describedby="wishlistExperienceShareUrlHelp" required value="${pdict.listSelected.shareUrl}" data-url="${pdict.listSelected.shareUrl}" />
+                                <div class="input-group-append">
+                                    <button type="submit" class="wishlist-modal-share-list-submit btn btn-primary">
+                                        ${Resource.msg('button.copy', 'wishlist', null)}
+                                    </button>
+                                </div>
+                            </fieldset>
+                            <span id="wishlistExperienceShareUrlHelp" class="d-none form-text">
+                                ${Resource.msg('text.modal.copied', 'wishlist', null)}
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</isif>

@@ -1,0 +1,18 @@
+
+<div class="card-footer">
+    <div class="row">
+        <div class="col order-image-col card-info-group">
+            <p>${Resource.msg('label.orderhistory.totalitems','account',null)}</p>
+            <p class="dashboard-order-card-footer-value">
+                <isprint value="${order.productQuantityTotal + order.giftCertificateLineItems.totalQuantity}" formatter="#"/>
+            </p>
+        </div>
+        <div class="col order-details-col card-info-group">
+            <p>${Resource.msg('label.orderhistory.ordertotal','account',null)} </p>
+            <p class="dashboard-order-card-footer-value">
+                ${order.priceTotal}
+            </p>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>

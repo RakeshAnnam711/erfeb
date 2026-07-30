@@ -1,0 +1,26 @@
+<iscomment>
+    isinclude's cannot be used before the assets are written out as it breaks the IE conditional tag in the footer
+    This file is included both in the head and the footer, to ensure js is loaded after the html has been parsed
+    It's added twice because IE doesn't respect the defer attribute for scripts
+
+    This issue is why this file exists in both rvw_integrations_core AND rvw_autobahn_core
+    
+    Performance Optimization: Load PLP.js for Product Listing Pages instead of main.js
+    to reduce initial JavaScript execution time and improve performance scores
+</iscomment>
+<isif condition="${request.httpPath.indexOf('Search-Show') !== -1 || request.httpQueryString.indexOf('cgid=') !== -1 || request.httpQueryString.indexOf('q=') !== -1}">
+    <script src="${URLUtils.staticURL('/js/PLP.js')}" defer></script>
+<iselse/>
+    <script src="${URLUtils.staticURL('/js/main.js')}" defer></script>
+</isif>
+
+<isloop items="${ require('*/cartridge/scripts/assets.js').scripts }" var="script">
+    <script src="${script.src}" <isif condition="${script.integrity != null}">integrity="${script.integrity}" crossorigin="anonymous"</isif> <isif condition="${!empty(script.sequence)}">${script.sequence}</isif>></script>
+</isloop>
+
+<isinclude template="/common/recaptchaInclude" />
+
+<iscomment>
+    No is includes can add script tags as they will break the IE conditional causing the script to be added twice,
+    in the header and in the footer.
+</iscomment>

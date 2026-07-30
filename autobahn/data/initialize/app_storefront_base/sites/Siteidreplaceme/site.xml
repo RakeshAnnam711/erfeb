@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site xmlns="http://www.demandware.com/xml/impex/site/2007-04-30" site-id="Siteidreplaceme">
+    <name>Sitenamereplaceme</name>
+    <currency>USD</currency>
+    <taxation>net</taxation>
+</site>

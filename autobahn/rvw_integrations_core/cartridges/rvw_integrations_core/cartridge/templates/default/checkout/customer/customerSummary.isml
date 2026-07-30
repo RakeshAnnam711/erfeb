@@ -1,0 +1,18 @@
+<isset name="isRegistered" value="${pdict.customer.registeredUser}" scope="page" />
+<isset name="profileEmail" value="${pdict.customer.profile ? pdict.customer.profile.email : ''}" scope="page" />
+<isset name="klaviyoEnabled" value="${dw.system.Site.current.getCustomPreferenceValue('klaviyo_enabled')}" scope="page" />
+<isset name="customerEmail" value="${'order' in pdict ? pdict.order.orderEmail : profileEmail}" scope="page" />
+
+<span class="summary-section-label customer-label">
+    ${Resource.msg('label.customer.data', 'confirmation', null)}
+</span>
+<br/>
+<div class="summary-details customer">
+    <span class="customer-summary-email">${customerEmail}</span>
+</div>
+
+<isif condition="${klaviyoEnabled && isRegistered}">
+    <div class="form-group custom-control custom-checkbox">
+        <isinclude template="klaviyo/subscribeCheckbox" />
+    </div>
+</isif>

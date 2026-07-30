@@ -1,0 +1,49 @@
+{
+    "name": "WGACA Slider Category Products",
+    "group": "wgaca_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "category",
+            "attribute_definitions": [
+                {
+                    "id": "section",
+                    "name": "GTM ID",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "id": "category",
+                    "name": "Category",
+                    "type": "category",
+                    "required": true
+                },
+                {
+                    "id": "products_to_display",
+                    "name": "Number of Products To Display",
+                    "description": "Enter the number of products to display in the carousel. Default: 6",
+                    "type": "integer",
+                    "default_value": 6,
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "sliderConfiguration",
+            "attribute_definitions": [
+                {
+                    "id": "showShadow",
+                    "name": "Add shadow to product tile",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "tileBackground",
+                    "name": "Add background to product tile",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

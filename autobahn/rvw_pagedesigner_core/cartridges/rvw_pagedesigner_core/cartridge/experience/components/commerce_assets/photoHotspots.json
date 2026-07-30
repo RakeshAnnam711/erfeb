@@ -1,0 +1,605 @@
+{
+    "name": "Photo with Hotspots",
+    "description": "Select a photo and add hotspot product links to it.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "photoHotspotsSettings",
+            "name": "Hotspot Settings",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to the hotspot container for spacing, background color, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "tooltipClass",
+                    "name": "Tooltip class",
+                    "description": "Class(es) to add to the tooltip container for spacing, background colors, fonts, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "customImageAlt",
+                    "name": "Custom Image Alt Text",
+                    "type": "string",
+                    "description": "Add alternative text for image, default is an empty string. See following to better understand what to write: https://html.spec.whatwg.org/multipage/images.html#alt",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage1",
+            "name": "Hotspot 1",
+            "attribute_definitions": [
+                {
+                    "id": "image1",
+                    "name": "Hotspot 1 Image",
+                    "description": "Upload an image and place a hotspot.",
+                    "type": "image",
+                    "required": true
+                },
+                {
+                    "id": "primaryText1",
+                    "name": "Hotspot 1 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass1",
+                    "name": "Hotspot 1 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText1",
+                    "name": "Hotspot 1 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass1",
+                    "name": "Hotspot 1 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product1",
+                    "name": "Hotspot 1 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 1.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme1",
+                    "name": "Hotspot 1 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage2",
+            "name": "Hotspot 2",
+            "attribute_definitions": [
+                {
+                    "id": "image2",
+                    "name": "Hotspot 2 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText2",
+                    "name": "Hotspot 2 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass2",
+                    "name": "Hotspot 2 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText2",
+                    "name": "Hotspot 2 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass2",
+                    "name": "Hotspot 2 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product2",
+                    "name": "Hotspot 2 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 2.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme2",
+                    "name": "Hotspot 2 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage3",
+            "name": "Hotspot 3",
+            "attribute_definitions": [
+                {
+                    "id": "image3",
+                    "name": "Hotspot 3 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText3",
+                    "name": "Hotspot 3 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass3",
+                    "name": "Hotspot 3 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText3",
+                    "name": "Hotspot 3 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass3",
+                    "name": "Hotspot 3 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product3",
+                    "name": "Hotspot 3 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 3.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme3",
+                    "name": "Hotspot 3 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage4",
+            "name": "Hotspot 4",
+            "attribute_definitions": [
+                {
+                    "id": "image4",
+                    "name": "Hotspot 4 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText4",
+                    "name": "Hotspot 4 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass4",
+                    "name": "Hotspot 4 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText4",
+                    "name": "Hotspot 4 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass4",
+                    "name": "Hotspot 4 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product4",
+                    "name": "Hotspot 4 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 4.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme4",
+                    "name": "Hotspot 4 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage5",
+            "name": "Hotspot 5",
+            "attribute_definitions": [
+                {
+                    "id": "image5",
+                    "name": "Hotspot 5 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText5",
+                    "name": "Hotspot 5 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass5",
+                    "name": "Hotspot 5 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText5",
+                    "name": "Hotspot 5 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass5",
+                    "name": "Hotspot 5 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product5",
+                    "name": "Hotspot 5 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 5.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme5",
+                    "name": "Hotspot 5 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage6",
+            "name": "Hotspot 6",
+            "attribute_definitions": [
+                {
+                    "id": "image6",
+                    "name": "Hotspot 6 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText6",
+                    "name": "Hotspot 6 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass6",
+                    "name": "Hotspot 6 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText6",
+                    "name": "Hotspot 6 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass6",
+                    "name": "Hotspot 6 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product6",
+                    "name": "Hotspot 6 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 6.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme6",
+                    "name": "Hotspot 6 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage7",
+            "name": "Hotspot 7",
+            "attribute_definitions": [
+                {
+                    "id": "image7",
+                    "name": "Hotspot 7 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText7",
+                    "name": "Hotspot 7 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass7",
+                    "name": "Hotspot 7 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText7",
+                    "name": "Hotspot 7 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass7",
+                    "name": "Hotspot 7 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product7",
+                    "name": "Hotspot 7 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 7.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme7",
+                    "name": "Hotspot 7 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage8",
+            "name": "Hotspot 8",
+            "attribute_definitions": [
+                {
+                    "id": "image8",
+                    "name": "Hotspot 8 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText8",
+                    "name": "Hotspot 8 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass8",
+                    "name": "Hotspot 8 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText8",
+                    "name": "Hotspot 8 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass8",
+                    "name": "Hotspot 8 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product8",
+                    "name": "Hotspot 8 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 8.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme8",
+                    "name": "Hotspot 8 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage9",
+            "name": "Hotspot 9",
+            "attribute_definitions": [
+                {
+                    "id": "image9",
+                    "name": "Hotspot 9 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText9",
+                    "name": "Hotspot 9 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass9",
+                    "name": "Hotspot 9 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText9",
+                    "name": "Hotspot 9 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass9",
+                    "name": "Hotspot 9 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product9",
+                    "name": "Hotspot 9 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 9.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme9",
+                    "name": "Hotspot 9 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "photoHotspotsImage10",
+            "name": "Hotspot 10",
+            "attribute_definitions": [
+                {
+                    "id": "image10",
+                    "name": "Hotspot 10 Image",
+                    "description": "Please upload the same image, and place a new hotspot.",
+                    "type": "image",
+                    "required": false
+                },
+                {
+                    "id": "primaryText10",
+                    "name": "Hotspot 10 primary text",
+                    "description": "Optional primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "primaryTextClass10",
+                    "name": "Hotspot 10 primary text class",
+                    "description": "Class(es) to add to the primary text for styling purposes, e.g. 'h4'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "secondaryText10",
+                    "name": "Hotspot 10 secondary text",
+                    "description": "Optional additional text placed below the primary text.",
+                    "type": "markup",
+                    "required": false
+                },
+                {
+                    "id": "secondaryTextClass10",
+                    "name": "Hotspot 10 secondary text class",
+                    "description": "Additional class(es) to add to the secondary text for styling purposes, e.g. 'text--gray'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "product10",
+                    "name": "Hotspot 10 Product ID",
+                    "description": "The ID of the product to be displayed for Hotspot 10.",
+                    "type": "product",
+                    "required": false
+                },
+                {
+                    "id": "hotspotTheme10",
+                    "name": "Hotspot 10 Theme",
+                    "description": "Set the theme to help with visibility of the hotspot. Default is light",
+                    "type": "enum",
+                    "values": ["light", "dark"],
+                    "default_value": "light",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

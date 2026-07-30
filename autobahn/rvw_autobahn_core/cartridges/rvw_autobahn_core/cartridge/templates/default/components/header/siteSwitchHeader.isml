@@ -1,0 +1,17 @@
+<isif condition="${pdict.siteContext && !empty(pdict.siteContext.logos) && (pdict.abConfigs && pdict.abConfigs.hideBrandNav ? !pdict.abConfigs.hideBrandNav : true)}">
+    <div class="pre-nav-header">
+        <div class="container d-flex">
+            <div class="site-switcher">
+                <isloop items="${pdict.siteContext.logos}" var="logo">
+                    <a href="${logo.link}" class="${pdict.siteContext.ID === logo.siteID ? 'active' : ''}" title="${logo.siteName}">
+                        <isif condition="${!empty(logo.imageURL)}">
+                            <img alt="${logo.siteName}" src="${logo.imageURL}" />
+                        <iselse/>
+                            <span>${logo.siteName}</span>
+                        </isif>
+                    </a>
+                </isloop>
+            </div>
+        </div>
+    </div>
+</isif>
