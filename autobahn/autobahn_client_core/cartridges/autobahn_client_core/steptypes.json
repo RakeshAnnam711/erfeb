@@ -364,6 +364,54 @@
 				}
             }
 
+        ],
+        "pipeline-step": [
+            {
+                "@type-id": "custom.importCatalogWithAttributeDefinitions",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "false",
+                "@supports-organization-context": "true",
+                "description": "Imports a catalog feed and enables product attribute definition imports.",
+                "pipeline": "ImportCatalogWithAttributeDefinitions-Start",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name": "ImportFile",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": "true",
+                            "description": "Catalog file path relative to IMPEX/src, for example catalog/feed.xml."
+                        },
+                        {
+                            "@name": "ImportMode",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": "true",
+                            "description": "Catalog import mode.",
+                            "enum-values": {
+                                "value": [
+                                    "MERGE",
+                                    "UPDATE",
+                                    "REPLACE",
+                                    "DELETE"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the catalog import fails."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when the catalog import finishes successfully."
+                        }
+                    ]
+                }
+            }
         ]
     }
 }
