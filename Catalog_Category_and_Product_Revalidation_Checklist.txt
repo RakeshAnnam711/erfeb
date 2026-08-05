@@ -1,0 +1,114 @@
+# Catalog Category and Product Revalidation Checklist
+
+## Purpose
+
+Use this checklist to validate catalog categories and products after an update, migration, integration, or release.
+
+## Category Revalidation
+
+### Structure and hierarchy
+
+-  Category IDs are unique.
+-  Category names are correct and complete.
+-  Each category has the correct parent.
+-  There are no duplicate, orphaned, or circular categories.
+-  Category hierarchy and breadcrumb paths are correct.
+-  Category display order is correct.
+
+### Status and visibility
+
+-  Active categories are visible and inactive categories are hidden.
+-  Start and end dates are correct.
+-  Categories appear in the correct navigation menus.
+-  Hidden or search-only categories do not appear unexpectedly.
+-  Empty categories are handled according to business requirements.
+
+### Content and localization
+
+-  Display names and descriptions are accurate.
+-  Banners, images, and landing-page content display correctly.
+-  Content has no spelling, formatting, or broken-link issues.
+-  Required translations are complete and accurate.
+-  Fallback content works correctly.
+
+### Product assignments
+
+-  Products are assigned to the correct categories.
+-  Primary category assignments are correct.
+-  Product ordering within categories is correct.
+-  Active categories contain the expected products.
+-  Unavailable products are handled correctly.
+
+### Filters and sorting
+
+-  Required filters appear in the correct categories.
+-  Default and customer-selected sorting work correctly.
+
+### SEO
+
+-  Category URLs are unique and readable.
+-  Page titles, meta descriptions, and headings are correct.
+-  Canonical URLs are correct.
+-  Redirects exist for renamed, moved, or removed categories.
+-  Indexing settings and sitemap inclusion are correct.
+
+## Product Revalidation
+
+### Identity and status
+
+-  Product IDs and SKUs are unique.
+-  Product types and relationships are correct.
+-  Active and inactive statuses are correct.
+-  Start and end dates are correct.
+-  Discontinued and future-dated products are handled correctly.
+
+### Product information
+
+-  Product names and descriptions are complete and accurate.
+-  Brand, color, size, material, condition, and required attributes are populated.
+-  Attribute values follow approved formats and naming conventions.
+-  Dimensions, weight, and specifications are accurate.
+-  Content contains no invalid formatting or broken links.
+-  Required translations are complete and accurate.
+
+### Variants and relationships
+
+-  Parent and variant relationships are correct.
+
+
+### Pricing
+
+-  Every sellable product has a valid price.
+-  Prices use the correct currency.
+-  List, sale, and promotional prices display correctly.
+-  Price validity dates are correct.
+
+
+### Inventory and availability
+
+-  Inventory records exist for sellable products.
+-  Stock quantities are accurate.
+-  In-stock, out-of-stock, preorder, and backorder behavior is correct.
+-  Availability dates are correct.
+-  Store or warehouse inventory is mapped correctly.
+-  Purchase quantity limits work correctly.
+-  Availability is consistent across listing, detail, cart, and checkout pages.
+
+### Images and media
+
+-  Primary, alternate, and variant images display correctly.
+-  Required image sizes are available.
+-  Images are clear, correctly cropped, and not duplicated.
+-  Image URLs are secure and valid.
+-  Videos and other media work correctly.
+-  Alternative text is meaningful and accurate.
+
+### Search and storefront behavior
+
+-  Products can be found by ID, SKU, name, and relevant keywords.
+-  Products appear in the correct category and search results.
+-  Search filters use the correct product attributes.
+-  Product cards show the correct details.
+-  Product detail pages load successfully.
+-  Add-to-cart behavior works correctly.
+-  Product information remains consistent through checkout.

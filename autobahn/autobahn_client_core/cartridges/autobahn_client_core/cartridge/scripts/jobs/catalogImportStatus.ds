@@ -1,0 +1,53 @@
+/**
+ * Logs catalog import data errors and warnings in the parent job log and maps
+ * the ImportCatalog result to the job framework's ExitStatus.
+ *
+ * @input ImportStatus : dw.system.Status
+ * @output ExitStatus : dw.system.Status
+ */
+function execute(args) {
+    var Logger = require('dw/system/Logger');
+    var Status = require('dw/system/Status');
+    var importStatus = args.ImportStatus;
+
+    if (!importStatus) {
+        Logger.error('Catalog import did not return an import status.');
+        args.ExitStatus = new Status(Status.ERROR, 'ERROR', 'Catalog import did not return a status.');
+        return PIPELET_NEXT;
+    }
+
+    var dataErrorCount = Number(importStatus.getDetail('DataErrorCount') || 0);
+    var dataWarningCount = Number(importStatus.getDetail('DataWarningCount') || 0);
+    var importLogFile = importStatus.getDetail('LogFileName') || 'not available';
+
+    if (dataErrorCount > 0) {
+        Logger.error(
+            'Catalog import completed with {0} data error(s). See {1} for details.',
+            dataErrorCount,
+            importLogFile
+        );
+    }
+
+    if (dataWarningCount > 0) {
+        Logger.warn(
+            'Catalog import completed with {0} data warning(s). See {1} for details.',
+            dataWarningCount,
+            importLogFile
+        );
+    }
+
+    if (importStatus.isError()) {
+        args.ExitStatus = importStatus;
+    } else if (dataErrorCount > 0 || dataWarningCount > 0) {
+        args.ExitStatus = new Status(
+            Status.OK,
+            'WARN',
+            'Catalog import completed with ' + dataErrorCount + ' data error(s) and '
+                + dataWarningCount + ' data warning(s). See ' + importLogFile + ' for details.'
+        );
+    } else {
+        args.ExitStatus = new Status(Status.OK, 'OK', 'Catalog import completed without data errors or warnings.');
+    }
+
+    return PIPELET_NEXT;
+}

@@ -408,6 +408,10 @@
                         {
                             "@code": "OK",
                             "description": "Used when the catalog import finishes successfully."
+                        },
+                        {
+                            "@code": "WARN",
+                            "description": "Used when the catalog import finishes with data errors or warnings."
                         }
                     ]
                 }

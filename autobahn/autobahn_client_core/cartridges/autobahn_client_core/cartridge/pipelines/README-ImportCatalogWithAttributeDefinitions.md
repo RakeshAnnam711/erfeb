@@ -19,6 +19,8 @@ Upload the feed beneath `IMPEX/src`, then run the job. Do not use the regular
 Business Manager catalog import screen for this feed, because that importer
 does not enable product attribute definition imports.
 
-The pipelet writes its result to the pipeline dictionary as `ExitStatus`, so
-the Business Manager job receives the detailed import status. The pipelet's
-error connector is routed to an error end node.
+The pipelet writes its result to `ImportStatus`. A post-import status script
+logs data-error and data-warning counts with the detailed import-log filename,
+then maps the result to the job framework's `ExitStatus`. Imports containing
+data errors or warnings finish with the `WARN` status code. The pipelet's error
+connector uses the same status handler before ending the pipeline.

@@ -18,18 +18,42 @@
                     <key-binding alias="ImportFile" key="ImportFile"/>
                     <key-binding alias="ImportMode" key="ImportMode"/>
                     <key-binding alias="{importAttributeDefinitions:true}" key="ImportConfiguration"/>
-                    <key-binding alias="ExitStatus" key="Status"/>
+                    <key-binding alias="ImportStatus" key="Status"/>
                 </pipelet-node>
                 <node-display x="0" y="1"/>
                 <branch basename="error" source-connector="error">
                     <transition target-connector="in"/>
                     <segment>
                         <node>
-                            <end-node name="error"/>
+                            <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                                <config-property key="Transactional" value="false"/>
+                                <config-property key="OnError" value="PIPELET_ERROR"/>
+                                <config-property key="ScriptFile" value="jobs/catalogImportStatus.ds"/>
+                                <key-binding alias="ImportStatus" key="ImportStatus"/>
+                                <key-binding alias="ExitStatus" key="ExitStatus"/>
+                                <key-binding alias="ScriptLog" key="ScriptLog"/>
+                            </pipelet-node>
                             <node-display orientation="horizontal" x="1" y="0"/>
+                        </node>
+                        <simple-transition/>
+                        <node>
+                            <end-node name="error"/>
+                            <node-display orientation="horizontal" x="1" y="1"/>
                         </node>
                     </segment>
                 </branch>
+            </node>
+            <simple-transition/>
+            <node>
+                <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                    <config-property key="Transactional" value="false"/>
+                    <config-property key="OnError" value="PIPELET_ERROR"/>
+                    <config-property key="ScriptFile" value="jobs/catalogImportStatus.ds"/>
+                    <key-binding alias="ImportStatus" key="ImportStatus"/>
+                    <key-binding alias="ExitStatus" key="ExitStatus"/>
+                    <key-binding alias="ScriptLog" key="ScriptLog"/>
+                </pipelet-node>
+                <node-display x="0" y="1"/>
             </node>
             <simple-transition/>
             <node>
