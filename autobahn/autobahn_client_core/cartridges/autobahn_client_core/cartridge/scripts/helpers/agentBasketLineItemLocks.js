@@ -163,31 +163,7 @@ function markCSCHandoffLineItem(lineItem) {
     setCustomBoolean(lineItem, CSC_LINE_ITEM_ATTR, true);
 }
 
-function markCurrentLineItemsAsCSCHandoff(basket) {
-    if (!basket || !basket.allProductLineItems) {
-        return;
-    }
-
-    collections.forEach(basket.allProductLineItems, function (lineItem) {
-        markCSCHandoffLineItem(lineItem);
-    });
-}
-
-function markStorefrontLineItem(lineItem) {
-    var basket;
-    var storefrontUUIDs;
-
-    if (!isCSCHandoffLineItem(lineItem)) {
-        setCustomBoolean(lineItem, STOREFRONT_LINE_ITEM_ATTR, true);
-
-        basket = getLineItemContainer(lineItem);
-        storefrontUUIDs = getStoredStorefrontUUIDs(basket);
-        addUnique(storefrontUUIDs, lineItem.UUID);
-        setStoredStorefrontUUIDs(basket, storefrontUUIDs);
-    }
-}
-
-// Unlike markStorefrontLineItem, this does not check isCSCHandoffLineItem first. It is used right after
+// Does not check isCSCHandoffLineItem first (unlike the sweep logic elsewhere in this file). It is used right after
 // a storefront AddProduct call, where the caller has just matched this exact line item by productID for
 // the current request. Because Add to Cart is hidden on PLP/PDP for CSC/live-selling products, a genuine
 // storefront click can never target an existing CSC line item's product - so any CSC flag found here must
@@ -487,7 +463,5 @@ module.exports = {
     isRestrictedBasket: isRestrictedBasket,
     isAgentBasket: isAgentBasket,
     forceMarkStorefrontLineItem: forceMarkStorefrontLineItem,
-    markCurrentLineItemsAsCSCHandoff: markCurrentLineItemsAsCSCHandoff,
-    markStorefrontLineItem: markStorefrontLineItem,
     removeExpiredCSCLineItems: removeExpiredCSCLineItems
 };
