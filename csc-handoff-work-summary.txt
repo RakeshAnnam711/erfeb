@@ -254,14 +254,40 @@ assigning it to the category, but is a candidate for removal later if that
 flexibility turns out not to be needed (not done yet - flagged for cleanup).
 
 
-7. Temporary Debug Tooling
+7. Cleanup Pass (post-stabilization)
 -------------------------------
-Cart-DebugCSC (Cart.js) - a temporary GET endpoint added during
-investigation, still present, used throughout this work to inspect a live
-basket's classification state (channel type, locked line item UUIDs,
-per-line-item and per-shipment custom attributes) directly from the browser
-without needing Business Manager. Marked TEMP DEBUG in the code; candidate
-for removal once this work is considered stable.
+Once the feature was confirmed stable, a cleanup pass removed debug tooling
+and dead code accumulated across the project's iterations:
+
+- Cart-DebugCSC (Cart.js) - the temporary GET endpoint used throughout this
+  work to inspect a live basket's classification state (channel type,
+  locked line item UUIDs, per-line-item and per-shipment custom attributes)
+  directly from the browser without needing Business Manager. Removed now
+  that the feature is confirmed working.
+- mergeBasketUtil.js - reverted an early, non-functional fix attempt
+  (isAgentSourceBasket, based on basket.isAgentBasket()) that never actually
+  fired in this org - the real signal turned out to be channelType, handled
+  entirely elsewhere. Confirmed dead (zero effect on behavior) before
+  removal.
+- cscBasketHandoff.js (deleted) and its 4 dw.ocapi.shop.basket.agent.* hook
+  registrations in hooks.json - the very first fix attempt, based on the
+  wrong hypothesis that OCAPI "agent basket" hooks were the mechanism CSC
+  handoff went through. Later confirmed those hooks never fire in this org
+  (the real CSC "New Order" screen uses a different internal Business
+  Manager API entirely, not the OCAPI Shop API basket endpoints these hooks
+  attach to).
+- Two dead functions removed from agentBasketLineItemLocks.js
+  (markCurrentLineItemsAsCSCHandoff, markStorefrontLineItem) - defined and
+  exported but never called from anywhere, internally or externally;
+  markStorefrontLineItem had been superseded by forceMarkStorefrontLineItem
+  early on and never cleaned up.
+
+Verified before removal: every function/hook removed had zero remaining
+callers (confirmed by search across the whole codebase), and the two
+"early wrong hypothesis" mechanisms (mergeBasketUtil's isAgentSourceBasket,
+the OCAPI hooks) were already established as non-functional earlier in this
+project - removing them changes nothing about how the feature actually
+works today.
 
 
 8. Business Manager Setup Needed
@@ -352,7 +378,6 @@ Core logic:
 - autobahn_client_core/cartridge/models/search/suggestions/product.js
 - autobahn_client_core/cartridge/scripts/checkout/checkoutHelpers.js
 - autobahn_client_core/cartridge/scripts/helpers/agentBasketLineItemLocks.js (new)
-- autobahn_client_core/cartridge/scripts/hooks/cscBasketHandoff.js (new)
 - autobahn_client_core/cartridge/scripts/hooks/mergeBasketUtil.js
 - autobahn_client_core/hooks.json
 - rvw_integrations_core/cartridge/scripts/checkout/doPrePlaceOrder.js
