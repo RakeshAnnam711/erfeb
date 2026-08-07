@@ -11,8 +11,8 @@ var SESSION_STOREFRONT_KEY = 'storefrontLineItemUUIDs';
 var SESSION_STOREFRONT_BASKET_KEY = 'storefrontLineItemBasketUUID';
 var CSC_LINE_ITEM_ATTR = 'isCSCHandoffLineItem';
 var STOREFRONT_LINE_ITEM_ATTR = 'isStorefrontLineItem';
-var LIVE_CATEGORY_IDS = ['live-selling-dev-products'];
 var DEFAULT_EXPIRATION_MS = 5 * 60 * 1000; // 5 minutes, used only if the site preference is unset/invalid
+var liveSellingCategoryHelper = require('*/cartridge/scripts/helpers/liveSellingCategoryHelper');
 
 // Business-configurable via the cscHandoffExpirationHours Site Preference, so the business can change the
 // expiration window without a code deploy. Falls back to the original 5-minute default if left blank.
@@ -233,27 +233,7 @@ function getCustomBooleanTriState(object, attributeID) {
     }
 }
 
-function isLiveSellingCategory(category) {
-    if (!category) {
-        return false;
-    }
-
-    try {
-        var categoryID = category.ID || (typeof category.getID === 'function' && category.getID());
-
-        if (LIVE_CATEGORY_IDS.indexOf(categoryID) > -1) {
-            return true;
-        }
-
-        return getCustomBoolean(category, 'isLiveSellingCategory');
-    } catch (e) {
-        return false;
-    }
-}
-
 function isLiveSellingProduct(product) {
-    var foundLiveCategory = false;
-
     if (!product) {
         return false;
     }
@@ -262,23 +242,7 @@ function isLiveSellingProduct(product) {
         return true;
     }
 
-    try {
-        if (isLiveSellingCategory(product.primaryCategory)) {
-            return true;
-        }
-
-        if (product.categories) {
-            collections.forEach(product.categories, function (category) {
-                if (isLiveSellingCategory(category)) {
-                    foundLiveCategory = true;
-                }
-            });
-        }
-    } catch (e) {
-        return false;
-    }
-
-    return foundLiveCategory;
+    return liveSellingCategoryHelper.isProductAssignedToLiveSellingCategory(product);
 }
 
 // Mirrors the tri-state resolution used in doPrePlaceOrder.js at checkout, so cart locking and order-level

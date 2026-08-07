@@ -10,9 +10,7 @@ var ACTION_ENDPOINT = preferences.suggestionsActionEnpoint
     : "Product-Show";
 var IMAGE_SIZE = preferences.imageSize ? preferences.imageSize : "medium";
 var images = require("*/cartridge/models/product/decorators/images");
-var CatalogMgr = require("dw/catalog/CatalogMgr");
-
-var LIVE_SELLING_CATEGORY_ID = 'live-selling-dev-products';
+var liveSellingCategoryHelper = require("*/cartridge/scripts/helpers/liveSellingCategoryHelper");
 
 /**
  * Live selling products are only browsable on their own dedicated category page - never via
@@ -23,12 +21,7 @@ var LIVE_SELLING_CATEGORY_ID = 'live-selling-dev-products';
  * @return {boolean} - True if the product should be hidden from suggestions
  */
 function isHiddenLiveSellingProduct(product) {
-    try {
-        var liveSellingCategory = CatalogMgr.getCategory(LIVE_SELLING_CATEGORY_ID);
-        return !!(liveSellingCategory && product && product.isAssignedToCategory(liveSellingCategory));
-    } catch (e) {
-        return false;
-    }
+    return liveSellingCategoryHelper.isProductAssignedToLiveSellingCategory(product);
 }
 
 /**

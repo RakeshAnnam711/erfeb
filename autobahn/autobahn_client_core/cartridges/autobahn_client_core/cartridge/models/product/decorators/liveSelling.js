@@ -1,9 +1,7 @@
 'use strict';
 
-var collections = require('*/cartridge/scripts/util/collections');
 var Site = require('dw/system/Site');
-
-var LIVE_CATEGORY_IDS = ['live-selling-dev-products'];
+var liveSellingCategoryHelper = require('*/cartridge/scripts/helpers/liveSellingCategoryHelper');
 
 function define(object, name, value) {
     try {
@@ -56,50 +54,8 @@ function getSitePreferenceValue(prefID) {
     }
 }
 
-function isLiveCategory(category) {
-    var categoryID;
-
-    if (!category) {
-        return false;
-    }
-
-    try {
-        categoryID = category.ID || (typeof category.getID === 'function' && category.getID());
-
-        if (LIVE_CATEGORY_IDS.indexOf(categoryID) > -1) {
-            return true;
-        }
-
-        return getCustomBoolean(category.custom, 'isLiveSellingCategory');
-    } catch (e) {
-        return false;
-    }
-}
-
-function isAssignedToLiveCategory(apiProduct) {
-    var foundLiveCategory = false;
-
-    try {
-        if (isLiveCategory(apiProduct.primaryCategory)) {
-            return true;
-        }
-
-        if (apiProduct.categories) {
-            collections.forEach(apiProduct.categories, function (category) {
-                if (isLiveCategory(category)) {
-                    foundLiveCategory = true;
-                }
-            });
-        }
-    } catch (e) {
-        return false;
-    }
-
-    return foundLiveCategory;
-}
-
 module.exports = function liveSelling(object, apiProduct) {
-    var isLiveSellingProduct = getCustomBoolean(apiProduct.custom, 'isLiveSellingProduct') || isAssignedToLiveCategory(apiProduct);
+    var isLiveSellingProduct = getCustomBoolean(apiProduct.custom, 'isLiveSellingProduct') || liveSellingCategoryHelper.isProductAssignedToLiveSellingCategory(apiProduct);
     var badgeText = getSitePreferenceValue('liveSellingBadgeText') || 'LIVE';
 
     define(object, 'isLiveSellingProduct', isLiveSellingProduct);

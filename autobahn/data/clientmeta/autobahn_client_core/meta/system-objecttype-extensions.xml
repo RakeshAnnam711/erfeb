@@ -655,18 +655,6 @@
                 <order-required-flag>false</order-required-flag>
                 <externally-defined-flag>false</externally-defined-flag>
             </attribute-definition>
-            <attribute-definition attribute-id="isLiveSellingProduct">
-                <display-name xml:lang="x-default">Live Selling Product</display-name>
-                <description xml:lang="x-default">Marks this product as a live selling item. Price and storefront Add to Cart are hidden on PLP and PDP.</description>
-                <type>boolean</type>
-                <localizable-flag>false</localizable-flag>
-                <site-specific-flag>false</site-specific-flag>
-                <mandatory-flag>false</mandatory-flag>
-                <visible-flag>true</visible-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <order-required-flag>false</order-required-flag>
-                <externally-defined-flag>false</externally-defined-flag>
-            </attribute-definition>
             <attribute-definition attribute-id="liveSellingItemID">
                 <display-name xml:lang="x-default">Live Selling Item ID</display-name>
                 <description xml:lang="x-default">Item ID shown on the live selling PLP and PDP.</description>
@@ -1535,14 +1523,12 @@
                 <attribute attribute-id="location"/>
                 <attribute attribute-id="styleNumber"/>
                 <attribute attribute-id="enableRTWProduct"/>
-                <attribute attribute-id="isLiveSellingProduct"/>
                 <attribute attribute-id="liveSellingItemID"/>
                 <attribute attribute-id="pCategory"/>
                 <attribute attribute-id="pSubCategory"/>
             </attribute-group>
             <attribute-group group-id="LiveSelling">
                 <display-name xml:lang="x-default">Live Selling</display-name>
-                <attribute attribute-id="isLiveSellingProduct"/>
                 <attribute attribute-id="liveSellingItemID"/>
             </attribute-group>
             <attribute-group group-id="ExternalSearch">
@@ -1893,6 +1879,14 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="liveSellingCategoryID">
+                <display-name xml:lang="x-default">Live Selling Category ID</display-name>
+                <description xml:lang="x-default">The category ID products must be assigned to in order to be treated as live selling (hidden price/Add to Cart, excluded from every other category/search). Falls back to the dev category ID (live-selling-dev-products) in code if left blank - set this per environment (e.g. a different ID in production) without needing a code change.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
                 <attribute-group group-id="Storefront Configs">
@@ -1929,6 +1923,7 @@
                 <attribute attribute-id="liveSellingBadgeText"/>
                 <attribute attribute-id="cscHandoffExpirationHours"/>
                 <attribute attribute-id="liveSellingPlatform"/>
+                <attribute attribute-id="liveSellingCategoryID"/>
             </attribute-group>
             <attribute-group group-id="Frenzy recommendation">
                 <display-name xml:lang="x-default">Frenzy recommendation</display-name>
