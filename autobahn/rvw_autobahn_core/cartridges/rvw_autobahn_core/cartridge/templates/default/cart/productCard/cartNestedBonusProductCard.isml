@@ -5,9 +5,9 @@
                 <div class="col-lg-12 d-flex flex-row">
                     <a class="item-image" href="${URLUtils.url('Product-Show', 'pid', lineItem.id)}">
                         <img class="product-image"
-                            src="${productLineItem.images.small[0].url}"
-                            alt="${productLineItem.images.small[0].alt}"
-                            title="${productLineItem.images.small[0].title}"
+                            src="${productLineItem.images[miniCart ? 'minicart' : 'cart'][0].url}"
+                            alt="${productLineItem.images[miniCart ? 'minicart' : 'cart'][0].alt}"
+                            title="${productLineItem.images[miniCart ? 'minicart' : 'cart'][0].title}"
                             loading="lazy" width="120" height="160" />
                     </a>
                     <div class="item-attributes d-flex flex-column">

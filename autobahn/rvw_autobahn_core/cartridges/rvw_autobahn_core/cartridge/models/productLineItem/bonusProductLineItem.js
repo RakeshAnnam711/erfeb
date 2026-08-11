@@ -19,7 +19,7 @@ var productLineItemDecorators = require('*/cartridge/models/productLineItem/deco
  */
 module.exports = function bonusProductLineItem(product, apiProduct, options) {
     productDecorators.base(product, apiProduct, options.productType);
-    productDecorators.images(product, apiProduct, { types: ['small'], quantity: 'single' });
+    productDecorators.images(product, apiProduct, { types: ['small', 'cart', 'minicart'], quantity: 'single' });
     productDecorators.variationAttributes(product, options.variationModel, {
         attributes: 'selected'
     });

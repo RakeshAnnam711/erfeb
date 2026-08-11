@@ -7,8 +7,8 @@
     <iselse/>
         <div class="product-line-item-details d-flex flex-row">
             <div class="item-image">
-                <img class="product-image" src="${lineItem.images.small[0].url}" alt="${lineItem.images.small[0].alt}"
-                    title="${lineItem.images.small[0].title}">
+                <img class="product-image" src="${lineItem.cartImages[miniCart ? 'minicart' : 'cart'][0].url}" alt="${lineItem.cartImages[miniCart ? 'minicart' : 'cart'][0].alt}"
+                    title="${lineItem.cartImages[miniCart ? 'minicart' : 'cart'][0].title}">
             </div>
             <div class="item-attributes">
                 <div class="line-item-header">
@@ -39,8 +39,8 @@
                                 <div class="nested-line-item">
                                     <div class="product-line-item-details d-flex flex-row">
                                         <div class="item-image">
-                                            <img class="product-image" src="${nestedLineItem.images.small[0].url}" alt="${nestedLineItem.images.small[0].alt}"
-                                                title="${nestedLineItem.images.small[0].title}">
+                                            <img class="product-image" src="${nestedLineItem.images[miniCart ? 'minicart' : 'cart'][0].url}" alt="${nestedLineItem.images[miniCart ? 'minicart' : 'cart'][0].alt}"
+                                                title="${nestedLineItem.images[miniCart ? 'minicart' : 'cart'][0].title}">
                                         </div>
                                         <div class="item-attributes">
                                             <div class="line-item-header">

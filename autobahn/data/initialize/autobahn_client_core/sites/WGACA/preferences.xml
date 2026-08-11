@@ -220,7 +220,13 @@
                         "small":"large",
                         "thumbnail":"large",
                         "swatch":"swatch",
-                        "card":"large"
+                        "card":"large",
+                        "cart":"large",
+                        "minicart":"large",
+                        "pdp":"large",
+                        "plp":"large",
+                        "full":"large",
+                        "public":"large"
                     },
                     "yotpo":{
                         "scaleWidth":400,
@@ -253,6 +259,30 @@
                     "card":{
                         "scaleWidth":400,
                         "scaleHeight":600
+                    },
+                    "cart":{
+                        "scaleWidth":74,
+                        "scaleHeight":120
+                    },
+                    "minicart":{
+                        "scaleWidth":80,
+                        "scaleHeight":120
+                    },
+                    "pdp":{
+                        "scaleWidth":296,
+                        "scaleHeight":444
+                    },
+                    "plp":{
+                        "scaleWidth":173,
+                        "scaleHeight":260
+                    },
+                    "full":{
+                        "scaleWidth":1500,
+                        "scaleHeight":1500
+                    },
+                    "public":{
+                        "scaleWidth":1366,
+                        "scaleHeight":768
                     }
                 }</preference>
             <preference preference-id="disableMakeAnOfferDisplay">false</preference>

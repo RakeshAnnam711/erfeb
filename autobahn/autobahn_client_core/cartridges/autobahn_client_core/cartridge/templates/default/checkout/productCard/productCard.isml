@@ -8,9 +8,9 @@
                  <isif condition="${isProductAvaliabe}">
                     <a class="item-image mini-cart" href="${lineItem.productType === 'giftCertificate' ? URLUtils.url('GiftCertificate-Purchase') : URLUtils.url('Product-Show', 'pid', lineItem.id)}" aria-label="${Resource.msg('text.product.img','cart',null)}">
                         <img class="product-image"
-                            src="${lineItem.images.small[0].url}"
-                            alt="${lineItem.images.small[0].alt}"
-                            title="${lineItem.images.small[0].title}"
+                            src="${lineItem.cartImages.minicart[0].url}"
+                            alt="${lineItem.cartImages.minicart[0].alt}"
+                            title="${lineItem.cartImages.minicart[0].title}"
                             width="80"
                             height="120"
                             onerror="this.onerror=null;this.src='${placeholderImage}'">
@@ -18,9 +18,9 @@
                 <iselse/>
                     <span class="item-image mini-cart">
                         <img class="product-image"
-                            src="${lineItem.images.small[0].url}"
-                            alt="${lineItem.images.small[0].alt}"
-                            title="${lineItem.images.small[0].title}"
+                            src="${lineItem.cartImages.minicart[0].url}"
+                            alt="${lineItem.cartImages.minicart[0].alt}"
+                            title="${lineItem.cartImages.minicart[0].title}"
                             width="80"
                             height="120"
                             onerror="this.onerror=null;this.src='${placeholderImage}'">

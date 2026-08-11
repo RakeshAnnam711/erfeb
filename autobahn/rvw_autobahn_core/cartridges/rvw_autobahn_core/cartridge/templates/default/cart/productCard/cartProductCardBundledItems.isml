@@ -3,9 +3,9 @@
         <div class="d-flex flex-row">
             <div class="item-image">
                 <img class="product-image"
-                    src="${bundledLineItem.images.small[0].url}"
-                    alt="${bundledLineItem.images.small[0].alt}"
-                    title="${bundledLineItem.images.small[0].title}"
+                    src="${bundledLineItem.cartImages[miniCart ? 'minicart' : 'cart'][0].url}"
+                    alt="${bundledLineItem.cartImages[miniCart ? 'minicart' : 'cart'][0].alt}"
+                    title="${bundledLineItem.cartImages[miniCart ? 'minicart' : 'cart'][0].title}"
                 >
             </div>
             <div class="item-attributes">

@@ -1,9 +1,9 @@
 <div class="product-line-item-details d-flex flex-row">
     <a class="item-image" href="${URLUtils.url('Product-Show', 'pid', nestedLineItem.id)}">
         <img class="product-image"
-            src="${nestedLineItem.images.small[0].url}"
-            alt="${nestedLineItem.images.small[0].alt}"
-            title="${nestedLineItem.images.small[0].title}"
+            src="${nestedLineItem.images[miniCart ? 'minicart' : 'cart'][0].url}"
+            alt="${nestedLineItem.images[miniCart ? 'minicart' : 'cart'][0].alt}"
+            title="${nestedLineItem.images[miniCart ? 'minicart' : 'cart'][0].title}"
             onerror="this.onerror=null;this.src='${URLUtils.staticURL('/images/noimage-small.png')}'"
         />
     </a>

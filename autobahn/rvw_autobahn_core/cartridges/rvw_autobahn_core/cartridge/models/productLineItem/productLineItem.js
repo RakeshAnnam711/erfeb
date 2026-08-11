@@ -4,6 +4,7 @@ var base = module.superModule;
 var customPLIPrefs = require('*/cartridge/models/productLineItem/decorators/customProductLineItemPreferences');
 var wishlistPLIDecorator = require('*/cartridge/models/productLineItem/decorators/wishlistProductLineItem');
 var itemType = require('*/cartridge/models/product/decorators/itemType');
+var ImageModel = require('*/cartridge/models/product/productImages');
 
 /**
  * Decorate product with product line item information
@@ -24,6 +25,9 @@ module.exports = function productLineItem(product, apiProduct, options) {
     customPLIPrefs(product, apiProduct, options);
     wishlistPLIDecorator(product, apiProduct, options);
     itemType(product, apiProduct);
+    // WGACA MODIFICATION - context-specific image crops for cart page vs minicart/checkout summary
+    // (base.call() already locked product.images via Object.defineProperty, so a distinct property is used here)
+    product.cartImages = new ImageModel(apiProduct, { types: ['cart', 'minicart'], quantity: 'single' });
 
     return product;
 };
