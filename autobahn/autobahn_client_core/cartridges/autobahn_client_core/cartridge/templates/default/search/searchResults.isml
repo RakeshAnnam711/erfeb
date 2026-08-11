@@ -12,5 +12,5 @@
 
     <isinclude template="search/searchResultsNoDecorator" />
 
-    <isslot id="plp-bottom" context="category" description="live selling slot url" context-object="${pdict.fullCategory}" />
+     <isslot id="live-selling" context="global" description="live selling slot url" />
 </isdecorate>
