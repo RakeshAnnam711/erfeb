@@ -3,8 +3,6 @@
 var collections = require('*/cartridge/scripts/util/collections');
 var Site = require('dw/system/Site');
 
-var FALLBACK_CATEGORY_ID = 'live-selling-dev-products';
-
 function getCustomBoolean(customAttributes, attributeID) {
     try {
         return !!(customAttributes && attributeID in customAttributes && customAttributes[attributeID]);
@@ -14,24 +12,24 @@ function getCustomBoolean(customAttributes, attributeID) {
 }
 
 /**
- * The primary live selling category ID, configurable via the liveSellingCategoryID Site Preference so it
- * does not need a code change to differ between environments (e.g. dev vs production). Falls back to the
- * original dev category ID if the preference is blank/unset.
- * @returns {string}
+ * The primary live selling category ID, configurable via the liveSellingCategoryID Site Preference. No
+ * fallback - if the preference is blank/unset, this returns null and ID-based matching is skipped
+ * entirely (a category can then only qualify via its own isLiveSellingCategory custom attribute).
+ * @returns {string|null}
  */
 function getLiveSellingCategoryID() {
     try {
         var value = Site.getCurrent().getCustomPreferenceValue('liveSellingCategoryID');
-        return (value && value.toString()) || FALLBACK_CATEGORY_ID;
+        return value ? value.toString() : null;
     } catch (e) {
-        return FALLBACK_CATEGORY_ID;
+        return null;
     }
 }
 
 /**
- * True if the given category is the configured live selling category, or has separately been flagged as
- * one via its own isLiveSellingCategory custom attribute (lets additional categories opt in without a
- * Site Preference/code change).
+ * True if the given category matches the configured live selling category ID (when that Site Preference
+ * is set), or has separately been flagged as one via its own isLiveSellingCategory custom attribute (lets
+ * additional categories opt in independent of the Site Preference).
  * @param {dw.catalog.Category} category
  * @returns {boolean}
  */
@@ -42,8 +40,9 @@ function isLiveSellingCategory(category) {
 
     try {
         var categoryID = category.ID || (typeof category.getID === 'function' && category.getID());
+        var configuredCategoryID = getLiveSellingCategoryID();
 
-        if (categoryID === getLiveSellingCategoryID()) {
+        if (configuredCategoryID && categoryID === configuredCategoryID) {
             return true;
         }
 
