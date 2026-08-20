@@ -2,6 +2,7 @@
 
 var Resource = require('dw/web/Resource');
 var Site = require('dw/system/Site');
+var Logger = require('dw/system/Logger');
 
 var server = require('server');
 server.extend(module.superModule);
@@ -53,20 +54,28 @@ if (Site.current.getCustomPreferenceValue('MarketingCloudForNewsletterEnabled'))
             * }
             */
             var email = viewData.account.profile.email;
-            var SubscribersLists = (MarketingManager.GetSubscriptionSubscriberList(email) || {}); // Check results
+            var SubscribersLists = {};
+            var AllLists = {};
 
-            /*
-            * MarketingManager.GetAllList returns object with results property. Results (Array of Objects) contains List indicating all the publication lists to on Marketing Cloud account.
-            * Example List objects: (https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/list.html)
-            * {
-            *	  ID: (String) List ID
-            *	  ListName: (String) Name
-            *	  Description: (String) MC List Description
-            *	  ListCLassification: (String Constants) PublicationList		Always PublicationList
-            *	  Type: (String Constant) Public		Always Public
-            * }
-            */
-            var AllLists = (MarketingManager.GetAllList() || {}); // Check results
+            try {
+                SubscribersLists = (MarketingManager.GetSubscriptionSubscriberList(email) || {}); // Check results
+
+                /*
+                * MarketingManager.GetAllList returns object with results property. Results (Array of Objects) contains List indicating all the publication lists to on Marketing Cloud account.
+                * Example List objects: (https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/list.html)
+                * {
+                *	  ID: (String) List ID
+                *	  ListName: (String) Name
+                *	  Description: (String) MC List Description
+                *	  ListCLassification: (String Constants) PublicationList		Always PublicationList
+                *	  Type: (String Constant) Public		Always Public
+                * }
+                */
+                AllLists = (MarketingManager.GetAllList() || {}); // Check results
+            } catch (e) {
+                // Marketing Cloud outage/misconfiguration shouldn't break the My Account page; just omit the subscription list section.
+                Logger.error('Account-Show: failed to retrieve Marketing Cloud subscription lists: {0}', e.message);
+            }
 
             res.setViewData({
                 AllLists: AllLists,
