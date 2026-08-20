@@ -6,6 +6,7 @@ var URLUtils = require('dw/web/URLUtils');
 
 var dwLogger = require('dw/system/Logger').getLogger('RVW_SOM_Integration', 'SOM');
 var images = require('*/cartridge/models/product/decorators/images');
+var liveSellingPriceHelper = require('*/cartridge/scripts/helpers/liveSellingPriceHelper');
 
 function buildStorefrontUrl(path, fallbackUrl) {
     var storefrontBaseUrl = Site.getCurrent().getCustomPreferenceValue('storefrontBaseUrl');
@@ -156,6 +157,17 @@ function doPrePlaceOrder(order) {
                                     isLiveSellingOrder = true;
                                     lineItem.custom.isLiveSellingLineItem = true;
                                     lineItem.custom.liveSellingItemID = liveSellingItemID;
+
+                                    // Safety net: normally the cart page sweep (agentBasketLineItemLocks.js)
+                                    // already applies this price on every cart render, but if the order gets
+                                    // placed without the storefront cart ever being loaded after handoff,
+                                    // this re-applies it here so the order can't go through at the wrong
+                                    // price. No-ops if the product has no price defined in that book.
+                                    var liveSellingPrice = liveSellingPriceHelper.getLiveSellingPrice(product);
+                                    if (liveSellingPrice) {
+                                        lineItem.setPriceValue(liveSellingPrice.value);
+                                    }
+
                                     // Host name/event summary are no longer duplicated onto the line item -
                                     // the Order-level copy (aggregated below) is the single source of
                                     // truth. Both always held the same value anyway, since every

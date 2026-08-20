@@ -13,6 +13,7 @@ var CSC_LINE_ITEM_ATTR = 'isCSCHandoffLineItem';
 var STOREFRONT_LINE_ITEM_ATTR = 'isStorefrontLineItem';
 var DEFAULT_EXPIRATION_MS = 5 * 60 * 1000; // 5 minutes, used only if the site preference is unset/invalid
 var liveSellingCategoryHelper = require('*/cartridge/scripts/helpers/liveSellingCategoryHelper');
+var liveSellingPriceHelper = require('*/cartridge/scripts/helpers/liveSellingPriceHelper');
 
 // Business-configurable via the cscHandoffExpirationHours Site Preference, so the business can change the
 // expiration window without a code deploy. Falls back to the original 5-minute default if left blank.
@@ -262,6 +263,25 @@ function isLineItemLiveSelling(lineItem) {
     }
 }
 
+// Deliberately stricter than isLineItemLiveSelling above (no category-fallback) - pricing is a real money
+// change, so it should only ever happen from the agent's explicit checkbox, matching the same strict rule
+// doPrePlaceOrder.js already uses for order-level live selling reporting.
+function isLineItemExplicitlyLiveSelling(lineItem) {
+    return isCSCHandoffLineItem(lineItem) && getCustomBooleanTriState(lineItem, 'isLiveSellingLineItem') === true;
+}
+
+function applyLiveSellingPrice(lineItem) {
+    try {
+        var price = liveSellingPriceHelper.getLiveSellingPrice(lineItem.product);
+
+        if (price) {
+            lineItem.setPriceValue(price.value);
+        }
+    } catch (e) {
+        // Live selling price book may not exist yet, or this product has no price defined there.
+    }
+}
+
 function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     var lockedUUIDs = getStoredLockedUUIDs(basket);
     var persistedLockedUUIDs = getPersistedLockedUUIDs(basket);
@@ -330,6 +350,20 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
                 if (!isKnownStorefrontItem && !isCSCHandoffLineItem(lineItem) && isLineItemLiveSelling(lineItem)) {
                     markCSCHandoffLineItem(lineItem);
                     addUnique(lockedUUIDs, lineItem.UUID);
+                }
+            });
+        });
+    }
+
+    // Re-apply the live selling price on every render too, since basket recalculation (quantity change,
+    // coupon applied, etc.) silently resets a line item's price back to whatever the site's normal price
+    // book resolution would give it. Runs unconditionally (not gated by shouldMarkUnclassifiedAsCSC above)
+    // so it keeps correcting the price for as long as the line item stays explicitly marked live selling.
+    if (basket && basket.allProductLineItems) {
+        Transaction.wrap(function () {
+            collections.forEach(basket.allProductLineItems, function (lineItem) {
+                if (isLineItemExplicitlyLiveSelling(lineItem)) {
+                    applyLiveSellingPrice(lineItem);
                 }
             });
         });
