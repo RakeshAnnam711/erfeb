@@ -241,8 +241,8 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="liveSellingEventDate">
-                <display-name xml:lang="x-default">Live Selling Event Date</display-name>
+            <attribute-definition attribute-id="liveSellingEventSummary">
+                <display-name xml:lang="x-default">Live Selling Event Summary</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -265,7 +265,7 @@
                 <attribute attribute-id="isLiveSellingOrder"/>
                 <attribute attribute-id="isCSCHandoffOrder"/>
                 <attribute attribute-id="liveSellingHostName"/>
-                <attribute attribute-id="liveSellingEventDate"/>
+                <attribute attribute-id="liveSellingEventSummary"/>
                 <attribute attribute-id="cscOrderNotes"/>
             </attribute-group>
         </group-definitions>
@@ -1848,9 +1848,9 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="liveSellingEventDate">
-                <display-name xml:lang="x-default">Live Selling Event Date</display-name>
-                <description xml:lang="x-default">Static event date for the current live selling event, shared across all live selling products.</description>
+            <attribute-definition attribute-id="liveSellingEventSummary">
+                <display-name xml:lang="x-default">Live Selling Event Summary</display-name>
+                <description xml:lang="x-default">Static event summary for the current live selling event, shared across all live selling products (e.g. "Sold on IG -6/28 - Summer").</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -1919,7 +1919,7 @@
                 <display-name xml:lang="x-default">Live Selling</display-name>
                 <attribute attribute-id="liveSellingEventID"/>
                 <attribute attribute-id="liveSellingHostName"/>
-                <attribute attribute-id="liveSellingEventDate"/>
+                <attribute attribute-id="liveSellingEventSummary"/>
                 <attribute attribute-id="liveSellingBadgeText"/>
                 <attribute attribute-id="cscHandoffExpirationHours"/>
                 <attribute attribute-id="liveSellingPlatform"/>

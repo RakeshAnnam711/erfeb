@@ -107,7 +107,7 @@ function doPrePlaceOrder(order) {
         var isLiveSellingOrder = false;
         var isCSCHandoffOrder = false;
         var liveSellingHostNames = [];
-        var liveSellingEventDates = [];
+        var liveSellingEventSummaries = [];
         if (shipments.length > 0) {
             dwTransaction.begin();
             order.custom.somCC_checkoutStorefront = somOrderHelper.GetOrderCheckoutStorefront(order);
@@ -147,19 +147,21 @@ function doPrePlaceOrder(order) {
                             if (lineItemIsLiveSelling) {
                                 try {
                                     var liveSellingItemID = getCustomValue(product.custom, 'liveSellingItemID') || product.ID;
-                                    // Host name and event date are static for the whole event (Site
+                                    // Host name and event summary are static for the whole event (Site
                                     // Preferences), not per-product/per-line-item - whatever the agent may
                                     // have typed into the CSC line item's own host name field is ignored.
                                     var liveSellingHostName = getSitePreferenceValue('liveSellingHostName');
-                                    var liveSellingEventDate = getSitePreferenceValue('liveSellingEventDate');
+                                    var liveSellingEventSummary = getSitePreferenceValue('liveSellingEventSummary');
 
                                     isLiveSellingOrder = true;
                                     lineItem.custom.isLiveSellingLineItem = true;
                                     lineItem.custom.liveSellingItemID = liveSellingItemID;
-                                    lineItem.custom.liveSellingHostName = liveSellingHostName;
-                                    lineItem.custom.liveSellingEventDate = liveSellingEventDate;
+                                    // Host name/event summary are no longer duplicated onto the line item -
+                                    // the Order-level copy (aggregated below) is the single source of
+                                    // truth. Both always held the same value anyway, since every
+                                    // line item on an order reads from the same Site Preferences.
                                     addUnique(liveSellingHostNames, liveSellingHostName);
-                                    addUnique(liveSellingEventDates, liveSellingEventDate);
+                                    addUnique(liveSellingEventSummaries, liveSellingEventSummary);
 
                                     // Reuse the exact same SOM export flag final_sale products use
                                     // (set by autobahn_client_core's doPrePlaceOrder, which runs before this
@@ -231,7 +233,7 @@ function doPrePlaceOrder(order) {
                 if (isLiveSellingOrder) {
                     order.custom.isLiveSellingOrder = true;
                     order.custom.liveSellingHostName = liveSellingHostNames.join(', ');
-                    order.custom.liveSellingEventDate = liveSellingEventDates.join(', ');
+                    order.custom.liveSellingEventSummary = liveSellingEventSummaries.join(', ');
                 }
                 if (isCSCHandoffOrder) {
                     order.custom.isCSCHandoffOrder = true;

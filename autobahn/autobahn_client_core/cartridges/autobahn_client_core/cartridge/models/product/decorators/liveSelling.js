@@ -43,7 +43,7 @@ function getCustomBoolean(customAttributes, attributeID) {
     }
 }
 
-// liveSellingEventID/BadgeText/HostName/EventDate are static, shared across every live selling product for
+// liveSellingEventID/BadgeText/HostName/EventSummary are static, shared across every live selling product for
 // the current event, so they live as Site Preferences rather than per-product custom attributes.
 function getSitePreferenceValue(prefID) {
     try {
@@ -63,5 +63,5 @@ module.exports = function liveSelling(object, apiProduct) {
     define(object, 'liveSellingEventID', getSitePreferenceValue('liveSellingEventID'));
     define(object, 'liveSellingBadgeText', badgeText);
     define(object, 'liveSellingHostName', getSitePreferenceValue('liveSellingHostName'));
-    define(object, 'liveSellingEventDate', getSitePreferenceValue('liveSellingEventDate'));
+    define(object, 'liveSellingEventSummary', getSitePreferenceValue('liveSellingEventSummary'));
 };
