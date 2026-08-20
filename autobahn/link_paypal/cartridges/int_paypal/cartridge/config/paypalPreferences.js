@@ -11,7 +11,7 @@ function getPaypalPaymentMethodId() {
     var paypalPaymentMethodID;
 
     Array.some(activePaymentMethods, function (paymentMethod) {
-        if (paymentMethod.paymentProcessor.ID === allowedProcessorsIds) {
+        if (paymentMethod.paymentProcessor && paymentMethod.paymentProcessor.ID === allowedProcessorsIds) {
             paypalPaymentMethodID = paymentMethod.ID;
             return true;
         }
