@@ -42,11 +42,8 @@
                             ${Resource.msg('label.promocodeapplied','cart', null)}
                         </p>
                         <isset value="${dw.catalog.ProductMgr.getProduct(lineItem.id)}" name="Product" scope="page" />
-                        <isif condition="${Product.custom.final_sale}">
+                        <isif condition="${Product.custom.final_sale || lineItem.isAgentLockedLineItem}">
                             <iscontentasset aid ="finalsalecalloutmsg"/>
-                        </isif>
-                        <isif condition="${lineItem.isAgentLockedLineItem}">
-                            <p class="live-selling-returns-message">${Resource.msg('label.liveselling.noreturns', 'cart', null)}</p>
                         </isif>
                         <isinclude template="checkout/productCard/productCardProductPromotions" />
                     </div>

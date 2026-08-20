@@ -79,12 +79,8 @@
                     </isloop>
                 </div>
 
-                <isif condition="${objProductLineItem.custom.final_sale}">
+                <isif condition="${objProductLineItem.custom.final_sale || lineItem.isAgentLockedLineItem}">
                     <iscontentasset aid ="finalsalecalloutmsg"/>
-                </isif>
-
-                <isif condition="${lineItem.isAgentLockedLineItem}">
-                    <p class="live-selling-returns-message">${Resource.msg('label.liveselling.noreturns', 'cart', null)}</p>
                 </isif>
 
                 <iscomment> promotion section </iscomment>

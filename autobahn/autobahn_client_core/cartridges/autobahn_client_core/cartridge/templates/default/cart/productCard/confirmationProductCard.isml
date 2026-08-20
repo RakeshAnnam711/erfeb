@@ -20,7 +20,7 @@
                         <isinclude template="cart/productCard/cartProductCardHeader" />
                     </div>
                     <isset value="${dw.catalog.ProductMgr.getProduct(lineItem.id)}" name="Product" scope="page" />
-                    <isif condition="${Product.custom.final_sale}">
+                    <isif condition="${Product.custom.final_sale || lineItem.isLiveSellingLineItem}">
                         <iscontentasset aid ="finalsalecalloutmsg"/>
                     </isif>
                 </div>

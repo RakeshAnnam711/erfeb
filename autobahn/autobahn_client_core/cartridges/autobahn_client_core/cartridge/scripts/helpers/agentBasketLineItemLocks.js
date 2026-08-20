@@ -399,6 +399,13 @@ function decorateProductLineItem(productLineItem, sourceLineItem) {
     if (productLineItem && sourceLineItem && isLockedUUID(sourceLineItem.lineItemCtnr, sourceLineItem.UUID)) {
         productLineItem.isAgentLockedLineItem = true; // eslint-disable-line no-param-reassign
     }
+
+    // Unlike isAgentLockedLineItem above (session/basket-sweep based, unreliable once the basket becomes an
+    // order), this reads the persisted line item state directly, so it stays correct on order confirmation/
+    // history pages too.
+    if (productLineItem && sourceLineItem) {
+        productLineItem.isLiveSellingLineItem = isLineItemLiveSelling(sourceLineItem); // eslint-disable-line no-param-reassign
+    }
 }
 
 function decorateCartModelItems(items, basket) {
