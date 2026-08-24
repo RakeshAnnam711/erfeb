@@ -6,7 +6,7 @@ var URLUtils = require('dw/web/URLUtils');
 
 var dwLogger = require('dw/system/Logger').getLogger('RVW_SOM_Integration', 'SOM');
 var images = require('*/cartridge/models/product/decorators/images');
-var liveSellingPriceHelper = require('*/cartridge/scripts/helpers/liveSellingPriceHelper');
+var liveSellingPriceAdjustmentHelper = require('*/cartridge/scripts/helpers/liveSellingPriceAdjustmentHelper');
 
 function buildStorefrontUrl(path, fallbackUrl) {
     var storefrontBaseUrl = Site.getCurrent().getCustomPreferenceValue('storefrontBaseUrl');
@@ -158,14 +158,18 @@ function doPrePlaceOrder(order) {
                                     lineItem.custom.isLiveSellingLineItem = true;
                                     lineItem.custom.liveSellingItemID = liveSellingItemID;
 
-                                    // Safety net: normally the cart page sweep (agentBasketLineItemLocks.js)
-                                    // already applies this price on every cart render, but if the order gets
-                                    // placed without the storefront cart ever being loaded after handoff,
-                                    // this re-applies it here so the order can't go through at the wrong
-                                    // price. No-ops if the product has no price defined in that book.
-                                    var liveSellingPrice = liveSellingPriceHelper.getLiveSellingPrice(product);
-                                    if (liveSellingPrice) {
-                                        lineItem.setPriceValue(liveSellingPrice.value);
+                                    // Safety check only - read-only, never mutates. By the time this runs,
+                                    // payment has already been authorized against the order's current total
+                                    // (Adyen/PayPal/etc. authorize before doPrePlaceOrder executes), so
+                                    // actively changing the adjustment/total here would make the order total
+                                    // stop matching the already-authorized payment amount, which is exactly
+                                    // what broke checkout when this used to call
+                                    // syncLiveSellingPriceAdjustment() and updateTotals(). If this is ever
+                                    // false, the cart page sweep failed to apply the price before checkout -
+                                    // that's a real bug worth investigating, but it's too late to safely fix
+                                    // by mutating this order, so just log it instead.
+                                    if (!liveSellingPriceAdjustmentHelper.isAdjustmentCorrect(lineItem)) {
+                                        dwLogger.error('Live selling price adjustment is missing/incorrect on an already-priced order line item (product {0}, order line item {1}) - order total may not reflect the live selling price.', product.ID, lineItem.UUID);
                                     }
 
                                     // Host name/event summary are no longer duplicated onto the line item -
