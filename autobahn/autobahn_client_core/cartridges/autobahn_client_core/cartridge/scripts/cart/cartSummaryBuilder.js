@@ -36,11 +36,7 @@ function getEstimatedValue(currentBasket) {
     }
 }
 
-// Despite the name (kept as-is - this feeds pdict.order.totals.totalBasePrice, which the checkout/order
-// confirmation templates render as "Subtotal"), this needs to be the customer-facing final line-item
-// total, not the pre-adjustment list price - so it sums getAdjustedPrice() (already the full-quantity
-// total, already inclusive of any product-level price adjustment, live selling or otherwise), not
-// getBasePrice() (a unit price, and deliberately pre-adjustment).
+// Despite the name (feeds pdict.order.totals.totalBasePrice, rendered as "Subtotal"), sums getAdjustedPrice() (full-quantity, adjustment-inclusive total) not getBasePrice() (pre-adjustment unit price).
 var getTotalBasePrice = function(basket) {
     var totalBasePriceValue = 0;
     try {
@@ -53,9 +49,7 @@ var getTotalBasePrice = function(basket) {
             });
         }
     } catch (e) {
-        // This is called directly from every checkout controller (Checkout.js, CheckoutServices.js,
-        // CheckoutShippingServices.js, Order.js) with no try/catch of its own around the call - an
-        // uncaught error here would break checkout/payment page rendering entirely, not just this field.
+        // Called with no try/catch of its own from every checkout controller - an uncaught error here would break checkout/payment page rendering entirely.
         Logger.getLogger('CartSummary').error('Error calculating total base price: {0}', e);
         totalBasePriceValue = 0;
     }
@@ -172,10 +166,7 @@ var cartSummaryBuilder = function (basket) {
             // Process each product line item
             productLineItems.forEach(function (item) {
                 var pid = item.productID;
-                // basePrice is the true, pre-adjustment unit price (used for "was" style comparisons
-                // against finalPrice) - it should not be topped up with any adjustment, live selling or
-                // otherwise. finalPrice (getAdjustedPrice()) is already the full-quantity, adjustment-
-                // inclusive total, so it already correctly reflects the live selling price on its own.
+                // basePrice stays the true pre-adjustment unit price for "was" comparisons; finalPrice (getAdjustedPrice()) already reflects any adjustment, live selling included.
                 var basePriceVal = item.getBasePrice() ? item.getBasePrice().value : 0;
                 var finalPriceVal = item.getAdjustedPrice() ? item.getAdjustedPrice().value : 0;
 

@@ -298,10 +298,7 @@ coreCart.init = function () {
         document.getElementById('ge-country-selector').click();
     });
 
-    // Poll for CSC line items expiring while the customer sits on the cart page without navigating
-    // anywhere - a plain page-load check alone would never catch that, since nothing re-runs server code
-    // until the next request. The server independently re-validates elapsed time on every poll, so this
-    // is just a trigger, not something the client is trusted to decide on its own.
+    // Polls for CSC line items expiring while the customer sits on the cart page - the server re-validates elapsed time on every poll, the client just triggers the check.
     const checkExpiredUrl = document.getElementById('check-expired-csc-url');
     if (checkExpiredUrl && checkExpiredUrl.value) {
         setInterval(function () {

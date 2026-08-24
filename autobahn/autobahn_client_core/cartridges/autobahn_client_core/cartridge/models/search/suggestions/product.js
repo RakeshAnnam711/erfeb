@@ -12,14 +12,7 @@ var IMAGE_SIZE = preferences.imageSize ? preferences.imageSize : "medium";
 var images = require("*/cartridge/models/product/decorators/images");
 var liveSellingCategoryHelper = require("*/cartridge/scripts/helpers/liveSellingCategoryHelper");
 
-/**
- * Live selling products are only browsable on their own dedicated category page - never via
- * search-as-you-type suggestions. Mirrors the same category-assignment check used to filter
- * them out of regular search/category results (models/search/productSearch.js).
- *
- * @param {dw.catalog.Product} product - Suggested product
- * @return {boolean} - True if the product should be hidden from suggestions
- */
+// Live selling products are hidden from search-as-you-type suggestions too - same category check as models/search/productSearch.js.
 function isHiddenLiveSellingProduct(product) {
     return liveSellingCategoryHelper.isProductAssignedToLiveSellingCategory(product);
 }

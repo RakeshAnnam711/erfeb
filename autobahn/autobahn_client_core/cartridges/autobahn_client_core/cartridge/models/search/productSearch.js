@@ -65,10 +65,7 @@ function ProductSearch(productSearch, httpParams, sortingRule, sortingOptions, r
     }
     base.apply(this, arguments);
 
-    // Live selling products are only browsable on their own dedicated category page - everywhere
-    // else (other categories, keyword search) they're filtered out of the rendered grid. Filtering
-    // on category assignment (rather than the isLiveSellingProduct custom attribute) avoids relying
-    // on search-index refinement behavior for a boolean attribute that's unset on most of the catalog.
+    // Live selling products are only browsable on their own category page; filtered by category assignment (not the boolean attribute) to avoid search-index refinement quirks.
     var isViewingLiveSellingCategory = liveSellingCategoryHelper.isLiveSellingCategory(productSearch && productSearch.category);
 
     if (!isViewingLiveSellingCategory && this.productIds) {

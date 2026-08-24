@@ -1,21 +1,6 @@
 "use strict";
 
-/**
- * Overrides int_adyen_SFRA's lineItemHelper.js to fix a null-dereference on custom (non-Business-Manager)
- * price adjustments. dw.order.PriceAdjustment.getPromotion() always returns null for a price adjustment
- * created via ProductLineItem.createPriceAdjustment() with an arbitrary ID rather than a real registered
- * dw.campaign.Promotion (e.g. this org's own SubPro subscription discount, and the live selling price
- * override) - the base file's isValidLineItem()/getVatAmount() read lineItem.promotion.promotionClass
- * directly, which throws for any such adjustment. That throw propagates up through
- * createPaymentRequest -> handlePayments -> placeOrder, and surfaces to the shopper as the generic
- * "The payment you submitted is not valid" error - on any open-invoice-style payment method (Affirm,
- * PayPal, etc.) that builds itemized line item data via getAllLineItems().
- *
- * A custom, product-level price adjustment correctly has no place in this itemized-adjustments list
- * anyway - its value is already folded into the product line item's own adjustedNetPrice/adjustedTax,
- * sent separately via the isProductLineItem branches below. So null-guarding here isn't a workaround,
- * it's the actually-correct behavior the base file was already trying to express.
- */
+// Overrides int_adyen_SFRA's lineItemHelper.js: getPromotion() is always null for a custom price adjustment (e.g. live selling), and the base file dereferenced .promotionClass on it directly, crashing checkout on itemized payment methods (Affirm, PayPal) with "payment not valid".
 var AdyenHelper = require('*/cartridge/adyen/utils/adyenHelper');
 var __LineItemHelper = {
   getDescription: function getDescription(lineItem) {

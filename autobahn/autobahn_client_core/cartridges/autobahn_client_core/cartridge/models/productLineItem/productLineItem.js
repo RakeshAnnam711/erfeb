@@ -15,14 +15,7 @@ module.exports = function productLineItem(product, apiProduct, options) {
     base.call(this, product, apiProduct, options);
     agentLocks.decorateProductLineItem(product, options.lineItem);
 
-    // The base price decorator (productDecorators.price, via factories/price.js) computes product.price
-    // fresh from the product's own default price model - it has no concept of a line item's actual charged
-    // price (base price + adjustments), so the live selling price adjustment applied by the dw.order.calculate
-    // hook never shows up here on its own. Overwriting it directly is the only way the displayed unit price
-    // matches what the customer actually gets charged (the basket subtotal/total already reflect it
-    // correctly, since those sum the line item's real adjusted price, not this decorator's output). Requires
-    // our own decorators/price.js override (configurable: true) - the base decorator locks price/renderedPrice
-    // as non-configurable, and a plain assignment can't change that either since it's also non-writable.
+    // The base price decorator computes purely from the product's default price model, so the live selling adjustment never shows up here on its own - overwrite it directly (needs decorators/price.js's configurable: true).
     if (options.lineItem && liveSellingPriceAdjustmentHelper.isEligibleForOverride(options.lineItem)) {
         var liveSellingPrice = liveSellingPriceHelper.getLiveSellingPrice(apiProduct);
 

@@ -93,10 +93,7 @@ server.append('AddProduct', function (req, res, next) {
             var productListItems = currentBasket.productLineItems;
             for (var i = 0; i < currentBasket.productLineItems.length; i++) {
                 if (productListItems[i].productID === pid) {
-                    // Unconditional: a CSC classification found here can only be a false positive from the
-                    // lock sweep running earlier in this same request (base AddProduct's own response/model
-                    // build happens before this append), since Add to Cart is hidden for CSC/live-selling
-                    // products and a genuine storefront click can never target an existing CSC line item.
+                    // Unconditional: Add to Cart is hidden for CSC/live-selling products, so any CSC flag found here is a false positive from the earlier lock sweep.
                     agentLocks.forceMarkStorefrontLineItem(productListItems[i]);
                 }
             }
@@ -178,9 +175,7 @@ server.append('Show', function (req, res, next) {
     next();
 });
 
-// Lightweight endpoint polled by the client-side cart page to catch CSC line items expiring while the
-// customer is sitting on the page without navigating anywhere (a plain page-load check would never fire
-// in that case). Removes anything expired and reports whether the page needs to refresh.
+// Polled by the client-side cart page to catch CSC line items expiring while the customer sits on the page without navigating - removes anything expired and reports whether to refresh.
 server.get('CheckExpired', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
     var expiredUUIDs = [];

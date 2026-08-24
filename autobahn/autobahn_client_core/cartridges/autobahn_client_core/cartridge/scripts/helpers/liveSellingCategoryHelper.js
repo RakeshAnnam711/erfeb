@@ -11,12 +11,7 @@ function getCustomBoolean(customAttributes, attributeID) {
     }
 }
 
-/**
- * The primary live selling category ID, configurable via the liveSellingCategoryID Site Preference. No
- * fallback - if the preference is blank/unset, this returns null and ID-based matching is skipped
- * entirely (a category can then only qualify via its own isLiveSellingCategory custom attribute).
- * @returns {string|null}
- */
+// Live selling category ID from the liveSellingCategoryID Site Preference - null if unset, no fallback.
 function getLiveSellingCategoryID() {
     try {
         var value = Site.getCurrent().getCustomPreferenceValue('liveSellingCategoryID');
@@ -26,13 +21,7 @@ function getLiveSellingCategoryID() {
     }
 }
 
-/**
- * True if the given category matches the configured live selling category ID (when that Site Preference
- * is set), or has separately been flagged as one via its own isLiveSellingCategory custom attribute (lets
- * additional categories opt in independent of the Site Preference).
- * @param {dw.catalog.Category} category
- * @returns {boolean}
- */
+// True if the category matches the configured live selling category ID, or is separately flagged via its own isLiveSellingCategory attribute.
 function isLiveSellingCategory(category) {
     if (!category) {
         return false;
@@ -52,11 +41,7 @@ function isLiveSellingCategory(category) {
     }
 }
 
-/**
- * True if the given product is assigned (primary or otherwise) to any live selling category.
- * @param {dw.catalog.Product} product
- * @returns {boolean}
- */
+// True if the product is assigned (primary or otherwise) to any live selling category.
 function isProductAssignedToLiveSellingCategory(product) {
     var foundLiveCategory = false;
 

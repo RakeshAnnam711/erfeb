@@ -43,8 +43,7 @@ function getCustomBoolean(customAttributes, attributeID) {
     }
 }
 
-// liveSellingEventID/BadgeText/HostName/EventSummary are static, shared across every live selling product for
-// the current event, so they live as Site Preferences rather than per-product custom attributes.
+// liveSellingEventID/BadgeText/HostName/EventSummary are static for the current event, so they live as Site Preferences, not per-product custom attributes.
 function getSitePreferenceValue(prefID) {
     try {
         var value = Site.getCurrent().getCustomPreferenceValue(prefID);

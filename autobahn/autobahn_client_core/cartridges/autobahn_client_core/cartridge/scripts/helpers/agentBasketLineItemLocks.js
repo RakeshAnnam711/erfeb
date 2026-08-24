@@ -14,8 +14,7 @@ var STOREFRONT_LINE_ITEM_ATTR = 'isStorefrontLineItem';
 var DEFAULT_EXPIRATION_MS = 5 * 60 * 1000; // 5 minutes, used only if the site preference is unset/invalid
 var liveSellingCategoryHelper = require('*/cartridge/scripts/helpers/liveSellingCategoryHelper');
 
-// Business-configurable via the cscHandoffExpirationHours Site Preference, so the business can change the
-// expiration window without a code deploy. Falls back to the original 5-minute default if left blank.
+// Configurable via the cscHandoffExpirationHours Site Preference; falls back to the 5-minute default if unset.
 function getExpirationMs() {
     try {
         var hours = Site.getCurrent().getCustomPreferenceValue('cscHandoffExpirationHours');
@@ -50,9 +49,7 @@ function isAgentBasket(basket) {
     }
 }
 
-// This org's Business Manager "Customer Service Center" ("New Order for Customer") flow does not
-// create baskets via BasketMgr.createAgentBasket() (isAgentBasket() is always false for them). It
-// tags the basket with the platform-managed channelType instead, confirmed safe to read here.
+// This org's Business Manager CSC "New Order for Customer" flow never sets isAgentBasket() true - it tags the basket with channelType instead.
 function isCustomerServiceCenterBasket(basket) {
     if (!basket) {
         return false;
@@ -163,12 +160,7 @@ function markCSCHandoffLineItem(lineItem) {
     setCustomBoolean(lineItem, CSC_LINE_ITEM_ATTR, true);
 }
 
-// Does not check isCSCHandoffLineItem first (unlike the sweep logic elsewhere in this file). It is used right after
-// a storefront AddProduct call, where the caller has just matched this exact line item by productID for
-// the current request. Because Add to Cart is hidden on PLP/PDP for CSC/live-selling products, a genuine
-// storefront click can never target an existing CSC line item's product - so any CSC flag found here must
-// be a false positive from the classification sweep running earlier in the same request (during the base
-// AddProduct response/model build, before this correction runs) and is safe to clear.
+// Used right after a storefront AddProduct - Add to Cart is hidden for CSC/live-selling products, so any CSC flag found here is a false positive from the sweep and safe to clear.
 function forceMarkStorefrontLineItem(lineItem) {
     var basket;
     var storefrontUUIDs;
@@ -245,9 +237,7 @@ function isLiveSellingProduct(product) {
     return liveSellingCategoryHelper.isProductAssignedToLiveSellingCategory(product);
 }
 
-// Mirrors the tri-state resolution used in doPrePlaceOrder.js at checkout, so cart locking and order-level
-// live selling reporting always agree: the CSC agent's explicit checkbox choice (checked or unchecked) on
-// this line item wins when present, otherwise fall back to the catalog product's own live selling flag.
+// Mirrors doPrePlaceOrder.js's tri-state resolution: the agent's explicit checkbox choice wins when present, otherwise falls back to the catalog product's own live selling flag.
 function isLineItemLiveSelling(lineItem) {
     try {
         var agentChoice = getCustomBooleanTriState(lineItem, 'isLiveSellingLineItem');
@@ -286,14 +276,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     storedStorefrontUUIDs = getStoredStorefrontUUIDs(basket);
     hasStorefrontItems = hasStorefrontLineItems(basket);
 
-    // Release any line item that is no longer correctly locked: either it's confirmed storefront, or it
-    // was previously locked as CSC but is no longer live selling (the CSC agent unchecked "Is Live Selling
-    // Line Item" after initially checking it, or otherwise changed their mind). Without this, a line item's
-    // isCSCHandoffLineItem flag only ever gets set by the sweep below and never re-evaluated once true, so
-    // it would stay locked forever even after the agent explicitly marks it not-live-selling. This also
-    // covers the session-cache staleness case: a line item the sweep briefly (and wrongly) locked earlier
-    // in the same request - before AddProduct's forceMarkStorefrontLineItem corrected it - stays purged
-    // here instead of persisting forever, since the session-cached UUID list otherwise only ever grows.
+    // Release any line item no longer correctly locked - confirmed storefront, or CSC but no longer live selling (agent unchecked the box) - so the session-cached list can't just grow forever.
     if (basket && basket.allProductLineItems) {
         Transaction.wrap(function () {
             collections.forEach(basket.allProductLineItems, function (lineItem) {
@@ -313,13 +296,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
         });
     }
 
-    // Sweep any unclassified line item into CSC on every render while this basket is CSC-sourced. This
-    // must stay "always on" (not one-time) so a live-selling item pushed from CSC *after* the customer has
-    // already been shopping still gets locked. It is safe against re-claiming customer-added items because
-    // Cart.js's AddProduct handler now unconditionally corrects a new item's classification via
-    // forceMarkStorefrontLineItem, and the purge above keeps the session cache in sync with that correction.
-    // Only live selling items get locked - a CSC agent adding a plain, non-live-selling product should
-    // leave that item fully editable for the customer, same as if they'd added it themselves.
+    // Sweeps any unclassified item into CSC on every render (stays "always on" so a later CSC add still gets locked); safe against customer-added items since AddProduct always corrects those via forceMarkStorefrontLineItem first.
     shouldMarkUnclassifiedAsCSC = forceCurrentItemsLocked || isAgentBasket(basket) || isCustomerServiceCenterBasket(basket);
 
     if (basket && basket.allProductLineItems && shouldMarkUnclassifiedAsCSC) {
@@ -335,9 +312,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
         });
     }
 
-    // Pricing is no longer synchronized here - it's centralized in the dw.order.calculate hook override
-    // (cartridge/scripts/hooks/cart/calculate.js), which runs on every basket recalculation regardless of
-    // which page/controller triggers it, not just the specific storefront pages that call this sweep.
+    // Pricing sync is centralized in the dw.order.calculate hook (calculate.js), not here.
 
     if (lockedUUIDs.length) {
         setLockedUUIDs(basket, lockedUUIDs);
@@ -345,10 +320,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
         clearLockedUUIDs();
     }
 
-    // Drives a Dynamic Customer Group (session.custom rule condition in Business Manager) used to restrict
-    // a shipping method to baskets with a live selling item. lockedUUIDs is already filtered down to only
-    // UUIDs still present on this basket, so this can't go stale from a previous basket in the same session.
-    // Explicitly set to false (not just left unset) so it can't stick around true after the item is removed.
+    // Drives a Dynamic Customer Group used to restrict a shipping method to baskets with a live selling item - explicitly set false so it can't stick around true after the item is removed.
     if (typeof session !== 'undefined' && session.custom) {
         session.custom.hasLiveSellingItemInCart = lockedUUIDs.length > 0;
     }
@@ -356,13 +328,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     return lockedUUIDs;
 }
 
-// Removes CSC handoff line items that have sat in the basket, unpurchased, longer than the
-// cscHandoffExpirationHours Site Preference. Clock starts at the line item's own creationDate (when the
-// CSC agent added it), not the customer's session activity. Each line item is evaluated independently, so
-// e.g. two CSC items added at different times each expire on their own schedule. Returns the UUIDs of
-// whatever got removed (empty array if nothing expired), so the caller can both recalculate basket totals
-// and patch any view data it already built from the pre-removal basket state instead of rendering a
-// now-stale line item.
+// Removes CSC handoff line items sitting unpurchased longer than cscHandoffExpirationHours; clock starts at each item's own creationDate. Returns the removed UUIDs so the caller can patch stale view data.
 function removeExpiredCSCLineItems(basket) {
     var expiredItems = [];
     var now = new Date().getTime();
@@ -412,9 +378,7 @@ function decorateProductLineItem(productLineItem, sourceLineItem) {
         productLineItem.isAgentLockedLineItem = true; // eslint-disable-line no-param-reassign
     }
 
-    // Unlike isAgentLockedLineItem above (session/basket-sweep based, unreliable once the basket becomes an
-    // order), this reads the persisted line item state directly, so it stays correct on order confirmation/
-    // history pages too.
+    // Unlike isAgentLockedLineItem above (session-sweep based), this reads persisted state directly, so it stays correct on order confirmation/history pages too.
     if (productLineItem && sourceLineItem) {
         productLineItem.isLiveSellingLineItem = isLineItemLiveSelling(sourceLineItem); // eslint-disable-line no-param-reassign
     }

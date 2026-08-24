@@ -59,8 +59,7 @@ function getCustomBoolean(customAttributes, attributeID) {
     }
 }
 
-// liveSellingEventID/HostName/EventDate/BadgeText are static, shared across every live selling product for
-// the current event, so they are Site Preferences rather than per-product/per-line-item custom attributes.
+// liveSellingEventID/HostName/EventDate/BadgeText are static and shared across the current event, so they're Site Preferences rather than per-line-item custom attributes.
 function getSitePreferenceValue(prefID) {
     try {
         var value = Site.getCurrent().getCustomPreferenceValue(prefID);
@@ -70,11 +69,7 @@ function getSitePreferenceValue(prefID) {
     }
 }
 
-/**
- * Reads a boolean custom attribute as a tri-state value so an agent's explicit choice can be told apart
- * from a field that was never touched. Returns true/false when the attribute holds an explicit value,
- * or undefined when it is null/unset (attribute never saved for this line item).
- */
+// Reads a boolean custom attribute as tri-state, so an agent's explicit choice can be told apart from a field that was never touched (undefined).
 function getCustomBooleanTriState(customAttributes, attributeID) {
     try {
         if (!customAttributes || !(attributeID in customAttributes)) {
@@ -134,23 +129,14 @@ function doPrePlaceOrder(order) {
                         }
 
                         if (!empty(product)) {
-                            // isLiveSellingOrder is intentionally stricter here than the cart-side locking
-                            // check (agentBasketLineItemLocks.js), which still falls back to the catalog
-                            // product's own isLiveSellingProduct flag when the agent never touches the
-                            // checkbox. For order-level reporting, only the CSC agent's explicit "Is Live
-                            // Selling Line Item" = true counts - a normal customer-purchased product never
-                            // qualifies (isCSCLineItem gates that), and neither does a CSC line item where the
-                            // agent left the checkbox unchecked/untouched, even if the catalog product itself
-                            // is flagged live-selling.
+                            // Stricter than the cart-side locking check - for order-level reporting, only the agent's explicit "Is Live Selling Line Item" = true counts, not the catalog product's own flag.
                             var agentLiveSellingChoice = getCustomBooleanTriState(lineItem.custom, 'isLiveSellingLineItem');
                             var lineItemIsLiveSelling = isCSCLineItem && agentLiveSellingChoice === true;
 
                             if (lineItemIsLiveSelling) {
                                 try {
                                     var liveSellingItemID = getCustomValue(product.custom, 'liveSellingItemID') || product.ID;
-                                    // Host name and event summary are static for the whole event (Site
-                                    // Preferences), not per-product/per-line-item - whatever the agent may
-                                    // have typed into the CSC line item's own host name field is ignored.
+                                    // Host name/event summary are static Site Preferences for the whole event - whatever the agent typed into the line item's own field is ignored.
                                     var liveSellingHostName = getSitePreferenceValue('liveSellingHostName');
                                     var liveSellingEventSummary = getSitePreferenceValue('liveSellingEventSummary');
 
@@ -158,32 +144,16 @@ function doPrePlaceOrder(order) {
                                     lineItem.custom.isLiveSellingLineItem = true;
                                     lineItem.custom.liveSellingItemID = liveSellingItemID;
 
-                                    // Safety check only - read-only, never mutates. By the time this runs,
-                                    // payment has already been authorized against the order's current total
-                                    // (Adyen/PayPal/etc. authorize before doPrePlaceOrder executes), so
-                                    // actively changing the adjustment/total here would make the order total
-                                    // stop matching the already-authorized payment amount, which is exactly
-                                    // what broke checkout when this used to call
-                                    // syncLiveSellingPriceAdjustment() and updateTotals(). If this is ever
-                                    // false, the cart page sweep failed to apply the price before checkout -
-                                    // that's a real bug worth investigating, but it's too late to safely fix
-                                    // by mutating this order, so just log it instead.
+                                    // Read-only safety check - payment is already authorized against the order total by this point, so we can only log a mismatch, never fix it here.
                                     if (!liveSellingPriceAdjustmentHelper.isAdjustmentCorrect(lineItem)) {
                                         dwLogger.error('Live selling price adjustment is missing/incorrect on an already-priced order line item (product {0}, order line item {1}) - order total may not reflect the live selling price.', product.ID, lineItem.UUID);
                                     }
 
-                                    // Host name/event summary are no longer duplicated onto the line item -
-                                    // the Order-level copy (aggregated below) is the single source of
-                                    // truth. Both always held the same value anyway, since every
-                                    // line item on an order reads from the same Site Preferences.
+                                    // Host name/event summary aren't duplicated onto the line item - the order-level copy (aggregated below) is the single source of truth.
                                     addUnique(liveSellingHostNames, liveSellingHostName);
                                     addUnique(liveSellingEventSummaries, liveSellingEventSummary);
 
-                                    // Reuse the exact same SOM export flag final_sale products use
-                                    // (set by autobahn_client_core's doPrePlaceOrder, which runs before this
-                                    // one via the base module chain) rather than a separate live-selling
-                                    // return flag - live selling line items are excluded from returns the
-                                    // same way final sale ones are.
+                                    // Reuses the same SOM export flag final_sale products use, so live selling items are excluded from returns the same way.
                                     lineItem.custom.somCC_returnable = false;
                                 } catch(err) {
                                     dwLogger.warn('Missing ProductLineItem live selling custom attribute definition: ' + err);
