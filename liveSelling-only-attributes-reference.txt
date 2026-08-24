@@ -1,0 +1,134 @@
+Live Selling Attributes Only - Reference
+===========================================================
+Scope: ONLY attributes with "liveSelling"/"LiveSelling" in their name.
+Does not include CSC-handoff-specific attributes (isCSCHandoffOrder,
+isCSCHandoffLineItem, isStorefrontLineItem, cscOrderNotes) - those are a
+separate concern, covered in liveSelling-csc-attributes-reference.txt if
+needed.
+
+Reflects current state only - isLiveSellingProduct (Product) and
+liveSellingHostName/liveSellingEventDate (ProductLineItem) have both been
+removed and are intentionally not listed here.
+
+
+1. CATEGORY
+---------------
+isLiveSellingCategory
+  Group: WGACACustomAttributes (general catch-all - no dedicated group on
+    Category for this attribute)
+  Purpose: Marks a category as a live selling category. Lets additional
+    categories opt in as live selling independent of whatever category ID
+    is set in the liveSellingCategoryID Site Preference - either mechanism
+    alone is enough (see the Site Preferences section below).
+
+
+2. PRODUCT
+---------------
+liveSellingItemID
+  Group: LiveSelling (also referenced from the general WGACA-Custom-
+    Attributes catch-all group)
+  Purpose: The item number/ID shown on the live selling PLP and PDP instead
+    of price (e.g. "Item: 04"). Set once per product. Falls back to the
+    product's own ID if left blank.
+
+
+3. ORDER
+---------------
+isLiveSellingOrder
+  Group: RTWOrder
+  Purpose: True only when a CSC agent explicitly checked "Is Live Selling
+    Line Item" for at least one product on the order. Strict - never falls
+    back to the product's own flag or category assignment, unlike cart-
+    locking. A normal customer order can never accidentally get marked
+    live selling.
+
+liveSellingHostName
+  Group: RTWOrder
+  Purpose: Order-level snapshot of the live selling event host name,
+    copied from the liveSellingHostName Site Preference at the moment the
+    order was placed.
+
+liveSellingEventDate
+  Group: RTWOrder
+  Purpose: Order-level snapshot of the event date, copied from the Site
+    Preference at order-placement time. Same pattern as liveSellingHostName
+    above.
+
+
+4. PRODUCTLINEITEM
+---------------
+isLiveSellingLineItem
+  Group: LiveSelling
+  Purpose: The CSC agent's checkbox in the Business Manager "Product
+    Detail" form - the only live-selling-related field shown to the agent.
+    The agent's explicit choice (checked or unchecked) always wins over the
+    catalog product's own live-selling status when present.
+
+liveSellingItemID
+  Group: LiveSelling
+  Purpose: Snapshot of the product's liveSellingItemID at the moment of
+    purchase, written automatically at order placement - preserves what
+    item ID applied to this specific purchase even if the product's own ID
+    changes later. Not an agent-editable field.
+
+
+5. SITE PREFERENCES (Custom Preferences)
+---------------
+liveSellingEventID
+  Group: LiveSelling (also referenced from the general "Autobahn Configs"
+    catch-all group in rvw_autobahn_core's metadata)
+  Purpose: Static identifier for the current live selling event. Same
+    value for every live selling product/order during that event - this is
+    why it is a Site Preference rather than a per-product attribute.
+
+liveSellingHostName
+  Group: LiveSelling (+ Autobahn Configs)
+  Purpose: The authoritative host name for the current event. This is the
+    single source of truth for the order/order-line-item copies above -
+    nothing else feeds it.
+
+liveSellingEventDate
+  Group: LiveSelling (+ Autobahn Configs)
+  Purpose: The authoritative event date. Same role as liveSellingHostName
+    above.
+
+liveSellingBadgeText
+  Group: LiveSelling (+ Autobahn Configs)
+  Purpose: Text shown on the live selling badge on PLP/PDP. Defaults to
+    "LIVE" in code if left blank.
+
+liveSellingPlatform
+  Group: LiveSelling (+ Autobahn Configs)
+  Purpose: Placeholder, not wired into any code yet. Intended for the
+    platform the live selling event is/will be hosted on (e.g. Instagram,
+    TikTok, Bambuser). Created for future use, not a mistake.
+
+liveSellingCategoryID
+  Group: LiveSelling (+ Autobahn Configs)
+  Purpose: The category ID products must be assigned to in order to be
+    treated as live selling (hidden price/Add to Cart, excluded from every
+    other category/search). If left blank, the code falls back to nothing
+    - only isLiveSellingCategory-flagged categories would then qualify (the
+    hardcoded dev-category fallback was removed at explicit request).
+    Read via the shared helper scripts/helpers/liveSellingCategoryHelper.js,
+    used consistently by every file that needs to know whether a category
+    or product counts as live selling.
+
+
+SUMMARY TABLE
+---------------------------------------------------------------
+Attribute                  | System Object   | Group
+----------------------------|-----------------|------------------------
+isLiveSellingCategory       | Category        | WGACACustomAttributes
+liveSellingItemID           | Product         | LiveSelling
+isLiveSellingOrder          | Order           | RTWOrder
+liveSellingHostName         | Order           | RTWOrder
+liveSellingEventDate        | Order           | RTWOrder
+isLiveSellingLineItem       | ProductLineItem | LiveSelling
+liveSellingItemID           | ProductLineItem | LiveSelling
+liveSellingEventID          | SitePreferences | LiveSelling + Autobahn Configs
+liveSellingHostName         | SitePreferences | LiveSelling + Autobahn Configs
+liveSellingEventDate        | SitePreferences | LiveSelling + Autobahn Configs
+liveSellingBadgeText        | SitePreferences | LiveSelling + Autobahn Configs
+liveSellingPlatform         | SitePreferences | LiveSelling + Autobahn Configs
+liveSellingCategoryID       | SitePreferences | LiveSelling + Autobahn Configs

@@ -1,0 +1,214 @@
+Cross-Verification: PRs #1165, #1167, #1168, #1169 vs Local Branch
+===========================================================
+Source: 4 PDF exports of GitHub Enterprise PR diffs (WGACA/WGACA-SFCC repo),
+all by Mike Romanov, all status "Awaiting approval" / Open, none merged to
+develop as of the export timestamps (8/17/26).
+
+Local branch checked against: feature/live-selling-checkout-planning-july30
+
+VERDICT: None of the four PRs' changes are present in the local repo. All
+four are separate, unrelated, unmerged work - not part of the live-selling/
+CSC feature, and not something this branch has picked up (whether via the
+July 30 code drop or otherwise). Confirmed by direct file search - not one
+of the new files (imageHelper.js expansion, importCatalogWithAttribute
+Definitions.js, attentiveScript.isml) or modified strings (recaptcha-
+disclosure, AttentiveEnable) exists locally.
+
+
+PR #1165 - Remove the reCAPTCHA and accessibility buttons displayed on the website
+---------------------------------------------------------------
+Branch: feature/WIP-828-Remove-the-reCAPTCHA-and-accessibility-buttons...
+3 files changed, +10/-2
+
+What it does:
+- pageFooter.isml: the reCAPTCHA badge is currently shown with no visible
+  disclosure text (Google requires a disclosure notice when the badge
+  itself is hidden/styled away). This PR adds that required disclosure
+  text, gated behind the existing enableRecaptcha site preference:
+    <isif condition="...enableRecaptcha...">
+      <div class="recaptcha-disclosure copyright mt-4">
+        ${Resource.msg('pagefooter.recaptchadisclosure', 'components', null)}
+      </div>
+    </isif>
+- components.properties: adds the new resource string -
+  pagefooter.recaptchadisclosure = "This site is protected by reCAPTCHA."
+- _common.scss: changes .grecaptcha-badge from a z-index adjustment to
+  visibility: hidden - i.e. the reCAPTCHA badge itself is now fully hidden
+  from view (matches the PR title "remove the reCAPTCHA... buttons
+  displayed on the website"), which is exactly why the text disclosure
+  above is now required (Google's terms require the disclosure text to
+  remain visible even if the badge is hidden).
+- Also touches the AudioEye accessibility script block in pageFooter.isml -
+  looks like a bug fix (the inline <script> tag was missing its closing
+  </script>) plus a new <iframe> embed for an AudioEye "Accessibility
+  Statement" page (fixed height 2300px).
+
+Not present locally - confirmed via search for enableRecaptcha/recaptcha-
+disclosure/pagefooter.recaptchadisclosure, zero matches.
+
+
+PR #1167 - SFCC render correct product image size per page
+---------------------------------------------------------------
+Branch: feature/WIP-903-SFCC-Render-Correct-Product-Image...
+18 files changed, +332/-41
+
+What it does: introduces an external image CDN layer that most of the
+codebase's product-image URL building can optionally route through,
+instead of always using SFCC's built-in DIS (Dynamic Imaging Service)
+absolute URLs directly.
+
+Core new logic lives in rvw_autobahn_core/cartridge/scripts/helpers/
+imageHelper.js (heavily expanded - our local copy only has the original
+20-line getDisConfiguration() function, none of the below):
+- getDisConfiguration() - now caches its result, reads the disConfiguration
+  site preference JSON (unchanged mechanism, just cached).
+- getCdnConfiguration() / isCdnEnabled() - reads a NEW "cdn" block nested
+  inside disConfiguration: { enabled, baseUrl, absUrlVariant,
+  variantMapping }. Falls back to sane defaults if any piece is missing.
+- getCdnImageId(mediaFile) - derives a CDN image ID from the DIS image's
+  file name (strips path and known image extensions via a regex).
+- getCdnImageUrl(mediaFile, type) - builds <baseUrl>/<imageId>/<variant>
+  when the CDN is enabled, using variantMapping to translate a logical
+  image type (e.g. "large") to whatever variant name the CDN expects.
+  Returns null when the CDN is disabled/unusable, so every caller can
+  cleanly fall back to the old DIS-based URL with `||`.
+- getImageUrls(mediaFile, type) - convenience wrapper returning both a
+  display url and an absURL, CDN-based when enabled, DIS-based otherwise.
+- getViewType(type) - maps a logical image type through viewTypeMapping,
+  same as before, just extracted as its own reusable function.
+
+New Site Preference shape: disConfiguration's JSON gains the "cdn" block
+above. Applied to both autobahn_client_core/sites/WGACA/preferences.xml
+(the real site) and rvw_autobahn_core/sites/Siteidreplaceme/preferences.xml
+(the placeholder/template used when spinning up a new site), with the CDN
+left disabled (enabled: false) by default in both.
+
+Every file below was changed the same way: wherever it used to build an
+absolute image URL by manually concatenating the storefront base URL (or
+calling image.getAbsURL()) directly, it now tries
+imageHelper.getCdnImageUrl(image, type) FIRST and falls back to the
+original logic with `||` if that returns null (CDN disabled) - so behavior
+is unchanged today (CDN defaults to disabled) but the switch is now a
+config flip, no further code change needed, once someone flips
+disConfiguration.cdn.enabled to true and sets a real baseUrl:
+  - autobahn_client_core/cartridge/scripts/jobs/exportEbayProductsMasterFeed.js
+  - autobahn_client_core/cartridge/scripts/jobs/exportProductsupMasterFeed.js
+  - autobahn_client_core/cartridge/scripts/jobs/exportRegionSpecificSitemaps.js
+  - rvw_autobahn_core/cartridge/scripts/jobs/exportZetaDeltaCatalog.js
+  - autobahn_client_core/cartridge/templates/default/product/components/
+    imagePDPCarousel.isml (also switches the PDP zoom modal to load the
+    hi-res view type instead of large, and simplifies fetchpriority/loading
+    attributes to static low/lazy instead of being conditional on the
+    image's position in the loop)
+  - int_bambuser/cartridge/models/bambuser/product.js
+  - int_feedonomics/cartridge/scripts/helpers/feedonomicsHelpers.js
+  - int_yotpo_sfra/cartridge/scripts/utils/yotpoUtils.js (+ its unit test,
+    updated to mock imageHelper.getCdnImageUrl returning null by default)
+  - bm_autobahn_core (or similar)/cartridge/scripts/helpers/
+    googlemerchantHelpers.js
+  - autobahn_client_core/cartridge/models/product/productImages.js - the
+    core product-image model itself, updated with a larger comment block
+    documenting the new cdn config shape and how viewTypeMapping still
+    applies even in CDN mode
+  - amazon export job (exportProductToAmazon.js)
+  - frenzy product feed helper
+
+Not present locally - confirmed local imageHelper.js is the old 20-line
+version, none of the above functions exist, none of the 18 files show any
+of these changes.
+
+
+PR #1168 - SFCC catalog pipeline import job step
+---------------------------------------------------------------
+Branch: WIP-902-SFCC-Catalog-Pipeline-Import-JobStep
+3 files changed, +237/-1
+
+What it does: adds a new, purpose-built job step to work around a real
+Business Manager/SFCC limitation - the standard, built-in "Import Catalog"
+job step (and the manual BM catalog-import UI) silently IGNORE any
+<product-attribute-definitions> section in a catalog XML file, logging a
+data error instead of importing them. Only the lower-level ImpEx
+ImportCatalog pipelet actually supports importing attribute definitions,
+and only when explicitly told to via an ImportConfiguration flag
+(importAttributeDefinitions: true) - something the native job step has no
+way to set.
+
+New file: autobahn_client_core/cartridge/scripts/jobs/
+importCatalogWithAttributeDefinitions.js (170 lines, brand new):
+- Scans a configurable IMPEX/src/ subfolder for catalog XML files matching
+  a configurable regex (defaults to every .xml file), sorted alphabetically.
+- For each file, runs the ImportCatalog pipelet directly with
+  ImportConfiguration.importAttributeDefinitions = true set, so attribute
+  definitions actually get imported this time.
+- Since ImpEx's own import log isn't otherwise surfaced anywhere visible,
+  this job step reads that log file after each import and re-logs any
+  ERROR/WARN lines into the job's own custom log (capped at 500 messages
+  per file, with a safety message if that cap is hit), so import problems
+  are actually visible without having to go dig through IMPEX/log/
+  manually.
+- Fails the whole job step (ERROR status) if any file's import status
+  isn't OK, listing which files failed.
+
+New step type registered in autobahn_client_core/steptypes.json:
+custom.importCatalogWithAttributeDefinitions ("Import Catalog With
+Attribute Definitions") - organization-context only (not site-specific),
+parameters: WorkingFolder (required), FilePattern (optional, default
+\.xml$), ImportMode (required enum MERGE/UPDATE/REPLACE/DELETE, default
+MERGE), IsDisabled (optional, skips the step entirely when true).
+
+Small unrelated fix bundled in: brandLink.js decorator - `apiProduct.brand`
+read is now defended against being null/undefined (`|| ''`), avoiding a
+downstream error for products with no brand set.
+
+Not present locally - confirmed the new job script, the new step type
+entry, and the brandLink.js null-safety fix are all absent.
+
+
+PR #1169 - Attentive Enhanced Tag Added to Site
+---------------------------------------------------------------
+Branch: feature/WIP-459-Attentive-Enhanced-Tag-Added-to-S...
+3 files changed, +33/-0 (pure addition)
+
+What it does: adds Attentive's "Enhanced Tag" (SMS/marketing pixel,
+https://help.attentive.com/hc/en-us/articles/30256115019796) to the site,
+following the exact same pattern already used for this cartridge's other
+marketing pixels.
+
+New file: autobahn_client_core/cartridge/templates/default/common/head/
+attentiveScript.isml (21 lines):
+- Only included when the new AttentiveEnable site preference is true.
+- Wrapped in the OneTrust marketing-consent category (optanon-category-
+  C0004), so it only actually fires once the shopper has granted marketing
+  cookie consent - same consent-gating already used for the other
+  marketing pixels in this cartridge (per its own comment, referencing
+  htmlHead.isml and marketing.isml).
+- Script src points at a first-party CNAME subdomain
+  (xsdsr.whatgoesaroundnyc.com) that Attentive asked to have pointed at
+  their servers via DNS; an onError handler falls back to Attentive's
+  standard CDN script (cdn.attn.tv/wgaca/dtag.js) if that subdomain isn't
+  resolving yet.
+
+Modified: htmlHead.isml - adds the include, gated by the same
+AttentiveEnable check, placed right after the existing CustomHeaderScripts
+block.
+
+Modified: autobahn_client_core/meta/system-objecttype-extensions.xml -
+adds the new AttentiveEnable Site Preference (boolean, "Enable Attentive",
+default false), added to the same attribute group that already contains
+enableTangiblee/CustomHeaderScripts/NonAuthorizedBrands (the general WGACA
+Configs-style catch-all group - same kind of group placement pattern we
+used throughout the live-selling Site Preference work this session).
+
+Not present locally - confirmed no attentiveScript.isml file, no
+AttentiveEnable reference anywhere in htmlHead.isml or the tracked
+metadata.
+
+
+SUMMARY TABLE
+---------------------------------------------------------------
+PR    | Title                                    | Files | +/-      | In local branch?
+------|------------------------------------------|-------|----------|------------------
+1165  | Remove reCAPTCHA/accessibility buttons    | 3     | +10/-2   | No
+1167  | Render correct product image size/page    | 18    | +332/-41 | No
+1168  | Catalog pipeline import job step           | 3     | +237/-1  | No
+1169  | Attentive Enhanced Tag added to site       | 3     | +33/-0   | No

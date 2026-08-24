@@ -1,0 +1,67 @@
+WHAT BROKE
+----------
+The "My Account" page on the website was crashing for customers because of a
+failed connection to Salesforce Marketing Cloud (the system that manages
+newsletter/email subscriptions).
+
+WHERE
+-----
+File: autobahn/rvw_salesforce_services/cartridges/int_salesforce_services/cartridge/scripts/marketing/MarketingManager.js
+Function: getSubscriptionSubscriberList (around line 460)
+Triggered from: Account.js controller, on the "Show" (My Account) page
+
+WHY IT BROKE
+------------
+1. The My Account page asks Marketing Cloud "what newsletter lists is this
+   customer subscribed to?" using an older connection type called SOAP.
+
+2. To ask that question, the website first needs a temporary login token
+   from Marketing Cloud (like a session password).
+
+3. The website got a token, tried the request, and Marketing Cloud said
+   "login failed."
+
+4. The website's code assumed the token had simply expired, so it threw it
+   away, grabbed a brand new one, and tried again.
+
+5. The brand new token failed in the exact same way.
+
+6. Because it failed twice in a row with a fresh token both times, the code
+   gave up and threw an error - which crashed the whole My Account page for
+   every customer (not just the subscription section).
+
+MOST LIKELY ROOT CAUSE
+-----------------------
+Since a completely fresh login token failed the same way, the token itself
+isn't the problem - it's a PERMISSIONS problem on the Marketing Cloud side.
+
+The website connects to Marketing Cloud using an "Installed Package" (an app
+with a Client ID/Secret). That app most likely has permission to use the
+newer REST API, but does NOT have permission enabled for "List and
+Subscribers" data, which is what this specific SOAP request needs. That
+missing permission has to be turned on inside Marketing Cloud Setup - it is
+not something fixable purely from the website's code.
+
+TEMPORARY FIX APPLIED (STOPS THE PAGE FROM CRASHING)
+------------------------------------------------------
+File: autobahn/rvw_salesforce_services/cartridges/int_salesforce_services/cartridge/controllers/Account.js
+
+The Marketing Cloud calls are now wrapped in a try/catch. If Marketing Cloud
+fails or is unreachable:
+ - The error is logged (so we can see it happened)
+ - The rest of the My Account page still loads normally
+ - The subscription list section is simply left empty/hidden
+
+This does NOT fix the real problem - it just stops one broken third-party
+integration from taking down the entire account page for customers.
+
+WHAT STILL NEEDS TO HAPPEN
+---------------------------
+Someone with access to Salesforce Marketing Cloud Setup needs to:
+ 1. Go to Setup > Platform Tools > Apps > Installed Packages
+ 2. Find the package matching the site's MarketingCloudClientId
+   (find that value in Business Manager > Site Preferences)
+ 3. Open its "API Integration" component
+ 4. Check that "List and Subscribers" permission (Read/Write) is enabled
+ 5. If it was missing, enable it and save - that should resolve the
+    original error at its source.
