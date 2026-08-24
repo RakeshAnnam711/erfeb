@@ -4,6 +4,7 @@ var base = module.superModule;
 var HookMgr = require('dw/system/HookMgr');
 var collections = require('*/cartridge/scripts/util/collections');
 var liveSellingPriceAdjustmentHelper = require('*/cartridge/scripts/helpers/liveSellingPriceAdjustmentHelper');
+var dwLogger = require('dw/system/Logger').getLogger('LiveSelling', 'CalculateHook');
 
 /**
  * Synchronizes the live selling price adjustment on every line item in the basket, then re-runs just the
@@ -18,8 +19,15 @@ function applyLiveSellingAdjustments(basket) {
 
     if (basket && basket.allProductLineItems) {
         collections.forEach(basket.allProductLineItems, function (lineItem) {
-            if (liveSellingPriceAdjustmentHelper.syncLiveSellingPriceAdjustment(lineItem)) {
-                adjustmentsChanged = true;
+            // syncLiveSellingPriceAdjustment() already catches its own errors, but this loop touches every
+            // line item in the basket on every recalculation site-wide - one bad line item must never stop
+            // the rest from being processed, or block tax/totals recalculation for everything else.
+            try {
+                if (liveSellingPriceAdjustmentHelper.syncLiveSellingPriceAdjustment(lineItem)) {
+                    adjustmentsChanged = true;
+                }
+            } catch (e) {
+                dwLogger.error('Unexpected error synchronizing live selling price adjustment for line item {0}: {1}', lineItem && lineItem.UUID, e);
             }
         });
     }
@@ -52,7 +60,15 @@ exports.calculateTax = function (basket) {
 exports.calculate = function (basket, original, payByLinkScenario) {
     var result = base.calculate(basket, original, payByLinkScenario);
 
-    applyLiveSellingAdjustments(basket);
+    // Outermost safety net: base.calculate()'s result must always be returned regardless of what happens
+    // in our own logic below. This hook runs on every basket recalculation across the entire site - it
+    // must never be the reason checkout/payment breaks for a basket that has nothing to do with live
+    // selling at all.
+    try {
+        applyLiveSellingAdjustments(basket);
+    } catch (e) {
+        dwLogger.error('Unexpected error applying live selling price adjustments for basket {0}: {1}', basket && basket.UUID, e);
+    }
 
     return result;
 };

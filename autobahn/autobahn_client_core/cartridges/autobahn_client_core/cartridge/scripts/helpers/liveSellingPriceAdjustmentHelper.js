@@ -2,6 +2,7 @@
 
 var AmountDiscount = require('dw/campaign/AmountDiscount');
 var liveSellingPriceHelper = require('*/cartridge/scripts/helpers/liveSellingPriceHelper');
+var dwLogger = require('dw/system/Logger').getLogger('LiveSelling', 'PriceAdjustment');
 
 var ADJUSTMENT_ID = 'live-selling-price-override';
 
@@ -67,53 +68,63 @@ function syncLiveSellingPriceAdjustment(lineItem) {
         return false;
     }
 
-    var existingAdjustment = getExistingAdjustment(lineItem);
-    var eligible = isEligibleForOverride(lineItem);
-    var liveSellingPrice = eligible ? liveSellingPriceHelper.getLiveSellingPrice(lineItem.product) : null;
+    // Everything below mutates real order/basket state (creating, updating, or removing a price
+    // adjustment). This runs on every basket recalculation site-wide via the dw.order.calculate hook, so
+    // an uncaught exception here - for any reason, on any line item, live selling or not - would break
+    // basket calculation for the entire checkout flow, not just this feature. Never let that happen.
+    try {
+        var existingAdjustment = getExistingAdjustment(lineItem);
+        var eligible = isEligibleForOverride(lineItem);
+        var liveSellingPrice = eligible ? liveSellingPriceHelper.getLiveSellingPrice(lineItem.product) : null;
 
-    // Not eligible, or eligible but the product has no valid price in the live selling price book -
-    // remove any existing adjustment (checkbox unchecked, item un-marked as CSC, or price book entry
-    // removed) so the line item falls back to whatever the normal price resolution gives it.
-    if (!liveSellingPrice) {
+        // Not eligible, or eligible but the product has no valid price in the live selling price book -
+        // remove any existing adjustment (checkbox unchecked, item un-marked as CSC, or price book entry
+        // removed) so the line item falls back to whatever the normal price resolution gives it.
+        if (!liveSellingPrice) {
+            if (existingAdjustment) {
+                lineItem.removePriceAdjustment(existingAdjustment);
+                return true;
+            }
+
+            return false;
+        }
+
+        var quantity = lineItem.quantityValue || 1;
+        // lineItem.price is the TOTAL price for the full line item quantity, not a unit price -
+        // liveSellingPrice (from the price book lookup) is a unit price, so it must be multiplied by
+        // quantity before comparing against/subtracting from lineItem.price. Getting this wrong is
+        // invisible at quantity 1 (unit and total are numerically identical) and only shows up as a wrong
+        // discount at quantity 2+.
+        var currentLineItemTotal = lineItem.price;
+
+        if (!currentLineItemTotal || !currentLineItemTotal.available) {
+            return false;
+        }
+
+        var targetLineItemTotal = liveSellingPrice.multiply(quantity);
+        var targetAdjustmentTotal = targetLineItemTotal.subtract(currentLineItemTotal);
+
         if (existingAdjustment) {
-            lineItem.removePriceAdjustment(existingAdjustment);
-            return true;
+            if (!existingAdjustment.price || !existingAdjustment.price.equals(targetAdjustmentTotal)) {
+                existingAdjustment.setPriceValue(targetAdjustmentTotal.value);
+                return true;
+            }
+
+            return false;
         }
 
+        // AmountDiscount's constructor value is only used to create the adjustment - the actual price is
+        // overridden immediately after via setPriceValue() below - but a zero/non-positive amount here
+        // appears to be rejected by the platform, so pass the real total difference (always positive in
+        // the discount case) rather than a throwaway placeholder.
+        var discountAmount = currentLineItemTotal.subtract(targetLineItemTotal).value;
+        var newAdjustment = lineItem.createPriceAdjustment(ADJUSTMENT_ID, new AmountDiscount(discountAmount > 0 ? discountAmount : 0.01));
+        newAdjustment.setPriceValue(targetAdjustmentTotal.value);
+        return true;
+    } catch (e) {
+        dwLogger.error('Failed to synchronize live selling price adjustment for line item {0}: {1}', lineItem.UUID, e);
         return false;
     }
-
-    var quantity = lineItem.quantityValue || 1;
-    // lineItem.price is the TOTAL price for the full line item quantity, not a unit price - liveSellingPrice
-    // (from the price book lookup) is a unit price, so it must be multiplied by quantity before comparing
-    // against/subtracting from lineItem.price. Getting this wrong is invisible at quantity 1 (unit and
-    // total are numerically identical) and only shows up as a wrong discount at quantity 2+.
-    var currentLineItemTotal = lineItem.price;
-
-    if (!currentLineItemTotal || !currentLineItemTotal.available) {
-        return false;
-    }
-
-    var targetLineItemTotal = liveSellingPrice.multiply(quantity);
-    var targetAdjustmentTotal = targetLineItemTotal.subtract(currentLineItemTotal);
-
-    if (existingAdjustment) {
-        if (!existingAdjustment.price || !existingAdjustment.price.equals(targetAdjustmentTotal)) {
-            existingAdjustment.setPriceValue(targetAdjustmentTotal.value);
-            return true;
-        }
-
-        return false;
-    }
-
-    // AmountDiscount's constructor value is only used to create the adjustment - the actual price is
-    // overridden immediately after via setPriceValue() below - but a zero/non-positive amount here appears
-    // to be rejected by the platform, so pass the real total difference (always positive in the discount
-    // case) rather than a throwaway placeholder.
-    var discountAmount = currentLineItemTotal.subtract(targetLineItemTotal).value;
-    var newAdjustment = lineItem.createPriceAdjustment(ADJUSTMENT_ID, new AmountDiscount(discountAmount > 0 ? discountAmount : 0.01));
-    newAdjustment.setPriceValue(targetAdjustmentTotal.value);
-    return true;
 }
 
 /**

@@ -2222,3 +2222,8 @@ $folder-nav-desktop-nested-folder-border-color: $border-color !default;
 $custom-scrollbar-size: 8px;
 $custom-scrollbar-background-color: $off-white;
 $custom-scrollbar-foreground-color: $light-gray;
+
+/*
+* Z Indexes
+*/
+$z-index-header-popover: 10000 !default; // Used by components/_miniCart.scss - matches autobahn_client_core's value

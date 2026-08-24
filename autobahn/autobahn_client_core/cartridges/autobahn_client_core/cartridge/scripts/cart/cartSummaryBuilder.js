@@ -43,13 +43,21 @@ function getEstimatedValue(currentBasket) {
 // getBasePrice() (a unit price, and deliberately pre-adjustment).
 var getTotalBasePrice = function(basket) {
     var totalBasePriceValue = 0;
-    if (basket) {
-        // Extract all product and coupon line items
-        var productLineItems = basket.getAllProductLineItems().toArray();
-        productLineItems.forEach(function (item) {
-            var adjustedPriceVal = item.getAdjustedPrice() ? item.getAdjustedPrice().value : 0;
-            totalBasePriceValue += adjustedPriceVal;
-        });
+    try {
+        if (basket) {
+            // Extract all product and coupon line items
+            var productLineItems = basket.getAllProductLineItems().toArray();
+            productLineItems.forEach(function (item) {
+                var adjustedPriceVal = item.getAdjustedPrice() ? item.getAdjustedPrice().value : 0;
+                totalBasePriceValue += adjustedPriceVal;
+            });
+        }
+    } catch (e) {
+        // This is called directly from every checkout controller (Checkout.js, CheckoutServices.js,
+        // CheckoutShippingServices.js, Order.js) with no try/catch of its own around the call - an
+        // uncaught error here would break checkout/payment page rendering entirely, not just this field.
+        Logger.getLogger('CartSummary').error('Error calculating total base price: {0}', e);
+        totalBasePriceValue = 0;
     }
     return getFormattedPrice(totalBasePriceValue, basket);
 }
