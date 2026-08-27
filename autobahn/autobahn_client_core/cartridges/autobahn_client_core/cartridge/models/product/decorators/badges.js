@@ -143,11 +143,11 @@ function buildBadgeStyleAndClass(badgeClass, badgeFontSize, badgeBorderColor, ba
 }
 
 
-// Resolves one 'badges' Custom Object by name into {name, class, style}; wrapped in try/catch since liveSelling.js calls this for every product tile and a missing Custom Object type must not break the whole PLP.
-function resolveBadge(badgeName) {
+// Resolves one 'badges' Custom Object by name in a single lookup, returning both whether it exists at all and its currently-visible {name, class, style} (or null if unset/outside its date window) - callers that need to tell "never created" apart from "created but currently off" (see liveSelling.js) can do so from one call instead of two. Wrapped in try/catch since liveSelling.js calls this for every product tile and a missing Custom Object type must not break the whole PLP.
+function resolveBadgeStatus(badgeName) {
     try {
         if (empty(badgeName)) {
-            return null;
+            return {exists: false, badge: null};
         }
 
         var CustomObjectMgr = require('dw/object/CustomObjectMgr');
@@ -157,7 +157,7 @@ function resolveBadge(badgeName) {
         // custom object badges had to be in metadata otherwise a error will be thrown
         var badgeObj = CustomObjectMgr.getCustomObject("badges", badgeName);
         if (empty(badgeObj)) {
-            return null;
+            return {exists: false, badge: null};
         }
 
         var badgeStartDateTime = !empty(badgeObj.custom.badgeStartDateTime) ? badgeObj.custom.badgeStartDateTime : null;
@@ -173,7 +173,7 @@ function resolveBadge(badgeName) {
 
         var resolvedBadgeName = badgeDisplayName || badgeName;
         if (empty(resolvedBadgeName)) {
-            return null;
+            return {exists: true, badge: null};
         }
 
         var badgeStyleData = buildBadgeStyleAndClass(
@@ -191,7 +191,7 @@ function resolveBadge(badgeName) {
         }
 
         if (empty(badgeStartDateTime) && empty(badgeEndDateTime)) {
-            return data;
+            return {exists: true, badge: data};
         }
 
         var cal = Site.getCalendar();
@@ -201,10 +201,16 @@ function resolveBadge(badgeName) {
         var bet = empty(badgeEndDateTime) ? cal_tmp : new Calendar(badgeEndDateTime);
 
         //The Badge will be visible only if start date is after end date and current time is after or is startDateTime and before and is EndeDateTime.
-        return (bet.after(bst) && !(cal.before(bst) || cal.after(bet))) ? data : null;
+        var isVisible = bet.after(bst) && !(cal.before(bst) || cal.after(bet));
+        return {exists: true, badge: isVisible ? data : null};
     } catch (e) {
-        return null;
+        return {exists: false, badge: null};
     }
+}
+
+// Simple {name, class, style}-or-null wrapper around resolveBadgeStatus() for callers (addBadges below) that don't need the exists/badge distinction.
+function resolveBadge(badgeName) {
+    return resolveBadgeStatus(badgeName).badge;
 }
 
 function addBadges(apiProduct) {
@@ -231,6 +237,7 @@ module.exports = function(object, apiProduct) {
 };
 
 module.exports.resolveBadge = resolveBadge;
+module.exports.resolveBadgeStatus = resolveBadgeStatus;
 
 //Enable Old Behaviour
 //var badges = require('rvw_autobahn_core/cartridge/models/product/decorators/badges');

@@ -56,20 +56,12 @@ function getSitePreferenceValue(prefID) {
     }
 }
 
-// Distinguishes "badge Custom Object was never created" (falls back to the Site Preference default) from "it exists but its date window says off" (badge should genuinely disappear, not fall back).
-function liveSellingBadgeObjectExists() {
-    try {
-        return !empty(require('dw/object/CustomObjectMgr').getCustomObject('badges', LIVE_SELLING_BADGE_NAME));
-    } catch (e) {
-        return false;
-    }
-}
-
 module.exports = function liveSelling(object, apiProduct) {
     var isLiveSellingProduct = getCustomBoolean(apiProduct.custom, 'isLiveSellingProduct') || liveSellingCategoryHelper.isProductAssignedToLiveSellingCategory(apiProduct);
-    // Sourced from the 'badges' Custom Object (id: live-selling) so the business can control its look - and turn it on/off via its date window - from Business Manager. Only falls back to the old Site Preference text if that object was never created at all; if it exists but is outside its date window, the badge genuinely stays hidden.
-    var liveSellingBadge = badgesDecorator.resolveBadge(LIVE_SELLING_BADGE_NAME);
-    var badgeText = liveSellingBadge ? liveSellingBadge.name : (liveSellingBadgeObjectExists() ? '' : (getSitePreferenceValue('liveSellingBadgeText') || 'LIVE'));
+    // Sourced from the 'badges' Custom Object (id: live-selling) in a single lookup, so the business can control its look - and turn it on/off via its date window - from Business Manager. Only falls back to the old Site Preference text if that object was never created at all; if it exists but is outside its date window, the badge genuinely stays hidden.
+    var liveSellingBadgeStatus = badgesDecorator.resolveBadgeStatus(LIVE_SELLING_BADGE_NAME);
+    var liveSellingBadge = liveSellingBadgeStatus.badge;
+    var badgeText = liveSellingBadge ? liveSellingBadge.name : (liveSellingBadgeStatus.exists ? '' : (getSitePreferenceValue('liveSellingBadgeText') || 'LIVE'));
 
     define(object, 'isLiveSellingProduct', isLiveSellingProduct);
     define(object, 'liveSellingItemID', getCustomValue(apiProduct.custom, 'liveSellingItemID') || apiProduct.ID);
