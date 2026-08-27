@@ -306,7 +306,7 @@
                             <isif condition="${!empty(product.liveSellingItemID)}">
                                 <span class="badge-product live-selling-badge">${Resource.msgf('label.liveselling.itemid', 'product', null, product.liveSellingItemID)}</span>
                             </isif>
-                            <span class="live-selling-badge-text">${product.liveSellingBadgeText}</span>
+                            <span class="live-selling-badge-text ${product.liveSellingBadgeClass}"<isif condition="${!empty(product.liveSellingBadgeStyle)}"> style="${product.liveSellingBadgeStyle}"</isif>>${product.liveSellingBadgeText}</span>
                         </div>
                     </div>
                 </div>

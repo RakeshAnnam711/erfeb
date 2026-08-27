@@ -143,68 +143,82 @@ function buildBadgeStyleAndClass(badgeClass, badgeFontSize, badgeBorderColor, ba
 }
 
 
+// Resolves one 'badges' Custom Object by name into {name, class, style}; wrapped in try/catch since liveSelling.js calls this for every product tile and a missing Custom Object type must not break the whole PLP.
+function resolveBadge(badgeName) {
+    try {
+        if (empty(badgeName)) {
+            return null;
+        }
+
+        var CustomObjectMgr = require('dw/object/CustomObjectMgr');
+        var Site = require('dw/system/Site');
+        var Calendar = require('dw/util/Calendar');
+
+        // custom object badges had to be in metadata otherwise a error will be thrown
+        var badgeObj = CustomObjectMgr.getCustomObject("badges", badgeName);
+        if (empty(badgeObj)) {
+            return null;
+        }
+
+        var badgeStartDateTime = !empty(badgeObj.custom.badgeStartDateTime) ? badgeObj.custom.badgeStartDateTime : null;
+        var badgeEndDateTime = !empty(badgeObj.custom.badgeEndDateTime) ? badgeObj.custom.badgeEndDateTime : null;
+        var badgeClass = !empty(badgeObj.custom.badgeClass) ? badgeObj.custom.badgeClass : null;
+        var badgeDisplayName = !empty(badgeObj.custom.badgeDisplayName) ? badgeObj.custom.badgeDisplayName : null;
+        var badgeFontSize = !empty(badgeObj.custom.badgeFontSize) ? badgeObj.custom.badgeFontSize : null;
+        var badgeBorderColor = !empty(badgeObj.custom.badgeBorderColor) ? badgeObj.custom.badgeBorderColor : null;
+        var badgeBackgroundColor = !empty(badgeObj.custom.badgeBackgroundColor) ? badgeObj.custom.badgeBackgroundColor : null;
+        var badgeFontColor = !empty(badgeObj.custom.badgeFontColor) ? badgeObj.custom.badgeFontColor : null;
+        var badgeFontStyle = !empty(badgeObj.custom.badgeFontStyle) ? badgeObj.custom.badgeFontStyle : null;
+        var badgeFontWeight = !empty(badgeObj.custom.badgeFontWeight) ? badgeObj.custom.badgeFontWeight : null;
+
+        var resolvedBadgeName = badgeDisplayName || badgeName;
+        if (empty(resolvedBadgeName)) {
+            return null;
+        }
+
+        var badgeStyleData = buildBadgeStyleAndClass(
+            badgeClass,
+            badgeFontSize,
+            badgeBorderColor,
+            badgeBackgroundColor,
+            badgeFontColor,
+            badgeFontStyle,
+            badgeFontWeight
+        );
+        var data = {name: resolvedBadgeName, class: badgeStyleData.className || ''};
+        if (!empty(badgeStyleData.style)) {
+            data.style = badgeStyleData.style;
+        }
+
+        if (empty(badgeStartDateTime) && empty(badgeEndDateTime)) {
+            return data;
+        }
+
+        var cal = Site.getCalendar();
+        var cal_tmp = Site.getCalendar();
+        cal_tmp.add(Calendar.DAY_OF_MONTH, 1);
+        var bst = empty(badgeStartDateTime) ? cal : new Calendar(badgeStartDateTime);
+        var bet = empty(badgeEndDateTime) ? cal_tmp : new Calendar(badgeEndDateTime);
+
+        //The Badge will be visible only if start date is after end date and current time is after or is startDateTime and before and is EndeDateTime.
+        return (bet.after(bst) && !(cal.before(bst) || cal.after(bet))) ? data : null;
+    } catch (e) {
+        return null;
+    }
+}
+
 function addBadges(apiProduct) {
     var badgesData = []
 
     if (apiProduct && apiProduct.attributeModel && apiProduct.attributeModel.attributeGroups) {
         // Pulls down the badges product attribute group and converts it to an array
-
-        var CustomObjectMgr = require('dw/object/CustomObjectMgr');
-        var Site = require('dw/system/Site');
-        var Calendar = require('dw/util/Calendar');
-        var cal = Site.getCalendar();
-        var cal_tmp = Site.getCalendar();
-        cal_tmp.add(Calendar.DAY_OF_MONTH, 1);
-
         var badgeNames = !empty(apiProduct.custom) && !empty(apiProduct.custom.badgeNames) ? apiProduct.custom.badgeNames : [];
-        badgeNames.map((badgeName)=>{
-            // custom object badges had to be in metadata otherwise a error will be thrown
-            var badgeObj = CustomObjectMgr.getCustomObject("badges", badgeName);
-            if(!empty(badgeObj))
-            {
-                var badgeStartDateTime = !empty(badgeObj.custom.badgeStartDateTime) ? badgeObj.custom.badgeStartDateTime : null;
-                var badgeEndDateTime = !empty(badgeObj.custom.badgeEndDateTime) ? badgeObj.custom.badgeEndDateTime : null;
-                var badgeClass = !empty(badgeObj.custom.badgeClass) ? badgeObj.custom.badgeClass : null;
-                var badgeDisplayName = !empty(badgeObj.custom.badgeDisplayName) ? badgeObj.custom.badgeDisplayName : null;
-                var badgeFontSize = !empty(badgeObj.custom.badgeFontSize) ? badgeObj.custom.badgeFontSize : null;
-                var badgeBorderColor = !empty(badgeObj.custom.badgeBorderColor) ? badgeObj.custom.badgeBorderColor : null;
-                var badgeBackgroundColor = !empty(badgeObj.custom.badgeBackgroundColor) ? badgeObj.custom.badgeBackgroundColor : null;
-                var badgeFontColor = !empty(badgeObj.custom.badgeFontColor) ? badgeObj.custom.badgeFontColor : null;
-                var badgeFontStyle = !empty(badgeObj.custom.badgeFontStyle) ? badgeObj.custom.badgeFontStyle : null;
-                var badgeFontWeight = !empty(badgeObj.custom.badgeFontWeight) ? badgeObj.custom.badgeFontWeight : null;
-
-                var resolvedBadgeName = badgeDisplayName || badgeName;
-
-                if(empty(resolvedBadgeName)) return;
-                var badgeStyleData = buildBadgeStyleAndClass(
-                    badgeClass,
-                    badgeFontSize,
-                    badgeBorderColor,
-                    badgeBackgroundColor,
-                    badgeFontColor,
-                    badgeFontStyle,
-                    badgeFontWeight
-                );
-                var data = {name: resolvedBadgeName, class: badgeStyleData.className || ''};
-                if (!empty(badgeStyleData.style)) {
-                    data.style = badgeStyleData.style;
-                }
-                if(empty(badgeStartDateTime) && empty(badgeEndDateTime)){
-                    badgesData.push(data);
-                    return;
-                }
-                
-                var bst = empty(badgeStartDateTime)? cal :  new Calendar(badgeStartDateTime);
-                var bet = empty(badgeEndDateTime)?   cal_tmp :  new Calendar(badgeEndDateTime);
-
-                //The Badge will be visible only if start date is after end date and current time is after or is startDateTime and before and is EndeDateTime.
-
-                if(bet.after(bst) && !(cal.before(bst) || cal.after(bet))){
-                    badgesData.push(data);
-                }
-
+        badgeNames.forEach(function (badgeName) {
+            var resolved = resolveBadge(badgeName);
+            if (resolved) {
+                badgesData.push(resolved);
             }
-        })        
+        });
     }
     return badgesData;
 }
@@ -215,6 +229,8 @@ module.exports = function(object, apiProduct) {
         value: addBadges(apiProduct)
     });
 };
+
+module.exports.resolveBadge = resolveBadge;
 
 //Enable Old Behaviour
 //var badges = require('rvw_autobahn_core/cartridge/models/product/decorators/badges');

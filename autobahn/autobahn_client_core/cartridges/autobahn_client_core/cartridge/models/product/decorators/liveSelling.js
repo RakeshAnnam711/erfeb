@@ -2,6 +2,9 @@
 
 var Site = require('dw/system/Site');
 var liveSellingCategoryHelper = require('*/cartridge/scripts/helpers/liveSellingCategoryHelper');
+var badgesDecorator = require('*/cartridge/models/product/decorators/badges');
+
+var LIVE_SELLING_BADGE_NAME = 'live-selling';
 
 function define(object, name, value) {
     try {
@@ -53,14 +56,27 @@ function getSitePreferenceValue(prefID) {
     }
 }
 
+// Distinguishes "badge Custom Object was never created" (falls back to the Site Preference default) from "it exists but its date window says off" (badge should genuinely disappear, not fall back).
+function liveSellingBadgeObjectExists() {
+    try {
+        return !empty(require('dw/object/CustomObjectMgr').getCustomObject('badges', LIVE_SELLING_BADGE_NAME));
+    } catch (e) {
+        return false;
+    }
+}
+
 module.exports = function liveSelling(object, apiProduct) {
     var isLiveSellingProduct = getCustomBoolean(apiProduct.custom, 'isLiveSellingProduct') || liveSellingCategoryHelper.isProductAssignedToLiveSellingCategory(apiProduct);
-    var badgeText = getSitePreferenceValue('liveSellingBadgeText') || 'LIVE';
+    // Sourced from the 'badges' Custom Object (id: live-selling) so the business can control its look - and turn it on/off via its date window - from Business Manager. Only falls back to the old Site Preference text if that object was never created at all; if it exists but is outside its date window, the badge genuinely stays hidden.
+    var liveSellingBadge = badgesDecorator.resolveBadge(LIVE_SELLING_BADGE_NAME);
+    var badgeText = liveSellingBadge ? liveSellingBadge.name : (liveSellingBadgeObjectExists() ? '' : (getSitePreferenceValue('liveSellingBadgeText') || 'LIVE'));
 
     define(object, 'isLiveSellingProduct', isLiveSellingProduct);
     define(object, 'liveSellingItemID', getCustomValue(apiProduct.custom, 'liveSellingItemID') || apiProduct.ID);
     define(object, 'liveSellingEventID', getSitePreferenceValue('liveSellingEventID'));
     define(object, 'liveSellingBadgeText', badgeText);
+    define(object, 'liveSellingBadgeClass', liveSellingBadge ? liveSellingBadge.class : '');
+    define(object, 'liveSellingBadgeStyle', liveSellingBadge && liveSellingBadge.style ? liveSellingBadge.style : '');
     define(object, 'liveSellingHostName', getSitePreferenceValue('liveSellingHostName'));
     define(object, 'liveSellingEventSummary', getSitePreferenceValue('liveSellingEventSummary'));
 };

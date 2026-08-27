@@ -50,7 +50,7 @@
         let flagEl = el.parentNode?.querySelector('.flag-icon');
         if (!flagEl) return;
 
-        flagEl.className = `flag-icon flag-icon-${gc.toLowerCase()}`;
+        flagEl.className = 'flag-icon flag-icon-' + gc.toLowerCase();
 
     })(document.currentScript);
 </script>

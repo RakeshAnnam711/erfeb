@@ -2032,6 +2032,10 @@
                         font-size: 14px;
                         text-decoration: unset;
                     }
+                    .percent-off{
+                        color: $sale;
+                        font-size: 14px;
+                    }
                     @include media-breakpoint-down(md) {
                         flex-direction: row;
                         gap: 8px;

@@ -13,7 +13,7 @@
 				<isif condition="${product.isLiveSellingProduct}">
 					<div class="live-selling-product-meta">
 						<isif condition="${!empty(product.liveSellingBadgeText)}">
-							<span class="live-selling-badge-text">${product.liveSellingBadgeText}</span>
+							<span class="live-selling-badge-text ${product.liveSellingBadgeClass}"<isif condition="${!empty(product.liveSellingBadgeStyle)}"> style="${product.liveSellingBadgeStyle}"</isif>>${product.liveSellingBadgeText}</span>
 						</isif>
 					</div>
 				<iselse/>

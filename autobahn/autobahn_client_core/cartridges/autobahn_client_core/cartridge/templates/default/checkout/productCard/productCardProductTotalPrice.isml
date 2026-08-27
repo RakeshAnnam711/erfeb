@@ -1,0 +1,9 @@
+<div class="strike-through
+<isif condition=${!lineItem.priceTotal.nonAdjustedPrice}>non-adjusted-price</isif>"
+>
+    ${lineItem.priceTotal.nonAdjustedPrice}
+</div>
+<isif condition="${!empty(lineItem.priceTotal.percentOff)}">
+    <span class="percent-off">${Resource.msgf('label.price.percent.off', 'pricing', null, lineItem.priceTotal.percentOff)}</span>
+</isif>
+<div data-value="${lineItem.priceTotal.priceValue}" class="pricing line-item-total-price-amount item-total-${lineItem.UUID}">${lineItem.priceTotal.price}</div>
