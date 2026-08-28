@@ -59,7 +59,7 @@ function getCustomBoolean(customAttributes, attributeID) {
     }
 }
 
-// liveSellingEventID/HostName/EventDate/BadgeText are static and shared across the current event, so they're Site Preferences rather than per-line-item custom attributes.
+// liveSellingHostName/EventSummary are static and shared across the current event, so they're Site Preferences rather than per-line-item custom attributes.
 function getSitePreferenceValue(prefID) {
     try {
         var value = Site.getCurrent().getCustomPreferenceValue(prefID);
@@ -143,13 +143,14 @@ function doPrePlaceOrder(order) {
                                     isLiveSellingOrder = true;
                                     lineItem.custom.isLiveSellingLineItem = true;
                                     lineItem.custom.liveSellingItemID = liveSellingItemID;
+                                    lineItem.custom.liveSellingHostName = liveSellingHostName;
 
                                     // Read-only safety check - payment is already authorized against the order total by this point, so we can only log a mismatch, never fix it here.
                                     if (!liveSellingPriceAdjustmentHelper.isAdjustmentCorrect(lineItem)) {
                                         dwLogger.error('Live selling price adjustment is missing/incorrect on an already-priced order line item (product {0}, order line item {1}) - order total may not reflect the live selling price.', product.ID, lineItem.UUID);
                                     }
 
-                                    // Host name/event summary aren't duplicated onto the line item - the order-level copy (aggregated below) is the single source of truth.
+                                    // Event summary isn't duplicated onto the line item - the order-level copy (aggregated below) is the single source of truth. Host name is duplicated here too since it's needed at the product/line-item level.
                                     addUnique(liveSellingHostNames, liveSellingHostName);
                                     addUnique(liveSellingEventSummaries, liveSellingEventSummary);
 

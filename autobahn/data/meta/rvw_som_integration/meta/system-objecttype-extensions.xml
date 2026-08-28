@@ -163,6 +163,13 @@ This custom attribute has been added to the ProductLineItem so that it will be a
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="liveSellingHostName">
+                <display-name xml:lang="x-default">Live Selling Host Name</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="isCSCHandoffLineItem">
                 <display-name xml:lang="x-default">Is CSC Handoff Line Item</display-name>
                 <type>boolean</type>
@@ -205,6 +212,7 @@ This custom attribute has been added to the ProductLineItem so that it will be a
                 <display-name xml:lang="x-default">Live Selling</display-name>
                 <attribute attribute-id="isLiveSellingLineItem"/>
                 <attribute attribute-id="liveSellingItemID"/>
+                <attribute attribute-id="liveSellingHostName"/>
             </attribute-group>
             <attribute-group group-id="CSCHandoff">
                 <display-name xml:lang="x-default">CSC Handoff</display-name>

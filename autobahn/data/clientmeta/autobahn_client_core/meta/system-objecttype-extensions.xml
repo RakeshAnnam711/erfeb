@@ -1832,33 +1832,30 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="liveSellingEventID">
-                <display-name xml:lang="x-default">Live Selling Event ID</display-name>
-                <description xml:lang="x-default">Static identifier for the current live selling event, shared across all live selling products.</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-            </attribute-definition>
             <attribute-definition attribute-id="liveSellingHostName">
                 <display-name xml:lang="x-default">Live Selling Host Name</display-name>
-                <description xml:lang="x-default">Static host name for the current live selling event, shared across all live selling products.</description>
-                <type>string</type>
+                <description xml:lang="x-default">Host name for the current live selling event, shared across all live selling products.</description>
+                <type>enum-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Eswar</display>
+                        <value>eswar</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Eswartest</display>
+                        <value>eswartest</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Eswartest123</display>
+                        <value>eswartest123</value>
+                    </value-definition>
+                </value-definitions>
             </attribute-definition>
             <attribute-definition attribute-id="liveSellingEventSummary">
                 <display-name xml:lang="x-default">Live Selling Event Summary</display-name>
                 <description xml:lang="x-default">Static event summary for the current live selling event, shared across all live selling products (e.g. "Sold on IG -6/28 - Summer").</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-            </attribute-definition>
-            <attribute-definition attribute-id="liveSellingBadgeText">
-                <display-name xml:lang="x-default">Live Selling Badge Text</display-name>
-                <description xml:lang="x-default">Static badge text shown on live selling PLP/PDP products. Defaults to LIVE if left blank.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -1871,17 +1868,17 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
-            <attribute-definition attribute-id="liveSellingPlatform">
-                <display-name xml:lang="x-default">Live Selling Platform</display-name>
-                <description xml:lang="x-default">Placeholder attribute, not yet wired into any code - platform the live selling event is/will be hosted on (e.g. Instagram, TikTok, Bambuser). Created for future use.</description>
+            <attribute-definition attribute-id="liveSellingCategoryID">
+                <display-name xml:lang="x-default">Live Selling Category ID</display-name>
+                <description xml:lang="x-default">The category ID products must be assigned to in order to be treated as live selling (hidden price/Add to Cart, excluded from every other category/search). Falls back to the dev category ID (live-selling-dev-products) in code if left blank - set this per environment (e.g. a different ID in production) without needing a code change.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="liveSellingCategoryID">
-                <display-name xml:lang="x-default">Live Selling Category ID</display-name>
-                <description xml:lang="x-default">The category ID products must be assigned to in order to be treated as live selling (hidden price/Add to Cart, excluded from every other category/search). Falls back to the dev category ID (live-selling-dev-products) in code if left blank - set this per environment (e.g. a different ID in production) without needing a code change.</description>
+            <attribute-definition attribute-id="liveSellingPriceBookID">
+                <display-name xml:lang="x-default">Live Selling Price Book ID</display-name>
+                <description xml:lang="x-default">The price book ID holding special live selling prices. Falls back to wgaca-liveselling in code if left blank - set this per environment without needing a code change.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -1914,16 +1911,6 @@
             <attribute-group group-id="northBeamConfig">
                 <display-name xml:lang="x-default">North Beam Config</display-name>
                 <attribute attribute-id="isNorthBeamEnabled"/>
-            </attribute-group>
-            <attribute-group group-id="LiveSelling">
-                <display-name xml:lang="x-default">Live Selling</display-name>
-                <attribute attribute-id="liveSellingEventID"/>
-                <attribute attribute-id="liveSellingHostName"/>
-                <attribute attribute-id="liveSellingEventSummary"/>
-                <attribute attribute-id="liveSellingBadgeText"/>
-                <attribute attribute-id="cscHandoffExpirationHours"/>
-                <attribute attribute-id="liveSellingPlatform"/>
-                <attribute attribute-id="liveSellingCategoryID"/>
             </attribute-group>
             <attribute-group group-id="Frenzy recommendation">
                 <display-name xml:lang="x-default">Frenzy recommendation</display-name>

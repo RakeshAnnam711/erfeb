@@ -25,9 +25,6 @@
         </span>
     </span>
 </del>
-<isif condition="${!empty(lineItem.priceTotal.percentOff)}">
-    <span class="percent-off">${Resource.msgf('label.price.percent.off', 'pricing', null, lineItem.priceTotal.percentOff)}</span>
-</isif>
 
 <iscomment> Show already discounted price when coupons are not applied </iscomment>
 <isif condition="${finalOrigPrice.list !== null}">
