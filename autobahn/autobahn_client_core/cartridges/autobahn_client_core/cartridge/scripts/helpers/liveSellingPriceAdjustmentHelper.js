@@ -2,6 +2,7 @@
 
 var AmountDiscount = require('dw/campaign/AmountDiscount');
 var liveSellingPriceHelper = require('*/cartridge/scripts/helpers/liveSellingPriceHelper');
+var agentBasketLineItemLocks = require('*/cartridge/scripts/helpers/agentBasketLineItemLocks');
 var dwLogger = require('dw/system/Logger').getLogger('LiveSelling', 'PriceAdjustment');
 
 var ADJUSTMENT_ID = 'live-selling-price-override';
@@ -32,9 +33,18 @@ function getCustomBooleanTriState(lineItem, attributeID) {
     }
 }
 
-// Stricter than the cart-locking check elsewhere - both isCSCHandoffLineItem and isLiveSellingLineItem must be explicitly true, since this drives a real money change.
+// isCSCHandoffLineItem is only ever set by the storefront cart-lock sweep (agentBasketLineItemLocks.ensureLockedLineItems), which never runs from within Business Manager - so a line item an agent just added there wouldn't be eligible yet on the very first recalculation, showing full price until the customer's cart happened to load. Falls back to checking the basket's own CSC channel type directly, which the platform sets the moment Business Manager creates it - true immediately, no sweep required.
 function isEligibleForOverride(lineItem) {
-    return getCustomBoolean(lineItem, 'isCSCHandoffLineItem') && getCustomBooleanTriState(lineItem, 'isLiveSellingLineItem') === true;
+    if (getCustomBooleanTriState(lineItem, 'isLiveSellingLineItem') !== true) {
+        return false;
+    }
+
+    if (getCustomBoolean(lineItem, 'isCSCHandoffLineItem')) {
+        return true;
+    }
+
+    var lineItemCtnr = lineItem.lineItemCtnr;
+    return !!lineItemCtnr && (agentBasketLineItemLocks.isAgentBasket(lineItemCtnr) || agentBasketLineItemLocks.isCustomerServiceCenterBasket(lineItemCtnr));
 }
 
 function getExistingAdjustment(lineItem) {
