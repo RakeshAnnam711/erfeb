@@ -298,23 +298,6 @@ coreCart.init = function () {
         document.getElementById('ge-country-selector').click();
     });
 
-    // Polls for CSC line items expiring while the customer sits on the cart page - the server re-validates elapsed time on every poll, the client just triggers the check.
-    const checkExpiredUrl = document.getElementById('check-expired-csc-url');
-    if (checkExpiredUrl && checkExpiredUrl.value) {
-        setInterval(function () {
-            $.ajax({
-                url: checkExpiredUrl.value,
-                type: 'get',
-                dataType: 'json',
-                success: function (data) {
-                    if (data && data.expired) {
-                        window.location.reload();
-                    }
-                }
-            });
-        }, 30000);
-    }
-
     $('body').on('click', '.remove-all-products', function (e) {
         e.preventDefault();
 

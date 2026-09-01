@@ -9,7 +9,7 @@ var ADJUSTMENT_ID = 'live-selling-price-override';
 
 function getCustomBoolean(lineItem, attributeID) {
     try {
-        return !!(lineItem && lineItem.custom && lineItem.custom[attributeID]);
+        return !!lineItem.custom[attributeID];
     } catch (e) {
         return false;
     }

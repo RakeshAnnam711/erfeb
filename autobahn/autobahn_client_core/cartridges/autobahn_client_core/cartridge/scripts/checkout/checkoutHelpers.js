@@ -13,23 +13,11 @@ base.createOrder = function (currentBasket) {
     var OrderMgr = require('dw/order/OrderMgr');
     var Logger = require('dw/system/Logger');
     var order;
-    var cscOrderNotes;
 
     try {
         Logger.warn("autobahn_client_core: checkoutHelpers for the customer " + currentBasket.customerEmail);
         order = Transaction.wrap(function () {
             var newOrder;
-
-            try {
-                if (
-                    currentBasket.defaultShipment &&
-                    !empty(currentBasket.defaultShipment.custom.cscOrderNotes)
-                ) {
-                    cscOrderNotes = currentBasket.defaultShipment.custom.cscOrderNotes;
-                }
-            } catch (e) {
-                Logger.warn("autobahn_client_core: Unable to read cscOrderNotes from basket default shipment: " + e.message);
-            }
 
             if (!empty(currentBasket.custom.flowOrderNo)) {
                 if (session.currency.currencyCode !== currentBasket.currencyCode) {
@@ -38,15 +26,6 @@ base.createOrder = function (currentBasket) {
                 newOrder = OrderMgr.createOrder(currentBasket, currentBasket.custom.flowOrderNo);
             } else {
                 newOrder = OrderMgr.createOrder(currentBasket);
-            }
-
-            try {
-                if (!empty(cscOrderNotes)) {
-                    newOrder.custom.cscOrderNotes = cscOrderNotes;
-                    newOrder.addNote('CSC Order Note', cscOrderNotes);
-                }
-            } catch (e) {
-                Logger.warn("autobahn_client_core: Unable to set cscOrderNotes/addNote on order: " + e.message);
             }
 
             return newOrder;

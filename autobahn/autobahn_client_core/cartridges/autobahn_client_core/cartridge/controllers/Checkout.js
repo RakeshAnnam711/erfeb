@@ -6,9 +6,18 @@ server.extend(module.superModule);
 var BasketMgr = require('dw/order/BasketMgr');
 var CartModel = require('*/cartridge/models/cart');
 var cartSummaryBuilder = require('*/cartridge/scripts/cart/cartSummaryBuilder');
+var Transaction = require('dw/system/Transaction');
+var agentLocks = require('*/cartridge/scripts/helpers/agentBasketLineItemLocks');
 
 server.append('Begin', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
+
+    if (currentBasket && agentLocks.removeExpiredCSCLineItems(currentBasket).length) {
+        Transaction.wrap(function () {
+            require('*/cartridge/scripts/helpers/basketCalculationHelpers').calculateTotals(currentBasket);
+        });
+    }
+
     var productSKU = currentBasket && currentBasket.allProductLineItems && currentBasket.allProductLineItems[0] && currentBasket.allProductLineItems[0].productID;
     var profileForm = server.forms.getForm('profile');
     profileForm.clear();

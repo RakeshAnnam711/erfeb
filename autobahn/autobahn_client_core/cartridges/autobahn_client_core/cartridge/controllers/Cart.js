@@ -175,28 +175,6 @@ server.append('Show', function (req, res, next) {
     next();
 });
 
-// Polled by the client-side cart page to catch CSC line items expiring while the customer sits on the page without navigating - removes anything expired and reports whether to refresh.
-server.get('CheckExpired', function (req, res, next) {
-    var currentBasket = BasketMgr.getCurrentBasket();
-    var expiredUUIDs = [];
-
-    if (currentBasket) {
-        expiredUUIDs = agentLocks.removeExpiredCSCLineItems(currentBasket);
-
-        if (expiredUUIDs.length) {
-            Transaction.wrap(function () {
-                require('*/cartridge/scripts/helpers/basketCalculationHelpers').calculateTotals(currentBasket);
-            });
-        }
-    }
-
-    res.json({
-        expired: expiredUUIDs.length > 0,
-        expiredUUIDs: expiredUUIDs
-    });
-    next();
-});
-
 // Controller endpoint to return the structured cart summary JSON
 server.get('GetSummaryData', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
@@ -241,36 +219,19 @@ server.append('MiniCartShow', function (req, res, next) {
 
 server.get('ClearCart', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
-    var basketCalculationHelpers = require('*/cartridge/scripts/helpers/basketCalculationHelpers');
     var CartModel = require('*/cartridge/models/cart');
 
-    if (!currentBasket) {
-        res.json({ error: false, basket: null });
-        return next();
+    if (currentBasket) {
+        Transaction.wrap(function () {
+            BasketMgr.deleteBasket(currentBasket);
+        });
     }
-
-    Transaction.wrap(function () {
-        var productLineItems = currentBasket.allProductLineItems.toArray();
-        var couponLineItems = currentBasket.couponLineItems.toArray();
-        var priceAdjustments = currentBasket.priceAdjustments.toArray();
-
-        productLineItems.forEach(function (lineItem) {
-            currentBasket.removeProductLineItem(lineItem);
-        });
-        couponLineItems.forEach(function (couponLineItem) {
-            currentBasket.removeCouponLineItem(couponLineItem);
-        });
-        priceAdjustments.forEach(function (priceAdjustment) {
-            currentBasket.removePriceAdjustment(priceAdjustment);
-        });
-
-        basketCalculationHelpers.calculateTotals(currentBasket);
-    });
     agentLocks.clearLockedUUIDs();
 
+    var freshBasket = BasketMgr.getCurrentOrNewBasket();
     res.json({
         error: false,
-        basket: new CartModel(currentBasket)
+        basket: new CartModel(freshBasket)
     });
     return next();
 });

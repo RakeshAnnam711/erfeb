@@ -40,7 +40,7 @@ function getCustomValue(customAttributes, attributeID) {
 
 function getCustomBoolean(customAttributes, attributeID) {
     try {
-        return !!(customAttributes && attributeID in customAttributes && customAttributes[attributeID]);
+        return !!customAttributes[attributeID];
     } catch (e) {
         return false;
     }

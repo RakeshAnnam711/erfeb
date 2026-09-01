@@ -303,10 +303,9 @@
                 <div class="row">
                     <div class="col">
                         <div class="live-selling-product-meta live-selling-product-meta-pdp">
-                            <isif condition="${!empty(product.liveSellingItemID)}">
-                                <span class="badge-product live-selling-badge">${Resource.msgf('label.liveselling.itemid', 'product', null, product.liveSellingItemID)}</span>
+                            <isif condition="${!empty(product.liveSellingBadgeText)}">
+                                <span class="badge-product live-selling-badge ${product.liveSellingBadgeClass}"<isif condition="${!empty(product.liveSellingBadgeStyle)}"> style="${product.liveSellingBadgeStyle}"</isif>>${product.liveSellingBadgeText}${!empty(product.liveSellingItemID) ? ' ' + product.liveSellingItemID : ''}</span>
                             </isif>
-                            <span class="live-selling-badge-text ${product.liveSellingBadgeClass}"<isif condition="${!empty(product.liveSellingBadgeStyle)}"> style="${product.liveSellingBadgeStyle}"</isif>>${product.liveSellingBadgeText}</span>
                         </div>
                     </div>
                 </div>

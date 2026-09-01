@@ -106,7 +106,4 @@
         </div>
     </isif>
 </div>
-<isif condition="${product.isLiveSellingProduct && !empty(product.liveSellingItemID)}">
-    <span class="badge-product live-selling-badge">${Resource.msgf('label.liveselling.itemid', 'product', null, product.liveSellingItemID)}</span>
-</isif>
 <isinclude template="/product/components/badges" />

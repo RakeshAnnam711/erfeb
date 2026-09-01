@@ -65,7 +65,7 @@ function isCustomerServiceCenterBasket(basket) {
 
 function getCustomBoolean(lineItem, attributeID) {
     try {
-        return !!(lineItem && lineItem.custom && lineItem.custom[attributeID]);
+        return !!lineItem.custom[attributeID];
     } catch (e) {
         return false;
     }
@@ -73,9 +73,7 @@ function getCustomBoolean(lineItem, attributeID) {
 
 function setCustomBoolean(lineItem, attributeID, value) {
     try {
-        if (lineItem && lineItem.custom) {
-            lineItem.custom[attributeID] = value;
-        }
+        lineItem.custom[attributeID] = value;
     } catch (e) {
         // Metadata may not be imported yet; session state still protects this request.
     }
@@ -330,39 +328,26 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
 
 // Removes CSC handoff line items sitting unpurchased longer than cscHandoffExpirationHours; clock starts at each item's own creationDate. Returns the removed UUIDs so the caller can patch stale view data.
 function removeExpiredCSCLineItems(basket) {
-    var expiredItems = [];
-    var now = new Date().getTime();
-    var expirationMs = getExpirationMs();
-
     if (!basket || !basket.allProductLineItems) {
         return [];
     }
 
-    collections.forEach(basket.allProductLineItems, function (lineItem) {
-        try {
-            if (isCSCHandoffLineItem(lineItem) && lineItem.creationDate && (now - lineItem.creationDate.getTime()) >= expirationMs) {
-                expiredItems.push(lineItem);
-            }
-        } catch (e) {
-            // Skip this line item on any unexpected read failure rather than blocking the whole check.
-        }
-    });
+    try {
+        var now = new Date().getTime();
+        var expirationMs = getExpirationMs();
+        var expiredItems = basket.allProductLineItems.toArray().filter(function (lineItem) {
+            return isCSCHandoffLineItem(lineItem) && lineItem.creationDate && (now - lineItem.creationDate.getTime()) >= expirationMs;
+        });
+        var removedUUIDs = expiredItems.map(function (lineItem) { return lineItem.UUID; });
 
-    if (!expiredItems.length) {
+        Transaction.wrap(function () {
+            expiredItems.forEach(function (lineItem) { basket.removeProductLineItem(lineItem); });
+        });
+
+        return removedUUIDs;
+    } catch (e) {
         return [];
     }
-
-    var removedUUIDs = expiredItems.map(function (lineItem) {
-        return lineItem.UUID;
-    });
-
-    Transaction.wrap(function () {
-        expiredItems.forEach(function (lineItem) {
-            basket.removeProductLineItem(lineItem);
-        });
-    });
-
-    return removedUUIDs;
 }
 
 function isRestrictedBasket(basket) {
