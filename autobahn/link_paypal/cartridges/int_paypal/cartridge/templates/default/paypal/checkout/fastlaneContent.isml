@@ -1,0 +1,32 @@
+<isset name="sessionAccount" value="${payPalData.cardFieldsConfigs.sessionAccount}" scope="page" />
+<isset name="fastlanePaymentToken" value="${payPalData.cardFieldsConfigs.fastlanePaymentToken}" scope="page" />
+
+<div class="tab-pane active credit-card-content paypal-fastlane-content js-paypal-fastlane-content" id="credit-card-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control" name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+            value="${payPalData.paypalPaymentMethodId}"/>
+        <div class="credit-card-onApprove">
+            <input id="usedPaymentMethod" type="hidden" name="${pdict.forms.billingForm.paypal.usedPaymentMethod.htmlName}"
+                value="${payPalData.cardFieldsConfigs.creditCardPmId}"/>
+        </div>
+
+    <input type="hidden" id="isNonFastlaneUsed" value="${payPalData.isNonFastlaneUsed}" />
+
+    <div class="form-group js-fastlane-used-creditcard-account ${!empty(sessionAccount) && !empty(fastlanePaymentToken) ? '' : 'd-none'} ">
+            <label class="form-control-label" for="fastlaneCreditCardList">${Resource.msg('paypal.cardlist.label', 'locale', null)}</label>
+            <select name="fastlaneCreditCardList" id="fastlaneCreditCardList" class="form-control">
+                <option
+                    value="newcard"
+                    id="newCardAccount"
+                    data-payment-method="${payPalData.paypalPaymentMethodId}"
+                    selected="selected"
+                    >
+                    ${Resource.msg('paypal.cardlist.newcard', 'locale', null)}
+                </option>
+                <isinclude template="paypal/checkout/fastlaneSessionAccount"/>
+            </select>
+        </div>
+
+        <isinclude template="paypal/checkout/fastlaneHostedFields"/>
+    </fieldset>
+</div>

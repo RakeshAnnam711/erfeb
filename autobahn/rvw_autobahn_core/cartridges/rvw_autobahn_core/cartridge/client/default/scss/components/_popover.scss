@@ -1,0 +1,36 @@
+.popover {
+    font-family: $body-font;
+    font-size: $popover-font-size;
+    background-color: $popover-body-background-color;
+    border-color: $popover-border-color;
+    box-shadow: $popover-box-shadow;
+    border-radius: $popover-border-radius;
+    max-width: $popover-max-width;
+    .popover-header {
+        @include header(5);
+        background-color: $popover-header-background-color;
+        color: $popover-header-text-color;
+        border-top-left-radius: calc(#{$popover-border-radius} - 1px);
+        border-top-right-radius: calc(#{$popover-border-radius} - 1px);
+    }
+    .popover-body {
+        padding: $popover-body-padding;
+        font-size: $popover-font-size;
+        p {
+            font-size: $popover-font-size;
+        }
+        ul:only-child {
+            margin-bottom: 0;
+        }
+    }
+    &.bs-popover-bottom {
+        .popover-header:before {
+            display: none;
+        }
+        .arrow {
+            &:after {
+                border-bottom-color: $popover-border-color;
+            }
+        }
+    }
+}

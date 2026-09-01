@@ -1,0 +1,32 @@
+<iscache type="relative" hour="1" varyby="price_promotion" />
+<isif condition="${slotcontent}">
+    <iscomment> Render a tile of the category Name and the Category Landing Slot Image field </iscomment>
+    <div class="category-slot container">
+        <isif condition="${slotcontent && slotcontent.calloutMsg}">
+            <h2>
+                <isprint value="${slotcontent.calloutMsg}" encoding="off"/>
+            </h2>
+        </isif>
+
+        <div class="row">
+            <isloop items="${slotcontent.content}" var="category">
+                <isif condition="${'slotBannerImage' in category.custom && category.custom.slotBannerImage}">
+                    <div class="col-sm-6 col-md-4 category-item">
+                        <a class="category-tile text-placement-below aspect-ratio-square zoom" href="${URLUtils.url('Search-Show', 'cgid', category.ID)}" title="${category.displayName}">
+                            <div class="image-cropper">
+                                <div class="image-wrapper">
+                                    <span class="background-image" role="img" aria-label="${category.displayName}"
+                                          style="background-image: url(${category.custom.slotBannerImage.getURL()});"></span>
+                                </div>
+                            </div>
+                            <div class="category-tile-text text-${'textAlignment' in category.custom ? category.custom.textAlignment || 'center' : 'center'}">
+                                <div class="display-name"><isprint value="${category.displayName}" encoding="htmlcontent"/></div>
+                            </div>
+                        </a>
+                    </div>
+                </isif>
+            </isloop>
+        </div>
+    </div>
+
+</isif>

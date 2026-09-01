@@ -1,0 +1,2 @@
+<isinclude template="account/paypal/buttons/removeBtPayment" />
+<isinclude template="account/paypal/buttons/makeDefault" />

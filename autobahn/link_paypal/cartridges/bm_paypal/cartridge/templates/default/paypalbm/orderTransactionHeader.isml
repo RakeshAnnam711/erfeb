@@ -1,0 +1,54 @@
+<div class="paypalbm_header">
+    <table>
+        <tr>
+            <td width="100%" class="table_title w e s n">
+                ${Resource.msgf('ordertransaction.title', 'paypalbm', null, transaction.order.orderNo)}
+            </td>
+        </tr>
+        <tr>
+            <td class="w e s"></td>
+        </tr>
+    </table>
+</div>
+
+<div class="paypalbm_selectother_transactions">
+    <span>${Resource.msg('ordertransaction.othertransactions', 'paypalbm', null)}:</span>
+
+    <select class="js_paypalbm_order_transactions_ids">
+        <option value="">${transaction.mainTransactionId}</option>
+
+        <isif condition="${!empty(transaction.captures)}">
+            <isloop items="${transaction.captures}" var="captureTransaction">
+                <option value="${captureTransaction.id}" ${captureTransaction.id === transaction.captureID ? 'selected="selected"' : ''}>
+                    ${Resource.msg('capture.amount', 'paypalbm', null)} ${captureTransaction.id}
+                </option>
+            </isloop>
+        </isif>
+    </select>
+</div>
+
+<h2>${Resource.msgf('transaction.detail.title', 'paypalbm', null, transaction.transactionid)}</h2>
+
+<isif condition="${!empty(transaction.captureID)}">
+    <h2>${Resource.msgf('capture.detail.title', 'paypalbm', null, transaction.captureID)}</h2>
+</isif>
+
+<table class="paypalbm_transaction_detail_table infobox w e s n">
+    <tr>
+        <td class="infobox_title top">
+            ${Resource.msg('transaction.detail.customername', 'paypalbm', null)}:
+        </td>
+
+        <td class="infobox_item top">
+            ${Resource.msgf('transaction.detail.customerformatwithstatus', 'paypalbm', null, transaction.firstname, transaction
+            .lastname)}
+        </td>
+    </tr>
+    <tr class="paypalbm_gray">
+        <td class="infobox_title top">
+            ${Resource.msg('transaction.detail.customeremail', 'paypalbm', null)}:
+        </td>
+
+        <td class="infobox_item top">${transaction.email}</td>
+    </tr>
+</table>

@@ -1,0 +1,47 @@
+<div class="js-paypal-cc-fields paypal-card-fields ${isSavedCreditCards && isCreditCardVaultEnabled ? 'd-none' : ''}" data-configs="${JSON.stringify(payPalData.cardFieldsConfigs)}">
+    <div class="js-paypalLoader paypal-loader-container">
+        <i class="paypal-loader"></i>
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-label">
+            ${Resource.msg('paypal.creditcard.field.cardholder', 'locale', null)}
+        </label>
+
+        <div class="card-field" id="card-name-field-container"></div>
+    </div>
+
+    <div class="form-group required">
+        <label class="form-control-label">
+            ${Resource.msg('paypal.creditcard.field.cardNumber', 'locale', null)}
+        </label>
+
+        <input type="text" name="${payPalData.cardFieldsConfigs.fieldsConfig.numberHtmlName}" id="cardNumber"  class="cardNumber d-none" value=""/>
+
+        <div class="card-field" id="card-number-field-container"></div>
+    </div>
+
+    <div class="form-group required">
+        <label class="form-control-label">
+            ${Resource.msg('paypal.creditcard.field.cvv', 'locale', null)}
+        </label>
+
+        <div class="card-field" id="card-cvv-field-container"></div>
+    </div>
+
+    <div class="form-group required">
+        <label class="form-control-label">
+            ${Resource.msg('paypal.creditcard.field.expirationdate', 'locale', null)}
+        </label>
+
+        <div class="card-field" id="card-expire-field-container"></div>
+    </div>
+
+    <div class="form-group custom-control custom-checkbox ${!payPalData.cardFieldsConfigs.isShowCheckbox ? 'd-none' : ''}" id="saveCreditCardAccountContainer">
+        <input class="custom-control-input" name="saveCreditCardAccount" id="saveCreditCardAccount" type="checkbox" />
+
+        <label class="custom-control-label" for="saveCreditCardAccount">
+            ${Resource.msg('paypal.creditcard.savecard', 'locale', null)}
+        </label>
+    </div>
+</div>

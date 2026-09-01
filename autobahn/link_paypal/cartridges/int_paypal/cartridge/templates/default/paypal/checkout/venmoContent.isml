@@ -1,0 +1,24 @@
+<div class="tab-pane venmo-content js-venmo-content" id="venmo-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control"
+               name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+               value="${pdict.paypal.paypalPaymentMethodId}"/>
+
+        <div class="paypal_onApprove">
+            <input class="js-used-payment-method" type="hidden"
+                name="${pdict.forms.billingForm.paypal.usedPaymentMethod.htmlName}"
+                value="Venmo"/>
+        </div>
+
+        <div class="billing-venmo-btn-container">
+            <div class="paypalLoader paypal-loader-container js-venmo-loader">
+                <i class="paypal-loader"></i>
+            </div>
+            <div class="js-venmo-btn"
+                data-customer-email="${payPalData.customerEmail}"
+                data-funding="venmo"
+                data-paypal-button-config="${JSON.stringify(pdict.paypal.buttonConfig)}">
+            </div>
+        </div>
+    </fieldset>
+</div>

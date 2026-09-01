@@ -1,0 +1,43 @@
+<div class="payment-details">
+    <isloop items="${pdict.order.billing.payment.selectedPaymentInstruments}" var="payment">
+        <isset name="methodId" value="${payment.paymentMethod}" scope="page" />
+        <isset name="methodLabel" value="${payment.name}" scope="page" />
+        <isset name="hasCardDetails" value="${!empty(payment.maskedCreditCardNumber)}" scope="page" />
+        <isset name="displayMethodName" value="${!empty(payment.displayMethodName) ? payment.displayMethodName : (!empty(methodLabel) ? methodLabel : methodId)}" scope="page" />
+        <isset name="summaryAmount" value="${!empty(payment.formattedAmount) ? payment.formattedAmount : (!empty(payment.amount) ? payment.amount : pdict.order.priceTotal)}" scope="page" />
+
+        <isif condition="${['AFFIRM', 'STRIPE_AFFIRM'].includes(methodId)}">
+            <isset name="displayMethodName" value="${'Affirm'}" scope="page" />
+        <iselseif condition="${['KLARNA', 'STRIPE_KLARNA'].includes(methodId)}" />
+            <isset name="displayMethodName" value="${'Klarna'}" scope="page" />
+        <iselseif condition="${['APPLEPAY', 'APPLE_PAY', 'STRIPE_APPLEPAY', 'STRIPE_APPLE_PAY'].includes(methodId)}" />
+            <isset name="displayMethodName" value="${'Apple Pay'}" scope="page" />
+        <iselseif condition="${['GOOGLEPAY', 'GOOGLE_PAY', 'STRIPE_GOOGLEPAY', 'STRIPE_GOOGLE_PAY'].includes(methodId)}" />
+            <isset name="displayMethodName" value="${'Google Pay'}" scope="page" />
+        <iselseif condition="${['AMAZON_PAY', 'amazon_pay', 'STRIPE_AMAZON_PAY', 'AMAZONPAY', 'AmazonPay', 'STRIPE_AMAZONPAY'].includes(methodId)}" />
+            <isset name="displayMethodName" value="${'Amazon Pay'}" scope="page" />
+        <iselseif condition="${['AFTERPAY_CLEARPAY', 'AFTERPAY', 'STRIPE_AFTERPAY_CLEARPAY', 'STRIPE_AFTERPAY'].includes(methodId)}" />
+            <isset name="displayMethodName" value="${'Afterpay'}" scope="page" />
+        <iselseif condition="${methodId && methodId.indexOf('_') > -1 && (empty(displayMethodName) || displayMethodName === methodId)}" />
+            <isset name="displayMethodName" value="${methodId.replace(/STRIPE_/g, '').toLowerCase().replace(/_/g, ' ')}" scope="page" />
+        </isif>
+
+        <isif condition="${empty(displayMethodName)}">
+            <isset name="displayMethodName" value="${'Payment Method'}" scope="page" />
+        </isif>
+
+        <isif condition="${['CREDIT_CARD', 'PAYPAL_CREDIT_CARD'].includes(methodId) && hasCardDetails}">
+            <div class="payment-method-name">${displayMethodName}</div>
+            <isinclude template="checkout/billing/paymentOptions/creditCardSummary" />
+        <iselseif condition="${['PayPal', 'Venmo', 'ApplePay', 'GooglePay'].includes(methodId)}" />
+            <isinclude template="paypal/checkout/paypalSummary" />
+        <iselse/>
+            <div class="payment-method-summary">
+                <div class="payment-method-name">${displayMethodName}</div>
+                <isif condition="${!empty(summaryAmount)}">
+                    <div class="payment-method-amount">${summaryAmount}</div>
+                </isif>
+            </div>
+        </isif>
+    </isloop>
+</div>

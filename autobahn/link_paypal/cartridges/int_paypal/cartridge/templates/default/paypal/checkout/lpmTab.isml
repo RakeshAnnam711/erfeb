@@ -1,0 +1,5 @@
+<li class="nav-item js-nav-item-${lpmId} d-none">
+    <a class="nav-link js-lpm-tab js-${lpmId}-tab" data-toggle="tab" href="${'#' + lpmId}-content" role="tab">
+        <div class="js-lpm-mark js-${lpmId}-mark"></div>
+    </a>
+</li>

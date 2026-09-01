@@ -1,0 +1,31 @@
+<isdecorate template="paypalbm/util/pageTemplatePreferences">
+    <input type="hidden" name="client-id" value="" />
+
+    <isinclude template="preferences/configCheck" />
+
+    <div class="py-3" data-relations="${pdict.relations}">
+        <ul class="nav nav-tabs" role="tablist">
+            <isloop items="${pdict.customPreferencesConfig.sections}" var="section" status="loopStatus">
+                <isif condition="${pdict.activeTabs[section.groupId]}">
+                    <li class="nav-item" role="presentation">
+                        <a href="${'#' + section.key.toLowerCase()}" id="${section.key.toLowerCase()}-tab" class="nav-link ${loopStatus.first ? 'active' : ''}" data-toggle="tab" role="tab" aria-selected="true">
+                            ${section.name}
+                        </a>
+                    </li>
+                </isif>
+            </isloop>
+        </ul>
+
+        <div class="tab-content">
+            <isloop items="${pdict.customPreferencesConfig.sections}" var="section" status="loopStatus">
+                <isif condition="${pdict.activeTabs[section.groupId]}">
+                    <div class="tab-pane fade py-3 ${loopStatus.first ? 'active show' : ''}" id="${section.key.toLowerCase()}" role="tabpanel" aria-labelledby="${section.key.toLowerCase()}-tab">
+                        <isinclude url="${URLUtils.url('Preferences-Group', 'group_id', section.groupId)}" />
+                    </div>
+                </isif>
+            </isloop>
+
+            <isinclude template="preferences/components/applyToAllSites" />
+        </div>
+    </div>
+</isdecorate>

@@ -1,0 +1,19 @@
+<li class="nav-item" data-method-id="${paymentOption.ID}">
+    <a class="nav-link adyen-tab active <isif condition="${pdict.selectedPaymentMethod === 'AdyenComponent'}">active</isif>" data-toggle="tab" href="#adyen-component-content" role="tab">
+         <!--- Radio button --->
+        <iscomment> <i class="fa fa-check-circle"></i>
+        <i class="fa fa-circle-o"></i>
+
+        <img class="adyen-option"
+             src="${URLUtils.staticURL('/images/credit.png')}"
+             height="32"
+             alt="${paymentOption.name}"
+             title="${paymentOption.name}"
+        >
+        <span class="payment-option-title">Debit/Credit Card</span> </iscomment>
+
+    </a>
+
+</li>
+<isinclude template="checkout/billing/paymentOptions/adyenComponentContent"/>
+

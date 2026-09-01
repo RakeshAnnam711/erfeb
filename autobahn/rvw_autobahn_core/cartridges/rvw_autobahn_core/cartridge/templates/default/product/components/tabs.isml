@@ -1,0 +1,27 @@
+<isif condition="${typeof product === 'undefined' || empty(product)}">
+    <isset name="product" value="${pdict.product}" scope="page"/>
+</isif>
+<isset name="numberSlides" value="${(product.images['large'].length + ('pdpGalleryAssets' in product ? product.pdpGalleryAssets.length : 0)).toFixed()}" scope="page" />
+<isset name="hasSingleImage" value="${numberSlides > 1 ? false : true}" scope="page"/>
+<isif condition="${product.tabs && product.tabs.length > 0}">
+    <div class="tabs ${hasSingleImage ? '' : 'product-has-thumbnails'}">
+        <ul class="nav nav-tabs nav-fill" role="tablist">
+            <isloop items="${product.tabs}" var="tabTitle" status="loopstate">
+                <li class="nav-item" role="tab" aria-controls="pane${loopstate.index}" aria-selected="${loopstate.first ? 'true' : 'false'}">
+                    <a class="nav-link ${loopstate.first ? 'active' : ''}" id="tab${loopstate.index}" data-toggle="tab" href="${'#pane' + loopstate.index}">
+                        ${tabTitle.title}
+                    </a>
+                </li>
+            </isloop>
+        </ul>
+        <div class="tab-content">
+            <isloop items="${product.tabs}" var="tabDetails" status="loopstate">
+                <div class="tab-pane p-3 ${loopstate.first ? 'show active' : ''}" id="pane${loopstate.index}" role="tabpanel" aria-labelledby="tab${loopstate.index}">
+                    <p>
+                        <isprint value="${tabDetails.content}" encoding="off" />
+                    </p>
+                </div>
+            </isloop>
+        </div>
+    </div>
+</isif>

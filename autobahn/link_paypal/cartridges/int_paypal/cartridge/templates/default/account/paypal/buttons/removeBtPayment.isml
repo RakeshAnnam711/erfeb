@@ -1,0 +1,5 @@
+<button class="card-link remove-pp-payment pull-right js-remove-pp-payment"
+    aria-label="${Resource.msg('paypal.account.button.removepayment.arialabel', 'locale', null)}"
+    data-id="${customerSavedCreditCard.UUID}">
+    ${Resource.msg('paypal.accountslist.remove', 'locale', null)}
+</button>

@@ -1,0 +1,34 @@
+<div id="sizing" class="sg__header3">Sizing</div>
+<p>The custom sizing extends what already exists in Bootstrap by allowing breakpoints to be added, giving it more flexibility for such applications as in page designer components. Original Bootstrap documentation can be found <a href="https://getbootstrap.com/docs/4.0/utilities/sizing/" target="_blank" rel="noopener">here</a>.</p>
+<div class="row">
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="w-auto w-sm-100 w-md-75 w-lg-50 w-xl-25">Width with Breakpoints</div>
+    </div>
+    <div class="col-md-6">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="w-auto w-sm-100 w-md-75 w-lg-50 w-xl-25">w-auto w-sm-100 w-md-75 w-lg-50 w-xl-25</div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="mw-auto mw-sm-100 mw-md-75 mw-lg-50 mw-xl-25">Max-Width with Breakpoints</div>
+    </div>
+    <div class="col-md-6">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="mw-auto mw-sm-100 mw-md-75 mw-lg-50 mw-xl-25">mw-auto mw-sm-100 mw-md-75 mw-lg-50 mw-xl-25</div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="h-auto h-sm-100 h-md-75 h-lg-50 h-xl-25">Height with Breakpoints</div>
+    </div>
+    <div class="col-md-6">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="h-auto h-sm-100 h-md-75 h-lg-50 h-xl-25">h-auto h-sm-100 h-md-75 h-lg-50 h-xl-25</div></script></code></pre>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 pt-2 pb-3 pt-md-0 pb-md-0">
+        <div class="mh-auto mh-sm-100 mh-md-75 mh-lg-50 mh-xl-25">Max-Height with Breakpoints</div>
+    </div>
+    <div class="col-md-6">
+        <pre><code class='language-markup'><script type="text/plain" class="language-markup"><div class="mh-auto mh-sm-100 mh-md-75 mh-lg-50 mh-xl-25">mh-auto mh-sm-100 mh-md-75 mh-lg-50 mh-xl-25</div></script></code></pre>
+    </div>
+</div>

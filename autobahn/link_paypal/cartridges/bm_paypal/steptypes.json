@@ -1,0 +1,197 @@
+{
+	"step-types":{
+	   "script-module-step":[
+          {
+            "@type-id": "custom.PaypalSendFailedTransactionEmail",
+            "@supports-parallel-execution": "true",
+            "@supports-site-context": "true",
+            "@supports-organization-context": "false",
+            "description": "PayPal Send Failed Transaction Email",
+            "module": "bm_paypal/cartridge/scripts/steps/sendFailedTransactionEmail.js",
+            "function": "sendFailedTransactionEmail",
+            "transactional": "false",
+            "timeout-in-seconds": "900",
+            "parameters": {
+                "parameter": [
+                    {
+                        "@name": "Email",
+                        "@type": "string",
+                        "@required": "false",
+                        "description": "Email to send an alert",
+                        "default-value": ""
+                    },
+                    {
+                        "@name": "DaysToRetrieve",
+                        "@type": "long",
+                        "description": "the period which can be used for retrieving the respective transactions",
+                        "min-value": "1",
+                        "max-value": "365",
+                        "default-value": "7"
+                    },
+                    {
+                        "@name": "StatusesToCheck",
+                        "@type": "string",
+                        "description": "the statuses that will be considered to be checked, namely",
+                        "default-value": ""
+                    },
+                    {
+                        "@name": "AlertsInBM",
+                        "@type": "boolean",
+                        "description": "activates alerts for failed transactions in Business Manager",
+                        "default-value": "true"
+                    }
+                ]
+            },
+            "status-codes": {
+                "status": [
+                    {
+                        "@code": "ERROR",
+                        "description": "Used when the step failed with an error."
+                    },
+                    {
+                        "@code": "FINISHED",
+                        "description": "Used when the step finished successfully."
+                    },
+                    {
+                        "@code": "FINISHED_WITH_WARNINGS",
+                        "description": "Used when the step finished with warnings."
+                    }
+                ]
+            }
+          },
+           {
+               "@type-id": "custom.PaypalUseOrderTrackingApi",
+               "@supports-parallel-execution": "true",
+               "@supports-site-context": "true",
+               "@supports-organization-context": "false",
+               "description": "Add order into Paypal`s tracking API",
+               "module": "bm_paypal/cartridge/scripts/steps/createOrderTracking.js",
+               "function": "createOrderTracking",
+               "transactional": "false",
+               "timeout-in-seconds": "900",
+               "parameters": {
+                   "parameter": [
+                       {
+                           "@name": "Days",
+                           "@type": "long",
+                           "description": "The period for which to select orders for tracking",
+                           "min-value": "1",
+                           "default-value": "7",
+                           "@required": "true"
+                       }
+                   ]
+               },
+               "status-codes": {
+                   "status": [
+                       {
+                           "@code": "ERROR",
+                           "description": "Used when the step failed with an error."
+                       },
+                       {
+                           "@code": "FINISHED",
+                           "description": "Used when the step finished successfully."
+                       }
+                   ]
+               }
+           }
+	    ],
+        "chunk-script-module-step": [
+            {
+                "@type-id": "custom.PpSiteArchiveProcessing",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "false",
+                "@supports-organization-context": "true",
+                "description": "Configuration check. Processing files inside the archive.",
+                "module": "bm_paypal/cartridge/scripts/steps/siteArchiveProcessing.js",
+                "before-step-function": "beforeStep",
+                "total-count-function": "getTotalCount",
+                "read-function": "read",
+                "process-function": "process",
+                "write-function": "write",
+                "after-step-function": "afterStep",
+                "chunk-size": 1,
+                "transactional": "false",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name": "Options",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": "true",
+                            "default-value": "{\"siteId\":\"RefArch\",\"fileName\":\"site-export.zip\",\"logs\":false}",
+                            "description": "Options for Job."
+                        },
+                        {
+                            "@name": "ConnectionData",
+                            "@type": "string",
+                            "@required": "true",
+                            "@trim": "true",
+                            "default-value": "{}",
+                            "description": "Connection Data for Job."
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when the step finished successfully."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type-id": "custom.MigrateBillingAgreementIDsToVaultTokens",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Converts saved PayPal accounts, namely Billing Agreement IDs to Vault tokens",
+                "module": "bm_paypal/cartridge/scripts/steps/migrateBillingAgreement.js",
+                "before-step-function": "beforeStep",
+                "total-count-function": "getTotalCount",
+                "read-function": "read",
+                "process-function": "process",
+                "write-function": "write",
+                "after-step-function": "afterStep",
+                "chunk-size": 50,
+                "transactional": "false",
+                "parameters": {
+                    "parameter": [
+                        {
+                            "@name": "sourceFolderPath",
+                            "@type": "string",
+                            "@required": "false",
+                            "@trim": "true",
+                            "default-value": "PayPalMigrateBillingAgreementIDsToVaultTokens",
+                            "description": "Target folder path related to IMPEX/src"
+                        },
+                        {
+                            "@name": "sourceFileName",
+                            "@type": "string",
+                            "@required": "false",
+                            "@trim": "true",
+                            "default-value": "migration_report",
+                            "description": "Source file name, default extension is .csv"
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when the step finished successfully."
+                        }
+                    ]
+                }
+            }
+        ]
+	}
+ }

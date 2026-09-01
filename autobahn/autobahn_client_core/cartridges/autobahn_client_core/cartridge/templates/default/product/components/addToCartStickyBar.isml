@@ -1,0 +1,47 @@
+
+<div class="addtocart-sticky-bar" id="addtocart-sticky-bar" cypress-target="addToCartStickyBar">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-7 col-md-5 name">
+                <h2 class="product-name">${product.productName}</h2>
+            </div>
+
+            <!-- Jump links to PDP sections - Currently Deactivated. -->
+            <iscomment>
+                <div class="col-5 links">
+                    <isif condition="${!empty(product.sampleLink)}">
+                        <a class="jumplink" href="#sampleLink"> Sample Link </a>
+                    </isif>
+
+                    <isif condition="${!empty(product.reviews)}">
+                        <a class="jumplink" href="#reviews"> Product Reviews </a>
+                    </isif>
+                </div>
+            </iscomment>
+            <isset name="loopState" value="{count: 1}" scope="page" />
+            <div class="d-none d-md-flex col-md-4 attribute-container">
+                <isif condition="${product.enableVariantSelectionInPdpStickyAddToCart}">
+                    <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                        <div class="sticky-attribute clearfix" data-attr="${attr.id}">
+                            <iscomment>To save space, always use select dropdowns for non-color attributes</iscomment>
+                            <isif condition="${attr.id !== 'color'}">
+                                <isset name="noSwatchOverride" value="${true}" scope="page"/>
+                            </isif>
+                            <isinclude template="product/components/variationAttribute" />
+                        </div>
+                    </isloop>
+                </isif>
+            </div>
+            <div class="col-5 col-md-3 add-to-cart-btn">
+                <!-- Add To Cart -->
+                <isset name="hideExtensions" value="true" scope="page" />
+                <isif condition="${product.productType === 'set' || product.productType === 'bundle'}">
+                    <isinclude template="product/components/addToCartGlobal" />
+                <iselse/>
+                    <isinclude template="product/components/addToCartProduct" />
+                </isif>
+                <isset name="hideExtensions" value="false" scope="page" />
+            </div>
+        </div>
+    </div>
+</div>

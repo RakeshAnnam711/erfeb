@@ -1,0 +1,188 @@
+.paypalbm_header {margin-bottom:1rem}
+.paypalbm_footer {padding:1.5rem 0 0 0}
+.paypal_hide {display:none}
+
+.paypalbm_content table {width:100%; border-spacing:0; border-collapse:collapse}
+.paypalbm_content h2 {color: #84BD00; padding:0 0 1rem; margin:0; font-size:1.5rem; font-weight:bold; line-height:2.5rem}
+.paypalbm_content .error_box {margin-bottom:1rem}
+.paypalbm_content .paypalbm_transaction_detail_table {font-size:1.3rem; line-height:1.4; margin-bottom:1rem; width:100%}
+.paypalbm_content .paypalbm_transaction_detail_table td {padding:0.4rem 0.6rem}
+.paypalbm_content .paypalbm_gray {background-color:#fcfcfc}
+.paypalbm_content .paypalbm_table_head {font-size:1.4rem; background:#f0f0f0; font-weight:bold}
+.paypalbm_content .paypalbm_table_head td {border-bottom:0.1rem solid #dadada}
+.paypalbm_content .infobox_title {width:18.5rem; text-align:right}
+.paypalbm_content .infobox_title i {font-weight:normal; color:#777}
+.paypalbm_content select.inputfield {min-width: 286px}
+.paypalbm_detail_table tr:nth-child(even) {background-color:#fcfcfc}
+.paypalbm_content .paypalbm_detail_table {font-size: 1rem;}
+
+.paypalbm_pagination {padding:1rem 0 0 0}
+.paypalbm_pagination .pagecursortxt {padding:0 0.2rem}
+
+.paypalbm_window_content .paypalbm_content {padding:1rem 1rem 0 1rem}
+.paypalbm_window_content .paypalbm_footer {display:none}
+.paypalbm_window_content .paypalbm_header {display:none}
+.paypalbm_window_content .x-window-body {background:#fff}
+.paypalbm_window_content table {width:inherit}
+
+.paypalbm_selectother_transactions {float:right}
+.paypalbm_selectother_transactions span {font-size:1.3rem}
+
+.paypalbm_transaction_actions {padding:0 0 0.5rem 0}
+.paypalbm_transaction_actions li {display:inline-block; padding:0 0.5rem 0 0}
+.paypalbm_transaction_actions li span {display:inline-block; padding:0.2rem 0.6rem; text-decoration:none; background-color:#d9d9d9; border:0.1rem solid #d9d9d9; border-radius:0.3rem; color:#00629b; cursor:pointer; margin:0; white-space:nowrap; font-size:1.2rem}
+.paypalbm_transaction_actions li span:hover {background-color:#eee; border:0.1rem solid #ccc}
+
+.paypal_action_form h2 {color: #84BD00; padding:0 0 1rem; margin:0; font-size:1.5rem; font-weight:bold; line-height:1.1em}
+.paypal_action_form input {width:10rem; border:0.1rem solid #a5aeb5}
+.paypal_action_form .js_paypal_reference_transaction_card input {width:20rem}
+.paypal_action_form textarea {width:30rem}
+.paypal_action_form .paypal_error_field .infobox_title {color:#f00}
+.paypal_action_form .paypal_error_field input {border-color:#f00}
+.paypal_action_form table {width:100%; border-spacing:0; border-collapse:collapse}
+
+.paypal_error_msg_box {display:none; min-height:3rem; margin:0 0 1rem 0; border:0.1rem solid #ffcf0f; padding:1.2rem 1.2rem 0 6rem; color:#000; background: #ffffde url('../images/icon-alert.gif') no-repeat 1.5rem 1rem; font-size:1.3rem; line-height:1.3em}
+.paypal_error_msg_box p {padding:0 0 1.2rem 0}
+
+.paypal_ba_customer_search {padding: 0.6rem}
+
+.js_paypal_create_reference_transaction {float: right}
+
+.paypal_new_transaction_form td .biginput{width: 22rem;}
+
+.js_paypal_toggle_button {margin-left: 1rem; margin-bottom: 1rem; padding: 0 0.7rem}
+
+.paypal-create-new-transaction {float: right}
+
+.none {display: none}
+.block {display: block}
+.table-row {display: table-row}
+
+.paypalbm_transactions {background-color:rgba(192, 232, 242, 0.5); padding:10px 20px; max-width:330px; border-radius:15px; font-style:normal; font-size:14px; line-height:0.9; font-weight:700}
+.paypalbm_transaction_success {color:#1889b6}
+.paypalbm_transaction_failure {color:#e31616}
+.switch_link.paypalbm_active_link.paypalbm_active_link {border-top-left-radius:0.3rem; border-top-right-radius:0.3rem; display:inline-block; margin:-0.3rem -0.4rem 0 -0.4rem; padding:0.4rem 1.2rem; color:#00629b; font-weight:bold; text-decoration:inherit;background-color:transparent; cursor:default}
+
+.pp_accordion {margin-bottom:15px;}
+.pp_accordion_head {color:#5bb0d1; position: relative; padding-left: 1.2rem; cursor:pointer; margin-bottom: 5px;}
+.pp_accordion_head h3 {color: inherit; font-size: 1.1rem; display: inline-block; border-bottom: 2px solid #5bb0d1; padding: 0; line-height: 1;}
+.pp_accordion_arrow {position: absolute; top: 0; left: 0; bottom: 0; width: 0.9rem; height: 0.6rem;  margin: auto; transition: transform 0.25s ease-in-out; transform: rotate(-90deg);}
+.pp_accordion_arrow::before, .pp_accordion_arrow::after { content: ''; position: absolute; width: 0.5rem; height: 2px; top: 0;background-color: #5bb0d1;}
+.pp_accordion_arrow::before {transform-origin: top left; left: 2px; transform: rotate(45deg);}
+.pp_accordion_arrow::after {transform-origin: top right; right: 2px; transform: rotate(-45deg);}
+.pp_accordion_body {display:none}
+.pp_accordion_body p {margin-bottom: 10px; font-size: .8rem; color: #858585;}
+.pp_accordion_field {border: 1px solid #ccc; padding: 5px;}
+.pp_accordion_field textarea {resize: auto; max-width: 100%;}
+.is_opened > .pp_accordion_head .pp_accordion_arrow {transform: rotate(0deg);}
+.is_opened > .pp_accordion_body {display:block;}
+
+.paypalbm-table {width:100%; border-spacing:0; border-collapse:collapse; font-size:1.3rem; line-height:1.4; margin:0 0 1rem; color:#444; border:0.06rem solid #dadada; background-color:#f5f5f5}
+.paypalbm-table th, .paypalbm-table td {padding:0.4rem; padding-left:0.8rem; border-bottom:0.06rem solid #ccc; vertical-align:middle}
+.paypalbm-table th {font-weight:bold; background-color:#e9e9e9}
+.paypalbm-table tr {border-bottom:0.06rem solid #d2f2f2}
+table.paypalbm-transaction-history-table {width:100%}
+
+.d-none {display:none}
+.width-inherit {width:inherit !important}
+.w-20 {width:20%}
+.w-15 {width:15%}
+.w-35 {width:35%}
+.text-transform-none {text-transform:none}
+#bm_content_column {padding-bottom:40px}
+.tab-content>.active {font-weight:400}
+
+.flash-messages-container {position:fixed; width:fit-content; top:1rem; left:50%; padding:0 1rem; z-index:9999; transform:translateX(-50%); height: 0;}
+.flash-messages-container > .alert {width:fit-content; margin:0 auto 1rem auto}
+
+.dw-collection-field .dw-controls .dw-text-field {border-top-right-radius:0; border-bottom-right-radius:0}
+.dw-collection-field .dw-controls .dw-button {border-top-left-radius:0; border-bottom-left-radius:0}
+.dw-grid-column .dw-collection-field > .dw-values > .dw-value {height:100%}
+.dw-grid-container .dw-grid-column {padding-top:.4rem; padding-bottom:.4rem}
+[type=checkbox].dw-input-checkbox {margin: 0.2rem 0 0 -1.25rem}
+.toolbar-entry.search-bar .dw-search {display:flex}
+.badge-payment-method.badge-info {color:#737373; background-color:#97d9e9}
+.badge-payment-method.badge-info small {font-weight:inherit}
+.labelContainer .dw-input-label .dw-text {font-weight: 700;}
+.dw-text-area.dw-text-area-full {width: 100%; max-width:100%}
+
+.apply-to-sites-wizard {position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); width: 1000px; z-index: 10000;}
+.apply-to-sites-wizard .dw-nc-wizard {width: 100%;}
+.apply-to-sites-wizard .dw-scroller {height: 500px;}
+.apply-to-sites-wizard .vertical-rule {border-left: 1px solid #bbb; display: inline-block; height: 500px; margin: 0 5px;}
+.apply-to-sites-wizard .bm-summary {display: flex;}
+.apply-to-sites-wizard .bm-summary .attr-selections {flex: 1.7}
+.apply-to-sites-wizard .bm-summary .site-selections {flex: 1}
+.dw-nc-wizard-body .dw-grid-selection {width: 24px;}
+.tab-content .dw-wizard-mask {position: fixed;}
+.paypalbm_content .dw-nc-text-heading-medium {padding-bottom: 0;}
+.paypalbm_content .dw-text-area {line-height: 1.5;}
+.semi-opaque {animation: opaque .2s;}
+.dw-mask.dw-mask-instant.dw-mask-modal {background: rgba(150,148,146,.45); position: fixed; z-index: 9999; opacity: 1;}
+.dw-window.dw-confirm {top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.x-body-masked {overflow: hidden}
+.x-window-body .form-check-input {margin-top: 0; margin-left: -1rem}
+
+.dw-nc-wizard-progress-horizontal .dw-nc-wizard-progress-item .paypal-progress-item::before {width: 4rem;height: 4rem;border-radius: 50%;line-height: calc(4rem - 4px);text-align: center;font-size: 1rem;content: counter(a);counter-increment: a;}
+.paypal-progress-text {width: 5rem; margin: 0;text-align: center;}
+.alert.alert-caution {color: #856404; background-color: #fff3cd; border-color: #ffeeba;}
+.dispute-subcontent {margin-top: -10px; margin-bottom: 15px; font-size: 1rem; line-height: 1.5;}
+.dispute-evidences, .dispute-messages {line-height: 1.2; font-size: 13px;}
+.dispute-evidences hr, .dispute-messages hr {margin: 5px 0;}
+.dispute-highlight {color: #a75c21;}
+.text-break {word-break: break-word; word-wrap: break-word;}
+
+.infobox_item_search_tr {display: flex; justify-content: flex-end;}
+
+.text-center {text-align: center;}
+.text-right {text-align: right;}
+
+.switch_link.active { color: #00629b; font-weight: bold; cursor: default; background-color: transparent; }
+.switch_link.active:hover { border-color: transparent; background-color: transparent; }
+
+.tab-content > .tab-pane { display: none; }
+.tab-content > .active { display: block; font-weight: 400; }
+
+/* date fields */
+.date-fields { display: inline-block; padding: 0; margin-top: 4px; background-color: #fff; border: 1px solid #d6d6d6; border-radius: 4px;  font: 500 1rem/1.5 Arial, sans-serif; text-align: left; }
+.date-shortcuts { font-size: 0; border-bottom: 1px solid #d6d6d6; }
+.date-shortcuts li { margin: 0 1px 0 0; display: inline-block; zoom: 1; }
+.date-shortcuts button { color: #5c5c5c; border: 0; border-bottom: 4px solid transparent; padding: 12px 0 8px; margin: 0 5px; cursor: pointer; background-color: transparent; transition: border-color 500ms ease-out; }
+.date-shortcuts button:hover, .date-shortcuts button.active { color: #202020; border-bottom-color: #2A38D8; }
+.date-shortcuts button.active { cursor: default; }
+.date-shortcuts button:disabled { cursor: not-allowed; opacity: .7; color: #a9a9a9; border-bottom: 4px solid transparent; }
+.date-shortcuts li:first-child button { margin-left: 15px; }
+.date-shortcuts li:last-child button { margin-right: 15px; }
+.date-fields label { color: #5c5c5c; font-size: 0.875rem; display: block; margin-bottom: 5px; line-height: 1; }
+.date-container { padding: 15px; }
+.date-container .button { margin: 0; font-size: 0.875rem; }
+.date-pickers { display: flex; justify-content: space-between; }
+.date-picker { position: relative; }
+.ui-datepicker-trigger { cursor: pointer; height: 15px; width: 15px; position: absolute; top: 28px; right: 10px; }
+.date-fields .datepicker { width: 155px; }
+.date-fields input, .date-fields select { display: block; width: 100%; max-width: 23rem; padding: 8px 10px; border-radius: 4px; border: 1px solid #b3b3b3; outline: 0; color: #202020; transition: border 200ms ease-out; margin-bottom: 10px; }
+.date-fields input { appearance: none; }
+.date-fields input:disabled { cursor: not-allowed; opacity: .7; color: #a9a9a9; border-color: #d6d6d6; }
+.date-fields input:disabled::selection { background-color: transparent; }
+.date-fields input:disabled + img { display: none; }
+.date-fields input:not(:disabled):hover, .date-fields input:not(:disabled):focus { border-color: #2A38D8; }
+
+/* Self-Check */
+.form-selfcheck { display: flex; align-items: center; padding-left: 20px; }
+.form-selfcheck i { color: red; }
+.form-selfcheck.approved, .form-selfcheck.rejected { padding-left: 0; }
+.form-selfcheck-input { margin: 0 8px; vertical-align: middle; }
+.form-selfcheck-label { margin: 0; line-height: 1.5; }
+
+.approved::before, .rejected::before { font-weight: bold; font-size: large; display: inline-block; vertical-align: middle; }
+.approved::before { content: "+"; color: green; padding-right: 8px; }
+.rejected::before { content: "-"; color: red; padding-right: 14px; }
+
+@keyframes opaque {
+    from {opacity: 1;}
+    to {opacity: .4;}
+}
+
+@media screen and (max-width:1024px) {
+    .flash-messages-container > .alert {width:100%}
+}

@@ -1,0 +1,11 @@
+<isif condition="${pdict.isPaymentMethodActive}">
+    <isinclude template="button/paypal/smartButton" />
+
+    <br />
+
+    <isif condition="${pdict.isButtonMessagesEnabled}">
+        <isinclude template="button/paypal/buttonMessage" />
+    </isif>
+<iselse/>
+    <isinclude template="button/components/paymentMethodDisabled" />
+</isif>

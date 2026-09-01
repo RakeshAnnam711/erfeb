@@ -1,0 +1,89 @@
+<div class="attribute">
+    <isset name="onlyAttribute" value="${attributeStatus.first && attributeStatus.last ? true : false}" scope="page" />
+    <isset name="onlyAttributeIsDropdown" value="${onlyAttribute && !attr.swatchable}" scope="page" />
+    <isset name="isColor" value="${attr.id == 'color'}" scope="page"/>
+    <div class="${attr.id}-attributes ${!isColor ? 'non-color-attribute-swatches' : ''}" data-attr="${attr.id}">
+
+        <isif condition="${attr.swatchable && noSwatchOverride !== true}">
+
+            <div class="select-${attr.id}" id="${attr.id}-${loopState !== 'undefined' && loopState.count ? loopState.count : '1' }">
+                <iscomment>Select <Attribute> Label</iscomment>
+                <span class="${attr.id} non-input-label ${attr.id}-label">
+                    <isif condition="${isColor}">
+                        ${attr.displayName}: <span class="color-display-value">${empty(product.selectedColorName) && !onlyAttribute  ? Resource.msgf('select.variant.value','product',null, attr.displayName) : product.selectedColorName}</span>
+                    <iselse/>
+                        ${Resource.msg('label.select', 'common', null)} ${attr.displayName}: <span class="non-color-display-value"><isprint value="${!onlyAttribute ? attr.displayValue : ''}" /></span>
+                    </isif>
+                </span>
+
+                <iscomment>Circular Swatch Image Attribute Values</iscomment>
+                <div class="d-flex swatch-container justify-content-center flex-wrap ${onlyAttribute ? 'single-select-quick-add-to-cart' : ''}">
+                    <isloop items="${attr.values}" var="attrValue">
+                        <isif condition="${!(isBundle && product.productType === 'variant' && !attrValue.selected) }">
+                            <isset name="image" value="${attrValue.images ? attrValue.images[attrValue.images.type] : ''}" scope="page"/>
+                            <div class="${attr.id}-tile swatch-tile-container">
+                                <button class="${attr.id}-attribute swatch"
+                                        aria-label="${Resource.msg('label.select', 'common', null)} ${attr.displayName} ${attrValue.displayValue}"
+                                        aria-describedby="${attrValue.id}"
+                                        data-url="${attrValue.url}"
+                                        ${ product.productType === "variant" && isBundle ? "disabled" : "" }
+                                        data-attr="${attr.id}"
+                                        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('GTMEnable')}">
+                                            data-gtmdata="${JSON.stringify(product.gtmData)}"
+                                        </isif>
+                                >
+                                    <span data-attr-value="${attrValue.value}"
+                                        data-displayvalue="${attrValue.displayValue}"
+                                        data-display-value="${attrValue.displayValue}"
+                                        class="swatch mx-1
+                                            ${attr.id}-value
+                                            ${isColor && attrValue.images.type === 'thumbnail' ? 'swatch-thumbnail' : (isColor ? 'swatch-circle' : '')}
+                                            ${!isColor ? 'non-color-swatch-value' : ''}
+                                            swatch-value
+                                            ${attrValue.selected && !onlyAttribute ? 'selected' : ''}
+                                            ${attrValue.selectable ? 'selectable' : 'unselectable'}
+                                            ${attrValue.available ? 'available' : 'unavailable'}
+                                        "
+                                        style="${isColor && image.length > 0 ? 'background-image: url("' + image[0].url + '")' : ''}"
+                                    >
+                                        <isif condition="${!isColor}">
+                                            <span class="name">
+                                                <span class="name">${attrValue.displayValue}</span>
+                                            </span>
+                                        </isif>
+                                    </span>
+                                    <span id="${attrValue.id}" class="sr-only selected-assistive-text">
+                                        ${attrValue.selected && !onlyAttribute ? Resource.msg('msg.assistive.selected.text', 'common', null) : ''}
+                                    </span>
+                                    <isif condition="${!empty(attrValue.description)}">
+                                        <span class="description">${attrValue.description}</span>
+                                    </isif>
+                                </button>
+                            </div>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+        <iselse/>
+            <iscomment>Select <Attribute> Label</iscomment>
+            <label class="${attr.id}" for="${attr.id}-${loopState && loopState.count ? loopState.count : '1' }">
+                ${Resource.msg('label.select', 'common', null)} ${attr.displayName}
+            </label>
+            <iscomment>Attribute Values Drop Down Menu</iscomment>
+            <select class="custom-select form-control select-${attr.id} selectpicker <isif condition="${attr.values.length == 1}"> single-select</isif>" data-attr="${attr.id}" id="${attr.id}-${loopState !== 'undefined' && loopState && loopState.count ? loopState.count : '1' }" name="select-${attr.id}" ${ product.productType === "variant" && isBundle ? "disabled" : "" }>
+                <option value="${attr.resetUrl}">
+                    ${Resource.msg('label.select', 'common', null)} ${attr.displayName}
+                </option>
+                <isloop items="${attr.values}" var="attrValue">
+                <iscomment>${JSON.stringify(attrValue.selected)}</iscomment>
+                    <option value="${attrValue.url}" data-attr-value="${attrValue.value}"
+                        ${!attrValue.selectable ? 'disabled' : ''}
+                        ${attrValue.selected ? 'selected' : ''}
+                    >
+                        ${attrValue.displayValue}
+                    </option>
+                </isloop>
+            </select>
+        </isif>
+    </div>
+</div>

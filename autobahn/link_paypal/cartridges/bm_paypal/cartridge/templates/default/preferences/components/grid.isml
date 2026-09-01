@@ -1,0 +1,75 @@
+<div class="main-grid mb-5">
+    <div class="editor">
+        <div class="main-form">
+            <div class="fields">
+                <div class="dwx-customizable">
+                    <div class="preferenceGrid dw-grid dw-pinnable-container dw-id-12">
+                        <div class="dw-grid-container">
+                            <table>
+                                <colgroup>
+                                    <col class="w-20" />
+                                    <col />
+                                    <col class="w-15" />
+                                    <col class="w-35" />
+                                </colgroup>
+
+                                <isinclude template="preferences/components/gridThead" />
+
+                                <tbody>
+                                    <tr class="dw-body-row">
+                                        <td class="dw-body" colspan="4">
+                                            <div class="grid-message ng-hide">
+                                                ${Resource.msg('common.message.NoResultsMessage', 'preferences', null)}
+                                            </div>
+                                            <div class="grid-message ng-hide">
+                                                ${Resource.msg('common.message.NoRecordsExistMessage', 'preferences', null)}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <isloop items="${pdict.attributeDefinitions}" var="attributeDefinition" status="loopStatus">
+                                        <tr class="dw-row ${loopStatus.first ? 'dw-first' : ''} ${loopStatus.odd ? 'dw-odd' : ''} ${attributeDefinition.ID.toLowerCase()} js-dw-attr-row">
+                                            <td class="dw-grid-column">
+                                                <div class="dw-grid-column-inner py-1">
+                                                    <div class="dw-component dwx-replace">
+                                                        <div class="labelContainer">
+                                                            <div class="dw-input-label dw-valid is-valid dw-pristine is-unchanged is-untouched">
+                                                                <label class="dw-text js-dw-attr-label" for="${attributeDefinition.ID}" data-attr-id="${attributeDefinition.ID}">${attributeDefinition.displayName}</label>
+                                                                <span class="dw-required">*</span>
+                                                                <div class="dw-after-label dw-transclude-position"></div>
+                                                            </div>
+
+                                                            <div class="bm-content">
+                                                                <hr class="my-2 border-top" />
+                                                                <span class="tooltipId">(${attributeDefinition.ID})</span>
+                                                                <div class="valueRestrictions">
+                                                                    <span class="valueType">(${pdict.valueType[attributeDefinition.valueTypeCode]})</span>
+                                                                    <span class="ng-hide">&nbsp;</span>
+                                                                    <span class="valueRange ng-hide"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="dw-grid-column">
+                                                <div class="dw-grid-column-inner py-1">
+                                                    <isinclude template="preferences/components/inputComponent" />
+                                                </div>
+                                            </td>
+
+                                            <isinclude template="preferences/components/cellDefaultValue" />
+
+                                            <td class="dw-grid-column">
+                                                <div class="dw-grid-column-inner overflow-auto text-wrap py-1" data-dw-attr-id="${attributeDefinition.ID}"></div>
+                                            </td>
+                                        </tr>
+                                    </isloop>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

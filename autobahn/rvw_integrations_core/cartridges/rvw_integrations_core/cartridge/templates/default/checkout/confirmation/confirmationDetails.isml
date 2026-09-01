@@ -1,0 +1,5 @@
+<isif condition="${!!dw.system.Site.current.getCustomPreferenceValue('SOM_Order_History_Enabled') && pdict.isOrderDetails}">
+    <isinclude template="checkout/confirmation/confirmationDetailsLightning" />
+<iselse/>
+    <isinclude template="checkout/confirmation/confirmationDetailsContent" />
+</isif>

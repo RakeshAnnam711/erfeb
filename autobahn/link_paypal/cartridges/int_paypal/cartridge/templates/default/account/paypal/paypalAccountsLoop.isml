@@ -1,0 +1,13 @@
+<isif condition="${!empty(pdict.paypal.savedPpAccounts)}">
+    <div class="card-body card-info-group">
+        <isloop items="${pdict.paypal.savedPpAccounts}" var="savedPpAccount">
+            <div class="saved-paypal-account-item clearfix">
+                <span>${pdict.paypal.getPaypalEmail(savedPpAccount)}</span>
+                <button class="card-link pull-right remove-paypal-button" aria-label="Remove payment"
+                    data-paypal-email="${pdict.paypal.getPaypalEmail(savedPpAccount)}">
+                    ${Resource.msg('paypal.accountslist.remove', 'locale', null)}
+                </button>
+            </div>
+        </isloop>
+    </div>
+</isif>

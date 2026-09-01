@@ -1,0 +1,56 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+
+    assets.addJs('/js/paymentInstruments.js');
+</isscript>
+
+<isinclude template="account/payment/deletePaymentModal"/>
+
+<div class="card">
+    <div class="card-header clearfix">
+        <h2 class="pull-left">${Resource.msg('label.payment.creditcards', 'account', null)}</h2>
+    </div>
+
+    <div class="js-credit-card-accounts">
+        <isinclude template="account/paypal/creditCardsLoop" />
+    </div>
+
+    <isif condition="${pdict.paypal.prefs.creditCardVaultModeEnabled && pdict.paypal.prefs.isCreditCardVaultOnAccountEnabled}">
+        <div class="card-footer card-footer-border text-center js-paypal-add-new-card-container">
+            <button class="card-link paypal-add-new-card-btn js-paypal-add-new-card-btn" credit-card-limit="${pdict.paypal.prefs.creditCardVaultLimit}" aria-label="${Resource.msg('label.payment.addnewpayment','payment',null)}">${Resource.msg('link.addnew','account',null)}</button>
+        </div>
+
+        <div class="alert alert-info text-center m-0 d-none card-footer-border js-paypal-card-limit-message-container">
+            ${Resource.msg('creditcard.notification.limit', 'account', null)}
+        </div>
+
+        <div class="js-paypal-add-new-card-block card-footer-border p-3 position-relative d-none">
+            <div class="js-paypal-loader paypal-loader-container">
+                <i class="paypal-loader"></i>
+            </div>
+
+            <form class="js-paypal-add-credit-card-form" action="${URLUtils.url('CreditCard-AccountAddCreditCardHandle')}"
+                  method="POST" data-fields-styles="${JSON.stringify(pdict.paypal.prefs.cardFieldsStyles)}">
+                <isinclude template="paypal/components/billingAddressFields" />
+                <isinclude template="paypal/components/cardFields" />
+
+                <div class="row pt-2">
+                    <div class="col">
+                        <button type="reset" name="cancel" class="btn btn-block btn-outline-primary js-paypal-add-new-card-cancel-btn">
+                            ${Resource.msg('button.cancel', 'account', null)}
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" name="save" class="btn btn-save btn-block btn-primary js-paypal-add-new-card-save-btn">
+                            ${Resource.msg('button.save', 'account', null)}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <iselseif condition="${pdict.paypal.prefs.creditCardVaultModeDisabled || pdict.paypal.prefs.creditCardVaultModeEnabled && !pdict.paypal.prefs.isCreditCardVaultOnAccountEnabled}"/>
+        <div class="alert alert-info text-center m-0">
+            ${Resource.msg('paypal.account.creditcard.saved.notification', 'locale', null)}
+        </div>
+    </isif>
+</div>

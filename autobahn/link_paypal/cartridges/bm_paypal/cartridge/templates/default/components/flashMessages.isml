@@ -1,0 +1,16 @@
+<div class="flash-messages-container js-flash-messages-container">
+    <div class="alert alert-dismissible js-alert-template fade d-none" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <isif condition="${!empty(pdict.flashMessages)}">
+        <div class="alert alert-success alert-dismissible js-alert-template fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            ${pdict.flashMessages}
+        </div>
+    </isif>
+</div>

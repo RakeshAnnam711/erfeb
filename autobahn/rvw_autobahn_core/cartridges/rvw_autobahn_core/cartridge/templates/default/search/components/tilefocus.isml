@@ -1,0 +1,37 @@
+<iscontent type="text/html" charset="UTF-8" compact="true">
+<iscomment> Target tile-refocus only for PDP to PLP views, shift unached logic to secondary browser request </iscomment>
+<script>
+    ((d, w) => {
+        var t, pids, el,
+            findfn = ids => [null].concat(ids).reduce((ele, id) => ele || document.querySelector('[data-pid=\"' + id + '\"]')), // Find first match
+            jumpfn = () => {
+                if (!(el = findfn(pids))) return; // scroll when target found else return
+                clear(); // clear further events on success
+                el.scrollIntoView?.({behavior: "smooth", block: 'center'});
+            },
+            loadfn = () => t = setTimeout(jumpfn, 500),
+            clear = () => {
+                clearTimeout(t);
+                d.removeEventListener('DOMContentLoaded', loadfn);
+                w.removeEventListener('load', loadfn);
+                w.removeEventListener('scroll', clear);
+            };
+
+        d.addEventListener('DOMContentLoaded', loadfn);
+        w.addEventListener('load', loadfn);
+        // cancel autoscroll is page is scrolled
+        w.addEventListener('scroll', clear, {once: true});
+
+        (async () => (await window.fetch?.('${URLUtils.url("Search-TileFocusJSON")}', {priority: 'high'}))
+            .json()
+            .then(json => {
+                if (!(pids = json?.pids)) return clear(); // set pids, if null return and remove events
+                <isif condition="${dw.system.System.getInstanceType() !== dw.system.System.PRODUCTION_SYSTEM}">
+                    console.info('Scroll to ' + pids?.join(), 'Found: ', pids?.map(id => d.querySelector('[data-pid=\"' + id + '\"]')));
+                </isif>
+                (history || {}).scrollRestoration = 'manual'; // stop browser auto-alignment
+                jumpfn();
+            })
+        ) ();
+    })(document, window);
+</script>

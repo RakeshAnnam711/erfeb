@@ -1,0 +1,19 @@
+<script>
+    window.paypalAdminConfig = {
+        urls: {
+            orderTransaction: "${URLUtils.url('PaypalAdmin-OrderTransaction')}",
+            action: "${URLUtils.url('PaypalAdmin-Action')}"
+        },
+        resources: {
+            submit: "${Resource.msg('forms.submit', 'paypalbm', null)}",
+            cancel: "${Resource.msg('forms.cancel', 'paypalbm', null)}",
+            errorMsgTitle: "${Resource.msg('msg.error.title', 'errors', null)}",
+            serverError: "${Resource.msg('server.error', 'errors', null)}",
+            pleaseWait: "${Resource.msg('msg.pleasewait', 'paypalbm', null)}",
+            loadMaskText: {
+                authorization: "${Resource.msg('msg.creatingauthorizationtransaction', 'paypalbm', null)}",
+                capture: "${Resource.msg('msg.creatingcapturetransaction', 'paypalbm', null)}"
+            }
+        }
+    };
+</script>

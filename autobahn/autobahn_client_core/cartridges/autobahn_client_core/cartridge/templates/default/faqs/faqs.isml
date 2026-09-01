@@ -1,0 +1,833 @@
+<isinclude template="components/modules" />
+<isdecorate template="common/layout/page">
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addCss('/css/faqs.css');
+    </isscript>
+
+    <isscript>
+        var pageClass = 'page';
+        var contentId = '';
+
+        if (pdict.content != null && 'ID' in pdict.content && pdict.content.ID !=null) {
+            contentId = pdict.content.ID;
+            pageClass = 'page-' + pdict.content.ID;
+        }
+    </isscript>
+
+    <div class="container-fluid" id="faq-page">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="page-title font--tertiary">FAQs</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 page-content">
+                <div class="content-block">
+                    <h2 class="content-header">General Questions</h2>
+
+                    <div class="question">01. How do you authenticate products?</div>
+
+                    <p>We have in-house professional authenticators with experience
+                        <strong>authenticating&nbsp;</strong>thousands of luxury items from prestigious designer brands.
+                        Our
+                        proprietary multi-tiered <strong>authentication process&nbsp;</strong>ensures that each piece is
+                        reviewed multiple times by a trained authenticator before the item is available for sale. We
+                        collect
+                        data about all our items and use it to create reference libraries that show us every variance
+                        and
+                        minor change made by the brands we carry. We conduct an extremely detailed research about the
+                        counterfeit market and collect data on exactly how they are made to compare to authentic pieces.
+                        Our
+                        Authenticators are trained on exactly what details to look for that indicate an item may be
+                        counterfeit. We are constantly improving our methods and using technology to advance our
+                        processes.
+                        Learn more about our <a href="${URLUtils.url('Page-Show', 'cid', 'wgaca-authenticity-page')}"
+                            style="color: #005711; text-decoration: underline;">authentication process</a>.</p>
+
+                    <div class="question">02. Where do you get your products?</div>
+
+                    <p>Our expert buyers have sourcing partners worldwide that look for the most pristine and rare
+                        vintage
+                        finds. In addition, we buy from auction houses globally and directly from our vintage-loving
+                        clients. <a href="${URLUtils.url('Page-Show', 'cid', 'sell-to-us')}"
+                            style="color: #005711; text-decoration: underline;">Sell to us now.</a></p>
+
+                    <div class="question">03. Will I be charged tax?</div>
+
+                    <p><strong>Sales tax&nbsp;</strong>will be calculated and applied to your purchase prior to
+                        checkout. It
+                        is contingent on your state&rsquo;s current tax rate. States that do not have a WGACA presence
+                        will
+                        not be <strong>charged tax</strong>.</p>
+
+                    <div class="question">04. When will I be charged?</div>
+
+                    <p>As soon as you complete your order, authorization for the necessary payment will be requested
+                        automatically to verify the credit card and availability of funds; however, the card is not
+                        charged
+                        at this time. The actual <strong>payment&nbsp;</strong>occurs when the <strong>order is
+                            invoiced</strong>, at which point you will receive a notification e-mail of the shipment
+                        with
+                        tracking information. If your order is canceled for whatever reason, the pending charges will
+                        drop
+                        within the next few business days.</p>
+
+                    <div class="question">05. What payment methods does WGACA accept?</div>
+
+                    <p>We accept Visa, MasterCard, American Express, Discover, Affirm and PayPal as <strong>payment
+                            methods</strong>.<br />
+                        Check for information on our partnership with <a href="${URLUtils.url('Page-Show', 'cid', 'shop-now-pay-later-affirm-klarna-info')}"
+                            style="color: #005711; text-decoration: underline;">Affirm</a>.<br />
+                        Check more general information on <a href="https://www.affirm.com/how-it-works"
+                            style="color: #005711; text-decoration: underline;">how Affirm works</a>.<br />
+                        We do not offer layaway options.</p>
+
+                    <div class="question">06. What is your price adjustment policy?</div>
+
+                    <p>We do not offer <strong>price adjustments</strong>. Each WGACA item is unique in its grade and
+                        age,
+                        and because of this, its pricing is subject to various conditions</p>
+
+                    <div class="question">07. I just purchased an item and now there&rsquo;s a sale. Can I receive a
+                        price
+                        adjustment?</div>
+
+                    <p>We cannot offer <strong>price adjustments&nbsp;</strong>for previously purchased items. Various
+                        factors contribute to an item's inclusion or exclusion from a sale. Critical eligibility factors
+                        cannot be assessed if a previously purchased item is no longer in our inventory when the sale
+                        begins.</p>
+
+                    <div class="question">08. Are items available in store?</div>
+
+                    <p>Some of our items listed online are housed in our retail locations and are <strong>available
+                            in-store</strong>. Please email <a href="mailto:shop@whatgoesaroundnyc.com"
+                            style="color: #005711; text-decoration: underline;">shop@whatgoesaroundnyc.com</a> if you
+                        have
+                        any questions about our products.</p>
+                </div>
+
+                <div class="content-block">
+                    <div class="content-header">Order Inquiries</div>
+
+                    <div class="question">01. How will I know my order was received?</div>
+
+                    <p>An e-mail confirmation will be sent from <a href="mailto:orders@whatgoesaroundnyc.com"
+                            style="color: #005711; text-decoration: underline;">orders@whatgoesaroundnyc.com</a> after
+                        your
+                        order is placed. This confirmation will detail your order number, item(s) purchased, and tender
+                        used. You can also check the <strong>status of your order&nbsp;</strong>by logging into your
+                        account. Once logged in, you can search for your order under &lsquo;My Orders&rsquo;. All orders
+                        associated with your account will appear there, along with their order status. The updated
+                        tracking
+                        information can also be found when an order is shipped.</p>
+
+                    <div class="question">02. How can I change or cancel my order?</div>
+
+                    <p>For <strong>order cancelation&nbsp;</strong>please email <a
+                            href="mailto:cs@whatgoesaroundnyc.com"
+                            style="color: #005711; text-decoration: underline;">cs@whatgoesaroundnyc.com</a> immediately
+                        after placing your order to request any changes. There may be instances where we are unable to
+                        modify your order if the order has already been processed.</p>
+                </div>
+
+                <div class="content-block">
+                    <div class="content-header">Domestic Orders</div>
+
+                    <div class="question">01. When will my order ship?</div>
+
+                    <p><strong>Orders&nbsp;</strong>are mostly shipped within two business days with a signature
+                        requirement
+                        upon delivery. Please note that this includes orders with expedited shipping. Orders placed on
+                        weekends or on holidays will begin processing the following business day. Our warehouse is not
+                        open
+                        on the weekends or holidays. You will be notified via email if items in your order are delayed
+                        or
+                        out of stock.</p>
+
+                    <p>Orders received after 1pm EST are considered as the next business day and are not guaranteed to
+                        be
+                        shipped the same day.</p>
+
+                    <div class="question">02. Where do you ship?</div>
+
+                    <p>We ship directly within the United States. For <strong>international orders</strong>, we partner
+                        with
+                        Global-e and ship via DHL. Please see our international FAQ section below if you are ordering
+                        from
+                        outside the United States.</p>
+                </div>
+
+                <div class="content-block">
+                    <div class="mixed-header">
+                        <div class="content-header">International Orders</div>
+
+                        <p>What Goes Around Comes Around ships internationally to over 100 countries via our
+                            international
+                            e-commerce partner, Global-e . To see if we ship to your country, click the flag on the top
+                            left-hand corner of our site.</p>
+                    </div>
+
+                    <div class="question">01. Why Global-e ?</div>
+
+                    <p>We have partnered with <strong> Global-e &nbsp;</strong>to allow our international customers to
+                        shop
+                        with their local currency securely online, receive cost-effective <strong>international shipping
+                            costs</strong>, and prepay duties and taxes. At checkout, you will be provided with a
+                        guaranteed
+                        order total in your local currency. The order total presented will be the exact amount that
+                        <strong>
+                            Global-e Payments&nbsp;</strong>will bill you. There will not be any additional costs billed
+                        upon delivery or due as COD charges if you pay the amount at checkout.</p>
+
+                    <div class="question">02. Canceling international orders</div>
+
+                    <p>To <strong>cancel an order</strong>, please contact our Customer Care team urgently at <a
+                            href="mailto:cs@whatgoesaroundnyc.com"
+                            style="color: #005711; text-decoration: underline;">cs@whatgoesaroundnyc.com</a> to request
+                        an
+                        order cancelation. We cannot cancel an order that has already been fulfilled.</p>
+
+                    <div class="question" id="return-policy">03. Returning international orders</div>
+
+                    <p><strong>International returns&nbsp;</strong>are subject to the same terms and conditions as
+                        orders
+                        placed in the United States. Please refer to our <strong>Return Policy&nbsp;</strong>for
+                        instructions on how to initiate your return.</p>
+
+                    <div class="question">04. International site credits and gift cards</div>
+
+                    <p>Unfortunately, we cannot offer site credits or gift cards for international orders.</p>
+                </div>
+
+                <div class="content-block">
+                    <div class="mixed-header">
+                        <div class="content-block">
+                            <div class="mixed-header">
+                                <div class="content-header">Return Policy</div>
+                                <div class="content-block">
+                                    <isslot id="shipping-return-policy-faqs" description="Return Policy Text Slot" context="global" />
+                                </div>
+                            </div>
+
+                            <div class="question">01. How do I start a return?</div>
+
+                            <p>You can request a return by logging into your WGACA account and navigating to the Order
+                                History page. If your order is eligible for a return, you will generate a FedEx return
+                                shipping label for you. Please note that return labels expire after 3 days and cannot be
+                                used beyond that period. For your return, only use the shipping label provided by WGACA,
+                                as
+                                we are not responsible for items lost in transit when unauthorized shipping labels are
+                                used.
+                            </p>
+
+                            <div class="question">02. What is the return process?</div>
+
+                            <p>Please include the packing slip inside your return package and use the return label
+                                provided.
+                                Returns must be shipped within 3 business days of generating your shipping label. We
+                                recommend retaining your tracking information and the FedEx receipt as proof of return.
+                                &nbsp;</p>
+
+                            <p>We are not responsible for lost returns that do not show an initial scan at a FedEx
+                                facility.
+                                Additionally, items purchased online cannot be returned to store locations. We are not
+                                liable for lost or damaged items sent without authorization or without using our
+                                provided
+                                shipping label. &nbsp;</p>
+
+                            <p>Once we receive your return, we will verify its condition and authenticity. You will be
+                                notified by email once your refund has been processed. Please allow 2-3 business days
+                                for
+                                processing, though this may take longer during peak periods. Refunds typically appear
+                                within
+                                5-7 business days, depending on your payment method.</p>
+
+                            <div class="question">03. What items are ineligible for return?</div>
+
+                            <p><strong>Final Sale &amp; Discounted Items:</strong> Items marked as Final Sale or
+                                purchased
+                                with a discount of 30% or more are not eligible for return. Items purchased in our
+                                retail
+                                store locations or through any of our wholesale partners are final sale and not eligible
+                                for
+                                return. All Rolex watches are final sale.</p>
+
+                            <p><strong>Return Condition:</strong> To qualify for a refund, items must have all original
+                                tags
+                                attached, including the security tag, and must be returned in their original condition-
+                                unworn, unaltered, undamaged, unused, and unwashed. Items with odors (such as smoke or
+                                perfume) will not be accepted. We photograph and document the condition of all items at
+                                the
+                                time of packaging for verification.</p>
+
+                            <p><strong>Non-Qualifying Returns:</strong> If the returned merchandise does not meet these
+                                conditions, your return may not be eligible for a refund. In this case, we reserve the
+                                right
+                                to send the item(s) back to you without issuing a refund </p>
+
+                            <div class="question">04. Do You Offer Exchanges?</div>
+
+                            <p>We do not offer exchanges. If you would like to exchange an item, please return the
+                                original
+                                item for a refund or site credit (less original shipping cost) and place a new order.
+                            </p>
+                        </div>
+
+                        <div class="content-block">
+                            <div class="content-header">Sell to Us Questions</div>
+
+                            <div class="question">01. Do you consign?</div>
+
+                            <p>What Goes Around Comes Around buys outright; we do not offer consignment. When you sell
+                                your
+                                luxury item(s) to us, payment can be issued by one of the following methods:</p>
+
+                            <ul>
+                                <li>Paper check sent to your home</li>
+                                <li>Direct electronic payment to your bank account</li>
+                                <li>Store credit where you can earn an extra 20% more than a cash payment</li>
+                            </ul>
+
+                            <div class="question">02. How long does the whole selling process take?</div>
+
+                            <p>The <strong>selling process&nbsp;</strong>takes about 3 weeks total from acceptance to
+                                pay-out (in the event there are no delays). After uploading your photos, the seller will
+                                receive an estimated offer if we are interested in purchasing their item(s). If the
+                                seller
+                                would like to accept the estimated offer, we will issue a prepaid shipping label for
+                                them to
+                                send in their item(s) to be checked for QA/QC in-house. After receiving and checking the
+                                item(s) for authenticity and condition, our team will then either confirm the estimated
+                                quote or propose a counteroffer in the case that the item(s) are in a different
+                                condition
+                                than the original photos indicated. Once the final offer is agreed upon, the seller will
+                                select their preferred method of payout. Store credit is processed the same day and
+                                available for use on our website or at any What Goes Around Comes Around store. Check
+                                and
+                                Direct Deposit payments are processed by our internal finance department, and the payout
+                                is
+                                mailed or deposited within 10 business days.</p>
+
+                            <div class="question">03. What brands do you accept?</div>
+
+                            <p>We are currently buying <strong>luxury accessories&nbsp;</strong>from Chanel,
+                                Herm&egrave;s,
+                                Gucci, Louis Vuitton, Dior, Fendi, Prada, and YSL.</p>
+
+                            <div class="question">04. What items do you accept?</div>
+
+                            <p>We are currently buying handbags, luggage, small leather goods, jewelry, belts, scarves,
+                                home
+                                goods, and much more from our list of accepted brands only.</p>
+
+                            <div class="question">05. What items do you not accept?</div>
+
+                            <p>We do not accept footwear, items outside our list of accepted brands, or any items that
+                                have
+                                been damaged, altered, or customized.</p>
+
+                            <div class="question">06. Do you take Men's Luxury Accessories?</div>
+
+                            <p>Yes, we do take <strong>men's luxury accessories!&nbsp;</strong>We buy men&rsquo;s
+                                luggage,
+                                leather goods, and more from Herm&egrave;s, Gucci, Louis Vuitton, Dior, and Prada.</p>
+
+                            <div class="question">07. How do I submit my items for sale?</div>
+
+                            <p>To <strong>submit items&nbsp;</strong>for sale and <strong>receive a
+                                    quote&nbsp;</strong>for
+                                your luxury item(s), please send photos to us at <a href="mailto:luxbuyers@wgacany.com"
+                                    style="color: #005711; text-decoration: underline;">luxbuyers@wgacany.com</a>, and
+                                you
+                                will receive a reply within 7-10 business days. Please note that our retail teams cannot
+                                offer this service, and it can only be done through e-mail. Follow our luxury submission
+                                photo guide below to receive your estimated offer right away.</p>
+
+                            <p>Please take clear photos of the best possible quality for your item(s) to be evaluated by
+                                the
+                                Buy Team.</p>
+
+                            <p>The following images are required to receive a quote for your item(s):</p>
+
+                            <ol>
+                                <li>Front of item</li>
+                                <li>Back of item</li>
+                                <li>Interior of item</li>
+                                <li>Sides of item</li>
+                                <li>Base/bottom of item</li>
+                                <li>Serial number, date code or blind stamps. If you do not know where to look for this
+                                    on
+                                    your bag, we are happy to show you where to find it.</li>
+                            </ol>
+
+                            <p>&nbsp;</p>
+
+                            <p>If your item shows significant wear, please be sure to photograph and describe it
+                                clearly.
+                                Additional photo angles for bags in used condition should include:</p>
+
+                            <ul>
+                                <li>Up-close image of corners</li>
+                                <li>Up-close image of handles, hardware &amp; strap (if applicable)</li>
+                                <li>Interior pockets</li>
+                            </ul>
+
+                            <isslot id="faqs-image-block" description="FAQs page images" context="global" />
+
+                            <p>&nbsp;</p>
+
+                            <div class="question">08. How do I send my item(s) to you?</div>
+
+                            <p>If you accept the estimated offer for your item(s), you will be issued a prepaid FedEx
+                                shipping label via email. Use this label to send your item(s) to our Buying Office for
+                                QA/QC
+                                inspection. We do not provide shipping materials to sellers. Please securely pack your
+                                item(s) using any box and packing materials you see fit in order to maintain the
+                                condition
+                                and structure of the item(s). You can then drop your package off at any FedEx facility
+                                or
+                                schedule a pickup.</p>
+
+                            <div class="question">09. How will I know if my item(s) have been received?</div>
+
+                            <p>Sellers can <strong>track shipments&nbsp;</strong>using the FedEx tracking number. Once
+                                this
+                                page has been updated to &ldquo;Delivered&rdquo; status, please allow 1-3 days for us to
+                                process your package. After QA/QC inspection, the seller will receive an e-mail
+                                confirmation
+                                and update describing the next steps.</p>
+
+                            <div class="question">10. Is there a maximum number of items I can submit for sale?</div>
+
+                            <p>There is no limit to how many items a seller can submit to us. Please remember to keep
+                                submissions limited to only the accepted categories and brands we carry.</p>
+
+                            <div class="question">11. What are the advantages of receiving store credit versus cash?
+                            </div>
+
+                            <p>We offer a store credit value that&rsquo;s 20% greater than the cash estimate issued for
+                                each
+                                item submitted by a seller. <strong>Store credit&nbsp;</strong>can be redeemed at any
+                                WGACA
+                                retail location as well as on our website.</p>
+
+                            <div class="question">12. How do you determine pricing?</div>
+
+                            <p>We <strong>determine the price&nbsp;</strong>of each item we buy based on its current
+                                market
+                                value, which can vary by style, size, colorway, and, of course, condition. Other factors
+                                such as client demand, rarity, accessibility, and our retail price are also considered
+                                when
+                                making our offers to sellers.</p>
+
+                            <p>We offer full transparency to our sellers regarding the valuation of their luxury item(s)
+                                and
+                                do our best to answer any questions.</p>
+
+                            <div class="question">13. Will you price match a quote from another company?</div>
+
+                            <p>We realize and understand that a seller might receive a higher offer for their luxury
+                                item(s)
+                                from a different company, as we all have our own pricing structures, markups, and
+                                customer
+                                demands. Although we do not practice <strong>price-matching</strong>, we are open to
+                                hearing
+                                your price expectations and, in some cases, are open to negotiations.</p>
+
+                            <div class="question">14. What if you don't accept my item? What if I don't accept your
+                                updated
+                                offer, if it has changed after inspection</div>
+
+                            <p>If we pass on the item(s) due to condition and/or authenticity concerns, we will update
+                                you
+                                via e-mail and ship the item(s) back to you immediately. If we are unable to
+                                authenticate
+                                the item, you will need to provide us with a return label to send back. If you choose
+                                not to
+                                accept an updated offer after the inspection or we do not come to an agreement on price,
+                                we
+                                will ship the item(s) back to you immediately at no expense to you. All shipments are
+                                made
+                                via FedEx.</p>
+
+                            <div class="question">15. Will you tell me if my item is real or fake?</div>
+
+                            <p>We do not provide virtual authentication services. However, during the selling process,
+                                all
+                                items are checked for authenticity in-house. If our team passes on an item due to
+                                <strong>authenticity concerns</strong>, we are happy to explain how we came to that
+                                determination and describe the specific points of concern if the seller wishes to hear
+                                them.
+                            </p>
+
+                            <p>What Goes Around Comes Around takes <strong>authenticity&nbsp;</strong>very seriously and
+                                guarantees that only <strong>authentic items&nbsp;</strong>are sold to our customers.
+                                For
+                                that reason, we cannot accept any item that we are not 100% confident is authentic.</p>
+                        </div>
+
+                        <div class="content-block">
+                            <div class="content-header">Wholesale</div>
+
+                            <div class="question">01. I purchased a bag from one of your wholesale partners. Can I
+                                return it
+                                to you?</div>
+
+                            <p>Once an item is sold to a third-party wholesale partner such as Dillard's, Von Maur, or
+                                Belk,
+                                we no longer own the product and cannot extend further courtesies on their behalf. If
+                                you
+                                wish to return or exchange, it must be done with the wholesale partner and by their
+                                policy.
+                            </p>
+
+                            <div class="question">02. Do you offer a warranty?</div>
+
+                            <p>We do not offer warranties on any of our products due to the varying degrees of the
+                                condition
+                                of each item at the time of purchase.</p>
+
+                            <div class="question">03. How do I register my bag?</div>
+
+                            <p>Our feature to register on our website is still a work in progress.</p>
+
+                            <div class="question">04. I purchased a bag from one of your wholesale partners but I did
+                                not
+                                receive a branded dust bag or box. Can you send me these items?</div>
+
+                            <p>Unfortunately, we are not able to provide boxes or original dust bags for your purchase.
+                                Each
+                                item is pre-owned and sometimes purchased without the original box or duster. Your
+                                handbag
+                                is still guaranteed to be authentic without these effects.</p>
+                        </div>
+
+                        <div class="content-block">
+                            <div class="mixed-header">
+                                <div class="content-header">Amazon</div>
+
+                                <p>For all questions regarding purchases made on Amazon, please contact them directly.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you authenticate products?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We have in-house professional authenticators with experience authenticating thousands of\n            luxury items from prestigious designer brands. Our proprietary multi-tiered authentication process\n            ensures that each piece is reviewed multiple times by a trained authenticator before the item is\n            available for sale. We collect data about all our items and use it to create reference libraries that show\n            us every variance and minor change made by the brands we carry. We conduct an extremely detailed\n            research about the counterfeit market and collect data on exactly how they are made to compare to\n            authentic pieces. Our Authenticators are trained on exactly what details to look for that indicate an\n            item may be counterfeit. We are constantly improving our methods and using technology to advance\n            our processes. Learn more about our authentication process."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do you get your products?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our expert buyers have sourcing partners worldwide that look for the most pristine and rare\n            vintage finds. In addition, we buy from auction houses globally and directly from our vintage-loving\n            clients. Sell to us now."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will I be charged tax?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sales tax will be calculated and applied to your purchase prior to checkout. It is contingent\n            on your state’s current tax rate. States that do not have a WGACA presence will not be charged tax."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When will I be charged?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As soon as you complete your order, authorization for the necessary payment will be\n            requested automatically to verify the credit card and availability of funds; however, the card is not\n            charged at this time. The actual payment occurs when the order is invoiced, at which point you will\n            receive a notification e-mail of the shipment with tracking information. If your order is canceled for\n            whatever reason, the pending charges will drop within the next few business days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What payment methods does WGACA accept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We accept Visa, MasterCard, American Express, Discover, Affirm, and PayPal as payment\n            methods.\n            Check for information on our partnership with Affirm.\n            Check more general information on how Affirm works.\n            We do not offer layaway options."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is your price adjustment policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We do not offer price adjustments. Each WGACA item is unique in its grade and age, and\n            because of this, its pricing is subject to various conditions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I just purchased an item, and now there’s a sale. Can I receive a price adjustment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We cannot offer price adjustments for previously purchased items. Various factors\n            contribute to an item&#39;s inclusion or exclusion from a sale. Critical eligibility factors cannot be assessed\n            if a previously purchased item is no longer in our inventory when the sale begins."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are items available in store?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some of our items listed online are housed in our retail locations and are available in-store.\n            Please email help@whatgoesaroundnyc.com if you have any questions about our products."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How will I know my order was received?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An e-mail confirmation will be sent from orders@whatgoesaroundnyc.com after your order\n            is placed. This confirmation will detail your order number, item(s) purchased, and tender used. You\n            can also check the status of your order by logging into your account. Once logged in, you can search\n            for your order under ‘My Orders’. All orders associated with your account will appear there, along with\n            their order status. The updated tracking information can also be found when an order is shipped."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I change or cancel my order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For order cancelation please email cs@whatgoesaroundnyc.com immediately after\n            placing your order to request any changes. There may be instances where we are unable to modify\n            your order if the order has already been processed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When will my order ship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "\"Orders are mostly shipped within two business days with a signature requirement upon\n            delivery. Please note that this includes orders with expedited shipping. Orders placed on weekends or\n            on holidays will begin processing the following business day. Our warehouse is not open on the\n            weekends or holidays. You will be notified via email if items in your order are delayed or out of stock.\n            Orders received after 1 pm EST are considered as the next business day and are not guaranteed to\n            be shipped the same day.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do you ship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We ship directly within the United States. For international orders, we partner with Global-e and\n            ship via DHL. Please see our international FAQ section below if you are ordering from outside the\n            United States."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much is shipping?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FedEx ground shipping is a $10 flat rate charge. We offer expedited FedEx delivery, including\n            Three-Day Select, Second Day Air, and Next Day Air. Expedited shipping charges vary depending on\n            the shipping address."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why Global-e?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We have partnered with Global-e to allow our international customers to shop with their local\n            currency securely online, receive cost-effective international shipping costs, and prepay duties and\n            taxes. All duties and taxes are collected at checkout and are not factored into the listing prices. At\n            checkout, you will be provided with a guaranteed order total in your local currency. The order total\n            presented will be the exact amount that Global-e Payments will bill you. There will not be any additional\n            costs billed upon delivery or due as COD charges if you pay the amount at checkout."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Canceling international orders",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To cancel an order, please contact our Customer Care team urgently at\n            cs@whatgoesaroundnyc.com to request an order cancelation. We cannot cancel an order that has\n            already been fulfilled."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Returning international orders",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "International returns are subject to the same terms and conditions as orders placed in the\n            United States. Please refer to our Return Policy for instructions on how to initiate your return."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "International site credits and gift cards",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unfortunately, we cannot offer site credits or gift cards for international orders."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to initiate a return?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To initiate your return request, send an email to cs@whatgoesaroundnyc.com.\n            Include your order number, the item(s) you wish to return, and the reason for returning.\n            Please allow the Customer Care team 2 business days to respond to your request.\n            Note that our business hours are Monday through Friday, 9 am to 5 pm EST.\n            Once the Customer Care team approves your return, please follow the instructions.\n            Returned items must be shipped within 3 business days of receiving a response from Customer Care.\n            The label will be void after this period, and the return will be ineligible.\n            Please save your tracking information for your reference. We suggest keeping the receipt provided by\n            FedEx to prove that your return has been scanned.\n            We are not responsible for lost returns that have not shown an initial scan at a FedEx facility.\n            Items purchased online cannot be returned to our store locations.\n            All online returns must be authorized by our Customer Care team and shipped to our warehouse via\n            the FedEx shipping label provided to you.\n            We are not responsible for lost or damaged items sent to us without authorization or our provided\n            shipping label.\n            Once we have received your return and it has been evaluated for condition and authenticity, you will\n            receive an email that your refund has been processed.\n            Returns can take 2-3 business days to be processed. After processing, your refund may take 5-7\n            business days to reflect in your account, depending on your payment method.\n            Any return requests made after the 7-day return period will be denied.\n            Items marked as FINAL SALE are not eligible for return.\n            Items purchased in our retail store locations are FINAL SALE and not eligible for return.\n            Items purchased through our wholesale partners are FINAL SALE."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I do an exchange?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We do not offer exchanges. If you would like to exchange an item, please return the\n            original item for a refund or site credit (less original shipping cost) and place a new order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you consign?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "What Goes Around Comes Around buys outright; we do not offer consignment. When you\n            sell your luxury item(s) to us, payment can be issued by one of the following methods:\n            • Paper check sent to your home\n            • Direct electronic payment to your bank account\n            • Store credit, where you can earn an extra 20% more than a cash payment"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the whole selling process take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The selling process takes about 3 weeks total from acceptance to pay-out (in the event\n            there are no delays). After uploading your photos, the seller will receive an estimated offer if we are\n            interested in purchasing their item(s). If the seller would like to accept the estimated offer, we will issue\n            a prepaid shipping label for them to send in their item(s) to be checked for QA/QC in-house. After\n            receiving and checking the item(s) for authenticity and condition, our team will then either confirm the\n            estimated quote or propose a counteroffer in the case that the item(s) are in a different condition than\n            the original photos indicated.\n            Once the final offer is agreed upon, the seller will select their preferred method of payout. Store credit\n            is processed the same day and available for use on our website or at any What Goes Around Comes\n            Around store. Check and Direct Deposit payments are processed by our internal finance department,\n            and the payout is mailed or deposited within 10 business days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What brands do you accept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We are currently buying luxury accessories from Chanel, Hermès, Gucci, Louis Vuitton,\n            Dior, Fendi, Prada, and YSL."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What items do you accept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We are currently buying handbags, luggage, small leather goods, jewelry, belts, scarves,\n            home goods, and much more from our list of accepted brands only."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What items do you not accept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We do not accept footwear, items outside our list of accepted brands, or any items that\n            have been damaged, altered, or customized."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you take men&#39;s luxury accessories?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we do take men&#39;s luxury accessories! We buy men’s luggage, leather goods, and\n            more from Hermès, Gucci, Louis Vuitton, Dior, and Prada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I submit my items for sale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To submit items for sale and receive a quote for your luxury item(s), please send photos to\n            us at lux buyers@wgacany.com, and you will receive a reply within 7-10 business days. Please note\n            that our retail teams cannot offer this service, and it can only be done through e-mail. Follow our\n            luxury submission photo guide below to receive your estimated offer right away.\n            Please take clear photos of the best possible quality for your item(s) to be evaluated by the Buy Team.\n            The following images are required to receive a quote for your item(s):\n            1. Front of item\n            2. Back of item\n            3. Interior of item\n            4. Sides of item\n            5. Base/bottom of the item\n            6. Serial number, date code, or blind stamps. If you do not know where to look for this in your bag,\n            we are happy to show you where to find it.\n            If your item shows significant wear, please be sure to photograph and describe it clearly. Additional\n            photo angles for bags in used condition should include:\n            • Up-close image of corners\n            • Up-close image of handles, hardware & strap (if applicable)\n            • Interior pockets"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I send my item(s) to you?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you accept the estimated offer for your item(s), you will be issued a prepaid FedEx shipping\n            label via email. Use this label to send your item(s) to our Buying Office for QA/QC inspection. We do\n            not provide shipping materials to sellers. Please securely pack your item(s) using any box and packing\n            materials you see fit in order to maintain the condition and structure of the item(s). You can then drop\n            your package off at any FedEx facility or schedule a pickup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How will I know if my item(s) have been received?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sellers can track shipments using the FedEx tracking number. Once this page has been\n            updated to “Delivered” status, please allow 1-3 days for us to process your package. After QA/QC\n            inspection, the seller will receive an e-mail confirmation and update describing the next steps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a maximum number of items I can submit for sale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no limit to how many items a seller can submit to us. Please remember to keep\n            submissions limited to only the accepted categories and brands we carry."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the advantages of receiving store credit versus cash?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer a store credit value that’s 20% greater than the cash estimate issued for each\n            item submitted by a seller. Store credit can be redeemed at any WGACA retail location as well as on\n            our website."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you determine pricing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We determine the price of each item we buy based on its current market value, which can\n            vary by style, size, colorway, and, of course, condition. Other factors such as client demand, rarity,\n            accessibility, and our retail price are also considered when making our offers to sellers.\n            We offer full transparency to our sellers regarding the valuation of their luxury item(s) and do our best\n            to answer any questions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will you price match a quote from another company?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We realize and understand that a seller might receive a higher offer for their luxury item(s)\n            from a different company, as we all have our own pricing structures, markups, and customer\n            demands. Although we do not practice price-matching, we are open to hearing your price expectations\n            and, in some cases, are open to negotiations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if you don&#39;t accept my item? What if I don&#39;t accept your updated offer if it has\n            changed after the inspection",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If we pass on the item(s) due to condition and/or authenticity concerns, we will update you\n            via e-mail and ship the item(s) back to you immediately. If we are unable to authenticate the item, you\n            will need to provide us with a return label to send back. If you choose not to accept an updated offer\n            after the inspection or we do not come to an agreement on price, we will ship the item(s) back to you\n            immediately at no expense to you. All shipments are made via FedEx and are insured and tracked."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will you tell me if my item is real or fake?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We do not provide virtual authentication services. However, during the selling process, all\n            items are checked for authenticity in-house. If our team passes on an item due to authenticity\n            concerns, we are happy to explain how we came to that determination and describe the specific points\n            of concern if the seller wishes to hear them.\n            What Goes Around Comes Around takes authenticity very seriously and guarantees that only\n            authentic items are sold to our customers. For that reason, we cannot accept any item that we are not\n            100% confident is authentic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I purchased a bag from one of your wholesale partners. Can I return it to you?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Once an item is sold to a third-party wholesale partner such as Dillard&#39;s, Von Maur, or Belk,\n            we no longer own the product and cannot extend further courtesies on their behalf. If you wish to\n            return or exchange, it must be done with the wholesale partner and by their policy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer a warranty?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We do not offer warranties on any of our products due to the varying degrees of the\n            condition of each item at the time of purchase."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I register my bag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our feature to register on our website is still a work in progress."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I purchased a bag from one of your wholesale partners, but I did not receive a branded\n            dust bag or box. Can you send me these items?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unfortunately, we are not able to provide boxes or original dust bags for your purchase.\n            Each item is pre-owned and sometimes purchased without the original box or duster. Your handbag is\n            still guaranteed to be authentic without these effects."
+      }
+    }
+  ]
+}
+</script>
+</isdecorate>

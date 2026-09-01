@@ -1,0 +1,19 @@
+<select name="paypalCreditCardList" id="paypalCreditCardList" class="form-control">
+    <option value="newcard" id="new-card-account" ${payPalData.cardFieldsConfigs.isNewCardOptionSelected ? "selected='selected'": ''}>
+        ${Resource.msg('paypal.cardlist.newcard', 'locale', null)}
+    </option>
+    <isset name="expirationCreditCards" value="${payPalData.cardFieldsConfigs.expirationCreditCards}" scope="page" />
+    <isloop items="${payPalData.cardFieldsConfigs.customerSavedCreditCards}" var="creditCard">
+        <option value="${creditCard.UUID}" ${creditCard.custom.payPalDefaultCard ? "selected='selected'" : ''}
+            data-billing-address="${creditCard.custom.paypalCreditCardBillingAddress}"
+        >
+            ${Resource.msgf('paypal.cardlist.option', 'locale', null, creditCard.maskedCreditCardNumber, creditCard.creditCardType, StringUtils.formatNumber(creditCard.creditCardExpirationMonth, '00'), StringUtils.formatNumber(creditCard.creditCardExpirationYear.toString().substr(2), '00'), '')}
+
+            ${creditCard.custom.payPalDefaultCard ? Resource.msg('paypal.checkout.creditcard.default', 'locale', null) : ''}
+
+            <isif condition="${expirationCreditCards[creditCard.UUID]}">
+                ${'(' + expirationCreditCards[creditCard.UUID].expireMessage + ')'}
+            </isif>
+        </option>
+    </isloop>
+</select>

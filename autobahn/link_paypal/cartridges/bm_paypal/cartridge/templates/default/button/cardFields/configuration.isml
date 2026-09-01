@@ -1,0 +1,45 @@
+<div class="row py-3">
+    <div class="col-6 mb-3">
+        <h2 class="h4 mb-3">
+            ${Resource.msg('cardfields.title', 'configuration', null)}
+        </h2>
+
+        <isinclude template="button/cardFields/form"/>
+    </div>
+    <div class="w-50 col-6 d-flex flex-column justify-content-center">
+        <p>
+            ${Resource.msg('cardfields.note', 'configuration', null)}
+        </p>
+        <div class="w-100 tab-pane active credit-card-content" id="credit-card-content" role="tabpanel">
+            <form id="card-fields-form" action="#" method="post">
+                <div class="form-group required">
+                    <label class="form-control-label" for="name">
+                        <span>${Resource.msg('cardfields.example.name', 'configuration', null)}</span>
+                    </label>
+                    <input type="text" class="form-control card-fields-form-input js-card-fields-form-input" id="name" name="cardholder-name" required/>
+                </div>
+
+                <div class="form-group required">
+                    <label class="form-control-label" for="card-number">
+                        <span>${Resource.msg('cardfields.example.card', 'configuration', null)}</span>
+                    </label>
+                    <input type="text" class="form-control card-fields-form-input js-card-fields-form-input" id="card-number" name="cardnumber" pattern="\d{4}(\s\d{4}){3}" placeholder="${Resource.msg('cardfields.example.placeholder.card', 'configuration', null)}" required/>
+                </div>
+
+                <div class="form-group required">
+                    <label class="form-control-label" for="cvv">
+                        <span>${Resource.msg('cardfields.example.cvv', 'configuration', null)}</span>
+                    </label>
+                    <input type="text" class="form-control card-fields-form-input js-card-fields-form-input" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" placeholder="${Resource.msg('cardfields.example.placeholder.cvv', 'configuration', null)}" required/>
+                </div>
+
+                <div class="form-group required">
+                    <label class="form-control-label" for="exp-date">
+                        <span>${Resource.msg('cardfields.example.expiration', 'configuration', null)}</span>
+                    </label>
+                    <input type="text" class="form-control card-fields-form-input js-card-fields-form-input" id="exp-date" name="exp-date" placeholder="${Resource.msg('cardfields.example.placeholder.expiration', 'configuration', null)}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

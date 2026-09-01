@@ -1,0 +1,67 @@
+// footer social media links
+.social-links {
+    list-style: none;
+    display: inline-flex;
+    flex-flow: wrap;
+    padding-left: 0px;
+    margin-bottom: 0px;
+    li {
+        margin: $footer-social-links-margin;
+    }
+    a {
+        font-size: $footer-icon-size;
+        line-height: $footer-icon-size;
+        text-decoration: none;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .fa-linkedin-square {
+        @include icon($icon-linkedin);
+    }
+    .fa-facebook-square {
+        @include icon($icon-facebook);
+    }
+    .fa-twitter-square {
+        @include icon($icon-twitter);
+    }
+    .fa-youtube-square {
+        @include icon($icon-youtube);
+    }
+    .fa-pinterest-square {
+        @include icon($icon-pinterest);
+    }
+    .fa-email-square {
+        @include icon($icon-email);
+    }
+    .fa-link-square {
+        @include icon($icon-link);
+    }
+    .fa-instagram-square {
+        @include icon($icon-instagram);
+    }
+    .share-link {
+        font-size: initial;
+    }
+}
+
+// general styles for social share links (used on PDP and in Page Designer)
+.social-icons {
+    @include remove-list-styling();
+    .fa-pinterest {
+        @include icon($icon-pinterest, before);
+    }
+    .fa-facebook-official {
+        @include icon($icon-facebook, before);
+    }
+    .fa-twitter {
+        @include icon($icon-twitter, before);
+    }
+    .fa-link {
+        @include icon($icon-link, before);
+    }
+    .share-link {
+        text-decoration: none;
+        display: block;
+    }
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slot-configurations xmlns="http://www.demandware.com/xml/impex/slot/2008-09-08">
+    <slot-configuration slot-id="404-promo" context="global" configuration-id="Promo Zune" default="true" assigned-to-site="true">
+        <description>Free Microsoft Zune with Purchase of $500 (or equivalent in your Currency) or More in Electronics</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune with Purchase of $500 (or equivalent in your Currency) or More in Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="error-promo" context="global" configuration-id="Zune Promo Image" assigned-to-site="true">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 (or equivalent in your Currency) Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="header-banner" context="global" configuration-id="free2dayshiporderover300" default="true" assigned-to-site="true">
+        <description>HTML slot for Free 2 Day Shipping</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;div class="header-promotion"&gt;&lt;strong&gt;FREE 2-Day SHIPPING&lt;/strong&gt; FOR ORDERS OVER $300&lt;/div&gt;</body>
+            </html>
+        </content>
+        <customer-groups>
+            <customer-group group-id="NonGlobaleCustomers"/>
+        </customer-groups>
+    </slot-configuration>
+
+    <slot-configuration slot-id="header-banner" context="global" configuration-id="freeinternationalshipping" assigned-to-site="true">
+        <description>HTML slot for Free International Shipping</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;div class="header-promotion"&gt;&lt;strong&gt;FREE INTERNATIONAL SHIPPING&lt;/strong&gt; Use DEMO-FREE-SHIPPING Coupon Code&lt;/div&gt;</body>
+            </html>
+        </content>
+        <customer-groups>
+            <customer-group group-id="GlobaleCustomers"/>
+        </customer-groups>
+    </slot-configuration>
+    
+    <slot-configuration slot-id="minicart-banner" context="global" configuration-id="10%offorderover$150" assigned-to-site="true">
+        <description>Free Ground Shipping for Orders over $150</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <schedule>
+            <recurrence>
+                <time-of-day>
+                    <time-from>21:00:00.000Z</time-from>
+                    <time-to>08:59:00.000Z</time-to>
+                </time-of-day>
+            </recurrence>
+        </schedule>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;div class="minicartslot"&gt;
+&lt;p style="padding: 0px 10px;"&gt;10% off any order with a purchase of over $150&lt;/p&gt;
+&lt;/div&gt;</body>
+            </html>
+        </content>
+        <customer-groups>
+            <customer-group group-id="NonGlobaleCustomers"/>
+        </customer-groups>
+    </slot-configuration>
+
+    <slot-configuration slot-id="minicart-banner" context="global" configuration-id="freegroundshippingover$150" assigned-to-site="true">
+        <description>Free Ground Shipping for Orders over $150</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <schedule>
+            <recurrence>
+                <time-of-day>
+                    <time-from>09:00:00.000Z</time-from>
+                    <time-to>21:00:00.000Z</time-to>
+                </time-of-day>
+            </recurrence>
+        </schedule>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;div class="minicartslot"&gt;
+&lt;p style="padding: 0px 10px;"&gt;Free Ground Shipping for Orders over $150&lt;/p&gt;
+&lt;/div&gt;</body>
+            </html>
+        </content>
+        <customer-groups>
+            <customer-group group-id="NonGlobaleCustomers"/>
+        </customer-groups>
+    </slot-configuration>
+
+    <slot-configuration slot-id="search-result-banner" context="global" configuration-id="search-results-banner" default="true" assigned-to-site="true">
+        <description>Slot Banner that displays above search results</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;div class="html-slot"&gt;
+&lt;h1&gt;Can't find what you are looking for? Consider a &lt;a href="$httpsURL('GiftCert-Purchase')$" title="Go to Gift Certificates"&gt;gift certificate&lt;/a&gt;!&lt;/h1&gt;
+&lt;/div&gt;</body>
+            </html>
+        </content>
+        <customer-groups>
+            <customer-group group-id="NonGlobaleCustomers"/>
+        </customer-groups>
+    </slot-configuration>
+
+</slot-configurations>

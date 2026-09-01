@@ -1,0 +1,27 @@
+<isinclude template="paypalbm/util/modules" />
+
+<div class="paypalbm_header">
+    <isset name="ordersUrl" scope="page"
+        value="${URLUtils.url('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'orders')}" />
+    <isset name="paypalPluginUrl" scope="page"
+        value="${URLUtils.url('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'paypal-plugin')}" />
+
+    <isbreadcrumb name1="${Resource.msg('paypal.plugin.title', 'paypalbm', null)}" url1="${ordersUrl}"
+        name2="${Resource.msg('transactions.title', 'paypalbm', null)}" />
+
+    <table>
+        <tr>
+            <td width="100%" class="table_title w e s n">
+                ${Resource.msg('transactions.title', 'paypalbm', null)}
+            </td>
+        </tr>
+        <tr>
+            <td class="w e s"></td>
+        </tr>
+        <tr>
+            <td class="table_title_description e w">
+                <p>${Resource.msg('transactions.description', 'paypalbm', null)}</p>
+            </td>
+        </tr>
+    </table>
+</div>

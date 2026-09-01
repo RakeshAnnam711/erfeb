@@ -1,0 +1,24 @@
+<thead class="dw-pinnable">
+    <tr class="dw-header-row">
+        <th class="dw-grid-header">
+            <div class="dw-grid-column-inner">
+                ${Resource.msg('common.column.name', 'preferences', null)}
+            </div>
+        </th>
+        <th class="dw-grid-header">
+            <div class="dw-grid-column-inner">
+                ${Resource.msg('common.column.value', 'preferences', null)}
+            </div>
+        </th>
+        <th class="dw-grid-header">
+            <div class="dw-grid-column-inner">
+                ${Resource.msg('common.column.default.value', 'preferences', null)}
+            </div>
+        </th>
+        <th class="dw-grid-header">
+            <div class="dw-grid-column-inner">
+                ${Resource.msg('common.column.property.description', 'preferences', null)}
+            </div>
+        </th>
+    </tr>
+</thead>

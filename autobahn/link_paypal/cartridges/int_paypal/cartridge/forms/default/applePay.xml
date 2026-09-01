@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+    <field formid="applePayEmailAddress" type="string" max-length="24" mandatory="false" />
+    <field formid="applePayPaymentSource" type="string" max-length="24" mandatory="false" />
+    <field formid="applePayPhoneNumber" type="string" max-length="24" mandatory="false" />
+    <field formid="applePayShippingAddressAsString" type="string" mandatory="false" />
+</form>

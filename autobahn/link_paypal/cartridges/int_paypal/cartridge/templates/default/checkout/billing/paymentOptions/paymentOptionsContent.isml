@@ -1,0 +1,62 @@
+<isif condition="${payPalData && (payPalData.isPayPalActive || payPalData.isActiveVenmo)}">
+    <script
+        src="${payPalData.sdkUrl}"
+        data-page-type="checkout"
+        data-partner-attribution-id="${payPalData.partnerAttributionId}"
+        ${payPalData.userIdToken ? "data-user-id-token=" + payPalData.userIdToken : ''}
+        ${isPaypalCardFieldsEnabled && !payPalData.isFastlaneEnabled ? "data-client-token='" + payPalData.cardFieldsConfigs.clientToken + "'" : ''}
+        ${payPalData.isFastlaneEnabled ? "data-sdk-client-token='" + payPalData.cardFieldsConfigs.clientSDKToken + "'" : ''}
+        ${payPalData.isFastlaneEnabled ? "data-client-metadata-id='" + payPalData.cardFieldsConfigs.clientMetadataId + "'" : ''}>
+    </script>
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+
+        assets.addJs('/js/int_paypal_billing.js');
+        assets.addCss('/css/paypal.css');
+    </isscript>
+
+    <isif condition="${payPalData.fraudNet}">
+        <isset name="fraudNetLocation" value="SFCC-PP-PLUGIN-BILLING" scope="page" />
+        <isinclude template="paypal/components/fraudNet" />
+    </isif>
+</isif>
+
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption" status="loopSate">
+    <isif condition="${paymentOption.ID === 'PAYPAL_CREDIT_CARD' && isPaypalCardFieldsEnabled}">
+        <isif condition="${payPalData && payPalData.isFastlaneEnabled && !pdict.customer.registeredUser}">
+            <isinclude template="paypal/checkout/fastlaneContent" />
+        <iselseif condition="${payPalData.isPayPalActive && isPaypalCardFieldsEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/creditCardContent" />
+        </isif>
+    </isif>
+    <isif condition="${paymentOption.ID === 'CREDIT_CARD' && isBasicCreditCardVisible}">
+        <isinclude template="checkout/billing/paymentOptions/creditCardContent" />
+    </isif>
+
+    <isif condition="${paymentOption.ID === 'Venmo' && payPalData.isActiveVenmo}">
+        <isinclude template="paypal/checkout/venmoContent"/>
+    </isif>
+
+    <isif condition="${paymentOption.ID === 'PayPal' && payPalData}">
+        <isif condition="${pdict.paypal.isGooglePayEnabled}">
+            <script src="${pdict.paypal.googlePayConfigs.sdkUrl}"></script>
+        </isif>
+
+        <isinclude template="paypal/checkout/paypalContent" />
+
+        <isif condition="${payPalData.availableLPMSArray.length}">
+            <isloop items="${payPalData.availableLPMSArray}" var="lpmId">
+                <isinclude template="paypal/checkout/lpmContent"/>
+            </isloop>
+        </isif>
+
+        <isif condition="${pdict.paypal.isApplePayEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/applePayContent" />
+        </isif>
+
+        <isif condition="${pdict.paypal.isGooglePayEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/googlePayContent" />
+        </isif>
+    </isif>
+</isloop>

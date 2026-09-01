@@ -1,0 +1,29 @@
+<isdecorate template="paypalbm/util/pageTemplateDisputes">
+    <isinclude template="inc/Modules" />
+
+    <isset name="TOP_URL" scope="page" value="${URLUtils.https('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'paypal-plugin')}" />
+
+    <isbreadcrumb
+        name1="${Resource.msg('paypal.plugin.title', 'paypalbm', null)}" url1="${TOP_URL}"
+        name2="${Resource.msg('disputes.title', 'disputes', null)}" />
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+            <isinclude template="disputes/components/header"/>
+
+            <isif condition="${!pdict.simplifiedDisputePage}">
+                <isinclude template="disputes/components/infobox"/>
+            </isif>
+        </tbody>
+    </table>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <isif condition="${pdict.PagingModel.count > 0}">
+            <tr><td><isinclude template="disputes/components/list"/></td></tr>
+        <iselse/>
+            <tr><td class="table_detail w e s">${Resource.msg('disputes.notfound', 'disputes', null)}</td></tr>
+        </isif>
+        </tbody>
+    </table>
+</isdecorate>

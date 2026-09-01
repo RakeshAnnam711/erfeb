@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site xmlns="http://www.demandware.com/xml/impex/site/2007-04-30" site-id="Siteidreplaceme">
+    <name>Sitenamereplaceme</name>
+    <currency>USD</currency>
+    <taxation>net</taxation>
+    <custom-cartridges>
+        autobahn_client_core:
+        rvw_integrations_core:
+        rvw_autobahn_core:
+        rvw_pagedesigner_core:
+        plugin_slas_lite:
+        plugin_passwordlesslogin:
+        plugin_seo:
+        plugin_gtm:
+        plugin_sitemap:
+        rvw_integrations_base:
+        app_storefront_base:
+        bm_autobahn_core:
+        bc_job_components
+    </custom-cartridges>
+    <storefront-status>online</storefront-status>
+</site>

@@ -1,0 +1,8 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <div class="container error-page">
+        <iscontentasset aid="error-page-content" />
+    </div>
+</isdecorate>

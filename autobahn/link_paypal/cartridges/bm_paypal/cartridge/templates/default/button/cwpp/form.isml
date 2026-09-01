@@ -1,0 +1,108 @@
+<form id="js-cwpp-config-form" method="POST"  action="${URLUtils.url('CWPPConfig-SaveButton')}"
+    data-button-styles="${pdict.buttonStyles}"
+    data-paypal-api-config="${pdict.payPalApiConfig}">
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="js-cwpp-location">
+                ${Resource.msg('cwpp.location.label', 'configuration', null)}
+            </label>
+
+            <select class="custom-select custom-select-sm" name="location" id="js-cwpp-location">
+                <option value="login">
+                    ${Resource.msg('cwpp.location.option.login', 'configuration', null)}
+                </option>
+
+                <option value="billing">
+                    ${Resource.msg('cwpp.location.option.billing', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="js-cwpp-label">
+                ${Resource.msg('cwpp.buttonType.label', 'configuration', null)}
+            </label>
+
+            <select class="custom-select custom-select-sm" name="buttonType" id="js-cwpp-label">
+                <option value="CWP">
+                    ${Resource.msg('cwpp.buttonType.option.connectwithpaypal', 'configuration', null)}
+                </option>
+                <option value="LWP">
+                    ${Resource.msg('cwpp.buttonType.option.loginwithpaypal', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="js-cwpp-shape-button">
+                ${Resource.msg('cwpp.buttonShape.label', 'configuration', null)}
+            </label>
+
+            <select class="custom-select custom-select-sm" name="buttonShape" id="js-cwpp-shape-button">
+                <option>
+                    ${Resource.msg('cwpp.buttonShape.option.rect', 'configuration', null)}
+                </option>
+                <option>
+                    ${Resource.msg('cwpp.buttonShape.option.pill', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="js-cwpp-size">
+                ${Resource.msg('cwpp.buttonSize.label', 'configuration', null)}
+            </label>
+
+            <select class="custom-select custom-select-sm" name="buttonSize" id="js-cwpp-size">
+                <option value="sm">
+                    ${Resource.msg('cwpp.buttonSize.option.small', 'configuration', null)}
+                </option>
+                <option value="md">
+                    ${Resource.msg('cwpp.buttonSize.option.medium', 'configuration', null)}
+                </option>
+                <option value="lg">
+                    ${Resource.msg('cwpp.buttonSize.option.large', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="js-cwpp-theme-button">
+                ${Resource.msg('cwpp.theme.label', 'configuration', null)}
+            </label>
+
+            <select class="custom-select custom-select-sm" name="theme" id="js-cwpp-theme-button">
+                <option>
+                    ${Resource.msg('cwpp.theme.option.blue', 'configuration', null)}
+                </option>
+                <option>
+                    ${Resource.msg('cwpp.theme.option.neutral', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <isset name="msgArgument" value="PayPal button" scope="page" />
+    <isinclude template="components/checkboxApplyToAll"/>
+
+    <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-primary">
+            ${Resource.msg('button.save', 'configuration', null)}
+        </button>
+
+        <div class="spinner-border text-primary ml-2 d-none" role="status" id="js-cwpp-loader">
+            <span class="sr-only">
+                ${Resource.msg('loader.text', 'configuration', null)}
+            </span>
+        </div>
+    </div>
+</form>

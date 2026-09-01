@@ -1,0 +1,12 @@
+<div class="tab-pane ${pdict.isSearchByPaymentStatus ? 'active': ''}" id="search-by-status" role="tabpanel" aria-labelledby="search-by-status-tab">
+    <select id="paymentStatus" name="paymentStatus" class="inputfield">
+        <option value="">${Resource.msg('forms.select', 'paypalbm', null)}</option>
+
+        <isloop items="${pdict.paymentStatuses}" var="paymentStatus">
+            <option value="${paymentStatus.value}" ${pdict.isSearchByPaymentStatus && hm.paymentStatus.stringValue === ('' + paymentStatus
+            .value) ? "selected" : ""}>
+            ${paymentStatus.label}
+            </option>
+        </isloop>
+    </select>
+</div>

@@ -1,0 +1,58 @@
+@import "~base/variables";
+@import "bootstrap/scss/mixins/breakpoints";
+@import "bootstrap/scss/variables";
+
+.dw-apple-pay-button.apple-pay-cart,
+.dw-apple-pay-button.apple-pay-cart:hover {
+    padding: 0.5em 1em;
+    margin: auto;
+    border-radius: $border-radius;
+}
+
+.checkout-and-applepay .btn {
+    margin: 1%;
+}
+
+.checkout-continue .checkout-and-applepay {
+    @include media-breakpoint-only(xs) {
+        padding: 0 calc(#{$grid-gutter-width} / 2) 1.625em;
+    }
+}
+
+.dw-apple-pay-button.apple-pay-pdp,
+.dw-apple-pay-button.apple-pay-pdp:hover {
+    padding: 0.5em 1em;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    margin: auto;
+    border-radius: $border-radius;
+}
+
+isapplepay.btn {
+    display: none !important;
+}
+
+.cart-and-ipay {
+    display: flex;
+    justify-content: center;
+}
+
+.applepay-tab-wrapper {
+    display: none;
+}
+
+body.apple-pay-enabled .applepay-tab-wrapper {
+    display: block;
+}
+
+// Adyen Apple Pay button styling - Higher specificity to override Adyen CSS
+.adyen-checkout__applepay__button,
+button.adyen-checkout__applepay__button,
+.adyen-checkout__applepay__button.adyen-checkout__applepay__button {
+    margin-top: 10px !important;
+    height: 47px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+}

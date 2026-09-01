@@ -1,0 +1,27 @@
+<isif condition="${payPalData.lpmSdk}">
+    <script
+        src="${payPalData.lpmSdk}"
+        data-page-type="checkout"
+        data-namespace="paypalLpm"
+        data-partner-attribution-id="${payPalData.partnerAttributionId}"
+    >
+    </script>
+</isif>
+<div class="tab-pane ${lpmId}-content" id="${lpmId}-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control"
+               name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+               value="${lpmId}"/>
+
+        <div class="paypal_onApprove">
+            <input class="js-used-payment-method" type="hidden"
+                name="${pdict.forms.billingForm.paypal.usedPaymentMethod.htmlName}" value=""/>
+        </div>
+        <div class="billing-lpm-btn-container">
+            <div class="paypalLoader paypal-loader-container">
+                <i class="paypal-loader"></i>
+            </div>
+            <div class="js-lpm-btn js-${lpmId}-btn" data-lpm-id="${lpmId}" data-lpm-messages="${pdict.paypal.messagesForLPM}"></div>
+        </div>
+    </fieldset>
+</div>

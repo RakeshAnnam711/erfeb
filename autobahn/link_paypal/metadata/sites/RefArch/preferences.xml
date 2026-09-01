@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances>
+            <preference preference-id="PP_Button_Location">
+                <value>Cart</value>
+                <value>MiniCart</value>
+                <value>PDP</value>
+                <value>PVP</value>
+            </preference>
+            <preference preference-id="PP_Venmo_Button_Location">
+                <value>Cart</value>
+                <value>MiniCart</value>
+                <value>PDP</value>
+                <value>PVP</value>
+            </preference>
+            <preference preference-id="PP_Pay_Later_Messaging_Styles">{"product_preview":{"layout":"text","logo-type":"primary","placement":"product_preview","logo-position":"left","text-color":"black","text-size":"12","status":"enabled"},"checkout":{"layout":"text","logo-type":"primary","placement":"checkout","logo-position":"left","text-color":"black","text-size":"12","status":"enabled"},"cart":{"layout":"text","logo-type":"primary","placement":"cart","logo-position":"left","text-color":"black","text-size":"12","status":"enabled"},"product":{"layout":"text","logo-type":"primary","placement":"product","logo-position":"left","text-color":"black","text-size":"12","status":"enabled"},"category":{"layout":"flex","placement":"category","color":"gray","ratio":"8x1","status":"enabled"}}</preference>
+            <preference preference-id="PP_Smart_Button_Styles">{"cart":{"height":35,"color":"gold","shape":"rect","layout":"vertical","label":"checkout","tagline":false},"billing":{"height":35,"color":"gold","shape":"rect","layout":"vertical","label":"checkout","tagline":false},"minicart":{"height":35,"color":"gold","shape":"rect","layout":"vertical","label":"checkout","tagline":false},"pdp":{"height":35,"color":"gold","shape":"rect","layout":"vertical","label":"checkout","tagline":false},"pvp":{"height":35,"color":"gold","shape":"rect","layout":"vertical","label":"checkout","tagline":false}}</preference>
+        </all-instances>
+    </custom-preferences>
+</preferences>

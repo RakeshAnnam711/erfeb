@@ -1,0 +1,58 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "session": "off",
+    "empty": "off",
+    "customer": "off",
+    "request": "off",
+    "dw": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "require-jsdoc": "off",
+    "max-len": "off",
+    "quote-props": "off",
+    "no-new": "off",
+    "no-undef": "off",
+    "new-cap": "off",
+    "valid-jsdoc": "off",
+    "no-unused-expressions": "off",
+
+    "sonarjs/cognitive-complexity": "off",
+    "sonarjs/elseif-without-else": "off",
+    "sonarjs/max-switch-cases": "off",
+    "sonarjs/no-all-duplicated-branches": "off",
+    "sonarjs/no-collapsible-if": "off",
+    "sonarjs/no-collection-size-mischeck": "off",
+    "sonarjs/no-duplicate-string": "off",
+    "sonarjs/no-duplicated-branches": "off",
+    "sonarjs/no-element-overwrite": "off",
+    "sonarjs/no-empty-collection": "off",
+    "sonarjs/no-extra-arguments": "off",
+    "sonarjs/no-gratuitous-expressions": "off",
+    "sonarjs/no-identical-conditions": "off",
+    "sonarjs/no-identical-expressions": "off",
+    "sonarjs/no-identical-functions": "off",
+    "sonarjs/no-ignored-return": "off",
+    "sonarjs/no-inverted-boolean-check": "off",
+    "sonarjs/no-nested-switch": "off",
+    "sonarjs/no-nested-template-literals": "off",
+    "sonarjs/no-one-iteration-loop": "off",
+    "sonarjs/no-redundant-boolean": "off",
+    "sonarjs/no-redundant-jump": "off",
+    "sonarjs/no-same-line-conditional": "off",
+    "sonarjs/no-small-switch": "off",
+    "sonarjs/no-unused-collection": "off",
+    "sonarjs/no-use-of-empty-return-value": "off",
+    "sonarjs/no-useless-catch": "off",
+    "sonarjs/non-existent-operator": "off",
+    "sonarjs/prefer-immediate-return": "off",
+    "sonarjs/prefer-object-literal": "off",
+    "sonarjs/prefer-single-boolean-return": "off",
+    "sonarjs/prefer-while": "off"
+  }
+}

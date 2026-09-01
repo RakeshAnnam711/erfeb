@@ -1,0 +1,115 @@
+<div class="row">
+    <form class="js-button-message-form col-6" action="${URLUtils.url('PaypalConfig-SaveButtonMessage')}"
+          data-button-message-styles="${pdict.savedButtonMessageConfigs}">
+        <h2 class="h4 mb-3">
+            ${Resource.msg('button.message.title', 'configuration', null)}
+        </h2>
+
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="button-message-location">
+                    ${Resource.msg('location.label', 'configuration', null)}
+                </label>
+
+                <select class="custom-select js-button-message-location custom-select-sm" name="location" id="button-message-location">
+                    <isif condition="${pdict.buttonMessagePageVisibility.billing}">
+                        <option value="billing">
+                            ${Resource.msg('button.message.option.billing', 'configuration', null)}
+                        </option>
+                    </isif>
+
+                    <isif condition="${pdict.buttonMessagePageVisibility.cart}">
+                        <option value="cart">
+                            ${Resource.msg('button.message.option.cart', 'configuration', null)}
+                        </option>
+                    </isif>
+
+                    <isif condition="${pdict.buttonMessagePageVisibility.minicart}">
+                        <option value="minicart">
+                            ${Resource.msg('button.message.option.minicart', 'configuration', null)}
+                        </option>
+                    </isif>
+
+                    <isif condition="${pdict.buttonMessagePageVisibility.pdp}">
+                        <option value="pdp">
+                            ${Resource.msg('button.message.option.pdp', 'configuration', null)}
+                        </option>
+                    </isif>
+
+                    <isif condition="${pdict.buttonMessagePageVisibility.pvp}">
+                        <option value="pvp">
+                            ${Resource.msg('button.message.option.pvp', 'configuration', null)}
+                        </option>
+                    </isif>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="style-align-button-message">
+                    ${Resource.msg('button.message.align', 'configuration', null)}
+                </label>
+
+                <select class="custom-select js-style-align-button-message custom-select-sm" name="align" id="style-align-button-message">
+                    <option value="center">
+                        ${Resource.msg('button.message.align.option.center', 'configuration', null)}
+                    </option>
+                    <option value="left">
+                        ${Resource.msg('button.message.align.option.left', 'configuration', null)}
+                    </option>
+                    <option value="right">
+                        ${Resource.msg('button.message.align.option.right', 'configuration', null)}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="style-color-button-message">
+                    ${Resource.msg('button.message.color', 'configuration', null)}
+                </label>
+
+                <select class="custom-select js-style-color-button-message custom-select-sm" name="color" id="style-color-button-message">
+                    <option value="black">
+                        ${Resource.msg('button.message.color.option.black', 'configuration', null)}
+                    </option>
+                    <option value="white">
+                        ${Resource.msg('button.message.color.option.white', 'configuration', null)}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="style-position-button-message">
+                    ${Resource.msg('button.message.position', 'configuration', null)}
+                </label>
+
+                <select class="custom-select js-style-position-button-message custom-select-sm" name="position" id="style-position-button-message">
+                    <option value="top">
+                        ${Resource.msg('button.message.position.option.top', 'configuration', null)}
+                    </option>
+                    <option value="bottom">
+                        ${Resource.msg('button.message.position.option.bottom', 'configuration', null)}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <isset name="msgArgument" value="Messaging" scope="page" />
+        <isinclude template="components/checkboxApplyToAll"/>
+
+        <button type="submit" class="btn btn-primary">
+            ${Resource.msg('button.save', 'configuration', null)}
+        </button>
+    </form>
+
+    <div class="paypal-cart-button w-50 col-6 d-flex flex-column">
+        <span class="button-message-not-eligible-warn">
+            ${Resource.msg('button.message.not.eligible.message', 'configuration', null)}
+        </span>
+        <br/>
+        <div class="js-paypal-button-message"></div>
+    </div>
+
+</div>

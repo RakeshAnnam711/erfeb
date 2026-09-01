@@ -1,0 +1,152 @@
+{
+    "name": "Category Navigation",
+    "description": "Create a linked navigation by selecting specific categories.",
+    "group": "autobahn_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "categoryNavSettings",
+            "name": "Global Settings",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container class",
+                    "description": "Class(es) to add to this component's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "title",
+                    "name": "Title",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "titleClass",
+                    "name": "Title class",
+                    "description": "Class(es) to add to the title for styling purposes, e.g. 'h2 text--black mb-2'.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "categoryData",
+                    "name": "Categories",
+                    "description": "Choose categories below. Select a category to show its subcategories, or click the Select button to change the top-level category.",
+                    "type": "custom",
+                    "required": false,
+                    "editor_definition": {
+                        "type": "categoryPicker"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "menuLevel1Settings",
+            "name": "Menu Level 1 Settings",
+            "attribute_definitions": [
+                {
+                    "id": "listClass1",
+                    "name": "Menu list class",
+                    "description": "Add a custom class to the container of the first level menu.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "itemClass1",
+                    "name": "Menu item class",
+                    "description": "Add a custom class to each menu list item.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "linkClass1",
+                    "name": "Menu link class",
+                    "description": "Add a custom class to each menu item link.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "menuLevel2Settings",
+            "name": "Menu Level 2 Settings",
+            "attribute_definitions": [
+                {
+                    "id": "listClass2",
+                    "name": "Menu list class",
+                    "description": "Add a custom class to the container of the second level menu.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "itemClass2",
+                    "name": "Menu item class",
+                    "description": "Add a custom class to each menu list item.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "linkClass2",
+                    "name": "Menu link class",
+                    "description": "Add a custom class to each menu item link.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "menuLevel3Settings",
+            "name": "Menu Level 3 Settings",
+            "attribute_definitions": [
+                {
+                    "id": "listClass3",
+                    "name": "Menu list class",
+                    "description": "Add a custom class to the container of the third level menu.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "itemClass3",
+                    "name": "Menu item class",
+                    "description": "Add a custom class to each menu list item.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "linkClass3",
+                    "name": "Menu link class",
+                    "description": "Add a custom class to each menu item link.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "menuLevel4Settings",
+            "name": "Menu Level 4 Settings",
+            "attribute_definitions": [
+                {
+                    "id": "listClass4",
+                    "name": "Menu list class",
+                    "description": "Add a custom class to the container of the fourth level menu.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "itemClass4",
+                    "name": "Menu item class",
+                    "description": "Add a custom class to each menu list item.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "linkClass4",
+                    "name": "Menu link class",
+                    "description": "Add a custom class to each menu item link.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}

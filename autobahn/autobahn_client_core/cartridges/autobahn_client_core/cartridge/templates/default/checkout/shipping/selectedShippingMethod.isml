@@ -1,0 +1,30 @@
+<iscomment>
+    This overwrites what is in rvw_autobahn_core.
+
+    The reason for the duplication is because there are attribute level configurations that are integration specific,
+    that couldn't be broken out into its own template
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+<isif condition="${shippingModel.selectedShippingMethod && shippingMethod.ID === shippingModel.selectedShippingMethod.ID}">
+    <input
+        id="shippingMethod-${shippingMethod.ID}-${shippingModel.UUID}${lineItem ? '-' + lineItem.UUID : ''}"
+        name="${shippingAddress.shippingMethodID.htmlName}"
+        tabindex="0"
+        type="radio" class="custom-control-input"
+        value="${shippingMethod.ID}"
+        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('bopisCartridgeEnabled')}">
+            data-pickup="${shippingMethod.storePickupEnabled}"
+        </isif>
+        checked />
+<iselse/>
+    <input
+        id="shippingMethod-${shippingMethod.ID}-${shippingModel.UUID}${lineItem ? '-' + lineItem.UUID : ''}"
+        name="${shippingAddress.shippingMethodID.htmlName}"
+        tabindex="0"
+        type="radio" class="custom-control-input"
+        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('bopisCartridgeEnabled')}">
+            data-pickup="${shippingMethod.storePickupEnabled}"
+        </isif>
+        value="${shippingMethod.ID}" />
+</isif>

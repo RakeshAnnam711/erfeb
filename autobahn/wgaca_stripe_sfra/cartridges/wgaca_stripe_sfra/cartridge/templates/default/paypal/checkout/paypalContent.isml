@@ -1,0 +1,56 @@
+<isset name="paypalDataSafe" value="${pdict.paypal}" scope="page" />
+<isset name="paypalConfig" value="${paypalDataSafe && paypalDataSafe.buttonConfig ? paypalDataSafe.buttonConfig : null}" scope="page" />
+<isset name="buttonMessageConfig" value="${paypalDataSafe && paypalDataSafe.buttonMessageConfig ? paypalDataSafe.buttonMessageConfig : null}" scope="page" />
+<isset name="usedPaymentMethodSafe" value="${paypalDataSafe && paypalDataSafe.isVenmoUsed ? 'Venmo' : 'PayPal'}" scope="page" />
+<isset name="isButtonMessageEnabledSafe" value="${paypalDataSafe && paypalDataSafe.isPayPalButtonMessageEnabled}" scope="page" />
+<isset name="customerEmailSafe" value="${paypalDataSafe && paypalDataSafe.customerEmail ? paypalDataSafe.customerEmail : ''}" scope="page" />
+<isset name="userIdTokenSafe" value="${paypalDataSafe && paypalDataSafe.userIdToken ? paypalDataSafe.userIdToken : ''}" scope="page" />
+<isset name="isCardFieldsEnabledSafe" value="${paypalDataSafe && paypalDataSafe.isPaypalCardFieldsEnabled}" scope="page" />
+
+<div class="tab-pane paypal-content js-paypal-content" id="paypal-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control" name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+            value="${pdict.paypal.paypalPaymentMethodId}"/>
+
+        <div class="paypal_onApprove">
+            <input id="paypal_saveAccount" type="hidden"
+                name="${pdict.forms.billingForm.paypal.savePaypalAccount.htmlName}" value="" />
+            <input id="paypal_makeDefault" type="hidden"
+                name="${pdict.forms.billingForm.paypal.makeDefaultPaypalAccount.htmlName}" value="" />
+            <input id="paypal_activeAccount" type="hidden"
+                name="${pdict.forms.billingForm.paypal.paypalActiveAccount.htmlName}" value="" />
+            <input class="js-used-payment-method" type="hidden"
+                name="${pdict.forms.billingForm.paypal.usedPaymentMethod.htmlName}" value="${usedPaymentMethodSafe}" />
+        </div>
+
+        <div class="form-group">
+            <isinclude template="paypal/checkout/paypalAccountsDropdown" />
+        </div>
+        <div id="billing-paypal-button-container" class="billing-paypal-button-container">
+            <div class="paypalLoader paypal-loader-container">
+                <i class="paypal-loader"></i>
+            </div>
+
+            <div class="paypal-checkout-button js-paypal-button-on-billing-form"
+                data-paypal-button-config="${JSON.stringify(paypalConfig)}"
+                ${isButtonMessageEnabledSafe
+                    ? "data-paypal-button-message-config=" + buttonMessageConfig : ''}
+                data-digital-goods="${JSON.stringify(pdict.paypal.digitalGoodsData)}"
+                data-is-card-fields="${isCardFieldsEnabledSafe}"
+                data-customer-email="${customerEmailSafe}"
+                ${userIdTokenSafe ? "data-user-id-token=" + userIdTokenSafe : ''}>
+            </div>
+        </div>
+
+        <isif condition="${pdict.paypal.showSavePaypalCheckbox}">
+            <div class="paypal-checkbox-container">
+                <div id="savePaypalAccountContainer" class="form-group custom-control custom-checkbox">
+                    <input class="custom-control-input" name="savePaypalAccount" id="savePaypalAccount"
+                        type="checkbox" data-error-message="${Resource.msg('paypal.error.payment.not.saved', 'paypalerrors', null)}" />
+                    <label class="custom-control-label"
+                        for="savePaypalAccount"><span>${Resource.msg('paypal.checkout.saveaccount', 'locale', null)}</span></label>
+                </div>
+            </div>
+        </isif>
+    </fieldset>
+</div>

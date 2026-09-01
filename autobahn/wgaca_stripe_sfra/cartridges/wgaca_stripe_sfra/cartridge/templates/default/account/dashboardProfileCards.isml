@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/paypal.css')}" />
+<input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}" />
+<input type="hidden" data-tokenname="${pdict.csrf.tokenName}" data-token="${pdict.csrf.token}" />
+
+<div class="row justify-content-center js-account-dashboard">
+    <div class="col-sm-6">
+        <iscomment> Profile </iscomment>
+        <isinclude template="account/profileCard" />
+
+        <isif condition="${!pdict.account.isExternallyAuthenticated}">
+            <iscomment> Password </iscomment>
+            <isinclude template="account/passwordCard" />
+        </isif>
+
+        <iscomment> Address Book </iscomment>
+        <isinclude template="account/addressBookCard" />
+    </div>
+    <div class="col-sm-6">
+        <iscomment> Order History </iscomment>
+        <isif condition="${pdict.account.orderHistory}">
+            <isset name="order" value="${pdict.account.orderHistory}" scope="page" />
+            <isinclude template="account/order/orderHistoryCard" />
+        </isif>
+
+        <iscomment> Stripe / default SFRA payment block </iscomment>
+        <isinclude template="account/paymentCard" />
+
+        <iscomment> Paypal credit card block </iscomment>
+        <isif condition="${pdict.paypal && pdict.paypal.isCreditCardBlockVisible}">
+            <isinclude template="account/paypal/paymentCard" />
+        </isif>
+
+        <iscomment> Paypal payment block </iscomment>
+<isif condition="${pdict.paypal && pdict.paypal.isPayPalBlockVisible}">
+            <isinclude template="account/paypal/paymentPaypal" />
+        </isif> 
+    </div>
+</div>
+
+<script>
+    window.paypalUrls = Object.assign({}, window.paypalUrls || {}, {
+        deletePaypalAccount: '${URLUtils.url('Paypal-DeletePaypalAccount')}',
+        renderPayPalAccountsUrl: '${URLUtils.https('Paypal-RenderAccountsList')}',
+        unlinkCwppUrl: '${URLUtils.https('CWPP-Unlink')}',
+        deleteCreditCardUrl: '${URLUtils.url('CreditCard-Delete')}',
+        makeCreditCardDefaultUrl: '${URLUtils.https('CreditCard-MakeDefault')}',
+        createSetupToken: '${URLUtils.https('CreditCard-CreateSetupToken')}',
+        createSetupTokenForPaypal: '${URLUtils.https('Paypal-CreateSetupTokenForPaypal')}',
+        accountAddPaypalHandler: '${URLUtils.https('Paypal-AccountAddPaypalHandler')}'
+    });
+</script>
+<script>
+    (function () {
+        var preOpened3DSPopup = null;
+        var originalWindowOpen = window.open;
+        var PAYPAL_3DS_URL_FRAGMENT = '/webapps/helios?action=authenticate';
+
+        function is3DSUrl(url) {
+            return typeof url === 'string' && url.indexOf(PAYPAL_3DS_URL_FRAGMENT) !== -1;
+        }
+
+        document.addEventListener('click', function (event) {
+            var saveButton = event.target && event.target.closest('.js-paypal-add-new-card-save-btn');
+
+            if (!saveButton) {
+                return;
+            }
+
+            var parentForm = saveButton.closest('form');
+            if (parentForm && parentForm.checkValidity && !parentForm.checkValidity()) {
+                return;
+            }
+
+            if (preOpened3DSPopup && !preOpened3DSPopup.closed) {
+                return;
+            }
+
+            preOpened3DSPopup = originalWindowOpen.call(
+                window,
+                'about:blank',
+                '__paypal_3ds_preopen__',
+                'popup,width=450,height=510'
+            );
+        }, true);
+
+        window.open = function (url, target, features) {
+            if (is3DSUrl(url) && preOpened3DSPopup && !preOpened3DSPopup.closed) {
+                preOpened3DSPopup.location.href = url;
+                preOpened3DSPopup.focus();
+
+                return preOpened3DSPopup;
+            }
+
+            return originalWindowOpen.call(window, url, target, features);
+        };
+    }());
+</script>
+<script src="${URLUtils.staticURL('/js/int_paypal_account.js')}" defer="defer"></script>

@@ -1,0 +1,31 @@
+<isscript>
+    var site = require('dw/system/Site');
+    var system = require('dw/system/System');
+</isscript>
+
+<div class="bm-context-fields">
+    <div class="fields">
+        <form action="#" method="GET" name="gridModifiers" class="js-form-instance-type">
+            <div class="fieldContainer">
+                <div class="dw-input-label">
+                    <label class="dw-text" for="instance-type-${pdict.attributeGroup.ID.toLowerCase()}">${Resource.msg('common.label.instance.type', 'preferences', null)}</label>
+                    <span class="dw-required">*</span>
+                </div>
+
+                <div class="dw-validate-input">
+                    <select name="instanceType" id="instance-type-${pdict.attributeGroup.ID.toLowerCase()}" class="dw-select js-instance-type" data-site-id="${site.current.ID}" data-group-id="${pdict.attributeGroup.ID}">
+                        <option value="0" class="dw-option" ${system.instanceType === system.DEVELOPMENT_SYSTEM ? 'selected': ''}>
+                            ${Resource.msg('common.instanceType.label.sandbox', 'preferences', null)}
+                        </option>
+                        <option value="1" class="dw-option" ${system.instanceType === system.STAGING_SYSTEM ? 'selected': ''}>
+                            ${Resource.msg('common.instanceType.label.staging', 'preferences', null)}
+                        </option>
+                        <option value="2" class="dw-option" ${system.instanceType === system.PRODUCTION_SYSTEM ? 'selected': ''}>
+                            ${Resource.msg('common.instanceType.label.production', 'preferences', null)}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

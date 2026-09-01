@@ -1,0 +1,35 @@
+<isset name="ppForm" value="${pdict.forms.billingForm.paypal}" scope="page" />
+
+<div class="paypal-credit-card-fields js-paypal-credit-card-fields">
+    <div id="fastlane-fields-container"></div>
+    <input id="cardNumber" class="cardNumber" type="hidden" name="${payPalData.cardFieldsConfigs.fieldsConfig.numberHtmlName}" value=""/>
+    <input id="fastlaneCardType" type="hidden" name="${ppForm.fastlaneCardType.htmlName}" value="Visa" />
+    <input id="fastlaneCardLastDigits" type="hidden" name="${ppForm.fastlaneCardLastDigits.htmlName}" value="" />
+    <input id="fastlaneExpiry" type="hidden" name="${ppForm.fastlaneExpiry.htmlName}" value="" />
+    <input id="fastlanePaymentToken" type="hidden" name="${ppForm.fastlanePaymentToken.htmlName}" value="" />
+    <input id="fastlaneCardHolderName" type="hidden"
+        name="${ppForm.creditCardHolderName.htmlName}" value="" />
+
+    <iscomment> Flexible Fastlane </iscomment>
+    <div id="fastlane-card-container" class="fastlane-card justify-content-between align-items-center d-none">
+        <div class="d-flex align-items-center">
+            <div id="fastlane-card-type" class="fastlane-card-type mr-3"></div>
+            <div id="fastlane-last4" class="fastlane-last4"></div>
+        </div>
+
+        <button id="js-change-fastlane-card" type="button" class="btn btn-sm btn-outline-dark fastlane-button">
+            ${Resource.msg('button.change', 'locale', null)}
+        </button>
+    </div>
+    <div class="card-watermark-container d-none">
+        <div id="card-watermark" class="card-watermark">
+        <img src="https://www.paypalobjects.com/fastlane-v1/assets/fastlane_en_sm_light.0296.svg" alt="${Resource.msg('paypal.fastlane.logo', 'locale', null)}" class="d-block"/>
+    </div>
+    </div>
+    <iscomment> Component Fastlane </iscomment>
+    <div id="fastlane-wallet-container" class="d-none"></div>
+
+    <div class="js-paypalLoader paypal-loader-container">
+        <i class="paypal-loader"></i>
+    </div>
+</div>

@@ -1,0 +1,561 @@
+{
+    "sections": [
+        {
+            "name": "General",
+            "key": "GENERAL",
+            "groupId": "PAYPAL_GENERAL"
+        },
+        {
+            "name": "PayPal",
+            "key": "PAYPAL",
+            "groupId": "PAYPAL_CHECKOUT",
+            "paymentMethodId": "PayPal"
+        },
+        {
+            "name": "Credit Card",
+            "key": "CREDIT_CARD",
+            "groupId": "PAYPAL_CREDIT_CARD",
+            "paymentMethodId": "PAYPAL_CREDIT_CARD"
+        },
+        {
+            "name": "Apple Pay",
+            "key": "APPLE_PAY",
+            "groupId": "PAYPAL_APPLEPAY",
+            "paymentMethodId": "ApplePay"
+        },
+        {
+            "name": "Google Pay",
+            "key": "GOOGLE_PAY",
+            "groupId": "PAYPAL_GOOGLE_PAY",
+            "paymentMethodId": "GooglePay"
+        },
+        {
+            "name": "Venmo",
+            "key": "VENMO",
+            "groupId": "PAYPAL_VENMO",
+            "paymentMethodId": "Venmo"
+        },
+        {
+            "name": "Fastlane by PayPal",
+            "key": "FASTLANE",
+            "groupId": "PAYPAL_FASTLANE",
+            "paymentMethodIds": "PAYPAL_CREDIT_CARD,PayPal",
+            "isFastlane": true
+        },
+        {
+            "name": "Pay Later Banners/Messaging",
+            "key": "PAY_LATER_BANNERS_MESSAGING",
+            "groupId": "PAYPAL_PAY_LATER_BANNERS_MESSAGING"
+        }
+    ],
+    "relations": [
+        {
+            "id": "PP_CWPP_Button_Enabled",
+            "oldValue": "true",
+            "newValue": "false",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Please note that 'Automatic PM adding' site preference is automatically disabled since Connect with PayPal functionality is disabled"
+                },
+                {
+                    "type": "change",
+                    "value": "false",
+                    "id": "PP_Automatic_Payment_Method_Adding_Enabled"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Automatic_Payment_Method_Adding_Enabled"
+                },
+                {
+                    "type": "alert",
+                    "message": "Please note that 'Account Linking Security Layer' site preference is automatically disabled since Connect with PayPal functionality is disabled"
+                },
+                {
+                    "type": "change",
+                    "value": "false",
+                    "id": "PP_CWPP_Account_Linking_Security_Layer_Enabled"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_CWPP_Account_Linking_Security_Layer_Enabled"
+                }
+            ]
+        },
+        {
+            "id": "PP_CWPP_Button_Enabled",
+            "oldValue": "false",
+            "newValue": "true",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Please note that 'Account Linking Security Layer' is automatically activated as recommended feature"
+                },
+                {
+                    "type": "change",
+                    "value": "true",
+                    "id": "PP_CWPP_Account_Linking_Security_Layer_Enabled"
+                },
+                {
+                    "type": "disable",
+                    "value": false,
+                    "id": "PP_CWPP_Account_Linking_Security_Layer_Enabled"
+                },
+                {
+                    "type": "alert",
+                    "message": "Please note that 'Automatic PM adding' is automatically activated as recommended feature"
+                },
+                {
+                    "type": "change",
+                    "value": "true",
+                    "id": "PP_Automatic_Payment_Method_Adding_Enabled"
+                },
+                {
+                    "type": "disable",
+                    "value": false,
+                    "id": "PP_Automatic_Payment_Method_Adding_Enabled"
+                }
+            ]
+        },
+        {
+            "id": "PP_Automatic_Payment_Method_Adding_Enabled",
+            "oldValue": "false",
+            "newValue": "true",
+            "conditions": [
+                {
+                    "id": "PP_CWPP_Button_Enabled",
+                    "value": "false",
+                    "operator": "and"
+                }
+            ],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Please note that the 'Automatic PM adding' site preference will not make any impact since Connect with PayPal functionality is disabled"
+                }
+            ]
+        },
+        {
+            "id": "PP_Payment_Model",
+            "oldValue": "Sale",
+            "newValue": ["Authorize"],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Note: In case you enable Local Payment Methods (LPM) they will still use Sale Payment Model since LPMs don't support the Authorization payment model."
+                },
+                {
+                    "type": "alert",
+                    "message": "Please note that in case you enable PayPal Digital Goods flow it will not be triggered since this flow supports the sale payment model only."
+                }
+            ]
+        },
+        {
+            "id": "PP_Saved_Accounts_Limit",
+            "oldValue": "1",
+            "newValue": ["-1", "2", "3"],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Please note that the recommended value of the ''Limit of saved PayPal accounts'' site preference was changed and it may affect the behavior of the PayPal Returning Customer Experience if you save more than one PayPal account."
+                }
+            ]
+        },
+        {
+            "id": "PP_Store_CC_To_Vault",
+            "oldValue": "Enabled",
+            "newValue": "Disabled",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "change",
+                    "value": false,
+                    "id": "PP_Save_CC_On_My_Account"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Save_CC_On_My_Account"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Save_CC_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Store_CC_To_Vault",
+            "oldValue": ["Disabled", "Partially Disabled", ""],
+            "newValue": [],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": true,
+                    "onLoad": true,
+                    "id": "PP_Save_CC_On_My_Account"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "onLoad": true,
+                    "id": "PP_Save_CC_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Store_CC_To_Vault",
+            "oldValue": "Enabled",
+            "newValue": ["Partially Disabled", ""],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "change",
+                    "value": false,
+                    "id": "PP_Save_CC_On_My_Account"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Save_CC_On_My_Account"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Save_CC_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Store_CC_To_Vault",
+            "oldValue": ["Disabled", "Partially Disabled", ""],
+            "newValue": "Enabled",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": false,
+                    "id": "PP_Save_CC_On_My_Account"
+                },
+                {
+                    "type": "disable",
+                    "value": false,
+                    "id": "PP_Save_CC_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Vault_Enabled",
+            "oldValue": "Enabled",
+            "newValue": "Disabled",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Saved_Accounts_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Vault_Enabled",
+            "oldValue": "Disabled",
+            "newValue": [],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": true,
+                    "onLoad": true,
+                    "id": "PP_Saved_Accounts_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Vault_Enabled",
+            "oldValue": ["Partially Disabled", "Enabled", ""],
+            "newValue": "Disabled",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Note:  'Automatic payment method adding enabled' site preference is automatically disabled since Vault Mode is disabled."
+                },
+                {
+                    "type": "change",
+                    "value": false,
+                    "id": "PP_Automatic_Payment_Method_Adding_Enabled"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Automatic_Payment_Method_Adding_Enabled"
+                }
+            ]
+        },
+        {
+            "id": "PP_Vault_Enabled",
+            "oldValue": "Enabled",
+            "newValue": ["Partially Disabled", ""],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Saved_Accounts_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Vault_Enabled",
+            "oldValue": "Disabled",
+            "newValue": ["Enabled", "Partially Disabled", ""],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": false,
+                    "id": "PP_Automatic_Payment_Method_Adding_Enabled"
+                }
+            ]
+        },
+        {
+            "id": "PP_Vault_Enabled",
+            "oldValue": ["Partially Disabled", "Disabled", ""],
+            "newValue": "Enabled",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": false,
+                    "id": "PP_Saved_Accounts_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Vault_Enabled",
+            "oldValue": ["Disabled", "Partially Disabled", ""],
+            "newValue": [],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": true,
+                    "onLoad": true,
+                    "id": "PP_Saved_Accounts_Limit"
+                }
+            ]
+        },
+        {
+            "id": "PP_Vault_Enabled",
+            "oldValue": ["Disabled"],
+            "newValue": [],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": true,
+                    "onLoad": true,
+                    "id": "PP_Automatic_Payment_Method_Adding_Enabled"
+                }
+            ]
+        },
+        {
+            "id": "PP_Fastlane_Checkout_Enabled",
+            "oldValue": "false",
+            "newValue": "true",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Please note that the following site preferences will not have an impact on the Fastlane Checkout: Store Credit Card in Vault, Store Credit Card in Vault via My Account, Verify Credit Card on My Account, Credit Card Expire Notification Configuration, Limit of saved credit cards."
+                }
+            ]
+        },
+        {
+            "id": "PP_Fastlane_Privacy_Enabled",
+            "oldValue": "true",
+            "newValue": "false",
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "PayPal powers this accelerated checkout solution from Fastlane. Since you'll share consumers email address with PayPal, please consult your legal advisors on the appropriate privacy setting for your business."
+                }
+            ]
+        },
+        {
+            "id": "PP_Fastlane_Payment_UI",
+            "oldValue": "false",
+            "newValue": "true",
+            "conditions": [
+                {
+                    "id": "PP_Fastlane_Cardholder_Name",
+                    "value": "true",
+                    "operator": "and"
+                }
+            ],
+            "triggers": [
+                {
+                    "type": "change",
+                    "value": "false",
+                    "id": "PP_Fastlane_Cardholder_Name"
+                },
+                {
+                    "type": "alert",
+                    "message": "Note: The cardholder name can be disabled only in the native UI (the Fastlane Payment UI site preference should be set to 'No')."
+                }
+            ]
+        },
+        {
+            "id": "PP_Fastlane_Cardholder_Name",
+            "oldValue": "false",
+            "newValue": "true",
+            "conditions": [
+                {
+                    "id": "PP_Fastlane_Payment_UI",
+                    "value": "true",
+                    "operator": "and"
+                }
+            ],
+            "triggers": [
+                {
+                    "type": "change",
+                    "value": "false",
+                    "id": "PP_Fastlane_Cardholder_Name"
+                },
+                {
+                    "type": "alert",
+                    "message": "Cardholder name is not applicable for Payment UI component. The cardholder name can be disabled only in the native UI (the Fastlane Payment UI site preference should be set to 'No')."
+                }
+            ]
+        },
+        {
+            "id": "PP_Digital_Goods_Flow_Enabled",
+            "oldValue": "false",
+            "newValue": "true",
+            "conditions": [
+                {
+                    "id": "PP_Fastlane_Checkout_Enabled",
+                    "value": "true",
+                    "operator": "and"
+                }
+            ],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Please note that Digital Goods flow will not be applied for guest storefront users, as Fastlane is enabled in Business Manager."
+                }
+            ]
+        },
+        {
+            "id": "PP_Fastlane_Checkout_Enabled",
+            "oldValue": "false",
+            "newValue": "true",
+            "conditions": [
+                {
+                    "id": "PP_Digital_Goods_Flow_Enabled",
+                    "value": "true",
+                    "operator": "and"
+                }
+            ],
+            "triggers": [
+                {
+                    "type": "alert",
+                    "message": "Please note that Digital Goods flow will not be applied for guest storefront users, as Fastlane is enabled in Business Manager."
+                }
+            ]
+        },
+        {
+            "id": "PP_Streamlined_Checkout",
+            "oldValue": ["true", ""],
+            "newValue": [],
+            "conditions": [
+                {
+                    "id": "PP_Returning_Customer_Experience_Enabled",
+                    "value": "false",
+                    "operator": "and"
+                }
+            ],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": true,
+                    "onLoad": true,
+                    "id": "PP_Returning_Customer_Experience_Enabled"
+                }
+            ]
+        },
+        {
+            "id": "PP_Streamlined_Checkout",
+            "oldValue": ["false", ""],
+            "newValue": "true",
+            "conditions": [
+                {
+                    "id": "PP_Returning_Customer_Experience_Enabled",
+                    "value": "false",
+                    "operator": "and"
+                }
+            ],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Returning_Customer_Experience_Enabled"
+                },
+                {
+                    "type": "alert",
+                    "message": "Please note: PayPal Returning Experience is disabled since it doesn't work in conjunction with the Streamlined Checkout."
+                }
+            ]
+        },
+        {
+            "id": "PP_Streamlined_Checkout",
+            "oldValue": ["false", ""],
+            "newValue": "true",
+            "conditions": [
+                {
+                    "id": "PP_Returning_Customer_Experience_Enabled",
+                    "value": "true",
+                    "operator": "and"
+                }
+            ],
+            "triggers": [
+                {
+                    "type": "change",
+                    "value": "false",
+                    "id": "PP_Returning_Customer_Experience_Enabled"
+                },
+                {
+                    "type": "disable",
+                    "value": true,
+                    "id": "PP_Returning_Customer_Experience_Enabled"
+                },
+                {
+                    "type": "alert",
+                    "message": "Please note: PayPal Returning Experience is disabled since it doesn't work in conjunction with the Streamlined Checkout. <b>Please go to the PayPal tab and save the applied changes.</b>"
+                }
+            ]
+        },
+        {
+            "id": "PP_Streamlined_Checkout",
+            "oldValue": ["true", ""],
+            "newValue": ["false"],
+            "conditions": [],
+            "triggers": [
+                {
+                    "type": "disable",
+                    "value": false,
+                    "id": "PP_Returning_Customer_Experience_Enabled"
+                }
+            ]
+        }
+    ]
+}

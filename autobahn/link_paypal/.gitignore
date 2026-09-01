@@ -1,0 +1,24 @@
+.idea
+.vscode
+.nyc_output
+coverage
+node_modules
+mochawesome-report
+dw.json
+yarn.lock
+*.code-workspace
+cartridges/**/cartridge/static/default/js/*.js
+cartridges/**/cartridge/static/default/js/*.map
+
+# Allow vendor-provided BM PayPal static assets
+!cartridges/bm_paypal/cartridge/static/default/js/
+!cartridges/bm_paypal/cartridge/static/default/js/*.js
+!cartridges/bm_paypal/cartridge/static/default/js/*.map
+.DS_Store
+dw-api-types
+cartridges/jsconfig.json
+custom-scripts/files
+custom-scripts/config.json
+
+# ignore temporary files created by MS Office (starting with ~$)
+~$*

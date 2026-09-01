@@ -1,0 +1,16 @@
+<div class="paypal-credit-card-details">
+    <div class="creditcard-method-name">
+        ${payment.paymentMethodName}
+    </div>
+    <isif condition="${payment.maskedCreditCardNumber}">
+        <div class="credit-card-number">
+            ${payment.maskedCreditCardNumber}
+        </div>
+    </isif>
+    <div class="credit-card-type">
+        ${payment.type}
+    </div>
+    <div class="creditcard-amount">
+        ${pdict.order.priceTotal}
+    </div>
+</div>

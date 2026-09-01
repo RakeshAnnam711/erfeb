@@ -1,0 +1,61 @@
+<isset name="isProductSet" value="${pdict.product.productType === 'set'}" scope="page" />
+<isset name="paypalData" value="${pdict.paypal}" scope="page" />
+
+<div class="row cart-and-ipay">
+    <div class="col-sm-12">
+        <input type="hidden" class="js-is-show-pp-button" value="${product.readyToOrder && product.available}" />
+        <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}" />
+        <button class="add-to-cart-global btn btn-primary js-add-to-cart-global"
+                data-pid="${product.id}"
+                ${!product.readyToOrder || !product.available ? "disabled" : ""}>
+            <i class="fa fa-shopping-bag"></i>
+            <isif condition="${product.productType === 'set' || product.productType === 'bundle'}">
+                ${Resource.msg('button.addalltocart', 'common', null)}
+            <iselse/>
+                ${Resource.msg('button.addtocart', 'common', null)}
+            </isif>
+        </button>
+
+        <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}" />
+
+        <isif condition="${pdict.action === 'Product-Show'}">
+            <div class="row paypal-pdp-button-global">
+                <div class="col-sm-12">
+                    <isif condition="${paypalData && paypalData.venmoOrPayPalButtonEnabled}">
+                        <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}" />
+
+                        <isinclude template="paypal/pdp/paypalPdpContent" />
+                    </isif>
+                    <isif condition="${paypalData && paypalData.isApplePayPvpButtonEnabled && !isProductSet}">
+                        <isinclude template="paypal/pdp/applePayPdpContent" />
+                    </isif>
+                    <isif condition="${paypalData && paypalData.isGooglePayPdpButtonEnabled}">
+                        <isinclude template="paypal/pdp/googlePayPdpContent" />
+                    </isif>
+                </div>
+            </div>
+        </isif>
+
+        <isif condition="${pdict.action === 'Product-ShowQuickView'}">
+            <div class="row paypal-pvp-button-global">
+                <div class="col-sm-12">
+                    <isif condition="${paypalData && paypalData.venmoOrPayPalButtonEnabled}">
+                        <isinclude template="paypal/pdp/paypalPdpContent" />
+                    </isif>
+                </div>
+                <div class="col-sm-12">
+                    <isif condition="${paypalData && paypalData.isApplePayPvpButtonEnabled && !isProductSet}">
+                        <isinclude template="paypal/pdp/applePayPdpContent" />
+                    </isif>
+                </div>
+                <div class="col-sm-12">
+                    <isif condition="${paypalData && paypalData.isGooglePayPvpButtonEnabled}">
+                        <isinclude template="paypal/pdp/googlePayPdpContent" />
+                    </isif>
+                </div>
+            </div>
+        </isif>
+
+        <isinclude template="paypal/paylaterMessaging/productMessage"/>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+<div class="${pdict.containerClass}">
+    <isset name="product" value="${pdict.product}" scope="page"/>
+    <isinclude template="product/components/productDetailsReviews" />
+</div>

@@ -1,0 +1,45 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/login.js');
+    </isscript>
+
+    <div class="container login-page">
+
+        <iscontentasset aid="accountHeaderLogin"/>
+
+        <!---Breadcrumbs--->
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+        <div class="row justify-content-center equal-height">
+            <div class="col-md-6">
+                <div class="card w-100">
+                    <div class="card-body">
+                        <div class="login-nav-tabs">
+                            <isinclude template="account/components/navTabs" />
+                        </div>
+                        <div class="login-form-nav">
+                            <div class="tab-content">
+                                <div class="tab-pane ${pdict.navTabValue === 'login' ? 'active' : ''}" id="login" role="tabpanel" aria-labelledby="login-tab">
+                                    <isinclude template="account/components/loginForm" />
+                                    <isinclude template="account/password/requestPasswordResetModal"/>
+                                    <isinclude template="account/components/oauth" />
+                                </div>
+                                <div class="tab-pane ${pdict.navTabValue === "register" ? 'active' : ''}" id="register" role="tabpanel" aria-labelledby="register-tab">
+                                    <isinclude template="account/components/registerForm" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card w-100">
+                    <isinclude template="account/components/trackOrderForm" />
+                </div>
+            </div>
+        </div>
+    </div>
+</isdecorate>

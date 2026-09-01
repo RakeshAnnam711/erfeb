@@ -1,0 +1,4 @@
+<iscomment>
+    WGACA override: intentionally suppress integration-specific confirmation header content
+    (including tracking/return label snippets) on order confirmation.
+</iscomment>

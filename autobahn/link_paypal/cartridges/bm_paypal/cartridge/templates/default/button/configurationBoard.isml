@@ -1,0 +1,84 @@
+<script>
+    const nativeArrayFrom = Array.from;
+    const nativeArrayMap = Array.prototype.map;
+    const nativeArrayEntries = Array.prototype.entries;
+</script>
+<isdecorate template="application/MenuFrame">
+    <link rel="stylesheet" href="${URLUtils.staticURL('css/bootstrap.min.css')}" />
+    <link rel="stylesheet" href="${URLUtils.staticURL('css/paypalconfigurationbm.css')}" />
+
+    <script>
+        Array.from = nativeArrayFrom;
+        Array.prototype.map = nativeArrayMap;
+        Array.prototype.entries = nativeArrayEntries;
+    </script>
+
+    <script src="${pdict.payPalSDK}"></script>
+
+    <div class="py-3">
+        <ul class="nav nav-tabs" id="payments-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="paypal-venmo-tab" data-toggle="tab" data-target="#paypal-venmo" type="button"
+                    role="tab" aria-controls="home" aria-selected="true">
+                    ${Resource.msg('tab.paypal.venmo', 'configuration', null)}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="paylater-configurations-tab" data-toggle="tab" data-target="#paylater-configurations" type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">
+                    ${Resource.msg('tab.paylater.configurations', 'configuration', null)}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="apple-pay-tab" data-toggle="tab" data-target="#apple-pay" type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">
+                    ${Resource.msg('tab.apple-pay', 'configuration', null)}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="google-pay-tab" data-toggle="tab" data-target="#google-pay" type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">
+                    ${Resource.msg('tab.google-pay', 'configuration', null)}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="cwpp-tab" data-toggle="tab" data-target="#cwpp" type="button"
+                    role="tab" aria-controls="contact" aria-selected="false">
+                    ${Resource.msg('tab.cwpp', 'configuration', null)}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="card-fields-tab" data-toggle="tab" data-target="#card-fields" type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">
+                    ${Resource.msg('tab.cardfields', 'configuration', null)}
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="payments-tab-content">
+            <div class="tab-pane fade active show" id="paypal-venmo" role="tabpanel" aria-labelledby="paypal-venmo-tab">
+                <isinclude url="${URLUtils.url('PaypalConfig-Start')}" />
+            </div>
+            <div class="tab-pane fade" id="apple-pay" role="tabpanel" aria-labelledby="apple-pay-tab">
+                <isinclude url="${URLUtils.url('ApplePayConfig-Start')}" />
+            </div>
+            <div class="tab-pane fade" id="google-pay" role="tabpanel" aria-labelledby="google-pay-tab">
+                <isinclude url="${URLUtils.url('GooglePayConfig-Start')}" />
+            </div>
+            <div class="tab-pane fade" id="cwpp" role="tabpanel" aria-labelledby="cwpp-tab">
+                <isinclude url="${URLUtils.url('CWPPConfig-Start')}" />
+            </div>
+            <div class="tab-pane fade" id="card-fields" role="tabpanel" aria-labelledby="card-fields-tab">
+                <isinclude url="${URLUtils.url('CardFieldsConfig-Start')}" />
+            </div>
+            <div class="tab-pane fade" id="paylater-configurations" role="tabpanel" aria-labelledby="paylater-configurations-tab">
+                <isinclude url="${URLUtils.url('PayLaterMsgConfigurator-Start')}" />
+            </div>
+        </div>
+    </div>
+
+    <isinclude template="components/flashMessages" />
+
+    <script src="${URLUtils.staticURL('js/bm_paypal_tab.js')}" defer="defer"></script>
+    <script src="${URLUtils.staticURL('js/bm_paypal_styleSettings.js')}" defer="defer"></script>
+</isdecorate>

@@ -1,0 +1,65 @@
+<iscomment> <isset name="AdyenHelper" value="${require('*/cartridge/adyen/utils/adyenHelper')}" scope="pdict"/>
+<isset name="AdyenConfigs" value="${require('*/cartridge/adyen/utils/adyenConfigs')}" scope="page" />
+<script src="${pdict.AdyenHelper.getCheckoutUrl()}" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="${pdict.AdyenHelper.getCheckoutCSS()}"/>
+<input type="hidden" id="adyen-token" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+<script type="text/javascript">
+    window.clientKey = "${AdyenConfigs.getAdyenClientKey()}";
+    window.locale = "${request.locale}";
+    window.selectShippingMethodUrl = "${URLUtils.https('Adyen-SelectShippingMethod')}";
+    window.paymentsDetailsURL = "${URLUtils.https('Adyen-PaymentsDetails')}";
+    window.paymentFromComponentURL = "${URLUtils.https('Adyen-PaymentFromComponent')}";
+    window.showConfirmationAction = "${URLUtils.https('Adyen-ShowConfirmationPaymentFromComponent')}";
+    window.environment = "${AdyenConfigs.getAdyenEnvironment()}";
+    window.getPaymentMethodsURL = "${URLUtils.https('Adyen-GetPaymentMethods')}";
+    window.shippingMethodsUrl = "${URLUtils.https('Adyen-ShippingMethods')}";
+    window.returnUrl = "${URLUtils.https('Cart-Show')}";
+    window.expressMethodsOrder = "${AdyenConfigs.getExpressPaymentsOrder()}";
+    window.isApplePayExpressEnabled = "${AdyenConfigs.isApplePayExpressEnabled()}";
+    window.isAmazonPayExpressEnabled = "${AdyenConfigs.isAmazonPayExpressEnabled()}";
+    window.isPayPalExpressEnabled = "${AdyenConfigs.isPayPalExpressEnabled()}";
+    window.isGooglePayExpressEnabled = "${AdyenConfigs.isGooglePayExpressEnabled()}";
+    window.isPayPalExpressReviewPageEnabled = "${AdyenConfigs.isPayPalExpressReviewPageEnabled()}";
+    window.digitsNumber = "${pdict.AdyenHelper.getFractionDigits(pdict.AdyenHelper.getBasketAmount().currencyCode)}";
+    window.basketAmount = "${pdict.AdyenHelper.getBasketAmount()}".replace(/&quot;/g, '\"');
+    window.makeExpressPaymentsCall = "${URLUtils.https('Adyen-MakeExpressPaymentsCall')}";
+    window.makeExpressPaymentDetailsCall = "${URLUtils.https('Adyen-MakeExpressPaymentDetailsCall')}";
+    window.saveShopperData = "${URLUtils.https('Adyen-SaveShopperData')}";
+    window.paypalUpdateOrder = "${URLUtils.https('Adyen-paypalUpdateOrder')}";
+    window.paypalReviewPageEnabled = ${AdyenConfigs.isPayPalExpressReviewPageEnabled()};
+    window.checkoutReview = "${URLUtils.https('Adyen-CheckoutReview')}";
+</script> </iscomment>
+<iscomment> <isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/expressPayments.js');
+    assets.addCss('/css/adyenCss.css');
+    assets.addJs('/js/apple-pay-override.js');
+</isscript> </iscomment>
+<div>
+    <a href="${URLUtils.https('Checkout-Begin')}"
+        class="btn btn-primary btn-block checkout-btn minicart-footer-cta m-0 ${pdict.valid.error ? 'disabled' : ''}" role="button" data-price="${pdict.totals.grandTotal}" cypress-target="beginCheckoutButton" title="Checkout" aria-label="${Resource.msg('button.checkout', 'cart', null)}">
+        ${Resource.msg('button.checkout', 'cart', null)}
+    </a>
+</div>
+<isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}" scope="page" />
+<iscomment> <isif condition="${AdyenConfigs.areExpressPaymentsEnabled() && !globaleSession.get('geOperatedCountry')}">
+    <div id="express-loader-container" class="express-loader-container">
+        <span class="express-loader"></span>
+    </div>
+    <div id="express-container" class="hidden">
+        <div data-method="applepay" class="expressComponent applepay" style="padding:0"></div>
+        <div data-method="amazonpay" class="expressComponent" id="amazonpay-container"></div>
+        <div data-method="paypal" class="expressComponent" id="paypal-container" style="padding:0"></div>
+        <div data-method="googlepay" class="expressComponent googlepay" style="padding:0"></div>
+    </div>
+</isif> </iscomment>
+
+<isset name="stripePublicKeyValue" value="${dw.system.Site.current.getCustomPreferenceValue('stripePublicKey')}" scope="page" />
+<isset name="isUSLocale" value="${request.locale && request.locale.indexOf('_US') !== -1}" scope="page" />
+<isset name="showStripeExpressOnCart" value="${dw.system.Site.current.getCustomPreferenceValue('stripeEnabled') && dw.system.Site.current.getCustomPreferenceValue('stripeExpressCheckoutCartPageEnabled') && stripePublicKeyValue && !pdict.valid.error && isUSLocale}" scope="page" />
+
+<isif condition="${showStripeExpressOnCart}">
+<div class="stripe-express-checkout-container" style="margin-top: 10px">
+    <isinclude template="checkout/expressCheckout/stripeExpressCheckoutButton" />
+</div>
+</isif>

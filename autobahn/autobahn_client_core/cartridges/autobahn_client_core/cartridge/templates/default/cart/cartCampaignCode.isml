@@ -1,0 +1,14 @@
+<iscomment> Campaigns list </iscomment>
+<h2 class="campaigns-header-title">${Resource.msg('label.campaigns.code','cart',null)}</h2>
+<isloop items="${pdict.totals.discounts}" var="discount">
+    <isif condition="${discount.type !== 'coupon'}">
+        <div class="promotion-information row leading-lines no-gutters promotion-${discount.UUID}">
+            <div class="col-7 start-lines">
+                <p><span class="promotion-name">${discount.lineItemText}</span></p>
+            </div>
+            <div class="col-5 end-lines">
+                <p><span class="applied-promotion-discount">${discount.price}</span></p>
+            </div>
+        </div>
+    </isif>
+</isloop>

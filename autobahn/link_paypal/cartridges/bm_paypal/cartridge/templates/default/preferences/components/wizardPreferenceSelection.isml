@@ -1,0 +1,32 @@
+<div id="preferenceSelection" class="dw-grid" data-wizard-stage="preferenceSelection">
+    <div class="dw-scroller dw-pinnable-container dw-grid-container">
+        <table>
+            <thead class="dw-pinnable">
+                <tr class="dw-header-row">
+                    <th class="dw-grid-selection">
+                        <input type="checkbox" class="js-dw-check-all" />
+                    </th>
+                    <th class="dw-grid-header">
+                        <span class="dw-grid-column-inner">${Resource.msg('common.column.name', 'preferences', null)}</span>
+                    </th>
+                    <th class="dw-grid-header">
+                        <span class="dw-grid-column-inner">${Resource.msg('common.column.value', 'preferences', null)}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="js-dw-tbody">
+                <tr class="dw-row js-attr-selection-row d-none" >
+                    <td class="dw-grid-column dw-grid-selection">
+                        <input type="checkbox" class="js-dw-checkbox" />
+                    </td>
+                    <td class="dw-grid-column ellipsis">
+                        <span class="dw-grid-column-inner"></span>
+                    </td>
+                    <td class="dw-grid-column ellipsis">
+                        <span class="dw-grid-column-inner"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

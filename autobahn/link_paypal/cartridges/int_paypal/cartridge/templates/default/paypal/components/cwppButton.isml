@@ -1,0 +1,8 @@
+<isif condition="${pdict.CWPPButtonEnabled}">
+    <div class="d-flex justify-content-center">
+        <div id="js-cwpp-button" class="cwpp-container"
+            data-cwpp-sdk="${pdict.CWPPSdkLink}"
+            data-parameters="${pdict.CWPPButtonParameters}"
+        ></div>
+    </div>
+</isif>

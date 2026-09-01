@@ -1,0 +1,22 @@
+<div class="container-fluid content-grid px-0 ${pdict.containerClass}">
+    <div class="row">
+        <isloop items="${pdict.contentSearch.contents}" var="contentAsset" status="loopStatus">
+            <isset name="index" value="${loopStatus.index}" scope="page"/>
+            <div class="${pdict.columnClass}">
+                <isinclude template="search/components/contentTile" />
+            </div>
+        </isloop>
+    </div>
+
+    <div class="col-12 content-grid-footer">
+        <isif condition="${pdict.contentSearch.showMoreButton}">
+            <div class="col show-more-content">
+                <div class="text-center">
+                    <button class="btn btn-secondary col-12 col-sm-4" data-url="${URLUtils.url('Search-UpdatePDContentGrid', 'pageSize', parseInt(pdict.pageMax, 10), 'resultLimit', parseInt(pdict.resultLimit, 10), 'customStartingPage', parseInt(pdict.customStartingPage, 10) + 1, 'q', pdict.contentSearch.queryPhrase, 'containerClass', pdict.containerClass, 'columnClass', pdict.columnClass)}">
+                        ${Resource.msg('button.more', 'search', null)}
+                    </button>
+                </div>
+            </div>
+        </isif>
+    </div>
+</div>

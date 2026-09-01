@@ -1,0 +1,46 @@
+<isif condition="${pdict.paypal.fraudNet}">
+    <isset name="fraudNetLocation" value="SFCC-PP-PLUGIN-ACCOUNT" scope="page" />
+    <isinclude template="paypal/components/fraudNet" />
+</isif>
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+
+    assets.addJs(pdict.paypal.sdkUrl);
+</isscript>
+
+<div class="card paypal-block">
+    <div class="paypalLoader paypal-loader-container">
+        <i class="paypal-loader"></i>
+    </div>
+
+    <div class="card-header">
+        <h2>${Resource.msg('label.payment.paypal', 'account', null)}</h2>
+    </div>
+
+    <div class="js-saved-paypal-account-group">
+        <isinclude template="account/paypal/paypalAccountsLoop" />
+    </div>
+
+    <isif condition="${pdict.paypal.prefs.paypalVaultModeDisabled}">
+        <div class="alert alert-info text-center mb-0" role="alert">
+            ${Resource.msg('paypal.accountslist.usagedisabled', 'locale', null)}
+        </div>
+    </isif>
+
+    <isif condition="${pdict.paypal.isPaypalVaultAllowed}">
+        <div class="card-footer card-footer-border text-center save-paypal-account-buttons">
+            <div class="paypal-account-button"></div>
+
+            <div class="card-link add-paypal-account"
+                aria-label="${Resource.msg('label.payment.addnewpayment', 'payment', null)}"
+                data-paypal-account-limit="${pdict.paypal.prefs.paypalAccountVaultLimit}">
+                ${Resource.msg('link.addnew', 'account', null)}
+            </div>
+        </div>
+    </isif>
+
+    <div class="alert alert-info text-center m-0 d-none limit-msg card-footer-border" role="alert">
+        ${Resource.msg('paypal.accountslist.vaultlimitreached', 'locale', null)}
+    </div>
+</div>

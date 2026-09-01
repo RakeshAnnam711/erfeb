@@ -1,0 +1,5 @@
+<button class="card-link make-card-default pull-right js-make-card-default"
+    aria-label="${Resource.msg('button.creditcard.makedefault.arialabel', 'account', null)}"
+    data-id="${customerSavedCreditCard.UUID}">
+    ${Resource.msg('button.creditcard.makedefault', 'account', null)}
+</button>

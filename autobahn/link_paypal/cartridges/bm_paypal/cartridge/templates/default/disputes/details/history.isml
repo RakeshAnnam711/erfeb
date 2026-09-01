@@ -1,0 +1,28 @@
+<isif condition="${!empty(entry.history)}">
+    <h2>${Resource.msg('dispute.detail.history.title', 'disputes', null)}</h2>
+
+    <isif condition="${!pdict.hasFullHistory}">
+        <p class="dispute-subcontent dispute-highlight">${Resource.msg('dispute.detail.history.note', 'disputes', null)}</p>
+    </isif>
+
+    <div class="dispute-history">
+        <table class="paypalbm-table paypalbm_detail_table paypalbm-transaction-history-table">
+            <thead>
+                <tr>
+                    <th>${Resource.msg('dispute.detail.history.time', 'disputes', null)}</th>
+                    <th>${Resource.msg('dispute.detail.history.status', 'disputes', null)}</th>
+                    <th>${Resource.msg('dispute.detail.history.amount', 'disputes', null)}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <isloop items="${entry.history}" var="history">
+                    <tr>
+                        <td><isprint value="${new Date(history.time)}" formatter="M/dd/yy h:mm a" /></td>
+                        <td>${history.status}</td>
+                        <td>${history.amount}</td>
+                    </tr>
+                </isloop>
+            </tbody>
+        </table>
+    </div>
+</isif>

@@ -1,0 +1,64 @@
+<div class="form-group
+    ${pdict.paypal.creditCardForm.cardName.mandatory === true ? 'required' : ''}">
+    <label class="form-control-label" for="${pdict.paypal.creditCardForm.cardName.htmlName}">
+        <isprint value="${pdict.paypal.creditCardForm.cardName.label}" encoding="htmlcontent" />
+    </label>
+
+    <div class="paypal-cc-field-wrap">
+        <input id="${pdict.paypal.creditCardForm.cardName.htmlName}"
+            class="paypal-card-fields-container form-control js-paypal-card-holder-name-input"
+            type="text"
+            placeholder="${Resource.msg('paypal.creditcard.field.cardholder', 'locale', null)}"
+            <isprint value="${pdict.paypal.creditCardForm.cardName.attributes}" encoding="off" /> />
+        <div class="invalid-feedback"></div>
+        <span class="js-paypal-card-holder-name-error js-paypal-error text-danger d-none"></span>
+    </div>
+</div>
+<div class="form-group
+    ${pdict.paypal.creditCardForm.cardNumber.mandatory === true ? 'required' : ''}">
+    <label class="form-control-label" for="${pdict.paypal.creditCardForm.cardNumber.htmlName}">
+        <isprint value="${pdict.paypal.creditCardForm.cardNumber.label}" encoding="htmlcontent" />
+    </label>
+
+    <div class="paypal-cc-field-wrap">
+        <input id="${pdict.paypal.creditCardForm.cardNumber.htmlName}"
+            class="paypal-card-fields-container form-control js-paypal-card-number-input"
+            type="text"
+            placeholder="${Resource.msg('paypal.creditcard.field.cardNumber', 'locale', null)}"
+            <isprint value="${pdict.paypal.creditCardForm.cardNumber.attributes}" encoding="off" /> />
+        <div class="invalid-feedback"></div>
+        <span class="js-paypal-card-number-error js-paypal-error text-danger d-none"></span>
+    </div>
+</div>
+<div class="form-group
+    ${pdict.paypal.creditCardForm.cardSecurityCode.mandatory === true ? 'required' : ''}">
+    <label class="form-control-label" for="${pdict.paypal.creditCardForm.cardSecurityCode.htmlName}">
+        <isprint value="${pdict.paypal.creditCardForm.cardSecurityCode.label}" encoding="htmlcontent" />
+    </label>
+
+    <div class="paypal-cc-field-wrap">
+        <input id="${pdict.paypal.creditCardForm.cardSecurityCode.htmlName}"
+            class="paypal-card-fields-container form-control js-paypal-cvv-input"
+            type="text"
+            placeholder="${Resource.msg('paypal.creditcard.field.cvv.placeholder', 'locale', null)}"
+            <isprint value="${pdict.paypal.creditCardForm.cardSecurityCode.attributes}" encoding="off" /> />
+        <div class="invalid-feedback"></div>
+        <span class="js-paypal-cvv-error js-paypal-error text-danger d-none"></span>
+    </div>
+</div>
+<div class="form-group
+    ${pdict.paypal.creditCardForm.cardExpirationDate.mandatory === true ? 'required' : ''}">
+    <label class="form-control-label" for="${pdict.paypal.creditCardForm.cardExpirationDate.htmlName}">
+        <isprint value="${pdict.paypal.creditCardForm.cardExpirationDate.label}" encoding="htmlcontent" />
+    </label>
+
+    <div class="paypal-cc-field-wrap">
+        <input id="${pdict.paypal.creditCardForm.cardExpirationDate.htmlName}"
+            class="paypal-card-fields-container form-control js-paypal-expiration-date-input"
+            placeholder="${Resource.msg('paypal.account.creditcard.field.expirationdate.placeholder', 'locale', null)}"
+            type="text"
+            <isprint value="${pdict.paypal.creditCardForm.cardExpirationDate.attributes}" encoding="off" /> />
+        <div class="invalid-feedback"></div>
+        <span class="js-paypal-expiration-date-error js-paypal-error text-danger d-none"></span>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+{
+    "root": true,
+    "plugins": ["sonarjs"],
+    "extends": [
+        "airbnb-base/legacy",
+        "plugin:sonarjs/recommended-legacy",
+        "prettier"
+    ],
+    "globals": {
+        "empty": "readonly",
+        "session": "readonly",
+        "customer": "readonly",
+        "request": "readonly",
+        "response": "readonly",
+        "$": "readonly",
+        "Ext": "readonly",
+        "google": "readonly",
+        "paypal": "readonly",
+        "Promise": "readonly"
+    },
+    "env": {
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2022,
+        "sourceType": "module"
+    },
+    "rules": {
+        "import/no-unresolved": "off",
+        "linebreak-style": "off",
+        "func-names": "off",
+        "global-require": "off",
+        "consistent-return": "error",
+        "no-undef": "error",
+        "camelcase": "off",
+        "no-param-reassign": "off",
+        "strict": "off",
+        "no-plusplus": "off",
+        "radix": "off",
+        "no-unused-expressions": "off",
+        "no-useless-return": "off",
+        "prefer-regex-literals": "off",
+        "no-loop-func": "off",
+        "prefer-exponentiation-operator": "off",
+        "no-case-declarations": "off",
+        "no-redeclare": "off",
+        "default-case": "off",
+        "guard-for-in": "off",
+        "no-restricted-syntax": "off",
+        "no-useless-catch": "off",
+        "no-bitwise": "off",
+        "no-underscore-dangle": "off",
+        "class-methods-use-this": "off",
+        "no-continue": "off",
+        "function-paren-newline": "off",
+        "keyword-spacing": ["error", { "before": true, "after": true }],
+
+        "key-spacing": ["error", { "beforeColon": false,  "afterColon": true}],
+        "max-len": ["error", {"code": 150, "ignoreComments": true}],
+        "newline-after-var": ["error", "always"],
+        "no-tabs": "error",
+        "block-spacing": ["error", "always"],
+        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+        "space-before-function-paren": ["error", "never"],
+        "no-trailing-spaces": "error",
+        "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
+        "no-lonely-if": "error",
+        "comma-dangle": ["error", "never"],
+        "no-console": "error",
+        "quotes": ["error", "single"],
+        "dot-location": ["error", "property"],
+        "semi": ["error", "always"],
+        "no-unused-vars": ["error", { "args": "after-used", "vars": "local" }],
+        "object-curly-spacing": ["error", "always"],
+        "operator-linebreak": ["error", "before"],
+        "comma-style": ["error", "last"],
+        "require-jsdoc": ["error", {
+            "require": {
+                "FunctionDeclaration": true,
+                "MethodDefinition": false,
+                "ClassDeclaration": false,
+                "ArrowFunctionExpression": false,
+                "FunctionExpression": false
+            }
+        }],
+        "valid-jsdoc": [
+            "error",
+            {
+                "preferType": {
+                    "Boolean": "boolean",
+                    "Number": "number",
+                    "object": "Object",
+                    "String": "string"
+                },
+                "requireReturn": false
+            }
+        ],
+        "no-shadow": [
+            "error",
+            {
+                "allow": [
+                    "err",
+                    "callback"
+                ]
+            }
+        ],
+        "padding-line-between-statements": [
+            "error",
+            { "blankLine": "always", "prev": "*", "next": "return" },
+            { "blankLine": "always", "prev": "*", "next": "throw" },
+            { "blankLine": "always", "prev": "*", "next": "break"},
+
+            { "blankLine": "always", "prev": "multiline-const", "next": "*" },
+            { "blankLine": "always", "prev": "multiline-let", "next": "*" },
+            { "blankLine": "always", "prev": "multiline-block-like", "next": "*" },
+
+            { "blankLine": "always", "prev": "const", "next": "*" },
+            { "blankLine": "always", "prev": "let", "next": "*" },
+            { "blankLine": "always", "prev": "*", "next": "const" },
+            { "blankLine": "always", "prev": "*", "next": "let" },
+
+            { "blankLine": "any", "prev": "const", "next": "const" },
+            { "blankLine": "any", "prev": "let", "next": "let" },
+            { "blankLine": "any", "prev": "let", "next": "const" },
+            { "blankLine": "any", "prev": "const", "next": "let" }
+        ],
+        "indent": [
+            "error",
+            4,
+            {
+                "MemberExpression": 1,
+                "SwitchCase": 1,
+                "VariableDeclarator": 1,
+                "FunctionDeclaration": {"parameters": "first"},
+                "FunctionExpression": {"parameters": "first"},
+                "CallExpression": {"arguments": 1},
+                "ArrayExpression": 1,
+                "ObjectExpression": 1,
+                "flatTernaryExpressions": true
+            }
+        ],
+        "max-params": ["error", 3],
+        "space-infix-ops": ["error", { "int32Hint": false }],
+        "prefer-const": "error",
+        "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1, "maxBOF": 1 }],
+        "sonarjs/cognitive-complexity": ["error", 15]
+    }
+}

@@ -1,0 +1,5 @@
+<isif condition="${payPalData && payPalData.sdkUrl}">
+    <script src="${payPalData.googlePayConfigs.sdkUrl}"></script>
+</isif>
+
+<isinclude template="paypal/cart/googlePayContent" />

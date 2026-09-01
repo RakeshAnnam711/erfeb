@@ -1,0 +1,70 @@
+<form method="POST" action="${URLUtils.url('ApplePayConfig-SaveButton')}" id="js-apple-pay-config-form"
+    data-button-styles="${pdict.buttonStyles}">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="js-ap-location">${Resource.msg('applepay.location.label', 'configuration', null)}</label>
+            <select class="custom-select custom-select-sm" name="location" id="js-ap-location">
+                <option value="billing">${Resource.msg('location.billing', 'configuration', null)}</option>
+
+                <isif condition="${pdict.pageVisibility.cart}">
+                    <option value="cart">${Resource.msg('location.cart', 'configuration', null)}</option>
+                </isif>
+
+                <isif condition="${pdict.pageVisibility.minicart}">
+                    <option value="minicart">${Resource.msg('location.minicart', 'configuration', null)}</option>
+                </isif>
+
+                <isif condition="${pdict.pageVisibility.pdp}">
+                    <option value="pdp">${Resource.msg('location.pdp', 'configuration', null)}</option>
+                </isif>
+
+                <isif condition="${pdict.pageVisibility.pvp}">
+                    <option value="pvp">${Resource.msg('location.pvp', 'configuration', null)}</option>
+                </isif>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="js-ap-button-style">${Resource.msg('applepay.color.label', 'configuration', null)}</label>
+            <select class="custom-select custom-select-sm" name="buttonStyle" id="js-ap-button-style">
+                <option value="black">
+                    ${Resource.msg('color.black', 'configuration', null)}
+                </option>
+
+                <option value="white">
+                    ${Resource.msg('color.white', 'configuration', null)}
+                </option>
+
+                <option value="white-outline">
+                    ${Resource.msg('color.white.outline', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="js-ap-type">${Resource.msg('applepay.type.label', 'configuration', null)}</label>
+            <select class="custom-select custom-select-sm" name="type" id="js-ap-type">
+                <isloop items="${pdict.buttonTypes}" var="type">
+                    <option value="${type}">${type}</option>
+                </isloop>
+            </select>
+        </div>
+    </div>
+
+    <isset name="msgArgument" value="Apple Pay button" scope="page" />
+    <isinclude template="components/checkboxApplyToAll"/>
+
+    <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-primary">
+            ${Resource.msg('button.save', 'configuration', null)}
+        </button>
+
+        <div class="spinner-border text-primary ml-2 d-none" role="status" id="js-ap-loader">
+            <span class="sr-only">${Resource.msg('loader.text', 'configuration', null)}</span>
+        </div>
+    </div>
+</form>

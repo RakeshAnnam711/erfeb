@@ -1,0 +1,25 @@
+<isif condition="${pdict.paylaterMessagingAvailable}">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+        assets.addJs('js/int_paypal_paylater_messaging.js');
+    </isscript>
+
+    <script src="${pdict.paypal.sdkUrl}"
+        data-page-type="product-listing"
+        data-partner-attribution-id="${pdict.paypal.partnerAttributionId}"
+        ${pdict.paypal.userIdToken ? "data-user-id-token=" + pdict.paypal.userIdToken : ''}
+    ></script>
+
+    <isset name="bannerConfig" value="${pdict.paylaterMessaging.config}" scope="page" />
+
+    <div class="category-banner"
+        data-pp-message
+        data-pp-placement="${bannerConfig.placement}"
+        data-pp-amount="${bannerConfig.amount}"
+        data-pp-style-layout="${bannerConfig.layout}"
+        data-pp-style-color="${bannerConfig.color || ''}"
+        data-pp-style-ratio="${bannerConfig.ratio || ''}"
+        data-pp-currency="${pdict.paylaterMessaging.currencyCode || ''}"
+        data-pp-buyercountry="${pdict.paylaterMessaging.locale || ''}">
+    </div>
+</isif>

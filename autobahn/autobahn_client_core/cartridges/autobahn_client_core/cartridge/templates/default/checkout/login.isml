@@ -1,0 +1,102 @@
+<isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/login.js');
+    </isscript>
+
+<script>
+        if (window.location.search.indexOf('?rurl=1') > -1) {
+            var hrefURL = window.location.href;
+            hrefURL = hrefURL.replace('?rurl=1', '');
+            window.location.href = hrefURL;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var loginBlock = document.getElementById('checkout-login-form');
+
+            if (!loginBlock) {
+                return;
+            }
+
+            var loginPane = loginBlock.querySelector('.login-form-nav .checkout-login-tab-content #login');
+            var registerPane = loginBlock.querySelector('.login-form-nav .checkout-login-tab-content #register');
+            var loginTab = loginBlock.querySelector('.login-nav-tabs a[href="#login"]');
+            var registerTab = loginBlock.querySelector('.login-nav-tabs a[href="#register"]');
+
+            function activateCheckoutAuthTab(targetId) {
+                if (!loginPane || !registerPane || !loginTab || !registerTab) {
+                    return;
+                }
+
+                var isRegister = targetId === 'register';
+
+                loginPane.classList.toggle('active', !isRegister);
+                loginPane.classList.toggle('show', !isRegister);
+                loginPane.classList.toggle('d-none', isRegister);
+
+                registerPane.classList.toggle('active', isRegister);
+                registerPane.classList.toggle('show', isRegister);
+                registerPane.classList.toggle('d-none', !isRegister);
+
+                loginTab.classList.toggle('active', !isRegister);
+                loginTab.setAttribute('aria-selected', String(!isRegister));
+
+                registerTab.classList.toggle('active', isRegister);
+                registerTab.setAttribute('aria-selected', String(isRegister));
+            }
+
+            if (loginTab) {
+                loginTab.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    activateCheckoutAuthTab('login');
+                });
+            }
+
+            if (registerTab) {
+                registerTab.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    activateCheckoutAuthTab('register');
+                });
+            }
+
+            var shouldUseRegister = registerPane
+                && registerPane.classList.contains('active');
+
+            activateCheckoutAuthTab(shouldUseRegister ? 'register' : 'login');
+        });
+    </script>
+
+
+
+<div class="checkout-login-form" id="checkout-login-form">
+    <div class="row equal-height">
+        <div class="col-12">
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="login-nav-tabs">
+                        <isinclude template="account/components/navTabs" />
+                    </div>
+                    <div class="login-form-nav">
+                        <div class="tab-content checkout-login-tab-content">
+                            <div class="checkout-login-tab-pane ${empty(pdict.navTabValue) || pdict.navTabValue === 'login' ? 'active show' : 'd-none'}" id="login"
+                                role="tabpanel" aria-labelledby="login-tab">
+                                <isinclude template="checkout/loginForm" />
+                                <isinclude template="account/password/requestPasswordResetModal" />
+                                <isinclude template="account/components/oauth" />
+                                <div class="guest-btn-wrapper">
+                                    <button class="btn btn-block btn-secondary continue-guest-btn js-cancel-login guest-btn" aria-label="${Resource.msg('button.text.Guest', 'login', null)}">${Resource.msg('button.text.Guest', 'login', null)}</button>
+                                </div>
+                            </div>
+                            <div class="checkout-login-tab-pane ${!empty(pdict.navTabValue) && pdict.navTabValue === "register" ? 'active show' : 'd-none'}" id="register"
+                                role="tabpanel" aria-labelledby="register-tab">
+                                <isinclude template="checkout/registerForm" />
+                                <div class="guest-btn-wrapper">
+                                    <button class="btn btn-block btn-secondary continue-guest-btn js-cancel-login guest-btn" aria-label="${Resource.msg('button.text.Guest', 'login', null)}">${Resource.msg('button.text.Guest', 'login', null)}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

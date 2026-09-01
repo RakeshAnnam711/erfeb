@@ -1,0 +1,6 @@
+<li class="nav-item js-nav-item-paypal" data-method-id="${paymentOption.ID}">
+    <a class="nav-link js-paypal-tab" data-toggle="tab" href="#paypal-content" role="tab" aria-label="${Resource.msg('paypal.button.text.checkout', 'paypal', 'PayPal')}">
+        <div class="js-paypal-mark"></div>
+        <span class="paypal-tab-fallback-label">${Resource.msg('paypal.button.text.checkout', 'paypal', 'PayPal')}</span>
+    </a>
+</li>

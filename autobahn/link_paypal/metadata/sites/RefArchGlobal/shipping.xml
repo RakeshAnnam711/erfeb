@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shipping xmlns="http://www.demandware.com/xml/impex/shipping/2007-03-31">
+    <shipping-method method-id="FREE_JPY" default="false">
+        <display-name xml:lang="x-default">Free JPY</display-name>
+        <description xml:lang="x-default">A zero amount shipping method</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="onlinePickupEnabled">true</custom-attribute>
+            <custom-attribute attribute-id="storePickupEnabled">false</custom-attribute>
+        </custom-attributes>
+        <currency>JPY</currency>
+    </shipping-method>
+
+    <shipping-method method-id="FREE_CNY" default="false">
+        <display-name xml:lang="x-default">Free CNY</display-name>
+        <description xml:lang="x-default">A zero amount shipping method</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="onlinePickupEnabled">true</custom-attribute>
+            <custom-attribute attribute-id="storePickupEnabled">false</custom-attribute>
+        </custom-attributes>
+        <currency>CNY</currency>
+    </shipping-method>
+
+    <shipping-method method-id="FREE_GBP" default="false">
+        <display-name xml:lang="x-default">Free GBP</display-name>
+        <description xml:lang="x-default">A zero amount shipping method</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="onlinePickupEnabled">true</custom-attribute>
+            <custom-attribute attribute-id="storePickupEnabled">false</custom-attribute>
+        </custom-attributes>
+        <currency>GBP</currency>
+    </shipping-method>
+
+    <shipping-method method-id="FREE_EUR" default="false">
+        <display-name xml:lang="x-default">Free EUR</display-name>
+        <description xml:lang="x-default">A zero amount shipping method</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="onlinePickupEnabled">true</custom-attribute>
+            <custom-attribute attribute-id="storePickupEnabled">false</custom-attribute>
+        </custom-attributes>
+        <currency>EUR</currency>
+    </shipping-method>
+
+    <shipping-method method-id="FREE_PLN" default="false">
+        <display-name xml:lang="x-default">Free PLN</display-name>
+        <description xml:lang="x-default">A zero amount shipping method</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="onlinePickupEnabled">true</custom-attribute>
+            <custom-attribute attribute-id="storePickupEnabled">false</custom-attribute>
+        </custom-attributes>
+        <currency>PLN</currency>
+    </shipping-method>
+
+     <shipping-method method-id="PLN001" default="false">
+        <display-name xml:lang="x-default">Ground</display-name>
+        <display-name xml:lang="fr-FR">Transport terrestre</display-name>
+        <display-name xml:lang="pl-PL">Transport terrestre</display-name>
+        <display-name xml:lang="it">Via terra</display-name>
+        <display-name xml:lang="it-IT">Via terra</display-name>
+        <display-name xml:lang="ja-JP">通常便</display-name>
+        <display-name xml:lang="zh-CN">陆路</display-name>
+        <description xml:lang="x-default">Order received within 7-10 business days</description>
+        <description xml:lang="fr-FR">Commande reçue en 7 à 10 jours ouvrés</description>
+        <description xml:lang="it">Ricezione ordine entro 7-10 giorni lavorativi</description>
+        <description xml:lang="it-IT">Ricezione ordine entro 7-10 giorni lavorativi</description>
+        <description xml:lang="ja-JP">ご注文の商品を 7 ～ 10 営業日以内にお届け</description>
+        <description xml:lang="zh-CN">在 7-10 个工作日内收到订单</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+            <amount order-value="0.01">5.99</amount>
+            <amount order-value="100">7.99</amount>
+            <amount order-value="200">9.99</amount>
+            <amount order-value="500">15.99</amount>
+        </price-table>
+        <product-cost-groups>
+            <product-cost-group>
+                <products>
+                    <included-products>
+                        <condition-group>
+                            <category-condition catalog-id="storefront-catalog-m-non-en" operator="is equal">
+                                <category-id>womens-jewelry</category-id>
+                            </category-condition>
+                        </condition-group>
+                    </included-products>
+                </products>
+                <cost-per-item>
+                    <surcharge>10.00</surcharge>
+                </cost-per-item>
+            </product-cost-group>
+        </product-cost-groups>
+        <excluded-addresses>
+            <included-addresses>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>shipment.shippingAddress.stateCode</attribute-path>
+                        <operator>is-equal</operator>
+                        <string>DS</string>
+                        <string>KP</string>
+                        <string>LU</string>
+                        <string>LB</string>
+                        <string>LD</string>
+                        <string>MA</string>
+                        <string>MZ</string>
+                        <string>OP</string>
+                        <string>PK</string>
+                        <string>PD</string>
+                        <string>PM</string>
+                        <string>SL</string>
+                        <string>SK</string>
+                        <string>WN</string>
+                        <string>WP</string>
+                        <string>ZP</string>
+                    </condition>
+                </condition-group>
+            </included-addresses>
+        </excluded-addresses>
+        <custom-attributes>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="x-default">7-10 Business Days</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="fr-FR">7 à 10 jours ouvrés</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="it-IT">7-10 giorni lavorativi</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="ja-JP">7 ～ 10 営業日</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="zh-CN">7-10 个工作日</custom-attribute>
+        </custom-attributes>
+        <currency>PLN</currency>
+    </shipping-method>
+
+    <shipping-method method-id="PLN002" default="false">
+        <display-name xml:lang="x-default">2-Day Express</display-name>
+        <display-name xml:lang="pl-PL">Transport terrestre</display-name>
+        <display-name xml:lang="fr-FR">Express - 2 jours </display-name>
+        <display-name xml:lang="it">Consegna espressa in 2 giorni</display-name>
+        <display-name xml:lang="it-IT">Consegna espressa in 2 giorni</display-name>
+        <display-name xml:lang="ja-JP">2 日お急ぎ便</display-name>
+        <display-name xml:lang="zh-CN">2 天速递</display-name>
+        <description xml:lang="x-default">Order received within 2 business days</description>
+        <description xml:lang="fr-FR">Commande reçue en 2 jours ouvrés</description>
+        <description xml:lang="it">Ricezione ordine entro 2 giorni lavorativi</description>
+        <description xml:lang="it-IT">Ricezione ordine entro 2 giorni lavorativi</description>
+        <description xml:lang="ja-JP">ご注文の商品を 2 営業日以内にお届け</description>
+        <description xml:lang="zh-CN">在 2 个工作日内收到订单</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+            <amount order-value="0.01">9.99</amount>
+            <amount order-value="100">11.99</amount>
+            <amount order-value="200">15.99</amount>
+            <amount order-value="500">20.99</amount>
+        </price-table>
+        <excluded-addresses>
+            <included-addresses>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>shipment.shippingAddress.stateCode</attribute-path>
+                        <operator>is-equal</operator>
+                        <string>DS</string>
+                        <string>KP</string>
+                        <string>LU</string>
+                        <string>LB</string>
+                        <string>LD</string>
+                        <string>MA</string>
+                        <string>MZ</string>
+                        <string>OP</string>
+                        <string>PK</string>
+                        <string>PD</string>
+                        <string>PM</string>
+                        <string>SL</string>
+                        <string>SK</string>
+                        <string>WN</string>
+                        <string>WP</string>
+                        <string>ZP</string>
+                    </condition>
+                </condition-group>
+            </included-addresses>
+        </excluded-addresses>
+        <custom-attributes>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="x-default">2 Business Days</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="fr-FR">2 jours ouvrés</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="it-IT">2 giorni lavorativi</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="ja-JP">2 営業日</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="zh-CN">2 个工作日</custom-attribute>
+        </custom-attributes>
+        <currency>PLN</currency>
+    </shipping-method>
+
+    <shipping-method method-id="PLN003" default="false">
+        <display-name xml:lang="x-default">Overnight</display-name>
+        <display-name xml:lang="pl-PL">Transport terrestre</display-name>
+        <display-name xml:lang="fr-FR">Le lendemain</display-name>
+        <display-name xml:lang="it">Il giorno successivo</display-name>
+        <display-name xml:lang="it-IT">Il giorno successivo</display-name>
+        <display-name xml:lang="ja-JP">翌日便</display-name>
+        <display-name xml:lang="zh-CN">连夜送货</display-name>
+        <description xml:lang="x-default">Order received the next business day</description>
+        <description xml:lang="fr-FR">Commande reçue le jour ouvré suivant (J+1)</description>
+        <description xml:lang="it">Ricezione ordine entro il giorno lavorativo successivo</description>
+        <description xml:lang="it-IT">Ricezione ordine entro il giorno lavorativo successivo</description>
+        <description xml:lang="ja-JP">ご注文の商品を翌営業日にお届け</description>
+        <description xml:lang="zh-CN">在下一工作日收到订单</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+            <amount order-value="0.01">15.99</amount>
+            <amount order-value="100">19.99</amount>
+            <amount order-value="200">21.99</amount>
+            <amount order-value="500">29.99</amount>
+        </price-table>
+        <excluded-addresses>
+            <included-addresses>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>shipment.shippingAddress.stateCode</attribute-path>
+                        <operator>is-equal</operator>
+                        <string>DS</string>
+                        <string>KP</string>
+                        <string>LU</string>
+                        <string>LB</string>
+                        <string>LD</string>
+                        <string>MA</string>
+                        <string>MZ</string>
+                        <string>OP</string>
+                        <string>PK</string>
+                        <string>PD</string>
+                        <string>PM</string>
+                        <string>SL</string>
+                        <string>SK</string>
+                        <string>WN</string>
+                        <string>WP</string>
+                        <string>ZP</string>
+                    </condition>
+                </condition-group>
+            </included-addresses>
+        </excluded-addresses>
+        <custom-attributes>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="x-default">Next Day</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="fr-FR">Next Day</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="it-IT">Next Day</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="ja-JP">翌日</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="zh-CN">第二天</custom-attribute>
+        </custom-attributes>
+        <currency>PLN</currency>
+    </shipping-method>
+
+    <shipping-method method-id="PLN004" default="false">
+        <display-name xml:lang="x-default">Super Saver</display-name>
+        <display-name xml:lang="pl-PL">Transport terrestre</display-name>
+        <display-name xml:lang="fr-FR">Ultra-économique</display-name>
+        <display-name xml:lang="it">Spedizione ridotta</display-name>
+        <display-name xml:lang="it-IT">Spedizione ridotta</display-name>
+        <display-name xml:lang="ja-JP">超おトク</display-name>
+        <display-name xml:lang="zh-CN">Super Saver</display-name>
+        <description xml:lang="x-default">Super Saver delivery (arrives in 3-7 business days)</description>
+        <description xml:lang="fr-FR">Livraison ultra-économique (en 3 à 7 jours ouvrés)</description>
+        <description xml:lang="it">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
+        <description xml:lang="it-IT">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
+        <description xml:lang="ja-JP">超おトク便 (お受け取りまで 3 ～ 7 営業日)</description>
+        <description xml:lang="zh-CN">Super Saver 交货（3 到 7 个工作日内送达）</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0">0</amount>
+            <amount order-value="0.01">1.99</amount>
+        </price-table>
+        <excluded-addresses>
+            <included-addresses>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>shipment.shippingAddress.stateCode</attribute-path>
+                        <operator>is-equal</operator>
+                        <string>DS</string>
+                        <string>KP</string>
+                        <string>LU</string>
+                        <string>LB</string>
+                        <string>LD</string>
+                        <string>MA</string>
+                        <string>MZ</string>
+                        <string>OP</string>
+                        <string>PK</string>
+                        <string>PD</string>
+                        <string>PM</string>
+                        <string>SL</string>
+                        <string>SK</string>
+                        <string>WN</string>
+                        <string>WP</string>
+                        <string>ZP</string>
+                    </condition>
+                </condition-group>
+            </included-addresses>
+        </excluded-addresses>
+        <custom-attributes>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="x-default">3-7 Business Days</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="fr-FR">3 à 7 jours ouvrés</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="it-IT">3-7 giorni lavorativi</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="ja-JP">3 ～ 7 営業日</custom-attribute>
+            <custom-attribute attribute-id="estimatedArrivalTime" xml:lang="zh-CN">3-7 个工作日</custom-attribute>
+        </custom-attributes>
+        <currency>PLN</currency>
+    </shipping-method>
+
+    <shipping-method method-id="PLN005" default="false">
+        <display-name xml:lang="x-default">EUR Store Pickup</display-name>
+        <display-name xml:lang="pl-PL">Transport terrestre</display-name>
+        <display-name xml:lang="fr-FR">EUR Retrait en magasin</display-name>
+        <display-name xml:lang="it">EUR Ritiro in negozio</display-name>
+        <display-name xml:lang="it-IT">EUR Ritiro in negozio</display-name>
+        <display-name xml:lang="ja-JP">EUR 店舗にて受け取り</display-name>
+        <display-name xml:lang="zh-CN">欧元到店提货</display-name>
+        <description xml:lang="x-default">EUR Pickup in store</description>
+        <description xml:lang="fr-FR">EUR retrait en magasin </description>
+        <description xml:lang="it">EUR Ritiro in negozio</description>
+        <description xml:lang="it-IT">EUR Ritiro in negozio</description>
+        <description xml:lang="ja-JP">EUR 店舗にて受け取り</description>
+        <description xml:lang="zh-CN">欧元到店提货</description>
+        <online-flag>true</online-flag>
+        <price-table>
+            <amount order-value="0">0</amount>
+        </price-table>
+        <custom-attributes>
+            <custom-attribute attribute-id="storePickupEnabled">true</custom-attribute>
+        </custom-attributes>
+        <currency>PLN</currency>
+    </shipping-method>
+
+</shipping>

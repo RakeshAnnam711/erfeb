@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+	<field formid="stateCode" label="label.input.state" type="string" mandatory="true" binding="stateCode" missing-error="error.message.required" value-error="address.field.invalid">
+        <options>
+            <option optionid="" label="resource.select" value=""/>
+
+            <!-- Poland states -->
+            <option optionid="DS" label="state.pl.dolnoslaskie" value="DS"/>
+            <option optionid="KP" label="state.pl.kujawsko-pomorskie" value="KP"/>
+            <option optionid="LU" label="state.pl.lubelskie" value="LU"/>
+            <option optionid="LB" label="state.pl.lubuskie" value="LB"/>
+            <option optionid="LD" label="state.pl.lodzkie" value="LD"/>
+            <option optionid="MA" label="state.pl.malopolskie" value="MA"/>
+            <option optionid="MZ" label="state.pl.mazowieckie" value="MZ"/>
+            <option optionid="OP" label="state.pl.opolskie" value="OP"/>
+            <option optionid="PK" label="state.pl.podkarpackie" value="PK"/>
+            <option optionid="PD" label="state.pl.podlaskie" value="PD"/>
+            <option optionid="PM" label="state.pl.pomorskie" value="PM"/>
+            <option optionid="SL" label="state.pl.slaskie" value="SL"/>
+            <option optionid="SK" label="state.pl.swietokrzyskie" value="SK"/>
+            <option optionid="WN" label="state.pl.warminsko-mazurskie" value="WN"/>
+            <option optionid="WP" label="state.pl.wielkopolskie" value="WP"/>
+            <option optionid="ZP" label="state.pl.zachodniopomorskie" value="ZP"/>
+
+            <!-- Other -->
+            <option optionid="OTHER" label="state.pl.other" value="OTHER"/>
+        </options>
+	</field>
+</form>

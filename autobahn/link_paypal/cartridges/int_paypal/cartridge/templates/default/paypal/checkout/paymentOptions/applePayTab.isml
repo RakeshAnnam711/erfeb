@@ -1,0 +1,9 @@
+<li class="nav-item js-nav-item-apple-pay d-none" data-method-id="${paymentOption.ID}">
+    <a class="nav-link js-apple-pay-tab" data-toggle="tab" href="#applepay-content" role="tab">
+        <img class="js-apple-pay-mark"
+            src="${URLUtils.staticURL('/images/braintree-applepay.png')}"
+            height="32"
+            alt="${payPalData.applePayConfigs.tabImageAlt}"
+        />
+    </a>
+</li>

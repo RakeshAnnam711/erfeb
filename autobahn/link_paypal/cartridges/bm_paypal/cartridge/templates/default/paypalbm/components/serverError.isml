@@ -1,0 +1,16 @@
+<isdecorate template="paypalbm/util/pageTemplatePaypal">
+
+<table class="error_box n s e w">
+    <tr valign="top">
+        <td class="error_icon top e"></td>
+        <td class="error top" width="100%">
+            <isif condition="${pdict.errorMessage}">
+                ${pdict.errorMessage}
+            <iselse/>
+                ${Resource.msg('server.error', 'errors', null)}
+            </isif>
+        </td>
+    </tr>
+</table>
+
+</isdecorate>

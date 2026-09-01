@@ -1,0 +1,7 @@
+<body>
+
+    <h1>${Resource.msgf('email.account.greeting', 'registration', null, pdict.firstName, pdict.lastName)}</h1>
+
+    <p>${Resource.msgf('email.account.unlinked.pp.text', 'notifications', null, pdict.currentSite, pdict.email)}</p>
+
+</body>

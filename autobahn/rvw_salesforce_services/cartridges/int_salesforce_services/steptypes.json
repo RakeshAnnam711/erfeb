@@ -1,0 +1,114 @@
+{
+	"step-types": {
+		"chunk-script-module-step": [{
+				"@type-id":"custom.Salesforce.Marketing.Feed",
+				"description":"Export Product Feed for Salesforce Marketing Cloud",
+				"@supports-site-context":"true",
+				"@supports-organization-context":"false",
+				"@supports-parallel-execution":"false",
+				"module":"int_salesforce_services/cartridge/scripts/jobsteps/MarketingProductFeed.js",
+				"before-step-function":"BeforeStep",
+				"before-chunk-function":"BeforeChunk",
+				"total-count-function":"GetTotalCount",
+				"read-function":"Read",
+				"process-function":"Process",
+				"write-function":"Write",
+				"after-chunk-function":"AfterChunk",
+				"after-step-function":"AfterStep",
+				"chunk-size":100,
+				"parameters": {
+					"parameters": [{
+							"@name":"TargetRelativePath",
+							"@type":"string",
+							"@required":"true",
+							"@trim":"true",
+							"description":"The relative folder path within the system IMPEX folder where the file will be saved",
+							"default-value":"src/export/marketing/product"
+						},
+						{
+							"@name":"FileNamePrefix",
+							"description":"The prefix to be used for the Filename of the generated file(s) containing the exported product data",
+							"@type":"string",
+							"@required":"false",
+							"@trim":"true",
+							"default-value":"ProductCatalog_"
+						},
+						{
+							"@name":"Delimiter",
+							"@type":"string",
+							"@required":"true",
+							"@trim":"false",
+							"description":"Required parameter for how each attribute value is separated;  Must be Pipe (|), Tab or Comma (,).",
+							"enum-values":
+							{
+							  "value":
+							  [
+								"Pipe",
+								"Tab",
+								"Comma"
+							  ]
+							}
+						},
+						{
+							"@name":"IncludeMasterProducts",
+							"@type":"boolean",
+							"@required":"true",
+							"description":"If true, then master products, along with variants, will be included in the file.",
+							"default-value":"false"
+						},
+						{
+							"@name":"LogAllProductsWritten",
+							"@type":"boolean",
+							"@required":"false",
+							"description":"If true, then all the products that are written to the file, Id & Name, will be logged. master products, along with variants, will be included in the file.",
+							"default-value":"false"
+						},
+						{
+							"@name":"RegularPriceBookId",
+							"description":"The identifier of the regular (aka List, MSRP) pricebook to use.",
+							"@type":"string",
+							"@required":"true",
+							"@trim":"true",
+							"default-value":""
+						},
+						{
+							"@name":"OtherPriceBookIds",
+							"description":"A comma separated identifier and header name for any other pricebooks to include. Comma separate multiple pricebooks, tilda separate id & header name; e.g. client-sale-us~SalePrice,client-msrp-ca~CanadianPrice",
+							"@type":"string",
+							"@required":"false",
+							"@trim":"true",
+							"default-value":""
+						},
+						{
+							"@name":"CustomProductAttributeIds",
+							"description":"An optional comma delimited list of custom attribute ids that should be included with the product data. HTML attributes are not supported. For example, if the ids 'AmazonKeywords,Material' are specified, then those ids will be used for the header row and the value of the attribute included for each product.",
+							"@type":"string",
+							"@required":"false",
+							"@trim":"true",
+							"default-value":""
+						},
+						{
+							"@name":"ProductAttributeHostValueMapping",
+							"description":"A small JSON string representing which product attribute to use and mapping values for that attribute to the host name to use. This is used for URL creation and is necessary for multi-brand sites that have multiple hostnames for the same Site (the alias settings job-hostnames does not work in that case).",
+							"@type":"string",
+							"@required":"false",
+							"@trim":"true",
+							"default-value":""
+						}
+					]
+				},
+				"status-codes": {
+					"status": [{
+							"@code":"ERROR",
+							"description":"Used when an exception occurred that should fail the job."
+						},
+						{
+							"@code":"OK",
+							"description":"Used when everything went as expected and the job should finish with a normal status."
+						}
+					]
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,19 @@
+<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
+    <isreplace/>
+<iselse/>
+    <isdecorate template="application/MenuFrame">
+        <link rel="stylesheet" href="${URLUtils.staticURL('css/bm.css')}" />
+        <link rel="stylesheet" href="${URLUtils.staticURL('jscript/ext/resources/css/ext-all.css')}" />
+
+        <script src="${URLUtils.staticURL('jscript/ext/adapter/ext/ext-base.js')}"></script>
+        <script src="${URLUtils.staticURL('jscript/ext/ext-all.js')}"></script>
+
+        <isinclude template="components/paypalAdminConfig" />
+
+        <div class="paypalbm_content js_paypal_disputes_page">
+            <isreplace/>
+        </div>
+
+        <script src="${URLUtils.staticURL('js/bm_paypal_disputes.js')}" defer="defer"></script>
+    </isdecorate>
+</isif>

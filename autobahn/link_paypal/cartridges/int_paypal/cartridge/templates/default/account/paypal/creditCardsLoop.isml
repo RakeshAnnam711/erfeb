@@ -1,0 +1,36 @@
+<isif condition="${!empty(pdict.paypal.customerSavedCreditCards)}">
+    <div class="js-paypal-cc-loader paypal-loader-container">
+        <i class="paypal-loader"></i>
+    </div>
+
+    <isloop items="${pdict.paypal.customerSavedCreditCards}" var="customerSavedCreditCard">
+        <div class="card-body card-body-pp clearfix position-relative" id="uuid-${customerSavedCreditCard.UUID}"
+            data-last-four="${customerSavedCreditCard.creditCardNumberLastDigits}"
+            data-type="${customerSavedCreditCard.creditCardType}"
+        >
+            <div class="card-info-group position-relative uuid-${customerSavedCreditCard.UUID} ${customerSavedCreditCard.isDefault ? 'is-default' : ''}">
+                <div class="mb-0">${customerSavedCreditCard.creditCardHolder}</div>
+
+                <div class="mb-0">
+                    ${customerSavedCreditCard.creditCardType}${customerSavedCreditCard.maskedCreditCardNumber}
+                </div>
+
+                <div class="mb-0">
+                    ${Resource.msg('label.payment.expirationdate', 'account', null).toLowerCase()}: ${customerSavedCreditCard.creditCardExpirationMonth}/${customerSavedCreditCard.creditCardExpirationYearShort}
+
+                    <isinclude template="account/paypal/buttons/buttons" />
+                </div>
+
+                <div class="card-is-default font-weight-bold mb-0">
+                    ${Resource.msg('creditcard.default', 'account', null)}
+                </div>
+            </div>
+
+            <isif condition="${customerSavedCreditCard.expireNotification}">
+                <span class="badge badge-${customerSavedCreditCard.expireStyle} badge-cc-min-width position-absolute position-top-right rounded-0">
+                    ${customerSavedCreditCard.expireMessage}
+                </span>
+            </isif>
+        </div>
+    </isloop>
+</isif>

@@ -1,0 +1,169 @@
+<isset name="payPalData" value="${pdict.paypal}" scope="page" />
+<isset name="isPaypalCardFieldsEnabled" value="${payPalData && payPalData.isPayPalActive && payPalData.isPaypalCardFieldsEnabled}" scope="page" />
+<isset name="isBasicCreditCardVisible" value="${!payPalData || !payPalData.isPayPalActive || !isPaypalCardFieldsEnabled}" scope="page" />
+<isset name="payPalUrls" value="${require('*/cartridge/config/urls')}" scope="page" />
+<isset name="payPalConstants" value="${require('*/cartridge/config/constants')}" scope="page" />
+<isset name="payPalPreferences" value="${require('*/cartridge/config/preferences')}" scope="page" />
+<isset name="payPalStorefrontPreferences" value="${payPalPreferences._whiteListedForStorefront}" scope="page" />
+
+<input type="hidden" id="wgacaPayPalUrls" value="${JSON.stringify(payPalUrls)}" />
+<input type="hidden" id="wgacaPayPalConstants" value="${JSON.stringify(payPalConstants)}" />
+<input type="hidden" id="wgacaPayPalPreferences" value="${JSON.stringify(payPalStorefrontPreferences)}" />
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addCss('/css/wgaca_checkout_tabs.css');
+</isscript>
+
+<div class="js-flash-messages-container"></div>
+
+<isif condition="${payPalData && (payPalData.isPayPalActive || payPalData.isActiveVenmo)}">
+    <script
+        src="${payPalData.sdkUrl}"
+        data-page-type="checkout"
+        data-partner-attribution-id="${payPalData.partnerAttributionId}"
+        ${payPalData.userIdToken ? "data-user-id-token=" + payPalData.userIdToken : ''}
+        ${isPaypalCardFieldsEnabled && !payPalData.isFastlaneEnabled ? "data-client-token='" + payPalData.cardFieldsConfigs.clientToken + "'" : ''}
+        ${payPalData.isFastlaneEnabled ? "data-sdk-client-token='" + payPalData.cardFieldsConfigs.clientSDKToken + "'" : ''}
+        ${payPalData.isFastlaneEnabled ? "data-client-metadata-id='" + payPalData.cardFieldsConfigs.clientMetadataId + "'" : ''}>
+    </script>
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+
+        assets.addJs('/js/wgaca_paypal_runtime_config.js');
+        assets.addJs('/js/int_paypal_billing.js');
+        assets.addCss('/css/paypal.css');
+    </isscript>
+
+    <isif condition="${payPalData.fraudNet}">
+        <isset name="fraudNetLocation" value="SFCC-PP-PLUGIN-BILLING" scope="page" />
+        <isinclude template="paypal/components/fraudNet" />
+    </isif>
+</isif>
+
+<isset name="stripeCheckoutHelper" value="${require('*/cartridge/scripts/stripe/helpers/checkoutHelper')}" scope="page" />
+<isset name="stripeHelper" value="${require('*/cartridge/scripts/stripe/helpers/stripeHelper')}" scope="page" />
+<isset name="stripeEnabled" value="${stripeHelper.isStripeEnabled()}" scope="page" />
+
+<isif condition="${stripeEnabled}">
+    <iscomment> <script src="${URLUtils.staticURL('/js/stripe.checkout.js')}"></script> </iscomment>
+        <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/stripe.checkout.js');
+    </isscript>
+</isif>
+<input type="hidden" id="getPaymentElementOptions" value="${URLUtils.https('StripePaymentsAPM-GetPaymentElementOptions')}" />
+<input type="hidden" id="getBankTransferElementOptions" value="${URLUtils.https('StripePaymentsAPM-GetBankTransferElementOptions')}" />
+<input type="hidden" id="stripeCardFormStyle" value="${JSON.stringify(stripeHelper.getStripeCardFormStyle())}" />
+<input type="hidden" id="stripeAccountCountry" value="${stripeCheckoutHelper.getPRCountry()}" />
+<input type="hidden" id="cardPaymentSubmitOrderURL" value="${URLUtils.https('StripePaymentsCard-CardPaymentSubmitOrder')}" />
+<input type="hidden" id="cardPaymentHandleRequiresActionURL" value="${URLUtils.https('StripePaymentsCard-CardPaymentHandleRequiresAction')}" />
+<input type="hidden" id="getStripeOrderItemsURL" value="${URLUtils.https('StripePaymentsAPM-GetStripeOrderItems')}" />
+<input type="hidden" id="billingPageUrl" value="${URLUtils.url('Checkout-Begin', 'stage', 'payment')}" />
+<input type="hidden" id="getCustomerEmailURL" value="${URLUtils.https('StripePaymentsAPM-GetCustomerEmail')}" />
+
+<input type="hidden" id="paymentElementSubmitOrderURL" value="${URLUtils.https('StripePaymentsAPM-PaymentElementSubmitOrder')}" />
+<input type="hidden" id="isStripePaymentElementsSavePaymentsEnabled" value="${customer.authenticated && customer.profile && customer.profile.email && stripeHelper.isStripePaymentElementsSavePaymentsEnabled()}" />
+<input type="hidden" id="stripeCaptureMethod" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('stripeChargeCapture') ? 'automatic' : 'manual'}" />
+<input type="hidden" id="stripeCollectBillingDetailsOnPaymentElement" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('stripeCollectBillingDetailsOnPaymentElement') ? 'auto' : 'never'}" />
+
+<input type="hidden" id="logStripeErrorMessageURL" value="${URLUtils.https('StripePaymentsAPM-LogStripeErrorMessage')}" />
+
+<input type="hidden" id="stripeFailOrderURL" value="${URLUtils.https('StripePaymentsAPM-FailOrder')}" />
+<input type="hidden" id="clearStripePaymentInstrumentsURL" value="${URLUtils.https('CheckoutServices-ClearStripePaymentInstruments')}" />
+
+<input type="hidden" name="stripe_source_client_secret" id="stripe_source_client_secret" />
+<input type="hidden" name="stripe_redirect_url" id="stripe_redirect_url" />
+
+<isset name="stripeOrder" value="${require('*/cartridge/scripts/stripe/helpers/checkoutHelper').getStripeOrderDetails(dw.order.BasketMgr.getCurrentBasket())}" scope="page" />
+
+<input type="hidden" id="stripe_order_amount" value="${stripeOrder.amount}" />
+<input type="hidden" id="stripe_order_currency" value="${stripeOrder.currency}" />
+<input type="hidden" id="stripe_site_id" value="${require('*/cartridge/scripts/stripe/helpers/checkoutHelper').getSiteID()}" />
+<input type="hidden" id="stripe_order_number" value="${require('*/cartridge/scripts/stripe/helpers/checkoutHelper').getNewStripeOrderNumber()}" />
+<input type="hidden" id="stripe_return_url" value="${URLUtils.https("StripePaymentsAPM-HandleAPM")}" />
+
+<input type="hidden" id="stripe_purchase_country" value="${stripeOrder.purchase_country}" />
+<input type="hidden" id="stripe_order_items" value="${stripeOrder.order_items}" />
+<input type="hidden" id="stripe_order_shipping" value="${stripeOrder.order_shipping}" />
+<input type="hidden" id="stripe_shipping_first_name" value="${stripeOrder.shipping_first_name}" />
+
+<input type="hidden" id="stripe_shipping_last_name" value="${stripeOrder.shipping_last_name}" />
+
+<input type="hidden" id="stripe_site_locale" value="${require('*/cartridge/scripts/stripe/helpers/checkoutHelper').getSiteLocale()}" />
+
+<isset name="selectedPaymentInstruments" value="${pdict.order.billing.payment.selectedPaymentInstruments}" scope="page" />
+<isset name="selectedPaymentInstrument" value="${selectedPaymentInstruments && selectedPaymentInstruments.length ? selectedPaymentInstruments[0] : null}" scope="page" />
+<isset name="selectedMethodId" value="${selectedPaymentInstrument && selectedPaymentInstrument.paymentMethod ? selectedPaymentInstrument.paymentMethod : pdict.selectedPaymentMethod}" scope="page" />
+<isset name="effectiveSelectedMethodId" value="${selectedMethodId}" scope="page" />
+
+<isif condition="${isStripePaymentElementEnabled && (empty(effectiveSelectedMethodId) || effectiveSelectedMethodId === 'CREDIT_CARD' || effectiveSelectedMethodId === 'PayPal' || effectiveSelectedMethodId === 'PAYPAL_CREDIT_CARD' || effectiveSelectedMethodId === 'Venmo')}">
+    <isset name="effectiveSelectedMethodId" value="${'STRIPE_PAYMENT_ELEMENT'}" scope="page" />
+</isif>
+
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption">
+    <isset name="isFirstPaymentOption" value="${pdict.order.billing.payment.applicablePaymentMethods[0].ID === paymentOption.ID}" scope="page" />
+    <isset name="checkOption" value="${effectiveSelectedMethodId === paymentOption.ID || empty(effectiveSelectedMethodId) && isFirstPaymentOption}" scope="page" />
+    <isset name="activeClass" value="${checkOption ? 'active show' : ''}" scope="page" />
+
+    <isif condition="${paymentOption.ID === 'CREDIT_CARD' && (!isStripePaymentElementEnabled || hasSavedCards)}">
+        <isif condition="${stripeEnabled}">
+            <div class="tab-pane ${paymentOption.ID}-content ${activeClass}" id="${paymentOption.ID}-content" role="tabpanel">
+                <fieldset class="payment-form-fields">
+                    <input type="hidden" class="form-control"
+                        name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+                        value="${paymentOption.ID}"
+                    />
+                    <input type="hidden" name="cardNumber" value="" class="cardNumber" id="cardNumber" />
+                    <input type="hidden" name="stripe_source_id" id="stripe_source_id" />
+                    <isinclude template="stripe/checkout/billing/sfra_cardform" />
+                </fieldset>
+            </div>
+        <iselse/>
+            <isinclude template="checkout/billing/paymentOptions/creditCardContent" />
+        </isif>
+    <iselseif condition="${paymentOption.ID === 'PAYPAL_CREDIT_CARD' && isPaypalCardFieldsEnabled}" />
+        <isif condition="${payPalData && payPalData.isFastlaneEnabled && !pdict.customer.registeredUser}">
+            <isinclude template="paypal/checkout/fastlaneContent" />
+        <iselseif condition="${payPalData && payPalData.isPayPalActive && isPaypalCardFieldsEnabled}" />
+            <isinclude template="paypal/checkout/paymentOptions/creditCardContent" />
+        </isif>
+    <iselseif condition="${paymentOption.ID === 'Venmo' && payPalData && payPalData.isActiveVenmo}" />
+        <isinclude template="paypal/checkout/venmoContent"/>
+    <iselseif condition="${paymentOption.ID === 'PayPal' && payPalData}" />
+        <isif condition="${payPalData.isGooglePayEnabled}">
+            <script src="${payPalData.googlePayConfigs.sdkUrl}"></script>
+        </isif>
+
+        <isinclude template="paypal/checkout/paypalContent" />
+
+        <isif condition="${payPalData.availableLPMSArray.length}">
+            <isloop items="${payPalData.availableLPMSArray}" var="lpmId">
+                <isinclude template="paypal/checkout/lpmContent"/>
+            </isloop>
+        </isif>
+
+        <isif condition="${payPalData.isApplePayEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/applePayContent" />
+        </isif>
+
+        <isif condition="${payPalData.isGooglePayEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/googlePayContent" />
+        </isif>
+    <iselseif condition="${paymentOption.ID === 'STRIPE_PAYMENT_ELEMENT'}" />
+        <isinclude template="checkout/billing/paymentOptions/stripePaymentElementContent" />
+    <iselseif condition="${paymentOption.ID === 'BANK_TRANSFER'}" />
+        <isinclude template="checkout/billing/paymentOptions/stripeBankTransferElementContent" />
+    <iselseif condition="${paymentOption.ID !== 'CREDIT_CARD' && paymentOption.ID !== 'PayPal' && paymentOption.ID !== 'PAYPAL_CREDIT_CARD' && paymentOption.ID !== 'Venmo'}" />
+        <div class="tab-pane ${paymentOption.ID}-content ${activeClass}" id="${paymentOption.ID}-content" role="tabpanel">
+            <fieldset class="payment-form-fields">
+                <input type="hidden" class="form-control"
+                    name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+                    value="${paymentOption.ID}"
+                />
+                <input type="hidden" name="stripe_source_id" id="stripe_source_id" />
+            </fieldset>
+        </div>
+    </isif>
+</isloop>

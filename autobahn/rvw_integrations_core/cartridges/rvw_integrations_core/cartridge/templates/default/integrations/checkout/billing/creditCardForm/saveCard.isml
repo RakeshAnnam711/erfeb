@@ -1,0 +1,19 @@
+<iscomment>
+    This is the overriding template for integration specific code, please ensure where appropriate to check
+    the global toggle for the integration you are adding to this page to ensure that only the active integrations get included and executed
+
+    Page Type: Checkout
+
+    It gets called by rvw_autobahn_core:templates/default/checkout/billing/creditCardForm.isml
+
+    Any change made here needs may also need to be reflected in the corresponding file in rvw_autobahn_core
+</iscomment>
+
+<div class="save-credit-card custom-control custom-checkbox ">
+    <input type="checkbox" class="custom-control-input" id="saveCreditCard" name="${creditFields.saveCard.htmlName}" value="true" checked>
+    <iscomment>browser doesn't submit disabled inputs so we additionally need a hidden one here</iscomment>
+    <label class="custom-control-label" for="saveCreditCard">
+        ${creditFields.saveCard.label}
+    </label>
+    <div class="invalid-feedback" id="securityCodeInvalidMessage"></div>
+</div>

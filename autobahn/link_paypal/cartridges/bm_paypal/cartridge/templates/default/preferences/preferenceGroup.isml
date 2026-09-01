@@ -1,0 +1,53 @@
+<isset name="fastlaneSettings" value="${pdict.fastlaneSettings}" scope="page" />
+<isset name="isPayPalEnabled" value="${fastlaneSettings.isPayPalEnabled}" scope="page" />
+<isset name="isCreditCardEnabled" value="${fastlaneSettings.isCreditCardEnabled}" scope="page" />
+
+<h2>
+    ${pdict.attributeGroup.displayName}
+
+    <isif condition="${fastlaneSettings.active}">
+        <span class="badge badge-payment-method badge-info rounded-0 ml-4 text-transform-none">
+            <small>
+                <isif condition="${!isPayPalEnabled && !isCreditCardEnabled}">
+                    ${Resource.msg('note.paymentmethod.fastlane.disabled.both', 'preferences', null)}
+                <iselseif condition="${!isPayPalEnabled}" />
+                    ${Resource.msg('note.paymentmethod.fastlane.disabled.paypal', 'preferences', null)}
+                <iselseif condition="${!isCreditCardEnabled}" />
+                    ${Resource.msg('note.paymentmethod.fastlane.disabled.creditcard', 'preferences', null)}
+                </isif>
+            </small>
+        </span>
+    </isif>
+
+    <isif condition="${pdict.paymentMethod && !pdict.paymentMethod.active}">
+        <span class="badge badge-payment-method badge-info rounded-0 ml-4 text-transform-none">
+            <small>
+                ${Resource.msgf('note.paymentmethod.disabled', 'preferences', null, pdict.paymentMethod.name)}
+            </small>
+        </span>
+    </isif>
+</h2>
+
+<div class="dwScreen">
+    <div class="bm-screen-content">
+        <div class="main-content dw-PreferenceAttributegrid details">
+            <isinclude template="preferences/components/instanceType" />
+
+            <div class="main-toolbar d-flex flex-wrap justify-content-between pt-3 pb-4">
+                <isinclude template="preferences/components/search" />
+                <isinclude template="preferences/components/actions" />
+            </div>
+
+            <form class="js-form-preferences" id="${pdict.attributeGroup.ID}">
+                <input type="hidden" name="site" value="single" />
+                <input type="hidden" name="group_id" value="${pdict.attributeGroup.ID}" />
+                <input type="hidden" name="sectionName" value="${pdict.sectionName}" />
+                <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}" />
+
+                <isinclude template="preferences/components/grid" />
+            </form>
+        </div>
+    </div>
+</div>
+
+

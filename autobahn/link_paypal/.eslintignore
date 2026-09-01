@@ -1,0 +1,7 @@
+doc/
+bin/
+coverage/
+cartridges/modules/
+cartridges/app_storefront_base/
+cartridges/**/cartridge/static/
+cartridges/**/tab.js

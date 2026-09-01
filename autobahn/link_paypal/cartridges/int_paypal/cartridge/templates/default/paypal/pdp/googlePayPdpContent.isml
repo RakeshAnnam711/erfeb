@@ -1,0 +1,24 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+
+    assets.addJs(pdict.paypal.googlePayConfigs.sdkUrl);
+    assets.addJs('/js/int_paypal_pdp.js');
+    assets.addCss('/css/paypal.css');
+</isscript>
+
+<div class="text-center row">
+    <div class="js-googlepay-content col-12" id="googlepay-content">
+        <div class="googlepay-pdp-buttons-wrap">
+            <div class="googlepay-pdp-button-wrap js-googlepay-pdp-button-wrap">
+                <div class="js-paypal-googlepay-button"
+                     data-googlepay-config="${JSON.stringify(pdict.paypal.googlePayConfigs)}"
+                     data-paypal-billing-form-fields="${pdict.paypal.googlePayFormFields}">
+                    <div class="js-googlepay-${pdict.paypal.googlePayConfigs.pageFlow}-btn mx-auto"></div>
+                </div>
+                <div class="paypalLoader paypal-loader-container js-paypal-googlepay-loader">
+                    <i class="paypal-loader"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<isif condition="${!empty(entry.disputed_transactions)}">
+    <isloop items="${entry.disputed_transactions}" var="transaction" status="loopstatus">
+        <table class="paypalbm_detail_table paypalbm_transaction_detail_table infobox w e s n">
+            <tbody>
+                <isif condition="${transaction.seller_transaction_id}">
+                    <isset name="order" value="${transaction.order}" scope="page" />
+
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.seller.transactionid', 'disputes', null)}:</td>
+                        <td class="infobox_item top">
+                            <isif condition="${order}">
+                                <a class="js-paypal-show-detail" href="${URLUtils.url('PaypalAdmin-OrderTransaction', 'orderNo', order.orderNo, 'currencyCode', order.currencyCode)}" data-ordertoken="${order.orderToken ? order.orderToken: null}" data-orderno="${order.orderNo}" data-currencycode="${order.currencyCode}" data-transactionid="${transaction.seller_transaction_id}" title="${Resource.msgf('ordertransaction.title', 'paypalbm', null, order.orderNo)}">
+                                    ${transaction.seller_transaction_id}
+                                </a>
+                            <iselse/>
+                                ${transaction.seller_transaction_id}
+                            </isif>
+                        </td>
+                    </tr>
+                </isif>
+
+                <isif condition="${transaction.buyer_transaction_id}">
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.buyer.transactionid', 'disputes', null)}:</td>
+                        <td class="infobox_item top">
+                            ${transaction.buyer_transaction_id}
+                        </td>
+                    </tr>
+                </isif>
+
+                <isif condition="${transaction.transaction_status}">
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.transaction.paymentstatus', 'disputes', null)}:</td>
+                        <td class="infobox_item top">${transaction.transaction_status}</td>
+                    </tr>
+                </isif>
+
+                <isif condition="${transaction.create_time}">
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.transaction.createtime', 'disputes', null)}:</td>
+                        <td class="infobox_item top">
+                            <isprint value="${new Date(transaction.create_time)}" formatter="M/dd/yy h:mm a" />
+                        </td>
+                    </tr>
+                </isif>
+
+                <isif condition="${transaction.gross_amount}">
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.transaction.amount', 'disputes', null)}:</td>
+                        <td class="infobox_item top">
+                            ${transaction.gross_amount.value}
+                            ${transaction.gross_amount.currency_code}
+                        </td>
+                    </tr>
+                </isif>
+
+                <isif condition="${transaction.invoice_number}">
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.invoicenumber', 'disputes', null)}:</td>
+                        <td class="infobox_item top">${transaction.invoice_number}</td>
+                    </tr>
+                </isif>
+
+                <isif condition="${transaction.seller}">
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.seller.name', 'disputes', null)}:</td>
+                        <td class="infobox_item top">${transaction.seller.name}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.seller.email', 'disputes', null)}:</td>
+                        <td class="infobox_item top">${transaction.seller.email}</td>
+                    </tr>
+                </isif>
+            </tbody>
+        </table>
+    </isloop>
+</isif>

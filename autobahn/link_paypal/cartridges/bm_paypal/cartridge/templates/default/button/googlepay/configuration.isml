@@ -1,0 +1,16 @@
+<isif condition="${pdict.paymentMethod && pdict.paymentMethod.active}">
+    <div class="row py-3">
+        <div class="col-6 mb-3">
+            <h2 class="h4 mb-3">${Resource.msg('googlepay.title', 'configuration', null)}</h2>
+
+            <isinclude template="button/googlepay/form" />
+        </div>
+        <div class="col-4 mb-3 d-flex justify-content-center align-items-center">
+            <div class="d-inline-block js-google-pay-container">
+                <isinclude template="button/googlepay/googlePayButton" />
+            </div>
+        </div>
+    </div>
+<iselse/>
+    <isinclude template="button/components/paymentMethodDisabled" />
+</isif>

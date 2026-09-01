@@ -1,0 +1,5 @@
+<script src="${pdict.applePayButtonSdk}"></script>
+
+<div class="apple-pay-btn-container">
+    <apple-pay-button id="js-apple-pay-btn" buttonstyle="black" type="plain" locale="${pdict.locale}"></apple-pay-button>
+</div>

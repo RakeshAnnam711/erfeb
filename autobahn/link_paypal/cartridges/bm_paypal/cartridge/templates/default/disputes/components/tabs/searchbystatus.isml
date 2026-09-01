@@ -1,0 +1,32 @@
+<tr id="paypalbm_search_dispute_by_status"
+    class="js_paypalbm_switch_block ${pdict.isSearchByDisputeStatus ? 'table-row' : 'none'}">
+    <td class="infobox_item_search" colspan="2">
+        <form action="${URLUtils.https('Disputes-Start')}" method="GET">
+            <table>
+                <tr class="infobox_item_search_tr">
+                    <td class="infobox_item_search" width="110" nowrap="nowrap">
+                        ${Resource.msg('dispute.search.status', 'disputes', null)}
+                    </td>
+
+                    <td class="infobox_item_search">
+                        <select id="disputeStatus" name="disputeStatus" class="inputfield">
+                            <option value="">${Resource.msg('forms.select', 'paypalbm', null)}</option>
+                            <isloop items="${pdict.disputeStatuses}" var="disputeStatus">
+                                <option value="${disputeStatus.value}" ${pdict.isSearchByDisputeStatus && (pdict.CurrentHttpParameterMap.disputeStatus.stringValue === disputeStatus.value) ? "selected" : ""}>
+                                    ${disputeStatus.label}
+                                </option>
+                            </isloop>
+                        </select>
+
+                        <button name="simpleSearch" value="true" class="button">
+                            ${Resource.msg('search.submitbutton', 'paypalbm', null)}
+                        </button>
+                    </td>
+
+                    <td class="infobox_item_search">&nbsp;</td>
+                    <td class="infobox_item_search"></td>
+                </tr>
+            </table>
+        </form>
+    </td>
+</tr>

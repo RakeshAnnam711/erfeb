@@ -1,0 +1,11 @@
+<body>
+    <p>${Resource.msg('email.alert.dear.user', 'notifications', null)}</p>
+
+    <isloop items="${pdict.emailData}" var="transactionStatus">
+        <p>${Resource.msgf('email.alert.be.informed', 'notifications', null, transactionStatus.status, transactionStatus.count)}
+        </p>
+    </isloop>
+    <p>${Resource.msg('email.alert.add.more.content', 'notifications', null)}</p>
+
+    <p>${Resource.msg('email.alert.please.review', 'notifications', null)}</p>
+</body>

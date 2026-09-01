@@ -1,0 +1,15 @@
+<iscache type="relative" minute="0" />
+<isif condition="${slotcontent}">
+    <hr />
+
+    <div class="recommendations">
+            <h2 class="col-12 title text-center pt-4 mb-4 recommendations-heading">${Resource.msg('label.einstein.recommendations', 'product', null)}</h2>
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-12 value content">
+                <isset name="end" value="${9}" scope="page" />
+                <isset name="recommendationProducts" value="${slotcontent.content}" scope="page" />
+                <isinclude template="components/productsNew" />
+            </div>
+        </div>
+    </div>
+</isif>

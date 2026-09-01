@@ -1,0 +1,172 @@
+<div class="row pt-3">
+    <form class="col-6" id="js-smartbutton-form" action="${URLUtils.url('PaypalConfig-SaveSmartButton')}"
+        data-smart-styles="${pdict.savedSmartStyles}" data-config="${pdict.config}">
+        <h2 class="h4 mb-3">
+            ${Resource.msg('paypal.location.title', 'configuration', null)}
+        </h2>
+
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="js-location-button">
+                    ${Resource.msg('location.label', 'configuration', null)}
+                </label>
+
+                <select class="custom-select custom-select-sm" name="location" id="js-location-button">
+                    <option value="billing">
+                        ${Resource.msg('paypal.location.billing', 'configuration', null)}
+                    </option>
+
+                    <isif condition="${pdict.buttonPageVisibility.cart || pdict.venmoPageVisibility.cart}">
+                        <option value="cart">
+                            ${Resource.msg('paypal.location.cart', 'configuration', null)}
+                        </option>
+                    </isif>
+
+                    <isif condition="${pdict.buttonPageVisibility.minicart || pdict.venmoPageVisibility.minicart}">
+                        <option value="minicart">
+                            ${Resource.msg('paypal.location.minicart', 'configuration', null)}
+                        </option>
+                    </isif>
+
+                    <isif condition="${pdict.buttonPageVisibility.pdp || pdict.venmoPageVisibility.pdp}">
+                        <option value="pdp">
+                            ${Resource.msg('paypal.location.pdp', 'configuration', null)}
+                        </option>
+                    </isif>
+
+                    <isif condition="${pdict.buttonPageVisibility.pvp || pdict.venmoPageVisibility.pvp}">
+                        <option value="pvp">
+                            ${Resource.msg('paypal.location.pvp', 'configuration', null)}
+                        </option>
+                    </isif>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="js-color-button">
+                    ${Resource.msg('smartbutton.color.title', 'configuration', null)}
+                </label>
+
+                <select class="custom-select custom-select-sm" name="color" id="js-color-button">
+                    <option>
+                        ${Resource.msg('smartbutton.color.option.gold', 'configuration', null)}
+                    </option>
+                    <option>
+                        ${Resource.msg('smartbutton.color.option.blue', 'configuration', null)}
+                    </option>
+                    <option>
+                        ${Resource.msg('smartbutton.color.option.black', 'configuration', null)}
+                    </option>
+                    <option>
+                        ${Resource.msg('smartbutton.color.option.white', 'configuration', null)}
+                    </option>
+                    <option>
+                        ${Resource.msg('smartbutton.color.option.silver', 'configuration', null)}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="js-shape-button">
+                    ${Resource.msg('smartbutton.shape.title', 'configuration', null)}
+                </label>
+
+                <select class="custom-select custom-select-sm" name="shape" id="js-shape-button">
+                    <option>
+                        ${Resource.msg('smartbutton.shape.option.rect', 'configuration', null)}
+                    </option>
+                    <option>
+                        ${Resource.msg('smartbutton.shape.option.pill', 'configuration', null)}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="js-label">
+                    ${Resource.msg('smartbutton.label.title', 'configuration', null)}
+
+                    <span class="badge badge-pill badge-secondary"
+                        title="${Resource.msg('smartbutton.label.tooltip', 'configuration', null)}">?</span>
+                </label>
+
+                <select class="custom-select custom-select-sm" name="label" id="js-label">
+                    <option value="checkout">
+                        ${Resource.msg('smartbutton.label.option.checkout', 'configuration', null)}
+                    </option>
+                    <option value="paypal">
+                        ${Resource.msg('smartbutton.label.option.paypal', 'configuration', null)}
+                    </option>
+                    <option value="buynow">
+                        ${Resource.msg('smartbutton.label.option.buynow', 'configuration', null)}
+                    </option>
+                    <option value="pay">
+                        ${Resource.msg('smartbutton.label.option.pay', 'configuration', null)}
+                    </option>
+                    <option value="installment">
+                        ${Resource.msg('smartbutton.label.option.installment', 'configuration', null)}
+                    </option>
+                    <option value="donate">
+                        ${Resource.msg('smartbutton.label.option.donate', 'configuration', null)}
+                    </option>
+                    <option value="subscribe">
+                        ${Resource.msg('smartbutton.label.option.subscribe', 'configuration', null)}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="js-height-range">
+                    ${Resource.msg('smartbutton.height.title', 'configuration', null)}
+                </label>
+
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            ${Resource.msg('smartbutton.max.height', 'configuration', null)}
+                        </span>
+                    </div>
+
+                    <input type="number" min="25" max="55" id="js-height-number" class="form-control text-center" aria-describedby="minNumber" />
+
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            ${Resource.msg('smartbutton.min.height', 'configuration', null)}
+                        </span>
+                    </div>
+                </div>
+
+                <input type="range" name="heightFormControlRange" class="form-control-range" list="height-list" min="25" max="55" step="1" id="js-height-range" />
+
+                <datalist id="height-list">
+                    <option value="25" label="25"></option>
+                    <option value="35"></option>
+                    <option value="45"></option>
+                    <option value="55" label="55"></option>
+                </datalist>
+            </div>
+        </div>
+
+        <isset name="msgArgument" value="button" scope="page" />
+        <isinclude template="components/checkboxApplyToAll"/>
+
+        <button type="submit" class="btn btn-primary mt-3">
+            ${Resource.msg('button.save', 'configuration', null)}
+        </button>
+    </form>
+
+    <div class="col-6 paypal-cart-button">
+        <div class="js-buttons-container">
+            <div class="mb-3 js-paypal-button-container"></div>
+            <div class="mb-3 js-venmo-button-container"></div>
+            <div class="mb-3 text-center js-venmo-eligibility">
+                ${Resource.msg('venmo.eligibility.note', 'configuration', null)}
+            </div>
+            <div class="mb-3 js-paylater-button-container"></div>
+            <div class="mb-4 js-card-button-container"></div>
+        </div>
+    </div>
+</div>

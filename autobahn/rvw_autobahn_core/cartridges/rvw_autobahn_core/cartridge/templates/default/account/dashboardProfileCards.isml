@@ -1,0 +1,39 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+
+    assets.addJs('/js/int_paypal_account.js');
+    assets.addCss('/css/paypal.css');
+</isscript>
+<div class="row justify-content-center">
+    <isprint value="${pdict.errorMsg}" />
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <!---Profile--->
+        <isinclude template="account/profileCard"/>
+
+        <isif condition="${!pdict.account.isExternallyAuthenticated}">
+            <!---Password--->
+            <isinclude template="account/passwordCard"/>
+        </isif>
+
+        <!---Address Book--->
+        <isinclude template="account/addressBookCard"/>
+    </div>
+    <div class="col-md-6">
+        <!---Order History--->
+        <isif condition="${pdict.account.orderHistory}">
+            <isset name="order" value="${pdict.account.orderHistory}" scope="page"/>
+            <isinclude template="account/order/orderHistoryCard"/>
+        </isif>
+        <!---Payment--->
+        <isinclude template="account/paymentCard"/>
+        <!---Wishlist--->
+        <isif condition="${pdict.account.wishlist}">
+            <div class="wishlist-account-card card" data-error-msg="${Resource.msg('wishlist.removefromwishlist.failure.msg','wishlist',null)}">
+                <isinclude template="account/wishlist/listCards"/>
+            </div>
+        </isif>
+        <isinclude template="integrations/account/dashboardProfileCards/additionalDashboardProfileCards">
+    </div>
+</div>

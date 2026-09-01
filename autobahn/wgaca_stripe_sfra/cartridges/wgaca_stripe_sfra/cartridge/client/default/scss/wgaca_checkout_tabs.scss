@@ -1,0 +1,116 @@
+.payment-information.wgaca-payment-tabs .payment-options {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0;
+    align-items: stretch;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options-heading {
+    margin: 0 0 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-transform: none !important;
+    letter-spacing: normal;
+}
+
+.payment-options-block .payment-information.wgaca-payment-tabs .payment-options-heading {
+    margin: 0 0 10px !important;
+    // font-weight: 600 !important;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-transform: none !important;
+    letter-spacing: normal;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options .nav-item {
+    float: none;
+    flex: 1 1 0;
+    min-width: 140px;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options.nav-fill .nav-item {
+    flex: 1 1 0;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 14px;
+    border-radius: 0;
+    border: 1px solid #d7d7d7;
+    border-bottom: 2px solid transparent;
+    background: #fff;
+    color: #222;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options .nav-link:hover {
+    border-color: #bcbcbc;
+    text-decoration: none;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options .nav-link.active,
+.payment-information.wgaca-payment-tabs .payment-options .nav-link[aria-selected="true"] {
+    border-color: #111;
+    border-bottom-color: #111;
+    color: #111;
+    font-weight: 600;
+    // position: relative;
+    // top: 2px;
+}
+
+@media (max-width: 767.98px) {
+    .payment-information.wgaca-payment-tabs .payment-options {
+        flex-wrap: nowrap;
+    }
+
+    .payment-information.wgaca-payment-tabs .payment-options .nav-item {
+        flex: 0 0 auto;
+        min-width: 140px;
+    }
+}
+
+.payment-information.wgaca-payment-tabs .payment-options .js-paypal-mark,
+.payment-information.wgaca-payment-tabs .payment-options .js-venmo-mark,
+.payment-information.wgaca-payment-tabs .payment-options .js-lpm-mark {
+    min-width: 56px;
+    min-height: 24px;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options .paypal-tab-fallback-label {
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options .tab-title {
+    font-weight: 600;
+}
+
+.payment-information.wgaca-payment-tabs .payment-options .js-paypal-mark,
+.payment-information.wgaca-payment-tabs .payment-options .js-credit-card-mark,
+.payment-information.wgaca-payment-tabs .payment-options .js-googlepay-mark,
+.payment-information.wgaca-payment-tabs .payment-options .js-applepay-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-information.wgaca-payment-tabs #paypalCreditCardList {
+    margin-top: 20px;
+}
+
+.credit-card-selection-new .tab-content > .tab-pane {
+    display: none;
+}
+
+.credit-card-selection-new .tab-content > .tab-pane.active,
+.credit-card-selection-new .tab-content > .tab-pane.show {
+    display: block !important;
+}

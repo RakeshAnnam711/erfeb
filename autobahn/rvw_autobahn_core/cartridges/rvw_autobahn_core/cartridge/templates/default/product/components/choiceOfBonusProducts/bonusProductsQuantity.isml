@@ -1,0 +1,32 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<!-- Quantity Drop Down Menu -->
+<div class="bonus-quantity">
+    <label class="sr-only" for="quantity-${loopState && loopState.count ? loopState.count : '1' }">
+        ${Resource.msg('quantity.label','product',null)}
+    </label>
+    <select
+        class="bonus-quantity-select custom-select form-control ${product.enableQuantityStepper ? 'd-none' : ''}"
+        id="quantity-${productLoopStatus && productLoopStatus.count ? productLoopStatus.count : '1' }"
+    >
+        <isloop items="${product.quantities}" var="quantity">
+            <isif condition="${quantity.value > pdict.maxPids}"><isbreak/></isif>
+            <option value="${quantity.value}"
+                <isif condition="${product.productType !== 'bundle'}">data-url="${quantity.url}"</isif>
+                ${quantity.selected ? 'selected' : ''}
+            >
+                ${quantity.value}
+            </option>
+        </isloop>
+    </select>
+
+    <isif condition="${product.enableQuantityStepper}">
+        <isquantitystepper
+            qty="${product.minOrderQuantity.toFixed()}"
+            min="${product.minOrderQuantity.toFixed()}"
+            max="${pdict.maxPids}"
+            size="${'large'}"
+            cypresstarget="bonusProductQuantityStepper"
+        />
+    </isif>
+</div>

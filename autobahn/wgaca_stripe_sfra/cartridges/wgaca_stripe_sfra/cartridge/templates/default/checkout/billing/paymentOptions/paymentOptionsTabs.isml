@@ -1,0 +1,99 @@
+<isset name="payPalData" value="${pdict.paypal}" scope="page" />
+<isset name="isPaypalCardFieldsEnabled" value="${payPalData && payPalData.isPayPalActive && payPalData.isPaypalCardFieldsEnabled}" scope="page" />
+<isset name="isBasicCreditCardVisible" value="${!payPalData || !payPalData.isPayPalActive || !isPaypalCardFieldsEnabled}" scope="page" />
+<isset name="selectedPaymentInstruments" value="${pdict.order.billing.payment.selectedPaymentInstruments}" scope="page" />
+<isset name="selectedPaymentInstrument" value="${selectedPaymentInstruments && selectedPaymentInstruments.length ? selectedPaymentInstruments[0] : null}" scope="page" />
+<isset name="selectedMethodId" value="${selectedPaymentInstrument && selectedPaymentInstrument.paymentMethod ? selectedPaymentInstrument.paymentMethod : pdict.selectedPaymentMethod}" scope="page" />
+<isset name="effectiveSelectedMethodId" value="${selectedMethodId}" scope="page" />
+
+<isif condition="${isStripePaymentElementEnabled && (empty(effectiveSelectedMethodId) || effectiveSelectedMethodId === 'CREDIT_CARD' || effectiveSelectedMethodId === 'PayPal' || effectiveSelectedMethodId === 'PAYPAL_CREDIT_CARD' || effectiveSelectedMethodId === 'Venmo')}">
+    <isset name="effectiveSelectedMethodId" value="${'STRIPE_PAYMENT_ELEMENT'}" scope="page" />
+</isif>
+
+<iscomment>1) Stripe tabs first (Payment Element / Bank Transfer / Card when applicable)</iscomment>
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption">
+    <isset name="isFirstPaymentOption" value="${pdict.order.billing.payment.applicablePaymentMethods[0].ID === paymentOption.ID}" scope="page" />
+    <isset name="checkOption" value="${effectiveSelectedMethodId === paymentOption.ID || empty(effectiveSelectedMethodId) && isFirstPaymentOption}" scope="page" />
+    <isset name="activeClass" value="${checkOption ? 'active' : ''}" scope="page" />
+
+    <isif condition="${paymentOption.ID === 'STRIPE_PAYMENT_ELEMENT' || paymentOption.ID === 'BANK_TRANSFER'}" >
+        <li class="nav-item payment-method-item" data-method-id="${paymentOption.ID}">
+            <a class="nav-link credit-card-tab ${activeClass}" data-toggle="tab" href="${'#'}${paymentOption.ID}-content" role="tab" id="${paymentOption.ID}-tab">
+                <isif condition="${paymentOption.ID === 'STRIPE_PAYMENT_ELEMENT'}">
+                    <span class="tab-title">${Resource.msg('paymentelement.tab.stripe', 'stripe', 'Stripe')}</span>
+                <iselse/>
+                    <span class="tab-title">${paymentOption.name}</span>
+                </isif>
+            </a>
+        </li>
+    <iselseif condition="${paymentOption.ID === 'CREDIT_CARD' && (!isStripePaymentElementEnabled || hasSavedCards) && !(isStripePaymentElementEnabled && hasSavedCards)}" />
+        <li class="nav-item payment-method-item" data-method-id="${paymentOption.ID}">
+            <a class="nav-link credit-card-tab ${activeClass}" data-toggle="tab" href="${'#'}${paymentOption.ID}-content" role="tab">
+                ${paymentOption.name}
+            </a>
+        </li>
+    </isif>
+</isloop>
+
+<iscomment>2) Stripe saved payment tab next</iscomment>
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption">
+    <isset name="isFirstPaymentOption" value="${pdict.order.billing.payment.applicablePaymentMethods[0].ID === paymentOption.ID}" scope="page" />
+    <isset name="checkOption" value="${effectiveSelectedMethodId === paymentOption.ID || empty(effectiveSelectedMethodId) && isFirstPaymentOption}" scope="page" />
+    <isset name="activeClass" value="${checkOption ? 'active' : ''}" scope="page" />
+
+    <isif condition="${paymentOption.ID === 'CREDIT_CARD' && isStripePaymentElementEnabled && hasSavedCards}">
+        <li class="nav-item payment-method-item" data-method-id="${paymentOption.ID}">
+            <a class="nav-link credit-card-tab ${activeClass}" data-toggle="tab" href="${'#'}${paymentOption.ID}-content" role="tab">
+                ${Resource.msg('paymentelement.savedmethod', 'stripe', paymentOption.name)}
+            </a>
+        </li>
+    </isif>
+</isloop>
+
+<iscomment>3) PayPal family after Stripe</iscomment>
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption">
+    <isset name="isFirstPaymentOption" value="${pdict.order.billing.payment.applicablePaymentMethods[0].ID === paymentOption.ID}" scope="page" />
+    <isset name="checkOption" value="${effectiveSelectedMethodId === paymentOption.ID || empty(effectiveSelectedMethodId) && isFirstPaymentOption}" scope="page" />
+    <isset name="activeClass" value="${checkOption ? 'active' : ''}" scope="page" />
+
+    <isif condition="${paymentOption.ID === 'PAYPAL_CREDIT_CARD' && isPaypalCardFieldsEnabled}" >
+        <isif condition="${payPalData && payPalData.isFastlaneEnabled && !pdict.customer.registeredUser}">
+            <isinclude template="paypal/checkout/paymentOptions/fastlaneTab" />
+        <iselseif condition="${payPalData && payPalData.isPayPalActive && isPaypalCardFieldsEnabled}" />
+            <isinclude template="paypal/checkout/paymentOptions/creditCardTab" />
+        </isif>
+    <iselseif condition="${paymentOption.ID === 'Venmo' && payPalData && payPalData.isActiveVenmo}" />
+        <isinclude template="paypal/checkout/venmoTab"/>
+    <iselseif condition="${paymentOption.ID === 'PayPal' && payPalData}" />
+        <isinclude template="paypal/checkout/paypalTab" />
+
+        <isif condition="${payPalData.availableLPMSArray.length}">
+            <isloop items="${payPalData.availableLPMSArray}" var="lpmId">
+                <isinclude template="paypal/checkout/lpmTab"/>
+            </isloop>
+        </isif>
+
+        <isif condition="${payPalData.isApplePayEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/applePayTab"/>
+        </isif>
+
+        <isif condition="${payPalData.isGooglePayEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/googlePayTab"/>
+        </isif>
+    </isif>
+</isloop>
+
+<iscomment>4) Remaining methods</iscomment>
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption">
+    <isset name="isFirstPaymentOption" value="${pdict.order.billing.payment.applicablePaymentMethods[0].ID === paymentOption.ID}" scope="page" />
+    <isset name="checkOption" value="${effectiveSelectedMethodId === paymentOption.ID || empty(effectiveSelectedMethodId) && isFirstPaymentOption}" scope="page" />
+    <isset name="activeClass" value="${checkOption ? 'active' : ''}" scope="page" />
+
+    <isif condition="${paymentOption.ID !== 'CREDIT_CARD' && paymentOption.ID !== 'PayPal' && paymentOption.ID !== 'PAYPAL_CREDIT_CARD' && paymentOption.ID !== 'Venmo' && paymentOption.ID !== 'STRIPE_PAYMENT_ELEMENT' && paymentOption.ID !== 'BANK_TRANSFER'}" >
+        <li class="nav-item payment-method-item" data-method-id="${paymentOption.ID}">
+            <a class="nav-link credit-card-tab ${activeClass}" data-toggle="tab" href="${'#'}${paymentOption.ID}-content" role="tab">
+                ${paymentOption.name}
+            </a>
+        </li>
+    </isif>
+</isloop>

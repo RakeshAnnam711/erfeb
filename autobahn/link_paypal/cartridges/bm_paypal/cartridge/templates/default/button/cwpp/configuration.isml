@@ -1,0 +1,18 @@
+<isif condition="${pdict.paymentMethod && pdict.paymentMethod.active}">
+    <div class="row py-3">
+        <div class="col-6 mb-3">
+            <h2 class="h4 mb-3">
+                ${Resource.msg('cwpp.title', 'configuration', null)}
+            </h2>
+
+            <isinclude template="button/cwpp/form" />
+        </div>
+        <div class="col-4 mb-3 d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <span id="js-cwpp-button" data-cwpp-sdk="${pdict.payPalExternalApi}"></span>
+            </div>
+        </div>
+    </div>
+<iselse/>
+    <isinclude template="button/components/paymentMethodDisabled" />
+</isif>

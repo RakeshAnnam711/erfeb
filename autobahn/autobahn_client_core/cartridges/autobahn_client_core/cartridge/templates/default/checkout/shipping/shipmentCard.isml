@@ -1,0 +1,32 @@
+<div class="card-body shipping-content">
+    <form class="shipping-form" autocomplete="on" novalidate
+          id="form-${shippingModel.UUID}"
+          action="${shipmentLoopState
+          ? URLUtils.url('CheckoutAddressServices-AddNewAddress')
+          : URLUtils.url('CheckoutShippingServices-SubmitShipping')}"
+          data-address-mode="${shippingModel.matchingAddressId ? 'edit' : 'new'}"
+          <isprint value=${pdict.forms.shippingForm.attributes} encoding="off"/>
+    >
+        <isif condition="${lineItem}">
+            <input name="productLineItemUUID" type="hidden" value="${lineItem.UUID}" />
+        </isif>
+
+        <input name="originalShipmentUUID" type="hidden" value="${shippingModel.UUID}" />
+        <input name="shipmentUUID" type="hidden" value="${shippingModel.UUID}" />
+
+        <div class="shipping-address ${pdict.order.usingMultiShipping ? 'd-none' : ''}">
+            <isinclude template="integrations/checkout/shipping/shipmentCardIntegrationsShippingAddress" />
+        </div>
+
+        <div class="view-address-block ${shippingModel.shippingAddress ? '' : 'd-none' }">
+            <isinclude template="checkout/shipping/shippingCard" />
+        </div>
+
+        <isif condition="${typeof showMultiShipActions !== 'undefined' && showMultiShipActions}">
+            <isinclude template="checkout/shipping/multiShippingButtons" />
+        </isif>
+        
+
+        <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+    </form>
+</div>

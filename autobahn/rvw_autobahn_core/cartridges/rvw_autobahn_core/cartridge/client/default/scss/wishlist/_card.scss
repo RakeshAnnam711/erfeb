@@ -1,0 +1,158 @@
+// wishlist cards on landing page
+.wishlist-card-list {
+    width: 100%;
+    .card-header {
+        background-color: $wishlist-card-header-background;
+    }
+    .public-list-text,
+    .private-list-text {
+        @include paragraph-font-size(small);
+        color: $wishlist-public-private-color;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        &::before {
+            padding-right: $spacer-sm;
+        }
+    }
+    .public-list-text {
+        @include icon($wishlist-public-icon, before, inherit, $wishlist-public-icon-color);
+    }
+    .private-list-text {
+        @include icon($wishlist-private-icon, before, inherit, $wishlist-private-icon-color);
+    }
+    .card-footer {
+        padding-top: 0;
+    }
+}
+.wishlist-card-list-header {
+    display: flex;
+    justify-content: space-between;
+}
+.wishlist-card-list-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: $spacer;
+    text-decoration: none;
+    .wishlist-card-list-body-image,
+    .wishlist-card-list-body-image-blank,
+    .extra-items-block {
+        flex: 0 1 auto;
+        width: 100%;
+        max-width: calc((100% / 4) - ((#{$card-body-padding-right + $card-body-padding-left + $spacer}) /  4));
+    }
+    .extra-items-block {
+        background-color: $off-white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        color: $dark-gray;
+    }
+    .wishlist-card-list-body-image {
+        height: auto;
+    }
+}
+.wishlist-card-list-body-empty-message {
+    color: $wishlist-card-empty-message-color;
+}
+
+// product cards on detail page
+.wishlist-card-product {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: $spacer;
+    .wishlist-card-product-toggle {
+        &::after {
+            position: absolute;
+            content: '';
+            display: flex;
+            height: $radiocheck-button-size;
+            width: $radiocheck-button-size;
+            background-color: $radiocheck-background-color;
+            border: 1px solid $radiocheck-border-color;
+            border-radius: $border-radius;
+            top: $wishlist-card-product-toggle-top;
+            right: $wishlist-card-product-toggle-right;
+            justify-content: center;
+            align-items: center;
+        }
+        &.selected {
+            @include icon($icon-checkmark, after, calc(#{$radiocheck-button-size} / 1.5), $radiocheck-icon-color);
+            &::after {
+                background-color: $radiocheck-background-color-selected;
+                border-color: $radiocheck-border-color-selected;
+                display: flex;
+            }
+        }
+        &:hover::after {
+            box-shadow: 0 0 0 1px $radiocheck-border-color;
+        }
+    }
+    .wishlist-card-product-image {
+        width: 100%;
+        margin-bottom: $wishlist-card-product-vertical-spacing;
+    }
+    .wishlist-card-product-name {
+        // margin-bottom: $wishlist-card-product-vertical-spacing;
+        .line-item-price-section{
+            margin-top: 16px;
+        }
+    }
+    .price {
+        .price-del {
+            order: 2;
+        }
+        span {
+            del ~ .sales {
+                padding-right: 0;
+            }
+        }
+    }
+    .wishlist-card-product-form {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        .item-attributes {
+            color: $wishlist-card-attribute-color;
+            .line-item-attributes {
+                margin: 0;
+            }
+            .line-item-availability {
+                margin-top: $wishlist-card-product-vertical-spacing;
+            }
+        }
+        .item-controls {
+            margin-top: auto;
+            .wishlist-card-product-add {
+                @include button($wishlist-card-product-add-button);
+                width: 100%;
+            }
+            .wishlist-quickview {
+                @include button($wishlist-card-quickview-button);
+                width: 100%;
+            }
+            .wishlist-card-product-form-quantity {
+                position: relative;
+                margin-bottom: $spacer;
+            }
+        }
+        .item-footer {
+            display: flex;
+            text-align: center;
+            > a {
+                flex: 1 1 auto;
+                margin-top: $wishlist-card-product-vertical-spacing;
+                @include text-link;
+                + a {
+                    border-left: $wishlist-card-footer-link-divider;
+                }
+            }
+        }
+    }
+}

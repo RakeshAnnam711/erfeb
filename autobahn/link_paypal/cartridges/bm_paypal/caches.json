@@ -1,0 +1,8 @@
+{
+    "caches": [
+        {
+            "id": "bm_paypalRestOauthToken",
+            "expireAfterSeconds": 900
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+<script>
+    Object.defineProperty(window, 'i18nMessages', {
+        value: Object.freeze(
+            JSON.parse('<isprint encoding="jsonvalue" value="${pdict.i18nMessagesString}" />')
+        ),
+        writable: false
+    });
+</script>

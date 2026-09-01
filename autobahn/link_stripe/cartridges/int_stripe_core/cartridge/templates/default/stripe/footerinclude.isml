@@ -1,0 +1,34 @@
+<isset name="stripeHelper" value="${require('*/cartridge/scripts/stripe/helpers/stripeHelper')}" scope="page" />
+<isset name="stripeCheckoutHelper" value="${require('*/cartridge/scripts/stripe/helpers/checkoutHelper')}" scope="page" />
+<isset name="stripeEnabled" value="${stripeHelper.isStripeEnabled()}" scope="page" />
+<isset name="isSFRA" value="${stripeHelper.isSFRA()}" scope="page" />
+<isset name="stripeScriptURL" value="${stripeHelper.getStripeScriptUrl()}" scope="page" />
+<isset name="stripePublicKey" value="${stripeHelper.getPublicApiKey()}" scope="page" />
+<isset name="stripeApiVersion" value="${stripeHelper.getStripeApiVersion()}" scope="page" />
+
+<isif condition="${stripeEnabled}">
+	<script src="${stripeScriptURL}"></script>
+	<isif condition="${stripePublicKey}">
+		<input type="hidden" id="stripePublicKey" value="${stripePublicKey}" />
+		<input type="hidden" id="stripeApiVersion" value="${stripeApiVersion}" />
+		<isif condition="${pageContext.ns === 'checkout'}">
+			<input type="hidden" id="stripeCardFormStyle" value="${JSON.stringify(stripeHelper.getStripeCardFormStyle())}" />
+			<input type="hidden" id="stripeAccountCountry" value="${stripeCheckoutHelper.getPRCountry()}" />
+			<input type="hidden" id="cardPaymentSubmitOrderURL" value="${URLUtils.https('StripePayments-CardPaymentSubmitOrder')}" />
+			<input type="hidden" id="cardPaymentHandleRequiresActionURL" value="${URLUtils.https('StripePayments-CardPaymentHandleRequiresAction')}" />
+			<input type="hidden" id="billingPageUrl" value="${isSFRA ? URLUtils.url('Checkout-Begin', 'stage', 'payment') : URLUtils.url('COShipping-Start')}" />
+			<input type="hidden" id="paymentElementSubmitOrderURL" value="${URLUtils.https('StripePayments-PaymentElementSubmitOrder')}" />
+            <input type="hidden" id="isStripePaymentElementsSavePaymentsEnabled" value="${customer.authenticated && customer.profile && customer.profile.email && stripeHelper.isStripePaymentElementsSavePaymentsEnabled()}" />
+            <input type="hidden" id="stripeCaptureMethod" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('stripeChargeCapture') ? 'automatic' : 'manual'}" />
+			<input type="hidden" id="stripePaymentMethodsInBeta" value="${stripeHelper.getPaymentMethodsInBeta()}" />
+			<input type="hidden" id="stripePaymentElementStyle" value="${JSON.stringify(stripeHelper.getStripePaymentElementStyle())}" />
+            <input type="hidden" id="logStripeErrorMessageURL" value="${URLUtils.https('StripePayments-LogStripeErrorMessage')}" />
+            <input type="hidden" id="stripeFailOrderURL" value="${URLUtils.https('StripePayments-FailOrder')}" />
+            <input type="hidden" id="stripeCardOrderPlacedURL" value="${URLUtils.https('Stripe-CardOrderPlaced')}" />
+
+            <input type="hidden" id="stripe_return_url" value="${URLUtils.https("StripePayments-HandleAPM")}">
+			<script src="${URLUtils.staticURL('/js/stripe.checkout.js')}" ></script>
+		</isif>
+		<script src="${URLUtils.staticURL('/js/stripe.expressCheckout.js')}" ></script>
+	</isif>
+</isif>

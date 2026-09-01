@@ -1,0 +1,5 @@
+<li class="nav-item js-nav-item-venmo d-none" data-method-id="${paymentOption.ID}">
+    <a class="nav-link js-venmo-tab" data-toggle="tab" href="#venmo-content" role="tab">
+        <div class="js-venmo-mark"></div>
+    </a>
+</li>

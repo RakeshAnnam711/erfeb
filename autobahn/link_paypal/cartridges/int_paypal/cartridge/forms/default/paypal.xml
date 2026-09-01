@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+    <field formid="savePaypalAccount" type="boolean" mandatory="false" />
+    <field formid="paypalActiveAccount" type="string" mandatory="false" />
+    <field formid="makeDefaultPaypalAccount" type="boolean" mandatory="false" />
+    <field formid="usedPaymentMethod" type="string" mandatory="false" />
+
+    <field formid="saveCreditCardAccount" type="boolean" mandatory="false" />
+    <field formid="creditCardHolderName" type="string" max-length="24" mandatory="false" />
+
+    <field formid="fastlaneCardType" type="string" max-length="16" mandatory="false" />
+    <field formid="fastlaneCardLastDigits" type="string" mandatory="false" />
+    <field formid="fastlaneExpiry" type="string" mandatory="false" />
+    <field formid="fastlanePaymentToken" type="string" mandatory="false" />
+
+    <!-- fields for Apple Pay selection -->
+    <include formid="applePay" name="applePay"/>
+    <!-- fields for Google Pay selection -->
+    <include formid="googlePay" name="googlePay"/>
+</form>

@@ -1,0 +1,31 @@
+<isif condition="${!empty(entry.evidences)}">
+    <table class="paypalbm_detail_table paypalbm_transaction_detail_table infobox w e s n">
+        <tbody>
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.evidences.title', 'disputes', null)}:</td>
+                <td class="infobox_item top dispute-evidences">
+                    <isloop items="${entry.evidences}" var="evidence" status="loopStatus">
+                        <p>
+                            <b>${Resource.msg('dispute.detail.evidence.type', 'disputes', null)}:</b>
+                            ${evidence.evidence_type}
+                        </p>
+
+                        <p>
+                            <b>${Resource.msg('dispute.detail.evidence.source', 'disputes', null)}:</b>
+                            ${evidence.source}
+                        </p>
+
+                        <isif condition="${evidence.notes}">
+                            <p class="text-break">
+                                <b>${Resource.msg('dispute.detail.evidence.notes', 'disputes', null)}:</b>
+                                ${evidence.notes}
+                            </p>
+                        </isif>
+
+                        <isif condition="${!loopStatus.last}"><hr/></isif>
+                    </isloop>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</isif>

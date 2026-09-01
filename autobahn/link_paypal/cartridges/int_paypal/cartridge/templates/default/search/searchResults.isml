@@ -1,0 +1,16 @@
+<isdecorate template="common/layout/page">
+
+    <script src="${pdict.applePaySdk}"></script>
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+
+        assets.addJs('/js/search.js');
+        assets.addCss('/css/search.css');
+
+        assets.addJs('/js/int_paypal_pvp.js');
+        assets.addCss('/css/paypal.css');
+    </isscript>
+
+    <isinclude template="search/searchResultsNoDecorator" />
+</isdecorate>

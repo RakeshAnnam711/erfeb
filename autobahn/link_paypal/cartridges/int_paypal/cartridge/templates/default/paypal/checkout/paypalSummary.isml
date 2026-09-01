@@ -1,0 +1,15 @@
+<isset name="isVenmoUsed" value="${payment.isVenmoUsed || (pdict.paypal && pdict.paypal.isVenmoUsed)}" scope="page" />
+
+<div>
+    <div>
+        <span>
+            ${Resource.msg('paypal.checkout.confirmation.account.holder', 'locale', null)} ${payment.paypalAccountHolder}
+            <div class="w-100"></div>
+            <isif condition="${isVenmoUsed}">
+                ${Resource.msg('venmo.payment.method.name', 'locale', null) + ' / ' + pdict.order.priceTotal}
+            <iselse/>
+                ${payment.fundingSource ? payment.fundingSource + ' / ' + pdict.order.priceTotal : payment.paymentMethod + ' / ' + pdict.order.priceTotal}
+            </isif>
+        </span>
+    </div>
+</div>

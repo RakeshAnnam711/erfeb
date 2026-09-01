@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="TaxJar Transaction Sync" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="TaxJar Transaction Sync Step" type="custom.TaxJar.SyncOrders" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ForceSync">false</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="false">
+                <recurrence>
+                    <date-from>2020-01-01Z</date-from>
+                    <start-time>00:00:00.000Z</start-time>
+                    <interval>10m</interval>
+                    <day-of-week/>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+</jobs>

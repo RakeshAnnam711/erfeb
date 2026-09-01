@@ -1,0 +1,35 @@
+<iscomment> <isset name="AdyenHelper" value="${require('*/cartridge/adyen/utils/adyenHelper')}" scope="page"/>
+<isset name="AdyenConfigs" value="${require('*/cartridge/adyen/utils/adyenConfigs')}" scope="page" />
+<isset name="globaleSession" value="${require('*/cartridge/models/globale/session')}" scope="page" />
+<script type="text/javascript">
+   window.environment = "${AdyenConfigs.getAdyenEnvironment()}";
+   window.clientKey = "${AdyenConfigs.getAdyenClientKey()}",
+   window.locale = "${request.locale}";
+   window.getPaymentMethodsURL = "${URLUtils.https('Adyen-GetPaymentMethods')}";
+   window.shippingMethodsUrl = "${URLUtils.https('Adyen-ShippingMethods')}";
+   window.selectShippingMethodUrl = "${URLUtils.https('Adyen-SelectShippingMethod')}";
+   window.paymentsDetailsURL = "${URLUtils.https('Adyen-PaymentsDetails')}";
+   window.paymentFromComponentURL = "${URLUtils.https('Adyen-PaymentFromComponent')}";
+   window.showConfirmationAction = "${URLUtils.https('Adyen-ShowConfirmationPaymentFromComponent')}";
+   window.returnUrl = "${URLUtils.https('Cart-Show')}";
+   window.createTemporaryBasketUrl = "${URLUtils.https('Adyen-CreateTemporaryBasket')}";
+   window.isApplePayExpressOnPdpEnabled = "${AdyenConfigs.isApplePayExpressOnPdpEnabled()}";
+   window.isGooglePayExpressOnPdpEnabled = "${AdyenConfigs.isGooglePayExpressOnPdpEnabled()}";
+   window.fractionDigits = "${AdyenHelper.getFractionDigits()}";
+   window.isGlobaleCountry = "${globaleSession.get('geOperatedCountry')}";
+</script>
+
+<isinclude url="${URLUtils.url('Adyen-Token')}" />
+<isif condition="${!globaleSession.get('geOperatedCountry')}">
+    <div id="express-payment-buttons"></div>
+</isif> </iscomment>
+
+<isset name="stripePublicKeyValue" value="${dw.system.Site.current.getCustomPreferenceValue('stripePublicKey')}" scope="page" />
+<isset name="isUSLocale" value="${request.locale && request.locale.indexOf('_US') !== -1}" scope="page" />
+<isset name="showStripeExpressOnPdp" value="${dw.system.Site.current.getCustomPreferenceValue('stripeEnabled') && dw.system.Site.current.getCustomPreferenceValue('stripeExpressCheckoutProductPageEnabled') && stripePublicKeyValue && product && product.readyToOrder && product.available && isUSLocale}" scope="page" />
+
+<isif condition="${showStripeExpressOnPdp}">
+<div class="stripe-express-checkout-container" style="margin-top: 10px">
+    <isinclude template="checkout/expressCheckout/stripeExpressCheckoutButton" />
+</div>
+</isif>

@@ -1,0 +1,26 @@
+<div class="dw-mask dw-mask-instant dw-mask-modal d-none js-wizard-alert">
+    <div class="dw-window dw-confirm dw-noheader">
+        <div class="dw-window-content">
+            <div class="dw-content">
+                <div class="dw-body">
+                    <div class="dw-left">
+                        <div class="dw-icon dw-glyph" role="img">
+                        </div>
+                    </div>
+                    <div class="dw-right">
+                        <div class="dw-title">${Resource.msg('common.wizard.alert.label', 'preferences', null)}</div>
+                        <div class="dw-msg">${Resource.msg('common.wizard.alert.message', 'preferences', null)}</div>
+                    </div>
+                </div>
+                <div class="dw-buttons">
+                    <button class="dw-button js-wizard-alert-cancel" type="button">
+                        <span class="dw-label">${Resource.msg('common.button.cancel', 'preferences', null)}</span>
+                    </button>
+                    <button class="dw-button dw-button-primary js-wizard-alert-ok" type="reset">
+                        <span class="dw-label">${Resource.msg('common.button.ok', 'preferences', null)}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

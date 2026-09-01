@@ -1,0 +1,14 @@
+<tr>
+    <td width="100%" class="table_title aldi">${Resource.msg('disputes.title', 'disputes', null)}</td>
+</tr>
+<tr>
+    <td class="w e s">
+        <img src="${URLUtils.staticURL('images/space.gif')}" width="1" height="2" alt="" border="0" />
+    </td>
+</tr>
+<tr>
+    <td class="table_title_description e w s">
+        <p>${Resource.msg('disputes.info', 'disputes', null)}</p>
+        <p><b>${Resource.msg('disputes.note', 'disputes', null)}</b></p>
+    </td>
+</tr>

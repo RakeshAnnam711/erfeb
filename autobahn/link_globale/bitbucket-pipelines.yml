@@ -1,0 +1,31 @@
+image: node:18.19.0
+
+pipelines:
+  custom:
+    compile-and-deploy:
+      - step:
+          name: Compile and Deploy
+          deployment: Test
+          script:
+            - git clone ${CIREPOSITORY}
+            - npm i yargs
+            - npm i archiver
+            - npm i chalk
+            - npm i sfcc-ci
+            - node ./SFCC-CI/deploy.js metadata --instance "${HOSTNAME}" --clientId "${CLIENTID}" --clientSecret "${CLIENTSECRET}" --configPath "${CICONFIGPATH}"
+            - node ./SFCC-CI/deploy.js cartridges --instance "${HOSTNAME}" --clientId "${CLIENTID}" --clientSecret "${CLIENTSECRET}" --configPath "${CICONFIGPATH}"
+            - node ./SFCC-CI/deploy.js jobs --instance "${HOSTNAME}" --clientId "${CLIENTID}" --clientSecret "${CLIENTSECRET}" --configPath "${CICONFIGPATH}"
+  branches:
+    release/*:
+      - step:
+          name: Import metadata, Deploy cartridges and Run GlobaleSettings job
+          deployment: Test
+          script:
+            - git clone ${CIREPOSITORY}
+            - npm i yargs
+            - npm i archiver
+            - npm i chalk
+            - npm i sfcc-ci
+            - node ./SFCC-CI/deploy.js metadata --instance "${HOSTNAME}" --clientId "${CLIENTID}" --clientSecret "${CLIENTSECRET}" --configPath "${CICONFIGPATH}"
+            - node ./SFCC-CI/deploy.js cartridges --instance "${HOSTNAME}" --clientId "${CLIENTID}" --clientSecret "${CLIENTSECRET}" --configPath "${CICONFIGPATH}"
+            - node ./SFCC-CI/deploy.js jobs --instance "${HOSTNAME}" --clientId "${CLIENTID}" --clientSecret "${CLIENTSECRET}" --configPath "${CICONFIGPATH}"

@@ -1,0 +1,134 @@
+body {
+    font-family: $default-text-font;
+    color: $base-font-color;
+    font-size: $default-text-font-size;
+    line-height: $default-text-line-height;
+    letter-spacing: $default-text-letter-spacing;
+    background-color: $page-background-color;
+}
+
+.page {
+    background-color: $page-background-color;
+}
+
+.error-messaging {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.error-message {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.error.continue-shopping {
+    margin-bottom: 100px;
+}
+
+// Necessary to avoid blue color applying to buttons due to IOS 15 update
+button {
+    color: inherit;
+}
+
+/*
+* ORIGINAL CSS
+* (everything under this comment was copied from Base and eventually
+* should be removed or moved above this comment if in use)
+*/
+
+.modal-background {
+    background-color: $black;
+    display: none;
+    height: 100vh;
+    position: fixed;
+    opacity: 0.5;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    transform: translateZ(0); // prevents background from disappearing on mobile scroll
+    z-index: $z-index-pdp-sticky-add-to-cart + 1; // just above all the visible page elements
+}
+
+input[placeholder] {
+    text-overflow: ellipsis;
+}
+
+.hide-order-discount {
+    display: none;
+}
+
+.hide-shipping-discount {
+    display: none;
+}
+
+.order-discount {
+    color: $success;
+}
+
+.giftcertificate-discount {
+    color: $success;
+}
+
+.shipping-discount {
+    color: $success;
+}
+
+.error-messaging {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.error.continue-shopping {
+    margin-bottom: 6.25em;
+}
+
+.error-unassigned-category {
+    color: $red;
+}
+
+.skip {
+    position: absolute;
+    left: 0;
+    top: -4.2em;
+    overflow: hidden;
+    padding: 1em 1.5em;
+    background: $white;
+    transition: all $transition-speed ease-in-out;
+}
+
+a.skip:active,
+a.skip:focus,
+a.skip:hover {
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    z-index: 10000000;
+    background: $white;
+    transition: all $transition-speed ease-in-out;
+}
+
+.login-oauth {
+    .oauth-facebook {
+        @include icon($icon-facebook);
+        margin-bottom: $spacer;
+        .fa-facebook-official {
+            display: none;
+        }
+    }
+    .oauth-google {
+        @include icon($icon-google);
+        margin-bottom: $spacer;
+        .fa-google {
+            display: none;
+        }
+    }
+}
+
+.grecaptcha-badge {
+    z-index: $z-index-sticky-footer + 1;
+}

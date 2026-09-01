@@ -1,0 +1,26 @@
+<isscript>
+    var resolvedProduct = (typeof product !== 'undefined' && product) ? product : pdict.product;
+</isscript>
+<isset name="product" value="${resolvedProduct}" scope="page" />
+<isif condition="${resolvedProduct && resolvedProduct.attributes && resolvedProduct.attributes.length > 0}">
+    <div class="main-content-item">
+        <div class="row">
+            <div class="col">
+                <div class="main-attributes">
+                    <isloop items="${product.attributes}" var="attributeGroup" status="level1LoopState">
+                        <isif condition="${attributeGroup.ID === 'mainAttributes'}">
+                            <isloop items="${attributeGroup.attributes}" var="attributes" status="level2LoopState">
+                                <div class="attribute-values">
+                                    ${attributes.label}:
+                                    <isloop items="${attributes.value}" var="value" status="level3LoopState">
+                                        ${value}
+                                    </isloop>
+                                </div>
+                            </isloop>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+        </div>
+    </div>
+</isif>

@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/common.css')}" />
+
+<script>//common/scripts.isml</script>
+<script defer="defer" src="${URLUtils.staticURL('/js/main.js')}"></script>
+<isloop items="${require('*/cartridge/scripts/assets.js').scripts}" var="script">
+    <isif condition="${script.src.indexOf('paypal.com/sdk') !== -1}">
+        <isif condition="${pdict.action === "Product-Show"}">
+            <script defer="defer" src="${script.src}" data-page-type="product-details" data-partner-attribution-id="${pdict.paypal.partnerAttributionId}"
+                ${pdict.paypal.userIdToken ? "data-user-id-token=" + pdict.paypal.userIdToken : ''}>
+            </script>
+        <iselse/>
+            <script defer="defer" src="${script.src}" data-partner-attribution-id="${pdict.paypal.partnerAttributionId}"></script>
+        </isif>
+    <iselseif condition="${script.integrity != null}"/>
+        <script defer="defer" integrity="${script.integrity}" crossorigin="anonymous" src="${script.src}"></script>
+    <iselse/>
+        <script defer="defer" src="${script.src}"></script>
+    </isif>
+</isloop>

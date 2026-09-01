@@ -1,0 +1,75 @@
+<isdecorate template="paypalbm/util/pageTemplatePaypal">
+
+    <isinclude template="inc/Modules" />
+
+    <isinclude template="paypalbm/orderListHeader" />
+
+    <div>
+        <table class="infobox w e s n">
+            <tr>
+                <td class="infobox_title_search">
+                    ${Resource.msg('transaction.statistics.title', 'paypalbm', null)}
+                </td>
+
+                <td align="right" nowrap="nowrap" class="infobox_item_search">
+                    <span class="infobox_title_search">
+                        ${Resource.msg('search.order.title', 'paypalbm', null)}
+                    </span>&nbsp;
+
+                    <a href="#paypalbm_search_transaction_by_payment_status"
+                        id="search-by-status-tab" data-target="#search-by-status" data-toggle="tab"
+                        class="switch_link js_paypalbm_switch ${pdict.isSearchByPaymentStatus ? 'active' : ''}">
+                        ${Resource.msg('search.transactionbystatus', 'paypalbm', null)}
+                    </a>&nbsp;
+
+                    <a href="#search-by-payment"
+                        id="search-by-payment-tab" data-target="#search-by-payment" data-toggle="tab"
+                        class="switch_link js_paypalbm_switch ${pdict.isSearchByPaymentMethod ? 'active' : ''}">
+                        ${Resource.msg('search.transactionbypayment', 'paypalbm', null)}
+                    </a>&nbsp;
+
+                    <a href="#paypalbm_search_order_by_id"
+                       id="search-by-order-id-tab" data-target="#search-by-order-id" data-toggle="tab"
+                        class="switch_link js_paypalbm_switch ${pdict.isSearchByOrderNo ? 'active' : ''}">
+                        ${Resource.msg('search.orderbynumber', 'paypalbm', null)}
+                    </a>&nbsp;
+
+                    <a href="#paypalbm_search_transaction_by_id"
+                       id="search-by-transaction-id-tab" data-target="#search-by-transaction-id" data-toggle="tab"
+                        class="switch_link js_paypalbm_switch ${pdict.isSearchByTransaction ? 'active' : ''}">
+                        ${Resource.msg('search.transactionbyid', 'paypalbm', null)}
+                    </a>&nbsp;
+                </td>
+            </tr>
+
+            <tr>
+                <td class="infobox_title_search">
+                    <isif condition="${pdict.availabilityOfStats}">
+                        <svg class="js-transaction-pie-chart" data-stats="${pdict.stats}" width="400" height="150"></svg>
+                    <iselse/>
+                        <div class="paypalbm_transactions">
+                            ${Resource.msg('transactions.notfound', 'paypalbm', null)}
+                        </div>
+                    </isif>
+                </td>
+                <td class="infobox_item_search">
+                    <isinclude template="paypalbm/components/searchFields" />
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+
+    <isinclude template="paypalbm/orders" />
+
+    <div class="paypalbm_footer">
+        <a class="button" href="${ordersUrl}">&lt;&lt; ${Resource.msg('transactions.backordering', 'paypalbm', null)}</a>
+
+        <a class="button paypal-create-new-transaction" href="${pdict.urls.newTransaction}" target="_blank" rel="noopener">
+            ${Resource.msg('transactions.newtransaction', 'paypalbm', null)}
+        </a>
+    </div>
+</isdecorate>

@@ -1,0 +1,24 @@
+{
+  "hooks": "./hooks.json",
+  "engines": {
+    "node": ">=4.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.10.4",
+    "focus-visible": "^5.2.0",
+    "imagesloaded": "^4.1.4",
+    "jquery-hoverintent": "^1.10.1",
+    "jquery-zoom": "^1.7.21",
+    "jquery.scrollintoview": "^1.9.4",
+    "popper.js": "^1.16.1",
+    "tiny-slider": "https://github.com/redvanworkshop/tiny-slider.git",
+    "tooltip.js": "^1.3.3",
+    "video.js": "7.8.4"
+  },
+  "packageName": "rvw_autobahn_core",
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
+}

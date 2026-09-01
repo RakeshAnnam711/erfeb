@@ -1,0 +1,159 @@
+<isinclude template="/components/modules" sf-toolkit="off" />
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets');
+    assets.addJs('/js/productDetail.js');
+</isscript>
+
+<isset name="product" value="${pdict.product}" scope="page" />
+<isset name="isQuickView" value="${false}" scope="page" />
+<isset name="isProductSet" value="${product.productType === 'set'}" scope="page" />
+<isset name="isBundle" value="${product.productType === 'bundle'}" scope="page" />
+<isset name="productDataColumnClass" value="${'col-12 col-md-' + (12 - parseInt(product.pdpImageColumnWidth.split('/')[0]))}" scope="page"/>
+<iscomment>Override column settings for Page Designer component if applicable</iscomment>
+<isif condition="${'pdpImageColumnWidth' in pdict}">
+    <isset name="productDataColumnClass" value="${'col-12 col-md-' + (12 - parseInt(pdict.pdpImageColumnWidth.split('/')[0]))}" scope="page"/>
+</isif>
+
+<isobject object="${product.raw}" view="detail" />
+
+    <header class="container page-header">
+        <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+    </header>
+    <iscomment>
+        WGACA MODIFICATION - additional class
+        <div class="container product-detail product-wrapper"
+    </iscomment>
+    <div class="container product-detail product-wrapper pdp"
+        data-swatchable-attributes="${pdict.product.attrsToUseForSwatch}"
+        data-pid="${product.id}">
+
+        <div class="row d-md-none">
+            <div class="col-12">
+                <h1 class="product-name">${product.productName}</h1>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <!-- Product Images Carousel -->
+            <isinclude template="product/components/imageCarousel" />
+
+            <div class="product-data ${productDataColumnClass}">
+
+                <!-- Product Name -->
+                <div class="row">
+                    <div class="col">
+                        <h1 class="product-name hidden-sm-down">${product.productName}</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="prices top-prices clearfix">
+                            <isset name="price" value="${product.price}" scope="page" />
+                            <isinclude template="product/components/pricing/main" />
+                        </div>
+                        <isinclude template="product/components/pidRating" />
+                    </div>
+                </div>
+
+                <isif condition="${!empty(product.headline)}">
+                    <div class="row mt-3">
+                        <div class="col product-headline">
+                            ${product.headline}
+                        </div>
+                    </div>
+                    <hr>
+                </isif>
+
+                <div class="attributes product-detail-attributes" cypress-target="productDetailAttributes">
+                    <isset name="isBundle" value="${false}" scope="page" />
+                    <isset name="loopState" value="${{count: 1}}" scope="page" />
+                    <isset name="sizeChartHasBeenShown" value="${false}" scope="page"/>
+                    <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                        <div class="row" data-attr="${attr.id}">
+                            <div class="col-12">
+                                <iscomment>used for sticky add to cart </iscomment>
+                                <isset name="noSwatchOverride" value="${false}" scope="page" />
+                                <isinclude template="product/components/variationAttribute" />
+                            </div>
+                        </div>
+                    </isloop>
+
+                    <div class="product-options">
+                        <isif condition="${product.options && product.options.length > 0}">
+                            <isinclude template="product/components/options" />
+                        </isif>
+                    </div>
+
+                    <iscomment>Sticky Add to Cart</iscomment>
+                    <isif condition="${product.enableStickyAddToCart}">
+                        <isinclude template="product/components/addToCartStickyBar" />
+                    </isif>
+
+                    <!-- Product Availability -->
+                    <iscomment> Please don't remove the availability section as it will break the add-to-cart functionality. Instead hide it via sr-only class </iscomment>
+                    <isinclude template="product/components/productAvailability" />
+
+                    <isinclude template="integrations/product/components/beforeAddToCart"/>
+
+                    <!-- Add To Cart and Quantity -->
+                    <div class="row qty-cart-container no-gutters" id="qty-cart-container">
+                        <!-- Quantity Drop Down Menu -->
+                        <div class="quantity col-12 col-sm-6 col-md-5 col-lg-3 align-items-start ${product.hideQty ? 'd-none' : ''} ${product.showBISN ? 'd-none' : ''}">
+                            <isinclude template="product/components/quantity" />
+                        </div>
+
+                        <div class="prices-add-to-cart-actions col-12 col-sm-6 col-md-7 col-lg-9">
+
+                            <!-- Add To Cart -->
+                            <isinclude template="product/components/addToCartProduct" />
+                        </div>
+                    </div>
+
+                    <!-- Applicable Promotions -->
+                    <div class="promotions">
+                        <isinclude template="product/components/promotions" />
+                    </div>
+
+                    <!-- Social Sharing Icons -->
+                    <div class="row">
+                        <isinclude template="product/components/socialIcons" />
+                    </div>
+
+                    <isif condition="${!empty(product.headlineDescription)}">
+                        <div class="row mt-3">
+                            <div class="col product-headlinedescription">
+                                <isprint value="${product.headlineDescription}" encoding="off" />
+                            </div>
+                        </div>
+                    </isif>
+
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <iscontentasset aid="complete-the-set-recommendations" />
+        </div>
+
+        <!-- Main Content Including Attributes and Collapsible Content -->
+        <isset name="loopState" value="${{count: 1}}" scope="page" />
+        <isinclude template="product/components/mainContent" />
+
+        <!-- Tabs -->
+        <isinclude template="product/components/tabs" />
+
+    </div>
+
+    <isif condition="${!empty(product.pdpAssetIds)}">
+        <div class="pdp-assets container">
+            <isloop items="${product.pdpAssetIds}" var="assetId">
+                <div class="pdp-asset">
+                    <iscontentasset aid="${assetId}" personalized="true" />
+                </div>
+            </isloop>
+        </div>
+    </isif>
+
+</isobject>

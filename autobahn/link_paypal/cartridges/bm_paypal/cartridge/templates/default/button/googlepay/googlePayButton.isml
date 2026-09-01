@@ -1,0 +1,6 @@
+<script src="${pdict.googlePayButtonSdk}"></script>
+
+<div class="google-pay-btn-container">
+    <div class="js-google-pay-button">
+    </div>
+</div>

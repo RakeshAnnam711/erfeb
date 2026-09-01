@@ -1,0 +1,1 @@
+<apple-pay-button id="apple-pay-btn" buttonstyle="${applePayConfigs.buttonConfigs.color}" type="${applePayConfigs.buttonConfigs.type}" locale="${applePayConfigs.buttonConfigs.locale}"></apple-pay-button>

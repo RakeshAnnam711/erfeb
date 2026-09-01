@@ -1,0 +1,70 @@
+<form id="js-pphf-config-form" method="POST" action="${URLUtils.url('CardFieldsConfig-SaveButton')}"
+            data-card-fields-styles="${pdict.cardFieldsStyles}">
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="js-pphf-input-color">
+                ${Resource.msg('cardfields.configuration.color', 'configuration', null)}
+            </label>
+
+            <input type="color" class="form-control form-control-color" name="inputColor" id="js-pphf-input-color" value="#000000"/>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="js-pphf-invalid-color">
+                ${Resource.msg('cardfields.configuration.invalidcolor', 'configuration', null)}
+            </label>
+
+            <input type="color" class="form-control form-control-color" name="invalidColor" id="js-pphf-invalid-color" value="#ff0000"/>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="js-pphf-valid-color">
+                ${Resource.msg('cardfields.configuration.validcolor', 'configuration', null)}
+            </label>
+
+            <input type="color" class="form-control form-control-color" name="validColor" id="js-pphf-valid-color" value="#008000"/>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="js-font-size-range">
+                ${Resource.msg('cardfields.configuration.fontsize', 'configuration', null)}
+            </label>
+
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        ${Resource.msg('cardfields.configuration.value.minsize', 'configuration', null)}
+                    </span>
+                </div>
+
+                <input type="number" min="8" max="16" id="js-font-size-number" class="form-control text-center" />
+
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        ${Resource.msg('cardfields.configuration.value.maxsize', 'configuration', null)}
+                    </span>
+                </div>
+            </div>
+
+            <input type="range" name="fontSize" class="form-control-range" list="cf-font-size-list" min="8" max="16" step="1" id="js-font-size-range" />
+
+            <datalist id="cf-font-size-list">
+                <option value="8" label="8"></option>
+                <option value="12"></option>
+                <option value="16" label="16"></option>
+            </datalist>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-primary">
+            ${Resource.msg('button.save', 'configuration', null)}
+        </button>
+    </div>
+</form>

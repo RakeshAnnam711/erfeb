@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <custom-type type-id="PayPalDisputes">
+        <display-name xml:lang="x-default">PayPal Disputes</display-name>
+        <description xml:lang="x-default">List of disputes</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <retention-days>90</retention-days>
+        <key-definition attribute-id="dispute_id">
+            <display-name xml:lang="x-default">The ID of the dispute</display-name>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="amount">
+                <display-name xml:lang="x-default">Amount for a financial transaction</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="create_time">
+                <display-name xml:lang="x-default">Create time</display-name>
+                <description xml:lang="x-default">The date and time</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="currency_code">
+                <display-name xml:lang="x-default">Currency code</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="reason">
+                <display-name xml:lang="x-default">The reason for the item-level dispute</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="status">
+                <display-name xml:lang="x-default">The overall status of the dispute</display-name>
+                <description xml:lang="x-default">The overall status of the dispute, constant for all the parties involved at anytime during the dispute lifecycle</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="update_time">
+                <display-name xml:lang="x-default">Update time</display-name>
+                <description xml:lang="x-default">The date and time</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="history">
+                <display-name xml:lang="x-default">History</display-name>
+                <description xml:lang="x-default">The history information for an offer</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="messages">
+                <display-name xml:lang="x-default">Messages</display-name>
+                <description xml:lang="x-default">The messages that were posted by the customer and merchant</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="General">
+                <display-name xml:lang="x-default">General</display-name>
+                <attribute attribute-id="dispute_id"/>
+                <attribute attribute-id="status"/>
+                <attribute attribute-id="reason"/>
+                <attribute attribute-id="amount"/>
+                <attribute attribute-id="currency_code"/>
+                <attribute attribute-id="history"/>
+                <attribute attribute-id="messages"/>
+                <attribute attribute-id="create_time"/>
+                <attribute attribute-id="update_time"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+</metadata>

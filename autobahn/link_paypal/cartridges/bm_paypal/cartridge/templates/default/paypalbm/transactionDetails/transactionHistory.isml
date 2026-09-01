@@ -1,0 +1,26 @@
+<isif condition="${!empty(transaction.paypalTransactionHistory)}">
+    <h2>${Resource.msg('transaction.table.history.title', 'paypalbm', null)}</h2>
+
+    <table class="paypalbm-table paypalbm-transaction-history-table">
+        <thead>
+            <tr>
+                <th>${Resource.msg('transaction.table.history.timestamp', 'paypalbm', null)}</th>
+                <th>${Resource.msg('transaction.table.history.status', 'paypalbm', null)}</th>
+                <th>${Resource.msg('transaction.amount', 'paypalbm', null)}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <isset name="helper" value="${require('~/cartridge/scripts/paypal/helpers')}" scope="page" />
+
+            <isloop items="${transaction.paypalTransactionHistory}" var="transactionHistory">
+                <tr>
+                    <td>
+                        <isprint value="${new Date(transactionHistory.timestamp)}" formatter="M/dd/yy h:mm a" />
+                    </td>
+                    <td>${helper.parseStatus(transactionHistory.status)}</td>
+                    <td>${parseFloat(transactionHistory.amount).toFixed(2)}</td>
+                </tr>
+            </isloop>
+        </tbody>
+    </table>
+</isif>

@@ -1,0 +1,12 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isif condition="${!empty(pdict.ContentFolders)}">
+    <div class="folder-based-navigation">
+        <isset name="contentFolders" value="${pdict.ContentFolders}" scope="page"/>
+        <isset name="pageId" value="${pdict.contentId || pdict.page.ID}" scope="page"/>
+
+        <isloop items="${contentFolders.keySet()}" var="folderName" status="loopState">
+            <isinclude template="components/content/folderBasedNavigationCards"/>
+            <isset name="contentFolders" value="${pdict.ContentFolders}" scope="page"/>
+        </isloop>
+    </div>
+</isif>

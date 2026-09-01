@@ -1,0 +1,13 @@
+<!-- Temporary fix until the PayPal 21.3.0 or later version is merged in -->
+<div class="mb-3">
+    <isif condition="${pdict.paypal && pdict.paypal.paypalEmail}">
+        <div>
+            ${pdict.paypal.paypalEmail}
+        </div>
+    </isif>
+    <div>
+        <span>
+            ${payment.paymentMethod + ' / ' + payment.formattedAmount}
+        </span>
+    </div>
+</div>

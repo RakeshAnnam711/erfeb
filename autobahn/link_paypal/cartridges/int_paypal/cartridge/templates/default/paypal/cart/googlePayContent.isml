@@ -1,0 +1,12 @@
+<div class="googlepay-content">
+    <div class="text-center googlepay-cart-button">
+        <div class="paypalLoader paypal-loader-container js-paypal-googlepay-loader">
+            <i class="paypal-loader"></i>
+        </div>
+        <div class="js-paypal-googlepay-button"
+            data-googlepay-config="${JSON.stringify(pdict.paypal.googlePayConfigs)}"
+            data-paypal-billing-form-fields="${JSON.stringify(pdict.paypal.googlePayFormFields)}">
+            <div class="js-googlepay-${pdict.paypal.googlePayConfigs.pageFlow}-btn pb-3 mx-auto"></div>
+        </div>
+    </div>
+</div>

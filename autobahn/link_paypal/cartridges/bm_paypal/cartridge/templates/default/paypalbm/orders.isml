@@ -1,0 +1,63 @@
+<isif condition="${pdict.PagingModel.count > 0}">
+    <table>
+        <tr>
+            <td class="table_header w e s">${Resource.msg('search.grid.number', 'paypalbm', null)}</td>
+            <td class="table_header e s" nowrap="nowrap">${Resource.msg('search.grid.date', 'paypalbm', null)}</td>
+            <td class="table_header e s" nowrap="nowrap">${Resource.msg('search.grid.created', 'paypalbm', null)}</td>
+            <td class="table_header e s" nowrap="nowrap">${Resource.msg('search.grid.registration', 'paypalbm', null)}</td>
+            <td class="table_header e s" nowrap="nowrap">${Resource.msg('search.grid.customer', 'paypalbm', null)}</td>
+            <td class="table_header e s" nowrap="nowrap">${Resource.msg('search.grid.email', 'paypalbm', null)}</td>
+            <td class="table_header e s left" nowrap="nowrap">${Resource.msg('search.grid.total', 'paypalbm', null)}</td>
+            <td class="table_header e s left" nowrap="nowrap">${Resource.msg('search.grid.paypalamount', 'paypalbm', null)}</td>
+            <td class="table_header e s left" nowrap="nowrap">${Resource.msg('search.grid.payment.method', 'paypalbm', null)}</td>
+            <td class="table_header e s left" nowrap="nowrap">${Resource.msg('search.grid.dispute', 'paypalbm', null)}</td>
+            <td class="table_header e s left" nowrap="nowrap" colspan="2">${Resource.msg('search.grid.status', 'paypalbm', null)}</td>
+        </tr>
+
+        <isloop items="${pdict.PagingModel.pageElements}" var="order">
+            <tr class="js-paypal-order">
+                <td class="table_detail w e s" nowrap="nowrap">
+                    <isif condition="${order.UUID}">
+                        <a class="js-paypal-order-no" href="${URLUtils.https('PaypalAdmin-RedirectToOrderPayment',  'orderUUID', order.UUID, 'orderNo', order.orderNo, 'orderToken', order.orderToken)}"
+                            data-width="780" data-orderno="${order.orderNo}" title="${Resource.msgf('ordertransaction.title', 'paypalbm', null, order.orderNo)}">${order.orderNo}</a>
+                    <iselse/>
+                        <p class="js-paypal-order-no" title="${Resource.msgf('ordertransaction.title', 'paypalbm', null, order.orderNo)}">${order.orderNo}</p>
+                    </isif>
+                    </td>
+                <td class="table_detail e s" nowrap="nowrap">
+                    <isprint value="${order.orderDate}"/>
+                </td>
+                <td class="table_detail e s" nowrap="nowrap"><isprint value="${order.createdBy}"/></td>
+                <isif condition="${typeof order.isRegistered === 'boolean'}">
+                    <td class="table_detail e s" nowrap="nowrap"><isprint value="${order.isRegistered ? Resource.msg('search.grid.registration.registered', 'paypalbm', null) : Resource.msg('search.grid.registration.unregistered', 'paypalbm', null)}"/></td>
+                <iselse/>
+                    <td class="table_detail e s" nowrap="nowrap"><isprint value="${order.isRegistered}"/></td>
+                </isif>
+                <td class="table_detail e s" nowrap="nowrap"><isprint value="${order.customer}"/></td>
+                <td class="table_detail e s" nowrap="nowrap"><isprint value="${order.email}"/></td>
+                <td class="table_detail e s" nowrap="nowrap"><isprint value="${order.orderTotal}"/></td>
+                <td class="table_detail e s" nowrap="nowrap"><isprint value="${order.paypalAmount}"/></td>
+                <td class="table_detail e s" nowrap="nowrap"><isprint value="${order.paymentMethod}"/></td>
+                <td class="table_detail e s" nowrap="nowrap">
+                <isif condition="${order.disputeId}">
+                    <a class="table_detail_link js-dispute-details" href="${URLUtils.url('Disputes-Details', 'dispute_id', order.disputeId)}">${order.disputeId}</a>
+                <iselse/>
+                    ${Resource.msg('transaction.detail.nodispute', 'paypalbm', null)}
+                </isif>
+                </td>
+                <td class="table_detail e s js-paypal-order-status" nowrap="nowrap"><isprint value="${order.status}"/></td>
+                <td class="table_detail e s" nowrap="nowrap">
+                    <a class="js-paypal-show-detail" href="${URLUtils.url('PaypalAdmin-OrderTransaction', 'orderNo', order.orderNo, 'currencyCode', order.currencyCode)}" data-ordertoken="${order.orderToken ? order.orderToken: null}" data-orderno="${order.orderNo}" data-currencycode="${order.currencyCode}" title="${Resource.msgf('ordertransaction.title', 'paypalbm', null, order.orderNo)}">${Resource.msg('search.grid.changestatus', 'paypalbm', null)}</a>
+                </td>
+            </tr>
+        </isloop>
+
+    </table>
+
+    <ispaypalpagination pageurl="${URLUtils.https('PaypalAdmin-Orders')}" pagingmodel="${pdict.PagingModel}"/>
+
+<iselse/>
+
+    <div class="table_detail w e s">${Resource.msg('transactions.emptysearch', 'paypalbm', null)}</div>
+
+</isif>

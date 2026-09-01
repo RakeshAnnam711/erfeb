@@ -1,0 +1,31 @@
+<isset name="applePayConfigs" value="${payPalData.applePayConfigs}" scope="page"/>
+
+<script src="${applePayConfigs.sdk}"></script>
+
+<div class="tab-pane applepay-content js-apple-pay-content" id="applepay-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control" name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+               value="${payPalData.paypalPaymentMethodId}"/>
+        <div class="paypal_onApprove">
+            <input class="js-used-payment-method" type="hidden" name="${pdict.forms.billingForm.paypal.usedPaymentMethod.htmlName}"
+                value="${applePayConfigs.paymentMethodId}"/>
+            <input id="applepay-email-address" type="hidden" name="${pdict.forms.billingForm.paypal.applePay.applePayEmailAddress.htmlName}"
+                value=""/>
+            <input id="applepay-payment-source" type="hidden" name="${pdict.forms.billingForm.paypal.applePay.applePayPaymentSource.htmlName}"
+                value=""/>
+            <input id="applepay-phone-number" type="hidden" name="${pdict.forms.billingForm.paypal.applePay.applePayPhoneNumber.htmlName}"
+                value=""/>
+        </div>
+
+        <div class="applepay-billing-buttons-wrap">
+            <div class="applepay-billing-button-wrap js-applepay-billing-button-wrap d-none">
+                <div class="paypal-billingpage-apple-button js-applepay-button d-flex justify-content-center" data-configs="${JSON.stringify(applePayConfigs)}">
+                    <isinclude template="paypal/components/applePayButton"/>
+                </div>
+                <div class="paypalLoader paypal-loader-container">
+                    <i class="paypal-loader"></i>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>

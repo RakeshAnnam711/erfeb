@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+
+    <job job-id="MergeAccountsPayPalAndSingleAuthentication">
+        <description>
+            Merge user accounts created via PayPal and Single Authentication. Remove accounts created by PayPal
+        </description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="mergeAccounts" type="custom.MergeAccountsPayPalAndSingleAuthentication" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="Delay">500</parameter>
+                    <parameter name="ServiceName">int_paypal.http.remove.customer</parameter>
+                    <parameter name="FileReportPath">IMPEX/src/jobMergeAccounts/merged-user-accounts-{DateTime}.csv</parameter>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-flow/>
+                    </on-exit>
+                    <on-exit status="OK">
+                        <continue/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <rules/>
+        <triggers/>
+    </job>
+
+    <job job-id="PpConfigCheckSiteArchiveProcessing">
+        <description/>
+        <parameters>
+            <parameter name="Options">{"siteId":"RefArch","fileName":"site-export.zip","logs":false}</parameter>
+            <parameter name="ConnectionData">{}</parameter>
+        </parameters>
+        <flow>
+            <context site-id="Sites"/>
+            <step step-id="SiteArchiveProcessing" type="custom.PpSiteArchiveProcessing" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="Options" job-parameter-ref="Options"/>
+                    <parameter name="ConnectionData" job-parameter-ref="ConnectionData"/>
+                </parameters>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <rules>
+            <on-running runtime-threshold="5m" enabled="true">
+                <mark-job-as-hanging/>
+            </on-running>
+        </rules>
+        <triggers/>
+    </job>
+
+    <job job-id="PayPalSendFailedTransactionEmail">
+        <description>Send failed transaction alerts via email</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="PayPalSendFailedTransactionEmail" type="custom.PaypalSendFailedTransactionEmail" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="Email"></parameter>
+                    <parameter name="DaysToRetrieve">7</parameter>
+                    <parameter name="StatusesToCheck"></parameter>
+                    <parameter name="AlertsInBM">true</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers/>
+    </job>
+
+    <job job-id="PaypalUseOrderTrackingApi">
+        <description>Add order into Paypal`s tracking API</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="PaypalUseOrderTrackingApi" type="custom.PaypalUseOrderTrackingApi" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="Days">7</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers/>
+    </job>
+
+    <job job-id="PayPalMigrateBillingAgreementIDsToVaultTokens">
+        <description>The job for conversion of saved PayPal accounts, namely Billing Agreement IDs to Vault tokens</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="MigrateBillingAgreementIDsToVaultTokens" type="custom.MigrateBillingAgreementIDsToVaultTokens" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="sourceFolderPath">PayPalMigrateBillingAgreementIDsToVaultTokens</parameter>
+                    <parameter name="sourceFileName">migration_report</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers/>
+    </job>
+</jobs>

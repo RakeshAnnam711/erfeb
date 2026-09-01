@@ -1,0 +1,40 @@
+
+<isif condition="${pdict.contentSearch.hasMessage}">
+    <div class="result-count mb-3 text-center">
+        <isif condition="${pdict.contentSearch.contentCount === 0}">
+            ${Resource.msg('label.noresultsfor', 'search', null)}
+            <span class="search-keywords">
+                ${pdict.contentSearch.queryPhrase}
+            </span>
+            <iscontentasset aid="search-noresults-help" />
+        <iselse/>
+            <isif condition="${pdict.contentSearch.contentCount === 1}">
+                ${Resource.msgf('label.resultfor', 'search', null, pdict.contentSearch.contentCount)}
+            <iselse/>
+                ${Resource.msgf('label.resultsfor', 'search', null, pdict.contentSearch.contentCount)}
+            </isif>
+            <span class="search-keywords">
+                ${pdict.contentSearch.queryPhrase}
+            </span>
+        </isif>
+    </div>
+</isif>
+
+<div class="row">
+<isloop items="${pdict.contentSearch.contents}" var="contentAsset" status="loopStatus">
+    <isset name="index" value="${loopStatus.index}" scope="page"/>
+    <div class="${pdict.mobileRowClass} ${pdict.desktopRowClass}">
+        <isinclude template="search/components/contentTile" />
+    </div>
+</isloop>
+</div>
+
+<isif condition="${pdict.contentSearch.moreContentUrl}">
+    <div class="col show-more-content">
+        <div class="text-center">
+            <button class="btn btn-outline-primary col-12 col-sm-4" data-url="${pdict.contentSearch.moreContentUrl}">
+                ${Resource.msg('button.more', 'search', null)}
+            </button>
+        </div>
+    </div>
+</isif>

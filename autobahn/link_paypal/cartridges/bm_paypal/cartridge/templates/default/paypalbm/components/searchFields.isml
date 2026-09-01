@@ -1,0 +1,51 @@
+<isset name="hm" value="${pdict.CurrentHttpParameterMap}" scope="page" />
+<isset name="shortcutValue" value="${hm.dateShortcut.submitted && !hm.dateShortcut.empty ? hm.dateShortcut.stringValue: 'past-thirty-days'}" scope="page" />
+
+<form class="text-right" method="GET" action="${URLUtils.url('PaypalAdmin-Orders')}">
+    <input type="hidden" name="dateShortcut" value="${shortcutValue}"/>
+
+    <div class="date-fields">
+        <ul class="date-shortcuts">
+            <isloop items="${Object.keys(pdict.shortcuts)}" var="key">
+                <li>
+                    <button type="button" class="js-date-shortcut ${shortcutValue === key ? 'active': ''}" data-shortcut="${key}">
+                        ${pdict.shortcuts[key]}
+                    </button>
+                </li>
+            </isloop>
+        </ul>
+
+        <div class="date-container">
+            <div class="date-pickers">
+                <div class="date-picker">
+                    <label for="search-created-at-min">${Resource.msg('search.label.start', 'paypalbm', null)}</label>
+
+                    <div class="date-picker-field">
+                        <input type="text" name="dateFrom" id="search-created-at-min" class="datepicker search-min" value="${pdict.dateFrom}" />
+                        <img class="ui-datepicker-trigger" id="search-created-at-min-btn" src="${URLUtils.staticURL('images/icon-cal.png')}" alt="" />
+                    </div>
+                </div>
+
+                <div class="date-picker">
+                    <label for="search-created-at-max">${Resource.msg('search.label.end', 'paypalbm', null)}</label>
+
+                    <div class="date-picker-field">
+                        <input type="text" name="dateTo" id="search-created-at-max" class="datepicker search-max" value="${pdict.dateTo}"/>
+                        <img class="ui-datepicker-trigger" id="search-created-at-max-btn" src="${URLUtils.staticURL('images/icon-cal.png')}" alt="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <isinclude template="paypalbm/components/tabs/searchbypaymentstatus"/>
+                <isinclude template="paypalbm/components/tabs/searchbypaymentmethod"/>
+                <isinclude template="paypalbm/components/tabs/searchbyorderno"/>
+                <isinclude template="paypalbm/components/tabs/searchbyid"/>
+            </div>
+
+            <div class="text-right">
+                <button class="button" type="submit">${Resource.msg('search.submitbutton', 'paypalbm', null)}</button>
+            </div>
+        </div>
+    </div>
+</form>

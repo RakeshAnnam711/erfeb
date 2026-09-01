@@ -1,0 +1,60 @@
+<isscript>
+    var Site = require('dw/system/Site');
+    var System = require('dw/system/System');
+</isscript>
+
+<div id="siteSelection" class="dw-grid d-none" data-wizard-stage="siteSelection">
+    <div class="dw-scroller dw-pinnable-container dw-grid-container">
+        <table>
+            <thead class="dw-pinnable">
+                <tr class="dw-header-row">
+                    <th class="dw-grid-header">
+                        <span class="dw-grid-column-inner">${Resource.msg('common.label.site', 'preferences', null)}</span>
+                    </th>
+                    <th class="dw-grid-header">
+                        <span class="dw-grid-column-inner">${Resource.msg('common.instanceType.label.sandbox', 'preferences', null)}</span>
+                    </th>
+                    <th class="dw-grid-header">
+                        <span class="dw-grid-column-inner">${Resource.msg('common.instanceType.label.staging', 'preferences', null)}</span>
+                    </th>
+                    <th class="dw-grid-header">
+                        <span class="dw-grid-column-inner">${Resource.msg('common.instanceType.label.production', 'preferences', null)}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="dw-row" >
+                    <td class="dw-grid-column">
+                        <button class="dw-button dw-grid-column-inner js-select-all" type="button">${Resource.msg('common.button.select.all', 'preferences', null)}</button>
+                    </td>
+                    <td class="dw-grid-column dw-grid-selection">
+                        <input class="js-dw-check-all" type="checkbox" data-for-instance="${System.DEVELOPMENT_SYSTEM}" />
+                    </td>
+                    <td class="dw-grid-column dw-grid-selection">
+                        <input class="js-dw-check-all" type="checkbox" data-for-instance="${System.STAGING_SYSTEM}" />
+                    </td>
+                    <td class="dw-grid-column dw-grid-selection">
+                        <input class="js-dw-check-all" type="checkbox" data-for-instance="${System.PRODUCTION_SYSTEM}" />
+                    </td>
+                </tr>
+
+                <isloop items="${Site.allSites}" var="site">
+                    <tr class="dw-row js-dw-row" data-site-id="${site.ID}" data-site-name="${site.name}">
+                        <td class="dw-grid-column">
+                            <span class="dw-grid-column-inner">${site.name}</span>
+                        </td>
+                        <td class="dw-grid-column dw-grid-selection">
+                            <input class="js-dw-checkbox" type="checkbox" data-for-instance="${System.DEVELOPMENT_SYSTEM}" data-for-site="${site.ID}" />
+                        </td>
+                        <td class="dw-grid-column dw-grid-selection">
+                            <input class="js-dw-checkbox" type="checkbox" data-for-instance="${System.STAGING_SYSTEM}" data-for-site="${site.ID}" />
+                        </td>
+                        <td class="dw-grid-column dw-grid-selection">
+                            <input class="js-dw-checkbox" type="checkbox" data-for-instance="${System.PRODUCTION_SYSTEM}" data-for-site="${site.ID}" />
+                        </td>
+                    </tr>
+                </isloop>
+            </tbody>
+        </table>
+    </div>
+</div>

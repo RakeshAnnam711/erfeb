@@ -1,0 +1,79 @@
+<div class="dw-component dwx-replace">
+    <div class="bm-attribute-string bm-attribute-id-${attributeDefinition.ID}">
+        <div class="dw-validate-input dw-collection-field js-dw-collection-field">
+            <isset name="attributeValue" value="${pdict.attributeValues[attributeDefinition.ID]}" scope="page" />
+            <isset name="value" value="${![null, undefined, ''].includes(attributeValue.value) ? attributeValue.value : ''}" scope="page" />
+
+            <isif condition="${[
+                pdict.attributeConstants.VALUE_TYPE_NUMBER,
+                pdict.attributeConstants.VALUE_TYPE_STRING
+            ].includes(attributeDefinition.valueTypeCode)}" >
+                <input type="text" class="dw-text-field" id="${attributeDefinition.ID}" name="${attributeDefinition.ID}" value="${value}" data-old-value="${value}" data-value-type-code="${attributeDefinition.valueTypeCode}" />
+
+            <iselseif condition="${attributeDefinition.valueTypeCode === pdict.attributeConstants.VALUE_TYPE_TEXT}" />
+                <textarea class="dw-text-area dw-text-area-full" id="${attributeDefinition.ID}" name="${attributeDefinition.ID}" data-old-value="${value}" data-value-type-code="${attributeDefinition.valueTypeCode}" rows="${attributeValue.rows}">${value}</textarea>
+
+            <iselseif condition="${attributeDefinition.valueTypeCode === pdict.attributeConstants.VALUE_TYPE_ENUM_OF_STRING && attributeDefinition.multiValueType}" />
+                <isset name="stringValue" value="${value.join(',').trim()}" scope="page" />
+
+                <input type="hidden" class="dw-text-field js-multi-value" name="${attributeDefinition.ID}" value="${stringValue}" data-old-value="${stringValue}" data-value-type-code="${attributeDefinition.valueTypeCode}" />
+
+                <isloop items="${attributeDefinition.values}" var="option">
+                    <div class="form-check">
+                        <input class="form-check-input dw-input-checkbox js-input-checkbox" type="checkbox" id="${attributeDefinition.ID + option.value}" value="${option.value}" ${stringValue.split(',').includes(option.value) ? "checked" : ""} />
+                        <label class="form-check-label m-0" for="${attributeDefinition.ID + option.value}">${option.displayValue}</label>
+                    </div>
+                </isloop>
+
+            <iselseif condition="${attributeDefinition.multiValueType}" />
+                <input type="hidden" class="dw-text-field js-multi-value" name="${attributeDefinition.ID}" value="${value.join(',').trim()}" data-old-value="${value.join(',').trim()}" data-value-type-code="${attributeDefinition.valueTypeCode}" />
+                <div class="dw-controls">
+                    <input type="text" class="dw-text-field js-text-field" id="${attributeDefinition.ID}" />
+                    <button type="button" class="dw-button js-action-add" disabled>${Resource.msg('common.button.add', 'preferences', null)}</button>
+                </div>
+                <div class="dw-values js-dw-values" data-attr-name="${attributeDefinition.ID}">
+                    <p class="dw-value d-none">
+                        <span class="dw-text"></span>
+                        <span class="dw-remove dw-glyph-times-circle dw-glyph-sm js-action-remove" data-attr-name="${attributeDefinition.ID}"></span>
+                    </p>
+                    <isloop items="${value}" var="option">
+                        <p class="dw-value">
+                            <span class="dw-text">${option}</span>
+                            <span class="dw-remove dw-glyph-times-circle dw-glyph-sm js-action-remove" data-attr-name="${attributeDefinition.ID}"></span>
+                        </p>
+                    </isloop>
+                </div>
+
+            <iselseif condition="${attributeDefinition.valueTypeCode === pdict.attributeConstants.VALUE_TYPE_PASSWORD}" />
+                <input type="password" class="dw-text-field" id="${attributeDefinition.ID}" name="${attributeDefinition.ID}" value="${value}" data-old-value="${value}"  data-value-type-code="${attributeDefinition.valueTypeCode}" />
+
+            <iselse/>
+                <select class="dw-select js-dw-select" id="${attributeDefinition.ID}" name="${attributeDefinition.ID}" data-old-value="${value}" data-value-type-code="${attributeDefinition.valueTypeCode}">
+                    <option class="dw-option" value="">
+                        ${Resource.msg('common.option.label.none', 'preferences', null)}
+                    </option>
+
+                    <iscomment> value type is boolean </iscomment>
+                    <isif condition="${attributeDefinition.valueTypeCode === pdict.attributeConstants.VALUE_TYPE_BOOLEAN}">
+                        <option value="true" class="dw-option" ${value === true ? 'selected': ''}>
+                            ${Resource.msg('common.option.label.yes', 'preferences', null)}
+                        </option>
+                        <option value="false" class="dw-option" ${value !== true ? 'selected': ''}>
+                            ${Resource.msg('common.option.label.no', 'preferences', null)}
+                        </option>
+                    <iselse/>
+                        <isloop items="${attributeDefinition.values}" var="option">
+                            <option value="${option.value}" class="dw-option" ${value == option.value ? 'selected': ''} data-display-value="${option.displayValue}">
+                                ${option.displayValue} (${option.value})
+                            </option>
+                        </isloop>
+                    </isif>
+                </select>
+            </isif>
+        </div>
+    </div>
+    <div class="field-error dw-valid-indicator dw-valid is-valid">
+        <span class="dw-icon dw-glyph-exclamation-circle" role="img"></span>
+        <div class="dw-messages"></div>
+    </div>
+</div>

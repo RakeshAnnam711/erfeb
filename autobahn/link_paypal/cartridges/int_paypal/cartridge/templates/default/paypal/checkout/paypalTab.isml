@@ -1,0 +1,5 @@
+<li class="nav-item js-nav-item-paypal d-none" data-method-id="${paymentOption.ID}">
+    <a class="nav-link js-paypal-tab" data-toggle="tab" href="#paypal-content" role="tab">
+        <div class="js-paypal-mark"></div>
+    </a>
+</li>

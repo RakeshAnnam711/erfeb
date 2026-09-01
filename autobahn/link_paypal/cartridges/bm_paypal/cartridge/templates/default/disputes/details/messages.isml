@@ -1,0 +1,35 @@
+<div class="pp_accordion js_pp_accordion">
+    <div class="pp_accordion_head">
+        <span class="pp_accordion_arrow"></span>
+        <h3>${Resource.msg('dispute.detail.messages.title', 'disputes', null)}</h3>
+    </div>
+
+    <div class="pp_accordion_body">
+        <isif condition="${!empty(entry.messages)}">
+            <div class="pp_accordion_field">
+                <isloop items="${entry.messages}" var="message" status="loopStatus">
+                    <div>
+                        <b>${Resource.msg('dispute.detail.message.time', 'disputes', null)}:</b>
+                        <isprint value="${new Date(message.time_posted)}" formatter="M/dd/yy h:mm a" />
+                    </div>
+
+                    <div>
+                        <b>${Resource.msg('dispute.detail.message.initiator', 'disputes', null)}:</b>
+                        ${message.posted_by}
+                    </div>
+
+                    <div>
+                        <b>${Resource.msg('dispute.detail.message.content', 'disputes', null)}:</b>
+                        ${message.content}
+                    </div>
+
+                    <isif condition="${!loopStatus.last}"><hr/></isif>
+                </isloop>
+            </div>
+        <iselse/>
+            <div>
+                <b>${Resource.msg('dispute.detail.no.messages', 'disputes', null)}</b>
+            </div>
+        </isif>
+    </div>
+</div>

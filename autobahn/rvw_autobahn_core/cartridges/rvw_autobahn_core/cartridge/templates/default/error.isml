@@ -1,0 +1,27 @@
+<isdecorate template="common/layout/page">
+
+    <isinclude template="/components/modules" sf-toolkit="off" />
+
+    <iscontentasset aid="error-page-content" />
+
+<iscomment>Error message shown on non-production instances only</iscomment>
+<isif condition="${pdict.showError}">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+
+        // Prism syntax highlighter JS/CSS
+        assets.addJs('https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js');
+        assets.addCss('https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css');
+    </isscript>
+
+    <div class="container">
+        <pre class="mt-5"><code class='language-javascript'>
+<isprint value=${pdict.error.errorText} encoding="htmlcontent" />
+<isif condition="${pdict.error.controllerName}">
+in controller ${pdict.error.controllerName}
+</isif>
+        </code></pre>
+    </div>
+</isif>
+
+</isdecorate>

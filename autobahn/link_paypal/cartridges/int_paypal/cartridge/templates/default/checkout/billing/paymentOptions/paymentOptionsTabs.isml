@@ -1,0 +1,32 @@
+<isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption" status="loopSate">
+    <isif condition="${paymentOption.ID === 'PAYPAL_CREDIT_CARD' && isPaypalCardFieldsEnabled}">
+        <isif condition="${payPalData && payPalData.isFastlaneEnabled && !pdict.customer.registeredUser}">
+            <isinclude template="paypal/checkout/paymentOptions/fastlaneTab" />
+        <iselseif condition="${payPalData.isPayPalActive && isPaypalCardFieldsEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/creditCardTab" />
+        </isif>
+    </isif>
+
+    <isif condition="${paymentOption.ID === 'CREDIT_CARD' && isBasicCreditCardVisible}">
+        <isinclude template="checkout/billing/paymentOptions/creditCardTab" />
+    </isif>
+
+    <isif condition="${paymentOption.ID === 'Venmo' && payPalData.isActiveVenmo}">
+        <isinclude template="paypal/checkout/venmoTab"/>
+    </isif>
+
+    <isif condition="${paymentOption.ID === 'PayPal' && payPalData}">
+        <isinclude template="paypal/checkout/paypalTab" />
+        <isif condition="${payPalData.availableLPMSArray.length}">
+            <isloop items="${payPalData.availableLPMSArray}" var="lpmId">
+                <isinclude template="paypal/checkout/lpmTab"/>
+            </isloop>
+        </isif>
+        <isif condition="${pdict.paypal.isApplePayEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/applePayTab"/>
+        </isif>
+        <isif condition="${pdict.paypal.isGooglePayEnabled}">
+            <isinclude template="paypal/checkout/paymentOptions/googlePayTab"/>
+        </isif>
+    </isif>
+</isloop>

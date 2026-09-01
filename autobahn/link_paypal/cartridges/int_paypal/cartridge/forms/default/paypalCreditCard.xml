@@ -1,0 +1,10 @@
+<form>
+    <field formid="cardName" type="string" mandatory="true"
+            label="label.paypal.creditcard.field.cardholder" regexp=".{2,}" max-length="24" parse-error="error.message.required" />
+    <field formid="cardNumber" type="string" mandatory="true"
+            label="label.paypal.creditcard.field.cardNumber" regexp=".{13,}" max-length="22" parse-error="error.message.required" />
+    <field formid="cardSecurityCode" type="string" mandatory="true"
+            label="label.paypal.creditcard.field.cvv" regexp=".{3,}" max-length="4" parse-error="error.message.required" />
+    <field formid="cardExpirationDate" type="string" mandatory="true"
+            label="label.paypal.creditcard.field.expirationdate" regexp=".{7,}" max-length="9"/>
+</form>

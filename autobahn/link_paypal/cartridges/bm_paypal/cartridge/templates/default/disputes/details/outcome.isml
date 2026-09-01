@@ -1,0 +1,20 @@
+<isif condition="${entry.dispute_outcome}">
+    <table class="paypalbm_detail_table paypalbm_transaction_detail_table infobox w e s n">
+        <tbody>
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.outcome', 'disputes', null)}:</td>
+                <td class="infobox_item top dispute-highlight">${entry.dispute_outcome.outcome_code}</td>
+            </tr>
+
+            <isif condition="${entry.dispute_outcome.amount_refunded}">
+                <tr>
+                    <td class="infobox_title top">${Resource.msg('dispute.detail.amountrefunded', 'disputes', null)}:</td>
+                    <td class="infobox_item top">
+                        ${entry.dispute_outcome.amount_refunded.value}
+                        ${entry.dispute_outcome.amount_refunded.currency_code}
+                    </td>
+                </tr>
+            </isif>
+        </tbody>
+    </table>
+</isif>

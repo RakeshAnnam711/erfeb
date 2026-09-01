@@ -1,0 +1,63 @@
+<div class="bundled-line-item clearfix">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-12 d-flex flex-row">
+                    <a class="item-image" href="${URLUtils.url('Product-Show', 'pid', lineItem.id)}">
+                        <img class="product-image"
+                            src="${productLineItem.images.small[0].url}"
+                            alt="${productLineItem.images.small[0].alt}"
+                            title="${productLineItem.images.small[0].title}"
+                            loading="lazy" width="120" height="160" />
+                    </a>
+                    <div class="item-attributes d-flex flex-column">
+                        <div class="line-item-header">
+                            <a href="${URLUtils.url('Product-Show', 'pid', productLineItem.id)}"
+                                class="line-item-name">${productLineItem.productName}</a>
+                        </div>
+                        <isloop items="${productLineItem.variationAttributes}" var="attribute">
+                            <p class="line-item-attributes">${attribute.displayName}: ${attribute.displayValue}</p>
+                        </isloop>
+                        <div class="item-options">
+                            <isloop items="${productLineItem.options}" var="option">
+                                <div class="line-item-option">${option.displayName}</div>
+                            </isloop>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 d-lg-none"><hr class="line-item-divider"></div>
+        <div class="col-lg-6 product-card-footer">
+            <div class="row">
+                <div class="col-4">
+                    <label class="line-item-price-info">${Resource.msg('label.each.item.price','cart',null)}</label>
+                    <div class="value">${productLineItem.bonusUnitPrice}</div>
+                </div>
+                <div class="col-4 line-item-quantity">
+                    <label class="line-item-price-info">${Resource.msg('field.selectquantity','cart',null)}</label>
+                    <p><isprint value="${productLineItem.quantity}" formatter="#"/></p>
+                </div>
+                <div class="col-4 line-item-total-price">
+                    <label class="line-item-price-info">
+                        ${Resource.msg('label.total.price','cart',null)}
+                    </label>
+                    <div class="price">
+                        <div class="pricing line-item-total-price-amount item-total-${productLineItem.UUID}">
+                            ${productLineItem.priceTotal.price}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <isif condition="${productLineItem.bundledProductLineItems.length > 0}">
+            <div class="col-12">
+                <div class="bundle-includes py-2">
+                    <p>${productLineItem.productName} ${Resource.msg('msg.bundle.includes','cart',null)}</p>
+                </div>
+                <isset name="lineItem" value="${productLineItem}" scope="page" />
+                <isinclude template="cart/productCard/cartProductCardBundledItems" />
+            </div>
+        </isif>
+    </div>
+</div>

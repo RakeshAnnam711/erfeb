@@ -1,0 +1,157 @@
+<div class="billing-address">
+    <div class="row">
+        <iscomment> First Name </iscomment>
+        <div class="col-6">
+            <div class="form-group
+                ${pdict.paypal.billingAddressForm.firstName.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="${pdict.paypal.billingAddressForm.firstName.htmlName}">
+                    <isprint value="${pdict.paypal.billingAddressForm.firstName.label}" encoding="htmlcontent" />
+                </label>
+
+                <input type="text" class="form-control" autocomplete="given-name"
+                    id="${pdict.paypal.billingAddressForm.firstName.htmlName}" <isprint
+                    value="${pdict.paypal.billingAddressForm.firstName.attributes}" encoding="off" /> />
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+
+        <iscomment> Last Name </iscomment>
+        <div class="col-6">
+            <div class="form-group
+                ${pdict.paypal.billingAddressForm.lastName.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="${pdict.paypal.billingAddressForm.lastName.htmlName}">
+                    <isprint value="${pdict.paypal.billingAddressForm.lastName.label}" encoding="htmlcontent" />
+                </label>
+
+                <input type="text" class="form-control" autocomplete="family-name"
+                    id="${pdict.paypal.billingAddressForm.lastName.htmlName}" <isprint
+                    value="${pdict.paypal.billingAddressForm.lastName.attributes}" encoding="off" /> />
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+    </div>
+
+    <iscomment> Address 1 </iscomment>
+    <div class="form-group
+        ${pdict.paypal.billingAddressForm.address1.mandatory === true ? 'required' : ''}">
+        <label class="form-control-label" for="${pdict.paypal.billingAddressForm.address1.htmlName}">
+            <isprint value="${pdict.paypal.billingAddressForm.address1.label}" encoding="htmlcontent" />
+        </label>
+
+        <input type="text" class="form-control" id="${pdict.paypal.billingAddressForm.address1.htmlName}"
+            autocomplete="address-line1" <isprint value="${pdict.paypal.billingAddressForm.address1.attributes}"
+            encoding="off" /> />
+        <div class="invalid-feedback"></div>
+    </div>
+
+    <iscomment> Address 2 </iscomment>
+    <div class="form-group
+        ${pdict.paypal.billingAddressForm.address2.mandatory === true ? 'required' : ''}">
+        <label class="form-control-label" for="${pdict.paypal.billingAddressForm.address2.htmlName}">
+            <isprint value="${pdict.paypal.billingAddressForm.address2.label}" encoding="htmlcontent" />
+        </label>
+
+        <input type="text" class="form-control" id="${pdict.paypal.billingAddressForm.address2.htmlName}"
+            autocomplete="billing address-line2" <isprint
+            value="${pdict.paypal.billingAddressForm.address2.attributes}" encoding="off" /> />
+        <div class="invalid-feedback"></div>
+    </div>
+
+    <iscomment> Country and State drop downs </iscomment>
+    <div class="row">
+        <iscomment> Country </iscomment>
+        <div class="col-6">
+            <div class="form-group ${pdict.paypal.billingAddressForm.country.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="${pdict.paypal.billingAddressForm.country.htmlName}">
+                    <isprint value="${pdict.paypal.billingAddressForm.country.label}" encoding="htmlcontent" />
+                </label>
+
+                <select class="form-control" id="${pdict.paypal.billingAddressForm.country.htmlName}"
+                    autocomplete="country" <isprint value="${pdict.paypal.billingAddressForm.country.attributes}"
+                    encoding="off" />>
+                <isloop items=${pdict.paypal.billingAddressForm.country.options} var="country">
+                    <option id="${country.id}" value="${country.htmlValue}" ${country.selected ? 'selected' : ''}>
+                        ${country.label}
+                    </option>
+                </isloop>
+                </select>
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+
+        <iscomment> State </iscomment>
+        <isif condition="${pdict.paypal.billingAddressForm.states}">
+            <div class="col-6">
+                <div class="form-group
+                    ${pdict.paypal.billingAddressForm.states.stateCode.mandatory === true ? 'required' : ''}">
+                    <label class="form-control-label" for="${pdict.paypal.billingAddressForm.states.stateCode.htmlName}">
+                        <isprint value="${pdict.paypal.billingAddressForm.states.stateCode.label}"
+                            encoding="htmlcontent" />
+                    </label>
+
+                    <select class="form-control" id="${pdict.paypal.billingAddressForm.states.stateCode.htmlName}"
+                        autocomplete="address-level1" <isprint
+                        value="${pdict.paypal.billingAddressForm.states.stateCode.attributes}" encoding="off" />>
+                    <isloop items=${pdict.paypal.billingAddressForm.states.stateCode.options} var="state">
+                        <option id="${state.id}" value="${state.htmlValue}" ${state.selected ? 'selected' : ''}>
+                            ${state.label || ' '}
+                        </option>
+                    </isloop>
+                    </select>
+                    <div class="invalid-feedback"></div>
+                </div>
+            </div>
+        </isif>
+    </div>
+
+    <iscomment> City and ZIP </iscomment>
+    <div class="row">
+        <div class="col-6">
+            <iscomment> City </iscomment>
+            <div class="form-group
+                ${pdict.paypal.billingAddressForm.city.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="${pdict.paypal.billingAddressForm.city.htmlName}">
+                    <isprint value="${pdict.paypal.billingAddressForm.city.label}" encoding="htmlcontent" />
+                </label>
+
+                <input type="text" class="form-control" id="${pdict.paypal.billingAddressForm.city.htmlName}"
+                    autocomplete="address-level2" <isprint value="${pdict.paypal.billingAddressForm.city.attributes}"
+                    encoding="off" /> />
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+
+        <iscomment> ZIP Code </iscomment>
+        <div class="col-6">
+            <div class="form-group
+                ${pdict.paypal.billingAddressForm.postalCode.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="${pdict.paypal.billingAddressForm.postalCode.htmlName}">
+                    <isprint value="${pdict.paypal.billingAddressForm.postalCode.label}" encoding="htmlcontent" />
+                </label>
+
+                <input type="text" class="form-control" id="${pdict.paypal.billingAddressForm.postalCode.htmlName}"
+                    autocomplete="postal-code" <isprint
+                    value="${pdict.paypal.billingAddressForm.postalCode.attributes}" encoding="off" /> />
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group
+            ${pdict.paypal.billingAddressForm.phone.mandatory === true ? 'required' : ''}
+            ${pdict.paypal.billingAddressForm.phone.htmlName}">
+            <label class="form-control-label" for="phoneNumber">
+                <isprint value="${Resource.msg('field.customer.phone.number', 'checkout', null)}" encoding="htmlcontent" />
+            </label>
+
+            <input type="tel" class="form-control phone" id="phoneNumber"
+                <isprint value="${pdict.paypal.billingAddressForm.phone.attributes}"
+                encoding="htmlsinglequote" />
+                aria-describedby="phoneInvalidMessage" />
+            <div class="invalid-feedback"></div>
+        </div>
+    </div>
+</div>

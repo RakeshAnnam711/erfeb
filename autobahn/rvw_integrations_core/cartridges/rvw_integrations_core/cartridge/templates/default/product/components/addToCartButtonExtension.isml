@@ -1,0 +1,36 @@
+<div class="js-paymentmethod-mutationobserver mt-3">
+    <isset name="stripePublicKeyValue" value="${dw.system.Site.current.getCustomPreferenceValue('stripePublicKey')}" scope="page" />
+    <isset name="isUSLocale" value="${request.locale && request.locale.indexOf('_US') !== -1}" scope="page" />
+    <isset name="showStripeExpressPDP" value="${dw.system.Site.current.getCustomPreferenceValue('stripeEnabled') && dw.system.Site.current.getCustomPreferenceValue('stripeExpressCheckoutProductPageEnabled') && stripePublicKeyValue && product && product.readyToOrder && product.available && isUSLocale}" scope="page" />
+
+    <div class="paymentmethodwarning js-paymentmethodwarning-msgcontainer d-none mb-3"
+        data-iframepresent="false"
+        <isif condition="${dw.system.Site.current.getCustomPreferenceValue('bopisCartridgeEnabled')}">
+            data-bopis_msg="${dw.web.Resource.msg('bopis.buynow.compat.warn.override', 'instorePickup', dw.web.Resource.msg('bopis.buynow.compat.warn', 'instorePickup', null))}"
+            data-bopis_show="false"
+            data-bopis_disable="true"
+        </isif>
+        data-available_msg="",
+        data-available_show="${!product.readyToOrder || !product.available}",
+        data-available_disable="true"
+    ></div>
+
+    <div class="js-paymentmethodwarning-affectedcontainer">
+        <iscomment>
+          If apply pay is configured (through Cybersource, Adyen, etc.) this tag will be used by the Apply Pay client
+          side script to add UI components. If not configured the tag will simply sit in the DOM unused.
+        </iscomment>
+        <isapplepay sku="${product.id}" class="dw-apple-pay-logo-black applePaySpecificityOverride"></isapplepay>
+
+        <isif condition="${dw.system.Site.current.getCustomPreferenceValue('sfcommercepaymentsCartridgeEnabled') && !showStripeExpressPDP}">
+            <isset name="buynowproduct" value="${product}" scope="page" />
+
+            <isinclude template="_commercepayments/product/components/addToCartPaymentCallout"/>
+            <isinclude template="_commercepayments/components/product/buyNowButtons" sf-toolkit="off"/>
+        </isif>
+
+        <isif condition="${showStripeExpressPDP}">
+            <isinclude template="checkout/expressCheckout/stripeExpressCheckoutButton" />
+        </isif>
+    </div>
+</div>

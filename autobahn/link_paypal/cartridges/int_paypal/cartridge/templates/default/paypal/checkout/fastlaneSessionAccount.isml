@@ -1,0 +1,28 @@
+<isif condition="${!empty(sessionAccount)}">
+    <isset name="expirationMonth" value="${StringUtils.formatNumber(sessionAccount.creditCardExpirationMonth, '00')}" scope="page" />
+    <isset name="expirationYear" value="${StringUtils.formatNumber(sessionAccount.creditCardExpirationYear.toString().substr(2), '00')}" scope="page" />
+    <isset name="creditCardHolder" value="${sessionAccount.creditCardHolder || ''}" scope="page"/>
+    <option id="fastlaneSessionCreditCard" value="sessioncard"
+        data-session-account="${!!sessionAccount}" ${fastlanePaymentToken ? 'selected="selected"' : ''}
+        class="form-account ${fastlanePaymentToken ? '' : 'd-none'}"
+        data-type="${sessionAccount.creditCardType}"
+        data-last-four="${sessionAccount.creditCardNumberLastDigits}"
+        data-number="${sessionAccount.maskedCreditCardNumber}"
+        data-owner="${creditCardHolder}"
+        data-expiration="${Resource.msgf('paypal.cardlist.expirationdate', 'locale', null, expirationMonth, expirationYear)}"
+        data-payment-token="${fastlanePaymentToken || ''}"
+        data-payment-method="${payPalData.paypalPaymentMethodId}">
+        ${Resource.msgf('paypal.cardlist.option', 'locale', null, sessionAccount.maskedCreditCardNumber, sessionAccount.creditCardType, expirationMonth, expirationYear, creditCardHolder)}
+    </option>
+<iselse/>
+    <option id="fastlaneSessionCreditCard" value="sessioncard"
+        data-session-account="false"
+        class="form-account d-none"
+        data-type="false"
+        data-number="false"
+        data-expiration="false"
+        data-owner="false"
+        data-payment-token="false"
+        data-payment-method="${payPalData.paypalPaymentMethodId}">
+    </option>
+</isif>

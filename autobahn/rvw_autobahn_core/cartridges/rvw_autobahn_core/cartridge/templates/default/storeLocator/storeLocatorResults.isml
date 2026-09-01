@@ -1,0 +1,17 @@
+<isloop items="${pdict.stores.stores}" var="store" status="loopState">
+    <isif condition="${pdict.showMap === 'true'}">
+        <div class="store-result" id="${store.ID}" data-store-type="${store.storeType.value}">
+            <div class='map-marker'>
+                <img src="${store.storeType.mapMarker.backgroundImage}" alt="${store.storeType.displayValue}">
+                <span <isif condition="${store.storeType.mapMarker.color}">style="color:${store.storeType.mapMarker.color}</isif>">${loopState.count}</span>
+            </div>
+            <isinclude template="storeLocator/storeDetails" />
+        </div>
+    <iselse>
+        <div class="store-result custom-control custom-radio">
+            <isset name="uniqueID" value="${(pdict.stores.products ? 'product' : 'general') + '-search-' + store.ID}" scope="page" />
+            <input type="radio" id=${uniqueID} class="custom-control-input select-store-input" name="${pdict.stores.products ? 'product' : 'general'}-store-search" value="${store.ID}" data-store-info="${JSON.stringify(store)}"/>
+            <label class="custom-control-label" for=${uniqueID}><isinclude template="storeLocator/storeDetails" /></label>
+        </div>
+    </isif>
+</isloop>

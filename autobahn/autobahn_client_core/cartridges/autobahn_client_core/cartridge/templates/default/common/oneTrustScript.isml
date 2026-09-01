@@ -1,0 +1,97 @@
+<isset name="isOneTrustEnable" value="${dw.system.Site.current.preferences.custom.OneTrustEnable && 'OneTrustConsentScript' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.OneTrustConsentScript!=''}" scope="page" />
+<isif condition="${dw.system.Site.current.preferences.custom.OneTrustEnable && 'OneTrustConsentScript' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.OneTrustConsentScript!=''}">
+    <script type="text/javascript">
+
+        // Define dataLayer and the gtag function.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // Default consent for US regions to 'granted'.
+        gtag('consent', 'default', {
+                'ad_storage': "granted",
+                'analytics_storage': "granted",
+                'functionality_storage': "granted",
+                'personalization_storage': "granted",
+                'security_storage': "granted",
+                'ad_user_data': "granted",
+                'ad_personalization': "granted",
+                'region': ['US'],
+                'wait_for_update': 500
+        });
+
+        // Default consent to 'denied'.
+        gtag('consent', 'default', {
+                'ad_storage': "denied",
+                'analytics_storage': "denied",
+                'functionality_storage': "granted",
+                'personalization_storage': "denied",
+                'security_storage': "granted",
+                'ad_user_data': "denied",
+                'ad_personalization': "denied",
+                'wait_for_update': 500
+        });
+
+
+        // Get stored user consent
+        const consent = localStorage.getItem('userConsent');
+
+        if (consent) {
+            gtag('consent', 'update', {
+                'ad_storage': consent.includes("C0004")?"granted":"denied",
+                'analytics_storage': consent.includes("C0002")?"granted":"denied",
+                'functionality_storage': consent.includes("C0003")?"granted":"denied",
+                'personalization_storage': consent.includes("C0004")?"granted":"denied",
+                'security_storage': "granted",
+                'ad_user_data': consent.includes("C0004")?"granted":"denied",
+                'ad_personalization': consent.includes("C0004")?"granted":"denied"
+            });
+        }
+    </script>
+
+    <isif condition="${dw.system.Site.current.getCustomPreferenceValue('GTMEnable')}">
+        <isinclude url="${URLUtils.url('GTM-CustomerData')}" />
+
+        <isinclude template="/gtm/gtmScript" />
+    </isif>
+
+    <isprint value="${dw.system.Site.current.preferences.custom.OneTrustConsentScript}" encoding="off"/>
+
+    <script type="text/javascript">
+
+        async function updateConsentTracking(consent) {
+            try {
+                const fetchResponse = await fetch("${URLUtils.url('ConsentTracking-SetSession', 'consent', '')}"+consent, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (!fetchResponse.ok) {
+                    throw new Error('HTTP error! Status: ' + fetchResponse.status);
+                }
+
+                const data = await fetchResponse.json();
+            } catch (error) {
+                console.error("Error in setting consent:", error);
+            }
+        }
+
+        function OptanonWrapper() {
+            // Store user consent
+            localStorage.setItem('userConsent', OnetrustActiveGroups);
+
+            //check for Analytics consent
+            var consent = OnetrustActiveGroups.includes("C0004");
+            updateConsentTracking(consent);
+
+            const isWelcomeShown = localStorage.getItem('isWelcomeShown');
+
+            //Display GlobalE welcome popup if not displayed.
+            if (Boolean(isWelcomeShown)==false && Optanon.IsAlertBoxClosedAndValid() && GlobalE!=undefined && GlobalE.WelcomeManager) {
+                GlobalE.WelcomeManager.Welcome();
+                localStorage.setItem('isWelcomeShown', true);
+            }
+        }
+    </script>
+</isif>

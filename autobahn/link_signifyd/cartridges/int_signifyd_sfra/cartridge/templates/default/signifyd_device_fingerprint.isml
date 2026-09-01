@@ -1,0 +1,6 @@
+<isif condition="${session.custom.basketUUID != null}">
+    <script defer type="text/javascript" id="sig-api" data-order-session-id="${require('int_signifyd_sfra/cartridge/scripts/service/signifyd').getOrderSessionId(session.custom.basketUUID)}" src="https://cdn-scripts.signifyd.com/api/script-tag.js"></script>
+    <isset name="basketUUID" value="${session.custom.basketUUID = null}" scope="page" />  
+<iselse/>
+    <script defer type="text/javascript" id="sig-api" data-order-session-id="${require('int_signifyd_sfra/cartridge/scripts/service/signifyd').getOrderSessionId()}" src="https://cdn-scripts.signifyd.com/api/script-tag.js"></script>
+</isif>

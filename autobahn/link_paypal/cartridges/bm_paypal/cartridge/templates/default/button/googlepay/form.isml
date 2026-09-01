@@ -1,0 +1,145 @@
+<form method="POST" action="${URLUtils.url('GooglePayConfig-SaveButton')}" class="js-google-pay-config-form"
+    data-button-styles="${pdict.buttonStyles}">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="google-pay-location">${Resource.msg('googlepay.location.label', 'configuration', null)}</label>
+
+            <select class="js-google-pay-location custom-select custom-select-sm" name="location" id="google-pay-location">
+                <option value="billing">${Resource.msg('location.billing', 'configuration', null)}</option>
+
+                <isif condition="${pdict.pageVisibility.cart}">
+                    <option value="cart">${Resource.msg('location.cart', 'configuration', null)}</option>
+                </isif>
+
+                <isif condition="${pdict.pageVisibility.minicart}">
+                    <option value="minicart">${Resource.msg('location.minicart', 'configuration', null)}</option>
+                </isif>
+
+                <isif condition="${pdict.pageVisibility.pdp}">
+                    <option value="pdp">${Resource.msg('location.pdp', 'configuration', null)}</option>
+                </isif>
+
+                <isif condition="${pdict.pageVisibility.pvp}">
+                    <option value="pvp">${Resource.msg('location.pvp', 'configuration', null)}</option>
+                </isif>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="google-pay-color">${Resource.msg('googlepay.color.label', 'configuration', null)}</label>
+
+            <select class="js-google-pay-color custom-select custom-select-sm" name="buttonColor" id="google-pay-color">
+                <option value="default">
+                    ${Resource.msg('googlepay.color.option.default', 'configuration', null)}
+                </option>
+
+                <option value="black">
+                    ${Resource.msg('googlepay.color.option.black', 'configuration', null)}
+                </option>
+
+                <option value="white">
+                    ${Resource.msg('googlepay.color.option.white', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="google-pay-type">${Resource.msg('googlepay.type.label', 'configuration', null)}</label>
+
+            <select class="js-google-pay-type custom-select custom-select-sm" name="buttonType" id="google-pay-type">
+                <option value="book">
+                    ${Resource.msg('googlepay.type.option.book', 'configuration', null)}
+                </option>
+                <option value="buy">
+                    ${Resource.msg('googlepay.type.option.buy', 'configuration', null)}
+                </option>
+                <option value="checkout">
+                    ${Resource.msg('googlepay.type.option.checkout', 'configuration', null)}
+                </option>
+                <option value="donate">
+                    ${Resource.msg('googlepay.type.option.donate', 'configuration', null)}
+                </option>
+                <option value="order">
+                    ${Resource.msg('googlepay.type.option.order', 'configuration', null)}
+                </option>
+                <option value="pay">
+                    ${Resource.msg('googlepay.type.option.pay', 'configuration', null)}
+                </option>
+                <option value="plain">
+                    ${Resource.msg('googlepay.type.option.plain', 'configuration', null)}
+                </option>
+                <option value="subscribe">
+                    ${Resource.msg('googlepay.type.option.subscribe', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="google-pay-corner-radius-range">
+                ${Resource.msg('googlepay.corner.radius.label', 'configuration', null)}
+            </label>
+
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            ${Resource.msg('googlepay.corner.radius.min', 'configuration', null)}
+                        </span>
+                </div>
+
+                <input type="number" min="0" max="100" class="form-control text-center js-google-pay-corner-radius-range-number" aria-describedby="minNumber" />
+
+                <div class="input-group-append">
+                        <span class="input-group-text">
+                            ${Resource.msg('googlepay.corner.radius.max', 'configuration', null)}
+                        </span>
+                </div>
+            </div>
+
+            <input type="range" name="buttonRadius" class="js-google-pay-corner-radius-range form-control-range" list="gp-corner-radius-list" min="0" max="100" step="1" id="google-pay-corner-radius-range" />
+
+            <datalist id="gp-corner-radius-list">
+                <option value="0" label="0"></option>
+                <option value="25"></option>
+                <option value="50"></option>
+                <option value="75"></option>
+                <option value="100" label="100"></option>
+            </datalist>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="custom-size-checkbox">
+                ${Resource.msg('googlepay.size.label', 'configuration', null)}
+            </label>
+            <select class="js-google-pay-type-mode custom-select custom-select-sm" name="buttonSizeMode" id="custom-size-checkbox">
+                <option value="static">
+                    ${Resource.msg('googlepay.size.option.static', 'configuration', null)}
+                </option>
+
+                <option value="fill">
+                    ${Resource.msg('googlepay.size.option.fill', 'configuration', null)}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <isset name="msgArgument" value="Google Pay button" scope="page" />
+    <isinclude template="components/checkboxApplyToAll"/>
+
+    <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-primary">
+            ${Resource.msg('button.save', 'configuration', null)}
+        </button>
+
+        <div class="js-google-pay-loader spinner-border text-primary ml-2 d-none" role="status" id="google-pay-loader">
+            <span class="sr-only">${Resource.msg('loader.text', 'configuration', null)}</span>
+        </div>
+    </div>
+</form>

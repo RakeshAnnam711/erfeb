@@ -1,0 +1,8 @@
+<div class="row leading-lines giftcertificate-discount <isif condition="${!pdict.order.billing.payment.giftCertificatePaymentInstruments.length}">d-none</isif>">
+    <div class="col-7 start-lines">
+        <p class="giftcertificate-discount-label">${Resource.msg((pdict.order.billing.payment.giftCertificatePaymentInstruments.length > 1 ? 'giftcertificate.purchase.giftcertificates' : 'giftcertificate.purchase.giftcertificate'), 'checkout', null) + dw.util.StringUtils.format(Resource.msg('giftcertificate.checkout.applied.quantitydisplay', 'checkout', null), pdict.order.billing.payment.giftCertificatePaymentInstruments.length)}</p>
+    </div>
+    <div class="col-5 end-lines">
+        <p class="text-right giftcertificate-discount-total"><span> - ${pdict.order.totals.giftCertificatePaymentInstrumentsTotalFormatted}</span></p>
+    </div>
+</div>

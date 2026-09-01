@@ -1,0 +1,5 @@
+<li class="nav-item js-nav-item-credit-card d-none" data-method-id="${paymentOption.ID}">
+    <a class="nav-link js-credit-card-tab" data-toggle="tab" href="#credit-card-content" role="tab">
+        <div class="js-credit-card-mark"></div>
+    </a>
+</li>

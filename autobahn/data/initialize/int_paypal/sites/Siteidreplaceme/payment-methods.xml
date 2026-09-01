@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payment-settings xmlns="http://www.demandware.com/xml/impex/paymentsettings/2009-09-15">
+
+    <payment-method method-id="PayPal">
+        <name xml:lang="x-default">PayPal</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>PAYPAL</processor-id>
+    </payment-method>
+
+    <payment-method method-id="ApplePay">
+        <name xml:lang="x-default">ApplePay</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>PAYPAL</processor-id>
+    </payment-method>
+
+    <payment-method method-id="Venmo">
+        <name xml:lang="x-default">Venmo</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>PAYPAL</processor-id>
+    </payment-method>
+
+    <payment-method method-id="PAYPAL_CREDIT_CARD">
+        <name xml:lang="x-default">Paypal Credit Card</name>
+        <name xml:lang="fr-FR">Paypal Credit Card</name>
+        <name xml:lang="it-IT">Paypal Credit Card</name>
+        <name xml:lang="ja-JP">Paypal Credit Card</name>
+        <name xml:lang="zh-CN">Paypal Credit Card</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>PAYPAL</processor-id>
+    </payment-method>
+
+    <payment-method method-id="GooglePay">
+        <name xml:lang="x-default">GooglePay</name>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>PAYPAL</processor-id>
+    </payment-method>
+
+    <payment-card card-type="MasterCard">
+        <name xml:lang="x-default">MasterCard</name>
+        <name xml:lang="fr-FR">MasterCard</name>
+        <name xml:lang="it-IT">MasterCard</name>
+        <name xml:lang="ja-JP">MasterCard</name>
+        <name xml:lang="zh-CN">MASTERCARD</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length>
+                <length>16</length>
+            </number-length>
+            <number-prefix>
+                <prefix>51-55</prefix>
+            </number-prefix>
+        </card-number-settings>
+        <security-code-length>3</security-code-length>
+    </payment-card>
+
+    <payment-card card-type="American Express">
+        <name xml:lang="x-default">American Express</name>
+        <name xml:lang="fr-FR">American Express</name>
+        <name xml:lang="it-IT">American Express</name>
+        <name xml:lang="ja-JP">American Express</name>
+        <name xml:lang="zh-CN">American Express（美国运通卡）</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length>
+                <length>15</length>
+            </number-length>
+            <number-prefix>
+                <prefix>34</prefix>
+                <prefix>37</prefix>
+            </number-prefix>
+        </card-number-settings>
+        <security-code-length>4</security-code-length>
+    </payment-card>
+
+    <payment-card card-type="JCB">
+        <name xml:lang="x-default">JCB</name>
+        <name xml:lang="fr-FR">JCB</name>
+        <name xml:lang="it-IT">JCB</name>
+        <name xml:lang="ja-JP">JCB</name>
+        <name xml:lang="zh-CN">JCB（美国运通卡）</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length>
+                <length>15</length>
+            </number-length>
+            <number-prefix>
+                <prefix>34</prefix>
+                <prefix>37</prefix>
+            </number-prefix>
+        </card-number-settings>
+        <security-code-length>4</security-code-length>
+    </payment-card>
+
+    <payment-card card-type="Carte Bancaire">
+        <name xml:lang="x-default">Carte Bancaire</name>
+        <name xml:lang="fr-FR">Carte Bancaire</name>
+        <name xml:lang="it-IT">Carte Bancaire</name>
+        <name xml:lang="ja-JP">Carte Bancaire</name>
+        <name xml:lang="zh-CN">Carte Bancaire（美国运通卡）</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length>
+                <length>15</length>
+            </number-length>
+            <number-prefix>
+                <prefix>34</prefix>
+                <prefix>37</prefix>
+            </number-prefix>
+        </card-number-settings>
+        <security-code-length>4</security-code-length>
+    </payment-card>
+
+    <payment-card card-type="Discover">
+        <name xml:lang="x-default">Discover</name>
+        <name xml:lang="fr-FR">Discover</name>
+        <name xml:lang="it-IT">Discover</name>
+        <name xml:lang="ja-JP">Discover</name>
+        <name xml:lang="zh-CN">Discover（美国运通卡）</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length>
+                <length>15</length>
+            </number-length>
+            <number-prefix>
+                <prefix>34</prefix>
+                <prefix>37</prefix>
+            </number-prefix>
+        </card-number-settings>
+        <security-code-length>4</security-code-length>
+    </payment-card>
+
+    <payment-card card-type="Debit networks">
+        <name xml:lang="x-default">Debit networks</name>
+        <name xml:lang="fr-FR">Debit networks</name>
+        <name xml:lang="it-IT">Debit networks</name>
+        <name xml:lang="ja-JP">Debit networks</name>
+        <name xml:lang="zh-CN">Debit networks（美国运通卡）</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length>
+                <length>15</length>
+            </number-length>
+            <number-prefix>
+                <prefix>34</prefix>
+                <prefix>37</prefix>
+            </number-prefix>
+        </card-number-settings>
+        <security-code-length>4</security-code-length>
+    </payment-card>
+</payment-settings>

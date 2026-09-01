@@ -1,0 +1,26 @@
+<tr id="paypalbm_search_dispute_by_id"
+    class="js_paypalbm_switch_block ${pdict.isSearchByDisputeId ? 'table-row' : 'none'}">
+    <td class="infobox_item_search" colspan="2">
+        <form action="${URLUtils.https('Disputes-Start')}" method="GET">
+            <table>
+                <tr class="infobox_item_search_tr">
+                    <td class="infobox_item_search" width="110" nowrap="nowrap">
+                        ${Resource.msg('dispute.search.id', 'disputes', null)}
+                    </td>
+
+                    <td class="infobox_item_search">
+                        <input type="text" name="disputeId"
+                            value="${pdict.CurrentHttpParameterMap.disputeId.submitted ? pdict.CurrentHttpParameterMap.disputeId.stringValue : ''}"
+                            maxlength="350" size="35" class="inputfield_en"/>
+                        <button name="simpleSearch" value="true" class="button">
+                            ${Resource.msg('search.submitbutton', 'paypalbm', null)}
+                        </button>
+                    </td>
+
+                    <td class="infobox_item_search">&nbsp;</td>
+                    <td class="infobox_item_search"></td>
+                </tr>
+            </table>
+        </form>
+    </td>
+</tr>

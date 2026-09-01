@@ -1,0 +1,20 @@
+.salesforce-buynow-element {
+    width: 100%;
+}
+
+.salesforce-buynow-element:not(:empty) {
+    margin-top: $spacer;
+}
+
+.salesforce-buynow-element-errors {
+    margin-top: $spacer-sm;
+    text-align: left;
+}
+
+.salesforce-buynow-element[disabled] {
+    display: none;
+}
+
+.salesforce-buynow-element div:not(:first-child) {
+    margin-top: $spacer;
+}

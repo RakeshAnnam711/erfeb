@@ -1,0 +1,5 @@
+<div class="tab-pane ${pdict.isSearchByOrderNo ? 'active': ''}" id="search-by-order-id" role="tabpanel" aria-labelledby="search-by-order-id-tab">
+    <input type="text" name="orderNo"
+           value="${hm.orderNo.submitted ? hm.orderNo.stringValue : ''}"
+           maxlength="100"/>
+</div>

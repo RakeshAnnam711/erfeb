@@ -1,0 +1,130 @@
+<isset name="headerLayout" value="${dw.system.Site.current.preferences.custom.headerLayout.value || 'logo-left'}"
+    scope="page" />
+<isset name="headerFixedClass" value="${dw.system.Site.current.preferences.custom.headerFixed ? 'fixed-header' : ''}"
+    scope="page" />
+
+<header class="${headerLayout} ${headerFixedClass} checkout-header">
+    <isinclude template="/components/header/skipNav" />
+    <iscomment>
+        <div class="header-banner slide-up d-none">
+            <div class="container">
+                <div class="row no-gutters">
+                    <isif condition="${headerLayout === 'logo-left'}">
+                        <div class="col header-banner-column-1 hidden-md-down">
+                            <div class="pull-left header-locale-container">
+                                <isinclude url="${URLUtils.url('Page-Locale')}" />
+                            </div>
+                        </div>
+                    </isif>
+                    <div class="col header-banner-column-2 d-flex justify-content-between align-items-center">
+                        <div class="content">
+                            <iscontentasset aid="header-banner-promotion" />
+                        </div>
+                        <isif condition="${headerLayout === 'logo-center'}">
+                            <div class="close-button">
+                                <button type="button" class="close icon-close" aria-label="Close"></button>
+                            </div>
+                        </isif>
+                    </div>
+                    <isif condition="${headerLayout === 'logo-left'}">
+                        <div class="col header-banner-column-3 hidden-md-down">
+                            <div class="pull-right header-support-container">
+                                <iscontentasset aid="headerSupportMobile" />
+                            </div>
+                        </div>
+                    </isif>
+                </div>
+            </div>
+        </div>
+    </iscomment>
+    <nav class="header-nav">
+        <div class="header container">
+            <div class="row no-gutters">
+                <isif condition="${headerLayout === 'logo-center'}">
+                    <div class="col header-column-1">
+                        <iscomment> <div class="pull-left d-none d-lg-block header-locale-container">
+                            <isinclude url="${URLUtils.url('Page-Locale')}" />
+                        </div> </iscomment>
+                    </div>
+                    <div class="col header-column-2">
+                        <div class="brand">
+                            <a class="logo-home d-flex justify-content-center align-items-center" style="background:none" href="${URLUtils.url('Home-Show')}" title="${ Resource.msgf('global.homepage.tooltip', 'common', null, Resource.msg('global.storename', 'common', null), Resource.msg('global.home', 'common', null)) }" aria-label="${ Resource.msgf('global.homepage.tooltip', 'common', null, Resource.msg('global.storename', 'common', null), Resource.msg('global.home', 'common', null)) }">
+                                <picture>
+                                    <!-- Mobile logo - 80px width -->
+                                    <source
+                                        srcset="${URLUtils.staticURL('/images/logo-mobile.webp')}"
+                                        media="(max-width: 767px)"
+                                        type="image/webp" />
+
+                                    <!-- Tablet/Desktop logo - 500px width (optimized, not full 3059px) -->
+                                    <source
+                                        srcset="${URLUtils.staticURL('/images/logo.webp')}"
+                                        media="(min-width: 768px)"
+                                        type="image/webp" />
+
+                                    <!-- Fallback img with explicit dimensions to prevent oversized download -->
+                                    <img
+                                        class="logo-home-img"
+                                        src="${URLUtils.staticURL('/images/logo.webp')}"
+                                        alt="WGACA logo"
+                                        width="500"
+                                        height="32"
+                                        fetchpriority="high"
+                                        loading="eager"
+                                        decoding="async" />
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                </isif>
+                <isif condition="${headerLayout === 'logo-left'}">
+                    <div class="col header-column-2">
+                        <div class="brand">
+                            <a class="logo-home d-block" href="${URLUtils.url('Home-Show')}"
+                                title="${Resource.msgf('global.homepage.tooltip', 'common', null, Resource.msg('global.storename', 'common', null), Resource.msg(
+                                       'global.home', 'common', null))}">
+                                <picture>
+                                    <!-- Mobile logo - 80px width -->
+                                    <source
+                                        srcset="${URLUtils.staticURL('/images/logo-mobile.webp')}"
+                                        media="(max-width: 767px)"
+                                        type="image/webp" />
+
+                                    <!-- Tablet/Desktop logo - 500px width (optimized, not full 3059px) -->
+                                    <source
+                                        srcset="${URLUtils.staticURL('/images/logo.webp')}"
+                                        media="(min-width: 768px)"
+                                        type="image/webp" />
+
+                                    <!-- Fallback img with explicit dimensions to prevent oversized download -->
+                                    <img
+                                        class="logo-home-img"
+                                        src="${URLUtils.staticURL('/images/logo.webp')}"
+                                        alt="WGACA logo"
+                                        width="500"
+                                        height="32"
+                                        fetchpriority="high"
+                                        loading="eager"
+                                        decoding="async" />
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col header-column-1">
+                    </div>
+                </isif>
+                <div class="col header-column-3">
+                    <div class="hidden-md-down pull-right header-account-container">
+                        <isinclude url="${URLUtils.url('Account-Header')}" />
+                    </div>
+                    <div class="minicart pull-right" data-action-url="${URLUtils.url('Cart-MiniCartShow')}">
+                        <isinclude url="${URLUtils.url('Cart-MiniCart')}" />
+                    </div>
+                    <div class="hidden-md-down header-locale-container">
+                        <isinclude url="${URLUtils.url('Page-Locale')}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

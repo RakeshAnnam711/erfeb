@@ -1,0 +1,35 @@
+<isset name="paypalConfig" value="${payPalData.buttonConfig}" scope="page" />
+<isset name="buttonMessageConfig" value="${payPalData.buttonMessageConfig}" scope="page" />
+<isset name="billingFormFields" value="${payPalData.billingFormFields}" scope="page" />
+<isset name="isUpdateRequired" value="${payPalData.isPaypalInstrumentExist}" scope="page" />
+
+<isif condition="${pdict.paypal.fraudNet}">
+    <isset name="fraudNetLocation" value="SFCC-PP-PLUGIN-CART" scope="page" />
+    <isinclude template="paypal/components/fraudNet" />
+</isif>
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/int_paypal_cart.js');
+    assets.addCss('/css/paypal.css');
+</isscript>
+
+<div class="row">
+    <div class="paypal-content col-12" id="paypal-content">
+        <div id="cart-paypal-button-container">
+            <div class="paypalLoader paypal-loader-container">
+                <i class="paypal-loader"></i>
+            </div>
+            <div class="paypal-cart-button js-paypal-button-on-cart-page"
+                data-pp-uuid="cart"
+                data-buttons-to-render="${payPalData.buttonsToRender}"
+                data-paypal-button-config="${JSON.stringify(paypalConfig)}"
+                ${payPalData.isPayPalButtonMessageEnabled ? 'data-paypal-button-message-config=' + buttonMessageConfig : ''}
+                data-paypal-billing-form-fields="${JSON.stringify(billingFormFields)}"
+                data-digital-goods="${JSON.stringify(payPalData.digitalGoodsData)}"
+                data-customer-email="${payPalData.customerEmail}"
+                ${payPalData.userIdToken ? "data-user-id-token=" + payPalData.userIdToken : ''}>
+            </div>
+        </div>
+    </div>
+</div>

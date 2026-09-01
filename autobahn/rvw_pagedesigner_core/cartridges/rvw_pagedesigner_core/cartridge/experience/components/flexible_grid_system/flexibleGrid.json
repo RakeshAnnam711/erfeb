@@ -1,0 +1,137 @@
+{
+    "name": "Flexible Grid Container",
+    "group": "autobahn_layouts_flexgrid",
+    "attribute_definition_groups": [
+        {
+            "id": "global",
+            "name": "Global Settings",
+            "attribute_definitions": [
+                {
+                    "id": "containerClass",
+                    "name": "Container Class",
+                    "description": "Class(es) to add to the grid's container for spacing, alignment, etc.",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "marginTop",
+                    "name": "Top Margin",
+                    "description": "Override the default top spacing by entering a pixel amount here, e.g. '100'.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "marginBottom",
+                    "name": "Bottom Margin",
+                    "description": "Override the default bottom spacing by entering a pixel amount here, e.g. '100'.",
+                    "type": "integer",
+                    "required": false
+                },
+                {
+                    "id": "fullBleed",
+                    "name": "Full Bleed",
+                    "description": "If enabled, this container will be allowed to span the entire width of the viewport.",
+                    "type": "boolean",
+                    "required": false
+                },
+                {
+                    "id": "noGutters",
+                    "name": "Remove Gutters",
+                    "description": "Remove gutters (horizontal and vertical) for all flex grid items in this layout.",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "heading",
+            "name": "Grid Header",
+            "attribute_definitions": [
+                {
+                    "id": "textHeadline",
+                    "name": "Grid Title",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "textHeadlineAlignment",
+                    "name": "Grid Title Alignment",
+                    "type": "enum",
+                    "values": ["left", "center", "right"],
+                    "default_value": "left",
+                    "required": false
+                },
+                {
+                    "id": "textHeadlineClass",
+                    "name": "Grid Title Class",
+                    "description": "Additional class(es) to add to the title for styling purposes, e.g. 'h2 text--black mb-2'. Add 'custom' to remove other styles directly applied to this element.",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "id": "columns",
+            "name": "Grid Columns",
+            "attribute_definitions": [
+                {
+                    "id": "smDefaultColumns",
+                    "name": "Number of Columns on Mobile",
+                    "description": "Default is 2 Columns",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        6,
+                        12
+                    ],
+                    "default_value": 2,
+                    "required": false
+                },
+                {
+                    "id": "mdDefaultColumns",
+                    "name": "Number of Columns on Tablet",
+                    "description": "Default is 4 Columns",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        6,
+                        12
+                    ],
+                    "default_value": 4,
+                    "required": false
+                },
+                {
+                    "id": "lgDefaultColumns",
+                    "name": "Number of Columns on Desktop",
+                    "description": "Default is 12 Columns",
+                    "type": "enum",
+                    "values": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        6,
+                        12
+                    ],
+                    "default_value": 12,
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": [
+        {
+            "id": "gridItems",
+            "name": "Grid Items",
+            "component_type_inclusions": [
+                { "type_id": "flexible_grid_system.flexibleGridItem" }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+<isset name="customerPaypalPaymentInstruments" value="${pdict.paypal.customerPaypalPaymentInstruments}" scope="page" />
+<isset name="showDropdown" value="${customer.authenticated && !empty(customerPaypalPaymentInstruments)}" scope="page" />
+
+<div id="paypalAccountsDropdown" class="${showDropdown ? 'block' : 'none'}" >
+    <label class="form-control-label"
+        for="restPaypalAccountsList">${Resource.msg('paypal.checkout.paypalaccountlist.label', 'locale', null)}
+    </label>
+
+    <select name="restPaypalAccountsList" id="restPaypalAccountsList" class="form-control">
+        <option value="newaccount" ${!pdict.paypal.userIdToken  ? '' : 'selected'}>
+            ${Resource.msg('paypal.checkout.paypalaccountlist.newaccount', 'locale', null)}
+        </option>
+
+        <isif condition="${showDropdown}">
+            <isset name="getPaypalEmail" value="${pdict.paypal.getPaypalEmail}" scope="page" />
+
+            <isloop items="${customerPaypalPaymentInstruments}" var="instrument">
+                <option value="${getPaypalEmail(instrument)}"
+                    ${getPaypalEmail(instrument) === getPaypalEmail(pdict.paypal.lastAddedPaypalPaymentInstrument) && !pdict.paypal.userIdToken ? 'selected' : ''}>
+                    ${getPaypalEmail(instrument)}
+                </option>
+            </isloop>
+        </isif>
+    </select>
+</div>

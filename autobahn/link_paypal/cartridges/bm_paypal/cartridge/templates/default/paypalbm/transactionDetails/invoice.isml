@@ -1,0 +1,60 @@
+<isset name="order" value="${transaction.order}" scope="page"/>
+
+<table class="paypalbm_transaction_detail_table infobox w e s n">
+    <isif condition="${transaction.purchaseUnits.invoice_id !== undefined}">
+        <tr>
+            <td class="infobox_title top">${Resource.msg('transaction.detail.invnum', 'paypalbm', null)}:</td>
+            <td class="infobox_item top">${transaction.purchaseUnits.invoice_id}</td>
+        </tr>
+    </isif>
+    <tr class="paypalbm_gray">
+        <td class="infobox_title top">${Resource.msg('transaction.detail.ordertime', 'paypalbm', null)}:</td>
+        <td class="infobox_item top">${transaction.orderTimeCreated || transaction.orderTimeUpdated}</td>
+    </tr>
+    <tr>
+        <td class="infobox_title top">${Resource.msg('transaction.detail.paymentstatus', 'paypalbm', null)}:</td>
+        <td class="infobox_item top">${transaction.paymentstatus}
+        </td>
+    </tr>
+    <isif condition="${transaction.paymentMethod}">
+        <tr class="paypalbm_gray">
+            <td class="infobox_title top">${Resource.msg('transaction.detail.paymentmethod', 'paypalbm', null)}:</td>
+            <td class="infobox_item top">${transaction.paymentMethod}</td>
+        </tr>
+    </isif>
+    <tr>
+        <td class="infobox_title top"></td>
+        <td class="infobox_item top">
+            <ul class="paypalbm_transaction_actions">
+                <isset name="isOrder" value="${transaction.transactionid.indexOf('O-') !== -1}" scope="page" />
+
+                <iscomment> Refund button </iscomment>
+                <isif condition="${(transaction.paymentstatus !== 'REFUNDED' && (transaction.paymentstatus === 'COMPLETED' || transaction.paymentstatus === 'PARTIALLY_REFUNDED') && transaction.intent === 'CAPTURE') || ((transaction.paymentstatus === 'PARTIALLY_REFUNDED') && transaction.intent === 'AUTHORIZE')
+                 || transaction.paymentstatus === 'COMPLETED' && transaction.intent === 'AUTHORIZE'}">
+                    <li>
+                        <span class="js_paypal_action" data-action="refund" data-title="${Resource.msg('transaction.refund.title', 'paypalbm', null)}">${Resource.msg('transaction.actions.refund', 'paypalbm', null)}</span>
+                    </li>
+                </isif>
+
+                <iscomment> Reauthorize, Capture button </iscomment>
+                <isif condition="${!['VOIDED', 'CAPTURED', 'REFUNDED', 'DENIED'].includes(transaction.paymentstatus) && !transaction.isCaptured && transaction.isCaptureButtonAllowed}">
+                    <isif condition="${transaction.isExpiredHonorPeriod}">
+                        <li>
+                            <span class="js_paypal_action" data-action="reauthorize" data-title="${Resource.msg('transaction.reauthorize.title', 'paypalbm', null)}">${Resource.msg('transaction.actions.reauthorize', 'paypalbm', null)}</span>
+                        </li>
+                    </isif>
+                    <li>
+                        <span class="js_paypal_action" data-action="capture" data-title="${Resource.msg('transaction.capture.title', 'paypalbm', null)}">${Resource.msg('transaction.actions.capture', 'paypalbm', null)}</span>
+                    </li>
+                </isif>
+
+                <iscomment> Void button </iscomment>
+                <isif condition="${!['VOIDED', 'CAPTURED', 'REFUNDED', 'PARTIALLY_REFUNDED', 'DENIED'].includes(transaction.paymentstatus) && transaction.intent === 'AUTHORIZE' && empty(transaction.capturedAmount)}">
+                    <li>
+                        <span class="js_paypal_action" data-action="void" data-title="${Resource.msg('transaction.void.title', 'paypalbm', null)}">${Resource.msg('transaction.actions.void', 'paypalbm', null)}</span>
+                    </li>
+                </isif>
+            </ul>
+        </td>
+    </tr>
+</table>

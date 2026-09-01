@@ -1,0 +1,21 @@
+<isscript>
+    var resolvedProduct = (typeof product !== 'undefined' && product) ? product : pdict.product;
+</isscript>
+<isset name="product" value="${resolvedProduct}" scope="page" />
+<isset name="numberSlides" value="${resolvedProduct && resolvedProduct.images && resolvedProduct.images['large'] ? (resolvedProduct.images['large'].length + ('pdpGalleryAssets' in resolvedProduct ? resolvedProduct.pdpGalleryAssets.length : 0)).toFixed() : 0}" scope="page" />
+<isset name="hasSingleImage" value="${numberSlides > 1 ? false : true}" scope="page"/>
+
+<div class="main-content-group ${hasSingleImage ? '' : 'product-has-thumbnails'}">
+
+    <iscomment>Placeholder For rvw_integrations_core</iscomment>
+    <isinclude template="integrations/product/components/descDetailsIntegrationsBeforeMainAttributes" />
+
+    <isinclude template="product/components/mainAttributes" />
+
+    <isinclude template="product/components/attributes" />
+
+    <isinclude template="product/components/collapsibleContent" />
+
+    <iscomment>Placeholder For rvw_integrations_core</iscomment>
+    <isinclude template="integrations/product/components/descDetailsIntegrationsAfterLongDescription" />
+</div>

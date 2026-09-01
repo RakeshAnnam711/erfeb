@@ -1,0 +1,7 @@
+<p class="pt-3">
+    ${Resource.msg('payment.method.disabled.label', 'configuration', null)}
+
+    <a href="${URLUtils.url('PaymentMethod-Start')}">
+        ${Resource.msg('bm.payment.methods', 'configuration', null)}
+    </a>
+</p>

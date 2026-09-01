@@ -1,0 +1,13 @@
+<isif condition="${pdict.configurations.placements.length > 0}">
+   <div class="configurator">
+      <script src="${pdict.sdk}" defer="defer"></script>
+      <div
+         data-properties="${JSON.stringify(pdict.configurations)}"
+         data-onsave-url="${pdict.onSaveUrl}"
+         class="js-msg-configurator"
+         id="messaging-configurator">
+      </div>
+   </div>
+<iselse/>
+   <p class="pt-3">${Resource.msg('paylater.messaging.not.active', 'configuration', null)}</p>
+</isif>

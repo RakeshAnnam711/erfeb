@@ -1,0 +1,10 @@
+<isif condition="${dw.system.Site.current.getCustomPreferenceValue('enableRecaptcha')}">
+    <isset name="googleReCAPTCHAKey" value="${dw.system.Site.current.getCustomPreferenceValue('recaptchaSiteKey')}" scope="page"/>
+
+    <isif condition="${empty(googleReCAPTCHAKey)}">
+        <isset name="googleReCAPTCHAService" value="${require('*/cartridge/scripts/middleware/recaptcha.js').recaptchaVerifyService()}" scope="page"/>
+        <isset name="googleReCAPTCHAKey" value="${googleReCAPTCHAService.configuration.credential.password}" scope="page"/>
+    </isif>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=${googleReCAPTCHAKey}" defer></script>
+</isif>

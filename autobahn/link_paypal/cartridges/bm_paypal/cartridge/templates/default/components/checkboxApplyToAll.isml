@@ -1,0 +1,11 @@
+<isset name="uuid" value="${require('dw/util/UUIDUtils').createUUID()}" scope="page" />
+
+<div class="form-group">
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="${uuid}" name="applyToAll" value="true"/>
+
+        <label class="custom-control-label ml-0 mr-0 small lh-base" for="${uuid}">
+            ${Resource.msgf('checkbox.apply.all', 'configuration', null, msgArgument)}
+        </label>
+    </div>
+</div>

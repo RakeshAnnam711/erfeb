@@ -1,0 +1,42 @@
+<div class="dw-wizard-mask d-none js-dw-wizard">
+    <div class="apply-to-sites-wizard" dw-wizard-model="applyModel">
+        <div class="dw-nc-wizard">
+            <div class="dw-nc-wizard-header">
+                <button class="dw-nc-button-clear dw-nc-wizard-close dw-glyph dw-glyph-close js-dw-wizard-close"></button>
+                <h2 class="dw-nc-text-heading-medium">${Resource.msg('common.wizard.selection.pref', 'preferences', null)}</h2>
+            </div>
+
+            <ul class="dw-nc-wizard-progress dw-nc-wizard-progress-vertical js-progress-bar">
+                <li class="dw-nc-wizard-progress-item is-active" data-progress-id="preferenceSelection">
+                    <button class="dw-nc-button-clear dw-nc-wizard-progress-link dw-buttonlink js-dw-wizard-progress-link">
+                        ${Resource.msg('common.wizard.selection.pref', 'preferences', null)}
+                    </button>
+                </li>
+                <li class="dw-nc-wizard-progress-item is-disabled" data-progress-id="siteSelection">
+                    <button class="dw-nc-button-clear dw-nc-wizard-progress-link dw-buttonlink js-dw-wizard-progress-link">
+                        ${Resource.msg('common.wizard.selection.site', 'preferences', null)}
+                    </button>
+                </li>
+                <li class="dw-nc-wizard-progress-item is-disabled" data-progress-id="summary">
+                    <button class="dw-nc-button-clear dw-nc-wizard-progress-link dw-buttonlink js-dw-wizard-progress-link">
+                        ${Resource.msg('common.wizard.summary', 'preferences', null)}
+                    </button>
+                </li>
+            </ul>
+
+            <div class="dw-nc-wizard-body">
+                <isinclude template="preferences/components/wizardPreferenceSelection" />
+                <isinclude template="preferences/components/wizardSiteSelection" />
+                <isinclude template="preferences/components/wizardSummary" />
+            </div>
+
+            <div class="dw-nc-wizard-footer">
+                <button class="dw-button js-button-back" type="button" disabled="disabled">${Resource.msg('common.button.back', 'preferences', null)}</button>
+                <button class="dw-button dw-button-primary js-button-next" type="button" disabled="disabled">${Resource.msg('common.button.next', 'preferences', null)}</button>
+                <button class="dw-button dw-button-primary ng-hide js-button-apply" type="submit">${Resource.msg('common.button.apply', 'preferences', null)}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<isinclude template="preferences/components/wizardAlert" />

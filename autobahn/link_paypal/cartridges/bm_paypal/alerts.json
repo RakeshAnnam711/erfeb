@@ -1,0 +1,22 @@
+{
+    "alerts": [
+        {
+            "alert-id": "pp_failed_transactions_statuses",
+            "menu-action": "paypal-transactions-manager",
+            "message-resource-id": "failed_transactions",
+            "context-object-type": "dw.order.Order",
+            "priority": "WARN",
+            "remediation": {
+                "pipeline": "PaypalAdmin",
+                "start-node": "Orders"
+            }
+        },
+        {
+            "alert-id": "pp_migrate_billing_agreement",
+            "menu-action": "jobschedules",
+            "message-resource-id": "migrate_billing_agreement",
+            "context-object-type": "dw.customer.Customer",
+            "priority": "INFO"
+        }
+    ]
+}

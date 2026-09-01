@@ -1,0 +1,17 @@
+<isif condition="${pdict.paylaterMessagingAvailable}">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+
+        if (pdict.bannerSdkUrl && (!pdict.paypal || !pdict.paypal.pdpButtonEnabled || pdict.paypal.paypalEmail)) {
+            assets.addJs(pdict.bannerSdkUrl);
+        }
+
+        assets.addJs('js/int_paypal_paylater_messaging.js');
+    </isscript>
+
+    <div class="row ${pdict.action === 'Product-Show' ? 'mt-sm-2 px-4' : ''}">
+        <div class="col-sm-12">
+            <isinclude template="paypal/paylaterMessaging/messageConfig" />
+        </div>
+    </div>
+</isif>

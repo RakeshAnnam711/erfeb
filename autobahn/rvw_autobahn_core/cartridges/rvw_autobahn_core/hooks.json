@@ -1,0 +1,40 @@
+{
+    "hooks": [
+        {
+            "name": "app.contactUs.subscribe",
+            "script": "~/cartridge/scripts/helpers/email/contactus.js"
+        },
+        {
+            "name": "app.template.domInject",
+            "script": "~/cartridge/scripts/hooks/dom/inject"
+        },
+        {
+            "name": "app.payment.processor.basic_gift_certificate",
+            "script": "~/cartridge/scripts/hooks/payment/processor/basic_gift_certificate"
+        },
+        {
+            "name": "app.payment.form.processor.basic_gift_certificate",
+            "script": "~/cartridge/scripts/hooks/payment/processor/basic_gift_certificate"
+        },
+        {
+            "name": "app.activate.giftCertificate",
+            "script": "~/cartridge/scripts/hooks/giftCertificate/giftCertificateHooks"
+        },
+        {
+            "name": "app.server.registerRoute",
+            "script": "~/cartridge/scripts/hooks/siteContext.js"
+        },
+        {
+            "name": "app.server.registerRoute",
+            "script": "~/cartridge/scripts/hooks/abConfigs.js"
+        },
+        {
+            "name": "app.server.registerRoute",
+            "script": "~/cartridge/scripts/hooks/autobahnHeaders.js"
+        },
+        {
+            "name": "app.server.registerRoute",
+            "script": "~/cartridge/scripts/hooks/pageDesignerContentCache.js"
+        }
+    ]
+}

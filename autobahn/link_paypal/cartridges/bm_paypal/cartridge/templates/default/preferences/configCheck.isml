@@ -1,0 +1,175 @@
+<div class="pt-3 pb-2 js-config-check"
+    data-api-config="${pdict.apiConfig}"
+    data-resources="${pdict.resources}"
+    data-additional-data="${pdict.additionalData}"
+    data-test-connection-url="${pdict.testConnectionUrl}"
+    data-self-check-url="${pdict.selfCheckUrl}">
+
+    <button class="dw-button text-white bg-success border-success js-generate-config">
+        ${Resource.msg('button.generate.config', 'preferences', null)}
+    </button>
+
+    <button class="dw-button text-white bg-info border-info js-test-connection">
+        ${Resource.msg('button.test.connection', 'preferences', null)}
+    </button>
+
+    <button class="dw-button text-white bg-secondary border-secondary js-self-check">
+        ${Resource.msg('button.test.flows', 'preferences', null)}
+    </button>
+
+    <template class="js-form-template">
+        <form class="bg-white p-2 pt-3 js-form-generate-config" method="POST">
+            <p>
+                <b>${Resource.msg('configcheck.modal.text', 'preferences', null)}</b>
+            </p>
+
+            <div class="card rounded-0 bg-light">
+                <div class="card-body">
+                    <input type="hidden" name="siteId" value="${require('dw/system/Site').current.ID}" />
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" name="systemTypeDefinitions" type="checkbox" id="system-type-definitions" checked />
+                            <label class="form-check-label" for="system-type-definitions">
+                                <b>${Resource.msg('checkbox.customsitepreferences.label', 'preferences', null)}</b>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" name="services" type="checkbox" id="services" checked />
+                            <label class="form-check-label" for="services">
+                                <b>${Resource.msg('checkbox.services.label', 'preferences', null)}</b>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" name="paymentMethods" type="checkbox" id="payment-methods" checked />
+                            <label class="form-check-label" for="payment-methods">
+                                <b>${Resource.msg('checkbox.paymentmethods.label', 'preferences', null)}</b>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" name="logs" type="checkbox" id="logs" checked />
+                            <label class="form-check-label" for="logs">
+                                <b>${Resource.msg('checkbox.logs.label', 'preferences', null)}</b>
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="connection" id="connection" checked required disabled />
+                            <label class="form-check-label" for="connection">
+                                <b>${Resource.msg('checkbox.connection.label', 'preferences', null)}</b>
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="form-group">
+                        <label for="file-name">
+                            <b>${Resource.msg('input.exportfile.label', 'preferences', null)}</b>
+                        </label>
+
+                        <input type="text" name="fileName" class="form-control" id="file-name" value="plugin_configurations.zip" required pattern="^[a-zA-Z0-9_\-]{5,}\.zip$" title="${Resource.msg('input.filename.title', 'preferences', null)}" />
+                    </div>
+
+                    <div class="alert alert-info mb-0" role="alert">
+                        <div class="h6 mb-0 font-weight-bold">
+                            ${Resource.msg('configcheck.modal.alert', 'preferences', null)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </template>
+
+    <template class="js-self-check-template">
+        <form class="bg-white p-2 pt-3 js-form-self-check" method="POST">
+            <div class="card rounded-0 bg-light">
+                <div class="card-body">
+                    <p class="h6 font-weight-bold mb-3">
+                        ${Resource.msg('selfcheck.modal.head', 'preferences', null)}
+                    </p>
+
+                    <div class="alert alert-info" role="alert">
+                        <b>${Resource.msg('selfcheck.modal.note', 'preferences', null)}</b>
+                    </div>
+
+                    <div class="form-selfcheck">
+                        <input class="form-selfcheck-input" type="checkbox" name="all" id="all-config" value="" />
+                        <label class="form-selfcheck-label" for="all-config">
+                            <b>${Resource.msg('selfcheck.modal.checkbox.all', 'preferences', null)}</b>
+                        </label>
+                    </div>
+
+                    <hr/>
+
+                    <isloop items="${pdict.services}" var="service" status="loopstatus">
+                        <div class="form-group ${loopstatus.last ? 'mb-0': ''}">
+                            <div class="form-selfcheck">
+                                <input class="form-selfcheck-input js-selfcheck-checkbox" type="checkbox" name="service" id="${service.name}" ${service.primary ? 'checked required disabled' : ''} value="${service.name}"/>
+                                <label class="form-selfcheck-label" for="${service.name}">
+                                    <b>${Resource.msgf('selfcheck.modal.checkbox.label.service', 'preferences', null, service.name)}</b> <i></i>
+                                </label>
+                            </div>
+                        </div>
+                    </isloop>
+
+                    <hr/>
+
+                    <isloop items="${pdict.selfCheckFlows}" var="flow" status="loopstatus">
+                        <div class="form-group ${loopstatus.last ? 'mb-0': ''}">
+                            <div class="form-selfcheck">
+                                <input class="form-selfcheck-input js-selfcheck-checkbox" type="checkbox" name="flow" id="${flow.name}" ${flow.primary ? 'checked required disabled' : ''} value="${flow.name}"/>
+                                <label class="form-selfcheck-label" for="${flow.name}">
+                                    <b>${flow.name}</b> <i></i>
+                                </label>
+                            </div>
+                        </div>
+                    </isloop>
+
+                    <hr/>
+
+                    <isloop items="${pdict.selfCheckPayments}" var="payment" status="loopstatus">
+                        <div class="form-group ${loopstatus.last ? 'mb-0': ''}">
+                            <div class="form-selfcheck">
+                                <input class="form-selfcheck-input js-selfcheck-checkbox" type="checkbox" name="payment" id="${payment.name}" ${payment.primary ? 'checked required disabled' : ''} value="${payment.name}"/>
+                                <label class="form-selfcheck-label" for="${payment.name}">
+                                    <b>${payment.name}</b> <i></i>
+                                </label>
+                            </div>
+                        </div>
+                    </isloop>
+                </div>
+            </div>
+        </form>
+    </template>
+
+    <template class="js-progress-bar-template">
+        <ul class="dw-nc-wizard-progress dw-nc-wizard-progress-horizontal paypal-counter-reset d-flex justify-content-evenly p-5">
+            <li class="dw-nc-wizard-progress-item w-100 is-active" data-step-id="test-connection">
+                <button class="dw-nc-button-clear dw-nc-wizard-progress-link dw-buttonlink paypal-progress-item"></button>
+                <p class="text-center m-0">${Resource.msg('configcheck.modal.status.testconnection', 'preferences', null)}</p>
+            </li>
+            <li class="dw-nc-wizard-progress-item w-100" data-step-id="sfcc-site-archive-export">
+                <button class="dw-nc-button-clear dw-nc-wizard-progress-link dw-buttonlink paypal-progress-item"></button>
+                <p class="text-center m-0">${Resource.msg('configcheck.modal.status.export', 'preferences', null)}</p>
+            </li>
+            <li class="dw-nc-wizard-progress-item w-100" data-step-id="PpConfigCheckSiteArchiveProcessing">
+                <button class="dw-nc-button-clear dw-nc-wizard-progress-link dw-buttonlink paypal-progress-item"></button>
+                <p class="text-center m-0">${Resource.msg('configcheck.modal.status.process', 'preferences', null)}</p>
+            </li>
+        </ul>
+    </template>
+</div>

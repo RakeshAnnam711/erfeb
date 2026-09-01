@@ -1,0 +1,39 @@
+<isdecorate template="paypalbm/util/pageTemplatePaypal">
+    <isset name="transaction" value="${pdict.transaction}" scope="page" />
+    <isset name="handleAmount" value="${pdict.handleAmount}" scope="page" />
+    <isset name="transactionsUrl" value="${URLUtils.url('PaypalAdmin-Orders')}" scope="page" />
+
+    <div class="js_paypalbm_order_detail"
+        data-orderno="${transaction.order.orderNo}"
+        data-ordertoken="${transaction.order.orderToken}"
+        data-currencycode="${transaction.order.currencyCode}"
+    ></div>
+
+    <isinclude template="paypalbm/orderTransactionHeader" />
+
+    <isinclude template="paypalbm/transactionDetails/orderAmount" />
+    <isinclude template="paypalbm/transactionDetails/invoice" />
+    <isif condition="${transaction.purchase_units[0].shipping}">
+        <isinclude template="paypalbm/transactionDetails/orderShipping" />
+    </isif>
+    <isinclude template="paypalbm/transactionDetails/transactionHistory" />
+
+    <isif condition="${transaction.isTransactionLogEnabled}">
+        <isinclude template="paypalbm/transactionDetails/transactionLogs" />
+    </isif>
+
+
+    <div class="paypalbm_footer">
+        <a class="button" href="${transactionsUrl}">
+            &lt;&lt; ${Resource.msg('ordertransaction.backtolist', 'paypalbm', null)}
+        </a>
+    </div>
+
+    <isinclude template="paypalbm/components/actionCaptureForm" />
+    <isinclude template="paypalbm/components/actionRefundForm" />
+    <isinclude template="paypalbm/components/actionSaleForm" />
+    <isinclude template="paypalbm/components/actionAuthorizationForm" />
+    <isinclude template="paypalbm/components/actionReauthorizeForm" />
+    <isinclude template="paypalbm/components/actionVoidForm" />
+
+</isdecorate>

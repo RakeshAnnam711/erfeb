@@ -1,0 +1,14 @@
+<div class="toolbar-entry search-bar">
+    <div class="dw-search">
+        <input type="text" class="dw-text js-search-field" placeholder="${Resource.msg('common.label.search.by.id', 'preferences', null)}" />
+
+        <div class="dw-trigger dw-glyphicon d-inline-block align-top">
+            <button class="dw-button js-button-search" type="button">
+                <span role="img" class="dw-icon dw-glyph-search"></span>
+                <span class="dw-label">
+                    ${Resource.msg('common.button.find', 'preferences', null)}
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

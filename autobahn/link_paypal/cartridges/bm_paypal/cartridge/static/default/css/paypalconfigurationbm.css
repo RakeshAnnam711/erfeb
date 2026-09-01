@@ -1,0 +1,101 @@
+.paypal-cart-button {
+    position: sticky;
+    margin-top: 8%;
+    right: 13%;
+}
+
+.paypal-credit-banner {
+    margin-top: 8%;
+    right: 13%;
+}
+
+.custom-select:disabled {
+    opacity: 0.5;
+    user-select: none;
+    pointer-events: none;
+    background-image: none;
+}
+
+apple-pay-button {
+    --apple-pay-button-width: 2.5rem;
+    --apple-pay-button-height: 1.1875rem;
+    --apple-pay-button-border-radius: 0.3125rem;
+    --apple-pay-button-padding: 0.3125rem 1rem;
+
+    display: initial;
+}
+
+.flash-messages-container {
+    position: fixed;
+    width: 100%;
+    top: 1rem;
+    left: 0;
+    padding: 0 1rem;
+    z-index: 9999;
+    height: 0;
+}
+
+.flash-messages-container > .alert {
+    width: fit-content;
+    margin: 0 auto 1rem auto;
+}
+
+.form-group.required .form-control-label::before {
+    content: "*";
+    color: #c00;
+}
+
+.card-fields-form-input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    height: 40px;
+    background: white;
+    color: #3a3a3a;
+    max-width: 32em;
+    font-family: 'Helvetica', 'Tahoma', 'Calibri', sans-serif;
+}
+
+.form-control-color {
+    display: flex;
+    max-width: 3rem;
+    height: auto;
+    padding: 0.25rem;
+}
+
+.form-control-color:not(:disabled):not([readonly]) {
+    cursor: pointer;
+}
+
+.form-control-color::-moz-color-swatch {
+    height: 1.5em;
+    border-radius: 0.25rem;
+}
+
+.form-control-color::-webkit-color-swatch {
+    height: 1.5em;
+    border-radius: 0.25rem;
+}
+
+.grid-two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 5px;
+  align-content: start;
+}
+
+.grid-two-columns > div:empty {
+  display: none;
+}
+
+.lh-base { line-height: 1.5; }
+
+@media screen and (max-width: 1024px) {
+    .flash-messages-container > .alert {
+        width: 100%;
+    }
+}

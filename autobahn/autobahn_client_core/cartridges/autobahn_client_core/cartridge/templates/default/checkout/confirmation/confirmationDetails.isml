@@ -1,0 +1,46 @@
+<div class="row">
+
+    <div class="col-12 order-detail-md-width">
+        <isinclude template="integrations/checkout/confirmation/confirmationDetails/top" />
+
+        <div class="card confirm-details">
+            <div class="card-header">
+                <h2 class="card-header-custom">${Resource.msg('title.receipt', 'confirmation', null)}</h2>
+                <isinclude template="integrations/checkout/confirmation/confirmationDetails/additionalHeader" />
+            </div>
+
+            <div class="card-body">
+                <div class="order-receipt-section">
+                    <span class="summary-section-label order-number-label">${Resource.msg('label.order.number', 'confirmation', null)}</span>
+                    <span class="summary-details order-number">${pdict.order.orderNumber}</span>
+                    <iscomment> <span class="summary-section-label order-date-label">${Resource.msg('label.order.date', 'confirmation', null)}</span>
+                    <span class="summary-details order-date"><isprint value="${pdict.order.creationDate}" style="DATE_SHORT"/></span> </iscomment>
+                </div>
+                <div class="order-receipt-section">
+                    <iscomment> <span class="summary-section-label order-number-label">${Resource.msg('label.order.number', 'confirmation', null)}</span>
+                    <span class="summary-details order-number">${pdict.order.orderNumber}</span> </iscomment>
+                    <span class="summary-section-label order-date-label">${Resource.msg('label.order.date', 'confirmation', null)}</span>
+                    <span class="summary-details order-date"><isprint value="${pdict.order.creationDate}" style="DATE_SHORT"/></span>
+                </div>
+                <isinclude template="checkout/shipping/shippingSummary" />
+                <isinclude template="checkout/billing/billingSummary" />
+                
+            </div>
+        </div>
+
+        <div class="card checkout-order-total-summary">
+            <div class="card-body order-total-summary">
+                <isif condition="${!empty(pdict.order.totals.grandTotalLessGiftCertificatePaymentInstrumentsValue)}">
+                    <isinclude template="checkout/orderTotalSummary" />
+                </isif>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 order-detail-md-width checkout-order-summary">
+        <isif condition="${!empty(pdict.returningCustomer) && pdict.returningCustomer === false && pdict.order.orderEmail}">
+            <isinclude template="checkout/confirmation/confirmationCreateAccount" />
+        </isif>
+        <isinclude template="checkout/confirmationProductSummary" />
+    </div>
+</div>

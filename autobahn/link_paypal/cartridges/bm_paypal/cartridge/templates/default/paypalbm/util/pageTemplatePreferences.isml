@@ -1,0 +1,28 @@
+<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
+    <isreplace/>
+<iselse/>
+    <isdecorate template="application/MenuFrame">
+        <style>[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+
+        <link rel="stylesheet" href="${URLUtils.staticURL('jscript/ext/resources/css/ext-all.css')}" />
+        <link rel="stylesheet" href="${URLUtils.staticURL('css/bm.css')}" />
+        <link rel="stylesheet" href="${URLUtils.staticURL('css/bootstrap.min.css')}" />
+        <link rel="stylesheet" href="${URLUtils.staticURL('application/bm/lib/buist/resources/dw.ui.core.css')}" />
+        <link rel="stylesheet" href="${URLUtils.staticURL('application/bm/lib/buist/resources/dw.ui.core.directives.css')}" />
+        <link rel="stylesheet" href="${URLUtils.staticURL('application/bm/css/dw.ui.ecom.bm.app.css')}" />
+        <link rel="stylesheet" href="${URLUtils.staticURL('application/bm/css/dw.ui.ecom.bm.module.preference.css')}" />
+
+
+        <div class="paypalbm_content">
+            <isreplace/>
+        </div>
+
+        <isinclude template="components/flashMessages" />
+
+        <script src="${URLUtils.staticURL('jscript/ext/adapter/ext/ext-base.js')}" defer="defer"></script>
+        <script src="${URLUtils.staticURL('jscript/ext/ext-all.js')}" defer="defer"></script>
+        <script src="${URLUtils.staticURL('js/bm_paypal_tab.js')}" defer="defer"></script>
+        <script src="${URLUtils.staticURL('js/bm_paypal_preferences.js')}" defer="defer"></script>
+        <script src="${URLUtils.staticURL('js/bm_paypal_configCheck.js')}" defer="defer"></script>
+    </isdecorate>
+</isif>

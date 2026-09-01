@@ -1,0 +1,18 @@
+<isif condition="${transaction.paymentstatus !== 'REFUNDED'}">
+    <table class="paypalbm_transaction_detail_table infobox w e s n">
+        <tr class="paypalbm_gray">
+            <td class="infobox_title top">${Resource.msg('transaction.detail.shipaddress', 'paypalbm', null)}:</td>
+            <td class="infobox_item top" colspan="3">
+                <isset name="shipping" value="${transaction.order.shipments[0].shippingAddress}" scope="page" />
+                <isset name="shiptoname" value="${(shipping && shipping.fullName) || 'No name'}" scope="page" />
+                <isset name="shiptostreet" value="${(shipping && shipping.address1) || 'No street'}" scope="page" />
+                <isset name="shiptostreet2" value="${(shipping && shipping.address2) || ''}" scope="page" />
+                <isset name="shiptocity" value="${(shipping && shipping.city) || 'No city'}" scope="page" />
+                <isset name="shiptostate" value="${(shipping && shipping.stateCode) || 'No state'}" scope="page" />
+                <isset name="shiptozip" value="${(shipping && shipping.postalCode) || ''}" scope="page" />
+                <isset name="shiptocountry" value="${(shipping && shipping.countryCode && shipping.countryCode.value) || ''}" scope="page" />
+                <isprint value="${Resource.msgf('transaction.detail.shipaddressformat', 'paypalbm', null, shiptoname, shiptostreet, shiptostreet2, shiptocity, shiptostate, shiptozip, shiptocountry)}" encoding="jshtml"/>
+            </td>
+        </tr>
+    </table>
+</isif>

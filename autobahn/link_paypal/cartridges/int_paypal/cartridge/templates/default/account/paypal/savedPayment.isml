@@ -1,0 +1,2 @@
+<p>${payment.creditCardType}${payment.maskedCreditCardNumber}</p>
+<p>${Resource.msg('label.payment.expirationdate', 'account', null).toLowerCase()} ${payment.creditCardExpirationMonth}/${payment.creditCardExpirationYearShort}</p>

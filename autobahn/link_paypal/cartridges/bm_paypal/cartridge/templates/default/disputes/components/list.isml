@@ -1,0 +1,44 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td class="table_header aldi" nowrap="nowrap">${Resource.msg('dispute.label.id', 'disputes', null)}</td>
+            <td class="table_header n e s" nowrap="nowrap">${Resource.msg('dispute.label.createtime', 'disputes', null)}</td>
+            <td class="table_header n e s" nowrap="nowrap">${Resource.msg('dispute.label.updatetime', 'disputes', null)}</td>
+            <td class="table_header n e s" nowrap="nowrap">${Resource.msg('dispute.label.reason', 'disputes', null)}</td>
+            <td class="table_header n e s" nowrap="nowrap">${Resource.msg('dispute.label.status', 'disputes', null)}</td>
+            <td class="table_header n e s" nowrap="nowrap">${Resource.msg('dispute.label.amount', 'disputes', null)}</td>
+            <td class="table_header n e s" nowrap="nowrap">${Resource.msg('dispute.label.details', 'disputes', null)}</td>
+            <td class="table_header n e s" nowrap="nowrap">${Resource.msg('dispute.label.manage', 'disputes', null)}</td>
+        </tr>
+
+        <isloop items="${pdict.PagingModel.pageElements}" var="item" status="loopstatus">
+            <tr data-dispute-id="${item.dispute_id}">
+                <td class="table_detail w e s">
+                    <a class="table_detail_link" href="${pdict.resolutionCenterLink}/${item.dispute_id}" target="_blank" rel="noopener">${item.dispute_id}</a>
+                </td>
+                <td class="table_detail e s dispute-create_time">${item.create_time}</td>
+                <td class="table_detail e s dispute-update_time">${item.update_time}</td>
+                <td class="table_detail e s dispute-reason">${item.reason}</td>
+                <td class="table_detail e s dispute-status">${item.status}</td>
+                <td class="table_detail e s dispute-amount">${item.amount}</td>
+                <td class="table_detail e s">
+                    <a class="table_detail_link js-dispute-details"
+                        href="${URLUtils.url('Disputes-Details', 'dispute_id', item.dispute_id)}"
+                    >
+                        ${Resource.msg('dispute.view.details', 'disputes', null)}
+                    </a>
+                </td>
+                <td class="table_detail e s">
+                    <a class="table_detail_link" href="${pdict.resolutionCenterLink}/${item.dispute_id}" target="_blank" rel="noopener">
+                        ${Resource.msg('dispute.resolutioncenter', 'disputes', null)}
+                    </a>
+                </td>
+            </tr>
+        </isloop>
+
+    </tbody>
+</table>
+
+<isinclude template="paypalbm/util/modules" />
+
+<ispaypalpagination pageurl="${URLUtils.https('Disputes-Start')}" pagingmodel="${pdict.PagingModel}"/>

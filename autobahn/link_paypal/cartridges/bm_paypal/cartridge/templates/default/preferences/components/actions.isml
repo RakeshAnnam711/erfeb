@@ -1,0 +1,15 @@
+<div class="headerActions">
+    <div class="screenActions">
+        <button class="dw-button js-action-cancel" type="reset" name="cancel" form="${pdict.attributeGroup.ID}">
+            ${Resource.msg('common.button.cancel', 'preferences', null)}
+        </button>
+
+        <button class="dw-button js-action-apply-to-sites" type="button" name="apply-to-sites" form="${pdict.attributeGroup.ID}">
+            ${Resource.msg('common.button.apply.to.sites', 'preferences', null)}
+        </button>
+
+        <button class="dw-button dw-primary js-action-save" type="submit" name="save" form="${pdict.attributeGroup.ID}">
+            ${Resource.msg('common.button.save', 'preferences', null)}
+        </button>
+    </div>
+</div>

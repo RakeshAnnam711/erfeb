@@ -1,0 +1,25 @@
+<div class="tab-pane googlepay-content js-googlepay-content" id="googlepay-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control"
+               name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+               value="${pdict.paypal.googlePayPaymentMethodId}"/>
+
+        <div class="paypal_onApprove">
+            <input class="js-used-payment-method" type="hidden" name="${pdict.forms.billingForm.paypal.usedPaymentMethod.htmlName}"
+                   value="${pdict.paypal.googlePayPaymentMethodId}"/>
+            <input id="googlepay-email-address" type="hidden" name="${pdict.forms.billingForm.paypal.googlePay.googlePayEmailAddress.htmlName}"
+                   value=""/>
+            <input id="googlepay-billing-address-as-string" type="hidden" name="${pdict.forms.billingForm.paypal.googlePay.googlePayBillingAddressAsString.htmlName}"
+                   value=""/>
+        </div>
+
+        <div class="text-center">
+            <div class="paypalLoader paypal-loader-container js-paypal-googlepay-loader">
+                <i class="paypal-loader"></i>
+            </div>
+            <div class="js-paypal-googlepay-button" data-googlepay-config="${JSON.stringify(pdict.paypal.googlePayConfigs)}">
+                <div class="js-googlepay-${pdict.paypal.googlePayConfigs.pageFlow}-btn mx-auto"></div>
+            </div>
+        </div>
+    </fieldset>
+</div>

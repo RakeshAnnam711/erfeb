@@ -1,0 +1,5 @@
+ <isif condition="${!empty(pdict.asset)}">
+    <isset name="contentAsset" value="${pdict.asset}" scope="page"/>
+    <isset name="index" value="${0}" scope="page"/>
+    <isinclude template="search/components/contentTile" />
+</isif>

@@ -1,0 +1,25 @@
+<td class="dw-grid-column">
+    <div class="dw-grid-column-inner py-1">
+        <isif condition="${attributeDefinition.defaultValue && attributeDefinition.defaultValue.displayValue}">
+            <isset name="defaultValue" value="${attributeDefinition.defaultValue.displayValue}" scope="page" />
+
+            <div class="bm-value fadeExcess js-default-value" data-default-val="${defaultValue}">
+                <isif condition="${defaultValue === 'true'}">
+                    <div title="${Resource.msg('common.option.label.yes', 'preferences', null)}">
+                        ${Resource.msg('common.option.label.yes', 'preferences', null)}
+                    </div>
+                <iselseif condition="${defaultValue === 'false'}"/>
+                    <div title="${Resource.msg('common.option.label.no', 'preferences', null)}">
+                        ${Resource.msg('common.option.label.no', 'preferences', null)}
+                    </div>
+                <iselse/>
+                    <div title="${defaultValue}">${defaultValue}</div>
+                </isif>
+
+                <span class="is-default ng-hide">
+                    ${Resource.msg('common.label.default.indicator', 'preferences')}
+                </span>
+            </div>
+        </isif>
+    </div>
+</td>

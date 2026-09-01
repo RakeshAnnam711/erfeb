@@ -1,0 +1,27 @@
+<isif condition="${contentFolders.get(folderName) && !contentFolders.get(folderName).contentList.empty || !contentFolders.get(folderName).subFolders.empty}">
+    <div class="card collapsible-sm">
+        <div class="card-header" id="collapsible-title-${loopState && loopState.count ? loopState.count : '1'}">
+            <button type="button" class="card-title title custom" aria-expanded="false" aria-controls="collapsible-description-${loopState && loopState.count ? loopState.count : '1' }"><isprint value="${folderName}"/></button>
+        </div>
+        <div class="card-body" aria-labelledby="collapsible-title-${loopState && loopState.count ? loopState.count : '1'}">
+
+            <iscomment>Loop Through Folder Library assets </iscomment>
+            <isloop items="${contentFolders.get(folderName).contentList}" var="ContentAsset" status="loopcounter">
+                <isset name="isActive" value="${pageId === ContentAsset.ID}" scope="page"/>
+                <a class="d-block ${isActive ? 'active' : ''} page-${pageId} asset-${ContentAsset.ID}" href="${URLUtils.url('Page-Show','cid', ContentAsset.ID)}" title="${ContentAsset.name}" id="collapsible-description-${loopState && loopState.count ? loopState.count : '1'}">
+                    <isprint value="${ContentAsset.name}"/>
+                </a>
+            </isloop>
+
+            <iscomment>Loop Through Subfolders </iscomment>
+            <isif condition="${contentFolders.get(folderName) && !contentFolders.get(folderName).subFolders.empty}">
+                <isset name="previousLevelContentFolders" value="${contentFolders}" scope="page"/>
+                <isset name="contentFolders" value="${contentFolders.get(folderName).subFolders}" scope="page"/>
+                <isloop items="${contentFolders.keySet()}" var="folderName" status="foldersLoopState">
+                    <isinclude template="components/content/folderBasedNavigationCards"/>
+                </isloop>
+                <isset name="contentFolders" value="${previousLevelContentFolders}" scope="page"/>
+            </isif>
+        </div>
+    </div>
+</isif>

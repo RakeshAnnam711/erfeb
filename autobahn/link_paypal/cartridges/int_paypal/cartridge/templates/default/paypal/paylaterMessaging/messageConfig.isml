@@ -1,0 +1,24 @@
+<isset name="messagingConfig" value="${pdict.paylaterMessaging.config}" scope="page" />
+
+<isif condition="${pdict.action.toLowerCase().startsWith('product')}">
+    <isset name="ppMessage" value="${messagingConfig[product.id] || messagingConfig.product}" scope="page" />
+<iselse/>
+    <isset name="ppMessage" value="${messagingConfig}" scope="page" />
+</isif>
+
+<div class="row">
+    <div class="col-12">
+        <div class="mb-2 ${ppMessage.placement}-message js-${ppMessage.placement}-message"
+            data-pp-message
+            data-pp-placement="${ppMessage.placement}"
+            data-pp-amount="${ppMessage.amount}"
+            data-pp-style-layout="${ppMessage.layout}"
+            data-pp-style-logo-type="${ppMessage["logo-type"] || ''}"
+            data-pp-style-logo-position="${ppMessage["logo-position"] || ''}"
+            data-pp-style-text-color="${ppMessage["text-color"] || ''}"
+            data-pp-style-text-size="${ppMessage["text-size"] || ''}"
+            data-pp-currency="${pdict.paylaterMessaging.currencyCode || ''}"
+            data-pp-buyercountry="${pdict.paylaterMessaging.locale || ''}">
+        </div>
+    </div>
+</div>

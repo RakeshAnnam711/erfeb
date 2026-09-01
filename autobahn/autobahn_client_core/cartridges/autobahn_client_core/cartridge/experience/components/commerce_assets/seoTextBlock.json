@@ -1,0 +1,59 @@
+{
+    "name": "SEO Text Block",
+    "description": "A content component that displays a title and body text, allowing custom alignment and styling",
+    "group": "wgaca_assets",
+    "attribute_definition_groups": [
+    	{
+	    	"id": "textContainer",
+	      	"attribute_definitions": [
+				{
+					"id": "textContainerClass",
+					"name": "Text Container Class",
+					"type": "string",
+					"description": "Add a class to the text container to adjust spacing, alignment, or styling of the content. e.g. 'p-2'. See the Style Guide for more class options.",
+					"required": false
+				},
+	     		{
+	          		"id": "title",
+	          		"name": "Title",
+	          		"type": "string",
+	          		"required": false
+	        	},
+				{
+					"id": "titleHeadingTag",
+					"name": "Title Heading Tag",
+					"description": "Specifies the HTML heading tag (h2–h4) to be used for the title.Defaults to 'h2'",
+					"type": "enum",
+				    "values": ["h2", "h3", "h4"],
+				    "default_value": "h2",
+					"required": false
+			    },
+				{
+					"id": "titleAlignment",
+					"name": "Title Alignment",
+					"description": "Title alignment, default is center",
+					"type": "enum",
+					"values": ["left", "center", "right"],
+					"default_value": "center",
+					"required": false
+			    },
+				{
+					"id": "bodyText",
+					"name": "Body Text",
+					"type": "markup",
+					"required": false
+				},
+				{
+					"id": "bodyTextAlignment",
+					"name": "Body Text Alignment",
+					"description": "Body text alignment, default is left",
+					"type": "enum",
+					"values": ["left", "center", "right"],
+					"default_value": "left",
+					"required": false
+			    }
+	      	]
+	    }
+    ],
+    "region_definitions": []
+}

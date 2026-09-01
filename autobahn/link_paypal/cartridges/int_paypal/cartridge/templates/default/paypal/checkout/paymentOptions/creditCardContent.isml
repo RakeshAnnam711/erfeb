@@ -1,0 +1,26 @@
+<isset name="isSavedCreditCards" value="${!empty(payPalData.cardFieldsConfigs.customerSavedCreditCards)}" scope="page" />
+<isset name="isCreditCardVaultEnabled" value="${payPalData.cardFieldsConfigs.isCreditCardVaultEnabled}" scope="page" />
+
+<div class="tab-pane credit-card-content" id="credit-card-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <input type="hidden" class="form-control" name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+            value="${payPalData.paypalPaymentMethodId}"/>
+
+        <div class="credit-card-onApprove">
+            <input class="js-used-payment-method" type="hidden" name="${pdict.forms.billingForm.paypal.usedPaymentMethod.htmlName}"
+                value="${payPalData.cardFieldsConfigs.creditCardPmId}"/>
+
+            <input id="credit-card-saveAccount" type="hidden" name="${pdict.forms.billingForm.paypal.saveCreditCardAccount.htmlName}" value="" />
+        </div>
+
+        <isif condition="${isSavedCreditCards && isCreditCardVaultEnabled}">
+            <div class="form-group">
+                <isinclude template="paypal/checkout/creditCardAccountsDropdown" />
+            </div>
+        </isif>
+
+        <fieldset class="credit-card-form" style="padding: 1rem">
+            <isinclude template="paypal/checkout/creditCardForm" />
+        </fieldset>
+    </fieldset>
+</div>

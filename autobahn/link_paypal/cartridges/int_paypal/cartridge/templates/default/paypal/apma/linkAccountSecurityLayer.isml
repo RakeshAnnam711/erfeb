@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/paypal.css')}"/>
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/global.css')}" />
+
+<script defer="defer" src="${URLUtils.staticURL('/js/int_paypal_accountLinkingSecurityLayer.js')}"></script>
+
+
+<div class="container">
+
+    <div class="modal-header">${Resource.msg('paypal.account.linking.title', 'locale', null)}</div>
+
+    <div class="paypal-info_title">
+        <h3>${Resource.msg('paypal.account.linking.existed.account', 'locale', null)}</h3>
+    </div>
+
+    <form action="${pdict.actionUrl}" class="login" method="POST" name="login-form">
+        <div class="error d-none">
+            <div class="alert alert-danger alert-dismissible valid-cart-error show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span class="error-message"></span>
+            </div>
+        </div>
+
+        <div class="form-group required d-none">
+            <input type="email" id="login-form-email" required aria-required="true" class="form-control required" aria-describedby="form-email-error" name="loginEmail" value="${pdict.paypal.payPalEmail}">
+        </div>
+
+        <div class="form-group required">
+            <label class="form-control-label" for="login-form-password">
+                ${Resource.msg('label.input.login.password', 'login', null)}
+            </label>
+            <input type="password" id="login-form-password" required aria-required="true" class="form-control required" aria-describedby="form-password-error" name="loginPassword">
+            <div class="invalid-feedback" id="form-password-error"></div>
+        </div>
+
+        <div class="clearfix">
+            <div class="pull-right forgot-password text-right">
+                <a href="${URLUtils.url('Account-PasswordReset')}" title="${Resource.msg('link.login.forgotpassword', 'login', null)}">
+                    ${Resource.msg('link.login.forgotpassword', 'login', null)}
+                </a>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-block btn-primary">${Resource.msg('paypal.account.linking.confirm', 'locale', null)}</button>
+
+        <button class="cancel-btn btn btn-block btn-outline-primary">${Resource.msg('paypal.account.linking.cancel', 'locale', null)}</button>
+
+        <input type="hidden" id="csrf_token" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}" />
+    </form>
+</div>

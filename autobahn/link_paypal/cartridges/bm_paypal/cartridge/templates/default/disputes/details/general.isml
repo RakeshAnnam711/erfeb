@@ -1,0 +1,72 @@
+<table class="paypalbm_detail_table paypalbm_transaction_detail_table infobox w e s n">
+    <tbody>
+        <isif condition="${entry.dispute_amount}">
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.amount', 'disputes', null)}:</td>
+                <td class="infobox_item top">
+                    ${entry.dispute_amount.value}
+                    ${entry.dispute_amount.currency_code}
+                </td>
+            </tr>
+        </isif>
+
+        <isif condition="${entry.reason}">
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.reason', 'disputes', null)}:</td>
+                <td class="infobox_item top">${entry.reason}</td>
+            </tr>
+        </isif>
+
+        <isif condition="${entry.status}">
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.status', 'disputes', null)}:</td>
+                <td class="infobox_item top dispute-highlight">${entry.status}</td>
+            </tr>
+        </isif>
+
+        <isif condition="${entry.offer && entry.offer.buyer_requested_amount}">
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.buyer.requestedamount', 'disputes', null)}:</td>
+                <td class="infobox_item top">
+                    ${entry.offer.buyer_requested_amount.value}
+                    ${entry.offer.buyer_requested_amount.currency_code}
+                </td>
+            </tr>
+        </isif>
+
+        <isif condition="${entry.offer && entry.offer.seller_offered_amount}">
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.seller.offeredamount', 'disputes', null)}:</td>
+                <td class="infobox_item top">
+                    ${entry.offer.seller_offered_amount.value}
+                    ${entry.offer.seller_offered_amount.currency_code}
+                </td>
+            </tr>
+        </isif>
+
+        <isif condition="${entry.offer && entry.offer.offer_type}">
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.seller.offertype', 'disputes', null)}:</td>
+                <td class="infobox_item top">${entry.offer.offer_type}</td>
+            </tr>
+        </isif>
+
+        <isif condition="${entry.buyer_response_due_date}">
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.buyer.responseduedate', 'disputes', null)}:</td>
+                <td class="infobox_item top dispute-highlight">
+                    <isprint value="${new Date(entry.buyer_response_due_date)}" formatter="M/dd/yy" />
+                </td>
+            </tr>
+        </isif>
+
+        <isif condition="${entry.seller_response_due_date}">
+            <tr>
+                <td class="infobox_title top">${Resource.msg('dispute.detail.seller.responseduedate', 'disputes', null)}:</td>
+                <td class="infobox_item top dispute-highlight">
+                    <isprint value="${new Date(entry.seller_response_due_date)}" formatter="M/dd/yy" />
+                </td>
+            </tr>
+        </isif>
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+<isset name="applePayConfigs" value="${pdict.paypal.applePayConfigs}" scope="page"/>
+
+<script src="${applePayConfigs.sdk}"></script>
+
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    if (!pdict.paypal.venmoOrPayPalButtonEnabled) {
+        assets.addJs(pdict.paypal.sdkUrl);
+    }
+    assets.addJs('/js/int_paypal_pdp.js');
+    assets.addCss('/css/paypal.css');
+</isscript>
+
+<div class="row">
+    <div class="js-applepay-content col-12" id="applepay-content">
+        <div class="applepay-pdp-buttons-wrap">
+            <div class="applepay-pdp-button-wrap js-applepay-pdp-button-wrap d-none">
+                <div id="applepay-pdp-button" class="applepay-pdp-button js-applepay-button justify-content-center"
+                    data-configs="${JSON.stringify(applePayConfigs)}"
+                    data-paypal-billing-form-fields="${JSON.stringify(pdict.paypal.applePayFormFields)}">
+                    <isinclude template="paypal/components/applePayButton"/>
+                </div>
+                <div class="paypalLoader paypal-loader-container">
+                    <i class="paypal-loader"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

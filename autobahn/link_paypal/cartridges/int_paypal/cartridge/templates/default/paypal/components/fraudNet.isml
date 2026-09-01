@@ -1,0 +1,12 @@
+<script type="application/json" fncls="fnparams-dede7cc5-15fd-4c75-a9f4-36c430ee3a99">
+    {
+        "f":"${pdict.paypal.fraudNet.fraudNetUID}",
+        "s":"${fraudNetLocation}"
+    }
+</script>
+
+<script src="${pdict.paypal.fraudNet.paypalFraudNetScriptLink}"></script>
+
+<noscript>
+    <img src="${pdict.paypal.fraudNet.fraudNetNoScriptURL + '&s=' + fraudNetLocation}" alt="" />
+</noscript>

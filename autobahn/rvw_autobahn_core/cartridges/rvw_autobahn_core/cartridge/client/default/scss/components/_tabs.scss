@@ -1,0 +1,133 @@
+.nav-links,
+.nav-tabs,
+.nav-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    .nav-item {
+        white-space: nowrap;
+    }
+}
+
+.nav-tabs {
+    border-bottom: none;
+    padding-bottom: $tab-border-width;
+    .nav-link {
+        border-radius: $tab-border-radius-top-left $tab-border-radius-top-right $tab-border-radius-bottom-right $tab-border-radius-bottom-left;
+        border-top: $tab-border-top;
+        border-right: $tab-border-right;
+        border-bottom: $tab-border-bottom;
+        border-left: $tab-border-left;
+        font: $tab-font;
+        text-transform: $tab-text-transform;
+        font-weight: $tab-font-weight;
+        text-decoration: $tab-text-decoration;
+        letter-spacing: $tab-letter-spacing;
+        padding: $tab-padding-top $tab-padding-right $tab-padding-bottom $tab-padding-left;
+        background-color: $tab-background;
+        color: $tab-color;
+        &:hover {
+            border-top: $tab-border-top-hover;
+            border-right: $tab-border-right-hover;
+            border-bottom: $tab-border-bottom-hover;
+            border-left: $tab-border-left-hover;
+            text-decoration: $tab-text-decoration-hover;
+            background-color: $tab-background-hover;
+            color: $tab-color-hover;
+        }
+        &.active {
+            border-top: $tab-border-top-active;
+            border-right: $tab-border-right-active;
+            border-bottom: $tab-border-bottom-active;
+            border-left: $tab-border-left-active;
+            text-decoration: $tab-text-decoration-active;
+            background-color: $tab-background-active;
+            color: $tab-color-active;
+        }
+    }
+    // remove styles if there is only one tab
+    .nav-item:only-child .nav-link {
+        border: none;
+        background: transparent;
+    }
+}
+
+.nav-links {
+    .nav-link {
+        font: $link-tab-font;
+        text-transform: $link-tab-text-transform;
+        font-weight: $link-tab-font-weight;
+        text-decoration: $link-tab-text-decoration;
+        letter-spacing: $link-tab-letter-spacing;
+        color: $link-tab-color;
+        padding: $link-tab-padding-top $link-tab-padding-right $link-tab-padding-bottom $link-tab-padding-left;
+        &:hover {
+            text-decoration: $link-tab-text-decoration-hover;
+            color: $link-tab-color-hover;
+            font-weight: $link-tab-font-weight-hover;
+            text-transform: $link-tab-text-transform-hover;
+        }
+        &.active {
+            text-decoration: $link-tab-text-decoration-active;
+            color: $link-tab-color-active;
+            font-weight: $link-tab-font-weight-active;
+            text-transform: $link-tab-text-transform-active;
+        }
+    }
+}
+
+.nav-pills {
+    .nav-link {
+        font: $pills-tab-font;
+        text-transform: $pills-tab-text-transform;
+        font-weight: $pills-tab-font-weight;
+        text-decoration: $pills-tab-text-decoration;
+        letter-spacing: $pills-tab-letter-spacing;
+        background-color: $pills-tab-background;
+        color: $pills-tab-color;
+        padding: $pills-tab-padding-top $pills-tab-padding-right $pills-tab-padding-bottom $pills-tab-padding-left;
+        border-radius: $pills-tab-border-radius;
+        &:hover {
+            text-decoration: $pills-tab-text-decoration-hover;
+            background-color: $pills-tab-background-hover;
+            color: $pills-tab-color-hover;
+        }
+        &.active {
+            text-decoration: $pills-tab-text-decoration-active;
+            background-color: $pills-tab-background-active;
+            color: $pills-tab-color-active;
+        }
+    }
+}
+
+// handle tab nav overflow state
+.nav-tabs-container {
+    position: relative;
+
+    &.has-overflow {
+        // apply overflow gradient when tabs are scrollable
+        &::after {
+            content: '';
+            animation: fadeIn $transition-speed;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: calc(var(--nav-tabs-height) - #{$custom-scrollbar-size});
+            background: $page-background-color;
+            mask-image: linear-gradient(to left, rgba($black, 1) 0%, transparent);
+            mask-size: 40px 100%;
+            mask-position: top right;
+            mask-repeat: no-repeat;
+            pointer-events: none;
+        }
+        // adjust spacing if scrollbar is present
+        .nav.custom-scrollbar {
+            padding-right: $spacer;
+            &.nav-pills {
+                padding-bottom: $pills-tab-padding-bottom;
+            }
+        }
+    }
+}

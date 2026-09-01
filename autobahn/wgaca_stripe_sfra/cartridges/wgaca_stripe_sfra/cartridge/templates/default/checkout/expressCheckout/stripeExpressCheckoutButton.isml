@@ -1,0 +1,51 @@
+<isset name="stripeHelper" value="${require('*/cartridge/scripts/stripe/helpers/stripeHelper')}" scope="page" />
+<isset name="stripeEnabled" value="${stripeHelper.isStripeEnabled()}" scope="page" />
+<isset name="isStripeExpressCheckoutEnabledProductPage" value="${stripeHelper.getStripeExpressCheckoutProductPageEnabled()}" scope="page" />
+<isset name="isStripeExpressCheckoutEnabledCartPage" value="${stripeHelper.getStripeExpressCheckoutCartPageEnabled()}" scope="page" />
+<isset name="stripePublicKey" value="${stripeHelper.getPublicApiKey()}" scope="page" />
+<isset name="stripeScriptUrl" value="${stripeHelper.getStripeScriptUrl()}" scope="page" />
+<isset name="isUSLocale" value="${request.locale && request.locale.indexOf('_US') !== -1}" scope="page" />
+<isset name="isProductInStock" value="${pdict.product ? (pdict.product.readyToOrder && pdict.product.available) : true}" scope="page" />
+<isset name="currentBasket" value="${dw.order.BasketMgr.getCurrentBasket()}" scope="page" />
+
+<isif condition="${stripeEnabled && (isStripeExpressCheckoutEnabledProductPage || isStripeExpressCheckoutEnabledCartPage) && stripePublicKey && isUSLocale}">
+    <isset name="stripeApiVersion" value="${stripeHelper.getStripeApiVersion()}" scope="page" />
+    <isset name="stripeOrder" value="${currentBasket ? require('*/cartridge/scripts/stripe/helpers/checkoutHelper').getStripeOrderDetails(currentBasket) : null}" scope="page" />
+    <isset name="stripeCheckoutHelper" value="${require('*/cartridge/scripts/stripe/helpers/checkoutHelper')}" scope="page" />
+    <isset name="stripeExpressCheckoutAppearance" value="${JSON.stringify(stripeHelper.getStripeExpressCheckoutAppearance())}" scope="page" />
+
+    <input type="hidden" id="stripePublicKey" value="${stripePublicKey}" />
+    <input type="hidden" id="stripeApiVersion" value="${stripeApiVersion}" />
+    <input type="hidden" id="stripe_express_checkout_url" value="${URLUtils.https("StripePaymentsAPM-StripeQuickCheckout")}" />
+    <input type="hidden" id="stripe_return_url" value="${URLUtils.https("StripePaymentsAPM-HandleAPM")}" />
+    <input type="hidden" id="stripe_get_shipping_options" value="${URLUtils.https("Stripe-GetShippingOptions")}" />
+    <input type="hidden" id="logStripeErrorMessageURL" value="${URLUtils.https('StripePaymentsAPM-LogStripeErrorMessage')}" />
+    <input type="hidden" id="stripeCaptureMethod" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('stripeChargeCapture') ? 'automatic' : 'manual'}" />
+    <input type="hidden" id="stripeExpressCheckoutAppearance" value="${stripeExpressCheckoutAppearance}" />
+    <input type="hidden" id="stripePaymentMethodsInBeta" value="${stripeHelper.getPaymentMethodsInBeta()}" />
+    <input type="hidden" id="stripe_order_amount" value="${stripeOrder ? stripeOrder.amount : 0}" />
+    <input type="hidden" id="stripe_order_currency" value="${stripeOrder && stripeOrder.currency ? stripeOrder.currency : (session.currency && session.currency.currencyCode ? session.currency.currencyCode : dw.system.Site.getCurrent().getDefaultCurrency())}" />
+
+    <isif condition="${stripeScriptUrl}">
+        <script src="${stripeScriptUrl}"></script>
+    </isif>
+
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/stripe.expressCheckout.js');
+    </isscript>
+
+    <isset name="displayExpressCheckout" value="false" scope="page" />
+
+    <isif condition="${pdict.product}">
+        <isset name="displayExpressCheckout" value="${isStripeExpressCheckoutEnabledProductPage && isProductInStock}" scope="page" />
+        <input type="hidden" id="stripeProductPrice" value="${pdict.product.price.sales.value}" />
+    <iselseif condition="${isStripeExpressCheckoutEnabledCartPage}"/>
+        <isset name="displayExpressCheckout" value="true" scope="page" />
+    </isif>
+
+    <isif condition="${displayExpressCheckout}">
+        <div class="${pdict.product ? 'isProductPage' : ''}" id="express-checkout-element"></div>
+        <input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}" />
+    </isif>
+</isif>

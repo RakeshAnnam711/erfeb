@@ -1,0 +1,47 @@
+<isdecorate template="paypalbm/util/pageTemplateDisputes">
+    <isset name="entry" value="${pdict.dispute}" scope="page" />
+
+    <input type="hidden" class="js-dispute-for-update" data-dispute-id="${entry.dispute_id}" data-dispute="${pdict.diffsForUpdate}" data-stats="${pdict.stats}" />
+
+    <div class="paypalbm_content">
+        <h2>${Resource.msgf('dispute.detail.title', 'disputes', null, entry.dispute_id)}</h2>
+
+        <div class="dispute-subcontent">
+            <p>
+                <b>${Resource.msg('dispute.label.createtime', 'disputes', null)}:</b>
+                <isprint value="${new Date(entry.create_time)}" formatter="M/dd/yy h:mm a" />
+            </p>
+
+            <p>
+                <b>${Resource.msg('dispute.label.updatetime', 'disputes', null)}:</b>
+                <isprint value="${new Date(entry.update_time)}" formatter="M/dd/yy h:mm a" />
+            </p>
+        </div>
+
+        <isinclude template="disputes/details/general"/>
+
+        <table class="paypalbm_detail_table paypalbm_transaction_detail_table infobox w e s n">
+            <tbody>
+                <isif condition="${entry.dispute_life_cycle_stage}">
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.lifecyclestage', 'disputes', null)}:</td>
+                        <td class="infobox_item top">${entry.dispute_life_cycle_stage}</td>
+                    </tr>
+                </isif>
+
+                <isif condition="${entry.dispute_channel}">
+                    <tr>
+                        <td class="infobox_title top">${Resource.msg('dispute.detail.channel', 'disputes', null)}:</td>
+                        <td class="infobox_item top">${entry.dispute_channel}</td>
+                    </tr>
+                </isif>
+            </tbody>
+        </table>
+
+        <isinclude template="disputes/details/outcome"/>
+        <isinclude template="disputes/details/transactions"/>
+        <isinclude template="disputes/details/evidences"/>
+        <isinclude template="disputes/details/messages"/>
+        <isinclude template="disputes/details/history"/>
+    </div>
+</isdecorate>

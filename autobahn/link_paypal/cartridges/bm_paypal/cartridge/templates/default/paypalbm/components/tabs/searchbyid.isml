@@ -1,0 +1,5 @@
+<div class="tab-pane ${pdict.isSearchByTransaction ? 'active': ''}" id="search-by-transaction-id" role="tabpanel" aria-labelledby="search-by-transaction-id-tab">
+    <input type="text" name="transactionId"
+           value="${hm.transactionId.submitted ? hm.transactionId.stringValue : ''}"
+           maxlength="100"/>
+</div>

@@ -1,0 +1,107 @@
+{
+    "paymentMethods": [
+        {
+            "name": "PayPal",
+            "primary": true,
+            "id": "PayPal",
+            "processorID": "PAYPAL"
+        },
+        {
+            "name": "Paypal Credit Card",
+            "primary": false,
+            "id": "PAYPAL_CREDIT_CARD",
+            "processorID": "PAYPAL"
+        },
+        {
+            "name": "Google Pay",
+            "primary": false,
+            "id": "GooglePay",
+            "processorID": "PAYPAL"
+        },
+        {
+            "name": "Apple Pay",
+            "primary": false,
+            "id": "ApplePay",
+            "processorID": "PAYPAL"
+        },
+        {
+            "name": "Venmo",
+            "primary": false,
+            "id": "Venmo",
+            "processorID": "PAYPAL"
+        }
+    ],
+    "flows": [
+        {
+            "name": "Vault for PayPal",
+            "primary": false,
+            "prefsDependency": [
+                {
+                    "name": "PP_Vault_Enabled",
+                    "values": ["Enabled", "Partially Disabled"]
+                }
+            ],
+            "paymentDependency": ["PayPal"]
+        },
+        {
+            "name": "Vault for Card Fields",
+            "primary": false,
+            "prefsDependency": [
+                {
+                    "name": "PP_Store_CC_To_Vault",
+                    "values": ["Enabled", "Partially Disabled"]
+                }
+            ],
+            "paymentDependency": ["PayPal", "PAYPAL_CREDIT_CARD"]
+        },
+        {
+            "name": "Connect with PayPal",
+            "primary": false,
+            "prefsDependency": [
+                {
+                    "name": "PP_CWPP_Button_Enabled",
+                    "values": [true]
+                },
+                {
+                    "name": "PP_CWPP_Button_Url",
+                    "values": ["filled"]
+                },
+                {
+                    "name": "PP_CWPP_Agent_Login",
+                    "values": ["filled"]
+                },
+                {
+                    "name": "PP_CWPP_Agent_Password",
+                    "values": ["filled"]
+                }
+            ],
+            "paymentDependency": []
+        },
+        {
+            "name": "PayPal Returning Customer Experience",
+            "primary": false,
+            "prefsDependency": [
+                {
+                    "name": "PP_Returning_Customer_Experience_Enabled",
+                    "values": [true]
+                }
+            ],
+            "paymentDependency": ["PayPal"]
+        },
+        {
+            "name": "Digital Goods",
+            "primary": false,
+            "prefsDependency": [
+                {
+                    "name": "PP_Digital_Goods_Flow_Enabled",
+                    "values": [true]
+                },
+                {
+                    "name": "PP_Payment_Model",
+                    "values": ["Sale"]
+                }
+            ],
+            "paymentDependency": []
+        }
+    ]
+}

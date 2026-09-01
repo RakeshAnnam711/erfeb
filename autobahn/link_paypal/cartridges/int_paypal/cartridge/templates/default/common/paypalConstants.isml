@@ -1,0 +1,8 @@
+<script>
+    Object.defineProperty(window, 'paypalConstants', {
+        value: Object.freeze(
+            JSON.parse('<isprint encoding="jsonvalue" value="${pdict.paypalConstantsString}" />')
+        ),
+        writable: false
+    });
+</script>

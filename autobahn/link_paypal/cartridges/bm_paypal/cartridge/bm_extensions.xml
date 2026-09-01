@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
+
+	<menuitem id="paypal-plugin" site="true">
+        <name xml:lang="x-default">PayPal Plugin</name>
+        <short_description xml:lang="x-default">Manage the PayPal plugin functionality: transactions, styles, preferences.</short_description>
+        <description xml:lang="x-default">Manage the PayPal plugin functionality: transactions, styles, preferences.</description>
+		<icon>images/icon-transactions.png</icon>
+    </menuitem>
+
+	<menuaction id="paypal-disputes" menupath="paypal-plugin" position="1" site="true">
+		<name xml:lang="x-default">Disputes</name>
+		<short_description xml:lang="x-default">Manage the PayPal disputes.</short_description>
+		<description xml:lang="x-default">Manage the PayPal disputes.</description>
+		<exec pipeline="Disputes" node="Start" />
+		<sub-pipelines>
+			<pipeline name="Disputes-Start" />
+			<pipeline name="Disputes-Details" />
+		</sub-pipelines>
+		<icon>images/icon-transactions.png</icon>
+	</menuaction>
+
+	<menuaction id="paypal-transactions-manager" menupath="paypal-plugin" position="1" site="true">
+		<name xml:lang="x-default">Transactions</name>
+		<short_description xml:lang="x-default">Manage the PayPal transactions related with site orders.</short_description>
+		<description xml:lang="x-default">Manage the PayPal transactions related with site orders.</description>
+		<exec pipeline="PaypalAdmin" node="Orders" />
+		<sub-pipelines>
+			<pipeline name="PaypalAdmin-Orders" />
+			<pipeline name="PaypalAdmin-OrderTransaction" />
+			<pipeline name="PaypalAdmin-Action" />
+			<pipeline name="PaypalAdmin-RedirectToOrderPayment" />
+		</sub-pipelines>
+		<icon>images/icon-transactions.png</icon>
+	</menuaction>
+
+	<menuaction id="paypal-preference-configuration" menupath="paypal-plugin" position="3" site="true">
+		<name xml:lang="x-default">Preference Configuration</name>
+		<short_description xml:lang="x-default">Set PayPal site preferences.</short_description>
+		<description xml:lang="x-default">Set PayPal site preferences.</description>
+		<exec pipeline="Preferences" node="Groups" />
+		<sub-pipelines>
+			<pipeline name="Preferences-Groups" />
+            <pipeline name="Preferences-Group" />
+            <pipeline name="Preferences-Save" />
+			<pipeline name="ConfigCheck-TestServiceConnection" />
+            <pipeline name="ConfigCheck-SelfCheck" />
+		</sub-pipelines>
+		<icon>images/icon-transactions.png</icon>
+	</menuaction>
+
+	<menuaction id="paypal_configuration" menupath="paypal-plugin" position="2" site="true">
+		<name xml:lang="x-default">Styles Configuration</name>
+		<short_description xml:lang="x-default">Manage the PayPal Smart Button, PayPal Credit Banner and Login with PayPal Button Styles Configurations</short_description>
+		<description xml:lang="x-default">Manage the PayPal Smart Button, PayPal Credit Banner and Login with PayPal Button Styles Configurations</description>
+		<exec pipeline="Configuration" node="Start" />
+        <sub-pipelines>
+			<pipeline name="Configuration-Start" />
+			<pipeline name="PaypalConfig-Start" />
+			<pipeline name="PaypalConfig-SaveSmartButton" />
+            <pipeline name="PaypalConfig-SaveButtonMessage" />
+			<pipeline name="CWPPConfig-Start" />
+			<pipeline name="CWPPConfig-SaveButton" />
+			<pipeline name="ApplePayConfig-Start" />
+            <pipeline name="ApplePayConfig-SaveButton" />
+            <pipeline name="GooglePayConfig-SaveButton" />
+            <pipeline name="GooglePayConfig-Start" />
+			<pipeline name="CardFieldsConfig-Start" />
+			<pipeline name="CardFieldsConfig-SaveButton" />
+			<pipeline name="PayLaterMsgConfigurator-Start" />
+			<pipeline name="PayLaterMsgConfigurator-Save" />
+		</sub-pipelines>
+		<icon>images/paypal-mark-logo.png</icon>
+	</menuaction>
+
+</extensions>

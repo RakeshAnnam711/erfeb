@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header clearfix">
+        <h2 class="pull-left">${Resource.msg('label.payment', 'account', null)}</h2>
+    </div>
+
+    <isif condition="${pdict.hasUnifiedSavedPaymentMethods}">
+        <div class="card-body">
+            <isloop items="${pdict.unifiedSavedPaymentMethods}" var="savedMethod">
+                <div class="card-info-group mb-3">
+                    <p class="mb-1">
+                        <isif condition="${savedMethod.provider === 'paypal-account'}">
+                            <strong>${Resource.msg('label.payment.paypal', 'account', null)}</strong>
+                        <iselse/>
+                            <strong>${Resource.msg('label.payment.credit', 'account', null)}</strong>
+                        </isif>
+                        <isif condition="${savedMethod.isDefault}">
+                            <span class="ml-2">${Resource.msg('creditcard.default', 'account', null)}</span>
+                        </isif>
+                    </p>
+
+                    <isif condition="${savedMethod.provider === 'paypal-account'}">
+                        <p class="mb-1">${savedMethod.paypalEmail}</p>
+                    <iselse/>
+                        <p class="mb-1">${savedMethod.cardType} ${savedMethod.maskedNumber}</p>
+                        <isif condition="${savedMethod.expirationMonth && savedMethod.expirationYearShort}">
+                            <p class="mb-0">${Resource.msg('label.payment.expirationdate', 'account', null)}: ${savedMethod.expirationMonth}/${savedMethod.expirationYearShort}</p>
+                        </isif>
+                    </isif>
+                </div>
+            </isloop>
+        </div>
+    <iselse/>
+        <div class="card-body">
+            <p class="mb-0">${Resource.msg('msg.no.saved.payments', 'payment', null)}</p>
+        </div>
+    </isif>
+</div>
