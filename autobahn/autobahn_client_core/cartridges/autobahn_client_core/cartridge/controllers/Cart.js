@@ -219,19 +219,38 @@ server.append('MiniCartShow', function (req, res, next) {
 
 server.get('ClearCart', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
+    var basketCalculationHelpers = require('*/cartridge/scripts/helpers/basketCalculationHelpers');
     var CartModel = require('*/cartridge/models/cart');
 
-    if (currentBasket) {
-        Transaction.wrap(function () {
-            BasketMgr.deleteBasket(currentBasket);
-        });
+    if (!currentBasket) {
+        res.json({ error: false, basket: null });
+        return next();
     }
+
+    // BasketMgr.deleteBasket() throws "user not authorized to act on behalf of customer" for
+    // CSC/agent-handoff baskets, so contents are removed individually instead.
+    Transaction.wrap(function () {
+        var productLineItems = currentBasket.allProductLineItems.toArray();
+        var couponLineItems = currentBasket.couponLineItems.toArray();
+        var priceAdjustments = currentBasket.priceAdjustments.toArray();
+
+        productLineItems.forEach(function (lineItem) {
+            currentBasket.removeProductLineItem(lineItem);
+        });
+        couponLineItems.forEach(function (couponLineItem) {
+            currentBasket.removeCouponLineItem(couponLineItem);
+        });
+        priceAdjustments.forEach(function (priceAdjustment) {
+            currentBasket.removePriceAdjustment(priceAdjustment);
+        });
+
+        basketCalculationHelpers.calculateTotals(currentBasket);
+    });
     agentLocks.clearLockedUUIDs();
 
-    var freshBasket = BasketMgr.getCurrentOrNewBasket();
     res.json({
         error: false,
-        basket: new CartModel(freshBasket)
+        basket: new CartModel(currentBasket)
     });
     return next();
 });
