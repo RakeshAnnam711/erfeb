@@ -1,6 +1,0 @@
-{
-    "hooks": [
-        {"name": "dw.order.mergeBasket", "script": "./cartridge/scripts/hooks/mergeBasketUtil.js"},
-        {"name": "globale.getPLICustomMetadata", "script": "./cartridge/scripts/hooks/globaleCustomMetadata.js"}
-    ]
-}

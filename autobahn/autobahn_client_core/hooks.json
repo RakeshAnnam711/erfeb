@@ -1,0 +1,9 @@
+{
+    "hooks": [
+        {"name": "dw.order.mergeBasket", "script": "./cartridge/scripts/hooks/mergeBasketUtil.js"},
+        {"name": "globale.getPLICustomMetadata", "script": "./cartridge/scripts/hooks/globaleCustomMetadata.js"},
+
+        {"name": "dw.ocapi.shop.basket.items.afterPOST", "script": "./cartridge/scripts/hooks/liveSelling/items.js"},
+        {"name": "dw.ocapi.shop.product.modifyGETResponse", "script": "./cartridge/scripts/hooks/liveSelling/product.js"}
+    ]
+}

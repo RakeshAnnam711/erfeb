@@ -1,0 +1,217 @@
+<div class="card ghost payment">
+    <div class="card-header">
+        <h2 class="card-header-custom">${Resource.msg('heading.payment', 'checkout', null)}</h2>
+    </div>
+</div>
+
+<div class="card payment-form">
+    <iscomment>
+        <div class="card-header">
+            <h2 class="card-header-custom">${Resource.msg('heading.payment', 'checkout', null)}</h2>
+        </div>
+    </iscomment>
+    <div class="card-body">
+        <iscomment> coupons are not allowed on live selling baskets </iscomment>
+        <isif condition="${!pdict.isLiveSellingOrder}">
+            <fieldset>
+                <isinclude template="cart/cartPromoCode" />
+            </fieldset>
+        </isif>
+
+        <form autocomplete="on" class="payment-accordion-form" method="POST"
+            action="${URLUtils.url('CheckoutServices-SubmitPayment')}"
+            data-address-mode="${(!empty(pdict.order.billing.matchingAddressId) && pdict.order.billing.matchingAddressId !== false) || !pdict.order
+                               .totals.grandTotalLessGiftCertificatePaymentInstrumentsValue ? 'edit' : 'new'}"
+            <isprint value=${pdict.forms.billingForm.attributes} encoding="off" /> novalidate>
+
+        <iscomment> Gift Certificate </iscomment>
+        <fieldset>
+            <isif
+                condition="${currentSite.getCustomPreferenceValue('giftCertificateEnabled') && (!pdict.order.giftCertificateLineItems || !pdict.order
+                           .giftCertificateLineItems.totalQuantity) && pdict.giftCertificatePaymentMethodEnabled}">
+                <isinclude template="components/modules" />
+                <div class="giftcertificate-information <isif condition=" ${pdict.order && pdict.order.totals && !pdict.order.totals.grandTotalValueOrNull}">d-none
+            </isif>">
+            <div class="">
+                <div class="form-group">
+                    <div>
+                        <label class="form-control-label" for="giftcertificateid">
+                            <isprint value="${pdict.giftCertificateForm.balance.giftcertificateid.label}"
+                                encoding="htmlcontent" />
+                        </label>
+                    </div>
+                    <div class="giftCertificates-code-wrapper">
+                        <iscomment>
+                            <div class="col-10 pr-2">
+                        </iscomment>
+                        <div class="row giftCertificate-input-wrapper">
+                            <iscomment>
+                                <div class="row no-gutters giftCertificateCode-pills-wrapper">
+                                    <isloop items="${pdict.order.billing.payment.selectedPaymentInstruments}"
+                                        var="paymentInstrument">
+                                        <isif
+                                            condition="${paymentInstrument.maskedGiftCertificateCode != null || paymentInstrument.maskedGiftCertificateCode != undefined}">
+                                            <div class="giftCertificate-pill valid">
+                                                <div class="d-inline-flex giftCertificate-code">
+                                                    ${paymentInstrument.maskedGiftCertificateCode}</div>
+                                                <button type="button" class="js-remove-giftcertificate-pi"
+                                                    aria-label="Remove giftcertificate"
+                                                    data-action="${URLUtils.https('GiftCertificate-RemoveGiftCertificatePaymentInstrument')}"
+                                                    data-giftcertificatecode="${paymentInstrument.giftCertificateCode}">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </isif>
+                                    </isloop>
+                                </div>
+                            </iscomment>
+                            <div class="giftCertificate-input-area flex-fill">
+                                <input type="string" class="form-control" id="giftcertificateid" aria-invalid="false"
+                                    aria-label=""
+                                    placeholder="${Resource.msg('giftcertificate.checkout.placeholder', 'checkout', null)}"
+                                    <isprint value="${pdict.giftCertificateForm.apply.giftcertificateid.attributes}"
+                                    encoding="off" />>
+                                <span class="d-none clear_giftcertificate_input icon icon-close" role="button"
+                                    tabindex="0" aria-label="Clear input"></span>
+                                <div class="invalid-feedback"></div>
+                                <div class="d-none my-2">
+                                    <button type="button"
+                                        data-action="${URLUtils.https('GiftCertificate-ApplyBalance')}"
+                                        aria-label="${Resource.msg('giftcertificate.checkout.apply', 'checkout', null)}"
+                                        class="btn btn-block btn-secondary js-applybalancebutton"
+                                        value="${Resource.msg('giftcertificate.checkout.apply', 'locale', null)}">
+                                        ${Resource.msg('giftcertificate.checkout.apply', 'checkout', null)}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <iscomment>
+                    </div>
+                    </iscomment>
+                    <div class="gift-apply-btn">
+                        <button type="button" data-action="${URLUtils.https('GiftCertificate-ApplyBalance')}"
+                            class="btn btn-block btn-secondary js-applybalancebutton"
+                            value="${Resource.msg('giftcertificate.checkout.apply', 'locale', null)}">
+                            ${Resource.msg('giftcertificate.checkout.apply', 'checkout', null)}
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="my-2 ">
+        <div class="js-balancemsg" aria-live="polite"></div>
+    </div>
+    <div class="js-giftcertificatepaymentinstruments mb-4">
+        <isgiftcertificatepaymentinstruments
+            paymentinstruments="${pdict.order.billing.payment.selectedPaymentInstruments}" />
+    </div>
+    <iscomment> <div id="giftcard-payment-restriction-message" class="mt-2" style="display:none;">
+        <iscontentasset aid="giftcard-payment-restriction-message" />
+    </div> </iscomment>
+    <div id="giftcard-input-disabled-message" class="mt-2" style="display:none;">
+        <iscontentasset aid="giftcard-input-disabled-message" />
+    </div>
+</div>
+</isif>
+</fieldset>
+
+
+<fieldset class="billing-address-block">
+    <!-------------------------------------------------------------------------->
+    <!-- Billing Address Selector                                             -->
+    <!-------------------------------------------------------------------------->
+    <fieldset class="address-selector-block address-selector-block-styles <isif condition=" ${pdict.order && pdict.order.totals && !pdict.order.totals.grandTotalLessGiftCertificatePaymentInstrumentsValue}">d-none</isif>">
+        <div class="form-group">
+            <label class="form-control-label" for="billingAddressSelector">
+                ${Resource.msg('heading.billing.address', 'checkout', null)}
+            </label>
+
+            <isinclude template="checkout/billing/addressSelector" />
+            <div class="invalid-feedback"></div>
+            <div class="row btn-wrapper">
+                <button id="show-billing-details" class="col-6 text-left btn-show-details btn" type="button"
+                    aria-label="${Resource.msg('action.update.address', 'checkout', null)}">${Resource.msg('action.update.address', 'checkout', null)}</button>
+                <button id="add-new-billing" class="col-6 text-right btn-add-new btn" type="button"
+                    aria-label="${Resource.msg('action.add.new', 'checkout', null)}">${Resource.msg('action.add.new', 'checkout', null)}</button>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-------------------------------------------------------------------------->
+    <!-- Billing Address                                                      -->
+    <!-------------------------------------------------------------------------->
+    <isinclude template="integrations/checkout/billing/billingIntegrationsBillingAddressFieldset" />
+
+    <input type="hidden" id="csrf_billing" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}" />
+    <input type="hidden" name="localizedNewAddressTitle" value="${Resource.msg('msg.new.address', 'checkout', null)}" />
+</fieldset>
+
+<!-------------------------------------------------------------------------->
+<!-- Contact Info (Email and Phone)                                       -->
+<!-------------------------------------------------------------------------->
+<fieldset class="contact-info-block d-none">
+    <div class="row">
+        <div class="col-sm-12">
+            <iscomment>Hidden for SFRA 6 upgrade, as many cartridge rely on this fields presence</iscomment>
+            <div class="form-group d-none
+                            <isif condition=${pdict.forms.billingForm.contactInfoFields.email.mandatory === true}>required</isif>
+                            ${pdict.forms.billingForm.contactInfoFields.email.htmlName}">
+                <label class="form-control-label"
+                    for="email">${Resource.msg('field.customer.email', 'checkout', null)}</label>
+
+                <button type="button" class="info-icon" data-toggle="tooltip">
+                    <span class="icon" aria-hidden="true">i</span>
+                    <span class="sr-only">${Resource.msg('button.help.assistive.text', 'common', null)}</span>
+                    <span class="tooltip d-none">
+                        ${Resource.msg('tooltip.email', 'creditCard', null)}
+                    </span>
+                </button>
+
+                <input type="email" class="form-control email" id="email"
+                    value="${pdict.customer.profile ? pdict.customer.profile.email : (pdict.order.orderEmail || '')}"
+                    <isprint value=${pdict.forms.billingForm.contactInfoFields.email.attributesNoPattern}
+                    encoding="off" />
+                readonly
+                aria-describedby="emailInvalidMessage" autocomplete="billing email">
+                <div class="invalid-feedback" id="emailInvalidMessage"></div>
+            </div>
+            <div class="form-group
+                            <isif condition=${pdict.forms.billingForm.contactInfoFields.phone.mandatory === true}>required</isif>
+                            ${pdict.forms.billingForm.contactInfoFields.phone.htmlName}">
+                <label class="form-control-label"
+                    for="phoneNumber">${Resource.msg('field.customer.phone.number', 'checkout', null)}</label>
+
+                <button type="button" class="info-icon" data-toggle="tooltip"
+                    aria-label="${Resource.msg('button.help.assistive.text', 'common', null)}">
+                    <span class="icon" aria-hidden="true">i</span>
+                    <span class="sr-only">${Resource.msg('button.help.assistive.text', 'common', null)}</span>
+                    <span class="tooltip d-none">
+                        ${Resource.msg('tooltip.phone.number', 'creditCard', null)}
+                    </span>
+                </button>
+
+                <input type="tel"
+                    class="form-control phone ${pdict.forms.billingForm.contactInfoFields.phone.valid ? '' : 'is-invalid'}"
+                    id="phoneNumber" value="${pdict.order.billing.billingAddress.address ? pdict.order.billing.billingAddress.address.phone || '' : ''}" <isprint value=${pdict.forms.billingForm.contactInfoFields.phone.attributes}
+                    encoding="off" />
+                aria-describedby="phoneInvalidMessage" autocomplete="billing tel">
+                <div class="invalid-feedback" id="phoneInvalidMessage">
+                    <isif condition="${!pdict.forms.billingForm.contactInfoFields.phone.valid}">
+                        ${Resource.msg('error.message.required', 'forms', null)}
+                    </isif>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<!-------------------------------------------------------------------------->
+<!-- Payment Options                                                      -->
+<!-------------------------------------------------------------------------->
+<fieldset class="payment-options-block">
+    <isinclude template="checkout/billing/paymentOptions" />
+</fieldset>
+
+</form>
+</div>
+</div>
