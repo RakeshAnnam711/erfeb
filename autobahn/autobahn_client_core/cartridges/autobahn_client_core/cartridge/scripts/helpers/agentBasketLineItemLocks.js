@@ -49,7 +49,7 @@ function isAgentBasket(basket) {
     }
 }
 
-// This org's Business Manager CSC "New Order for Customer" flow never sets isAgentBasket() true - it tags the basket with channelType instead.
+// CSC baskets are identified by channel type in this implementation.
 function isCustomerServiceCenterBasket(basket) {
     if (!basket) {
         return false;
@@ -158,7 +158,7 @@ function markCSCHandoffLineItem(lineItem) {
     setCustomBoolean(lineItem, CSC_LINE_ITEM_ATTR, true);
 }
 
-// Used right after a storefront AddProduct - Add to Cart is hidden for CSC/live-selling products, so any CSC flag found here is a false positive from the sweep and safe to clear.
+// Clear CSC flags added by the lock sweep from storefront-added items.
 function forceMarkStorefrontLineItem(lineItem) {
     var basket;
     var storefrontUUIDs;
@@ -235,7 +235,7 @@ function isLiveSellingProduct(product) {
     return liveSellingCategoryHelper.isProductAssignedToLiveSellingCategory(product);
 }
 
-// Mirrors doPrePlaceOrder.js's tri-state resolution: the agent's explicit checkbox choice wins when present, otherwise falls back to the catalog product's own live selling flag.
+// Prefer the agent's selection and fall back to the product flag when unset.
 function isLineItemLiveSelling(lineItem) {
     try {
         var agentChoice = getCustomBooleanTriState(lineItem, 'isLiveSellingLineItem');
@@ -274,7 +274,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     storedStorefrontUUIDs = getStoredStorefrontUUIDs(basket);
     hasStorefrontItems = hasStorefrontLineItems(basket);
 
-    // Release any line item no longer correctly locked - confirmed storefront, or CSC but no longer live selling (agent unchecked the box) - so the session-cached list can't just grow forever.
+    // Remove stale entries from the session lock list.
     if (basket && basket.allProductLineItems) {
         Transaction.wrap(function () {
             collections.forEach(basket.allProductLineItems, function (lineItem) {
@@ -294,7 +294,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
         });
     }
 
-    // Sweeps any unclassified item into CSC on every render (stays "always on" so a later CSC add still gets locked); safe against customer-added items since AddProduct always corrects those via forceMarkStorefrontLineItem first.
+    // Classify new CSC items on each render; AddProduct corrects storefront items.
     shouldMarkUnclassifiedAsCSC = forceCurrentItemsLocked || isAgentBasket(basket) || isCustomerServiceCenterBasket(basket);
 
     if (basket && basket.allProductLineItems && shouldMarkUnclassifiedAsCSC) {
@@ -318,7 +318,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
         clearLockedUUIDs();
     }
 
-    // Drives a Dynamic Customer Group used to restrict a shipping method to baskets with a live selling item - explicitly set false so it can't stick around true after the item is removed.
+    // Keep the shipping-method session flag in sync with the basket.
     if (typeof session !== 'undefined' && session.custom) {
         session.custom.hasLiveSellingItemInCart = lockedUUIDs.length > 0;
     }
@@ -326,7 +326,7 @@ function ensureLockedLineItems(basket, forceCurrentItemsLocked) {
     return lockedUUIDs;
 }
 
-// Removes CSC handoff line items sitting unpurchased longer than cscHandoffExpirationHours; clock starts at each item's own creationDate. Returns the removed UUIDs so the caller can patch stale view data.
+// Remove expired CSC handoff items and return their UUIDs.
 function removeExpiredCSCLineItems(basket) {
     if (!basket || !basket.allProductLineItems) {
         return [];
@@ -363,7 +363,7 @@ function decorateProductLineItem(productLineItem, sourceLineItem) {
         productLineItem.isAgentLockedLineItem = true; // eslint-disable-line no-param-reassign
     }
 
-    // Unlike isAgentLockedLineItem above (session-sweep based), this reads persisted state directly, so it stays correct on order confirmation/history pages too.
+    // Use persisted state for order confirmation and history pages.
     if (productLineItem && sourceLineItem) {
         productLineItem.isLiveSellingLineItem = isLineItemLiveSelling(sourceLineItem); // eslint-disable-line no-param-reassign
     }

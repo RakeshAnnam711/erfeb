@@ -5,7 +5,7 @@ var Site = require('dw/system/Site');
 
 var DEFAULT_LIVE_SELLING_PRICE_BOOK_ID = 'wgaca-liveselling';
 
-// Configurable via the liveSellingPriceBookID Site Preference, so the price book ID can differ per environment without a code deploy. Falls back to the original hardcoded default if left blank.
+// The Site Preference allows each environment to use a different price book.
 function getLiveSellingPriceBookID() {
     try {
         var value = Site.getCurrent().getCustomPreferenceValue('liveSellingPriceBookID');
@@ -15,7 +15,7 @@ function getLiveSellingPriceBookID() {
     }
 }
 
-// Returns the product's price only if explicitly set in the live selling price book - compares against the parent book's price to avoid silently inheriting it via getPriceBookPrice()'s parent-chain walk.
+// Return only prices defined directly in the live-selling price book.
 function getLiveSellingPrice(product) {
     try {
         if (!product) {

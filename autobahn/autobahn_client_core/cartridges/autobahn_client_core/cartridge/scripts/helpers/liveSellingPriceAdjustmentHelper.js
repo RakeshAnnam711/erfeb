@@ -33,7 +33,7 @@ function getCustomBooleanTriState(lineItem, attributeID) {
     }
 }
 
-// isCSCHandoffLineItem is only ever set by the storefront cart-lock sweep (agentBasketLineItemLocks.ensureLockedLineItems), which never runs from within Business Manager - so a line item an agent just added there wouldn't be eligible yet on the very first recalculation, showing full price until the customer's cart happened to load. Falls back to checking the basket's own CSC channel type directly, which the platform sets the moment Business Manager creates it - true immediately, no sweep required.
+// Business Manager baskets need the channel check before storefront locks are initialized.
 function isEligibleForOverride(lineItem) {
     if (getCustomBooleanTriState(lineItem, 'isLiveSellingLineItem') !== true) {
         return false;
@@ -55,19 +55,19 @@ function getExistingAdjustment(lineItem) {
     }
 }
 
-// Uses a price adjustment instead of ProductLineItem.setPriceValue() because Global-e's dw.order.calculate resets the base price on every pass - an adjustment survives that reset since it's recomputed relative to whatever the base price currently is.
+// Use an adjustment because Global-e resets the line item's base price during calculation.
 function syncLiveSellingPriceAdjustment(lineItem) {
     if (!lineItem) {
         return false;
     }
 
-    // Runs on every basket recalculation site-wide, so an uncaught error here must never break checkout for the whole site.
+    // Pricing failures must not block basket calculation.
     try {
         var existingAdjustment = getExistingAdjustment(lineItem);
         var eligible = isEligibleForOverride(lineItem);
         var liveSellingPrice = eligible ? liveSellingPriceHelper.getLiveSellingPrice(lineItem.product) : null;
 
-        // Not eligible or no valid live selling price - remove any existing adjustment so the item falls back to normal pricing.
+        // Remove stale adjustments when the item is no longer eligible.
         if (!liveSellingPrice) {
             if (existingAdjustment) {
                 lineItem.removePriceAdjustment(existingAdjustment);
@@ -78,7 +78,7 @@ function syncLiveSellingPriceAdjustment(lineItem) {
         }
 
         var quantity = lineItem.quantityValue || 1;
-        // lineItem.price is the TOTAL for the full quantity, not a unit price - must multiply liveSellingPrice by quantity, or this is wrong at qty 2+.
+        // lineItem.price is the total for all units.
         var currentLineItemTotal = lineItem.price;
 
         if (!currentLineItemTotal || !currentLineItemTotal.available) {
@@ -97,7 +97,7 @@ function syncLiveSellingPriceAdjustment(lineItem) {
             return false;
         }
 
-        // AmountDiscount's constructor value is overridden right after via setPriceValue() - but a zero/non-positive amount is rejected by the platform, so pass the real discount instead.
+        // AmountDiscount requires a positive value even though setPriceValue updates it below.
         var discountAmount = currentLineItemTotal.subtract(targetLineItemTotal).value;
         var newAdjustment = lineItem.createPriceAdjustment(ADJUSTMENT_ID, new AmountDiscount(discountAmount > 0 ? discountAmount : 0.01));
         newAdjustment.setPriceValue(targetAdjustmentTotal.value);
@@ -108,7 +108,7 @@ function syncLiveSellingPriceAdjustment(lineItem) {
     }
 }
 
-// Read-only for use after payment authorization (doPrePlaceOrder's safety net) - mutating totals here would change the order total after the processor already authorized a specific amount.
+// Validate only; payment has already been authorized when this runs.
 function isAdjustmentCorrect(lineItem) {
     if (!lineItem) {
         return true;
@@ -127,7 +127,7 @@ function isAdjustmentCorrect(lineItem) {
     }
 
     var quantity = lineItem.quantityValue || 1;
-    // Same total-vs-unit correction as syncLiveSellingPriceAdjustment() above.
+    // Compare full-quantity totals.
     var currentLineItemTotal = lineItem.price;
 
     if (!currentLineItemTotal || !currentLineItemTotal.available) {

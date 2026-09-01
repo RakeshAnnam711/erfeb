@@ -6,7 +6,7 @@ var collections = require('*/cartridge/scripts/util/collections');
 var liveSellingPriceAdjustmentHelper = require('*/cartridge/scripts/helpers/liveSellingPriceAdjustmentHelper');
 var dwLogger = require('dw/system/Logger').getLogger('LiveSelling', 'CalculateHook');
 
-// Syncs the live selling price adjustment on every line item, then re-runs tax + totals recalc (not the whole dw.order.calculate hook, to avoid recursion) if anything changed.
+// Recalculate tax and totals when a live-selling adjustment changes.
 function applyLiveSellingAdjustments(basket) {
     var adjustmentsChanged = false;
 
@@ -35,11 +35,11 @@ exports.calculateTax = function (basket) {
     return base.calculateTax(basket);
 };
 
-// Wraps the base calculate hook (Global-e resets base price every pass) to sync the live selling price adjustment afterward - an adjustment survives that reset since it's recomputed off the current base price.
+// Apply live-selling adjustments after the base calculation resets line-item prices.
 exports.calculate = function (basket, original, payByLinkScenario) {
     var result = base.calculate(basket, original, payByLinkScenario);
 
-    // base.calculate()'s result must always be returned regardless - this hook must never break checkout for a basket unrelated to live selling.
+    // Preserve the base hook result if adjustment processing fails.
     try {
         applyLiveSellingAdjustments(basket);
     } catch (e) {

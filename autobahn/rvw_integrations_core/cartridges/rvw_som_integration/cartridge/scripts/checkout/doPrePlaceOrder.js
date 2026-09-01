@@ -59,7 +59,7 @@ function getCustomBoolean(customAttributes, attributeID) {
     }
 }
 
-// liveSellingHostName/EventSummary are static and shared across the current event, so they're Site Preferences rather than per-line-item custom attributes.
+// Event details are shared Site Preferences.
 function getSitePreferenceValue(prefID) {
     try {
         var value = Site.getCurrent().getCustomPreferenceValue(prefID);
@@ -69,7 +69,7 @@ function getSitePreferenceValue(prefID) {
     }
 }
 
-// Reads a boolean custom attribute as tri-state, so an agent's explicit choice can be told apart from a field that was never touched (undefined).
+// Preserve undefined to distinguish an unset value from an explicit false.
 function getCustomBooleanTriState(customAttributes, attributeID) {
     try {
         if (!customAttributes || !(attributeID in customAttributes)) {
@@ -129,14 +129,14 @@ function doPrePlaceOrder(order) {
                         }
 
                         if (!empty(product)) {
-                            // Stricter than the cart-side locking check - for order-level reporting, only the agent's explicit "Is Live Selling Line Item" = true counts, not the catalog product's own flag.
+                            // Order reporting uses the agent's explicit line-item flag.
                             var agentLiveSellingChoice = getCustomBooleanTriState(lineItem.custom, 'isLiveSellingLineItem');
                             var lineItemIsLiveSelling = isCSCLineItem && agentLiveSellingChoice === true;
 
                             if (lineItemIsLiveSelling) {
                                 try {
                                     var liveSellingItemID = getCustomValue(product.custom, 'liveSellingItemID') || product.ID;
-                                    // Host name/event summary are static Site Preferences for the whole event - whatever the agent typed into the line item's own field is ignored.
+                                    // Use the event-level Site Preference values.
                                     var liveSellingHostName = getSitePreferenceValue('liveSellingHostName');
                                     var liveSellingEventSummary = getSitePreferenceValue('liveSellingEventSummary');
 
@@ -145,16 +145,16 @@ function doPrePlaceOrder(order) {
                                     lineItem.custom.liveSellingItemID = liveSellingItemID;
                                     lineItem.custom.liveSellingHostName = liveSellingHostName;
 
-                                    // Read-only safety check - payment is already authorized against the order total by this point, so we can only log a mismatch, never fix it here.
+                                    // Log price mismatches without changing an authorized total.
                                     if (!liveSellingPriceAdjustmentHelper.isAdjustmentCorrect(lineItem)) {
                                         dwLogger.error('Live selling price adjustment is missing/incorrect on an already-priced order line item (product {0}, order line item {1}) - order total may not reflect the live selling price.', product.ID, lineItem.UUID);
                                     }
 
-                                    // Event summary isn't duplicated onto the line item - the order-level copy (aggregated below) is the single source of truth. Host name is duplicated here too since it's needed at the product/line-item level.
+                                    // Store the summary on the order and the host name on both levels.
                                     addUnique(liveSellingHostNames, liveSellingHostName);
                                     addUnique(liveSellingEventSummaries, liveSellingEventSummary);
 
-                                    // Reuses the same SOM export flag final_sale products use, so live selling items are excluded from returns the same way.
+                                    // SOM uses this flag to exclude the item from returns.
                                     lineItem.custom.somCC_returnable = false;
                                 } catch(err) {
                                     dwLogger.warn('Missing ProductLineItem live selling custom attribute definition: ' + err);
