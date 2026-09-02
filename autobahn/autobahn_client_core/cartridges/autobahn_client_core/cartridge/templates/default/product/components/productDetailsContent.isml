@@ -299,6 +299,11 @@
                 </div>
             </div>
 
+            <isif condition="${product.isLiveSellingProduct}">
+                <iscontentasset aid="liveSellingExclusiveMsg" />
+            </isif>
+
+            <isif condition="${!product.isLiveSellingProduct}">
             <div class="row">
                 <div class="col">
                     <div class="prices top-prices clearfix">
@@ -322,6 +327,7 @@
                     </div>
                 </div>
             </div>
+            </isif>
 
             <!-- Product Condition Modal -->
             <div class="modal fade" id="conditionScaleModal" tabindex="-1" role="dialog"
@@ -567,9 +573,11 @@
 
                 <div class="prices-add-to-cart-actions col-12 col-sm-6 col-md-12">
                     <!-- Add To Cart -->
+                    <isif condition="${!product.isLiveSellingProduct}">
                     <div id="add-to-cart-template">
                         <isinclude template="product/components/addToCartProduct" />
                     </div>
+                    </isif>
                     <div class="wishlist-icon-area">
                         <isif condition="${pdict.isWishlistModal !== true}">
                             <iswishlisticon wishlistpid="${product.wishlistpid}" productname="${product.productName}"

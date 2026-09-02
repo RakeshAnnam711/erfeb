@@ -14,16 +14,20 @@
 			<div class="tile-body">
 				<isinclude template="product/components/productTileName" />
 
-				<isset name="price" value="${product.price}" scope="page" />
-				<isif condition="${product.productType === 'set'}">
-					<isinclude template="product/components/pricing/setPrice" />
-				<iselse>
-					<isinclude template="product/components/pricing/main" />
-				</isif>
-				<isinclude template="util/affirmModule"/>
-				<isaffirmpromo context="plp" fpname="${require('*/cartridge/scripts/utils/affirmUtils').getFPNameForPLP(false, product)}" price="${price}"/>
+				<isif condition="${product.isLiveSellingProduct}">
+					<iscontentasset aid="liveSellingExclusiveMsg" />
+				<iselse/>
+					<isset name="price" value="${product.price}" scope="page" />
+					<isif condition="${product.productType === 'set'}">
+						<isinclude template="product/components/pricing/setPrice" />
+					<iselse>
+						<isinclude template="product/components/pricing/main" />
+					</isif>
+					<isinclude template="util/affirmModule"/>
+					<isaffirmpromo context="plp" fpname="${require('*/cartridge/scripts/utils/affirmUtils').getFPNameForPLP(false, product)}" price="${price}"/>
 
-					<isinclude template="integrations/product/productTileIntegrationsPostPrice"/>
+						<isinclude template="integrations/product/productTileIntegrationsPostPrice"/>
+				</isif>
 
 				<iscomment> to hide promotional code text in PLP </iscomment>
 				<iscomment> <isif condition="${dw.system.Site.current.preferences.custom.plpPromotionShow === true}">
@@ -41,6 +45,7 @@
 				</isif>
 			</div>
 			<!-- Add To Cart -->
+			<isif condition="${!product.isLiveSellingProduct}">
 			<div class="add-to-cart-btn-area">
 				<iscomment> <isinclude template="product/components/addToCartProduct" /> </iscomment>
 
@@ -84,6 +89,7 @@
 					</div>
 				</div>
 			</div>
+			</isif>
 		</isif>
 	</a>
     <!-- END_dwmarker -->

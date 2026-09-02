@@ -143,10 +143,77 @@ function buildBadgeStyleAndClass(badgeClass, badgeFontSize, badgeBorderColor, ba
 }
 
 
+// The real trigger for live selling is category membership, not the item ID field -
+// an agent can leave the item ID blank and the product is still live selling.
+function isInLiveSellingCategory(apiProduct) {
+    try {
+        var Site = require('dw/system/Site');
+        var categoryID = Site.getCurrent().getCustomPreferenceValue('liveSellingCategoryID');
+        if (empty(categoryID)) {
+            return false;
+        }
+        if (apiProduct.primaryCategory && apiProduct.primaryCategory.ID === categoryID) {
+            return true;
+        }
+        var categories = apiProduct.categories;
+        for (var i = 0; i < categories.length; i++) {
+            if (categories[i].ID === categoryID) {
+                return true;
+            }
+        }
+    } catch (e) {
+        return false;
+    }
+    return false;
+}
+
+// The entered item ID, if any - just the raw value, no fallback. Used for display only.
+function getLiveSellingItemID(apiProduct) {
+    if (!apiProduct || empty(apiProduct.custom) || empty(apiProduct.custom.liveSellingItemID)) {
+        return null;
+    }
+    return apiProduct.custom.liveSellingItemID;
+}
+
+function isLiveSellingProduct(apiProduct) {
+    return !!apiProduct && isInLiveSellingCategory(apiProduct);
+}
+
 function addBadges(apiProduct) {
     var badgesData = []
 
-    if (apiProduct && apiProduct.attributeModel && apiProduct.attributeModel.attributeGroups) {
+    if (!apiProduct) {
+        return badgesData;
+    }
+
+    // Live-selling products show "<label> <item ID>" as the badge instead of the usual
+    // badgeNames-driven badge. Falls back to the SKU when no item ID was entered.
+    if (isLiveSellingProduct(apiProduct)) {
+        var itemNumber = getLiveSellingItemID(apiProduct) || apiProduct.ID;
+        var badgeLabel = '';
+        var liveSellingData = { class: '' };
+        var liveSellingBadgeID = require('dw/system/Site').getCurrent().getCustomPreferenceValue('liveSellingBadgeID');
+        var liveSellingBadgeObj = !empty(liveSellingBadgeID) ? require('dw/object/CustomObjectMgr').getCustomObject('badges', liveSellingBadgeID) : null;
+        if (!empty(liveSellingBadgeObj)) {
+            badgeLabel = liveSellingBadgeObj.custom.badgeDisplayName || '';
+            var liveSellingStyleData = buildBadgeStyleAndClass(
+                liveSellingBadgeObj.custom.badgeClass,
+                liveSellingBadgeObj.custom.badgeFontSize,
+                liveSellingBadgeObj.custom.badgeBorderColor,
+                liveSellingBadgeObj.custom.badgeBackgroundColor,
+                liveSellingBadgeObj.custom.badgeFontColor,
+                liveSellingBadgeObj.custom.badgeFontStyle,
+                liveSellingBadgeObj.custom.badgeFontWeight
+            );
+            liveSellingData.class = liveSellingStyleData.className || '';
+            liveSellingData.style = liveSellingStyleData.style;
+        }
+        liveSellingData.name = empty(badgeLabel) ? itemNumber : badgeLabel + ': ' + itemNumber;
+        badgesData.push(liveSellingData);
+        return badgesData;
+    }
+
+    if (apiProduct.attributeModel && apiProduct.attributeModel.attributeGroups) {
         // Pulls down the badges product attribute group and converts it to an array
 
         var CustomObjectMgr = require('dw/object/CustomObjectMgr');
@@ -185,15 +252,12 @@ function addBadges(apiProduct) {
                     badgeFontStyle,
                     badgeFontWeight
                 );
-                var data = {name: resolvedBadgeName, class: badgeStyleData.className || ''};
-                if (!empty(badgeStyleData.style)) {
-                    data.style = badgeStyleData.style;
-                }
+                var data = {name: resolvedBadgeName, class: badgeStyleData.className || '', style: badgeStyleData.style};
                 if(empty(badgeStartDateTime) && empty(badgeEndDateTime)){
                     badgesData.push(data);
                     return;
                 }
-                
+
                 var bst = empty(badgeStartDateTime)? cal :  new Calendar(badgeStartDateTime);
                 var bet = empty(badgeEndDateTime)?   cal_tmp :  new Calendar(badgeEndDateTime);
 
@@ -204,7 +268,7 @@ function addBadges(apiProduct) {
                 }
 
             }
-        })        
+        })
     }
     return badgesData;
 }
@@ -214,6 +278,9 @@ module.exports = function(object, apiProduct) {
         enumerable: true,
         value: addBadges(apiProduct)
     });
+
+    object.isLiveSellingProduct = apiProduct ? isLiveSellingProduct(apiProduct) : false;
+    object.liveSellingItemID = apiProduct ? getLiveSellingItemID(apiProduct) : null;
 };
 
 //Enable Old Behaviour
