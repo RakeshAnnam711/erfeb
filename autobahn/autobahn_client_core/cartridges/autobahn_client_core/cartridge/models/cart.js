@@ -13,7 +13,11 @@ function CartModel(basket) {
     base.call(this, basket);
 
     // live selling baskets are cleared as a whole - no line item removal, no coupons
-    this.isLiveSellingOrder = !!(basket && basket.custom.isLiveSellingOrder);
+    try {
+        this.isLiveSellingOrder = !!(basket && basket.custom.isLiveSellingOrder);
+    } catch (e) {
+        this.isLiveSellingOrder = false;
+    }
 
     liveSellingHelpers.markLiveSellingLineItems(basket, this.items);
 }

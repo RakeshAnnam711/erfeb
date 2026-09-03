@@ -8,6 +8,10 @@ var Transaction = require('dw/system/Transaction');
 var Logger = require('dw/system/Logger');
 var affirmData = require('*/cartridge/scripts/data/affirmData');
 var cartSummaryBuilder = require('*/cartridge/scripts/cart/cartSummaryBuilder');
+var liveSellingHelpers = require('*/cartridge/scripts/helpers/liveSellingHelpers');
+var liveSellingExpiry = require('*/cartridge/scripts/middleware/liveSellingExpiry');
+
+server.prepend('Show', liveSellingExpiry.validateBasketExpiry);
 
 server.append('AddProduct', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
@@ -99,7 +103,6 @@ server.append('MiniCartShow', function (req, res, next) {
 
 server.get('ClearCart', function (req, res, next) {
     var CartModel = require('*/cartridge/models/cart');
-    var basketCalculationHelpers = require('*/cartridge/scripts/helpers/basketCalculationHelpers');
     var currentBasket = BasketMgr.getCurrentBasket();
 
     if (!currentBasket) {
@@ -107,36 +110,8 @@ server.get('ClearCart', function (req, res, next) {
         return next();
     }
 
-    // BasketMgr.deleteBasket() is restricted to agent scenarios - it requires the
-    // Create_Order_On_Behalf_Of permission and throws "user not authorized to act on
-    // behalf of customer" for shopper sessions, so the basket is emptied instead.
-    var safeBasket = currentBasket;
-
     try {
-        Transaction.wrap(function () {
-            while (safeBasket.productLineItems.length > 0) {
-                safeBasket.removeProductLineItem(safeBasket.productLineItems[0]);
-            }
-            while (safeBasket.giftCertificateLineItems.length > 0) {
-                safeBasket.removeGiftCertificateLineItem(safeBasket.giftCertificateLineItems[0]);
-            }
-            while (safeBasket.bonusDiscountLineItems.length > 0) {
-                safeBasket.removeBonusDiscountLineItem(safeBasket.bonusDiscountLineItems[0]);
-            }
-            while (safeBasket.couponLineItems.length > 0) {
-                safeBasket.removeCouponLineItem(safeBasket.couponLineItems[0]);
-            }
-            while (safeBasket.priceAdjustments.length > 0) {
-                safeBasket.removePriceAdjustment(safeBasket.priceAdjustments[0]);
-            }
-
-            // the basket survives the clear, so the live selling stamps have to be reset
-            safeBasket.custom.isLiveSellingOrder = null;
-            safeBasket.custom.liveSellingEventDate = null;
-            safeBasket.custom.liveSellingEventSummary = null;
-
-            basketCalculationHelpers.calculateTotals(safeBasket);
-        });
+        liveSellingHelpers.clearBasket(currentBasket);
     } catch (e) {
         Logger.error('Cart-ClearCart: unable to clear basket: {0}', e.message);
 

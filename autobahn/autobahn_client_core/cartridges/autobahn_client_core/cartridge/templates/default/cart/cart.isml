@@ -47,6 +47,15 @@
                 ${pdict.valid.message}
             </div>
         </isif>
+        <iscomment> the live selling bag was cleared because the handoff window expired </iscomment>
+        <isif condition="${pdict.liveSellingExpired}">
+            <div class="alert alert-danger alert-dismissible live-selling-expired fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                ${Resource.msg('error.liveselling.expired', 'cart', null)}
+            </div>
+        </isif>
     </div>
 
     <iscomment> cart page container </iscomment>

@@ -2,31 +2,26 @@
 
 'use strict';
 
+var Logger = require('dw/system/Logger');
 var Site = require('dw/system/Site');
+var liveSellingHelpers = require('*/cartridge/scripts/helpers/liveSellingHelpers');
 
 /**
- * Checks whether the basket is a live selling one, based on the posted item documents
- * and on the product line items already in the basket, marking every live selling line
- * item as non returnable along the way.
- *
- * @param {dw.order.Basket} basket - the current basket
- * @param {Object|Array} basketItems - the ProductItem document(s) of the POST request
- * @returns {boolean} true if at least one item is flagged as a live selling line item
+ * After POST the new items are already on the basket, so we only walk PLIs.
+ * Category parent is the source of truth - not the client flag.
  */
-function isLiveSelling(basket, basketItems) {
-    var items = basketItems && basketItems.length === undefined ? [basketItems] : basketItems;
+function isLiveSelling(basket) {
     var hasLiveSellingLineItem = false;
 
-    basket.allProductLineItems.toArray().forEach(pli => {
-        if (pli.custom.isLiveSellingLineItem) {
+    basket.allProductLineItems.toArray().forEach(function (pli) {
+        if (liveSellingHelpers.isLiveSellingProduct(pli.product)) {
+            pli.custom.isLiveSellingLineItem = true;
             pli.custom.somCC_returnable = false;
             hasLiveSellingLineItem = true;
         }
     });
 
-    return hasLiveSellingLineItem || (items || []).some(function (item) {
-        return item && item.c_isLiveSellingLineItem;
-    });
+    return hasLiveSellingLineItem;
 }
 
 exports.afterPOST = function (basket, basketItems) {
@@ -34,13 +29,18 @@ exports.afterPOST = function (basket, basketItems) {
         return;
     }
 
-    if (isLiveSelling(basket, basketItems)) {
-        var currentSite = Site.getCurrent();
+    try {
+        if (isLiveSelling(basket)) {
+            var currentSite = Site.getCurrent();
+            var expirationHours = currentSite.getCustomPreferenceValue('cscHandoffExpirationHours');
+            basket.custom.isLiveSellingOrder = true;
+            basket.custom.cscHandoffExpiration = expirationHours > 0 ? new Date(Date.now() + (expirationHours * 60 * 60 * 1000)) : null;
 
-        basket.custom.isLiveSellingOrder = true;
-        basket.custom.liveSellingEventDate = currentSite.getCustomPreferenceValue('liveSellingEventDate');
-        if (empty(basket.custom.liveSellingEventSummary)) {
-            basket.custom.liveSellingEventSummary = currentSite.getCustomPreferenceValue('liveSellingEventSummary');
+            if (empty(basket.custom.liveSellingEventSummary)) {
+                basket.custom.liveSellingEventSummary = currentSite.getCustomPreferenceValue('liveSellingEventSummary');
+            }
         }
+    } catch (e) {
+        Logger.error('liveSelling items.afterPOST: unable to stamp the basket: {0}', e.message);
     }
 };

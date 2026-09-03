@@ -143,40 +143,14 @@ function buildBadgeStyleAndClass(badgeClass, badgeFontSize, badgeBorderColor, ba
 }
 
 
-// The real trigger for live selling is category membership, not the item ID field -
-// an agent can leave the item ID blank and the product is still live selling.
-function isInLiveSellingCategory(apiProduct) {
-    try {
-        var Site = require('dw/system/Site');
-        var categoryID = Site.getCurrent().getCustomPreferenceValue('liveSellingCategoryID');
-        if (empty(categoryID)) {
-            return false;
-        }
-        if (apiProduct.primaryCategory && apiProduct.primaryCategory.ID === categoryID) {
-            return true;
-        }
-        var categories = apiProduct.categories;
-        for (var i = 0; i < categories.length; i++) {
-            if (categories[i].ID === categoryID) {
-                return true;
-            }
-        }
-    } catch (e) {
-        return false;
-    }
-    return false;
-}
+var liveSellingHelpers = require('*/cartridge/scripts/helpers/liveSellingHelpers');
 
-// The entered item ID, if any - just the raw value, no fallback. Used for display only.
+// Display only - does not decide live selling.
 function getLiveSellingItemID(apiProduct) {
     if (!apiProduct || empty(apiProduct.custom) || empty(apiProduct.custom.liveSellingItemID)) {
         return null;
     }
     return apiProduct.custom.liveSellingItemID;
-}
-
-function isLiveSellingProduct(apiProduct) {
-    return !!apiProduct && isInLiveSellingCategory(apiProduct);
 }
 
 function addBadges(apiProduct) {
@@ -188,7 +162,7 @@ function addBadges(apiProduct) {
 
     // Live-selling products show "<label> <item ID>" as the badge instead of the usual
     // badgeNames-driven badge. Falls back to the SKU when no item ID was entered.
-    if (isLiveSellingProduct(apiProduct)) {
+    if (liveSellingHelpers.isLiveSellingProduct(apiProduct)) {
         var itemNumber = getLiveSellingItemID(apiProduct) || apiProduct.ID;
         var badgeLabel = '';
         var liveSellingData = { class: '' };
@@ -279,7 +253,7 @@ module.exports = function(object, apiProduct) {
         value: addBadges(apiProduct)
     });
 
-    object.isLiveSellingProduct = apiProduct ? isLiveSellingProduct(apiProduct) : false;
+    object.isLiveSellingProduct = liveSellingHelpers.isLiveSellingProduct(apiProduct);
     object.liveSellingItemID = apiProduct ? getLiveSellingItemID(apiProduct) : null;
 };
 

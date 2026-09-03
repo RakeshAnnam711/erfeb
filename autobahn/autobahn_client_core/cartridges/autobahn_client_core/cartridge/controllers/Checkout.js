@@ -6,6 +6,9 @@ server.extend(module.superModule);
 var BasketMgr = require('dw/order/BasketMgr');
 var CartModel = require('*/cartridge/models/cart');
 var cartSummaryBuilder = require('*/cartridge/scripts/cart/cartSummaryBuilder');
+var liveSellingExpiry = require('*/cartridge/scripts/middleware/liveSellingExpiry');
+
+server.prepend('Begin', liveSellingExpiry.validateBasketExpiry);
 
 server.append('Begin', function (req, res, next) {
     var currentBasket = BasketMgr.getCurrentBasket();
@@ -27,6 +30,16 @@ server.append('Begin', function (req, res, next) {
     res.viewData.cartSummary = cartSummaryBuilder.getCartSummary(currentBasket);
     res.viewData.actionUrls= cartModel.actionUrls
     res.viewData.isLiveSellingOrder = cartModel.isLiveSellingOrder;
+
+    if (currentBasket && res.viewData.order && res.viewData.order.shipping) {
+        var liveSellingHelpers = require('*/cartridge/scripts/helpers/liveSellingHelpers');
+
+        res.viewData.order.shipping.forEach(function (shippingModel) {
+            if (shippingModel.productLineItems) {
+                liveSellingHelpers.markLiveSellingLineItems(currentBasket, shippingModel.productLineItems.items);
+            }
+        });
+    }
 
     if (currentBasket) {
         var totalBasePrice = cartSummaryBuilder.getTotalBasePrice(currentBasket);
