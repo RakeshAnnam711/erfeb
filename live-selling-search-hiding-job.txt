@@ -1,0 +1,44 @@
+LIVE SELLING - HIDING PRODUCTS FROM SEARCH
+
+What Mike proposed:
+
+An auto-reordering job that:
+- unassigns the product from its normal categories
+- assigns it only to the Event category
+- sets searchable = false
+- when the event ends, restores everything back to normal
+
+This is his answer to the search issue flagged earlier in the PR review - that live
+selling products could show up in search results because the code let search find
+them first, then removed them from the results afterward. His fix moves the product
+out of the catalog data entirely instead of filtering after the fact.
+
+
+Questions to ask him before this gets built:
+Q: If we set searchable = false, won't the product also disappear from the Event
+   category PLP?
+A: Needs an answer. Standard SFCC category pages use the product search index, so
+   setting searchable = false may hide the product from the Event PLP as well as
+   normal search results.
+
+Q: How does the job know which categories to put the product back into when the
+   event ends?
+A: Needs an answer. SFCC won't remember the original categories once removed -
+   something has to save that list before unassigning them.
+
+Q: How often does search reindexing run?
+A: Needs an answer. searchable = false doesn't hide a product from search right
+   away, it only takes effect after the next reindex. If events are short and
+   reindexing only runs nightly, the product could still show up in search for
+   hours after the job runs.
+
+Q: What actually triggers the job - a schedule that checks every few minutes, or
+   does it fire the moment an event starts or ends?
+A: Needs an answer. Affects how much delay there is between the event happening
+   and the catalog actually updating.
+
+Q: What happens if the job fails partway through, or an event doesn't get a clean
+   end - is there a manual way to restore a stuck product?
+A: Needs an answer. Without this, a failed run could leave a product stuck out of
+   its normal categories indefinitely.
+

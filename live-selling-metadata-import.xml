@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="Product">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="liveSellingItemID">
+                <display-name xml:lang="x-default">Live Selling Item ID</display-name>
+                <description xml:lang="x-default">Item number shown on the live selling badge. Optional - if left blank, the badge falls back to showing the product's SKU. Does NOT control whether the product is treated as live selling - that's category membership (see the Live Selling Category ID site preference).</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="liveSelling">
+                <display-name xml:lang="x-default">Live Selling</display-name>
+                <attribute attribute-id="liveSellingItemID"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="liveSellingHostName">
+                <display-name xml:lang="x-default">Live Selling Host Name</display-name>
+                <description xml:lang="x-default">The host name reported for live selling products and line items</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Host 1</display>
+                        <value>host_1</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Host 2</display>
+                        <value>host_2</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Host 3</display>
+                        <value>host_3</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Host 4</display>
+                        <value>host_4</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Host 5</display>
+                        <value>host_5</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingEventDate">
+                <display-name xml:lang="x-default">Live Selling Event Date</display-name>
+                <description xml:lang="x-default">The date of the current live selling event, stamped onto live selling baskets</description>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingEventSummary">
+                <display-name xml:lang="x-default">Live Selling Event Summary</display-name>
+                <description xml:lang="x-default">A summary of the current live selling event, stamped onto live selling baskets</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingCategoryID">
+                <display-name xml:lang="x-default">Live Selling Category ID</display-name>
+                <description xml:lang="x-default">Category ID a product must belong to for it to be treated as a live selling product (badge, hidden price/Add to Cart, live selling messaging).</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingBadgeID">
+                <display-name xml:lang="x-default">Live Selling Badge ID</display-name>
+                <description xml:lang="x-default">ID of the entry in the "badges" Custom Object that supplies the label and styling for the live selling badge.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Live Selling">
+                <display-name xml:lang="x-default">Live Selling Configurations</display-name>
+                <attribute attribute-id="liveSellingHostName"/>
+                <attribute attribute-id="liveSellingEventDate"/>
+                <attribute attribute-id="liveSellingEventSummary"/>
+                <attribute attribute-id="liveSellingCategoryID"/>
+                <attribute attribute-id="liveSellingBadgeID"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="isLiveSellingOrder">
+                <display-name xml:lang="x-default">Is Live Selling Order</display-name>
+                <description xml:lang="x-default">The order was placed from a live selling basket. Copied from the basket on order creation.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingHostName">
+                <display-name xml:lang="x-default">Live Selling Host Name</display-name>
+                <description xml:lang="x-default">The live selling host for this order.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingEventDate">
+                <display-name xml:lang="x-default">Live Selling Event Date</display-name>
+                <description xml:lang="x-default">The date of the live selling event this order was placed during</description>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingEventSummary">
+                <display-name xml:lang="x-default">Live Selling Event Summary</display-name>
+                <description xml:lang="x-default">A summary of the live selling event this order was placed during</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Live Selling">
+                <display-name xml:lang="x-default">Live Selling</display-name>
+                <attribute attribute-id="isLiveSellingOrder"/>
+                <attribute attribute-id="liveSellingHostName"/>
+                <attribute attribute-id="liveSellingEventDate"/>
+                <attribute attribute-id="liveSellingEventSummary"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Basket">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="isLiveSellingOrder">
+                <display-name xml:lang="x-default">Is Live Selling Order</display-name>
+                <description xml:lang="x-default">The basket contains at least one line item added from a live selling host</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingEventDate">
+                <display-name xml:lang="x-default">Live Selling Event Date</display-name>
+                <description xml:lang="x-default">The date of the live selling event this basket was created during</description>
+                <type>datetime</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="liveSellingEventSummary">
+                <display-name xml:lang="x-default">Live Selling Event Summary</display-name>
+                <description xml:lang="x-default">A summary of the live selling event this basket was created during</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Live Selling">
+                <display-name xml:lang="x-default">Live Selling</display-name>
+                <attribute attribute-id="isLiveSellingOrder"/>
+                <attribute attribute-id="liveSellingEventDate"/>
+                <attribute attribute-id="liveSellingEventSummary"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="ProductLineItem">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="liveSellingHostName">
+                <display-name xml:lang="x-default">Live Selling Host Name</display-name>
+                <description xml:lang="x-default">The live selling host this line item was added from. Set from the c_liveSellingHostName property of the posted basket item.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="isLiveSellingLineItem">
+                <display-name xml:lang="x-default">Is Live Selling Line Item</display-name>
+                <description xml:lang="x-default">The line item was added from a live selling host. Set from the c_isLiveSellingLineItem property of the posted basket item.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Live Selling">
+                <display-name xml:lang="x-default">Live Selling</display-name>
+                <attribute attribute-id="isLiveSellingLineItem"/>
+                <attribute attribute-id="liveSellingHostName"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>

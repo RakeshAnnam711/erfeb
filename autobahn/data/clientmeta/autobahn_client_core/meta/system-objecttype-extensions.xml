@@ -219,6 +219,14 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="liveSellingHostName">
+                <display-name xml:lang="x-default">Live Selling Host Name</display-name>
+                <description xml:lang="x-default">The live selling host for this order.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="liveSellingEventDate">
                 <display-name xml:lang="x-default">Live Selling Event Date</display-name>
                 <description xml:lang="x-default">The date of the live selling event this order was placed during</description>
@@ -243,6 +251,7 @@
             <attribute-group group-id="Live Selling">
                 <display-name xml:lang="x-default">Live Selling</display-name>
                 <attribute attribute-id="isLiveSellingOrder"/>
+                <attribute attribute-id="liveSellingHostName"/>
                 <attribute attribute-id="liveSellingEventDate"/>
                 <attribute attribute-id="liveSellingEventSummary"/>
             </attribute-group>
@@ -1418,6 +1427,19 @@
                 <externally-defined-flag>false</externally-defined-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="liveSellingItemID">
+                <display-name xml:lang="x-default">Live Selling Item ID</display-name>
+                <description xml:lang="x-default">Item number shown on the live selling badge. Optional - if left blank, the badge falls back to showing the product's SKU. Does NOT control whether the product is treated as live selling - that's category membership (see the Live Selling Category ID site preference).</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>true</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="WGACA-Custom-Attributes">
@@ -1501,6 +1523,10 @@
                 <attribute attribute-id="badgeTextColors"/>
                 <attribute attribute-id="badgeBackgroundColors"/>
                 <attribute attribute-id="badgeBorderColors"/>
+            </attribute-group>
+            <attribute-group group-id="liveSelling">
+                <display-name xml:lang="x-default">Live Selling</display-name>
+                <attribute attribute-id="liveSellingItemID"/>
             </attribute-group>
             <attribute-group group-id="FedEx Attributes">
                 <display-name xml:lang="x-default">FedEx Attributes</display-name>

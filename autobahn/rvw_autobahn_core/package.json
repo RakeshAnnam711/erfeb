@@ -8,6 +8,8 @@
     "focus-visible": "^5.2.0",
     "imagesloaded": "^4.1.4",
     "jquery-hoverintent": "^1.10.1",
+    "jquery-ui": "^1.13.2",
+    "jquery-ui-touch-punch": "^0.2.3",
     "jquery-zoom": "^1.7.21",
     "jquery.scrollintoview": "^1.9.4",
     "popper.js": "^1.16.1",

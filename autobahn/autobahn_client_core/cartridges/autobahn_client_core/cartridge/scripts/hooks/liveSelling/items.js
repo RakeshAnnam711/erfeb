@@ -39,6 +39,8 @@ exports.afterPOST = function (basket, basketItems) {
 
         basket.custom.isLiveSellingOrder = true;
         basket.custom.liveSellingEventDate = currentSite.getCustomPreferenceValue('liveSellingEventDate');
-        basket.custom.liveSellingEventSummary = currentSite.getCustomPreferenceValue('liveSellingEventSummary');
+        if (empty(basket.custom.liveSellingEventSummary)) {
+            basket.custom.liveSellingEventSummary = currentSite.getCustomPreferenceValue('liveSellingEventSummary');
+        }
     }
 };
