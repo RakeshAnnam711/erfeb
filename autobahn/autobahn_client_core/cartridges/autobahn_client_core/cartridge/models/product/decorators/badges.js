@@ -145,7 +145,7 @@ function buildBadgeStyleAndClass(badgeClass, badgeFontSize, badgeBorderColor, ba
 
 var liveSellingHelpers = require('*/cartridge/scripts/helpers/liveSellingHelpers');
 
-// Display only - does not decide live selling.
+// The entered item ID, if any - just the raw value, no fallback. Used for display only.
 function getLiveSellingItemID(apiProduct) {
     if (!apiProduct || empty(apiProduct.custom) || empty(apiProduct.custom.liveSellingItemID)) {
         return null;
@@ -153,16 +153,15 @@ function getLiveSellingItemID(apiProduct) {
     return apiProduct.custom.liveSellingItemID;
 }
 
-function addBadges(apiProduct) {
+function addBadges(apiProduct, isLiveSelling) {
     var badgesData = []
 
     if (!apiProduct) {
         return badgesData;
     }
 
-    // Live-selling products show "<label> <item ID>" as the badge instead of the usual
-    // badgeNames-driven badge. Falls back to the SKU when no item ID was entered.
-    if (liveSellingHelpers.isLiveSellingProduct(apiProduct)) {
+    // live selling products get their own badge (label + item ID, or SKU if no ID was entered) instead of the usual one
+    if (isLiveSelling) {
         var itemNumber = getLiveSellingItemID(apiProduct) || apiProduct.ID;
         var badgeLabel = '';
         var liveSellingData = { class: '' };
@@ -248,12 +247,14 @@ function addBadges(apiProduct) {
 }
 
 module.exports = function(object, apiProduct) {
+    var isLiveSelling = apiProduct ? liveSellingHelpers.isLiveSellingProduct(apiProduct) : false;
+
     Object.defineProperty(object, 'badges', {
         enumerable: true,
-        value: addBadges(apiProduct)
+        value: addBadges(apiProduct, isLiveSelling)
     });
 
-    object.isLiveSellingProduct = liveSellingHelpers.isLiveSellingProduct(apiProduct);
+    object.isLiveSellingProduct = isLiveSelling;
     object.liveSellingItemID = apiProduct ? getLiveSellingItemID(apiProduct) : null;
 };
 

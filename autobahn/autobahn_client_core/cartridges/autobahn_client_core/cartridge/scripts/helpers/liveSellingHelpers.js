@@ -3,25 +3,9 @@
 var Transaction = require('dw/system/Transaction');
 var Site = require('dw/system/Site');
 
-/**
- * Live selling = assigned to a category whose parent ID is liveSellingCategoryID.
- * e.g. live1 > liveselling. men / anything else does not count.
- * allCategories already includes the master assignments on a variant.
- *
- * @param {dw.catalog.Product} apiProduct
- * @returns {boolean}
- */
-function isLiveSellingProduct(apiProduct) {
-    if (!apiProduct) {
-        return false;
-    }
+function isAssignedToLiveSellingChild(product, parentID) {
+    var categories = product && product.onlineCategories;
 
-    var parentID = Site.getCurrent().getCustomPreferenceValue('liveSellingCategoryID');
-    if (empty(parentID)) {
-        return false;
-    }
-
-    var categories = apiProduct.allCategories;
     if (!categories || categories.empty) {
         return false;
     }
@@ -34,6 +18,29 @@ function isLiveSellingProduct(apiProduct) {
     }
 
     return false;
+}
+
+// Live selling products belong to a direct child of the configured category.
+function isLiveSellingProduct(apiProduct) {
+    if (!apiProduct) {
+        return false;
+    }
+
+    try {
+        var parentID = Site.getCurrent().getCustomPreferenceValue('liveSellingCategoryID');
+        if (empty(parentID)) {
+            return false;
+        }
+
+        if (isAssignedToLiveSellingChild(apiProduct, parentID)) {
+            return true;
+        }
+
+        return !!(apiProduct.variant && apiProduct.masterProduct &&
+            isAssignedToLiveSellingChild(apiProduct.masterProduct, parentID));
+    } catch (e) {
+        return false;
+    }
 }
 
 /**

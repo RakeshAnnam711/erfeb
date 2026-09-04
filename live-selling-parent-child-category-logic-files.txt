@@ -1,0 +1,2 @@
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/scripts/helpers/liveSellingHelpers.js
+autobahn/autobahn_client_core/cartridges/autobahn_client_core/cartridge/models/product/decorators/badges.js
